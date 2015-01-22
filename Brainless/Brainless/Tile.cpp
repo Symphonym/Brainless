@@ -17,7 +17,7 @@ m_bounds(bounds)
 }
 
 
-void Tile::draw(const sf::RenderTarget &target)
+void Tile::draw()
 {
 	Renderer::instance().draw(m_tileSprite);
 }

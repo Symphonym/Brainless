@@ -18,7 +18,7 @@ public:
 	explicit Tile(const sf::FloatRect &bounds, TileTypes tileType, const sf::Vector2f &spriteOffset);
 
 	// Draw the tile sprite to the specified render target
-	void draw(const sf::RenderTarget &target);
+	void draw();
 
 	// Checks if the tile collides with another bounding box
 	bool collidesWith(const sf::FloatRect &rect);
