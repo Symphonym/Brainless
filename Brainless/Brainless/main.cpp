@@ -3,6 +3,6 @@
 int main()
 {
 	//comment
-	// comment 2
+	// comment something else
 	return 0;
 }
