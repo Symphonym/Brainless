@@ -16,6 +16,7 @@ x86/
 build/
 bld/
 #[Bb]in/ THIS WAS REMOVED TO ALLOW SFML BIN DIRECTORY
+#!Bin/*
 [Oo]bj/
 
 
