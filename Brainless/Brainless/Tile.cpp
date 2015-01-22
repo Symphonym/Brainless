@@ -1,4 +1,5 @@
 #include "Tile.h"
+#include "Renderer.h"
 
 Tile::Tile(const sf::FloatRect &bounds, TileTypes tileType, const sf::Vector2f &spriteOffset)
 :
@@ -18,7 +19,7 @@ m_bounds(bounds)
 
 void Tile::draw(const sf::RenderTarget &target)
 {
-	//target.draw(m_tileSprite);
+	Renderer::instance().draw(m_tileSprite);
 }
 
 // Checks if the tile collides with another bounding box

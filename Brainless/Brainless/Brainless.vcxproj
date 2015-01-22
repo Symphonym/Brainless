@@ -81,12 +81,14 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Error.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
