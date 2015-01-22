@@ -24,7 +24,7 @@ void ResourceLoader::loadTexture(const std::string &name, const std::string &fil
 		if (texPtr->loadFromFile(filePath))
 			m_textures[name] = std::move(texPtr);
 		else
-			BRAINLESS_ERROR("The file '" + filePath + "' could not be loaded! FATAL ERROR!");
+			BRAINLESS_ERROR("The file '" + filePath + "' could not be loaded!");
 	}
 }
 void ResourceLoader::loadShader(const std::string &name, const std::string &filePath)
@@ -39,7 +39,7 @@ void ResourceLoader::loadShader(const std::string &name, const std::string &file
 		if (shadPtr->loadFromFile(filePath, sf::Shader::Fragment))
 			m_shaders[name] = std::move(shadPtr);
 		else
-			BRAINLESS_ERROR("The file '" + filePath + "' could not be loaded! FATAL ERROR!");
+			BRAINLESS_ERROR("The file '" + filePath + "' could not be loaded!");
 	}
 }
 void ResourceLoader::loadSound(const std::string &name, const std::string &filePath)
@@ -57,7 +57,7 @@ sf::Texture& ResourceLoader::retrieveTexture(const std::string &name)
 
 	// A texture by this name does not exist already
 	if (itr == m_textures.end())
-		BRAINLESS_ERROR("The texture resource '" + name + "' could not be found! FATAL ERROR!");
+		BRAINLESS_ERROR("The texture resource '" + name + "' could not be found!");
 	else
 		return *itr->second.get();
 }
@@ -67,7 +67,7 @@ sf::Shader& ResourceLoader::retrieveShader(const std::string &name)
 
 	// A shader by this name does not exist already
 	if (itr == m_shaders.end())
-		BRAINLESS_ERROR("The shader resource '" + name + "' could not be found! FATAL ERROR!");
+		BRAINLESS_ERROR("The shader resource '" + name + "' could not be found!");
 	else
 		return *itr->second.get();
 }
@@ -77,7 +77,7 @@ sf::Sound& ResourceLoader::retrieveSound(const std::string &name)
 
 	// A sound by this name does not exist already
 	if (itr == m_sounds.end())
-		BRAINLESS_ERROR("The sound resource '" + name + "' could not be found! FATAL ERROR!");
+		BRAINLESS_ERROR("The sound resource '" + name + "' could not be found!");
 	else
 		return *itr->second.get();
 }
@@ -87,7 +87,7 @@ sf::Music& ResourceLoader::retrieveMusic(const std::string &name)
 
 	// A sound by this name does not exist already
 	if (itr == m_music.end())
-		BRAINLESS_ERROR("The music resource '" + name + "' could not be found! FATAL ERROR!");
+		BRAINLESS_ERROR("The music resource '" + name + "' could not be found!");
 	else
 		return *itr->second.get();
 }

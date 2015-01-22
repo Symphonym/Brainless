@@ -17,6 +17,28 @@ m_tileSize(tileSize)
 	}
 }
 
+void TileMap::draw(const sf::View &view)
+{
+	sf::Vector2f topLeft(
+		view.getCenter().x - view.getSize().x / 2,
+		view.getCenter().y - view.getSize().y / 2);
+
+	sf::Vector2f bottomRight(
+		view.getCenter().x + view.getSize().x / 2,
+		view.getCenter().y + view.getSize().y / 2);
+
+	sf::Vector2i startIndex = positionToIndex(bottomRight);
+	sf::Vector2i endIndex = positionToIndex(topLeft);
+
+	for (int x = startIndex.x; x > endIndex.x; x--)
+	{
+		for (int y = startIndex.y; y > endIndex.x; y--)
+		{
+			m_tileMap[x][y].draw();
+		}
+	}
+}
+
 // Converts a position to an index in the grid
 sf::Vector2i TileMap::positionToIndex(const sf::Vector2f &position)
 {
