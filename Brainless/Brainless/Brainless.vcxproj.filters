@@ -13,10 +13,45 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Tile System">
+      <UniqueIdentifier>{247c67ca-8089-40be-a85c-5c6af48e8483}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Resource Loading">
+      <UniqueIdentifier>{e33cfa01-34fc-4ef9-bead-36ca3e4ec881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering">
+      <UniqueIdentifier>{59505d9b-33bd-4366-8a09-5eba22a03218}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source Files\Tile System</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceLoader.cpp">
+      <Filter>Source Files\Resource Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="Error.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Tile.h">
+      <Filter>Source Files\Tile System</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceLoader.h">
+      <Filter>Source Files\Resource Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="Error.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Source Files\Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

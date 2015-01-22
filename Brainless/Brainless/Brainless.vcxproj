@@ -76,7 +76,17 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Error.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="ResourceLoader.cpp" />
+    <ClCompile Include="Tile.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Error.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="ResourceLoader.h" />
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

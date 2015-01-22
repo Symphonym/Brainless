@@ -1,4 +1,5 @@
 #include <SFML\Graphics.hpp>
+#include "ResourceLoader.h"
 
 int main()
 {
@@ -6,6 +7,7 @@ int main()
 	sf::CircleShape circle(100.f);
 	circle.setFillColor(sf::Color::Green);
 
+	ResourceLoader::instance().retrieveTexture("NICE");
 
 	while (window.isOpen())
 	{
