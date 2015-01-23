@@ -76,6 +76,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera2D.cpp" />
+    <ClCompile Include="Editor.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -86,6 +88,8 @@
     <ClCompile Include="TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera2D.h" />
+    <ClInclude Include="Editor.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="TestClass.h" />
     <ClInclude Include="Object.h" />

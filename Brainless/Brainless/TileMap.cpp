@@ -8,10 +8,17 @@ m_tileSize(tileSize)
 	for (std::size_t x = 0; x < layout.size(); x++)
 	{
 		m_tileMap.push_back(TileVector());
-		for (std::size_t y = 0; y < layout[y].size(); y++)
+		for (std::size_t y = 0; y < layout[x].size(); y++)
 		{
-			Tile tile(sf::FloatRect(x*tileSize, y*tileSize, tileSize, tileSize), layout[x][y], sf::Vector2f(0,0));
-			m_tileMap[y].push_back(tile);
+			// Tile size has to be the dimension of the front side of the cube
+			Tile tile(sf::FloatRect(
+				x*tileSize, y*tileSize, tileSize, tileSize),
+				layout[x][y],
+				// In the vector below
+				// X needs to be negative half the width of the left side of the cube
+				// Y needs to be negative half the width of the top side of the cube
+				sf::Vector2f(-35, -30));
+			m_tileMap[x].push_back(tile);
 		}
 			
 	}
@@ -27,16 +34,38 @@ void TileMap::draw(const sf::View &view)
 		view.getCenter().x + view.getSize().x / 2,
 		view.getCenter().y + view.getSize().y / 2);
 
-	sf::Vector2i startIndex = positionToIndex(bottomRight);
-	sf::Vector2i endIndex = positionToIndex(topLeft);
+	sf::Vector2i startIndex = positionToIndex(bottomRight) + sf::Vector2i(1, 1);
+	sf::Vector2i endIndex = positionToIndex(topLeft) - sf::Vector2i(1, 1);
 
-	for (int x = startIndex.x; x > endIndex.x; x--)
-	{
-		for (int y = startIndex.y; y > endIndex.x; y--)
-		{
-			m_tileMap[x][y].draw();
-		}
-	}
+
+	// Adjust for corners
+	if (m_tileMap[0][0].getBounds().left > topLeft.x)
+		endIndex.x = 0;
+	if (m_tileMap[0][0].getBounds().top > topLeft.y)
+		endIndex.y = 0;
+
+	// Adjust for corners
+	if (m_tileMap[m_tileMap.size() - 1][m_tileMap[0].size() - 1].getBounds().left < bottomRight.x)
+		startIndex.x = m_tileMap.size() - 1;
+	if (m_tileMap[m_tileMap.size() - 1][m_tileMap[0].size() - 1].getBounds().top < bottomRight.y)
+		startIndex.y = m_tileMap[0].size() - 1;
+
+	// Clamp indexes
+	if (startIndex.x >= m_tileMap.size())
+		startIndex.x = m_tileMap.size() - 1;
+	if (startIndex.y >= m_tileMap[m_tileMap.size() - 1].size())
+		startIndex.y = m_tileMap[m_tileMap.size() - 1].size() - 1;
+
+	// Clamp indexes
+	if (endIndex.x < 0)
+		endIndex.x = 0;
+	if (endIndex.y < 0)
+		endIndex.y = 0;
+
+	// Render tiles from bottom right to top left
+	for (int x = startIndex.x; x >= endIndex.x; x--)
+		for (int y = startIndex.y; y >= endIndex.y; y--)
+			m_tileMap[x][y].draw(false);
 }
 
 // Converts a position to an index in the grid

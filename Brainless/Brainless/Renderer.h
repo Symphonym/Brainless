@@ -14,7 +14,7 @@ public:
 	void setTarget(sf::RenderTarget &target);
 	void draw(const sf::Drawable &drawable);
 
-	static Renderer instance();
+	static Renderer& instance();
 
 private:
 
