@@ -16,8 +16,6 @@ public:
 protected:
 	float m_positionX;
 	float m_positionY;
-	float m_speedX;
-	float m_speedY;
 	int m_width;
 	int m_height;
 	sf::Sprite m_sprite;
