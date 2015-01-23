@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Rendering">
       <UniqueIdentifier>{59505d9b-33bd-4366-8a09-5eba22a03218}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Level Editor">
+      <UniqueIdentifier>{bccfcc2a-aa14-4d12-afc6-fe69f5b90380}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,6 +45,9 @@
     <ClCompile Include="TileMap.cpp">
       <Filter>Source Files\Tile System</Filter>
     </ClCompile>
+    <ClCompile Include="Editor.cpp">
+      <Filter>Source Files\Level Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -58,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="TileMap.h">
       <Filter>Source Files\Tile System</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor.h">
+      <Filter>Source Files\Level Editor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

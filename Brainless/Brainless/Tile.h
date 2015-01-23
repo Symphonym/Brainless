@@ -9,8 +9,9 @@ public:
 
 	enum TileTypes
 	{
-		Ground = 0,
-		Ground_Right = 1,
+		Nothing = 0,
+		Ground = 1,
+		Ground_Right = 2,
 		// Etc
 	};
 
@@ -18,7 +19,7 @@ public:
 	explicit Tile(const sf::FloatRect &bounds, TileTypes tileType, const sf::Vector2f &spriteOffset);
 
 	// Draw the tile sprite to the specified render target
-	void draw();
+	void draw(bool debug = false);
 
 	// Checks if the tile collides with another bounding box
 	bool collidesWith(const sf::FloatRect &rect);

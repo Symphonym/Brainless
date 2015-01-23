@@ -29,7 +29,7 @@ void Renderer::draw(const sf::Drawable &drawable)
 		m_renderTarget->draw(drawable);
 }
 
-Renderer Renderer::instance()
+Renderer& Renderer::instance()
 {
 	static Renderer renderInstance;
 	return renderInstance;
