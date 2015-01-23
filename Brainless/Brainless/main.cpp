@@ -3,6 +3,7 @@
 #include "Renderer.h"
 #include "TileMap.h"
 #include "Editor.h"
+#include "Constants.h"
 
 int main()
 {
@@ -28,7 +29,7 @@ int main()
 				layout[i].push_back(Tile::Ground);
 		}
 	}
-	TileMap map(layout, 293);
+	TileMap map(layout, Constants::TileSize);
 
 	sf::View defView = window.getDefaultView();
 	Renderer::instance().setTarget(window);

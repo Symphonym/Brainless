@@ -90,6 +90,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Camera2D.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="TestClass.h" />
@@ -98,6 +99,7 @@
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMap.h" />
+    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
