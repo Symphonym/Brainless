@@ -79,6 +79,7 @@
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="Error.cpp" />
+    <ClCompile Include="FileSave.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -88,10 +89,12 @@
     <ClCompile Include="TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="FileSave.h" />
     <ClInclude Include="TestClass.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Renderer.h" />

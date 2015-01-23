@@ -3,6 +3,7 @@
 
 #include <SFML\Graphics.hpp>
 
+// byt namn sen?
 class Object
 {
 public:
@@ -10,7 +11,8 @@ public:
 	Object(float startX, float startY, int m_width, int m_height);
 	virtual void update();
 	sf::Sprite getSprite();
-	void setTexture(sf::Texture texture);
+	void setTexture(sf::Texture& texture);
+	void draw();
 protected:
 	float m_positionX;
 	float m_positionY;
@@ -19,9 +21,6 @@ protected:
 	int m_width;
 	int m_height;
 	sf::Sprite m_sprite;
-	// imagevector?
-	// imagePosition
-	// imageSize
 private:
 };
 
