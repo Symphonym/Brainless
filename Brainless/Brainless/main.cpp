@@ -4,21 +4,37 @@
 #include "TileMap.h"
 #include "Editor.h"
 #include "Constants.h"
-#include "Animation.h"
+#include "TestClass.h"
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Brainless");
-	sf::CircleShape circle(100.f);
-	circle.setFillColor(sf::Color::Green);
+	//sf::RenderWindow window(sf::VideoMode(800, 600), "Brainless");
+	/*sf::CircleShape circle(100.f);
+	circle.setFillColor(sf::Color::Green);*/
 
-	ResourceLoader::instance().loadTexture("testSheet", "testSheet.png");
-	Animation circleAnimation(100, 100);
-	circleAnimation.animate(0, 3, 0, 1);
 
-	/*Editor editor;
-	editor.run();*/
+	Editor editor;
+	editor.run();
 
+	/*TestClass test;
+	test.testUpdate();*/
+
+	// TEST CODE
+	/*TileMap::TileMapLayout layout;
+	for (int i = 0; i < 100; i++)
+	{
+		layout.push_back(std::vector<Tile::TileTypes>());
+		for (int y = 0; y < 100; y++)
+		{
+			if ((i % 5 == 0 && y % 5 == 0) || i % 3 == 0)
+				layout[i].push_back(Tile::Nothing);
+			else
+				layout[i].push_back(Tile::Ground);
+		}
+	}
+	TileMap map(layout, Constants::TileSize);
+
+	sf::View defView = window.getDefaultView();
 	Renderer::instance().setTarget(window);
 	while (window.isOpen())
 	{
@@ -30,13 +46,27 @@ int main()
 
 		}
 
-		circleAnimation.update();
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+			defView.move(0, -10);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+			defView.move(0, 10);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			defView.move(-10, 0);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			defView.move(10, 0);
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+			defView.zoom(1.01f);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+			defView.zoom(0.99f);
+
+		window.setView(defView);
 
 		window.clear(sf::Color::Black);
-		window.draw(circle);
-		window.draw(sf::Sprite(ResourceLoader::instance().retrieveTexture("testSheet"), circleAnimation.rectangle));
+		map.draw(defView);
+		//window.draw(circle);
 		window.display();
-	}
+	}*/
 	
 
 	return 0;
