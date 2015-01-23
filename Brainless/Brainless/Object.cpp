@@ -1,4 +1,6 @@
 #include "Object.h"
+#include "Renderer.h"
+#include "ResourceLoader.h"
 
 Object::Object(float startX, float startY) : m_positionX(startX), m_positionY(startY), m_sprite()
 {
@@ -7,6 +9,7 @@ Object::Object(float startX, float startY) : m_positionX(startX), m_positionY(st
 	m_width = 30;
 	m_height = 30;
 	m_sprite.setPosition(sf::Vector2f(startX, startY));
+
 }
 
 Object::Object(float startX, float startY, int width, int height) : m_positionX(startX), m_positionY(startY), m_sprite(), m_width(width), m_height(height)
@@ -26,7 +29,12 @@ sf::Sprite Object::getSprite()
 	return m_sprite;
 }
 
-void Object::setTexture(sf::Texture texture)
+void Object::setTexture(sf::Texture& texture)
 {
 	m_sprite.setTexture(texture);
+}
+
+void Object::draw()
+{
+	Renderer::instance().draw(m_sprite);
 }

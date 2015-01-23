@@ -28,6 +28,12 @@
     <Filter Include="Source Files\Camera">
       <UniqueIdentifier>{7669ccbb-722f-4c4f-b11d-e54e1c3302b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Object">
+      <UniqueIdentifier>{ff30c256-b886-471d-8a13-2ae39313b6f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TestClass">
+      <UniqueIdentifier>{8af318b9-d219-42e8-8369-2aa58974b05c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -53,6 +59,12 @@
     </ClCompile>
     <ClCompile Include="Camera2D.cpp">
       <Filter>Source Files\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TestClass.cpp">
+      <Filter>Source Files\TestClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +94,15 @@
     </ClInclude>
     <ClInclude Include="Utility.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Source Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TestClass.h">
+      <Filter>Source Files\TestClass</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

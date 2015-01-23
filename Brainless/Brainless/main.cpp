@@ -4,17 +4,20 @@
 #include "TileMap.h"
 #include "Editor.h"
 #include "Constants.h"
+#include "TestClass.h"
 
 int main()
 {
 	//sf::RenderWindow window(sf::VideoMode(800, 600), "Brainless");
-	sf::CircleShape circle(100.f);
-	circle.setFillColor(sf::Color::Green);
+	/*sf::CircleShape circle(100.f);
+	circle.setFillColor(sf::Color::Green);*/
 
 
 	Editor editor;
 	editor.run();
 
+	/*TestClass test;
+	test.testUpdate();*/
 
 	// TEST CODE
 	/*TileMap::TileMapLayout layout;
