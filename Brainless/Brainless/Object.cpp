@@ -32,4 +32,5 @@ void Object::setTexture(sf::Texture& texture)
 void Object::draw()
 {
 	Renderer::instance().draw(m_sprite);
+
 }
