@@ -11,6 +11,8 @@ public:
 
 	static const int MapWidth = 200;
 	static const int MapHeight = 50;
+
+	static const int BlockTypeCount = 4;
 };
 
 #endif

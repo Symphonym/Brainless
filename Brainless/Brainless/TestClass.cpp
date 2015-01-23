@@ -13,6 +13,6 @@ TestClass::TestClass() : unit(500,500)
 void TestClass::testUpdate()
 {
 	//crashar i render->draw
-	Renderer::instance().draw(unit.getSprite());
+	Renderer::instance().draw(unit.getSprite(), unit.getSprite());
 	std::cout << "test" << std::endl;
 }
