@@ -76,6 +76,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="Error.cpp" />
