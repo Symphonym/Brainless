@@ -23,7 +23,6 @@ int main()
 		}
 	}
 	TileMap map(layout, 293);
-	
 
 	sf::View defView = window.getDefaultView();
 	Renderer::instance().setTarget(window);
