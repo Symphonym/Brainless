@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Level Editor">
       <UniqueIdentifier>{bccfcc2a-aa14-4d12-afc6-fe69f5b90380}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Camera">
+      <UniqueIdentifier>{7669ccbb-722f-4c4f-b11d-e54e1c3302b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -48,6 +51,9 @@
     <ClCompile Include="Editor.cpp">
       <Filter>Source Files\Level Editor</Filter>
     </ClCompile>
+    <ClCompile Include="Camera2D.cpp">
+      <Filter>Source Files\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -67,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="Editor.h">
       <Filter>Source Files\Level Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera2D.h">
+      <Filter>Source Files\Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -14,6 +14,8 @@ public:
 
 private:
 
+	sf::View m_camera;
+
 	// Update loop
 	void loop();
 

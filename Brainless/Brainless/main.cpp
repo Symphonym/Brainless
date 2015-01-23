@@ -2,15 +2,21 @@
 #include "ResourceLoader.h"
 #include "Renderer.h"
 #include "TileMap.h"
+#include "Editor.h"
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Brainless");
+	//sf::RenderWindow window(sf::VideoMode(800, 600), "Brainless");
 	sf::CircleShape circle(100.f);
 	circle.setFillColor(sf::Color::Green);
 
+
+	Editor editor;
+	editor.run();
+
+
 	// TEST CODE
-	TileMap::TileMapLayout layout;
+	/*TileMap::TileMapLayout layout;
 	for (int i = 0; i < 100; i++)
 	{
 		layout.push_back(std::vector<Tile::TileTypes>());
@@ -56,7 +62,7 @@ int main()
 		map.draw(defView);
 		//window.draw(circle);
 		window.display();
-	}
+	}*/
 	
 
 	return 0;
