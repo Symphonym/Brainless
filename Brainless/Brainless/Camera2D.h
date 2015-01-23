@@ -14,7 +14,7 @@ public:
 	void levelEditorUpdate(sf::RenderWindow &window);
 
 	//Update that follows a target (like the player)
-	void gameUpdate(sf::RenderWindow &window, sf::Vector2f target);
+	void gameUpdate(sf::RenderWindow &window, sf::Vector2f &target);
 
 	//Mouse position relative to the game world
 	sf::Vector2f mousePos;

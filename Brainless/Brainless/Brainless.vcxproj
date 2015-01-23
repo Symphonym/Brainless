@@ -88,6 +88,7 @@
     <ClCompile Include="TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="Error.h" />
