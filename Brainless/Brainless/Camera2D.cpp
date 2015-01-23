@@ -40,7 +40,7 @@ void Camera2D::levelEditorUpdate(sf::RenderWindow &window)
 	window.setView(m_view);
 }
 
-void Camera2D::gameUpdate(sf::RenderWindow &window, sf::Vector2f target)
+void Camera2D::gameUpdate(sf::RenderWindow &window, sf::Vector2f &target)
 {
 	m_center = target;
 	m_view.setCenter(m_center);

@@ -9,17 +9,9 @@ m_tileSprite(),
 m_bounds(bounds)
 {
 	ResourceLoader::instance().loadTexture("GroundCube", "cube.png");
+	ResourceLoader::instance().loadTexture("AirCube", "cubeNada.png");
 
-	switch (tileType)
-	{
-	case Ground: 
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("GroundCube"));
-		//m_tileSprite.setScale(
-		//	m_bounds.width / m_tileSprite.getTexture()->getSize().x,
-		//	m_bounds.height / m_tileSprite.getTexture()->getSize().y);
-		break;
-		// TODO Load texture based on type
-	}
+	updateType();
 
 	// sprite.setTexture(ResourceLoader......);
 	
@@ -27,15 +19,14 @@ m_bounds(bounds)
 	m_tileSprite.move(spriteOffset);
 }
 
+void Tile::setType(TileTypes type)
+{
+	m_type = type;
+	updateType();
+}
 
 void Tile::draw(bool debug)
 {
-	if (debug)
-	{
-		
-	}
-
-
 	Renderer::instance().draw(m_tileSprite);
 
 	if (debug)
@@ -53,11 +44,34 @@ void Tile::draw(bool debug)
 }
 
 // Checks if the tile collides with another bounding box
-bool Tile::collidesWith(const sf::FloatRect &rect)
+bool Tile::collidesWith(const sf::FloatRect &rect) const
 {
 	return m_bounds.intersects(rect);
 }
 const sf::FloatRect& Tile::getBounds() const
 {
 	return m_bounds;
+}
+Tile::TileTypes Tile::getType() const
+{
+	return m_type;
+}
+
+
+
+void Tile::updateType()
+{
+	switch (m_type)
+	{
+	case Nothing:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("AirCube"));
+		break;
+	case Ground:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("GroundCube"));
+		//m_tileSprite.setScale(
+		//	m_bounds.width / m_tileSprite.getTexture()->getSize().x,
+		//	m_bounds.height / m_tileSprite.getTexture()->getSize().y);
+		break;
+		// TODO Load texture based on type
+	}
 }
