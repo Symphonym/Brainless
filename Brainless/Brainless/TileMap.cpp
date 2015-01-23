@@ -1,4 +1,6 @@
 #include "TileMap.h"
+#include "Constants.h"
+#include "Utility.h"
 
 TileMap::TileMap(TileMapLayout layout, const unsigned int tileSize)
 :
@@ -17,7 +19,7 @@ m_tileSize(tileSize)
 				// In the vector below
 				// X needs to be negative half the width of the left side of the cube
 				// Y needs to be negative half the width of the top side of the cube
-				sf::Vector2f(-35, -30));
+				sf::Vector2f(Constants::LeftTileOffset, Constants::TopTileOffset));
 			m_tileMap[x].push_back(tile);
 		}
 			
@@ -51,16 +53,11 @@ void TileMap::draw(const sf::View &view)
 		startIndex.y = m_tileMap[0].size() - 1;
 
 	// Clamp indexes
-	if (startIndex.x >= m_tileMap.size())
-		startIndex.x = m_tileMap.size() - 1;
-	if (startIndex.y >= m_tileMap[m_tileMap.size() - 1].size())
-		startIndex.y = m_tileMap[m_tileMap.size() - 1].size() - 1;
+	startIndex.x = Utility::clampValue<int>(startIndex.x, 0, m_tileMap.size() - 1);
+	startIndex.y = Utility::clampValue<int>(startIndex.y, 0, m_tileMap[m_tileMap.size() - 1].size() - 1);
 
-	// Clamp indexes
-	if (endIndex.x < 0)
-		endIndex.x = 0;
-	if (endIndex.y < 0)
-		endIndex.y = 0;
+	endIndex.x = Utility::clampValue<int>(endIndex.x, 0, m_tileMap.size() - 1);
+	endIndex.y = Utility::clampValue<int>(endIndex.y, 0, m_tileMap[m_tileMap.size() - 1].size() - 1);
 
 	// Render tiles from bottom right to top left
 	for (int x = startIndex.x; x >= endIndex.x; x--)

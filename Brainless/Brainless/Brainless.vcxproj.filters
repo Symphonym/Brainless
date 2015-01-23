@@ -77,5 +77,11 @@
     <ClInclude Include="Camera2D.h">
       <Filter>Source Files\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
