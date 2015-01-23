@@ -11,7 +11,8 @@ public:
 	{
 		Nothing = 0,
 		Ground = 1,
-		Ground_Right = 2,
+		Red = 2,
+		Blue = 3
 		// Etc
 	};
 
