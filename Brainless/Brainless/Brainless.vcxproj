@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="Error.cpp" />
+    <ClCompile Include="FileSave.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
@@ -87,6 +88,7 @@
   <ItemGroup>
     <ClInclude Include="Editor.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="FileSave.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="Tile.h" />
