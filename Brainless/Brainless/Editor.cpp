@@ -8,8 +8,10 @@
 Editor::Editor()
 :
 m_map(),
-m_editor(sf::VideoMode(800, 600, sf::Style::Close), "Brainless Editor"),
-m_camera()
+m_camera(),
+m_currentBlock(0),
+m_currentSyncID(0),
+m_editor(sf::VideoMode(800, 600, sf::Style::Close), "Brainless Editor")
 {
 	m_camera = m_editor.getDefaultView();
 	Renderer::instance().setTarget(m_editor);
@@ -55,7 +57,11 @@ void Editor::loop()
 		{
 			if (event.type == sf::Event::Closed)
 				m_editor.close();
-
+			else if (event.type == sf::Event::MouseWheelMoved)
+			{
+				m_currentBlock += event.mouseWheel.delta;
+				m_currentBlock = Utility::clampValue(m_currentBlock, 0, Constants::BlockTypeCount - 1);
+			}
 		}
 
 		// Camera movement
@@ -92,7 +98,7 @@ void Editor::loop()
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			m_highlightSprite.setColor(sf::Color::Color(0, 255, 0, 128));
-			m_map->getTile(mouseIndex.x, mouseIndex.y).setType(Tile::Ground);
+			m_map->getTile(mouseIndex.x, mouseIndex.y).setType(static_cast<Tile::TileTypes>(m_currentBlock));
 		}
 		else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
@@ -111,5 +117,7 @@ void Editor::loop()
 void Editor::draw()
 {
 	m_map->draw(m_camera);
-	Renderer::instance().draw(m_highlightSprite);
+	Renderer::instance().drawAbove(m_highlightSprite);
+	
+	Renderer::instance().executeDraws();
 }
