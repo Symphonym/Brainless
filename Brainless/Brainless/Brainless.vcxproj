@@ -76,12 +76,12 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="FileSave.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="TestClass.cpp" />
@@ -96,7 +96,6 @@
     <ClInclude Include="Error.h" />
     <ClInclude Include="FileSave.h" />
     <ClInclude Include="TestClass.h" />
-    <ClInclude Include="Object.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="Tile.h" />

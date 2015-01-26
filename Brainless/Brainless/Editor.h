@@ -26,9 +26,17 @@ private:
 	sf::Sprite m_highlightSprite;
 	sf::Texture m_highlightTexture;
 
+	// Which block you currently have selected for drawing
+	int m_currentBlock;
+
+	// Which sync ID you are using when placing an item, used to connect items
+	// to eachother. A key and the door it goes to would have a matching syncID
+	int m_currentSyncID;
+
 	// Update loop
 	void loop();
 
+	// Rendering function
 	void draw();
 
 	sf::RenderWindow m_editor;

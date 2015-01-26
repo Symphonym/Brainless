@@ -9,6 +9,8 @@ m_tileSprite(),
 m_bounds(bounds)
 {
 	ResourceLoader::instance().loadTexture("GroundCube", "cube.png");
+	ResourceLoader::instance().loadTexture("RedCube", "cubeRed.png");
+	ResourceLoader::instance().loadTexture("BlueCube", "cubeBlue.png");
 	ResourceLoader::instance().loadTexture("AirCube", "cubeNada.png");
 
 	updateType();
@@ -27,7 +29,7 @@ void Tile::setType(TileTypes type)
 
 void Tile::draw(bool debug)
 {
-	Renderer::instance().draw(m_tileSprite);
+	Renderer::instance().draw(m_tileSprite, m_tileSprite);
 
 	if (debug)
 	{
@@ -39,7 +41,7 @@ void Tile::draw(bool debug)
 		spr.setTexture(tex);
 		spr.setPosition(m_bounds.left, m_bounds.top);
 
-		Renderer::instance().draw(spr);
+		Renderer::instance().draw(spr, spr);
 	}
 }
 
@@ -68,9 +70,12 @@ void Tile::updateType()
 		break;
 	case Ground:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("GroundCube"));
-		//m_tileSprite.setScale(
-		//	m_bounds.width / m_tileSprite.getTexture()->getSize().x,
-		//	m_bounds.height / m_tileSprite.getTexture()->getSize().y);
+		break;
+	case Red:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("RedCube"));
+		break;
+	case Blue:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("BlueCube"));
 		break;
 		// TODO Load texture based on type
 	}
