@@ -16,6 +16,8 @@ public:
 
 	// Transformable is used for simple depth testing
 	void draw(const sf::Drawable &drawable, const sf::Transformable& transformable);
+	void draw(const sf::Sprite &sprite);
+
 	// Draws the drawable above everything else, usefull for drawing HUD and interfaces
 	void drawAbove(const sf::Drawable &drawable);
 

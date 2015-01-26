@@ -1,6 +1,14 @@
+#pragma once
+#include "TileMap.h"
+
 class FileSave
 {
 public:
-	static void saveMap(); //##Parameter for filepath needed
-	static void loadMap(); //##Parameter for filepath needed
+	//Saving & loading levels
+	static void saveMap(TileMap* map, int stage_number);
+	static void loadMap(TileMap* map, int stage_number);
+
+	//Saving & loading player progress and misc info
+	static void saveProgress();
+	static void loadProgress();
 };

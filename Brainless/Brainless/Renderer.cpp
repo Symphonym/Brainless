@@ -29,6 +29,16 @@ void Renderer::draw(const sf::Drawable &drawable, const sf::Transformable &trans
 
 	m_renderTasks.push_back(std::make_pair(&drawable, distanceToZero));
 }
+
+void Renderer::draw(const sf::Sprite &sprite)
+{
+	const sf::Drawable* drawable = ((sf::Drawable*) &sprite);
+	const sf::Vector2f& pos = ((sf::Transformable) sprite).getPosition();
+	float distanceToZero = std::sqrt(pos.x*pos.x + pos.y*pos.y);
+
+	m_renderTasks.push_back(std::make_pair(drawable, distanceToZero));
+}
+
 void Renderer::drawAbove(const sf::Drawable &drawable)
 {
 	m_renderTasks.push_back(std::make_pair(&drawable, -1));

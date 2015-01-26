@@ -4,32 +4,67 @@ Animation::Animation(int width, int height)
 :
 m_width(width),
 m_height(height),
-rectangle(0, 0, width, height)
+m_rectangle(0, 0, width, height)
 {
 }
 
- void Animation::animate(int startFrame, int endFrame, int frameRow, float speed)
+ void Animation::loop(int startFrame, int endFrame, int frameRow, float speed)
 {
 	 m_startFrame = startFrame;
 	 m_endFrame = endFrame;
-	 m_speed = speed;
-	 rectangle.top = frameRow * m_height;
+	 m_rectangle.top = frameRow * m_height;
 	 m_currentFrame = startFrame;
+	 m_type = looping;
 }
 
- void Animation::update()
+ void Animation::playOnce(int startFrame, int endFrame, int frameRow, float speed)
  {
-	 m_timer -= 0.3f * m_speed;
+	 m_startFrame = startFrame;
+	 m_endFrame = endFrame;
+	 m_rectangle.top = frameRow * m_height;
+	 m_currentFrame = startFrame;
+	 m_type = once;
+ }
 
-	if (m_timer <= 0)
-	{
-		m_currentFrame++;
+ void Animation::stillFrame(int frame, int row)
+ {
+	 m_rectangle.top = row * m_height;
+	 m_currentFrame = frame;
+	 m_type = still;
+ }
 
-		if (m_currentFrame > m_endFrame)
-			m_currentFrame = m_startFrame;
 
-		m_timer = m_delay;
-	}
+ sf::IntRect Animation::getRectangle(float deltaTime)
+ {
+	 m_timer -= deltaTime;
 
-	rectangle.left = m_currentFrame * m_width;
+	 if (m_type == looping)
+	 {
+		 if (m_timer <= 0)
+		 {
+			 m_currentFrame++;
+
+			 if (m_currentFrame > m_endFrame)
+				 m_currentFrame = m_startFrame;
+
+			 m_timer = m_delay;
+		 }
+	 }
+
+	 if (m_type == once)
+	 {
+		 if (m_timer <= 0)
+		 {
+			 m_currentFrame++;
+
+			 if (m_currentFrame > m_endFrame)
+				 stillFrame(m_endFrame, m_rectangle.top);
+
+			 m_timer = m_delay;
+		 }
+	 }
+
+	 m_rectangle.left = m_currentFrame * m_width;
+
+	 return m_rectangle;
  }
