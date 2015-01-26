@@ -1,20 +1,19 @@
 #include <ostream>
 #include <fstream>
 #include "FileSave.h"
+#include "Constants.h"
+#include "TileMap.h"
+#include "Tile.h"
 
-#include <iostream>
-
-void FileSave::saveMap()
+void FileSave::saveMap(TileMap& map)
 {
+	int map_width = Constants::MapWidth, map_height = Constants::MapHeight;
 	//File variables
 	std::ofstream file_write;
 	file_write.open("Map1.fmap");
-
-	const int file_size = 20000;
-	unsigned char file_content[file_size];
+	const int file_size = 2 + map_width*map_height;
+	unsigned char * file_content = new unsigned char[file_size];
 	int file_at = 0;
-	int map_width = 100, map_height = 100;
-
 	// - Save all tiles
 	file_content[0] = map_width;
 	file_content[1] = map_height;
@@ -23,7 +22,7 @@ void FileSave::saveMap()
 	{
 		for (int y = 0; y < map_height; y++)
 		{
-			file_content[file_at] = (x + y) % 4; //TileMap::getTile(x,y)->getType();
+			file_content[file_at] = static_cast<int>(map.getTile(x, y).getType());
 			file_at++;
 		}
 	}
@@ -52,9 +51,6 @@ void FileSave::loadMap()
 
 	for (int i = 0; i < file_size; i++)
 	{
-		std::cout << i << ":" << (int)file_content[i] << std::endl;
+		//std::cout << i << ":" << (int)file_content[i] << std::endl;
 	}
-
-	int temp;
-	std::cin >> temp;
 }
