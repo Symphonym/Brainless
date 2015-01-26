@@ -5,12 +5,13 @@
 
 #include <SFML\Graphics.hpp>
 
-class Player : Unit
+class Player : public Unit
 {
 public:
-	Player(float startX, float startY);
-	Player(float startX, float startY, int m_width, int m_height);
-
+	Player(float startX, float startY, float maxSpeedX, float maxSpeedY);
+	Player(float startX, float startY, int width, int height, float maxSpeedX, float maxSpeedY);
+	/* kollar efter keyboardinput, och eventuel slide*/
+	void checkPlayerInput();
 protected:
 
 private:
