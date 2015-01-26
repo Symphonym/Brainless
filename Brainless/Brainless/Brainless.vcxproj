@@ -79,10 +79,13 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="EditorGridMode.cpp" />
+    <ClCompile Include="EditorSpriteMode.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="FileSave.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemDatabase.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
@@ -94,6 +97,8 @@
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Editor.h" />
+    <ClInclude Include="EditorGridMode.h" />
+    <ClInclude Include="EditorSpriteMode.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="FileSave.h" />
     <ClInclude Include="Item.h" />
