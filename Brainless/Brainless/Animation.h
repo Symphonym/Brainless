@@ -3,18 +3,31 @@
 
 #include <SFML\Graphics.hpp>
 
+
+
 class Animation
 {
 public:
 	Animation(int width, int height);
 
-	//Sets which frames will be animated
-	void animate(int startFrame, int endFrame, int frameRow, float speed);
+	enum AnimationType
+	{
+		looping = 0,
+		once = 1,
+		still = 2
+	};
+
+	//Plays the selected frames over and over again
+	void loop(int startFrame, int endFrame, int frameRow, float speed);
+
+	//Plays the selected frames once and stops at the last frame
+	void playOnce(int startFrame, int endFrame, int frameRow, float speed);
+
+	//Shows only the selected frame
+	void stillFrame(int Frame, int Row);
 
 	//Updates the rectangles position
-	void update();
-
-	sf::IntRect rectangle;
+	sf::IntRect getRectangle(float deltaTime);
 
 private:
 	int m_height;
@@ -23,7 +36,8 @@ private:
 	int m_startFrame;
 	int m_endFrame;
 	int m_currentFrame;
-	sf::Texture m_texture;
+	sf::IntRect m_rectangle;
+	AnimationType m_type;
 	
 	float m_timer;
 	float m_delay = 100;
