@@ -13,13 +13,13 @@ int main()
 	circle.setFillColor(sf::Color::Green);*/
 
 
-	Editor editor;
-	editor.run();
+	//Editor editor;
+	//editor.run();
 
 	//fork test!!!
 
-	/*TestClass test;
-	test.testUpdate();*/
+	TestClass test;
+	test.testUpdate();
 
 	// TEST CODE
 	/*TileMap::TileMapLayout layout;

@@ -1,17 +1,17 @@
 #ifndef _PLAYER
 #define _PLAYER
 
-#include "Object.h"
+#include "Unit.h"
 
-// byt namn sen?
-class Player : public Object
+#include <SFML\Graphics.hpp>
+
+class Player : Unit
 {
 public:
 	Player(float startX, float startY);
-	void update();
+	Player(float startX, float startY, int m_width, int m_height);
+
 protected:
-	float m_speedX;
-	float m_speedY;
 
 private:
 };

@@ -1,6 +1,6 @@
 #include <SFML\Graphics.hpp>
 #include "testClass.h"
-#include "Object.h"
+#include "Unit.h"
 #include "Renderer.h"
 #include "ResourceLoader.h"
 #include <iostream>

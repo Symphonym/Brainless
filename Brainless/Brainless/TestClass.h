@@ -1,7 +1,7 @@
 #ifndef _TESTCLASS
 #define _TESTCLASS
 
-#include "Object.h"
+#include "Unit.h"
 
 class TestClass
 {
@@ -9,7 +9,7 @@ public:
 	void testUpdate();
 	TestClass();
 private:
-	Object unit;
+	Unit unit;
 };
 
 #endif
