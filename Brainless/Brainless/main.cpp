@@ -16,6 +16,8 @@ int main()
 	Editor editor;
 	editor.run();
 
+	//fork test!!!
+
 	/*TestClass test;
 	test.testUpdate();*/
 
