@@ -33,10 +33,10 @@ public:
 	//getters
 	float getPositionX(){ return m_positionX; }
 	float getPositionY(){ return m_positionY; }
-	float getSpeedX(){ return m_positionY; }
-	float getSpeedY(){ return m_positionY; }
-	float getAccelerationX(){ return m_positionY; }
-	float getAccelerationY(){ return m_positionY; }
+	float getSpeedX(){ return m_speedX; }
+	float getSpeedY(){ return m_speedY; }
+	float getAccelerationX(){ return m_accelerationX; }
+	float getAccelerationY(){ return m_accelerationY; }
 	int getWidth(){ return m_width; }
 	int getHeight(){ return m_height; }
 	bool getInAir(){ return m_inAir; }

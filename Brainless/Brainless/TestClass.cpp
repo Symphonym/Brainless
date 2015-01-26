@@ -7,7 +7,7 @@
 
 using namespace std;
 
-TestClass::TestClass() : unit(300, 300, 131, 73, 200, 200)
+TestClass::TestClass() : unit(300, 400-73, 131, 73, 300, 600)
 {
 	ResourceLoader::instance().loadTexture("testImage", "test2.png");
 	unit.setTexture(ResourceLoader::instance().retrieveTexture("testImage"));
@@ -65,8 +65,15 @@ void TestClass::testUpdate()
 		if (test == 0)
 		{
 			unit.checkPlayerInput();
-			unit.updateMovement(200, deltaTime);
+			unit.updateMovement(600, deltaTime);
 			//collisiongrejis?	
+			if (unit.getInAir() && 400 < unit.getPositionY() + unit.getHeight())
+			{
+				unit.setStatus(false);
+				unit.setPosition(unit.getPositionX(), 400 - unit.getHeight());
+				unit.setSpeed(unit.getSpeedX(), 0);
+				unit.setAcceleration(0, 0);
+			}
 		}
 		unit.draw(); 
 
