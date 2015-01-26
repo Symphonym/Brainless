@@ -18,8 +18,11 @@ public:
 	void draw(const sf::Drawable &drawable, const sf::Transformable& transformable);
 	void draw(const sf::Sprite &sprite);
 
-	// Draws the drawable above everything else, usefull for drawing HUD and interfaces
+	// Draws the drawable above everything else
 	void drawAbove(const sf::Drawable &drawable);
+
+	// Draws the drawable using the default camera view, and ontop of everything else
+	void drawHUD(const sf::Drawable &drawable);
 
 	// Executes all draw calls for this frame
 	void executeDraws();
@@ -32,6 +35,7 @@ private:
 
 	typedef std::pair<const sf::Drawable*, float> RenderPair;
 	std::vector<RenderPair> m_renderTasks;
+	std::vector<const sf::Drawable*> m_hudRenderTasks;
 
 	const sf::Shader *m_shader;
 	sf::RenderTarget *m_renderTarget;

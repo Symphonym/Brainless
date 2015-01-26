@@ -27,22 +27,9 @@ void Tile::setType(TileTypes type)
 	updateType();
 }
 
-void Tile::draw(bool debug)
+void Tile::draw()
 {
 	Renderer::instance().draw(m_tileSprite, m_tileSprite);
-
-	if (debug)
-	{
-		sf::Image colImg;
-		colImg.create(m_bounds.width, m_bounds.height, sf::Color::Green);
-
-		sf::Texture tex; tex.loadFromImage(colImg);
-		sf::Sprite spr;
-		spr.setTexture(tex);
-		spr.setPosition(m_bounds.left, m_bounds.top);
-
-		Renderer::instance().draw(spr, spr);
-	}
 }
 
 // Checks if the tile collides with another bounding box
@@ -57,6 +44,10 @@ const sf::FloatRect& Tile::getBounds() const
 Tile::TileTypes Tile::getType() const
 {
 	return m_type;
+}
+sf::Sprite& Tile::getSprite()
+{
+	return m_tileSprite;
 }
 
 

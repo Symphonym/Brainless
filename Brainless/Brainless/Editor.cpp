@@ -3,13 +3,16 @@
 #include "TileMap.h"
 #include "Constants.h"
 #include "Utility.h"
+#include "FileSave.h"
+#include "ResourceLoader.h"
 
 
 Editor::Editor()
 :
 m_map(),
 m_camera(),
-m_currentBlock(0),
+m_hudCamera(),
+m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constants::LeftTileOffset, Constants::TopTileOffset)),
 m_currentSyncID(0),
 m_editor(sf::VideoMode(800, 600, sf::Style::Close), "Brainless Editor")
 {
@@ -35,12 +38,35 @@ m_editor(sf::VideoMode(800, 600, sf::Style::Close), "Brainless Editor")
 	m_highlightTexture.loadFromImage(highlightImg);
 	m_highlightSprite.setTexture(m_highlightTexture);
 
+	// Scale preview tile
+	m_currentTile.getSprite().setScale(0.3f, 0.3f);
+
+	// Load text font
+	ResourceLoader::instance().loadFont("DefaultFont", "VCR_OSD_MONO.ttf");
+	m_saveText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+	m_saveText.setPosition(0, 0);
+	m_saveText.setCharacterSize(16);
+	m_saveText.setString("File is not saved!");
+	m_saveText.setColor(sf::Color::Red);
+
+	loadFile();
+
 }
 
 void Editor::run()
 {
 	loop();
 }
+
+void Editor::loadFile()
+{
+	FileSave::loadMap(m_map.get(), 0);
+}
+void Editor::saveFile()
+{
+	FileSave::saveMap(m_map.get(), 0);
+}
+
 
 void Editor::loop()
 {
@@ -59,8 +85,10 @@ void Editor::loop()
 				m_editor.close();
 			else if (event.type == sf::Event::MouseWheelMoved)
 			{
-				m_currentBlock += event.mouseWheel.delta;
-				m_currentBlock = Utility::clampValue(m_currentBlock, 0, Constants::BlockTypeCount - 1);
+				int curIndex = static_cast<int>(m_currentTile.getType());
+				curIndex += event.mouseWheel.delta;
+				curIndex = Utility::clampValue(curIndex, 0, Constants::BlockTypeCount - 1);
+				m_currentTile.setType(static_cast<Tile::TileTypes>(curIndex));
 			}
 		}
 
@@ -80,6 +108,14 @@ void Editor::loop()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 			m_camera.zoom(1.f - zoomSpeed);
 
+		// Save hotkey
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		{
+			saveFile();
+			m_saveText.setString("File is saved!");
+			m_saveText.setColor(sf::Color::Green);
+		}
+
 		// Update editor camera
 		m_editor.setView(m_camera);
 
@@ -98,12 +134,16 @@ void Editor::loop()
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			m_highlightSprite.setColor(sf::Color::Color(0, 255, 0, 128));
-			m_map->getTile(mouseIndex.x, mouseIndex.y).setType(static_cast<Tile::TileTypes>(m_currentBlock));
+			m_map->getTile(mouseIndex.x, mouseIndex.y).setType(m_currentTile.getType());
+			m_saveText.setString("File is not saved!");
+			m_saveText.setColor(sf::Color::Red);
 		}
 		else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
 			m_highlightSprite.setColor(sf::Color::Color(255, 0, 0, 128));
 			m_map->getTile(mouseIndex.x, mouseIndex.y).setType(Tile::Nothing);
+			m_saveText.setString("File is not saved!");
+			m_saveText.setColor(sf::Color::Red);
 		}
 		else
 			m_highlightSprite.setColor(sf::Color::Color(255, 255, 255, 128));
@@ -118,6 +158,8 @@ void Editor::draw()
 {
 	m_map->draw(m_camera);
 	Renderer::instance().drawAbove(m_highlightSprite);
+	Renderer::instance().drawHUD(m_currentTile.getSprite());
+	Renderer::instance().drawHUD(m_saveText);
 	
 	Renderer::instance().executeDraws();
 }

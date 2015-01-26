@@ -81,6 +81,8 @@
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="FileSave.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemDatabase.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
@@ -94,6 +96,9 @@
     <ClInclude Include="Editor.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="FileSave.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemDatabse.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="Tile.h" />

@@ -43,6 +43,12 @@ void Renderer::drawAbove(const sf::Drawable &drawable)
 {
 	m_renderTasks.push_back(std::make_pair(&drawable, -1));
 }
+
+void Renderer::drawHUD(const sf::Drawable &drawable)
+{
+	m_hudRenderTasks.push_back(&drawable);
+}
+
 void Renderer::executeDraws()
 {
 	// Sort draw calls based on distance to 0,0
@@ -59,6 +65,17 @@ void Renderer::executeDraws()
 			m_renderTarget->draw(*m_renderTasks[i].first);
 	}
 
+	m_renderTarget->setView(m_renderTarget->getDefaultView());
+
+	for (std::size_t i = 0; i < m_hudRenderTasks.size(); i++)
+	{
+		if (m_shader != nullptr)
+			m_renderTarget->draw(*m_hudRenderTasks[i], m_shader);
+		else
+			m_renderTarget->draw(*m_hudRenderTasks[i]);
+	}
+
+	m_hudRenderTasks.clear();
 	m_renderTasks.clear();
 }
 

@@ -62,7 +62,7 @@ void TileMap::draw(const sf::View &view)
 	// Render tiles from bottom right to top left
 	for (int x = startIndex.x; x >= endIndex.x; x--)
 		for (int y = startIndex.y; y >= endIndex.y; y--)
-			m_tileMap[x][y].draw(false);
+			m_tileMap[x][y].draw();
 }
 
 // Converts a position to an index in the grid

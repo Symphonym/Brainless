@@ -6,17 +6,22 @@
 #include "Constants.h"
 #include "Animation.h"
 
-int main()
+int main(int argc, const char *args[])
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Brainless");
 	sf::CircleShape circle(100.f);
 	circle.setFillColor(sf::Color::Green);
 
-	ResourceLoader::instance().loadTexture("testSheet", "testSheet.png");
+	//if (argc == 1) // ONLY UNCOMMEN THESE IF's WHEN DEPLOYING PROGRAM, editor can then be accessed by running "game.exe editor"
+	//{
+	//	if (args[0] == "editor")
+	//	{
+			Editor editor;
+			editor.run();
+	//	}
+	//}
 
-
-	Editor editor;
-	editor.run();
+	
 
 
 	/*Renderer::instance().setTarget(window);

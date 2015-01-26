@@ -28,6 +28,9 @@
     <Filter Include="Source Files\Camera">
       <UniqueIdentifier>{7669ccbb-722f-4c4f-b11d-e54e1c3302b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{c0108589-ea7b-49fb-922a-46f01f6385cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -59,6 +62,12 @@
     </ClCompile>
     <ClCompile Include="FileSave.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemDatabase.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +103,15 @@
     </ClInclude>
     <ClInclude Include="FileSave.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDatabse.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Source Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

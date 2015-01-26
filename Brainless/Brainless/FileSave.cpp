@@ -41,24 +41,29 @@ void FileSave::loadMap(TileMap* map, int stage_number)
 {
 	//File variables
 	std::ifstream file_read; file_read.open(std::to_string(stage_number) + ".fmap");
-	file_read.seekg(0, file_read.end); //Find size of the file then go back to start
-	const int file_size = file_read.tellg();
-	file_read.seekg(0, file_read.beg);
-	unsigned char * file_content = new unsigned char[file_size];
-	int file_at = 0;
 
-	//Read from file
-	file_read.read((char*)file_content, file_size);
-
-	int map_width = file_content[0];
-	int map_ehight = file_content[1];
-	file_at = 2;
-	for (int x = 0; x < Constants::MapWidth; x++)
+	if (file_read.is_open())
 	{
-		for (int y = 0; y < Constants::MapHeight; y++)
+		file_read.seekg(0, file_read.end); //Find size of the file then go back to start
+		const int file_size = file_read.tellg();
+		file_read.seekg(0, file_read.beg);
+		unsigned char * file_content = new unsigned char[file_size];
+		int file_at = 0;
+
+		//Read from file
+		file_read.read((char*)file_content, file_size);
+
+		int map_width = file_content[0];
+		int map_ehight = file_content[1];
+		file_at = 2;
+		for (int x = 0; x < Constants::MapWidth; x++)
 		{
-			map->getTile(x, y).setType(static_cast<Tile::TileTypes>(file_content[file_at]));
-			file_at++;
+			for (int y = 0; y < Constants::MapHeight; y++)
+			{
+				map->getTile(x, y).setType(static_cast<Tile::TileTypes>(file_content[file_at]));
+				file_at++;
+			}
 		}
 	}
+	
 }

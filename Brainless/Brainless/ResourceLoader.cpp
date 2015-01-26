@@ -50,6 +50,20 @@ void ResourceLoader::loadMusic(const std::string &name, const std::string &fileP
 {
 
 }
+void ResourceLoader::loadFont(const std::string &name, const std::string &filePath)
+{
+	auto itr = m_fonts.find(name);
+
+	// A font by this name does not exist already
+	if (itr == m_fonts.end())
+	{
+		FontPtr fontPtr = FontPtr(new sf::Font());
+		if (fontPtr->loadFromFile(filePath))
+			m_fonts[name] = std::move(fontPtr);
+		else
+			BRAINLESS_ERROR("The file '" + filePath + "' could not be loaded!");
+	}
+}
 
 sf::Texture& ResourceLoader::retrieveTexture(const std::string &name)
 {
@@ -88,6 +102,16 @@ sf::Music& ResourceLoader::retrieveMusic(const std::string &name)
 	// A sound by this name does not exist already
 	if (itr == m_music.end())
 		BRAINLESS_ERROR("The music resource '" + name + "' could not be found!");
+	else
+		return *itr->second.get();
+}
+sf::Font& ResourceLoader::retrieveFont(const std::string &name)
+{
+	auto itr = m_fonts.find(name);
+
+	// A sound by this name does not exist already
+	if (itr == m_fonts.end())
+		BRAINLESS_ERROR("The font resource '" + name + "' could not be found!");
 	else
 		return *itr->second.get();
 }
@@ -132,6 +156,17 @@ bool ResourceLoader::unloadMusic(const std::string &name)
 	if (itr != m_music.end()) // Resource was found
 	{
 		m_music.erase(itr);
+		return true;
+	}
+	else
+		return false;
+}
+bool ResourceLoader::unloadFont(const std::string &name)
+{
+	auto itr = m_fonts.find(name);
+	if (itr != m_fonts.end()) // Resource was found
+	{
+		m_fonts.erase(itr);
 		return true;
 	}
 	else

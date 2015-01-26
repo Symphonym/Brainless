@@ -21,13 +21,17 @@ public:
 
 	void setType(TileTypes type);
 
-	// Draw the tile sprite to the specified render target
-	void draw(bool debug = false);
+	// Draw the tile sprite
+	void draw();
 
 	// Checks if the tile collides with another bounding box
 	bool collidesWith(const sf::FloatRect &rect) const;
+
 	const sf::FloatRect& getBounds() const;
 	TileTypes getType() const;
+
+	// Raw acceess to sprite, do not modify if using tile with tilemap
+	sf::Sprite& getSprite();
 
 private:
 
