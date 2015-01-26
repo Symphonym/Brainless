@@ -28,7 +28,8 @@ public:
 	float getSpeedY(){ return m_positionY; }
 	float getAccelerationX(){ return m_positionY; }
 	float getAccelerationY(){ return m_positionY; }
-	
+	float getWidth(){ return m_width; }
+	float getHeight(){ return m_height; }
 protected:
 	float m_positionX;
 	float m_positionY;
