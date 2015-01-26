@@ -12,24 +12,24 @@ rectangle(0, 0, width, height)
 {
 	 m_startFrame = startFrame;
 	 m_endFrame = endFrame;
-	 m_speed = speed;
 	 rectangle.top = frameRow * m_height;
 	 m_currentFrame = startFrame;
 }
 
+
  void Animation::update()
  {
-	 m_timer -= 0.3f * m_speed;
+	 m_timer -= 1;
 
-	if (m_timer <= 0)
-	{
-		m_currentFrame++;
+	 if (m_timer <= 0)
+	 {
+		 m_currentFrame++;
 
-		if (m_currentFrame > m_endFrame)
-			m_currentFrame = m_startFrame;
+		 if (m_currentFrame > m_endFrame)
+			 m_currentFrame = m_startFrame;
 
-		m_timer = m_delay;
-	}
+		 m_timer = m_delay;
+	 }
 
-	rectangle.left = m_currentFrame * m_width;
+	 rectangle.left = m_currentFrame * m_width;
  }

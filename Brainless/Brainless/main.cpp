@@ -5,36 +5,23 @@
 #include "Editor.h"
 #include "Constants.h"
 #include "TestClass.h"
+#include "Animation.h"
 
 int main()
 {
-	//sf::RenderWindow window(sf::VideoMode(800, 600), "Brainless");
-	/*sf::CircleShape circle(100.f);
-	circle.setFillColor(sf::Color::Green);*/
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Brainless");
+	sf::CircleShape circle(100.f);
+	circle.setFillColor(sf::Color::Green);
 
+	Animation animationRect(100, 100);
+	animationRect.animate(0, 3, 0, 1);
+	ResourceLoader::instance().loadTexture("testSheet", "testSheet.png");
 
+/*
 	Editor editor;
-	editor.run();
+	editor.run();*/
 
-	/*TestClass test;
-	test.testUpdate();*/
 
-	// TEST CODE
-	/*TileMap::TileMapLayout layout;
-	for (int i = 0; i < 100; i++)
-	{
-		layout.push_back(std::vector<Tile::TileTypes>());
-		for (int y = 0; y < 100; y++)
-		{
-			if ((i % 5 == 0 && y % 5 == 0) || i % 3 == 0)
-				layout[i].push_back(Tile::Nothing);
-			else
-				layout[i].push_back(Tile::Ground);
-		}
-	}
-	TileMap map(layout, Constants::TileSize);
-
-	sf::View defView = window.getDefaultView();
 	Renderer::instance().setTarget(window);
 	while (window.isOpen())
 	{
@@ -45,28 +32,12 @@ int main()
 				window.close();
 
 		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-			defView.move(0, -10);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-			defView.move(0, 10);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-			defView.move(-10, 0);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			defView.move(10, 0);
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-			defView.zoom(1.01f);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-			defView.zoom(0.99f);
-
-		window.setView(defView);
-
+		animationRect.update();
 		window.clear(sf::Color::Black);
-		map.draw(defView);
-		//window.draw(circle);
+		window.draw(circle);
+		window.draw(sf::Sprite(ResourceLoader::instance().retrieveTexture("testSheet"), animationRect.rectangle));
 		window.display();
-	}*/
+	}
 	
 
 	return 0;
