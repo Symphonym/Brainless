@@ -57,23 +57,12 @@ void FileSave::saveMap(Level* stage, int stage_number)
 	file_content[file_at] = stage->getDecorations().size(); file_at++;
 	for (int i = 0; i < stage->getDecorations().size(); i++)
 	{
-		//3xByte - indicating X, 3xByte - indicating Y
-		if (stage->getDecorations()[i].sprite.getPosition().x < 0)
-			file_content[file_at + 0] = 0; else file_content[file_at + 0] = -1;
-		file_content[file_at + 1] = floor(stage->getDecorations()[i].sprite.getPosition().x / 255);
-		file_content[file_at + 2] = (int)(stage->getDecorations()[i].sprite.getPosition().x) % 255;
-		if (stage->getDecorations()[i].sprite.getPosition().y < 0)
-			file_content[file_at + 3] = 0; else file_content[file_at + 3] = -1;
-		file_content[file_at + 4] = floor(stage->getDecorations()[i].sprite.getPosition().y / 255);
-		file_content[file_at + 5] = (int)(stage->getDecorations()[i].sprite.getPosition().y) % 255;
-		//Byte - indicating foreground or background
-		file_content[file_at + 6] = stage->getDecorations()[i].drawToForeground;
-		file_at += 7;
-		//Byte - indicating string lenght, string - indicating sprite name
-		int string_lenght = stage->getDecorations()[i].textureName.length();
-		std::string string = stage->getDecorations()[i].textureName;
-		file_content[file_at] = string_lenght;file_at++;
-		for (int j = 0; j < string_lenght; j++)
+		int string_lenght = 0;
+		file_content[file_at] = stage->getDecorations()[i].first.getPosition().x;
+		file_content[file_at + 1] = stage->getDecorations()[i].first.getPosition().y;
+		file_content[file_at + 2] = string_lenght;
+		file_at++;
+		for (int j = 0; j < string_lenght;j++)
 		{
 			file_content[file_at] = string[j];
 			file_at++;
