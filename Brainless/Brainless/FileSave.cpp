@@ -113,11 +113,10 @@ void FileSave::loadMap(Level* stage, int stage_number)
 		}
 	}
 	//Loading items
-	typedef std::unique_ptr<Item> ItemPtr;
 	int item_count = file_content[file_at]; file_at++;
 	for (int i = 0; i < item_count; i++)
 	{
-		ItemPtr item = ItemDatabase::instance().extractItem(file_content[file_at + 6]);
+		ItemDatabase::ItemPtr item = ItemDatabase::instance().extractItem(file_content[file_at + 6]);
 		stage->getItems().push_back(item);
 		int item_x = file_content[file_at + 1] * 256 + file_content[file_at + 2];
 		if (file_content[file_at + 0] == 0) item_x = -item_x;

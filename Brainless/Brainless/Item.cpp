@@ -32,6 +32,12 @@ int Item::getID() const
 {
 	return m_id;
 }
+
+void Item::setSyncID(int id)
+{
+	m_syncID = id;
+}
+
 int Item::getSyncID() const
 {
 	return m_syncID;
