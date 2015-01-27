@@ -10,9 +10,8 @@ public:
 
 	EditorSpriteMode(std::vector<std::pair<sf::Sprite, bool> >& spriteVector);
 
-	void events(const sf::Event &event);
-
-	// Returns true if sprites were removed/added (something changed)
+	// Returns true if something changed (so editor knows if it needs to resave)
+	bool events(const sf::Event &event, const sf::RenderWindow &editorWindow);
 	bool update(float deltaTime, const sf::RenderWindow &editorWindow);
 	void draw();
 

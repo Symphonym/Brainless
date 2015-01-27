@@ -23,7 +23,7 @@ EditorGridMode::~EditorGridMode()
 
 }
 
-void EditorGridMode::events(const sf::Event &event)
+bool EditorGridMode::events(const sf::Event &event, const sf::RenderWindow &editorWindow)
 {
 	if (event.type == sf::Event::MouseWheelMoved)
 	{
@@ -34,6 +34,8 @@ void EditorGridMode::events(const sf::Event &event)
 
 		m_currentTile.setType(static_cast<Tile::TileTypes>(curIndex));
 	}
+
+	return false;
 }
 
 bool EditorGridMode::update(float deltaTime, const sf::RenderWindow &editorWindow)

@@ -14,10 +14,8 @@ m_sprites(spriteVector)
 	m_highlightSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_availableDecorations[m_currentSpriteIndex]));
 }
 
-void EditorSpriteMode::events(const sf::Event &event)
+bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &editorWindow)
 {
-	m_somethingChanged = false;
-
 	if (event.type == sf::Event::MouseWheelMoved)
 	{
 		// Scroll between block types
@@ -26,27 +24,33 @@ void EditorSpriteMode::events(const sf::Event &event)
 
 		m_highlightSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_availableDecorations[m_currentSpriteIndex]));
 	}
-	/*else if (event.type == sf::Event::MouseButtonReleased)
+	else if (event.type == sf::Event::MouseButtonReleased)
 	{
+		// Place a sprite
 		if (event.mouseButton.button == sf::Mouse::Left)
 		{
 			m_sprites.push_back(std::make_pair(m_highlightSprite, m_drawToForeground));
-			m_somethingChanged = true;
+			return true;
 		}
 		else if (event.mouseButton.button == sf::Mouse::Right)
 		{
 			sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));
 
+			// Loop through existing sprites and see if the cursor collides with them
 			for (std::size_t i = 0; i < m_sprites.size(); i++)
 			{
 				if (m_sprites[i].first.getGlobalBounds().contains(mousePos))
 				{
 					m_sprites.erase(m_sprites.begin() + i);
-					m_somethingChanged = true;
+					return true;
 				}
 			}
+
+			return false;
 		}
-	}*/
+	}
+	else
+		return false;
 }
 
 // Returns true if sprites were removed/added (something changed)
@@ -63,9 +67,9 @@ bool EditorSpriteMode::update(float deltaTime, const sf::RenderWindow &editorWin
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::B))
 		m_drawToForeground = false;
 
-
+	return false;
 	// Add/remove a sprite with left/right click
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	/*if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		m_sprites.push_back(std::make_pair(m_highlightSprite, m_drawToForeground));
 		return true;
@@ -83,7 +87,7 @@ bool EditorSpriteMode::update(float deltaTime, const sf::RenderWindow &editorWin
 		return false;
 	}
 	else
-		return false;
+		return false;*/
 }
 void EditorSpriteMode::draw()
 {
