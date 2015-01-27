@@ -12,9 +12,9 @@ public:
 	EditorGridMode(TileMap &tilemap);
 	~EditorGridMode();
 
-	void events(const sf::Event &event);
 
 	// Returns true if something was changed in the tilemap
+	bool events(const sf::Event &event, const sf::RenderWindow &editorWindow);
 	bool update(float deltaTime, const sf::RenderWindow &editorWindow);
 	void draw();
 

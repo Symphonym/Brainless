@@ -57,11 +57,11 @@ void Editor::run()
 
 void Editor::loadFile()
 {
-	FileSave::loadMap(&m_level.getTileMap(), 0);
+	FileSave::loadMap(&m_level, 0);
 }
 void Editor::saveFile()
 {
-	FileSave::saveMap(&m_level.getTileMap(), 0);
+	FileSave::saveMap(&m_level, 0);
 }
 
 
@@ -75,6 +75,9 @@ void Editor::loop()
 		const float cameraSpeed = deltaTime*2000.f;
 		const float zoomSpeed = deltaTime;
 
+		// If something was modified in the level
+		bool somethingChanged = false;
+
 		sf::Event event;
 		while (m_editor.pollEvent(event))
 		{
@@ -83,8 +86,12 @@ void Editor::loop()
 
 			switch (m_editorMode)
 			{
-				case EditorModes::Grid: m_gridMode->events(event); break;
-				case EditorModes::Sprite: m_spriteMode->events(event); break;
+				case EditorModes::Grid: 
+					somethingChanged = m_gridMode->events(event, m_editor) ? true : somethingChanged;
+					break;
+				case EditorModes::Sprite:
+					somethingChanged = m_spriteMode->events(event, m_editor) ? true : somethingChanged;
+					break;
 			}
 		}
 
@@ -129,9 +136,11 @@ void Editor::loop()
 		switch (m_editorMode)
 		{
 			case EditorModes::Grid:
-				somethingChanged = m_gridMode->update(deltaTime, m_editor); break;
+				somethingChanged = m_gridMode->update(deltaTime, m_editor) ? true : somethingChanged;
+				break;
 			case EditorModes::Sprite:
-				somethingChanged = m_spriteMode->update(deltaTime, m_editor); break;
+				somethingChanged = m_spriteMode->update(deltaTime, m_editor) ? true : somethingChanged;
+				break;
 		}
 
 		if (somethingChanged)
