@@ -5,7 +5,6 @@
 #include "Editor.h"
 #include "Constants.h"
 #include "Animation.h"
-#include "TestClass.h"
 
 int main(int argc, const char *args[])
 {
@@ -17,15 +16,11 @@ int main(int argc, const char *args[])
 	//{
 	//	if (args[0] == "editor")
 	//	{
-		/*	Editor editor;  
-			editor.run(); */
+			Editor editor;  
+			editor.run();
 	//	}
 	//}
 
-	//hej test branchasd
-	TestClass test;
-	test.testUpdate();
-	//vad händer nu vid merge till denna branch?
 
 	/*Renderer::instance().setTarget(window);
 	while (window.isOpen())
