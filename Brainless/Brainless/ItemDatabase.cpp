@@ -2,8 +2,8 @@
 
 ItemDatabase::ItemDatabase()
 {
-	// Testing item
-	addItem(ItemPtr(new Item("GreenCube", 0)));
+	// TODO Testing item
+	addItem(ItemPtr(new DefaultItem("GreenCube", 0)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)
@@ -11,10 +11,10 @@ void ItemDatabase::addItem(ItemPtr itemPtr)
 	m_items[itemPtr->getID()] = std::move(itemPtr);
 }
 
-//ItemDatabase::ItemPtr ItemDatabase::extractItem(int id)
-//{
-	// TODO return ItemPtr(new Item(m_items.at(id)));
-//}
+ItemDatabase::ItemPtr ItemDatabase::extractItem(int id)
+{
+	return std::move(ItemPtr(m_items.at(id)->clone()));
+}
 
 ItemDatabase& ItemDatabase::instance()
 {

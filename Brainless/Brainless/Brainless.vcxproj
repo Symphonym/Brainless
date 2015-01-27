@@ -100,6 +100,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EditorGridMode.h" />
+    <ClInclude Include="EditorItemMode.h" />
     <ClInclude Include="EditorSpriteMode.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="FileSave.h" />

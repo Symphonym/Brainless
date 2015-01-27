@@ -12,7 +12,7 @@ public:
 	typedef std::unique_ptr<Item> ItemPtr;
 
 	// Extracts an item from the database by its ID
-	//ItemPtr extractItem(int id);
+	ItemPtr extractItem(int id);
 
 	static ItemDatabase& instance();
 

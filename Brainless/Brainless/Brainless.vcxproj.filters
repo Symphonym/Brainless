@@ -143,5 +143,11 @@
     <ClInclude Include="Player.h">
       <Filter>Source Files\Unit</Filter>
     </ClInclude>
+    <ClInclude Include="LevelSprite.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorItemMode.h">
+      <Filter>Source Files\Level Editor</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
