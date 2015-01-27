@@ -87,6 +87,18 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Unit</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WrappedText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorItemMode.cpp">
+      <Filter>Source Files\Level Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -116,9 +128,6 @@
     <ClInclude Include="Utility.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileSave.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Source Files\Game</Filter>
     </ClInclude>
@@ -145,6 +154,18 @@
     </ClInclude>
     <ClInclude Include="LevelSprite.h">
       <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorItemMode.h">
+      <Filter>Source Files\Level Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="WrappedText.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSave.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestClass.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

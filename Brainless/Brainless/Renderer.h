@@ -4,6 +4,16 @@
 #include <SFML\Graphics.hpp>
 #include <vector>
 
+
+struct RenderData
+{
+	RenderData(const sf::Drawable *drawableParam, sf::FloatRect boundsParam, float lengthParam);
+
+	const sf::Drawable *drawable;
+	sf::FloatRect bounds;
+	float lengthToOrigo;
+};
+
 class TileMap;
 class Renderer
 {
@@ -17,7 +27,7 @@ public:
 
 	void setTileMap(TileMap &tileMap);
 	void drawTMSpecial(const sf::Drawable &drawable, const sf::FloatRect &bounds);
-
+	void drawByBounds(const sf::Drawable &drawable, const sf::FloatRect &bounds);
 
 	// Transformable is used for simple depth testing
 	void draw(const sf::Drawable &drawable, const sf::Transformable& transformable);
@@ -40,10 +50,12 @@ public:
 
 private:
 
+
+
 	Renderer();
 
-	typedef std::pair<const sf::Drawable*, float> RenderPair;
-	std::vector<RenderPair> m_renderTasks;
+	//typedef std::pair<const sf::Drawable*, float> RenderPair;
+	std::vector<RenderData> m_renderTasks;
 	std::vector<const sf::Drawable*> m_hudRenderTasks;
 
 	// Foreground and background render tasks are separate from the semi depth

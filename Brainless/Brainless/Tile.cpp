@@ -29,7 +29,8 @@ void Tile::setType(TileTypes type)
 
 void Tile::draw()
 {
-	Renderer::instance().draw(m_tileSprite, m_tileSprite);
+	//Renderer::instance().draw(m_tileSprite, m_tileSprite);
+	Renderer::instance().drawByBounds(m_tileSprite, m_tileSprite.getGlobalBounds());
 }
 
 // Checks if the tile collides with another bounding box

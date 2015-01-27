@@ -116,8 +116,8 @@ void FileSave::loadMap(Level* stage, int stage_number)
 	int item_count = file_content[file_at]; file_at++;
 	for (int i = 0; i < item_count; i++)
 	{
-		ItemDatabase::ItemPtr item = ItemDatabase::instance().extractItem(file_content[file_at + 6]);
-		stage->getItems().push_back(item);
+		ItemDatabase::ItemPtr item = std::move(ItemDatabase::instance().extractItem(file_content[file_at + 6]));
+		stage->getItems().push_back(std::move(item));
 		int item_x = file_content[file_at + 1] * 256 + file_content[file_at + 2];
 		if (file_content[file_at + 0] == 0) item_x = -item_x;
 		int item_y = file_content[file_at + 4] * 256 + file_content[file_at + 5];

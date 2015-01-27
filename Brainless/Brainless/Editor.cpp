@@ -29,7 +29,7 @@ m_currentSyncID(0)
 	// Load editor resources
 	ResourceLoader::instance().loadFont("EditorFont", "VCR_OSD_MONO.ttf");
 	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");
-	ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
+	//ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
 
 
 
