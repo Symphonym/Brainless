@@ -17,14 +17,11 @@ int main(int argc, const char *args[])
 	//{
 	//	if (args[0] == "editor")
 	//	{
-		/*	Editor editor;  
-			editor.run(); */
+			Editor editor;  
+			editor.run();
 	//	}
 	//}
 
-	//hej test branchasd
-			TestClass test;
-			test.testUpdate();
 
 	/*Renderer::instance().setTarget(window);
 	while (window.isOpen())
