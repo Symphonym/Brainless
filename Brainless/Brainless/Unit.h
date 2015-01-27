@@ -25,7 +25,6 @@ public:
 
 	void setMaxSpeed(float maxSpeed);
 
-	//render, temp? sköts av animationsklass senare
 	sf::Sprite getSprite();
 	void setTexture(sf::Texture& texture);
 	void draw();

@@ -7,13 +7,17 @@
 
 using namespace std;
 
-TestClass::TestClass() : unit(300, 400 - 73, 131, 73, 300, 600)
+TestClass::TestClass() 
 {
-	ResourceLoader::instance().loadTexture("testImage", "test2.png");
-	unit.setTexture(ResourceLoader::instance().retrieveTexture("testImage"));
+	ResourceLoader::instance().loadTexture("testImage", "spritesheet.png");
+
+
 }
 void TestClass::testUpdate()
 {
+	Player m_unit(300, 400 - 90, 60, 90, 200, 600);
+	m_unit.setTexture(ResourceLoader::instance().retrieveTexture("testImage"));
+
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "Brainless");
 	sf::CircleShape circle(100.f);
 	sf::RectangleShape rect(sf::Vector2f(10, 720));
@@ -64,18 +68,19 @@ void TestClass::testUpdate()
 		window.draw(rect);
 		if (test == 0)
 		{
-			unit.checkPlayerInput();
-			unit.updateMovement(600, deltaTime);
+			m_unit.checkPlayerInput();
+			m_unit.updateMovement(600, deltaTime);
+			m_unit.updateAnimation(deltaTime);
 			//collisiongrejis?	
-			if (unit.getInAir() && 400 < unit.getPositionY() + unit.getHeight())
+			if (m_unit.getInAir() && 400 < m_unit.getPositionY() + m_unit.getHeight())
 			{
-				unit.setStatus(false);
-				unit.setPosition(unit.getPositionX(), 400 - unit.getHeight());
-				unit.setSpeed(unit.getSpeedX(), 0);
-				unit.setAcceleration(0, 0);
+				m_unit.setStatus(false);
+				m_unit.setPosition(m_unit.getPositionX(), 400 - m_unit.getHeight());
+				m_unit.setSpeed(m_unit.getSpeedX(), 0);
+				m_unit.setAcceleration(0, 0);
 			}
 		}
-		unit.draw();
+		m_unit.draw();
 
 		Renderer::instance().executeDraws();
 		window.display();

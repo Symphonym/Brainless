@@ -28,7 +28,8 @@ public:
 
 	//Updates the rectangles position
 	sf::IntRect getRectangle(float deltaTime);
-
+	float getWidth(){ return m_width; }
+	float getHeight(){ return m_height; }
 private:
 	int m_height;
 	int m_width;

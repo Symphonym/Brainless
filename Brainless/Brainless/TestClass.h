@@ -9,7 +9,6 @@ public:
 	void testUpdate();
 	TestClass();
 private:
-	Player unit;
 };
 
 #endif

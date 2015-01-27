@@ -3,14 +3,24 @@
 #include <iostream>
 using namespace std;
 //V0.01
-Unit::Unit(float startX, float startY, float maxSpeedX, float maxSpeedY) : m_positionX(startX), m_positionY(startY), m_speedX(0), m_speedY(0), m_accelerationX(0),
-m_accelerationY(0), m_width(200), m_height(200), m_maxSpeedX(maxSpeedX), m_maxSpeedY(maxSpeedY), m_inAir(false)
+Unit::Unit(float startX, float startY, float maxSpeedX, float maxSpeedY) 
+: 
+m_positionX(startX), m_positionY(startY), 
+m_speedX(0), m_speedY(0), 
+m_accelerationX(0),m_accelerationY(0), 
+m_width(200), m_height(200), 
+m_maxSpeedX(maxSpeedX), m_maxSpeedY(maxSpeedY), 
+m_inAir(false)
 {
 	m_sprite.setPosition(sf::Vector2f(startX, startY));
 }
-Unit::Unit(float startX, float startY, int width, int height, float maxSpeedX, float maxSpeedY) : m_positionX(startX), m_positionY(startY), m_speedX(0), m_speedY(0),
-m_accelerationX(0), m_accelerationY(0), m_inAir(false)
-, m_width(width), m_height(height), m_maxSpeedX(maxSpeedX), m_maxSpeedY(maxSpeedY)
+Unit::Unit(float startX, float startY, int width, int height, float maxSpeedX, float maxSpeedY) 
+: 
+m_positionX(startX), m_positionY(startY), 
+m_speedX(0), m_speedY(0),
+m_accelerationX(0), m_accelerationY(0), m_inAir(false), 
+m_width(width), m_height(height), 
+m_maxSpeedX(maxSpeedX), m_maxSpeedY(maxSpeedY)
 {
 	m_sprite.setPosition(sf::Vector2f(startX, startY));
 }
