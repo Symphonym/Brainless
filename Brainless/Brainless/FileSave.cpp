@@ -61,7 +61,7 @@ void FileSave::saveMap(Level* stage, int stage_number)
 			file_content[i] = 'b';
 			file_at++;
 		}
-		file_content[i] = stage->getDecorations[string_lenght];
+//		file_content[i] = stage->getDecorations[string_lenght];
 		file_at += string_lenght;
 	}
 	//write array to file

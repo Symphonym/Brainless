@@ -106,6 +106,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemDatabse.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelSprite.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceLoader.h" />

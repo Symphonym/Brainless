@@ -27,10 +27,10 @@ void Level::draw(const sf::View &cameraView)
 
 	for (std::size_t i = 0; i < m_sprites.size(); i++)
 	{
-		if (m_sprites[i].second)
-			Renderer::instance().drawForeground(m_sprites[i].first);
+		if (m_sprites[i].drawToForeground)
+			Renderer::instance().drawForeground(m_sprites[i].sprite);
 		else
-			Renderer::instance().drawBackground(m_sprites[i].first);
+			Renderer::instance().drawBackground(m_sprites[i].sprite);
 	}
 }
 
@@ -39,7 +39,7 @@ TileMap& Level::getTileMap()
 {
 	return *m_tileMap.get();
 }
-std::vector<Level::SpritePair>& Level::getDecorations()
+std::vector<LevelSprite>& Level::getDecorations()
 {
 	return m_sprites;
 }

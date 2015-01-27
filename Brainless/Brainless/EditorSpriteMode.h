@@ -2,13 +2,14 @@
 #define INCLUDED_EDITOR_SPRITE_MODE
 
 #include <SFML\Graphics.hpp>
+#include "LevelSprite.h"
 #include <vector>
 
 class EditorSpriteMode
 {
 public:
 
-	EditorSpriteMode(std::vector<std::pair<sf::Sprite, bool> >& spriteVector);
+	EditorSpriteMode(std::vector<LevelSprite>& spriteVector);
 
 	// Returns true if something changed (so editor knows if it needs to resave)
 	bool events(const sf::Event &event, const sf::RenderWindow &editorWindow);
@@ -23,20 +24,16 @@ private:
 	// Initialize list of available sprites
 	void initializeSprites();
 
-	bool m_somethingChanged;
-
+	sf::Text m_layerText; // Shows what layer you're drawing to
 
 	// Used as a preview to how it would look like if the sprite was placed
-	sf::Sprite m_highlightSprite;
-
-	// Whether or not to draw to the foreground, otherwise draw to background
-	bool m_drawToForeground;
+	LevelSprite m_highlightSprite;
 
 	int m_currentSpriteIndex;
 	std::vector<std::string> m_availableDecorations; // List of all decorations available (list of texture names)
 
 	// The list of sprites for the level
-	std::vector<std::pair<sf::Sprite, bool> >& m_sprites;
+	std::vector<LevelSprite>& m_sprites;
 };
 
 #endif
