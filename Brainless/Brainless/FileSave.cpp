@@ -16,17 +16,14 @@
 void FileSave::saveMap(Level* stage, int stage_number)
 {
 	//Obtaining level parts
-	TileMap* map = stage->getTileMap();
-##itemPointer||vectorArray
-##TexturePointer||VectorArray
+	TileMap& map = stage->getTileMap();
 	//File variables
 	std::ofstream file_write; file_write.open(std::to_string(stage_number) + ".fmap");
-	const int file_size = (2 + Constants::MapWidth*Constants::MapHeight) + 1 + 6 * item_array.size();
+	const int file_size = (2 + Constants::MapWidth*Constants::MapHeight) + 1;//+ 6 * item_array.size();
 	unsigned char * file_content = new unsigned char[file_size];
 	int file_at = 0;
 
 	// - Save all tiles to array
-
 	file_content[0] = Constants::MapWidth;
 	file_content[1] = Constants::MapHeight;
 	file_at = 2;
@@ -34,19 +31,19 @@ void FileSave::saveMap(Level* stage, int stage_number)
 	{
 		for (int y = 0; y < Constants::MapHeight; y++)
 		{
-			file_content[file_at] = static_cast<int>(map->getTile(x, y).getType());
+			file_content[file_at] = static_cast<int>(map.getTile(x, y).getType());
 			file_at++;
 		}
 	}
 	//Save all items to array
-	std::vector<Item*> items_array;
+	std::vector<Item*> item_array;
 	file_content[file_at] = item_array.size();
 	for (int i = 0; i < item_array.size(); i++)
 	{
 		file_content[file_at + 0] = floor(item_array[i]->getPosition().x / 255);
-		file_content[file_at + 1] = item_array[i]->getPosition().x % 255;
+		file_content[file_at + 1] = (int)(item_array[i]->getPosition().x) % 255;
 		file_content[file_at + 2] = floor(item_array[i]->getPosition().y / 255);
-		file_content[file_at + 3] = item_array[i]->getPosition().y % 255;
+		file_content[file_at + 3] = (int)(item_array[i]->getPosition().y) % 255;
 		file_content[file_at + 4] = item_array[i]->getID();
 		file_content[file_at + 5] = item_array[i]->getSyncID();
 		file_at += 6;
@@ -54,10 +51,18 @@ void FileSave::saveMap(Level* stage, int stage_number)
 	//Save all textures to array
 	for (int i = 0; i < stage->getDecorations().size(); i++)
 	{
-		int lenght = texture_array[i].lenght();
-		file_content[i] = name[4];
-		// byte - string lenght
-		// string - name
+		int string_lenght = 0;
+		file_content[file_at] = stage->getDecorations()[i].first.getPosition().x;
+		file_content[file_at + 1] = stage->getDecorations()[i].first.getPosition().y;
+		file_content[file_at + 2] = string_lenght;
+		file_at++;
+		for (int j = 0; j < string_lenght;j++)
+		{
+			file_content[i] = 'b';
+			file_at++;
+		}
+		file_content[i] = stage->getDecorations[string_lenght];
+		file_at += string_lenght;
 	}
 	//write array to file
 	file_write.write((const char*)file_content, file_at);
@@ -66,7 +71,7 @@ void FileSave::saveMap(Level* stage, int stage_number)
 void FileSave::loadMap(Level* stage, int stage_number)
 {
 	//Obtaining level parts
-	TileMap* map = stage->getTileMap();
+	TileMap& map = stage->getTileMap();
 
 	//File variables
 	std::ifstream file_read; file_read.open(std::to_string(stage_number) + ".fmap");
@@ -87,7 +92,7 @@ void FileSave::loadMap(Level* stage, int stage_number)
 	{
 		for (int y = 0; y < Constants::MapHeight; y++)
 		{
-			map->getTile(x, y).setType(static_cast<Tile::TileTypes>(file_content[file_at]));
+			map.getTile(x, y).setType(static_cast<Tile::TileTypes>(file_content[file_at]));
 			file_at++;
 		}
 	}
