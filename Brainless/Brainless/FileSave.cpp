@@ -52,8 +52,8 @@ void FileSave::saveMap(Level* stage, int stage_number)
 	for (int i = 0; i < stage->getDecorations().size(); i++)
 	{
 		int string_lenght = 0;
-		file_content[file_at] = stage->getDecorations()[i].first.getPosition().x;
-		file_content[file_at + 1] = stage->getDecorations()[i].first.getPosition().y;
+		//file_content[file_at] = stage->getDecorations()[i].first.getPosition().x;
+		//file_content[file_at + 1] = stage->getDecorations()[i].first.getPosition().y;
 		file_content[file_at + 2] = string_lenght;
 		file_at++;
 		for (int j = 0; j < string_lenght;j++)

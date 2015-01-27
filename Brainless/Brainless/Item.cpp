@@ -30,3 +30,19 @@ int Item::getSyncID() const
 {
 	return m_syncID;
 }
+
+
+
+
+
+DefaultItem::DefaultItem(const std::string &textureName, int id, int syncID)
+:
+Item(textureName, id, syncID)
+{
+
+};
+
+Item* DefaultItem::clone()
+{
+	return new DefaultItem(*this);
+}
