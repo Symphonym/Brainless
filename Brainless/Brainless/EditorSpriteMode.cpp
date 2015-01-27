@@ -52,15 +52,12 @@ bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &ed
 					return true;
 				}
 			}
-
-			return false;
 		}
 	}
-	else
-		return false;
+	
+	return false;
 }
 
-// Returns true if sprites were removed/added (something changed)
 bool EditorSpriteMode::update(float deltaTime, const sf::RenderWindow &editorWindow)
 {
 	sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));

@@ -12,18 +12,21 @@ class Level
 {
 public:
 
+	typedef std::unique_ptr<TileMap> MapPtr;
+	typedef std::unique_ptr<Item> ItemPtr;
+
 	Level();
 
 	void update(float deltaTime);
 	void draw(const sf::View &cameraView);
 
 	TileMap& getTileMap();
+	std::vector<ItemPtr>& getItems();
 	std::vector<LevelSprite>& getDecorations();
 
 private:
 
-	typedef std::unique_ptr<TileMap> MapPtr;
-	typedef std::unique_ptr<Item> ItemPtr;
+
 
 	MapPtr m_tileMap; // Tilemap of all the tiles in the level
 	std::vector<ItemPtr> m_items; // Items in the level

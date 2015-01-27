@@ -19,11 +19,15 @@ public:
 	// Prototype pattern so we can clone item hierarchies
 	virtual Item* clone() = 0;
 
+	void draw();
+
 	void setPosition(const sf::Vector2f &pos);
 	sf::Vector2f getPosition() const;
 
 	sf::Sprite& getSprite();
+	
 	int getID() const;
+	void setSyncID(int id);
 	int getSyncID() const;
 
 private:

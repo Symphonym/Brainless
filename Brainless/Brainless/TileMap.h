@@ -17,7 +17,7 @@ public:
 	void draw(const sf::View &view);
 
 	// Converts a position to an index in the grid
-	sf::Vector2i positionToIndex(const sf::Vector2f &position);
+	sf::Vector2i positionToIndex(const sf::Vector2f &position) const;
 
 	// Get the tile at the specified coordinates
 	Tile &getTile(int x, int y);

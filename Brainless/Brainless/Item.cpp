@@ -1,5 +1,6 @@
 #include "Item.h"
 #include "ResourceLoader.h"
+#include "Renderer.h"
 
 Item::Item(const std::string &textureName, int id, int syncID)
 :
@@ -18,6 +19,12 @@ sf::Vector2f Item::getPosition() const
 	return m_sprite.getPosition();
 }
 
+void Item::draw()
+{
+	//Renderer::instance().draw(m_sprite, m_sprite); TODO UNCOMMENT THIS AND REMOVE DRAWTMSPECIAL
+	Renderer::instance().drawTMSpecial(m_sprite, m_sprite.getGlobalBounds());
+}
+
 sf::Sprite& Item::getSprite()
 {
 	return m_sprite;
@@ -26,6 +33,12 @@ int Item::getID() const
 {
 	return m_id;
 }
+
+void Item::setSyncID(int id)
+{
+	m_syncID = id;
+}
+
 int Item::getSyncID() const
 {
 	return m_syncID;

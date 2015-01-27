@@ -1,6 +1,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <memory>
 #include <math.h>
 
 //
@@ -12,6 +13,7 @@
 #include "TileMap.h"
 #include "Tile.h"
 #include "Item.h"
+#include "ItemDatabse.h"
 
 
 void FileSave::saveMap(Level* stage, int stage_number)
@@ -20,7 +22,7 @@ void FileSave::saveMap(Level* stage, int stage_number)
 	TileMap& map = stage->getTileMap();
 	//File variables
 	std::ofstream file_write; file_write.open(std::to_string(stage_number) + ".fmap");
-	const int file_size = 1000 + (2 + Constants::MapWidth*Constants::MapHeight) + 1;//+ 8 * item_array.size();
+	const int file_size = 1000 + (2 + Constants::MapWidth*Constants::MapHeight) + 1 + stage->getItems().size();
 	unsigned char * file_content = new unsigned char[file_size];
 	int file_at = 0;
 
@@ -37,20 +39,19 @@ void FileSave::saveMap(Level* stage, int stage_number)
 		}
 	}
 	//Save all items to array
-	std::vector<Item*> item_array;
-	file_content[file_at] = item_array.size(); file_at++;
-	for (int i = 0; i < item_array.size(); i++)
+	file_content[file_at] = stage->getItems().size(); file_at++;
+	for (int i = 0; i < stage->getItems().size(); i++)
 	{
-		if (item_array[i]->getPosition().x < 0)
+		if (stage->getItems()[i]->getPosition().x < 0)
 			file_content[file_at + 0] = 0; else file_content[file_at + 0] = -1;
-		file_content[file_at + 1] = floor(item_array[i]->getPosition().x / 255);
-		file_content[file_at + 2] = (int)(item_array[i]->getPosition().x) % 255;
-		if (item_array[i]->getPosition().y < 0)
+		file_content[file_at + 1] = floor(stage->getItems()[i]->getPosition().x / 256);
+		file_content[file_at + 2] = (int)(stage->getItems()[i]->getPosition().x) % 256;
+		if (stage->getItems()[i]->getPosition().y < 0)
 			file_content[file_at + 3] = 0; else file_content[file_at + 3] = -1;
-		file_content[file_at + 4] = floor(item_array[i]->getPosition().y / 255);
-		file_content[file_at + 5] = (int)(item_array[i]->getPosition().y) % 255;
-		file_content[file_at + 6] = item_array[i]->getID();
-		file_content[file_at + 7] = item_array[i]->getSyncID();
+		file_content[file_at + 4] = floor(stage->getItems()[i]->getPosition().y / 256);
+		file_content[file_at + 5] = (int)(stage->getItems()[i]->getPosition().y) % 256;
+		file_content[file_at + 6] = stage->getItems()[i]->getID();
+		file_content[file_at + 7] = stage->getItems()[i]->getSyncID();
 		file_at += 8;
 	}
 	//Save all textures to array
@@ -59,13 +60,13 @@ void FileSave::saveMap(Level* stage, int stage_number)
 	{
 		//3xByte - indicating X, 3xByte - indicating Y
 		if (stage->getDecorations()[i].sprite.getPosition().x < 0)
-			file_content[file_at + 0] = 0; else file_content[file_at + 0] = -1;
-		file_content[file_at + 1] = floor(stage->getDecorations()[i].sprite.getPosition().x / 255);
-		file_content[file_at + 2] = (int)(stage->getDecorations()[i].sprite.getPosition().x) % 255;
+			file_content[file_at + 0] = 0; else file_content[file_at + 0] = 1;
+		file_content[file_at + 1] = floor(stage->getDecorations()[i].sprite.getPosition().x / 256);
+		file_content[file_at + 2] = (int)(stage->getDecorations()[i].sprite.getPosition().x) % 256;
 		if (stage->getDecorations()[i].sprite.getPosition().y < 0)
-			file_content[file_at + 3] = 0; else file_content[file_at + 3] = -1;
-		file_content[file_at + 4] = floor(stage->getDecorations()[i].sprite.getPosition().y / 255);
-		file_content[file_at + 5] = (int)(stage->getDecorations()[i].sprite.getPosition().y) % 255;
+			file_content[file_at + 3] = 0; else file_content[file_at + 3] = 1;
+		file_content[file_at + 4] = floor(stage->getDecorations()[i].sprite.getPosition().y / 256);
+		file_content[file_at + 5] = (int)(stage->getDecorations()[i].sprite.getPosition().y) % 256;
 		//Byte - indicating foreground or background
 		file_content[file_at + 6] = stage->getDecorations()[i].drawToForeground;
 		file_at += 7;
@@ -110,5 +111,40 @@ void FileSave::loadMap(Level* stage, int stage_number)
 			map.getTile(x, y).setType(static_cast<Tile::TileTypes>(file_content[file_at]));
 			file_at++;
 		}
+	}
+	//Loading items
+	int item_count = file_content[file_at]; file_at++;
+	for (int i = 0; i < item_count; i++)
+	{
+		ItemDatabase::ItemPtr item = ItemDatabase::instance().extractItem(file_content[file_at + 6]);
+		stage->getItems().push_back(item);
+		int item_x = file_content[file_at + 1] * 256 + file_content[file_at + 2];
+		if (file_content[file_at + 0] == 0) item_x = -item_x;
+		int item_y = file_content[file_at + 4] * 256 + file_content[file_at + 5];
+		if (file_content[file_at + 3] == 0) item_y = -item_y;
+		item->setPosition(sf::Vector2f(item_x, item_y));
+		item->setSyncID(file_content[file_at + 7]);
+		file_at += 8;
+	}
+	//Loading textures
+	int texture_count = file_content[file_at]; file_at++;
+	for (int i = 0; i < texture_count; i++)
+	{
+		LevelSprite* texture = new LevelSprite();
+		stage->getDecorations().push_back(*texture);
+		int texture_x = file_content[file_at + 1] * 256 + file_content[file_at + 2];
+		if (file_content[file_at + 0] == 0) texture_x = -texture_x;
+		int texture_y = file_content[file_at + 4] * 256 + file_content[file_at + 5];
+		if (file_content[file_at + 3] == 0) texture_y -= texture_y;
+		texture->sprite.setPosition(sf::Vector2f(texture_x, texture_y));
+		texture->drawToForeground = file_content[file_at + 6];
+		file_at += 7;
+		std::string texture_string;
+		for (int j = 0; j < file_content[file_at]; j++)
+		{
+			texture_string += file_content[file_at + j];
+		}
+		file_at += file_content[file_at];
+		texture->textureName = texture_string;
 	}
 }
