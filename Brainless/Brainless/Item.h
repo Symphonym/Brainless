@@ -25,7 +25,9 @@ public:
 	sf::Vector2f getPosition() const;
 
 	sf::Sprite& getSprite();
+	
 	int getID() const;
+	void setSyncID(int id);
 	int getSyncID() const;
 
 private:
