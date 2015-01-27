@@ -5,7 +5,6 @@
 #include "Editor.h"
 #include "Constants.h"
 #include "Animation.h"
-#include "TestClass.h"
 
 int main(int argc, const char *args[])
 {
