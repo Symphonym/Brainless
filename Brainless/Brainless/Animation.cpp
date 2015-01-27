@@ -45,6 +45,7 @@ sf::IntRect Animation::getRectangle(float deltaTime)
 
 	if (m_type == looping)
 	{
+		//1/speed = number of seconds per frame.
 		if (1/m_speed <= m_timer)
 		{
 			m_currentFrame++;
@@ -52,6 +53,7 @@ sf::IntRect Animation::getRectangle(float deltaTime)
 			if (m_currentFrame > m_endFrame)
 				m_currentFrame = m_startFrame;
 
+			//decrease timer with time taken per frame
 			m_timer -= 1/m_speed;
 		}
 	}

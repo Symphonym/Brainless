@@ -11,7 +11,8 @@ class Player : public Unit
 public:
 	Player(float startX, float startY, float maxSpeedX, float maxSpeedY);
 	Player(float startX, float startY, int width, int height, float maxSpeedX, float maxSpeedY);
-	/* kollar efter keyboardinput, och eventuel slide*/
+
+	/* kollar efter playerinput */
 	void checkPlayerInput();
 	void updateAnimation(float deltaTime);
 
@@ -20,7 +21,7 @@ public:
 		idle,
 		walk,
 		run,
-		slide, //(turning while running)
+		slide,
 		jump,
 		fall
 	};
@@ -36,9 +37,10 @@ protected:
 	Animation m_animation;
 private:
 	AnimationState m_state;
-	Direction m_direction;
+	Direction m_spriteDirection;
+	Direction m_inputDirection;
 	/* gives a speed between minSpeed and maxSpeed depending on where value is between minValue and maxValue */
-	float calcSpeed(float minSpeed, float maxSpeed, float minValue, float maxValue, float value);
+	float calcFrameSpeed(float minSpeed, float maxSpeed, float useMinValue, float useMaxValue, float value);
 };
 
 
