@@ -94,6 +94,7 @@
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="WrappedText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -101,12 +102,14 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EditorGridMode.h" />
+    <ClInclude Include="EditorItemMode.h" />
     <ClInclude Include="EditorSpriteMode.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="FileSave.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemDatabse.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelSprite.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceLoader.h" />
@@ -115,6 +118,7 @@
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="WrappedText.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

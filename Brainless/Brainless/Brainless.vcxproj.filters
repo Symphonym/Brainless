@@ -37,6 +37,9 @@
     <Filter Include="Source Files\Unit\TestClass">
       <UniqueIdentifier>{5373fdc0-d7e2-44e8-8bae-d7ec0e0463c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\WrappedText">
+      <UniqueIdentifier>{3846caa8-3bac-4b82-b0c0-a0fbdb8531ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -92,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="TestClass.cpp">
       <Filter>Source Files\Unit\TestClass</Filter>
+    </ClCompile>
+    <ClCompile Include="WrappedText.cpp">
+      <Filter>Source Files\WrappedText</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +157,15 @@
     </ClInclude>
     <ClInclude Include="TestClass.h">
       <Filter>Source Files\Unit\TestClass</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSprite.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorItemMode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WrappedText.h">
+      <Filter>Source Files\WrappedText</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
