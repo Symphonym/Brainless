@@ -3,6 +3,7 @@
 
 #include <SFML\Graphics.hpp>
 #include <vector>
+#include <queue>
 
 class Renderer
 {
@@ -14,6 +15,9 @@ public:
 
 	void setTarget(sf::RenderTarget &target);
 
+
+
+
 	// Transformable is used for simple depth testing
 	void draw(const sf::Drawable &drawable, const sf::Transformable& transformable);
 	void draw(const sf::Sprite &sprite);
@@ -23,6 +27,10 @@ public:
 
 	// Draws the drawable using the default camera view, and ontop of everything else
 	void drawHUD(const sf::Drawable &drawable);
+
+	// Draw something super far back or super far in front, mostly for environment stuff
+	void drawBackground(const sf::Drawable &drawable);
+	void drawForeground(const sf::Drawable &drawable);
 
 	// Executes all draw calls for this frame
 	void executeDraws();
@@ -36,6 +44,11 @@ private:
 	typedef std::pair<const sf::Drawable*, float> RenderPair;
 	std::vector<RenderPair> m_renderTasks;
 	std::vector<const sf::Drawable*> m_hudRenderTasks;
+
+	// Foreground and background render tasks are separate from the semi depth
+	// buffer since don't require the same 2.5D layering in those layers
+	std::vector<const sf::Drawable*> m_foregroundRenderTasks;
+	std::vector<const sf::Drawable*> m_backgroundRenderTasks;
 
 	const sf::Shader *m_shader;
 	sf::RenderTarget *m_renderTarget;

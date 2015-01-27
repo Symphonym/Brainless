@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{c0108589-ea7b-49fb-922a-46f01f6385cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Unit">
+      <UniqueIdentifier>{4c558af9-e91d-46f7-a7f4-f2634f86780e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,6 +71,21 @@
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorGridMode.cpp">
+      <Filter>Source Files\Level Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorSpriteMode.cpp">
+      <Filter>Source Files\Level Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Source Files\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Unit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +130,18 @@
     </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorGridMode.h">
+      <Filter>Source Files\Level Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorSpriteMode.h">
+      <Filter>Source Files\Level Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Source Files\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Source Files\Unit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

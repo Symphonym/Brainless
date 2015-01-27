@@ -5,16 +5,18 @@
 #include "Utility.h"
 #include "FileSave.h"
 #include "ResourceLoader.h"
+#include "EditorGridMode.h"
+#include "EditorSpriteMode.h"
+
 
 
 Editor::Editor()
 :
-m_map(),
-m_camera(),
-m_hudCamera(),
-m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constants::LeftTileOffset, Constants::TopTileOffset)),
-m_currentSyncID(0),
-m_editor(sf::VideoMode(800, 600, sf::Style::Close), "Brainless Editor")
+m_editor(sf::VideoMode(800, 600, sf::Style::Close), "Brainless Editor"),
+m_editorMode(EditorModes::Grid),
+m_gridMode(nullptr),
+m_spriteMode(nullptr),
+m_currentSyncID(0)
 {
 	m_camera = m_editor.getDefaultView();
 	Renderer::instance().setTarget(m_editor);
@@ -28,29 +30,24 @@ m_editor(sf::VideoMode(800, 600, sf::Style::Close), "Brainless Editor")
 			layout[x].push_back(Tile::Ground);
 	}
 
-	m_map = MapPtr(new TileMap(layout, Constants::TileSize));
 
-	// Create temporary blank image
-	sf::Image highlightImg;
-	highlightImg.create(Constants::TileSize, Constants::TileSize, sf::Color::White);
-
-	// Make a blank texture which we can use for highlighting
-	m_highlightTexture.loadFromImage(highlightImg);
-	m_highlightSprite.setTexture(m_highlightTexture);
-
-	// Scale preview tile
-	m_currentTile.getSprite().setScale(0.3f, 0.3f);
+	m_gridMode = new EditorGridMode(m_level.getTileMap());
+	m_spriteMode = new EditorSpriteMode(m_level.getDecorations());
 
 	// Load text font
 	ResourceLoader::instance().loadFont("DefaultFont", "VCR_OSD_MONO.ttf");
 	m_saveText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_saveText.setPosition(0, 0);
 	m_saveText.setCharacterSize(16);
-	m_saveText.setString("File is not saved!");
-	m_saveText.setColor(sf::Color::Red);
+	m_saveText.setString("File is saved!");
+	m_saveText.setColor(sf::Color::Green);
 
 	loadFile();
 
+}
+Editor::~Editor()
+{
+	delete m_gridMode;
 }
 
 void Editor::run()
@@ -60,11 +57,11 @@ void Editor::run()
 
 void Editor::loadFile()
 {
-	FileSave::loadMap(m_map.get(), 0);
+	FileSave::loadMap(&m_level.getTileMap(), 0);
 }
 void Editor::saveFile()
 {
-	FileSave::saveMap(m_map.get(), 0);
+	FileSave::saveMap(&m_level.getTileMap(), 0);
 }
 
 
@@ -83,14 +80,21 @@ void Editor::loop()
 		{
 			if (event.type == sf::Event::Closed)
 				m_editor.close();
-			else if (event.type == sf::Event::MouseWheelMoved)
+
+			switch (m_editorMode)
 			{
-				int curIndex = static_cast<int>(m_currentTile.getType());
-				curIndex += event.mouseWheel.delta;
-				curIndex = Utility::clampValue(curIndex, 0, Constants::BlockTypeCount - 1);
-				m_currentTile.setType(static_cast<Tile::TileTypes>(curIndex));
+				case EditorModes::Grid: m_gridMode->events(event); break;
+				case EditorModes::Sprite: m_spriteMode->events(event); break;
 			}
 		}
+
+		// Switch between modes
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+			m_editorMode = EditorModes::Grid;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+			m_editorMode = EditorModes::Sprite;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::L))
+			m_editorMode = EditorModes::Item;
 
 		// Camera movement
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -119,34 +123,22 @@ void Editor::loop()
 		// Update editor camera
 		m_editor.setView(m_camera);
 
-		// Get position of mouse and map it to an index
-		sf::Vector2i mouseIndex = m_map->positionToIndex(m_editor.mapPixelToCoords(sf::Mouse::getPosition(m_editor)));
+		bool somethingChanged = false;
 
-		mouseIndex.x = Utility::clampValue<int>(mouseIndex.x, 0, Constants::MapWidth - 1);
-		mouseIndex.y = Utility::clampValue<int>(mouseIndex.y, 0, Constants::MapHeight - 1);
-
-		// Set position of highlight relative to mouse
-		m_highlightSprite.setPosition(
-			m_map->getTile(mouseIndex.x, mouseIndex.y).getBounds().left,
-			m_map->getTile(mouseIndex.x, mouseIndex.y).getBounds().top);
-
-		// Change the properties of a tile with left/right mouseclick
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		// Update depending on editor mode
+		switch (m_editorMode)
 		{
-			m_highlightSprite.setColor(sf::Color::Color(0, 255, 0, 128));
-			m_map->getTile(mouseIndex.x, mouseIndex.y).setType(m_currentTile.getType());
+			case EditorModes::Grid:
+				somethingChanged = m_gridMode->update(deltaTime, m_editor); break;
+			case EditorModes::Sprite:
+				somethingChanged = m_spriteMode->update(deltaTime, m_editor); break;
+		}
+
+		if (somethingChanged)
+		{
 			m_saveText.setString("File is not saved!");
 			m_saveText.setColor(sf::Color::Red);
 		}
-		else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
-		{
-			m_highlightSprite.setColor(sf::Color::Color(255, 0, 0, 128));
-			m_map->getTile(mouseIndex.x, mouseIndex.y).setType(Tile::Nothing);
-			m_saveText.setString("File is not saved!");
-			m_saveText.setColor(sf::Color::Red);
-		}
-		else
-			m_highlightSprite.setColor(sf::Color::Color(255, 255, 255, 128));
 
 		m_editor.clear(sf::Color::Black);
 		draw();
@@ -156,9 +148,13 @@ void Editor::loop()
 
 void Editor::draw()
 {
-	m_map->draw(m_camera);
-	Renderer::instance().drawAbove(m_highlightSprite);
-	Renderer::instance().drawHUD(m_currentTile.getSprite());
+	m_level.draw(m_camera);
+
+	switch (m_editorMode)
+	{
+	case EditorModes::Grid: m_gridMode->draw(); break;
+	case EditorModes::Sprite: m_spriteMode->draw(); break;
+	}
 	Renderer::instance().drawHUD(m_saveText);
 	
 	Renderer::instance().executeDraws();

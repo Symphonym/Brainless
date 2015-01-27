@@ -16,12 +16,10 @@ int main(int argc, const char *args[])
 	//{
 	//	if (args[0] == "editor")
 	//	{
-			Editor editor;
+			Editor editor;  
 			editor.run();
 	//	}
 	//}
-
-	
 
 
 	/*Renderer::instance().setTarget(window);
