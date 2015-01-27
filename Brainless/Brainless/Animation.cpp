@@ -17,6 +17,7 @@ void Animation::loop(int startFrame, int endFrame, int frameRow, float speed)
 	m_speed = speed;
 	m_currentFrame = startFrame;
 	m_type = looping;
+	m_timer = 0;
 }
 
 void Animation::playOnce(int startFrame, int endFrame, int frameRow, float speed)
@@ -27,6 +28,7 @@ void Animation::playOnce(int startFrame, int endFrame, int frameRow, float speed
 	m_currentFrame = startFrame;
 	m_speed = speed;
 	m_type = once;
+	m_timer = 0;
 }
 
 void Animation::stillFrame(int frame, int row)
@@ -39,35 +41,41 @@ void Animation::stillFrame(int frame, int row)
 
 sf::IntRect Animation::getRectangle(float deltaTime)
 {
-	m_timer -= deltaTime * m_speed;
+	m_timer += deltaTime;
 
 	if (m_type == looping)
 	{
-		if (m_timer <= 0)
+		if (1/m_speed <= m_timer)
 		{
 			m_currentFrame++;
 
 			if (m_currentFrame > m_endFrame)
 				m_currentFrame = m_startFrame;
 
-			m_timer = m_delay;
+			m_timer -= 1/m_speed;
 		}
 	}
 
 	if (m_type == once)
 	{
-		if (m_timer <= 0)
+		if (1 / m_speed <= m_timer)
 		{
 			m_currentFrame++;
 
 			if (m_currentFrame > m_endFrame)
 				stillFrame(m_endFrame, m_rectangle.top);
 
-			m_timer = m_delay;
+			m_timer -= 1 / m_speed;
 		}
 	}
 
 	m_rectangle.left = m_currentFrame * m_width;
 
 	return m_rectangle;
+}
+
+void Animation::setSpeed(float speed)
+{
+	m_speed = speed;
+
 }

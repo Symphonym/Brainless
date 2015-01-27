@@ -81,7 +81,7 @@ void Player::updateAnimation(float deltaTime)
 	{
 		if (m_state != idle)
 		{
-			m_animation.loop(0, 3, 0, 5/deltaTime);
+			m_animation.loop(0, 3, 0, 5);
 			m_sprite.setScale(1, 1); //TEMP just nu bara titta åt ett håll idle
 			m_state = idle;
 		}
@@ -90,7 +90,7 @@ void Player::updateAnimation(float deltaTime)
 	{
 		if (m_state != run)
 		{
-			m_animation.loop(4, 7, 2, 5/deltaTime);
+			m_animation.loop(4, 7, 2, 10);
 			m_state = run;
 		}
 		m_sprite.setScale(1, 1);
@@ -99,7 +99,7 @@ void Player::updateAnimation(float deltaTime)
 	{
 		if (m_state != run)
 		{
-			m_animation.loop(4, 7, 2, 5/deltaTime);
+			m_animation.loop(4, 7, 2, 10);
 			m_state = run;
 		}
 		m_sprite.setScale(-1, 1);
@@ -109,7 +109,7 @@ void Player::updateAnimation(float deltaTime)
 	{
 		if (m_state != walk)
 		{
-			m_animation.loop(0, 3, 1, 5/deltaTime);
+			m_animation.loop(0, 3, 1, 10);
 			m_state = walk;
 		}
 		m_sprite.setScale(1, 1);
@@ -118,7 +118,7 @@ void Player::updateAnimation(float deltaTime)
 	{
 		if (m_state != walk)
 		{
-			m_animation.loop(0, 3, 1, 5/deltaTime);
+			m_animation.loop(0, 3, 1, 10);
 			m_state = walk;
 		}
 		m_sprite.setScale(-1, 1);

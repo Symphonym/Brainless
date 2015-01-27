@@ -47,21 +47,21 @@ void Unit::updateMovement(float gravity, float deltaTime)
 	m_sprite.setPosition(sf::Vector2f(m_positionX, m_positionY)); //temp
 
 
-	//output en gång per sekund
-	static float timeTest = 0;
-	timeTest += deltaTime;
-	if (timeTest >= 1)
-	{
-		timeTest = 0;
-		cout << "m_posX: " << m_positionX << endl;
-		cout << "m_posY: " << m_positionY << endl;
-		cout << "m_speedX: " << m_speedX << endl;
-		cout << "m_speedY: " << m_speedY << endl;
-		cout << "m_accelX: " << m_accelerationX << endl;
-		cout << "m_accelY: " << m_accelerationY << endl;
-		cout << "inAir: " << m_inAir << endl;
-		cout << "deltaTime: " << deltaTime << endl;
-	}
+	////output en gång per sekund
+	//static float timeTest = 0;
+	//timeTest += deltaTime;
+	//if (timeTest >= 1)
+	//{
+	//	timeTest = 0;
+	//	cout << "m_posX: " << m_positionX << endl;
+	//	cout << "m_posY: " << m_positionY << endl;
+	//	cout << "m_speedX: " << m_speedX << endl;
+	//	cout << "m_speedY: " << m_speedY << endl;
+	//	cout << "m_accelX: " << m_accelerationX << endl;
+	//	cout << "m_accelY: " << m_accelerationY << endl;
+	//	cout << "inAir: " << m_inAir << endl;
+	//	cout << "deltaTime: " << deltaTime << endl;
+	//}
 }
 
 void Unit::setStatus(bool inAir)
