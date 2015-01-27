@@ -80,6 +80,7 @@
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorGridMode.cpp" />
+    <ClCompile Include="EditorItemMode.cpp" />
     <ClCompile Include="EditorSpriteMode.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="FileSave.cpp" />

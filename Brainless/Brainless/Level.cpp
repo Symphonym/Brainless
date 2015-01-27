@@ -32,12 +32,19 @@ void Level::draw(const sf::View &cameraView)
 		else
 			Renderer::instance().drawBackground(m_sprites[i].sprite);
 	}
+
+	for (std::size_t i = 0; i < m_items.size(); i++)
+		m_items[i]->draw();
 }
 
 
 TileMap& Level::getTileMap()
 {
 	return *m_tileMap.get();
+}
+std::vector<Level::ItemPtr>& Level::getItems()
+{
+	return m_items;
 }
 std::vector<LevelSprite>& Level::getDecorations()
 {

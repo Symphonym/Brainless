@@ -7,6 +7,7 @@
 #include "ResourceLoader.h"
 #include "EditorGridMode.h"
 #include "EditorSpriteMode.h"
+#include "EditorItemMode.h"
 
 
 
@@ -21,8 +22,15 @@ m_currentSyncID(0)
 	m_camera = m_editor.getDefaultView();
 	Renderer::instance().setTarget(m_editor);
 
+
+
+
 	// Load editor resources
 	ResourceLoader::instance().loadFont("EditorFont", "VCR_OSD_MONO.ttf");
+	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");
+
+
+
 
 	// Load a default map with nothing but ground tiles
 	TileMap::TileMapLayout layout;
@@ -36,6 +44,7 @@ m_currentSyncID(0)
 
 	m_gridMode = new EditorGridMode(m_level.getTileMap());
 	m_spriteMode = new EditorSpriteMode(m_level.getDecorations());
+	m_itemMode = new EditorItemMode(m_level.getItems());
 
 	// Initialize save text
 	m_saveText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
@@ -50,6 +59,8 @@ m_currentSyncID(0)
 Editor::~Editor()
 {
 	delete m_gridMode;
+	delete m_spriteMode;
+	delete m_itemMode;
 }
 
 void Editor::run()
@@ -93,6 +104,9 @@ void Editor::loop()
 					break;
 				case EditorModes::Sprite:
 					somethingChanged = m_spriteMode->events(event, m_editor) ? true : somethingChanged;
+					break;
+				case EditorModes::Item:
+					somethingChanged = m_itemMode->events(event, m_editor) ? true : somethingChanged;
 					break;
 			}
 		}
@@ -141,6 +155,9 @@ void Editor::loop()
 			case EditorModes::Sprite:
 				somethingChanged = m_spriteMode->update(deltaTime, m_editor) ? true : somethingChanged;
 				break;
+			case EditorModes::Item:
+				somethingChanged = m_itemMode->update(deltaTime, m_editor) ? true : somethingChanged;
+				break;
 		}
 
 		if (somethingChanged)
@@ -161,8 +178,9 @@ void Editor::draw()
 
 	switch (m_editorMode)
 	{
-	case EditorModes::Grid: m_gridMode->draw(); break;
-	case EditorModes::Sprite: m_spriteMode->draw(); break;
+		case EditorModes::Grid: m_gridMode->draw(); break;
+		case EditorModes::Sprite: m_spriteMode->draw(); break;
+		case EditorModes::Item: m_itemMode->draw(); break;
 	}
 	Renderer::instance().drawHUD(m_saveText);
 	

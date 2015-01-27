@@ -1,5 +1,6 @@
 #include "Item.h"
 #include "ResourceLoader.h"
+#include "Renderer.h"
 
 Item::Item(const std::string &textureName, int id, int syncID)
 :
@@ -16,6 +17,11 @@ void Item::setPosition(const sf::Vector2f &pos)
 sf::Vector2f Item::getPosition() const
 {
 	return m_sprite.getPosition();
+}
+
+void Item::draw()
+{
+	Renderer::instance().draw(m_sprite, m_sprite);
 }
 
 sf::Sprite& Item::getSprite()

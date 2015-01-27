@@ -12,7 +12,14 @@ public:
 	typedef std::unique_ptr<Item> ItemPtr;
 
 	// Extracts an item from the database by its ID
+	// Returns a null pointer if the item was not found
 	ItemPtr extractItem(int id);
+
+
+	// Returns the "count"'th item in the database
+	ItemPtr extractItemByCount(int count);
+
+	std::size_t getItemCount() const;
 
 	static ItemDatabase& instance();
 

@@ -9,6 +9,7 @@
 class TileMap;
 class EditorGridMode;
 class EditorSpriteMode;
+class EditorItemMode;
 class Editor
 {
 public:
@@ -39,6 +40,7 @@ private:
 	EditorModes m_editorMode;
 	EditorGridMode *m_gridMode;
 	EditorSpriteMode *m_spriteMode;
+	EditorItemMode *m_itemMode;
 
 	// Whether or not you have saved
 	sf::Text m_saveText;
