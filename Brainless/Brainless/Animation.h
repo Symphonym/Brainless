@@ -26,8 +26,13 @@ public:
 	//Shows only the selected frame
 	void stillFrame(int Frame, int Row);
 
+	//sets the number of frames per second
+	void setSpeed(float speed);
+
 	//Updates the rectangles position
 	sf::IntRect getRectangle(float deltaTime);
+	float getWidth(){ return m_width; }
+	float getHeight(){ return m_height; }
 
 private:
 	int m_height;
@@ -39,8 +44,7 @@ private:
 	sf::IntRect m_rectangle;
 	AnimationType m_type;
 	
-	float m_timer;
-	float m_delay = 100;
+	float m_timer = 0;
 };
 
 #endif

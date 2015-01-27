@@ -3,14 +3,24 @@
 #include <iostream>
 using namespace std;
 //V0.01
-Unit::Unit(float startX, float startY, float maxSpeedX, float maxSpeedY) : m_positionX(startX), m_positionY(startY), m_speedX(0), m_speedY(0), m_accelerationX(0),
-m_accelerationY(0), m_width(200), m_height(200), m_maxSpeedX(maxSpeedX), m_maxSpeedY(maxSpeedY), m_inAir(false)
+Unit::Unit(float startX, float startY, float maxSpeedX, float maxSpeedY) 
+: 
+m_positionX(startX), m_positionY(startY), 
+m_speedX(0), m_speedY(0), 
+m_accelerationX(0),m_accelerationY(0), 
+m_width(200), m_height(200), 
+m_maxSpeedX(maxSpeedX), m_maxSpeedY(maxSpeedY), 
+m_inAir(false)
 {
 	m_sprite.setPosition(sf::Vector2f(startX, startY));
 }
-Unit::Unit(float startX, float startY, int width, int height, float maxSpeedX, float maxSpeedY) : m_positionX(startX), m_positionY(startY), m_speedX(0), m_speedY(0),
-m_accelerationX(0), m_accelerationY(0), m_inAir(false)
-, m_width(width), m_height(height), m_maxSpeedX(maxSpeedX), m_maxSpeedY(maxSpeedY)
+Unit::Unit(float startX, float startY, int width, int height, float maxSpeedX, float maxSpeedY) 
+: 
+m_positionX(startX), m_positionY(startY), 
+m_speedX(0), m_speedY(0),
+m_accelerationX(0), m_accelerationY(0), m_inAir(false), 
+m_width(width), m_height(height), 
+m_maxSpeedX(maxSpeedX), m_maxSpeedY(maxSpeedY)
 {
 	m_sprite.setPosition(sf::Vector2f(startX, startY));
 }
@@ -37,21 +47,21 @@ void Unit::updateMovement(float gravity, float deltaTime)
 	m_sprite.setPosition(sf::Vector2f(m_positionX, m_positionY)); //temp
 
 
-	//output en gång per sekund
-	static float timeTest = 0;
-	timeTest += deltaTime;
-	if (timeTest >= 1)
-	{
-		timeTest = 0;
-		cout << "m_posX: " << m_positionX << endl;
-		cout << "m_posY: " << m_positionY << endl;
-		cout << "m_speedX: " << m_speedX << endl;
-		cout << "m_speedY: " << m_speedY << endl;
-		cout << "m_accelX: " << m_accelerationX << endl;
-		cout << "m_accelY: " << m_accelerationY << endl;
-		cout << "inAir: " << m_inAir << endl;
-		cout << "deltaTime: " << deltaTime << endl;
-	}
+	////output en gång per sekund
+	//static float timeTest = 0;
+	//timeTest += deltaTime;
+	//if (timeTest >= 1)
+	//{
+	//	timeTest = 0;
+	//	cout << "m_posX: " << m_positionX << endl;
+	//	cout << "m_posY: " << m_positionY << endl;
+	//	cout << "m_speedX: " << m_speedX << endl;
+	//	cout << "m_speedY: " << m_speedY << endl;
+	//	cout << "m_accelX: " << m_accelerationX << endl;
+	//	cout << "m_accelY: " << m_accelerationY << endl;
+	//	cout << "inAir: " << m_inAir << endl;
+	//	cout << "deltaTime: " << deltaTime << endl;
+	//}
 }
 
 void Unit::setStatus(bool inAir)
