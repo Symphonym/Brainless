@@ -8,6 +8,7 @@
 #include "FileSave.h"
 
 #include "Level.h"
+#include "LevelSprite.h"
 #include "TileMap.h"
 #include "Tile.h"
 #include "Item.h"
@@ -19,7 +20,7 @@ void FileSave::saveMap(Level* stage, int stage_number)
 	TileMap& map = stage->getTileMap();
 	//File variables
 	std::ofstream file_write; file_write.open(std::to_string(stage_number) + ".fmap");
-	const int file_size = (2 + Constants::MapWidth*Constants::MapHeight) + 1;//+ 8 * item_array.size();
+	const int file_size = 1000 + (2 + Constants::MapWidth*Constants::MapHeight) + 1;//+ 8 * item_array.size();
 	unsigned char * file_content = new unsigned char[file_size];
 	int file_at = 0;
 
@@ -53,20 +54,30 @@ void FileSave::saveMap(Level* stage, int stage_number)
 		file_at += 8;
 	}
 	//Save all textures to array
-	file_content[file_at] file_at++;
+	file_content[file_at] = stage->getDecorations().size(); file_at++;
 	for (int i = 0; i < stage->getDecorations().size(); i++)
 	{
-		int string_lenght = stage->getDecorations();
-		file_content[file_at] = stage->getDecorations()[i].first.getPosition().x;
-		file_content[file_at + 1] = stage->getDecorations()[i].first.getPosition().y;
-		file_content[file_at + 2] = string_lenght;
-		file_at++;
+		//3xByte - indicating X, 3xByte - indicating Y
+		if (stage->getDecorations()[i].sprite.getPosition().x < 0)
+			file_content[file_at + 0] = 0; else file_content[file_at + 0] = -1;
+		file_content[file_at + 1] = floor(stage->getDecorations()[i].sprite.getPosition().x / 255);
+		file_content[file_at + 2] = (int)(stage->getDecorations()[i].sprite.getPosition().x) % 255;
+		if (stage->getDecorations()[i].sprite.getPosition().y < 0)
+			file_content[file_at + 3] = 0; else file_content[file_at + 3] = -1;
+		file_content[file_at + 4] = floor(stage->getDecorations()[i].sprite.getPosition().y / 255);
+		file_content[file_at + 5] = (int)(stage->getDecorations()[i].sprite.getPosition().y) % 255;
+		//Byte - indicating foreground or background
+		file_content[file_at + 6] = stage->getDecorations()[i].drawToForeground;
+		file_at += 7;
+		//Byte - indicating string lenght, string - indicating sprite name
+		int string_lenght = stage->getDecorations()[i].textureName.length();
+		std::string string = stage->getDecorations()[i].textureName;
+		file_content[file_at] = string_lenght;file_at++;
 		for (int j = 0; j < string_lenght; j++)
 		{
-			file_content[i] = 'b';
+			file_content[file_at] = string[j];
 			file_at++;
 		}
-		file_at += string_lenght;
 	}
 	//write array to file
 	file_write.write((const char*)file_content, file_at);
