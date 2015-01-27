@@ -3,15 +3,17 @@
 #include "ResourceLoader.h"
 #include "Renderer.h"
 
-EditorSpriteMode::EditorSpriteMode(std::vector<std::pair<sf::Sprite,bool> >& spriteVector)
+EditorSpriteMode::EditorSpriteMode(std::vector<LevelSprite>& spriteVector)
 :
-m_somethingChanged(false),
-m_drawToForeground(true),
 m_sprites(spriteVector)
 {
 	initializeSprites();
 
-	m_highlightSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_availableDecorations[m_currentSpriteIndex]));
+	m_highlightSprite.sprite.setTexture(ResourceLoader::instance().retrieveTexture(m_availableDecorations[m_currentSpriteIndex]));
+
+	m_layerText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+	m_layerText.setPosition(30, 100);
+	m_layerText.setString("Drawing to: FOREGROUND");
 }
 
 bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &editorWindow)
@@ -22,14 +24,19 @@ bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &ed
 		m_currentSpriteIndex += event.mouseWheel.delta;
 		m_currentSpriteIndex = Utility::clampValue<int>(m_currentSpriteIndex, 0, m_availableDecorations.size() - 1);
 
-		m_highlightSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_availableDecorations[m_currentSpriteIndex]));
+		m_highlightSprite.sprite.setTexture(ResourceLoader::instance().retrieveTexture(m_availableDecorations[m_currentSpriteIndex]));
 	}
 	else if (event.type == sf::Event::MouseButtonReleased)
 	{
 		// Place a sprite
 		if (event.mouseButton.button == sf::Mouse::Left)
 		{
-			m_sprites.push_back(std::make_pair(m_highlightSprite, m_drawToForeground));
+			LevelSprite levelSprite;
+			levelSprite.sprite = m_highlightSprite.sprite;
+			levelSprite.drawToForeground = m_highlightSprite.drawToForeground;
+			levelSprite.textureName = m_highlightSprite.textureName;
+
+			m_sprites.push_back(levelSprite);
 			return true;
 		}
 		else if (event.mouseButton.button == sf::Mouse::Right)
@@ -39,7 +46,7 @@ bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &ed
 			// Loop through existing sprites and see if the cursor collides with them
 			for (std::size_t i = 0; i < m_sprites.size(); i++)
 			{
-				if (m_sprites[i].first.getGlobalBounds().contains(mousePos))
+				if (m_sprites[i].sprite.getGlobalBounds().contains(mousePos))
 				{
 					m_sprites.erase(m_sprites.begin() + i);
 					return true;
@@ -58,43 +65,31 @@ bool EditorSpriteMode::update(float deltaTime, const sf::RenderWindow &editorWin
 {
 	sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));
 
-	m_highlightSprite.setPosition(mousePos);
+	m_highlightSprite.sprite.setPosition(mousePos);
 
 
 	// Change between foreground/background
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
-		m_drawToForeground = true;
+	{
+		m_highlightSprite.drawToForeground = true;
+		m_layerText.setString("Drawing to: FOREGROUND");
+	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::B))
-		m_drawToForeground = false;
+	{
+		m_highlightSprite.drawToForeground = false;
+		m_layerText.setString("Drawing to: BACKGROUND");
+	}
 
 	return false;
-	// Add/remove a sprite with left/right click
-	/*if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-	{
-		m_sprites.push_back(std::make_pair(m_highlightSprite, m_drawToForeground));
-		return true;
-	}
-	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
-	{
-		for (std::size_t i = 0; i < m_sprites.size(); i++)
-		{
-			if (m_sprites[i].first.getGlobalBounds().contains(mousePos))
-			{
-				m_sprites.erase(m_sprites.begin() + i);
-				return true;
-			}
-		}
-		return false;
-	}
-	else
-		return false;*/
 }
 void EditorSpriteMode::draw()
 {
-	if (m_drawToForeground)
-		Renderer::instance().drawForeground(m_highlightSprite);
+	if (m_highlightSprite.drawToForeground)
+		Renderer::instance().drawForeground(m_highlightSprite.sprite);
 	else
-		Renderer::instance().drawBackground(m_highlightSprite);
+		Renderer::instance().drawBackground(m_highlightSprite.sprite);
+
+	Renderer::instance().drawHUD(m_layerText);
 }
 
 

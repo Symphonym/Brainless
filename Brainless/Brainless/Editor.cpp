@@ -21,6 +21,9 @@ m_currentSyncID(0)
 	m_camera = m_editor.getDefaultView();
 	Renderer::instance().setTarget(m_editor);
 
+	// Load editor resources
+	ResourceLoader::instance().loadFont("EditorFont", "VCR_OSD_MONO.ttf");
+
 	// Load a default map with nothing but ground tiles
 	TileMap::TileMapLayout layout;
 	for (int x = 0; x < Constants::MapWidth; x++)
@@ -34,9 +37,8 @@ m_currentSyncID(0)
 	m_gridMode = new EditorGridMode(m_level.getTileMap());
 	m_spriteMode = new EditorSpriteMode(m_level.getDecorations());
 
-	// Load text font
-	ResourceLoader::instance().loadFont("DefaultFont", "VCR_OSD_MONO.ttf");
-	m_saveText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+	// Initialize save text
+	m_saveText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
 	m_saveText.setPosition(0, 0);
 	m_saveText.setCharacterSize(16);
 	m_saveText.setString("File is saved!");
@@ -129,8 +131,6 @@ void Editor::loop()
 
 		// Update editor camera
 		m_editor.setView(m_camera);
-
-		bool somethingChanged = false;
 
 		// Update depending on editor mode
 		switch (m_editorMode)
