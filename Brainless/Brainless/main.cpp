@@ -23,8 +23,9 @@ int main(int argc, const char *args[])
 	//}
 
 	//hej test branchasd
-			TestClass test;
-			test.testUpdate();
+	TestClass test;
+	test.testUpdate();
+	//vad händer nu vid merge till denna branch?
 
 	/*Renderer::instance().setTarget(window);
 	while (window.isOpen())
