@@ -25,11 +25,20 @@ public:
 		fall
 	};
 
+	enum Direction
+	{
+		left,
+		right
+	};
+
 
 protected:
 	Animation m_animation;
 private:
 	AnimationState m_state;
+	Direction m_direction;
+	/* gives a speed between minSpeed and maxSpeed depending on where value is between minValue and maxValue */
+	float calcSpeed(float minSpeed, float maxSpeed, float minValue, float maxValue, float value);
 };
 
 

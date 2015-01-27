@@ -34,6 +34,9 @@
     <Filter Include="Source Files\Unit">
       <UniqueIdentifier>{4c558af9-e91d-46f7-a7f4-f2634f86780e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Unit\TestClass">
+      <UniqueIdentifier>{5373fdc0-d7e2-44e8-8bae-d7ec0e0463c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -84,11 +87,11 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="TestClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="TestClass.cpp">
+      <Filter>Source Files\Unit\TestClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,11 +146,11 @@
     <ClInclude Include="Player.h">
       <Filter>Source Files\Unit</Filter>
     </ClInclude>
-    <ClInclude Include="TestClass.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Source Files\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="TestClass.h">
+      <Filter>Source Files\Unit\TestClass</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

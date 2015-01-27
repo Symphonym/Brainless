@@ -15,7 +15,7 @@ TestClass::TestClass()
 }
 void TestClass::testUpdate()
 {
-	Player m_unit(300, 400 - 90, 60, 90, 200, 600);
+	Player m_unit(300, 400 - 90, 60, 90, 300, 600);
 	m_unit.setTexture(ResourceLoader::instance().retrieveTexture("testImage"));
 
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "Brainless");
