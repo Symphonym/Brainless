@@ -1,12 +1,12 @@
 #pragma once
-#include "TileMap.h"
+#include "Level.h"
 
 class FileSave
 {
 public:
 	//Saving & loading levels
-	static void saveMap(TileMap* map, int stage_number);
-	static void loadMap(TileMap* map, int stage_number);
+	static void saveMap(Level* stage, int stage_number);
+	static void loadMap(Level* stage, int stage_number);
 
 	//Saving & loading player progress and misc info
 	static void saveProgress();
