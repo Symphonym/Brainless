@@ -3,8 +3,8 @@
 
 #include <SFML\Graphics.hpp>
 #include <vector>
-#include <queue>
 
+class TileMap;
 class Renderer
 {
 public:
@@ -15,7 +15,8 @@ public:
 
 	void setTarget(sf::RenderTarget &target);
 
-
+	void setTileMap(TileMap &tileMap);
+	void drawTMSpecial(const sf::Drawable &drawable, const sf::FloatRect &bounds);
 
 
 	// Transformable is used for simple depth testing
@@ -50,8 +51,11 @@ private:
 	std::vector<const sf::Drawable*> m_foregroundRenderTasks;
 	std::vector<const sf::Drawable*> m_backgroundRenderTasks;
 
+	std::vector<std::pair<const sf::Drawable*, std::vector<sf::IntRect> > > m_testTasks;
+
 	const sf::Shader *m_shader;
 	sf::RenderTarget *m_renderTarget;
+	TileMap *m_tileMap;
 };
 
 #endif

@@ -21,7 +21,8 @@ sf::Vector2f Item::getPosition() const
 
 void Item::draw()
 {
-	Renderer::instance().draw(m_sprite, m_sprite);
+	//Renderer::instance().draw(m_sprite, m_sprite); TODO UNCOMMENT THIS AND REMOVE DRAWTMSPECIAL
+	Renderer::instance().drawTMSpecial(m_sprite, m_sprite.getGlobalBounds());
 }
 
 sf::Sprite& Item::getSprite()

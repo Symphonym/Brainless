@@ -66,7 +66,7 @@ void TileMap::draw(const sf::View &view)
 }
 
 // Converts a position to an index in the grid
-sf::Vector2i TileMap::positionToIndex(const sf::Vector2f &position)
+sf::Vector2i TileMap::positionToIndex(const sf::Vector2f &position) const
 {
 	return sf::Vector2i(position.x / m_tileSize, position.y / m_tileSize);
 }
