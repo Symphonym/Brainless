@@ -1,9 +1,14 @@
+#include <iostream>
+#include <algorithm>
+#include <stdlib.h>
+
 #include "Game.h"
 #include "Renderer.h"
 #include "ResourceLoader.h"
 #include "Constants.h"
 #include "Utility.h"
 #include "Unit.h"
+#include "Player.h"
 #include "Level.h"
 #include "FileSave.h"
 #include "TileMap.h"
@@ -45,8 +50,15 @@ Game::Game()
 	m_saveText.setCharacterSize(16);
 	m_saveText.setString("File is saved!");
 	m_saveText.setColor(sf::Color::Green);*/
+	//Temporary placment marker
+	sf::Image markerImg;
+	markerImg.create(Constants::TileSize * 0.5, Constants::TileSize * 0.7, sf::Color::Yellow);
+
+	m_markerTexture.loadFromImage(markerImg);
+	m_markerSprite.setTexture(m_markerTexture);
 
 	loadFile();
+	units.push_back(new Player(Constants::TileSize * 3, Constants::TileSize * 3.4, Constants::TileSize * 0.5, Constants::TileSize * 0.7, 300, 300));
 }
 Game::~Game()
 {
@@ -80,6 +92,17 @@ void Game::loop()
 		//Move units out of collisions
 		for (unsigned int i = 0; i < units.size(); i++)
 		{
+			// Unit movement
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+				units[i]->setPosition(units[i]->getPositionX(), units[i]->getPositionY() - 7);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+				units[i]->setPosition(units[i]->getPositionX(), units[i]->getPositionY() + 7);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+				units[i]->setPosition(units[i]->getPositionX() - 7, units[i]->getPositionY());
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+				units[i]->setPosition(units[i]->getPositionX() + 7, units[i]->getPositionY());
+			//Reset marker color
+			m_markerSprite.setColor(sf::Color::Color(255, 255, 255, 128));
 			/*
 			Find next position
 			- if (collision is free move, update status)
@@ -87,23 +110,34 @@ void Game::loop()
 			--- collision with obstacles
 			- else (move to contact, update status)*/
 			//Find colliding boxes 
-			float box_start_x = floor(units[i]->getPositionX());
-			float box_end_x = ceil((units[i]->getPositionX() + units[i]->getWidth()));
-			float box_start_y = floor(units[i]->getPositionY());
-			float box_end_y = ceil((units[i]->getPositionY() + units[i]->getHeight())) + 1;
-			for (float x = box_start_x; x < box_end_x; x++)
+
+			int box_start_x = floor(units[i]->getPositionX() / Constants::TileSize);
+			int box_end_x = ceil((units[i]->getPositionX() + units[i]->getWidth()) / Constants::TileSize);
+			int box_start_y = floor(units[i]->getPositionY() / Constants::TileSize);
+			int box_end_y = ceil((units[i]->getPositionY() + units[i]->getHeight()) / Constants::TileSize);
+
+			for (int x = std::max(box_start_x, 0); x < std::min(box_end_x, Constants::MapWidth); x++)
 			{
-				for (float y = box_start_y; y < box_end_y; y++)
+				for (int y = std::max(box_start_y, 0); y < std::min(box_end_y, Constants::MapHeight); y++)
 				{
 					//Check for collision
-					if (m_level.getTileMap().getTile(x, y).collidesWith(units[i]->getCollisionRect()))
+					if (m_level.getTileMap().getTile(x, y).getType() != Tile::Nothing && m_level.getTileMap().getTile(x, y).collidesWith(units[i]->getCollisionRect()))
 					{
+						std::cout << "x:" << units[i]->getPositionX() / Constants::TileSize << " - " << x << " y:" << units[i]->getPositionY() / Constants::TileSize << " - " << y;
+						m_markerSprite.setColor(sf::Color::Color(255, 0, 0, 128));
 						float unit_x = units[i]->getPositionX(), unit_y = units[i]->getPositionY();
 						while (m_level.getTileMap().getTile(x, y).collidesWith(units[i]->getCollisionRect()))
 						{
 							//Find direction to tile
+							float x_dif = x - (units[i]->getPositionX() / Constants::TileSize), y_dif = y - (units[i]->getPositionY() / Constants::TileSize);
+							if (std::abs(y_dif) < std::abs(x_dif))
+								y_dif = 0;
+							else
+								x_dif = 0;
 							//Move in opposite direction tile
-							units[i]->setPosition(unit_x, unit_y - 0.1);
+							unit_y -= y_dif;
+							unit_x -= x_dif;
+							units[i]->setPosition(unit_x, unit_y);
 						}
 						//Move out of contact
 						units[i]->setStatus(false);
@@ -114,6 +148,9 @@ void Game::loop()
 					}
 				}
 			}
+			std::cout << "\n";
+			//Move marker to unit
+			m_markerSprite.setPosition(units[i]->getPositionX(), units[i]->getPositionY());
 		}
 
 		sf::Event event;
@@ -159,6 +196,7 @@ void Game::draw()
 	case EditorModes::Item: m_itemMode->draw(); break;
 	}
 	Renderer::instance().drawHUD(m_saveText);*/
-
+	Renderer::instance().drawAbove(m_markerSprite);
 	Renderer::instance().executeDraws();
+
 }
