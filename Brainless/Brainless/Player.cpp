@@ -3,6 +3,7 @@
 
 
 */
+
 #include "Player.h"
 #include <iostream>
 using namespace std;
@@ -12,19 +13,19 @@ Unit(startX, startY, maxSpeedX, maxSpeedY),
 m_state(idle),
 m_spriteDirection(right),
 m_inputDirection(right),
-m_animation(60,90) //storleken på varje bild i texturesheet
+m_jumpState(null)
 {
 	m_sprite.setPosition(sf::Vector2f(startX, startY));
 	m_animation.loop(0, 3, 0, 5);
 }
 
-Player::Player(float startX, float startY, int width, int height, float maxSpeedX, float maxSpeedY) 
-: 
-Unit(startX, startY, width, height, maxSpeedX, maxSpeedY), 
+Player::Player(float startX, float startY, int width, int height, float maxSpeedX, float maxSpeedY)
+:
+Unit(startX, startY, width, height, maxSpeedX, maxSpeedY),
 m_state(idle),
 m_spriteDirection(right),
 m_inputDirection(right),
-m_animation(60,90)
+m_jumpState(null)
 {
 	m_sprite.setPosition(sf::Vector2f(startX, startY));
 	m_animation.loop(0, 3, 0, 5);
@@ -59,7 +60,7 @@ void Player::checkPlayerInput()
 	if (slowDown)
 	{
 		//small values = stop totally
-		if (m_speedX < 10 && m_speedX > -10) 
+		if (m_speedX < 10 && m_speedX > -10)
 		{
 			m_speedX = 0;
 			m_accelerationX = 0;
@@ -68,11 +69,21 @@ void Player::checkPlayerInput()
 		else m_accelerationX = -m_speedX * 6;
 	}
 	//Jump
-	if (!m_inAir && sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		m_speedY = -600;
-		m_inAir = true;
+		if (m_inAir)
+		{
+			m_accelerationY = -200;
+		}
+		else
+		{
+			m_speedY = -300;
+			m_accelerationY = -200;
+			m_inAir = true;
+		}
 	}
+	m_jumpState = null;
+
 }
 
 // nästa steg fixa kolla enbart state, sen kolla scale
@@ -114,7 +125,7 @@ void Player::updateAnimation(float deltaTime)
 	{
 		if (m_state != slide)
 		{
-			m_animation.stillFrame(4,0);
+			m_animation.stillFrame(4, 0);
 			m_state = slide;
 		}
 	}
@@ -127,7 +138,7 @@ void Player::updateAnimation(float deltaTime)
 			m_state = run;
 		}
 		m_animation.setSpeed(Animation::calcFrameSpeed(10, 20, runBreakpoint, m_maxSpeedX, m_speedX));
-		
+
 	}
 	//WALK
 	else if (m_speedX != 0)
@@ -141,9 +152,9 @@ void Player::updateAnimation(float deltaTime)
 	}
 
 
-/*	slide, //(turning while running)
-		jump,
-		fall*/
+	/*	slide, //(turning while running)
+	jump,
+	fall*/
 
 	//blev rörigt här, beroende på vart bildplacering gentemot collisionsplacering så ändras setpoision ev. någon annan stans.
 	//men just nu ändras set position i Unit.cpp genom samma position som collisionsplaceringen så setposition gentemot scale(-1,1) behöver ändras varje gång.
