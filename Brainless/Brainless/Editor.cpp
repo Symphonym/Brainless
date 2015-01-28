@@ -13,7 +13,7 @@
 
 Editor::Editor()
 :
-m_editor(sf::VideoMode(800, 600, sf::Style::Close), "Brainless Editor"),
+m_editor(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless Editor"),
 m_editorMode(EditorModes::Grid),
 m_gridMode(nullptr),
 m_spriteMode(nullptr),
