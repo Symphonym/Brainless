@@ -46,9 +46,6 @@
     <Filter Include="Source Files\Error">
       <UniqueIdentifier>{772b25dd-45f1-4145-a1f1-74a988355a53}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\WrapperText">
-      <UniqueIdentifier>{955ae274-02e2-4552-a96a-133a45e7f25d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -109,7 +106,7 @@
       <Filter>Source Files\Error</Filter>
     </ClCompile>
     <ClCompile Include="WrappedText.cpp">
-      <Filter>Source Files\WrapperText</Filter>
+      <Filter>Source Files\WrappedText</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -177,7 +174,7 @@
       <Filter>Source Files\Error</Filter>
     </ClInclude>
     <ClInclude Include="WrappedText.h">
-      <Filter>Source Files\WrapperText</Filter>
+      <Filter>Source Files\WrappedText</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

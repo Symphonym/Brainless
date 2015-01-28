@@ -81,3 +81,31 @@ void Animation::setSpeed(float speed)
 	m_speed = speed;
 
 }
+
+/*
+returns speed closer minSpeed when value is closer to useMinValue
+returns speed closer maxSpeed when value is closer to useMaxValue
+useMinValue can be higher than useMaxValue
+*/
+float Animation::calcFrameSpeed(float minSpeed, float maxSpeed, float useMinValue, float useMaxValue, float value)
+{
+	if (minSpeed == maxSpeed) return minSpeed;
+
+	//"Reverted"
+	if (useMaxValue < useMinValue)
+	{
+		if (value < useMaxValue) return maxSpeed;
+		else if (useMinValue < value) return minSpeed;
+		float b = useMinValue - useMaxValue;
+		float a = abs(value) - useMaxValue;
+		if (a == 0) return maxSpeed;
+		return maxSpeed - (maxSpeed - minSpeed)*(b / a);
+	}
+	//Normal
+	if (useMaxValue < value) return maxSpeed;
+	else if (value < useMinValue) return minSpeed;
+	float a = useMaxValue - useMinValue;
+	float b = abs(value) - useMinValue;
+	if (a == 0) return minSpeed;
+	return minSpeed + (maxSpeed - minSpeed)*(b / a);
+}

@@ -126,7 +126,7 @@ void Player::updateAnimation(float deltaTime)
 			m_animation.loop(4, 7, 2, 10);
 			m_state = run;
 		}
-		m_animation.setSpeed(calcFrameSpeed(10, 20, runBreakpoint, m_maxSpeedX, m_speedX));
+		m_animation.setSpeed(Animation::calcFrameSpeed(10, 20, runBreakpoint, m_maxSpeedX, m_speedX));
 		
 	}
 	//WALK
@@ -137,7 +137,7 @@ void Player::updateAnimation(float deltaTime)
 			m_animation.loop(0, 3, 1, 5);
 			m_state = walk;
 		}
-		m_animation.setSpeed(calcFrameSpeed(5, 20, 0, runBreakpoint, m_speedX));
+		m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, m_speedX));
 	}
 
 
@@ -173,32 +173,3 @@ void Player::updateAnimation(float deltaTime)
 
 	m_sprite.setTextureRect(m_animation.getRectangle(deltaTime));
 }
-
-/*
-	returns speed closer minSpeed when value is closer to useMinValue
-	returns speed closer maxSpeed when value is closer to useMaxValue
-	useMinValue can be higher than useMaxValue
-*/
-float Player::calcFrameSpeed(float minSpeed, float maxSpeed, float useMinValue, float useMaxValue, float value)
-{
-	if (minSpeed == maxSpeed) return minSpeed;
-	
-	//"Reverted"
-	if (useMaxValue < useMinValue)
-	{
-		if (value < useMaxValue) return maxSpeed;
-		else if (useMinValue < value) return minSpeed;
-		float b = useMinValue - useMaxValue;
-		float a = abs(value) - useMaxValue;
-		if (a == 0) return maxSpeed;
-		return maxSpeed - (maxSpeed - minSpeed)*(b / a);
-	}
-	//Normal
-	if (useMaxValue < value) return maxSpeed;
-	else if (value < useMinValue) return minSpeed;
-	float a = useMaxValue - useMinValue;
-	float b = abs(value) - useMinValue;
-	if (a == 0) return minSpeed;
-	return minSpeed + (maxSpeed-minSpeed)*(b / a);
-}
-

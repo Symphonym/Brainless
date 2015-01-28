@@ -34,6 +34,8 @@ public:
 	float getWidth(){ return m_width; }
 	float getHeight(){ return m_height; }
 
+	/* gives a speed between minSpeed and maxSpeed depending on where value is between minValue and maxValue */
+	static float calcFrameSpeed(float minSpeed, float maxSpeed, float useMinValue, float useMaxValue, float value);
 private:
 	int m_height;
 	int m_width;

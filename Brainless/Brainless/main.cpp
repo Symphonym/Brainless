@@ -9,9 +9,7 @@
 
 int main(int argc, const char *args[])
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Brainless");
-	sf::CircleShape circle(100.f);
-	circle.setFillColor(sf::Color::Green);
+	//sf::RenderWindow window(sf::VideoMode(1280, 720), "Brainless");
 
 	//if (argc == 1) // ONLY UNCOMMEN THESE IF's WHEN DEPLOYING PROGRAM, editor can then be accessed by running "game.exe editor"
 	//{
@@ -22,8 +20,8 @@ int main(int argc, const char *args[])
 	//	}
 	//}
 
-	/*	TestClass test;
-		test.testUpdate();*/
+	/*	TestClass test;	//remove this when closer to finnishing program, used to test isolated player movement and animation.
+		test.testUpdate(); */ 
 
 	/*Renderer::instance().setTarget(window);
 	while (window.isOpen())
@@ -36,7 +34,7 @@ int main(int argc, const char *args[])
 
 		}
 		window.clear(sf::Color::Black);
-		window.draw(circle);
+	
 		window.display();
 	}*/
 	

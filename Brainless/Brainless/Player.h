@@ -39,8 +39,6 @@ private:
 	AnimationState m_state;
 	Direction m_spriteDirection;
 	Direction m_inputDirection;
-	/* gives a speed between minSpeed and maxSpeed depending on where value is between minValue and maxValue */
-	float calcFrameSpeed(float minSpeed, float maxSpeed, float useMinValue, float useMaxValue, float value);
 };
 
 
