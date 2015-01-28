@@ -1,7 +1,6 @@
 /*
 
 	accelerationY och gravitation är splittade, lättare att hantera specialfall utan att gravity ökar accelerationY varje tick.
-	flytta och byt namn på calcFrameSpeed då den används även till att beräkna acceleration.
 
 	fortfarande endel magic numbers, fixa detta.
 */
@@ -82,7 +81,7 @@ void Player::checkPlayerInput()
 			if (m_inAir)
 			{
 				if (m_speedY < -200)
-				m_accelerationY = -1*Animation::calcFrameSpeed(0, 500, 0, 300, -1*m_speedY); //flytta calcFramespeed Igen, byt namn
+				m_accelerationY = -1*calcAcceleration(0, 500, 0, 300, -1*m_speedY); 
 				else m_accelerationY = 0;
 					// vid speedY ca 200
 			}
@@ -163,7 +162,7 @@ void Player::updateAnimation(float deltaTime)
 			m_animation.loop(4, 7, 2, 10);
 			m_state = run;
 		}
-		m_animation.setSpeed(Animation::calcFrameSpeed(10, 20, runBreakpoint, m_maxSpeedX, m_speedX));
+		m_animation.setSpeed(Animation::calcFrameSpeed(10, 20, runBreakpoint, m_maxSpeedX, abs(m_speedX)));
 
 	}
 	//WALK
@@ -174,7 +173,7 @@ void Player::updateAnimation(float deltaTime)
 			m_animation.loop(0, 3, 1, 5);
 			m_state = walk;
 		}
-		m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, m_speedX));
+		m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speedX)));
 	}
 
 
@@ -209,4 +208,31 @@ void Player::updateAnimation(float deltaTime)
 
 
 	m_sprite.setTextureRect(m_animation.getRectangle(deltaTime));
+}
+/*
+returns acceleration closer minAcceleration when value is closer to useMinValue
+returns acceleration closer maxAcceleration when value is closer to useMaxValue
+useMinValue can be higher than useMaxValue
+*/
+float Player::calcAcceleration(float minAcceleration, float maxAcceleration, float useMinValue, float useMaxValue, float value)
+{
+	if (minAcceleration == maxAcceleration) return minAcceleration;
+
+	//"Reverted"
+	if (useMaxValue < useMinValue)
+	{
+		if (value < useMaxValue) return maxAcceleration;
+		else if (useMinValue < value) return minAcceleration;
+		float b = useMinValue - useMaxValue;
+		float a = abs(value) - useMaxValue;
+		if (a == 0) return maxAcceleration;
+		return maxAcceleration - (maxAcceleration - minAcceleration)*(b / a);
+	}
+	//Normal
+	if (useMaxValue < value) return maxAcceleration;
+	else if (value < useMinValue) return minAcceleration;
+	float a = useMaxValue - useMinValue;
+	float b = abs(value) - useMinValue;
+	if (a == 0) return minAcceleration;
+	return minAcceleration + (maxAcceleration - minAcceleration)*(b / a);
 }

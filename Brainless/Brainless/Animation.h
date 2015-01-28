@@ -19,9 +19,11 @@ public:
 
 	//Plays the selected frames over and over again
 	void loop(int startFrame, int endFrame, int frameRow, float speed);
+	void loop(int startFrame, int endFrame, int startRow, int endRow, float speed);
 
 	//Plays the selected frames once and stops at the last frame
 	void playOnce(int startFrame, int endFrame, int frameRow, float speed);
+	void playOnce(int startFrame, int endFrame, int startRow, int endRow, float speed);
 
 	//Shows only the selected frame
 	void stillFrame(int Frame, int Row);
@@ -43,6 +45,9 @@ private:
 	int m_startFrame;
 	int m_endFrame;
 	int m_currentFrame;
+	int m_startRow;
+	int m_endRow;
+	int m_currentRow;
 	sf::IntRect m_rectangle;
 	AnimationType m_type;
 	

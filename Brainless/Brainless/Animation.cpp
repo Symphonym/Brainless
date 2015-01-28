@@ -1,5 +1,7 @@
 #include "Animation.h"
 
+#define ENDFRAME 8 //spritesheet storlek
+
 Animation::Animation(int width, int height)
 :
 m_width(width),
@@ -13,27 +15,55 @@ void Animation::loop(int startFrame, int endFrame, int frameRow, float speed)
 {
 	m_startFrame = startFrame;
 	m_endFrame = endFrame;
-	m_rectangle.top = frameRow * m_height;
 	m_speed = speed;
 	m_currentFrame = startFrame;
 	m_type = looping;
 	m_timer = 0;
+	m_startRow = frameRow;
+	m_endRow = frameRow;
+	m_currentRow = frameRow;
 }
 
+void Animation::loop(int startFrame, int endFrame, int startRow, int endRow, float speed)
+{
+	m_startFrame = startFrame;
+	m_endFrame = endFrame;
+	m_speed = speed;
+	m_currentFrame = startFrame;
+	m_type = looping;
+	m_timer = 0;
+	m_startRow = startRow;
+	m_endRow = endRow;
+	m_currentRow = startRow;
+}
 void Animation::playOnce(int startFrame, int endFrame, int frameRow, float speed)
 {
 	m_startFrame = startFrame;
 	m_endFrame = endFrame;
-	m_rectangle.top = frameRow * m_height;
 	m_currentFrame = startFrame;
 	m_speed = speed;
 	m_type = once;
 	m_timer = 0;
+	m_startRow = frameRow;
+	m_endRow = frameRow;
+	m_currentRow = frameRow;
+}
+void Animation::playOnce(int startFrame, int endFrame, int startRow, int endRow, float speed)
+{
+	m_startFrame = startFrame;
+	m_endFrame = endFrame;
+	m_currentFrame = startFrame;
+	m_speed = speed;
+	m_type = once;
+	m_timer = 0;
+	m_startRow = startRow;
+	m_endRow = endRow;
+	m_currentRow = startRow;
 }
 
 void Animation::stillFrame(int frame, int row)
 {
-	m_rectangle.top = row * m_height;
+	m_currentRow = row;
 	m_currentFrame = frame;
 	m_type = still;
 }
@@ -50,8 +80,19 @@ sf::IntRect Animation::getRectangle(float deltaTime)
 		{
 			m_currentFrame++;
 
-			if (m_currentFrame > m_endFrame)
+			//restart loop
+			if (m_currentRow == m_endRow && m_currentFrame > m_endFrame)
+			{
 				m_currentFrame = m_startFrame;
+				m_currentRow = m_startRow;
+			}
+			//next row
+			else if (m_currentFrame == ENDFRAME)
+			{
+				m_currentRow += 1;
+				m_currentFrame = 0;
+			}
+		
 
 			//decrease timer with time taken per frame
 			m_timer -= 1/m_speed;
@@ -64,13 +105,23 @@ sf::IntRect Animation::getRectangle(float deltaTime)
 		{
 			m_currentFrame++;
 
-			if (m_currentFrame > m_endFrame)
-				stillFrame(m_endFrame, m_rectangle.top);
+			//stop loop at endFrame
+			if (m_currentRow == m_endRow && m_currentFrame > m_endFrame)
+			{
+				stillFrame(m_endFrame, m_endRow);
+			}
+			//next row
+			else if (m_currentFrame == ENDFRAME)
+			{
+				m_currentRow += 1;
+				m_currentFrame = 0;
+			}
 
 			m_timer -= 1 / m_speed;
 		}
 	}
 
+	m_rectangle.top = m_currentRow * m_height;
 	m_rectangle.left = m_currentFrame * m_width;
 
 	return m_rectangle;
