@@ -37,6 +37,18 @@
     <Filter Include="Source Files\WrappedText">
       <UniqueIdentifier>{3846caa8-3bac-4b82-b0c0-a0fbdb8531ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Unit\playerTest">
+      <UniqueIdentifier>{1120a9e2-e100-42cb-8cea-9770268369ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FileSave">
+      <UniqueIdentifier>{6d5a7529-d725-4ad8-bb37-dc2fea610c13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Error">
+      <UniqueIdentifier>{772b25dd-45f1-4145-a1f1-74a988355a53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WrapperText">
+      <UniqueIdentifier>{955ae274-02e2-4552-a96a-133a45e7f25d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -47,9 +59,6 @@
     </ClCompile>
     <ClCompile Include="ResourceLoader.cpp">
       <Filter>Source Files\Resource Loading</Filter>
-    </ClCompile>
-    <ClCompile Include="Error.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files\Rendering</Filter>
@@ -62,9 +71,6 @@
     </ClCompile>
     <ClCompile Include="Camera2D.cpp">
       <Filter>Source Files\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="FileSave.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ItemDatabase.cpp">
       <Filter>Source Files\Game</Filter>
@@ -87,17 +93,23 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TestClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WrappedText.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EditorItemMode.cpp">
       <Filter>Source Files\Level Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="TestClass.cpp">
+      <Filter>Source Files\Unit\playerTest</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSave.cpp">
+      <Filter>Source Files\FileSave</Filter>
+    </ClCompile>
+    <ClCompile Include="Error.cpp">
+      <Filter>Source Files\Error</Filter>
+    </ClCompile>
+    <ClCompile Include="WrappedText.cpp">
+      <Filter>Source Files\WrapperText</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,9 +118,6 @@
     </ClInclude>
     <ClInclude Include="ResourceLoader.h">
       <Filter>Source Files\Resource Loading</Filter>
-    </ClInclude>
-    <ClInclude Include="Error.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>Source Files\Rendering</Filter>
@@ -158,14 +167,17 @@
     <ClInclude Include="EditorItemMode.h">
       <Filter>Source Files\Level Editor</Filter>
     </ClInclude>
-    <ClInclude Include="WrappedText.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="TestClass.h">
+      <Filter>Source Files\Unit\playerTest</Filter>
     </ClInclude>
     <ClInclude Include="FileSave.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\FileSave</Filter>
     </ClInclude>
-    <ClInclude Include="TestClass.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Error.h">
+      <Filter>Source Files\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="WrappedText.h">
+      <Filter>Source Files\WrapperText</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
