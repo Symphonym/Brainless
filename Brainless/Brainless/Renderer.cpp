@@ -65,6 +65,8 @@ void Renderer::executeDraws()
 		return b.second < a.second;
 	});
 
+	
+
 	// Draw background stuff
 	for (std::size_t i = 0; i < m_backgroundRenderTasks.size(); i++)
 	{

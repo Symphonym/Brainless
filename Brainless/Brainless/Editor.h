@@ -29,6 +29,8 @@ private:
 		Item
 	};
 
+	// TODO TEST CODE, DONT REMOVE UNLESS YOU MADE THIS
+	float shaderTest;
 
 	typedef std::unique_ptr<TileMap> MapPtr;
 
@@ -36,6 +38,7 @@ private:
 	sf::View m_camera;
 
 	Level m_level;
+	sf::Sprite m_editorBackground;
 
 	EditorModes m_editorMode;
 	EditorGridMode *m_gridMode;

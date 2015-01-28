@@ -27,9 +27,14 @@ m_currentSyncID(0)
 	ResourceLoader::instance().loadFont("EditorFont", "VCR_OSD_MONO.ttf");
 	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");
 	ResourceLoader::instance().loadTexture("TestItem2", "wizard_idle.png");
+	ResourceLoader::instance().loadTexture("EditorLevelSize", "levelsize.png");
+	ResourceLoader::instance().loadShader("BlackAndWhiteShader", "BlackAndWhite.txt");
+
+	Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("BlackAndWhiteShader"));
 	//ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
 
-
+	m_editorBackground.setPosition(0, -40);
+	m_editorBackground.setTexture(ResourceLoader::instance().retrieveTexture("EditorLevelSize"));
 
 	// Load a default map with nothing but ground tiles
 	TileMap::TileMapLayout layout;
@@ -39,6 +44,9 @@ m_currentSyncID(0)
 		for (int y = 0; y < Constants::MapHeight; y++)
 			layout[x].push_back(Tile::Ground);
 	}
+
+	// TODO TEST CODE DONT REMOVE
+	shaderTest = 1;
 
 
 	m_gridMode = new EditorGridMode(m_level.getTileMap());
@@ -109,6 +117,18 @@ void Editor::loop()
 					break;
 			}
 		}
+
+		//////////////////////////////////////////////////////////////////////////// SHADER TEST CODE
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::T))
+			shaderTest += deltaTime;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
+			shaderTest -= deltaTime;
+
+		shaderTest = Utility::clampValue<float>(shaderTest, 0, 1);
+		sf::Shader &shader = ResourceLoader::instance().retrieveShader("BlackAndWhiteShader");
+		shader.setParameter("intensityValue", shaderTest);
+		shader.setParameter("image", sf::Shader::CurrentTexture);
+		//////////////////////////////////////////////////////////////////////////// SHADER TEST CODE END
 
 		// Switch between modes
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::J))
@@ -191,6 +211,7 @@ void Editor::draw()
 		case EditorModes::Item: m_itemMode->draw(); break;
 	}
 	Renderer::instance().drawHUD(m_saveText);
+	Renderer::instance().drawBackground(m_editorBackground);
 	
 	Renderer::instance().executeDraws();
 }

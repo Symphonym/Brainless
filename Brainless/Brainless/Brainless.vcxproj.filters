@@ -108,6 +108,9 @@
     <ClCompile Include="WrappedText.cpp">
       <Filter>Source Files\WrappedText</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -176,5 +179,13 @@
     <ClInclude Include="WrappedText.h">
       <Filter>Source Files\WrappedText</Filter>
     </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="BlackAndWhite.txt">
+      <Filter>Source Files\Game</Filter>
+    </Text>
   </ItemGroup>
 </Project>
