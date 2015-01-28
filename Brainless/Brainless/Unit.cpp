@@ -28,14 +28,14 @@ m_animation(60, 90) //storleken på varje bild i texturesheet
 {
 	m_sprite.setPosition(sf::Vector2f(startX, startY));
 
-	text.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
-	text.setCharacterSize(16);
-	text2.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
-	text2.setCharacterSize(16);
-	text3.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
-	text3.setCharacterSize(16);
-	text4.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
-	text4.setCharacterSize(16);
+	//text.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+	//text.setCharacterSize(16);
+	//text2.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+	//text2.setCharacterSize(16);
+	//text3.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+	//text3.setCharacterSize(16);
+	//text4.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+	//text4.setCharacterSize(16);
 
 }
 void Unit::updateMovement(float gravity, float deltaTime)
@@ -43,11 +43,11 @@ void Unit::updateMovement(float gravity, float deltaTime)
 	float accelYtrue;
 	if (m_inAir)
 	{
-		text.setPosition(0, 0);
+	/*	text.setPosition(0, 0);
 		text.setString("inAir");
 		text.setColor(sf::Color::Green);
 		Renderer::instance().drawHUD(text);
-	
+	*/
 		accelYtrue = m_accelerationY + gravity; // funkar inte fixa asap efter lunch
 	}
 	else
@@ -69,18 +69,18 @@ void Unit::updateMovement(float gravity, float deltaTime)
 
 	m_sprite.setPosition(sf::Vector2f(m_positionX, m_positionY)); //temp ska inte baseras på "collisionvärden"
 
-	text2.setPosition(0, 20);
-	text2.setString("speedY " + to_string(m_speedY));
-	text2.setColor(sf::Color::Green);
-	Renderer::instance().drawHUD(text2);
-	text3.setPosition(0, 40);
-	text3.setString("accelY " + to_string(m_accelerationY));
-	text3.setColor(sf::Color::Green);
-	Renderer::instance().drawHUD(text3);
-	text4.setPosition(0, 60);
-	text4.setString("accelY+grav " + to_string(accelYtrue));
-	text4.setColor(sf::Color::Green);
-	Renderer::instance().drawHUD(text4);
+	//text2.setPosition(0, 20);
+	//text2.setString("speedY " + to_string(m_speedY));
+	//text2.setColor(sf::Color::Green);
+	//Renderer::instance().drawHUD(text2);
+	//text3.setPosition(0, 40);
+	//text3.setString("accelY " + to_string(m_accelerationY));
+	//text3.setColor(sf::Color::Green);
+	//Renderer::instance().drawHUD(text3);
+	//text4.setPosition(0, 60);
+	//text4.setString("accelY+grav " + to_string(accelYtrue));
+	//text4.setColor(sf::Color::Green);
+	//Renderer::instance().drawHUD(text4);
 
 	////output en gång per sekund
 	//static float timeTest = 0;
