@@ -35,6 +35,10 @@ m_currentSyncID(0)
 	ResourceLoader::instance().loadTexture("SpriteButtonPressed", "images/spriteButtonPressed.png");
 	ResourceLoader::instance().loadTexture("ItemButton", "images/itemButton.png");
 	ResourceLoader::instance().loadTexture("ItemButtonPressed", "images/itemButtonPressed.png");
+	ResourceLoader::instance().loadTexture("CameraButton", "images/resetCameraButton.png");
+	ResourceLoader::instance().loadTexture("CameraButtonPressed", "images/resetCameraButtonPressed.png");
+	ResourceLoader::instance().loadTexture("SaveButton", "images/saveButton.png");
+	ResourceLoader::instance().loadTexture("SaveButtonPressed", "images/saveButtonPressed.png");
 	ResourceLoader::instance().loadShader("BlackAndWhiteShader", "BlackAndWhite.txt");
 
 
@@ -99,7 +103,9 @@ void Editor::loop()
 	Button tileButton(ResourceLoader::instance().retrieveTexture("TileButton"), ResourceLoader::instance().retrieveTexture("TileButtonPressed"), sf::IntRect(20, 610, 80, 80), &m_editor);
 	Button spriteButton(ResourceLoader::instance().retrieveTexture("SpriteButton"), ResourceLoader::instance().retrieveTexture("SpriteButtonPressed"), sf::IntRect(120, 610, 80, 80), &m_editor);
 	Button itemButton(ResourceLoader::instance().retrieveTexture("ItemButton"), ResourceLoader::instance().retrieveTexture("ItemButtonPressed"), sf::IntRect(220, 610, 80, 80), &m_editor);
-
+	Button cameraButton(ResourceLoader::instance().retrieveTexture("CameraButton"), ResourceLoader::instance().retrieveTexture("CameraButtonPressed"), sf::IntRect(320, 610, 80, 80), &m_editor);
+	Button saveButton(ResourceLoader::instance().retrieveTexture("SaveButton"), ResourceLoader::instance().retrieveTexture("SaveButtonPressed"), sf::IntRect(420, 610, 80, 80), &m_editor);
+	m_isMenu = false;
 
 	sf::Clock tickClock;
 	while (m_editor.isOpen())
@@ -118,9 +124,19 @@ void Editor::loop()
 			if (event.type == sf::Event::Closed)
 				m_editor.close();
 
-			switch (m_editorMode)
+			if (event.type == sf::Event::KeyReleased)
 			{
-				case EditorModes::Grid: 
+				if (event.key.code == sf::Keyboard::Return)
+				{
+					m_isMenu = !m_isMenu;
+				}
+			}
+
+			if (!m_isMenu)
+			{
+				switch (m_editorMode)
+				{
+				case EditorModes::Grid:
 					somethingChanged = m_gridMode->events(event, m_editor) ? true : somethingChanged;
 					break;
 				case EditorModes::Sprite:
@@ -129,6 +145,7 @@ void Editor::loop()
 				case EditorModes::Item:
 					somethingChanged = m_itemMode->events(event, m_editor) ? true : somethingChanged;
 					break;
+				}
 			}
 		}
 
@@ -144,16 +161,45 @@ void Editor::loop()
 		shader.setParameter("image", sf::Shader::CurrentTexture);
 		//////////////////////////////////////////////////////////////////////////// SHADER TEST CODE END
 
+		if (m_isMenu)
+		{
+			// Switch between modes
+			if (tileButton.isClicked() || sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+			{
+				m_editorMode = EditorModes::Grid;
+			}
+			else if (spriteButton.isClicked() || sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+			{
+				m_editorMode = EditorModes::Sprite;
+			}
+			else if (itemButton.isClicked() || sf::Keyboard::isKeyPressed(sf::Keyboard::L))
+			{
+				m_editorMode = EditorModes::Item;
+			}
+			else if (cameraButton.isClicked())
+			{
+				sf::Vector2f curCenter = m_camera.getCenter();
+				m_camera = m_editor.getDefaultView();
+				m_camera.setCenter(curCenter);
+			}
+			else if (saveButton.isClicked())
+			{
+				saveFile();
+				m_saveText.setString("File is saved!");
+				m_saveText.setColor(sf::Color::Green);
+			}
+		}
+
 		// Switch between modes
-		if (tileButton.isClicked() || sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::J))
 		{
 			m_editorMode = EditorModes::Grid;
 		}
-		else if (spriteButton.isClicked() || sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
 		{
 			m_editorMode = EditorModes::Sprite;
 		}
-		else if (itemButton.isClicked() || sf::Keyboard::isKeyPressed(sf::Keyboard::L))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::L))
 		{
 			m_editorMode = EditorModes::Item;
 		}
@@ -194,7 +240,9 @@ void Editor::loop()
 		// Update editor camera
 		m_editor.setView(m_camera);
 
-		// Update depending on editor mode
+		if (!m_isMenu)
+		{
+			// Update depending on editor mode
 			switch (m_editorMode)
 			{
 			case EditorModes::Grid:
@@ -207,6 +255,7 @@ void Editor::loop()
 				somethingChanged = m_itemMode->update(deltaTime, m_editor) ? true : somethingChanged;
 				break;
 			}
+		}
 
 		if (somethingChanged)
 		{
@@ -218,9 +267,14 @@ void Editor::loop()
 		draw();
 		m_editor.display();
 
-		tileButton.draw();
-		spriteButton.draw();
-		itemButton.draw();
+		if (m_isMenu)
+		{
+			tileButton.draw();
+			spriteButton.draw();
+			itemButton.draw();
+			cameraButton.draw();
+			saveButton.draw();
+		}
 	}
 }
 

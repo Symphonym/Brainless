@@ -14,6 +14,7 @@ m_sprites(spriteVector)
 	m_layerText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
 	m_layerText.setPosition(30, 100);
 	m_layerText.setString("Drawing to: FOREGROUND");
+	m_highlightSprite.drawToForeground = true;
 }
 
 bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &editorWindow)
