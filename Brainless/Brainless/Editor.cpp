@@ -54,7 +54,7 @@ m_currentSyncID(0)
 	}
 
 	// TODO TEST CODE DONT REMOVE
-	shaderTest = 1;
+	shaderTest = 0;
 
 
 	m_gridMode = new EditorGridMode(m_level.getTileMap());
