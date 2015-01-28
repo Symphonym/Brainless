@@ -97,6 +97,6 @@ void Unit::setTexture(sf::Texture& texture)
 
 void Unit::draw()
 {
-	Renderer::instance().draw(m_sprite);
+	Renderer::instance().drawDepth(m_sprite);
 }
 
