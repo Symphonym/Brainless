@@ -8,6 +8,7 @@
 
 class Level;
 class Unit;
+class Player;
 
 class Game
 {
@@ -25,6 +26,7 @@ private:
 	sf::View m_camera, m_hudCamera;
 
 	Level m_level;
+	Player* player;
 	std::vector<Unit*> units;
 
 	// Load/save functionality

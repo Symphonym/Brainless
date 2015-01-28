@@ -26,6 +26,7 @@ Game::Game()
 	// Load editor resources
 	ResourceLoader::instance().loadFont("EditorFont", "VCR_OSD_MONO.ttf");
 	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");
+	ResourceLoader::instance().loadTexture("testImage", "spritesheet.png");
 	//ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
 
 
@@ -58,7 +59,9 @@ Game::Game()
 	m_markerSprite.setTexture(m_markerTexture);
 
 	loadFile();
-	units.push_back(new Player(Constants::TileSize * 3, Constants::TileSize * 3.4, Constants::TileSize * 0.5, Constants::TileSize * 0.7, 300, 300));
+	player = new Player(Constants::TileSize * 3, Constants::TileSize * 3.4, Constants::TileSize * 0.5, Constants::TileSize * 0.7, 300, 300);
+	units.push_back(player);
+	player->setTexture(ResourceLoader::instance().retrieveTexture("testImage"));
 }
 Game::~Game()
 {
@@ -90,17 +93,18 @@ void Game::loop()
 		const float zoomSpeed = deltaTime;
 
 		//Move units out of collisions
+		player->checkPlayerInput();
 		for (unsigned int i = 0; i < units.size(); i++)
 		{
 			// Unit movement
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 				units[i]->setPosition(units[i]->getPositionX(), units[i]->getPositionY() - 7);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 				units[i]->setPosition(units[i]->getPositionX(), units[i]->getPositionY() + 7);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 				units[i]->setPosition(units[i]->getPositionX() - 7, units[i]->getPositionY());
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-				units[i]->setPosition(units[i]->getPositionX() + 7, units[i]->getPositionY());
+				units[i]->setPosition(units[i]->getPositionX() + 7, units[i]->getPositionY());*/
 			//Reset marker color
 			m_markerSprite.setColor(sf::Color::Color(255, 255, 255, 128));
 			/*
@@ -152,7 +156,8 @@ void Game::loop()
 			//Move marker to unit
 			m_markerSprite.setPosition(units[i]->getPositionX(), units[i]->getPositionY());
 		}
-
+		player->updateMovement(600,deltaTime);
+		player->updateAnimation(deltaTime);
 		sf::Event event;
 		while (m_game.pollEvent(event))
 		{
@@ -161,13 +166,13 @@ void Game::loop()
 		}
 
 		// Camera movement
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 			m_camera.move(0, -cameraSpeed);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 			m_camera.move(0, cameraSpeed);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 			m_camera.move(-cameraSpeed, 0);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 			m_camera.move(cameraSpeed, 0);
 
 		// Camera zoom
@@ -188,7 +193,10 @@ void Game::loop()
 void Game::draw()
 {
 	m_level.draw(m_camera);
-
+	for (unsigned int i = 0; i < units.size(); i++)
+	{
+		units[i]->draw();
+	}
 	/*switch (m_editorMode)
 	{
 	case EditorModes::Grid: m_gridMode->draw(); break;
