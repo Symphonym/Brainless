@@ -33,9 +33,9 @@ public:
 
 	enum JumpState
 	{
-		null = 0,
-		pressed = 2,
-		released = 3,
+		null,
+		pressed,
+		released
 	};
 
 

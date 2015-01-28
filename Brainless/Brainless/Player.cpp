@@ -1,7 +1,9 @@
 /*
 
+	accelerationY och gravitation är splittade, lättare att hantera specialfall utan att gravity ökar accelerationY varje tick.
+	flytta och byt namn på calcFrameSpeed då den används även till att beräkna acceleration.
 
-
+	fortfarande endel magic numbers, fixa detta.
 */
 
 #include "Player.h"
@@ -69,20 +71,44 @@ void Player::checkPlayerInput()
 		else m_accelerationX = -m_speedX * 6;
 	}
 	//Jump
+	if (!m_inAir) m_jumpState = null; // can jump
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		if (m_inAir)
+	
+		if (m_jumpState != released)
 		{
-			m_accelerationY = -200;
+		
+			//jump while in the air
+			if (m_inAir)
+			{
+				if (m_speedY < -200)
+				m_accelerationY = -1*Animation::calcFrameSpeed(0, 500, 0, 300, -1*m_speedY); //flytta calcFramespeed Igen, byt namn
+				else m_accelerationY = 0;
+					// vid speedY ca 200
+			}
+			//from ground
+			else
+			{
+				m_speedY = -300;
+				m_inAir = true;
+				m_jumpState = pressed;
+			}
 		}
-		else
+		else //stop jump
 		{
-			m_speedY = -300;
-			m_accelerationY = -200;
-			m_inAir = true;
+			m_accelerationY = 0;
 		}
 	}
-	m_jumpState = null;
+	//prevent "re-jump" after releasing button
+	else if (m_jumpState == pressed)
+	{
+		m_jumpState = released;
+	}
+	//stop the jump
+	else 
+	{
+		m_accelerationY = 0;
+	}
 
 }
 

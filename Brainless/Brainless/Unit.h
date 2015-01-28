@@ -61,6 +61,14 @@ protected:
 	sf::Sprite m_sprite;
 	bool m_inAir;
 	Animation m_animation;
+
+	//väldigt temp
+	sf::Text text;
+	sf::Text text2;	
+	sf::Text text3;	
+	sf::Text text4;
+
+
 private:
 };
 

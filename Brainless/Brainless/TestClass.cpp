@@ -10,19 +10,16 @@ using namespace std;
 TestClass::TestClass() 
 {
 	ResourceLoader::instance().loadTexture("testImage", "spritesheet.png");
-
-
+	ResourceLoader::instance().loadFont("EditorFont", "VCR_OSD_MONO.ttf");
 }
 void TestClass::testUpdate()
 {
-	Player m_unit(300, 400 - 90, 60, 90, 300, 600);
+	Player m_unit(300, 400 - 90, 60, 90, 300, 1000);
 	m_unit.setTexture(ResourceLoader::instance().retrieveTexture("testImage"));
 
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "Brainless");
-	sf::CircleShape circle(100.f);
 	sf::RectangleShape rect(sf::Vector2f(10, 720));
 	rect.setPosition(800, 0);
-	circle.setFillColor(sf::Color::Green);
 
 	sf::Clock clock;
 	float deltaTime = clock.restart().asSeconds();
@@ -62,7 +59,6 @@ void TestClass::testUpdate()
 
 		window.clear(sf::Color::Black);
 
-		window.draw(circle);
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::T)) test = 0;
 		window.draw(rect);
