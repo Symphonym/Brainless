@@ -13,7 +13,7 @@
 
 Editor::Editor()
 :
-m_editor(sf::VideoMode(800, 600, sf::Style::Close), "Brainless Editor"),
+m_editor(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless Editor"),
 m_editorMode(EditorModes::Grid),
 m_gridMode(nullptr),
 m_spriteMode(nullptr),
@@ -22,9 +22,6 @@ m_currentSyncID(0)
 	m_camera = m_editor.getDefaultView();
 	Renderer::instance().setTarget(m_editor);
 
-
-	// TODO REMOVE
-	Renderer::instance().setTileMap(m_level.getTileMap());
 
 	// Load editor resources
 	ResourceLoader::instance().loadFont("EditorFont", "VCR_OSD_MONO.ttf");
