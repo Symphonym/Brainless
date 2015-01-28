@@ -1,4 +1,5 @@
-#pragma once
+/*#pragma once
+#include <SFML\Graphics.hpp>
 #include <memory>
 #include <vector>
 
@@ -18,13 +19,14 @@ private:
 	std::vector<Unit*> units;
 	
 	// Load/save functionality
-	/*void loadFile();
+	void loadFile();
 	void saveFile();
-	*/
+
 	// Update loop
 	void loop();
 
 	// Rendering function
-	/*void draw();*/
+	void draw();
 };
 
+*/

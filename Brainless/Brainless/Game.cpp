@@ -1,3 +1,5 @@
+/*#include "FileSave.h"
+
 #include "Game.h"
 #include "Constants.h"
 #include "Unit.h"
@@ -6,8 +8,18 @@
 #include "Tile.h"
 
 
+
 Game::Game()
 {
+}
+
+void Game::loadFile()
+{
+	FileSave::loadMap(&m_level, 0);
+}
+void Game::saveFile()
+{
+	FileSave::saveMap(&m_level, 0);
 }
 
 void Game::loop()
@@ -20,9 +32,9 @@ void Game::loop()
 		--- collision with tiles
 		--- collision with obstacles
 		- else (move to contact, update status)
-		*/
-		/*int new_x = units[i]->getX() + units[i]->getHspeed();
-		int new_y = units[i]->getY() + units[i]->getVspeed();*/
+		
+		int new_x = units[i]->getX() + units[i]->getHspeed();
+		int new_y = units[i]->getY() + units[i]->getVspeed();
 		//Find colliding boxes 
 		float box_start_x = floor(units[i]->getPositionX());
 		float box_end_x = ceil((units[i]->getPositionX() + units[i]->getWidth()));
@@ -34,9 +46,9 @@ void Game::loop()
 			for (float y = box_start_y; y < box_end_y; y++)
 			{
 				//Check for collision
-				//tiles.push_back(m_level.getTileMap().getTile(x, y).collidesWith(units[i]->getSprite().getGlobalBounds()));
+				//tiles.push_back(m_level.getTileMap().getTile(x, y).collidesWith(NULL));
 			}
 		}
 		//Move to collision 
 	}
-}
+}*/
