@@ -13,6 +13,7 @@ m_bounds(bounds)
 	ResourceLoader::instance().loadTexture("BlueCube", "cubeBlue.png");
 	ResourceLoader::instance().loadTexture("AirCube", "cubeNada.png");
 	ResourceLoader::instance().loadTexture("StandardCube", "cubeStandard.png");
+	ResourceLoader::instance().loadTexture("SmoothCube", "cubeSmooth.png");
 
 	updateType();
 
@@ -62,10 +63,10 @@ void Tile::updateType()
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("AirCube"));
 		break;
 	case Ground:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("StandardCube"));
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("SmoothCube"));
 		break;
 	case Red:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("RedCube"));
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("StandardCube"));
 		break;
 	case Blue:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("BlueCube"));
