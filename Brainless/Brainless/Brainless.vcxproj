@@ -84,7 +84,6 @@
     <ClCompile Include="EditorSpriteMode.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="FileSave.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemDatabase.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -108,7 +107,6 @@
     <ClInclude Include="EditorSpriteMode.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="FileSave.h" />
-    <ClInclude Include="Game.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemDatabse.h" />
     <ClInclude Include="Level.h" />
