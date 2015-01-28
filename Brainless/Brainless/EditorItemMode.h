@@ -22,6 +22,10 @@ private:
 	// Reference to the item list of the level
 	std::vector<std::unique_ptr<Item> >& m_items;
 
+	// Extra text that is shown only in the editor (per item) when placing items
+	std::vector<sf::Text> m_itemInfo;
+
+	sf::Text m_currentIDText; // Just so you know the ID of the current item
 	sf::Text m_currentIndexText, m_currentSyncIDText;
 	int m_currentIndex, m_currentSyncID;
 

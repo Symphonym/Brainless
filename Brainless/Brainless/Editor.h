@@ -33,7 +33,7 @@ private:
 	typedef std::unique_ptr<TileMap> MapPtr;
 
 	sf::RenderWindow m_editor;
-	sf::View m_camera, m_hudCamera;
+	sf::View m_camera;
 
 	Level m_level;
 
