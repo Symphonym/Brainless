@@ -23,9 +23,6 @@ m_currentSyncID(0)
 	Renderer::instance().setTarget(m_editor);
 
 
-	// TODO REMOVE
-	Renderer::instance().setTileMap(m_level.getTileMap());
-
 	// Load editor resources
 	ResourceLoader::instance().loadFont("EditorFont", "VCR_OSD_MONO.ttf");
 	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");

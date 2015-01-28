@@ -23,23 +23,20 @@ public:
 	void plugShader(const sf::Shader &shader);
 	void unplugShader();
 
+	// Set the render target of the renderer
 	void setTarget(sf::RenderTarget &target);
 
-	void setTileMap(TileMap &tileMap);
-	void drawTMSpecial(const sf::Drawable &drawable, const sf::FloatRect &bounds);
-	void drawByBounds(const sf::Drawable &drawable, const sf::FloatRect &bounds);
+	// Draw a drawable with depth sorting, bounds of the drawable is required
+	void drawDepth(const sf::Drawable &drawable, const sf::FloatRect &bounds);
+	void drawDepth(const sf::Sprite &sprite); // Bounds are grabbed from sprite
 
-	// Transformable is used for simple depth testing
-	void draw(const sf::Drawable &drawable, const sf::Transformable& transformable);
-	void draw(const sf::Sprite &sprite);
-
-	// Draws the drawable above everything else
+	// Draw a drawable with depth sorting, but make it's depth value so that it's in front of everything
 	void drawAbove(const sf::Drawable &drawable);
 
-	// Draws the drawable using the default camera view, and ontop of everything else
+	// Draws the drawable in a separate layer using the default camera view, and ontop of everything else
 	void drawHUD(const sf::Drawable &drawable);
 
-	// Draw something super far back or super far in front, mostly for environment stuff
+	// Draw something a separate layer super far back or super far in front, mostly for environment stuff
 	void drawBackground(const sf::Drawable &drawable);
 	void drawForeground(const sf::Drawable &drawable);
 
