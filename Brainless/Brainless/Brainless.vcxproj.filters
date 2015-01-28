@@ -46,6 +46,9 @@
     <Filter Include="Source Files\Error">
       <UniqueIdentifier>{772b25dd-45f1-4145-a1f1-74a988355a53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{48061318-ca76-4c8b-889e-c554b46b9e90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -107,6 +110,12 @@
     </ClCompile>
     <ClCompile Include="WrappedText.cpp">
       <Filter>Source Files\WrappedText</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,5 +185,16 @@
     <ClInclude Include="WrappedText.h">
       <Filter>Source Files\WrappedText</Filter>
     </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="BlackAndWhite.txt">
+      <Filter>Source Files\Game</Filter>
+    </Text>
   </ItemGroup>
 </Project>

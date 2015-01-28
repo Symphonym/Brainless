@@ -136,7 +136,7 @@ void Unit::draw()
 	Renderer::instance().drawDepth(m_sprite);
 }
 
-sf::IntRect Unit::getCollisionRect()
+sf::FloatRect Unit::getCollisionRect()
 {
-	return sf::IntRect(m_positionX, m_positionY, m_width, m_height);
+	return sf::FloatRect(m_positionX, m_positionY, m_width, m_height);
 }

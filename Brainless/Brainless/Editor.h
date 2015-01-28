@@ -29,13 +29,16 @@ private:
 		Item
 	};
 
+	// TODO TEST CODE, DONT REMOVE UNLESS YOU MADE THIS
+	float shaderTest;
 
 	typedef std::unique_ptr<TileMap> MapPtr;
 
 	sf::RenderWindow m_editor;
-	sf::View m_camera, m_hudCamera;
+	sf::View m_camera;
 
 	Level m_level;
+	sf::Sprite m_editorBackground;
 
 	EditorModes m_editorMode;
 	EditorGridMode *m_gridMode;
@@ -48,7 +51,6 @@ private:
 	// Which sync ID you are using when placing an item, used to connect items
 	// to eachother. A key and the door it goes to would have a matching syncID
 	int m_currentSyncID;
-
 
 	// Load/save functionality
 	void loadFile();

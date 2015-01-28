@@ -5,15 +5,6 @@
 #include <vector>
 
 
-struct RenderData
-{
-	RenderData(const sf::Drawable *drawableParam, sf::FloatRect boundsParam, float lengthParam);
-
-	const sf::Drawable *drawable;
-	sf::FloatRect bounds;
-	float lengthToOrigo;
-};
-
 class TileMap;
 class Renderer
 {
@@ -47,12 +38,12 @@ public:
 
 private:
 
-
+	typedef std::pair<const sf::Drawable*, float> RenderPair;
 
 	Renderer();
 
 	//typedef std::pair<const sf::Drawable*, float> RenderPair;
-	std::vector<RenderData> m_renderTasks;
+	std::vector<RenderPair> m_renderTasks;
 	std::vector<const sf::Drawable*> m_hudRenderTasks;
 
 	// Foreground and background render tasks are separate from the semi depth

@@ -4,6 +4,7 @@ ItemDatabase::ItemDatabase()
 {
 	// TODO Testing item
 	addItem(ItemPtr(new DefaultItem("TestItem", 0)));
+	addItem(ItemPtr(new DefaultItem("TestItem2", 1)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)

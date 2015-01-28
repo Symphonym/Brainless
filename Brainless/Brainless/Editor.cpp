@@ -8,6 +8,7 @@
 #include "EditorGridMode.h"
 #include "EditorSpriteMode.h"
 #include "EditorItemMode.h"
+#include "Button.h"
 
 
 
@@ -26,9 +27,22 @@ m_currentSyncID(0)
 	// Load editor resources
 	ResourceLoader::instance().loadFont("EditorFont", "VCR_OSD_MONO.ttf");
 	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");
+	ResourceLoader::instance().loadTexture("TestItem2", "wizard_idle.png");
+	ResourceLoader::instance().loadTexture("EditorLevelSize", "levelsize.png");
+	ResourceLoader::instance().loadTexture("TileButton", "images/tileButton.png");
+	ResourceLoader::instance().loadTexture("TileButtonPressed", "images/tileButtonPressed.png");
+	ResourceLoader::instance().loadTexture("SpriteButton", "images/spriteButton.png");
+	ResourceLoader::instance().loadTexture("SpriteButtonPressed", "images/spriteButtonPressed.png");
+	ResourceLoader::instance().loadTexture("ItemButton", "images/itemButton.png");
+	ResourceLoader::instance().loadTexture("ItemButtonPressed", "images/itemButtonPressed.png");
+	ResourceLoader::instance().loadShader("BlackAndWhiteShader", "BlackAndWhite.txt");
+
+
+	Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("BlackAndWhiteShader"));
 	//ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
 
-
+	m_editorBackground.setPosition(0, -40);
+	m_editorBackground.setTexture(ResourceLoader::instance().retrieveTexture("EditorLevelSize"));
 
 	// Load a default map with nothing but ground tiles
 	TileMap::TileMapLayout layout;
@@ -38,6 +52,9 @@ m_currentSyncID(0)
 		for (int y = 0; y < Constants::MapHeight; y++)
 			layout[x].push_back(Tile::Ground);
 	}
+
+	// TODO TEST CODE DONT REMOVE
+	shaderTest = 1;
 
 
 	m_gridMode = new EditorGridMode(m_level.getTileMap());
@@ -78,6 +95,12 @@ void Editor::saveFile()
 
 void Editor::loop()
 {
+	// Buttons
+	Button tileButton(ResourceLoader::instance().retrieveTexture("TileButton"), ResourceLoader::instance().retrieveTexture("TileButtonPressed"), sf::IntRect(20, 610, 80, 80), &m_editor);
+	Button spriteButton(ResourceLoader::instance().retrieveTexture("SpriteButton"), ResourceLoader::instance().retrieveTexture("SpriteButtonPressed"), sf::IntRect(120, 610, 80, 80), &m_editor);
+	Button itemButton(ResourceLoader::instance().retrieveTexture("ItemButton"), ResourceLoader::instance().retrieveTexture("ItemButtonPressed"), sf::IntRect(220, 610, 80, 80), &m_editor);
+
+
 	sf::Clock tickClock;
 	while (m_editor.isOpen())
 	{
@@ -109,13 +132,31 @@ void Editor::loop()
 			}
 		}
 
+		//////////////////////////////////////////////////////////////////////////// SHADER TEST CODE
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::T))
+			shaderTest += deltaTime;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
+			shaderTest -= deltaTime;
+
+		shaderTest = Utility::clampValue<float>(shaderTest, 0, 1);
+		sf::Shader &shader = ResourceLoader::instance().retrieveShader("BlackAndWhiteShader");
+		shader.setParameter("intensityValue", shaderTest);
+		shader.setParameter("image", sf::Shader::CurrentTexture);
+		//////////////////////////////////////////////////////////////////////////// SHADER TEST CODE END
+
 		// Switch between modes
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+		if (tileButton.isClicked() || sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+		{
 			m_editorMode = EditorModes::Grid;
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+		}
+		else if (spriteButton.isClicked() || sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+		{
 			m_editorMode = EditorModes::Sprite;
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::L))
+		}
+		else if (itemButton.isClicked() || sf::Keyboard::isKeyPressed(sf::Keyboard::L))
+		{
 			m_editorMode = EditorModes::Item;
+		}
 
 		// Camera movement
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -133,6 +174,15 @@ void Editor::loop()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 			m_camera.zoom(1.f - zoomSpeed);
 
+		// Camera zoom reset
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		{
+			sf::Vector2f curCenter = m_camera.getCenter();
+			m_camera = m_editor.getDefaultView();
+			m_camera.setCenter(curCenter);
+
+		}
+
 		// Save hotkey
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
@@ -145,8 +195,8 @@ void Editor::loop()
 		m_editor.setView(m_camera);
 
 		// Update depending on editor mode
-		switch (m_editorMode)
-		{
+			switch (m_editorMode)
+			{
 			case EditorModes::Grid:
 				somethingChanged = m_gridMode->update(deltaTime, m_editor) ? true : somethingChanged;
 				break;
@@ -156,7 +206,7 @@ void Editor::loop()
 			case EditorModes::Item:
 				somethingChanged = m_itemMode->update(deltaTime, m_editor) ? true : somethingChanged;
 				break;
-		}
+			}
 
 		if (somethingChanged)
 		{
@@ -167,6 +217,10 @@ void Editor::loop()
 		m_editor.clear(sf::Color::Black);
 		draw();
 		m_editor.display();
+
+		tileButton.draw();
+		spriteButton.draw();
+		itemButton.draw();
 	}
 }
 
@@ -181,6 +235,7 @@ void Editor::draw()
 		case EditorModes::Item: m_itemMode->draw(); break;
 	}
 	Renderer::instance().drawHUD(m_saveText);
+	Renderer::instance().drawBackground(m_editorBackground);
 	
 	Renderer::instance().executeDraws();
 }
