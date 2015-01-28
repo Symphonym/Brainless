@@ -77,5 +77,5 @@ void Button::draw()
 
 	m_sprite.setPosition(m_position);
 
-	Renderer::instance().drawAbove(m_sprite);
+	Renderer::instance().drawHUD(m_sprite);
 }
