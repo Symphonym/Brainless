@@ -5,9 +5,9 @@ class Constants
 {
 public:
 
-	static const int TileSize = 293;
-	static const int LeftTileOffset = -35;
-	static const int TopTileOffset = -30;
+	static const int TileSize = 96;
+	static const int LeftTileOffset = -32;
+	static const int TopTileOffset = -32;
 
 	static const int MapWidth = 200;
 	static const int MapHeight = 50;

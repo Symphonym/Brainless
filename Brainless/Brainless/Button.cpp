@@ -8,7 +8,7 @@ m_texturePressed(pressed),
 m_window(window)
 {
 	m_sizeRectangle = sf::IntRect(0, 0, placement.width, placement.height);
-	m_position = sf::Vector2f(placement.left, placement.height);
+	m_position = sf::Vector2f(placement.left, placement.top);
 	m_hitBoxRect = sf::IntRect(m_position.x, m_position.y, placement.width, placement.height);
 	m_mouseIsPressed = true;
 }

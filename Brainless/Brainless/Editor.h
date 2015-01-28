@@ -52,7 +52,6 @@ private:
 	// to eachother. A key and the door it goes to would have a matching syncID
 	int m_currentSyncID;
 
-
 	// Load/save functionality
 	void loadFile();
 	void saveFile();
