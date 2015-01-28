@@ -2,6 +2,8 @@
 #define _UNIT
 
 #include <SFML\Graphics.hpp>
+#include "Animation.h"
+
 //version 0.1
 class Unit
 {
@@ -23,11 +25,15 @@ public:
 	void setSpeed(float speedX, float speedY);
 	void setAcceleration(float accelerationX, float accelerationY);
 
+	//changes the maxSpeed for movement
 	void setMaxSpeed(float maxSpeed);
 
 	sf::Sprite getSprite();
 	void setTexture(sf::Texture& texture);
 	void draw();
+
+	//updates animation
+	virtual void updateAnimation(float deltaTime) = 0;
 
 	//getters
 	float getPositionX(){ return m_positionX; }
@@ -52,6 +58,7 @@ protected:
 	int m_height;
 	sf::Sprite m_sprite;
 	bool m_inAir;
+	Animation m_animation;
 private:
 };
 

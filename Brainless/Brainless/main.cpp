@@ -15,13 +15,13 @@ int main(int argc, const char *args[])
 	//{
 	//	if (args[0] == "editor")
 	//	{
-			Editor editor;  
-			editor.run();
+		/*	Editor editor;  
+			editor.run();*/
 	//	}
 	//}
 
-	/*	TestClass test;	//remove this when closer to finnishing program, used to test isolated player movement and animation.
-		test.testUpdate(); */ 
+		TestClass test;	//remove this when closer to finnishing program, used to test isolated player movement and animation.
+		test.testUpdate();  
 
 	/*Renderer::instance().setTarget(window);
 	while (window.isOpen())
