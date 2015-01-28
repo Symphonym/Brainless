@@ -44,7 +44,7 @@ bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &ed
 			sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));
 
 			// Loop through existing sprites and see if the cursor collides with them
-			for (std::size_t i = 0; i < m_sprites.size(); i++)
+			for (int i = m_sprites.size()-1; i >= 0; i--)
 			{
 				if (m_sprites[i].sprite.getGlobalBounds().contains(mousePos))
 				{

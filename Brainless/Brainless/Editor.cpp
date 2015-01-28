@@ -26,6 +26,7 @@ m_currentSyncID(0)
 	// Load editor resources
 	ResourceLoader::instance().loadFont("EditorFont", "VCR_OSD_MONO.ttf");
 	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");
+	ResourceLoader::instance().loadTexture("TestItem2", "wizard_idle.png");
 	//ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
 
 
@@ -132,6 +133,15 @@ void Editor::loop()
 			m_camera.zoom(1.f + zoomSpeed);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 			m_camera.zoom(1.f - zoomSpeed);
+
+		// Camera zoom reset
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		{
+			sf::Vector2f curCenter = m_camera.getCenter();
+			m_camera = m_editor.getDefaultView();
+			m_camera.setCenter(curCenter);
+
+		}
 
 		// Save hotkey
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::S))
