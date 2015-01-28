@@ -14,7 +14,7 @@ int main(int argc, const char *args[])
 
 	//if (argc == 1) // ONLY UNCOMMEN THESE IF's WHEN DEPLOYING PROGRAM, editor can then be accessed by running "game5.exe editor"
 	//{
-	if (args[0] == "editor" || true)
+	if (args[0] == "editor")
 	{
 		Editor editor;  
 			editor.run();

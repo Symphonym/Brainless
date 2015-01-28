@@ -18,7 +18,7 @@
 
 Game::Game()
 	:
-	m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless Editor")
+	m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 {
 	m_camera = m_game.getDefaultView();
 	Renderer::instance().setTarget(m_game);
@@ -94,60 +94,71 @@ void Game::loop()
 
 		//Move units out of collisions
 		player->checkPlayerInput();
+
 		for (unsigned int i = 0; i < units.size(); i++)
 		{
 			//Reset marker color
 			m_markerSprite.setColor(sf::Color::Color(255, 255, 255, 128));
-			/*
-			Find next position
-			- if (collision is free move, update status)
-			--- collision with tiles
-			--- collision with obstacles
-			- else (move to contact, update status)*/
-			//Find colliding boxes 
 
-			int box_start_x = floor(units[i]->getPositionX() / Constants::TileSize);
-			int box_end_x = ceil((units[i]->getPositionX() + units[i]->getWidth()) / Constants::TileSize);
+			float old_x = units[i]->getPositionX();
+			float old_y = units[i]->getPositionY();
+			units[i]->updateMovement(600, deltaTime);
+
+			//Find colliding boxes
+			int box_start_x = floor(units[i]->getPositionX() / Constants::TileSize)-1;
+			int box_end_x = ceil((units[i]->getPositionX() + units[i]->getWidth()) / Constants::TileSize)+1;
 			int box_start_y = floor(units[i]->getPositionY() / Constants::TileSize);
-			int box_end_y = ceil((units[i]->getPositionY() + units[i]->getHeight()) / Constants::TileSize);
+			int box_end_y = ceil((units[i]->getPositionY() + units[i]->getHeight()) / Constants::TileSize)+1;
+			bool airborne = true;
 
 			for (int x = std::max(box_start_x, 0); x < std::min(box_end_x, Constants::MapWidth); x++)
 			{
 				for (int y = std::max(box_start_y, 0); y < std::min(box_end_y, Constants::MapHeight); y++)
 				{
-					//Check for collision
-					if (m_level.getTileMap().getTile(x, y).getType() != Tile::Nothing && m_level.getTileMap().getTile(x, y).collidesWith(units[i]->getCollisionRect()))
+					if (m_level.getTileMap().getTile(x, y).getType() != Tile::Nothing)
 					{
-						std::cout << "x:" << units[i]->getPositionX() / Constants::TileSize << " - " << x << " y:" << units[i]->getPositionY() / Constants::TileSize << " - " << y;
-						m_markerSprite.setColor(sf::Color::Color(255, 0, 0, 128));
-						float unit_x = units[i]->getPositionX(), unit_y = units[i]->getPositionY();
-						while (m_level.getTileMap().getTile(x, y).collidesWith(units[i]->getCollisionRect()))
+						if (m_level.getTileMap().getTile(x, y).collidesWith(units[i]->getCollisionRect()))
 						{
-							//Find direction to tile
-							float x_dif = x - (units[i]->getPositionX() / Constants::TileSize), y_dif = y - (units[i]->getPositionY() / Constants::TileSize);
-							if (std::abs(y_dif) < std::abs(x_dif))
-								y_dif = 0;
+							if (std::abs(old_y - (units[i]->getPositionY())) > std::abs(old_x - (units[i]->getPositionX())))
+							{
+								units[i]->setSpeed(units[i]->getSpeedX(), 0);
+								//units[i]->setAcceleration(units[i]->getAccelerationX(), 0);
+							}
 							else
-								x_dif = 0;
-							//Move in opposite direction tile
-							unit_y -= y_dif;
-							unit_x -= x_dif;
-							units[i]->setPosition(unit_x, unit_y);
+							{
+								//units[i]->setSpeed(0,units[i]->getSpeedY());
+							}
+							//Move out of contact
+							//units[i]->setPosition(units[i]->getPositionX() - units[i]->getSpeedX(), units[i]->getPositionY() - units[i]->getSpeedY());
+							units[i]->setPosition(old_x,old_y);
 						}
-						//Move out of contact
-						units[i]->setStatus(false);
-					}
-					else
-					{
-						units[i]->setStatus(true);
+						//Down
+						if (m_level.getTileMap().getTile(x, y).collidesWith(sf::FloatRect(units[i]->getPositionX(), units[i]->getPositionY(), units[i]->getWidth(), units[i]->getHeight()+2)))
+						{
+							m_markerSprite.setColor(sf::Color::Color(255, 0, 0, 128));
+							airborne = false;
+							units[i]->setSpeed(units[i]->getSpeedX(), 0);
+							units[i]->setAcceleration(units[i]->getAccelerationX(), 0);
+							units[i]->setPosition(units[i]->getPositionX(), y*Constants::TileSize - units[i]->getHeight());
+						}
+						//Left && Right
+						if ((units[i]->getSpeedX()<0 && m_level.getTileMap().getTile(x, y).collidesWith(sf::FloatRect(units[i]->getPositionX()-2, units[i]->getPositionY(), units[i]->getWidth()+2, units[i]->getHeight()))) ||
+							(units[i]->getSpeedX()>0 && m_level.getTileMap().getTile(x, y).collidesWith(sf::FloatRect(units[i]->getPositionX(), units[i]->getPositionY(), units[i]->getWidth()+2, units[i]->getHeight()))) &&
+							airborne == true)
+						{
+							m_markerSprite.setColor(sf::Color::Color(128, 64, 0, 128));
+							units[i]->setSpeed(0,units[i]->getSpeedY());
+							units[i]->setAcceleration(0,units[i]->getAccelerationY());
+							units[i]->setPosition(units[i]->getPositionX()-units[i]->getSpeedX(), units[i]->getPositionY());
+						}
+						
 					}
 				}
 			}
-			std::cout << "\n";
+			units[i]->setStatus(airborne);
 			//Move marker to unit
 			m_markerSprite.setPosition(units[i]->getPositionX(), units[i]->getPositionY());
 		}
-		player->updateMovement(600,deltaTime);
 		player->updateAnimation(deltaTime);
 		sf::Event event;
 		while (m_game.pollEvent(event))
