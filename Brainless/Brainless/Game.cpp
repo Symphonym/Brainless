@@ -53,13 +53,13 @@ Game::Game()
 	m_saveText.setColor(sf::Color::Green);*/
 	//Temporary placment marker
 	sf::Image markerImg;
-	markerImg.create(Constants::TileSize * 0.5, Constants::TileSize * 0.7, sf::Color::Yellow);
+	markerImg.create(60, 90, sf::Color::Yellow);
 
 	m_markerTexture.loadFromImage(markerImg);
 	m_markerSprite.setTexture(m_markerTexture);
 
 	loadFile();
-	player = new Player(Constants::TileSize * 3, Constants::TileSize * 3.4, Constants::TileSize * 0.5, Constants::TileSize * 0.7, 300, 300);
+	player = new Player(Constants::TileSize * 3, Constants::TileSize * 3.4, 60, 90, 300, 300);
 	units.push_back(player);
 	player->setTexture(ResourceLoader::instance().retrieveTexture("testImage"));
 }
@@ -96,15 +96,6 @@ void Game::loop()
 		player->checkPlayerInput();
 		for (unsigned int i = 0; i < units.size(); i++)
 		{
-			// Unit movement
-			/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-				units[i]->setPosition(units[i]->getPositionX(), units[i]->getPositionY() - 7);
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-				units[i]->setPosition(units[i]->getPositionX(), units[i]->getPositionY() + 7);
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-				units[i]->setPosition(units[i]->getPositionX() - 7, units[i]->getPositionY());
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-				units[i]->setPosition(units[i]->getPositionX() + 7, units[i]->getPositionY());*/
 			//Reset marker color
 			m_markerSprite.setColor(sf::Color::Color(255, 255, 255, 128));
 			/*
