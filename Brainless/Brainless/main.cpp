@@ -11,7 +11,7 @@ int main(int argc, const char *args[])
 {
 	//sf::RenderWindow window(sf::VideoMode(1280, 720), "Brainless");
 
-	//if (argc == 1) // ONLY UNCOMMEN THESE IF's WHEN DEPLOYING PROGRAM, editor can then be accessed by running "game.exe editor"
+	//if (argc == 1) // ONLY UNCOMMEN THESE IF's WHEN DEPLOYING PROGRAM, editor can then be accessed by running "game5.exe editor"
 	//{
 	//	if (args[0] == "editor")
 	//	{

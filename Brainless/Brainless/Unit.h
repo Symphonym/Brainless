@@ -45,7 +45,7 @@ public:
 	int getWidth(){ return m_width; }
 	int getHeight(){ return m_height; }
 	bool getInAir(){ return m_inAir; }
-	sf::IntRect getCollisionRect();
+	sf::FloatRect getCollisionRect();
 
 protected:
 	float m_positionX;
