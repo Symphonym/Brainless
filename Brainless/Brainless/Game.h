@@ -20,11 +20,11 @@ private:
 	// Load/save functionality
 	/*void loadFile();
 	void saveFile();
-
+	*/
 	// Update loop
 	void loop();
 
 	// Rendering function
-	void draw();*/
+	/*void draw();*/
 };
 
