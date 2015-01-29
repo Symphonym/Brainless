@@ -2,10 +2,11 @@
 #include "ResourceLoader.h"
 #include "Renderer.h"
 
-Item::Item(const std::string &textureName, int id, int syncID)
+Item::Item(const std::string &textureName, int id, int syncID, CombineData combineData)
 :
 m_id(id),
-m_syncID(syncID)
+m_syncID(syncID),
+m_combineData(combineData)
 {
 	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
 }
@@ -21,8 +22,6 @@ sf::Vector2f Item::getPosition() const
 
 void Item::draw()
 {
-	//Renderer::instance().draw(m_sprite, m_sprite); TODO UNCOMMENT THIS AND REMOVE DRAWTMSPECIAL
-	//Renderer::instance().drawTMSpecial(m_sprite, m_sprite.getGlobalBounds());
 	Renderer::instance().drawDepth(m_sprite);
 }
 
@@ -44,7 +43,19 @@ int Item::getSyncID() const
 {
 	return m_syncID;
 }
+const CombineData& Item::getCombineData() const
+{
+	return m_combineData;
+}
 
+
+CombineData::CombineData(int combineIDParam, int productItemIDParam)
+:
+combineID(combineIDParam),
+productItemID(productItemIDParam)
+{
+
+}
 
 
 
@@ -60,3 +71,10 @@ Item* DefaultItem::clone()
 {
 	return new DefaultItem(*this);
 }
+
+
+
+
+
+
+
