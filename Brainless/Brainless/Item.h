@@ -26,6 +26,7 @@ public:
 	virtual void onInteract(Item &otherItem) {}; // Called when this item iteracts with another item
 	virtual void onInteractedWith(Item &otherItem) {}; // Called when another item interactors with THIS item
 	virtual std::string examine() const;
+	virtual std::string onUse() const;
 	virtual std::string onPickUp() const;
 
 	// Prototype pattern so we can clone item hierarchies

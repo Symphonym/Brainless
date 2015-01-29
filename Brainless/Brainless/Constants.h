@@ -20,6 +20,7 @@ public:
 	static const int InventoryHeight = 4;
 
 	static const std::string CantPickUpString;
+	static const std::string CantUseString;
 };
 
 #endif

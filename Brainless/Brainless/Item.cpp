@@ -54,6 +54,11 @@ std::string Item::examine() const
 	return "Nothing interesting.";
 }
 
+std::string Item::onUse() const
+{
+	return Constants::CantUseString;
+}
+
 std::string Item::onPickUp() const
 {
 	return Constants::CantPickUpString;
