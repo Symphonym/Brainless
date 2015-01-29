@@ -23,11 +23,10 @@ public:
 private:
 
 	sf::RenderWindow m_game;
-	sf::View m_camera, m_hudCamera;
+	sf::View m_camera;
 
 	Level m_level;
-	Player* player;
-	std::vector<Unit*> units;
+	Player* m_player;
 
 	// Load/save functionality
 	void loadFile();

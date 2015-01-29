@@ -2,6 +2,7 @@
 #include "Constants.h"
 #include "Utility.h"
 #include "Renderer.h"
+#include "ResourceLoader.h"
 
 EditorGridMode::EditorGridMode(TileMap &tilemap)
 :
@@ -16,7 +17,12 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 	m_highlightTexture.loadFromImage(highlightImg);
 	m_highlightSprite.setTexture(m_highlightTexture);
 
-	m_currentTile.getSprite().setScale(0.3f, 0.3f);
+	m_currentTile.getSprite().setScale(0.8f, 0.8f);
+
+	// Initialize index text
+	m_indexText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+	m_indexText.setString("X: 0  Y: 0");
+	m_indexText.setPosition(10, 200);
 }
 EditorGridMode::~EditorGridMode()
 {
@@ -47,6 +53,9 @@ bool EditorGridMode::update(float deltaTime, const sf::RenderWindow &editorWindo
 	mouseIndex.x = Utility::clampValue<int>(mouseIndex.x, 0, Constants::MapWidth - 1);
 	mouseIndex.y = Utility::clampValue<int>(mouseIndex.y, 0, Constants::MapHeight - 1);
 
+	// Update index text
+	m_indexText.setString("X: " + std::to_string(mouseIndex.x) + "  Y: " + std::to_string(mouseIndex.y));
+
 	// Set position of highlight relative to mouse
 	m_highlightSprite.setPosition(
 		m_tilemap.getTile(mouseIndex.x, mouseIndex.y).getBounds().left,
@@ -75,4 +84,5 @@ void EditorGridMode::draw()
 {
 	Renderer::instance().drawAbove(m_highlightSprite);
 	Renderer::instance().drawHUD(m_currentTile.getSprite());
+	Renderer::instance().drawHUD(m_indexText);
 }

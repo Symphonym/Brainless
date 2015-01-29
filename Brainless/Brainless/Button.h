@@ -3,14 +3,16 @@
 
 #include <SFML\Graphics.hpp>
 #include <SFML\Window.hpp>
+#include "GUIElement.h"
 
-class Button
+class Button : public GUIElement
 {
 public:
 	Button(sf::Texture &notPressed, sf::Texture &pressed, sf::IntRect placement, sf::RenderWindow *window);
 
 	//Checks if the button is pressed and released
-	bool isClicked();
+	virtual bool getReleased();
+	virtual std::string getType();
 
 	void draw();
 
