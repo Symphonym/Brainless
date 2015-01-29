@@ -2,7 +2,6 @@
 #include "Constants.h"
 #include "Utility.h"
 #include "Renderer.h"
-#include "ResourceLoader.h"
 
 EditorGridMode::EditorGridMode(TileMap &tilemap)
 :
@@ -17,11 +16,7 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 	m_highlightTexture.loadFromImage(highlightImg);
 	m_highlightSprite.setTexture(m_highlightTexture);
 
-	m_currentTile.getSprite().setScale(0.3f, 0.3f);
-
-	m_indexText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
-	m_indexText.setString("X: 0  Y: 0");
-	m_indexText.setPosition(10, 150);
+	m_currentTile.getSprite().setScale(0.8f, 0.8f);
 }
 EditorGridMode::~EditorGridMode()
 {
@@ -57,9 +52,6 @@ bool EditorGridMode::update(float deltaTime, const sf::RenderWindow &editorWindo
 		m_tilemap.getTile(mouseIndex.x, mouseIndex.y).getBounds().left,
 		m_tilemap.getTile(mouseIndex.x, mouseIndex.y).getBounds().top);
 
-	// Update index text
-	m_indexText.setString("X: " + std::to_string(mouseIndex.x) + "  Y: " + std::to_string(mouseIndex.y));
-
 	// Change the properties of a tile with left/right mouseclick
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
@@ -83,5 +75,4 @@ void EditorGridMode::draw()
 {
 	Renderer::instance().drawAbove(m_highlightSprite);
 	Renderer::instance().drawHUD(m_currentTile.getSprite());
-	Renderer::instance().drawHUD(m_indexText);
 }
