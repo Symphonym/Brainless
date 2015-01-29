@@ -73,21 +73,23 @@ std::vector<Level::UnitPtr>& Level::getUnits()
 
 
 
-
+#include <iostream>
 void Level::updateUnitCollision(float deltaTime)
 {
 	/*for (unsigned int i = 0; i < m_units.size(); i++)
 	{
 		Unit* currentUnit = m_units[i].get();
 		sf::FloatRect unitBounds = currentUnit->getCollisionRect();
+		std::cout << "BOUNDS X: " << unitBounds.left << " BOUNDS Y: " << unitBounds.top << std::endl;
+		std::cout << "SIZE X: " << unitBounds.width << " SIZE Y: " << unitBounds.height << std::endl;
 
 		currentUnit->updateMovement(600, deltaTime);
 
-		sf::Vector2i startIndex = m_tileMap->positionToIndex(sf::Vector2f(currentUnit->getPositionX(), currentUnit->getPositionY()));
+		sf::Vector2i startIndex = m_tileMap->positionToIndex(sf::Vector2f(currentUnit->getPosition().x, currentUnit->getPosition().y));
 		startIndex -= sf::Vector2i(1, 1);
 
 		sf::Vector2i endIndex = m_tileMap->positionToIndex(
-			sf::Vector2f(currentUnit->getPositionX()+currentUnit->getWidth(), currentUnit->getPositionY()+currentUnit->getHeight()));
+			sf::Vector2f(currentUnit->getPosition().x+currentUnit->getSize().x, currentUnit->getPosition().y+currentUnit->getSize().y));
 		endIndex += sf::Vector2i(1, 1);
 
 		startIndex.x = Utility::clampValue(startIndex.x, 0, Constants::MapWidth - 1);
@@ -95,6 +97,8 @@ void Level::updateUnitCollision(float deltaTime)
 
 		endIndex.x = Utility::clampValue(endIndex.x, 0, Constants::MapWidth - 1);
 		endIndex.y = Utility::clampValue(endIndex.y, 0, Constants::MapHeight - 1);
+
+		std::cout << "STARTINDEX X " << startIndex.x << " STARTINDEX Y " << startIndex.y << std::endl;
 
 		bool collision = false;
 		for (int x = startIndex.x; x < endIndex.x; x++)
@@ -120,12 +124,13 @@ void Level::updateUnitCollision(float deltaTime)
 					std::cout << "distanceFromLeftToRight: " << distanceFromLeftToRight << std::endl;
 					std::cout << "distanceFromRightToLeft: " << distanceFromRightToLeft << std::endl;
 
+					currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top - unitBounds.height));
+
 					if (std::abs(distanceFromBottomToTop) < Constants::TileSize / 4 && std::abs(distanceFromBottomToTop) > 0)
 					{
-						currentUnit->setPosition(currentUnit->getPositionX(), tileBounds.top - unitBounds.height);
-						currentUnit->setSpeed(currentUnit->getSpeedX(), -1000);
-						currentUnit->setAcceleration(currentUnit->getAccelerationX(), -1000);
-						distanceFromBottomToTop = tileBounds.top - (currentUnit->getPositionY() + currentUnit->getHeight());
+						currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x, 0));
+						currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
+						distanceFromBottomToTop = tileBounds.top - (currentUnit->getPosition().y + currentUnit->getSize().y);
 						std::cout << "distanceFromBottomToTop: " << distanceFromBottomToTop << std::endl;
 						int d = 0;
 

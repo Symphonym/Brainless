@@ -86,12 +86,26 @@ void Unit::draw()
 	Renderer::instance().drawDepth((*m_sprite));
 }
 
-//Getters
-bool Unit::getInAir() const { return m_inAir; }
-sf::Vector2f Unit::getPosition() const { return m_position; }
-sf::Vector2f Unit::getSpeed() const { return m_speed; }
-sf::Vector2f Unit::getAcceleration() const { return m_acceleration; }
-sf::Vector2f Unit::getSize() const { return m_acceleration; }
+bool Unit::getInAir() const
+{
+	return m_inAir;
+}
+sf::Vector2f Unit::getPosition() const
+{
+	return m_position;
+}
+sf::Vector2f Unit::getSpeed() const
+{
+	return m_speed;
+}
+sf::Vector2f Unit::getAcceleration() const
+{
+	return m_acceleration;
+}
+sf::Vector2f Unit::getSize() const
+{ 
+	return m_size;
+}
 sf::FloatRect Unit::getCollisionRect()
 {
 	return sf::FloatRect(m_position, m_size);

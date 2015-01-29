@@ -7,6 +7,8 @@ class Constants
 {
 public:
 
+	static const int Gravity = 800;
+
 	static const int TileSize = 96;
 	static const int LeftTileOffset = -20;
 	static const int TopTileOffset = -20;

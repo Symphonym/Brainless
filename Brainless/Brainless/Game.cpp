@@ -52,9 +52,6 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	sf::Image markerImg;
 	markerImg.create(60, 90, sf::Color::Yellow);
 
-	m_markerTexture.loadFromImage(markerImg);
-	m_markerSprite.setTexture(m_markerTexture);
-
 	loadFile();
 	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(sf::Vector2f(Constants::TileSize * 3, Constants::TileSize * 3.4)))));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("run"));
@@ -86,15 +83,10 @@ void Game::loop()
 	sf::Clock tickClock;
 	while (m_game.isOpen())
 	{
-		m_markerSprite.setColor(sf::Color::Color(255, 255, 255, 128));
-
 		// Get delta time for time based movement
 		float deltaTime = tickClock.restart().asSeconds();
 		const float cameraSpeed = deltaTime*2000.f;
 		const float zoomSpeed = deltaTime;
-
-		m_markerSprite.setPosition(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
-
 
 		// Update game logic and input
 		m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
@@ -139,14 +131,6 @@ void Game::loop()
 void Game::draw()
 {
 	m_level.draw(m_camera);
-	/*switch (m_editorMode)
-	{
-	case EditorModes::Grid: m_gridMode->draw(); break;
-	case EditorModes::Sprite: m_spriteMode->draw(); break;
-	case EditorModes::Item: m_itemMode->draw(); break;
-	}
-	Renderer::instance().drawHUD(m_saveText);*/
-	Renderer::instance().drawAbove(m_markerSprite);
 	m_inventory->draw();
 	Renderer::instance().executeDraws();
 

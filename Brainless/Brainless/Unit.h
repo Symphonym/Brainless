@@ -16,11 +16,8 @@ public:
 	*/
 	void updateMovement(float gravity, float deltaTime);
 
-	/*
-	set functions
-	ev. kanske behöver annat "format"?
-	*/
-	void setStatus(/*ev. mer status information */ bool inAir);
+	// Set player status
+	void setStatus(bool inAir);
 	void setPosition(sf::Vector2f position);
 	void setSpeed(sf::Vector2f speed);
 	void setAcceleration(sf::Vector2f acceleration);
@@ -28,7 +25,6 @@ public:
 	//changes the maxSpeed for movement
 	void setMaxSpeed(float maxSpeed);
 
-	sf::Sprite getSprite();
 	void setTexture(int index, sf::Texture& texture);
 	void addTexture(sf::Texture& texture);
 	void draw();
@@ -36,7 +32,8 @@ public:
 	//updates animation
 	virtual void updateAnimation(float deltaTime) = 0;
 
-	//getters
+	sf::Sprite getSprite();
+
 	sf::Vector2f getPosition() const;
 	sf::Vector2f getSpeed() const;
 	sf::Vector2f getAcceleration() const;

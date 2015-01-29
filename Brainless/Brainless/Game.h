@@ -41,10 +41,6 @@ private:
 
 	// Rendering function
 	void draw();
-
-	//Temprary marker 
-	sf::Sprite m_markerSprite;
-	sf::Texture m_markerTexture;
 };
 
 #endif
