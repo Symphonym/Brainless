@@ -115,6 +115,7 @@
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="FileSave.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GUIElement.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemDatabase.cpp" />
     <ClCompile Include="Level.cpp" />

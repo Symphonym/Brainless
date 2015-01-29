@@ -16,7 +16,7 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 	m_highlightTexture.loadFromImage(highlightImg);
 	m_highlightSprite.setTexture(m_highlightTexture);
 
-	m_currentTile.getSprite().setScale(0.3f, 0.3f);
+	m_currentTile.getSprite().setScale(0.8f, 0.8f);
 }
 EditorGridMode::~EditorGridMode()
 {

@@ -13,7 +13,7 @@ m_window(window)
 	m_mouseIsPressed = true;
 }
 
-bool Button::isClicked()
+bool Button::getReleased()
 {
 	//The button must be pressed and released without the mouse leaving the button for the click to be registred.
 
@@ -62,6 +62,11 @@ bool Button::isClicked()
 		}
 	}
 	return false;
+}
+
+std::string Button::getType()
+{
+	return "Button";
 }
 
 void Button::draw()
