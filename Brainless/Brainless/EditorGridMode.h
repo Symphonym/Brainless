@@ -30,6 +30,9 @@ private:
 	sf::Sprite m_highlightSprite;
 	sf::Texture m_highlightTexture;
 
+	// Text for showing the grid index of the mouse pointer
+	sf::Text m_indexText;
+
 };
 
 #endif
