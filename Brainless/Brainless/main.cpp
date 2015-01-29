@@ -7,17 +7,19 @@
 #include "Constants.h"
 #include "Animation.h"
 #include "TestClass.h"
-
+#include <iostream> // REMOVE
+#include <string>
 int main(int argc, const char *args[])
 {
 	//sf::RenderWindow window(sf::VideoMode(1280, 720), "Brainless");
 
 	//if (argc == 1) // ONLY UNCOMMEN THESE IF's WHEN DEPLOYING PROGRAM, editor can then be accessed by running "game5.exe editor"
 	//{
-	if (args[0] == "editor")
+
+	if (argc > 1 && std::string(args[1]) == "editor")
 	{
 		Editor editor;  
-			editor.run();
+		editor.run();
 	}
 	else
 	{
