@@ -126,6 +126,9 @@
     <ClCompile Include="Inventory.cpp">
       <Filter>Source Files\Game\Inventory</Filter>
     </ClCompile>
+    <ClCompile Include="Constants.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">

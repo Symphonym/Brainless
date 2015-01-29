@@ -1,6 +1,8 @@
 #ifndef INCLUDED_CONSTANTS_H
 #define INCLUDED_CONSTANTS_H
 
+#include <string>
+
 class Constants
 {
 public:
@@ -16,6 +18,8 @@ public:
 
 	static const int InventoryWidth = 5;
 	static const int InventoryHeight = 4;
+
+	static const std::string CantPickUpString;
 };
 
 #endif
