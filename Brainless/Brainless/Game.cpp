@@ -52,8 +52,8 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	m_markerSprite.setTexture(m_markerTexture);
 
 	loadFile();
-	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(Constants::TileSize * 3, Constants::TileSize * 3.4, 60, 90, 300, 300))));
-	m_player->setTexture(ResourceLoader::instance().retrieveTexture("testImage"));
+	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(sf::Vector2f(Constants::TileSize * 3, Constants::TileSize * 3.4)))));
+	m_player->addTexture(ResourceLoader::instance().retrieveTexture("testImage"));
 }
 Game::~Game()
 {
@@ -87,11 +87,11 @@ void Game::loop()
 		const float cameraSpeed = deltaTime*2000.f;
 		const float zoomSpeed = deltaTime;
 
-		m_markerSprite.setPosition(m_player->getPositionX(), m_player->getPositionY());
+		m_markerSprite.setPosition(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
 
 
 		// Update game logic and input
-		m_camera.setCenter(m_player->getPositionX(), m_player->getPositionY());
+		m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
 		m_player->checkPlayerInput();
 		m_level.update(deltaTime);
 		m_inventory->update(m_game);
