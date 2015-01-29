@@ -1,6 +1,6 @@
 #include "Animation.h"
 
-#define ENDFRAME 8 //spritesheet storlek
+#define ENDFRAME 7 //spritesheet storlek
 
 Animation::Animation(int width, int height)
 :
@@ -76,7 +76,7 @@ sf::IntRect Animation::getRectangle(float deltaTime)
 	if (m_type == looping)
 	{
 		//1/speed = number of seconds per frame.
-		if (1/m_speed <= m_timer)
+		if (1 / m_speed <= m_timer)
 		{
 			m_currentFrame++;
 
@@ -92,10 +92,10 @@ sf::IntRect Animation::getRectangle(float deltaTime)
 				m_currentRow += 1;
 				m_currentFrame = 0;
 			}
-		
+
 
 			//decrease timer with time taken per frame
-			m_timer -= 1/m_speed;
+			m_timer -= 1 / m_speed;
 		}
 	}
 

@@ -3,13 +3,13 @@
 
 #include <SFML\Graphics.hpp>
 #include "Animation.h"
+#include <vector>
 
-//version 0.1
+//version 0.2
 class Unit
 {
 public:
-	Unit(float startX, float startY, float maxSpeedX, float maxSpeedY);
-	Unit(float startX, float startY, int width, int height, float maxSpeedX, float maxSpeedY);
+	Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset);
 
 	/*
 	Updates the collisionbox's position, speed, acceleration
@@ -21,53 +21,43 @@ public:
 	ev. kanske behöver annat "format"?
 	*/
 	void setStatus(/*ev. mer status information */ bool inAir);
-	void setPosition(float posX, float posY);
-	void setSpeed(float speedX, float speedY);
-	void setAcceleration(float accelerationX, float accelerationY);
+	void setPosition(sf::Vector2f position);
+	void setSpeed(sf::Vector2f speed);
+	void setAcceleration(sf::Vector2f acceleration);
 
 	//changes the maxSpeed for movement
 	void setMaxSpeed(float maxSpeed);
 
 	sf::Sprite getSprite();
-	void setTexture(sf::Texture& texture);
+	void setTexture(int index, sf::Texture& texture);
+	void addTexture(sf::Texture& texture);
 	void draw();
 
 	//updates animation
 	virtual void updateAnimation(float deltaTime) = 0;
 
 	//getters
-	float getPositionX(){ return m_positionX; }
-	float getPositionY(){ return m_positionY; }
-	float getSpeedX(){ return m_speedX; }
-	float getSpeedY(){ return m_speedY; }
-	float getAccelerationX(){ return m_accelerationX; }
-	float getAccelerationY(){ return m_accelerationY; }
-	int getWidth(){ return m_width; }
-	int getHeight(){ return m_height; }
-	bool getInAir(){ return m_inAir; }
+	sf::Vector2f getPosition() const;
+	sf::Vector2f getSpeed() const;
+	sf::Vector2f getAcceleration() const;
+	sf::Vector2f getSize() const;
+	bool getInAir() const;
 	sf::FloatRect getCollisionRect();
 
 protected:
-	float m_positionX;
-	float m_positionY;
-	float m_speedX;
-	float m_speedY;
-	float m_accelerationX;
-	float m_accelerationY;
-	float m_maxSpeedX;
-	float m_maxSpeedY;
-	int m_width;
-	int m_height;
-	sf::Sprite m_sprite;
+	sf::Vector2f m_position;
+	sf::Vector2f m_speed;
+	sf::Vector2f m_acceleration;
+	sf::Vector2f m_maxSpeed;
+	sf::Vector2f m_size;
+
+	typedef std::vector<sf::Sprite> SpriteVector;
+	SpriteVector m_spritSheets;
+	sf::Sprite* m_sprite;
+	sf::Vector2f m_spriteOffset;
+
 	bool m_inAir;
 	Animation m_animation;
-
-	//väldigt temp
-	/*sf::Text text;
-	sf::Text text2;	
-	sf::Text text3;	
-	sf::Text text4;*/
-
 
 private:
 };

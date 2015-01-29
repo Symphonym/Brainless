@@ -3,13 +3,11 @@
 
 #include "Unit.h"
 
-//version 0.1
+//version 0.2
 class Player : public Unit
 {
 public:
-	Player(float startX, float startY, float maxSpeedX, float maxSpeedY);
-	Player(float startX, float startY, int width, int height, float maxSpeedX, float maxSpeedY);
-
+	Player(sf::Vector2f startPosition);
 	/* kollar efter playerinput, ska köras innan Unit::updateMovement */
 	void checkPlayerInput();
 
