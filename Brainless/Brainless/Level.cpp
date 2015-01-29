@@ -157,17 +157,17 @@ void Level::updateUnitCollision(float deltaTime)
 		//Reset marker color
 		//m_markerSprite.setColor(sf::Color::Color(255, 255, 255, 128));
 
-		float old_x = m_units[i]->getPositionX();
-		float old_y = m_units[i]->getPositionY();
+		float old_x = m_units[i]->getPosition().x;
+		float old_y = m_units[i]->getPosition().y;
 		m_units[i]->updateMovement(600, deltaTime);
 
 		//m_units[i]->updateMovement(600, deltaTime);
 
 		//Find colliding boxes
-		int box_start_x = floor(m_units[i]->getPositionX() / Constants::TileSize) - 1;
-		int box_end_x = ceil((m_units[i]->getPositionX() + m_units[i]->getWidth()) / Constants::TileSize) + 1;
-		int box_start_y = floor(m_units[i]->getPositionY() / Constants::TileSize);
-		int box_end_y = ceil((m_units[i]->getPositionY() + m_units[i]->getHeight()) / Constants::TileSize) + 1;
+		int box_start_x = floor(m_units[i]->getPosition().x / Constants::TileSize) - 1;
+		int box_end_x = ceil((m_units[i]->getPosition().x + m_units[i]->getSize().x) / Constants::TileSize) + 1;
+		int box_start_y = floor(m_units[i]->getPosition().y / Constants::TileSize);
+		int box_end_y = ceil((m_units[i]->getPosition().y + m_units[i]->getSize().y) / Constants::TileSize) + 1;
 		bool airborne = true;
 
 		for (int x = std::max(box_start_x, 0); x < std::min(box_end_x, Constants::MapWidth); x++)
@@ -178,9 +178,9 @@ void Level::updateUnitCollision(float deltaTime)
 				{
 					if (m_tileMap->getTile(x, y).collidesWith(m_units[i]->getCollisionRect()))
 					{
-						if (std::abs(old_y - (m_units[i]->getPositionY())) > std::abs(old_x - (m_units[i]->getPositionX())))
+						if (std::abs(old_y - (m_units[i]->getPosition().y)) > std::abs(old_x - (m_units[i]->getPosition().x)))
 						{
-							m_units[i]->setSpeed(m_units[i]->getSpeedX(), 0);
+							m_units[i]->setSpeed(sf::Vector2f(m_units[i]->getSpeed().x, 0));
 							//units[i]->setAcceleration(units[i]->getAccelerationX(), 0);
 						}
 						else
@@ -189,34 +189,34 @@ void Level::updateUnitCollision(float deltaTime)
 						}
 						//Move out of contact
 						//units[i]->setPosition(units[i]->getPositionX() - units[i]->getSpeedX(), units[i]->getPositionY() - units[i]->getSpeedY());
-						m_units[i]->setPosition(old_x, old_y);
+						m_units[i]->setPosition(sf::Vector2f(old_x, old_y));
 					}
 
 					//Checks if ground is below, makes the player able to jump
 					//Kind of a temporary solution, but it works well
-					if (m_tileMap->getTile(x, y).collidesWith(sf::FloatRect(m_units[i]->getPositionX(), m_units[i]->getPositionY() + 1, m_units[i]->getWidth(), m_units[i]->getHeight() + 2)))
+					if (m_tileMap->getTile(x, y).collidesWith(sf::FloatRect(m_units[i]->getPosition().x, m_units[i]->getPosition().y + 1, m_units[i]->getSize().x, m_units[i]->getSize().y + 2)))
 					{
 						airborne = false;
 					}
 
 					//Down
-					if (m_tileMap->getTile(x, y).collidesWith(sf::FloatRect(m_units[i]->getPositionX(), m_units[i]->getPositionY(), m_units[i]->getWidth(), m_units[i]->getHeight() + 2)))
+					if (m_tileMap->getTile(x, y).collidesWith(sf::FloatRect(m_units[i]->getPosition().x, m_units[i]->getPosition().y, m_units[i]->getSize().x, m_units[i]->getSize().x + 2)))
 					{
-						m_units[i]->setAcceleration(m_units[i]->getAccelerationX(), 0);
-						m_units[i]->setPosition(m_units[i]->getPositionX(), y*Constants::TileSize - m_units[i]->getHeight());
-						m_units[i]->setSpeed(m_units[i]->getSpeedX(), 0);
+						m_units[i]->setAcceleration(sf::Vector2f(m_units[i]->getAcceleration().x, 0));
+						m_units[i]->setPosition(sf::Vector2f(m_units[i]->getPosition().x, y*Constants::TileSize - m_units[i]->getSize().y));
+						m_units[i]->setSpeed(sf::Vector2f(m_units[i]->getSpeed().x, 0));
 
 						airborne = false;
 					}
 					//Left && Right
-					if ((m_units[i]->getSpeedX()<0 && m_tileMap->getTile(x, y).collidesWith(sf::FloatRect(m_units[i]->getPositionX() - 2, m_units[i]->getPositionY(), m_units[i]->getWidth() + 2, m_units[i]->getHeight()))) ||
-						(m_units[i]->getSpeedX()>0 && m_tileMap->getTile(x, y).collidesWith(sf::FloatRect(m_units[i]->getPositionX(), m_units[i]->getPositionY(), m_units[i]->getWidth() + 2, m_units[i]->getHeight()))) &&
+					if ((m_units[i]->getSpeed().x<0 && m_tileMap->getTile(x, y).collidesWith(sf::FloatRect(m_units[i]->getPosition().x - 2, m_units[i]->getPosition().y, m_units[i]->getSize().x + 2, m_units[i]->getSize().y))) ||
+						(m_units[i]->getSpeed().x>0 && m_tileMap->getTile(x, y).collidesWith(sf::FloatRect(m_units[i]->getPosition().x, m_units[i]->getPosition().y, m_units[i]->getSize().x + 2, m_units[i]->getSize().y))) &&
 						airborne == true)
 					{
 						//m_markerSprite.setColor(sf::Color::Color(128, 64, 0, 128));
-						m_units[i]->setSpeed(0, m_units[i]->getSpeedY());
-						m_units[i]->setAcceleration(0, m_units[i]->getAccelerationY());
-						m_units[i]->setPosition(m_units[i]->getPositionX() - m_units[i]->getSpeedX(), m_units[i]->getPositionY());
+						m_units[i]->setSpeed(sf::Vector2f(0, m_units[i]->getSpeed().y));
+						m_units[i]->setAcceleration(sf::Vector2f(0, m_units[i]->getAcceleration().y));
+						m_units[i]->setPosition(sf::Vector2f(m_units[i]->getPosition().x - m_units[i]->getSpeed().x, m_units[i]->getPosition().y));
 					}
 
 				}
