@@ -38,7 +38,7 @@ void Inventory::addItem(ItemPtr item)
 	}
 }
 
-void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindow)
+void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindow, Level &level)
 {
 	sf::Vector2i mousePos = sf::Mouse::getPosition(gameWindow);
 
@@ -95,6 +95,11 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 			{
 				m_isOpen = false;
 
+				for (std::size_t i = 0; i < level.getUnits().size(); i++)
+				{
+					Unit& unit = *level.getUnits()[i].get();
+					//if ()
+				}
 				// Loop through level units
 				// if placement failed, put back into inventory
 			}

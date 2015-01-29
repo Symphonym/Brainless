@@ -4,6 +4,7 @@
 #include <SFML\Graphics.hpp>
 #include "Constants.h"
 #include "Item.h"
+#include "Level.h"
 #include <memory>
 #include <array>
 
@@ -18,7 +19,7 @@ public:
 	// Adds an item to the inventory
 	void addItem(ItemPtr item);
 
-	void events(const sf::Event &event, const sf::RenderWindow &gameWindow);
+	void events(const sf::Event &event, const sf::RenderWindow &gameWindow, Level &level);
 	void update(const sf::RenderWindow &gameWindow);
 
 	void draw();

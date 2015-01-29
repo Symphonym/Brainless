@@ -102,7 +102,7 @@ void Game::loop()
 			if (event.type == sf::Event::Closed)
 				m_game.close();
 
-			m_inventory->events(event, m_game);
+			m_inventory->events(event, m_game, m_level);
 		}
 
 		// Camera movement
