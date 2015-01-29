@@ -121,12 +121,14 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PopUpMenu.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="TestClass.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="WorldButton.cpp" />
     <ClCompile Include="WrappedText.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +149,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelSprite.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PopUpMenu.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="TestClass.h" />
@@ -154,6 +157,7 @@
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="WorldButton.h" />
     <ClInclude Include="WrappedText.h" />
   </ItemGroup>
   <ItemGroup>

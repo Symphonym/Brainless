@@ -120,6 +120,12 @@
     <ClCompile Include="GUIElement.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="WorldButton.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="PopUpMenu.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -195,6 +201,12 @@
       <Filter>Source Files\GUI</Filter>
     </ClInclude>
     <ClInclude Include="GUIElement.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldButton.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="PopUpMenu.h">
       <Filter>Source Files\GUI</Filter>
     </ClInclude>
   </ItemGroup>
