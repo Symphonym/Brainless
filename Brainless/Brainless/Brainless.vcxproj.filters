@@ -49,6 +49,9 @@
     <Filter Include="Source Files\GUI">
       <UniqueIdentifier>{48061318-ca76-4c8b-889e-c554b46b9e90}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Inventory">
+      <UniqueIdentifier>{50895dc1-b65e-4c00-b061-e794edf338d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -119,6 +122,9 @@
     </ClCompile>
     <ClCompile Include="GUIElement.cpp">
       <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Source Files\Game\Inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="GUIElement.h">
       <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Source Files\Game\Inventory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

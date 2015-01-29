@@ -13,6 +13,9 @@ public:
 	static const int MapHeight = 50;
 
 	static const int BlockTypeCount = 4;
+
+	static const int InventoryWidth = 5;
+	static const int InventoryHeight = 4;
 };
 
 #endif

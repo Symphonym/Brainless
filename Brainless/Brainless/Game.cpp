@@ -27,10 +27,13 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	// Load game resources
 	ResourceLoader::instance().loadFont("Game", "VCR_OSD_MONO.ttf");
 	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");
+	ResourceLoader::instance().loadTexture("TestItem2", "wizard_idle.png");
 	ResourceLoader::instance().loadTexture("testImage", "spritesheet.png");
+	ResourceLoader::instance().loadTexture("InventorySlot", "invSlot.png");
 	//ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
 
-
+	// TODO TEMPORARY, SHOULD NOT BE IN FINAL GAME, prolly put inventory in player class
+	m_inventory = new Inventory();
 
 	// Load a default map with nothing but ground tiles
 	TileMap::TileMapLayout layout;
@@ -54,6 +57,7 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 }
 Game::~Game()
 {
+	delete m_inventory;
 	//Clear units
 }
 
@@ -83,20 +87,22 @@ void Game::loop()
 		const float cameraSpeed = deltaTime*2000.f;
 		const float zoomSpeed = deltaTime;
 
-		//Move units out of collisions
+		m_markerSprite.setPosition(m_player->getPositionX(), m_player->getPositionY());
 
+
+		// Update game logic and input
 		m_camera.setCenter(m_player->getPositionX(), m_player->getPositionY());
 		m_player->checkPlayerInput();
-
 		m_level.update(deltaTime);
-
-		m_markerSprite.setPosition(m_player->getPositionX(), m_player->getPositionY());
+		m_inventory->update(m_game);
 
 		sf::Event event;
 		while (m_game.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				m_game.close();
+
+			m_inventory->events(event, m_game);
 		}
 
 		// Camera movement
@@ -135,6 +141,7 @@ void Game::draw()
 	}
 	Renderer::instance().drawHUD(m_saveText);*/
 	Renderer::instance().drawAbove(m_markerSprite);
+	m_inventory->draw();
 	Renderer::instance().executeDraws();
 
 }

@@ -1,9 +1,12 @@
-#pragma once
+#ifndef INCLUDED_GAME_H
+#define INCLUDED_GAME_H
+
 #include <SFML\Graphics.hpp>
 #include <memory>
 #include <vector>
 
-#include "level.h"
+#include "Level.h"
+#include "Inventory.h"
 
 
 class Level;
@@ -27,6 +30,7 @@ private:
 
 	Level m_level;
 	Player* m_player;
+	Inventory* m_inventory;
 
 	// Load/save functionality
 	void loadFile();
@@ -43,3 +47,4 @@ private:
 	sf::Texture m_markerTexture;
 };
 
+#endif

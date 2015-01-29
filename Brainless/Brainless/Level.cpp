@@ -1,6 +1,7 @@
 #include "Level.h"
 #include "Renderer.h"
 #include "Constants.h"
+#include "Utility.h"
 
 Level::Level()
 {
@@ -73,9 +74,84 @@ std::vector<Level::UnitPtr>& Level::getUnits()
 
 
 
-
 void Level::updateUnitCollision(float deltaTime)
 {
+	/*for (unsigned int i = 0; i < m_units.size(); i++)
+	{
+		Unit* currentUnit = m_units[i].get();
+		sf::FloatRect unitBounds = currentUnit->getCollisionRect();
+
+		currentUnit->updateMovement(600, deltaTime);
+
+		sf::Vector2i startIndex = m_tileMap->positionToIndex(sf::Vector2f(currentUnit->getPositionX(), currentUnit->getPositionY()));
+		startIndex -= sf::Vector2i(1, 1);
+
+		sf::Vector2i endIndex = m_tileMap->positionToIndex(
+			sf::Vector2f(currentUnit->getPositionX()+currentUnit->getWidth(), currentUnit->getPositionY()+currentUnit->getHeight()));
+		endIndex += sf::Vector2i(1, 1);
+
+		startIndex.x = Utility::clampValue(startIndex.x, 0, Constants::MapWidth - 1);
+		startIndex.y = Utility::clampValue(startIndex.y, 0, Constants::MapHeight - 1);
+
+		endIndex.x = Utility::clampValue(endIndex.x, 0, Constants::MapWidth - 1);
+		endIndex.y = Utility::clampValue(endIndex.y, 0, Constants::MapHeight - 1);
+
+		bool collision = false;
+		for (int x = startIndex.x; x < endIndex.x; x++)
+		{
+			for (int y = startIndex.y; y < endIndex.y; y++)
+			{
+				Tile& currentTile = m_tileMap->getTile(x, y);
+
+				// If tile isn't empty and is colliding with the unit
+				if (currentTile.getType() != Tile::Nothing && currentTile.collidesWith(unitBounds))
+				{
+					collision = true;
+					sf::FloatRect tileBounds = currentTile.getSprite().getGlobalBounds();
+
+					// Distances from sides of unit to corresponding sides of tile
+					float distanceFromTopToBottom = (tileBounds.top + tileBounds.height) - unitBounds.top;
+					float distanceFromBottomToTop = tileBounds.top - (unitBounds.top + unitBounds.height);
+					float distanceFromLeftToRight = (tileBounds.left + tileBounds.width) - unitBounds.left;
+					float distanceFromRightToLeft = tileBounds.left - (unitBounds.left+unitBounds.width);
+
+					std::cout << "distanceFromTopToBottom: " << distanceFromTopToBottom << std::endl;
+					std::cout << "distanceFromBottomToTop: " << distanceFromBottomToTop << std::endl;
+					std::cout << "distanceFromLeftToRight: " << distanceFromLeftToRight << std::endl;
+					std::cout << "distanceFromRightToLeft: " << distanceFromRightToLeft << std::endl;
+
+					if (std::abs(distanceFromBottomToTop) < Constants::TileSize / 4 && std::abs(distanceFromBottomToTop) > 0)
+					{
+						currentUnit->setPosition(currentUnit->getPositionX(), tileBounds.top - unitBounds.height);
+						currentUnit->setSpeed(currentUnit->getSpeedX(), -1000);
+						currentUnit->setAcceleration(currentUnit->getAccelerationX(), -1000);
+						distanceFromBottomToTop = tileBounds.top - (currentUnit->getPositionY() + currentUnit->getHeight());
+						std::cout << "distanceFromBottomToTop: " << distanceFromBottomToTop << std::endl;
+						int d = 0;
+
+					}
+
+
+					//if (std::abs(distanceFromTopToBottom) < Constants::TileSize / 4)
+					//	currentUnit->setPosition(currentUnit->getPositionX(), tileBounds.top + tileBounds.height);
+					//else if (std::abs(distanceFromBottomToTop) < Constants::TileSize / 4)
+					//	currentUnit->setPosition(currentUnit->getPositionX(), tileBounds.top - unitBounds.height);
+					//else if(std::abs(distanceFromLeftToRight) < Constants::TileSize / 4)
+					//	currentUnit->setPosition(tileBounds.left+tileBounds.width, currentUnit->getPositionY());
+					//else if(std::abs(distanceFromRightToLeft) < Constants::TileSize / 4)
+					//	currentUnit->setPosition(tileBounds.left, currentUnit->getPositionY());
+				}
+			}
+		}
+
+		if (!collision)
+			currentUnit->setStatus(true);
+		else
+			currentUnit->setStatus(false);
+
+		currentUnit->updateAnimation(deltaTime);
+	}*/
+
 	for (unsigned int i = 0; i < m_units.size(); i++)
 	{
 		//Reset marker color
