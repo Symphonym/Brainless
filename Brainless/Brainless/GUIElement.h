@@ -5,8 +5,6 @@
 
 class GUIElement
 {
-	~GUIElement();
-
 	virtual bool getReleased() = 0;
 	virtual std::string getType() = 0;
 };

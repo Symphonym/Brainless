@@ -13,6 +13,7 @@ m_window(window)
 	m_mouseIsPressed = true;
 }
 
+
 bool Button::getReleased()
 {
 	//The button must be pressed and released without the mouse leaving the button for the click to be registred.

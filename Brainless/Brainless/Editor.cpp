@@ -164,25 +164,25 @@ void Editor::loop()
 		if (m_isMenu)
 		{
 			// Switch between modes
-			if (tileButton.isClicked() || sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+			if (tileButton.getReleased() || sf::Keyboard::isKeyPressed(sf::Keyboard::J))
 			{
 				m_editorMode = EditorModes::Grid;
 			}
-			else if (spriteButton.isClicked() || sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+			else if (spriteButton.getReleased() || sf::Keyboard::isKeyPressed(sf::Keyboard::K))
 			{
 				m_editorMode = EditorModes::Sprite;
 			}
-			else if (itemButton.isClicked() || sf::Keyboard::isKeyPressed(sf::Keyboard::L))
+			else if (itemButton.getReleased() || sf::Keyboard::isKeyPressed(sf::Keyboard::L))
 			{
 				m_editorMode = EditorModes::Item;
 			}
-			else if (cameraButton.isClicked())
+			else if (cameraButton.getReleased())
 			{
 				sf::Vector2f curCenter = m_camera.getCenter();
 				m_camera = m_editor.getDefaultView();
 				m_camera.setCenter(curCenter);
 			}
-			else if (saveButton.isClicked())
+			else if (saveButton.getReleased())
 			{
 				saveFile();
 				m_saveText.setString("File is saved!");
