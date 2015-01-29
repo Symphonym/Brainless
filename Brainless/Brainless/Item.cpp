@@ -1,13 +1,13 @@
 #include "Item.h"
 #include "ResourceLoader.h"
 #include "Renderer.h"
+#include "Constants.h"
 
-Item::Item(const std::string &textureName, int id, int syncID, CombineData combineData, std::string description)
+Item::Item(const std::string &textureName, int id, int syncID, CombineData combineData)
 :
 m_id(id),
 m_syncID(syncID),
-m_combineData(combineData),
-m_description(description)
+m_combineData(combineData)
 {
 	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
 }
@@ -49,10 +49,16 @@ const CombineData& Item::getCombineData() const
 	return m_combineData;
 }
 
-std::string& Item::examine() const
+std::string Item::examine() const
 {
-	return m_description;
+	return "Nothing interesting.";
 }
+
+std::string Item::onPickUp() const
+{
+	return Constants::CantPickUpString;
+}
+
 
 
 CombineData::CombineData(int combineIDParam, int productItemIDParam)

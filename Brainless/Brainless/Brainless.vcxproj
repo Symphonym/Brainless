@@ -108,6 +108,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera2D.cpp" />
+    <ClCompile Include="Constants.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorGridMode.cpp" />
     <ClCompile Include="EditorItemMode.cpp" />
