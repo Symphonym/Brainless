@@ -1,8 +1,9 @@
 #include "PopUpMenu.h"
 
-PopUpMenu::PopUpMenu(WorldButton &examine, WorldButton &use, WorldButton &pickUp, sf::Vector2f &position)
+PopUpMenu::PopUpMenu(WorldButton &examine, WorldButton &use, WorldButton &pickUp, sf::Vector2f position)
 :
-m_position(position)
+m_position(position),
+m_item(item)
 {
 	m_buttons[0] = examine;
 	m_buttons[1] = use;

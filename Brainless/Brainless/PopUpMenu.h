@@ -7,7 +7,7 @@
 class PopUpMenu
 {
 public:
-	PopUpMenu(WorldButton &examine, WorldButton &use, WorldButton &pickUp, sf::Vector2f &position);
+	PopUpMenu(WorldButton &examine, WorldButton &use, WorldButton &pickUp, sf::Vector2f position);
 
 	//returns a number for which button is pressed
 	//1 = examine,  2 = use, 3 = pickUp, 0 = none

@@ -2,11 +2,12 @@
 #include "ResourceLoader.h"
 #include "Renderer.h"
 
-Item::Item(const std::string &textureName, int id, int syncID, CombineData combineData)
+Item::Item(const std::string &textureName, int id, int syncID, CombineData combineData, std::string description)
 :
 m_id(id),
 m_syncID(syncID),
-m_combineData(combineData)
+m_combineData(combineData),
+m_description(description)
 {
 	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
 }
@@ -46,6 +47,11 @@ int Item::getSyncID() const
 const CombineData& Item::getCombineData() const
 {
 	return m_combineData;
+}
+
+std::string& Item::examine() const
+{
+	return m_description;
 }
 
 

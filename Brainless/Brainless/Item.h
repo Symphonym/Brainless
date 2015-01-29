@@ -19,12 +19,14 @@ class Item
 public:
 
 	// TODO Item needs clone functionality, prototype pattern, if we want to be able to inherit from item
-	explicit Item(const std::string &textureName, int id, int syncID, CombineData combineData = CombineData(-1, -1));
+	explicit Item(const std::string &textureName, int id, int syncID, CombineData combineData = CombineData(-1, -1), std::string description = "Nothing of interest.");
 
 	// If the item needs custom interaction functionality
 	virtual void update() {};
 	virtual void onInteract(Item &otherItem) {}; // Called when this item iteracts with another item
 	virtual void onInteractedWith(Item &otherItem) {}; // Called when another item interactors with THIS item
+	virtual std::string& examine() const {};
+	virtual std::string onPickUp() {};
 
 	// Prototype pattern so we can clone item hierarchies
 	virtual Item* clone() = 0;
@@ -46,6 +48,7 @@ private:
 	sf::Sprite m_sprite;
 	int m_id; // Unique identifier for the item
 	int m_syncID; // ID to connect the item to other items
+	std::string m_description;
 	CombineData m_combineData; // Data for combining (crafting) into other items
 };
 
