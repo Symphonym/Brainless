@@ -34,15 +34,29 @@ m_jumpState(null)
 
 void Player::checkPlayerInput()
 {
+	float speedTurnAround = 12;
+	float speedStartAcc = 500;
+	float speedNormalAcc = 200;
+	float speedSlowDown = 6;
+
+	float startAccBreakpoint = 150;
+	float minSpeedBeforeStop = 10;
+
 	bool slowDown = true;
 	//Left
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		if (20 < m_speedX) //wrong direcion - slow character
 		{
-			m_accelerationX = -m_speedX * 8;
+			m_accelerationX = -m_speedX * speedTurnAround;
 		}
-		else m_accelerationX = -200;
+		else
+		{
+			if (abs(m_speedX) < startAccBreakpoint)
+				m_accelerationX = -speedStartAcc;
+			else
+				m_accelerationX = -speedNormalAcc;
+		}
 
 		slowDown = false;
 		m_inputDirection = left;
@@ -52,22 +66,28 @@ void Player::checkPlayerInput()
 	{
 		if (m_speedX < -20) //wrong direcion - slow character
 		{
-			m_accelerationX = -m_speedX * 8;
+			m_accelerationX = -m_speedX * speedTurnAround;
 		}
-		else m_accelerationX = 200;
+		else
+		{
+			if (abs(m_speedX) < startAccBreakpoint)
+				m_accelerationX = speedStartAcc;
+			else
+				m_accelerationX = speedNormalAcc;
+		}
 		slowDown = false;
 		m_inputDirection = right;
 	}
 	if (slowDown)
 	{
 		//small values = stop totally
-		if (m_speedX < 10 && m_speedX > -10)
+		if (m_speedX < minSpeedBeforeStop && m_speedX > -minSpeedBeforeStop)
 		{
 			m_speedX = 0;
 			m_accelerationX = 0;
 		}
 		//slow
-		else m_accelerationX = -m_speedX * 6;
+		else m_accelerationX = -m_speedX * speedSlowDown;
 	}
 	//Jump
 	if (!m_inAir) m_jumpState = null; // can jump
@@ -114,7 +134,8 @@ void Player::checkPlayerInput()
 // nästa steg fixa kolla enbart state, sen kolla scale
 void Player::updateAnimation(float deltaTime)
 {
-	float runBreakpoint = m_maxSpeedX * 2 / 3;
+	float runBreakpoint = m_maxSpeedX * 3 / 4;
+
 	if (m_inAir)
 	{
 		//JUMP

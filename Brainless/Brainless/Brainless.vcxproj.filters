@@ -191,6 +191,9 @@
     <ClInclude Include="Button.h">
       <Filter>Source Files\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="GUIElement.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="BlackAndWhite.txt">

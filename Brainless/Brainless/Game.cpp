@@ -132,14 +132,22 @@ void Game::loop()
 							//units[i]->setPosition(units[i]->getPositionX() - units[i]->getSpeedX(), units[i]->getPositionY() - units[i]->getSpeedY());
 							units[i]->setPosition(old_x,old_y);
 						}
-						//Down
-						if (m_level.getTileMap().getTile(x, y).collidesWith(sf::FloatRect(units[i]->getPositionX(), units[i]->getPositionY(), units[i]->getWidth(), units[i]->getHeight()+2)))
+
+						//Checks if ground is below, makes the player able to jump
+						//Kind of a temporary solution, but it works well
+						if (m_level.getTileMap().getTile(x, y).collidesWith(sf::FloatRect(units[i]->getPositionX(), units[i]->getPositionY()+1, units[i]->getWidth(), units[i]->getHeight() + 2)))
 						{
-							m_markerSprite.setColor(sf::Color::Color(255, 0, 0, 128));
 							airborne = false;
-							units[i]->setSpeed(units[i]->getSpeedX(), 0);
+						}
+
+						//Down
+						if (m_level.getTileMap().getTile(x, y).collidesWith(sf::FloatRect(units[i]->getPositionX(), units[i]->getPositionY(), units[i]->getWidth(), units[i]->getHeight() + 2)))
+						{
 							units[i]->setAcceleration(units[i]->getAccelerationX(), 0);
 							units[i]->setPosition(units[i]->getPositionX(), y*Constants::TileSize - units[i]->getHeight());
+							units[i]->setSpeed(units[i]->getSpeedX(), 0);
+
+							airborne = false;
 						}
 						//Left && Right
 						if ((units[i]->getSpeedX()<0 && m_level.getTileMap().getTile(x, y).collidesWith(sf::FloatRect(units[i]->getPositionX()-2, units[i]->getPositionY(), units[i]->getWidth()+2, units[i]->getHeight()))) ||
