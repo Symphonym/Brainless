@@ -89,11 +89,15 @@ void Editor::run()
 
 void Editor::loadFile()
 {
-	FileSave::loadMap(&m_level, 0);
+	FileSave::loadMapText(m_level, 0);
+	//FileSave::loadMap(&m_level, 0);
 }
 void Editor::saveFile()
 {
-	FileSave::saveMap(&m_level, 0);
+	//FileSave::saveMap(&m_level, 0);
+	FileSave::saveMapText(m_level, 0);
+	m_saveText.setString("File is saved!");
+	m_saveText.setColor(sf::Color::Green);
 }
 
 
@@ -129,6 +133,10 @@ void Editor::loop()
 				if (event.key.code == sf::Keyboard::Return)
 				{
 					m_isMenu = !m_isMenu;
+				}
+				else if (event.key.code == sf::Keyboard::S && event.key.control)
+				{
+					saveFile();
 				}
 			}
 
@@ -227,14 +235,6 @@ void Editor::loop()
 			m_camera = m_editor.getDefaultView();
 			m_camera.setCenter(curCenter);
 
-		}
-
-		// Save hotkey
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		{
-			saveFile();
-			m_saveText.setString("File is saved!");
-			m_saveText.setColor(sf::Color::Green);
 		}
 
 		// Update editor camera
