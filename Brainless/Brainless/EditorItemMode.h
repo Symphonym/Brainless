@@ -12,6 +12,9 @@ public:
 
 	explicit EditorItemMode(std::vector<std::unique_ptr<Item> >& itemVector);
 
+	// Reset all extra debug text and load it again
+	void reloadDebugText();
+
 	// Returns true if something changed (so editor knows if it needs to resave)
 	bool events(const sf::Event &event, const sf::RenderWindow &editorWindow);
 	bool update(float deltaTime, const sf::RenderWindow &editorWindow);

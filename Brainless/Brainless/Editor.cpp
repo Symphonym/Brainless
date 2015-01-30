@@ -61,11 +61,15 @@ m_currentSyncID(0)
 	// TODO TEST CODE DONT REMOVE
 	shaderTest = 0;
 
-	loadFile();
-
+	// Initialize the different editor modes
 	m_gridMode = new EditorGridMode(m_level.getTileMap());
 	m_spriteMode = new EditorSpriteMode(m_level.getDecorations());
 	m_itemMode = new EditorItemMode(m_level.getItems());
+
+	// Load the file and reload data for all the modes
+	loadFile();
+
+
 
 	// Initialize save text
 	m_saveText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
@@ -96,12 +100,12 @@ void Editor::run()
 
 void Editor::loadFile()
 {
-	if (!FileSave::loadMapText(m_level, m_currentLevelFileIndex))
-	{
-		// Reset the level if the user switched to a map file that doesn't exist
-		m_level.reset();
-	}
-	//FileSave::loadMap(&m_level, 0);
+	// Reset the level and load the new level
+	m_level.reset();
+	FileSave::loadMapText(m_level, m_currentLevelFileIndex);
+
+	// Reload info for different modes
+	m_itemMode->reloadDebugText();
 }
 void Editor::saveFile()
 {

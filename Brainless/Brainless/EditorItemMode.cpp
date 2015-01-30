@@ -18,9 +18,20 @@ m_currentSyncID(-1)
 	m_currentIndexText.setString("Item index: " + std::to_string(m_currentIndex));
 	m_currentSyncIDText.setString("Sync ID: " + std::to_string(m_currentSyncID));
 
+	// Initialize itemID text
 	m_currentIDText.setPosition(10, 50);
 	m_currentIndexText.setPosition(10, 100);
 	m_currentSyncIDText.setPosition(10, 150);
+
+	// Initialize current item and the starting text of currentID with that item
+	m_currentItem = std::move(ItemDatabase::instance().extractItemByCount(m_currentIndex));
+	m_currentIDText.setString("Item ID: " + std::to_string(m_currentItem->getID()));
+}
+
+
+void EditorItemMode::reloadDebugText()
+{
+	m_itemInfo.clear();
 
 	// Load debug strings for any items already loaded
 	for (std::size_t i = 0; i < m_items.size(); i++)
@@ -37,11 +48,8 @@ m_currentSyncID(-1)
 		text.setPosition(textPos);
 		m_itemInfo.push_back(text);
 	}
-
-	m_currentItem = std::move(ItemDatabase::instance().extractItemByCount(m_currentIndex));
-	m_currentIDText.setString("Item ID: " + std::to_string(m_currentItem->getID()));
-
 }
+
 bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &editorWindow)
 {
 	if (event.type == sf::Event::MouseWheelMoved)
