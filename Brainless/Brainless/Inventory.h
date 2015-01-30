@@ -4,10 +4,10 @@
 #include <SFML\Graphics.hpp>
 #include "Constants.h"
 #include "Item.h"
-#include "Level.h"
 #include <memory>
 #include <array>
 
+class Level;
 class Inventory
 {
 public:
@@ -18,6 +18,9 @@ public:
 
 	// Adds an item to the inventory
 	void addItem(ItemPtr item);
+
+	// Set which level the inventory will interact with
+	void setCurrentLevel(Level* level);
 
 	void events(const sf::Event &event, const sf::RenderWindow &gameWindow, Level &level);
 	void update(const sf::RenderWindow &gameWindow);

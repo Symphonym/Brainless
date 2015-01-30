@@ -22,7 +22,21 @@ m_currentSyncID(-1)
 	m_currentIndexText.setPosition(10, 100);
 	m_currentSyncIDText.setPosition(10, 150);
 
+	// Load debug strings for any items already loaded
+	for (std::size_t i = 0; i < m_items.size(); i++)
+	{
+		Item& curItem = *m_items[i].get();
 
+		sf::Text text;
+		text.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+		text.setString("ID: " + std::to_string(curItem.getID()) + " SyncID: " + std::to_string(curItem.getSyncID()));
+
+		sf::Vector2f textPos(
+			curItem.getSprite().getPosition().x + curItem.getSprite().getGlobalBounds().width / 2.f - text.getGlobalBounds().width / 2.f,
+			curItem.getSprite().getPosition().y - curItem.getSprite().getGlobalBounds().height / 2.f);
+		text.setPosition(textPos);
+		m_itemInfo.push_back(text);
+	}
 
 	m_currentItem = std::move(ItemDatabase::instance().extractItemByCount(m_currentIndex));
 	m_currentIDText.setString("Item ID: " + std::to_string(m_currentItem->getID()));

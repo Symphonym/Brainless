@@ -133,5 +133,4 @@ void Game::draw()
 	m_level.draw(m_camera);
 	m_inventory->draw();
 	Renderer::instance().executeDraws();
-
 }

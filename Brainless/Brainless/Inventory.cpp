@@ -1,7 +1,9 @@
 #include "Inventory.h"
 #include "Renderer.h"
 #include "ItemDatabse.h"
+#include "Level.h"
 #include "ResourceLoader.h"
+
 
 Inventory::Inventory()
 :
@@ -85,21 +87,64 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 						invPair->first = std::move(m_mouseItem);
 				}
 
-				// Select new item
+				// Select new item, the item might be null (empty slot) but doesn't matter since we use null to determine if an item is selected
 				else
 					m_mouseItem = std::move(invPair->first);
 			}
 
 			// The user did not click on the inventory, try with world interaction
-			else
+			else if (m_mouseItem)
 			{
-				m_isOpen = false;
+				
 
+				// If the item interacted with a unit this frame, don't let it interact with any items as well
+				// Since this could mean that an item is used twice in a single frame
+				bool interactedWithUnit = false;
+
+				// Try unit interaction
 				for (std::size_t i = 0; i < level.getUnits().size(); i++)
 				{
 					Unit& unit = *level.getUnits()[i].get();
-					//if ()
+					/*if (m_mouseItem.getSprite().getGlobalBounds().intersects(unit.getCollisionRect()))
+					{
+						if(m_mouseItem->onInteract(unit))
+							delete m_mouseItem.release();
+						unit.onInteractedWith(!m_mouseItem.get());
+
+						interactedWithUnit = true;
+					}*/
 				}
+
+				// Try item interaction
+				for (std::size_t i = 0; i < level.getItems().size(); i++)
+				{
+					if (!m_mouseItem || interactedWithUnit)
+						break;
+
+					Item& item = *level.getItems()[i].get();
+					if (m_mouseItem->getSprite().getGlobalBounds().intersects(item.getSprite().getGlobalBounds()))
+					{
+						// Invoke interaction on world item
+						if (item.onInteractedWith(*m_mouseItem.get()))
+							level.getItems().erase(level.getItems().begin() + i);
+
+						// Invoke interaction handling on mouse item
+						if (m_mouseItem->onInteract(item))
+							delete m_mouseItem.release();
+
+						break;
+					}
+				}
+
+
+				// First time click on world will just close the inventory
+				if (m_isOpen)
+					m_isOpen = false;
+
+				// Second time click on world, without the item being destroyed from interaction, will put it back into the inventory
+				else if (m_mouseItem && !m_isOpen)
+					addItem(std::move(m_mouseItem));
+
 				// Loop through level units
 				// if placement failed, put back into inventory
 			}
@@ -121,12 +166,12 @@ void Inventory::update(const sf::RenderWindow &gameWindow)
 
 	if (m_mouseItem)
 	{
-		// Place item in HUD space
+		// Place selected item in HUD space
 		if (m_isOpen)
 			m_mouseItem->getSprite().setPosition(
 				sf::Vector2f(mousePos.x - m_mouseItem->getSprite().getGlobalBounds().width / 2.f, mousePos.y - m_mouseItem->getSprite().getGlobalBounds().height / 2.f));
 
-		// Place item in WORLD space
+		// Place selected item in WORLD space
 		else
 		{
 			sf::Vector2f worldPos = gameWindow.mapPixelToCoords(mousePos);
@@ -166,7 +211,7 @@ void Inventory::draw()
 		}
 	}
 
-	// Draw selected item on hud or in game depending on if inventory is open or not
+	// Draw selected item on hud or in-game depending on if inventory is open or not
 	if (m_mouseItem)
 	{
 		if (m_isOpen)

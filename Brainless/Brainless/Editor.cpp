@@ -60,6 +60,7 @@ m_currentSyncID(0)
 	// TODO TEST CODE DONT REMOVE
 	shaderTest = 0;
 
+	loadFile();
 
 	m_gridMode = new EditorGridMode(m_level.getTileMap());
 	m_spriteMode = new EditorSpriteMode(m_level.getDecorations());
@@ -72,7 +73,6 @@ m_currentSyncID(0)
 	m_saveText.setString("File is saved!");
 	m_saveText.setColor(sf::Color::Green);
 
-	loadFile();
 
 }
 Editor::~Editor()
