@@ -7,7 +7,7 @@
 class PopUpMenu
 {
 public:
-	PopUpMenu(WorldButton &examine, WorldButton &use, WorldButton &pickUp, sf::Vector2f position);
+	PopUpMenu(WorldButton *examine, WorldButton *use, WorldButton *pickUp, sf::Vector2f position);
 
 	//returns a number for which button is pressed
 	//1 = examine,  2 = use, 3 = pickUp, 0 = none
@@ -24,7 +24,7 @@ public:
 
 private:
 	sf::Vector2f m_position;
-	std::array<WorldButton&, 3> m_buttons;
+	std::array<WorldButton*, 3> m_buttons;
 	sf::IntRect m_hitbox;
 	bool m_isActive;
 };
