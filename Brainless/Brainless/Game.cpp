@@ -30,9 +30,7 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	ResourceLoader::instance().loadTexture("TestItem2", "wizard_idle.png");
 	ResourceLoader::instance().loadTexture("testImage", "spritesheet.png");
 	ResourceLoader::instance().loadTexture("InventorySlot", "invSlot.png");
-	ResourceLoader::instance().loadTexture("run", "Skeleton_Spritesheet_Runcycle_v2.png");
-	ResourceLoader::instance().loadTexture("blah", "Character_256px_v2.png");
-
+	ResourceLoader::instance().loadTexture("PlayerSheet", "Spritesheet_Test_v3_2.png");
 
 	//ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
 
@@ -54,9 +52,7 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 
 	loadFile();
 	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(sf::Vector2f(Constants::TileSize * 3, Constants::TileSize * 3.4)))));
-	m_player->addTexture(ResourceLoader::instance().retrieveTexture("run"));
-	m_player->addTexture(ResourceLoader::instance().retrieveTexture("blah"));
-
+	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
 }
 Game::~Game()
 {

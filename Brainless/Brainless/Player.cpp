@@ -14,10 +14,10 @@
 Player::Player(sf::Vector2f startPosition)
 :
 Unit(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y)),
-m_state(idle),
+m_state(noAnimation),
 m_spriteDirection(right),
-m_inputDirection(right),
-m_jumpState(null)
+m_inputDirection(noDirection),
+m_jumpState(ready)
 {
 
 }
@@ -33,6 +33,7 @@ void Player::checkPlayerInput()
 	float minSpeedBeforeStop = 10;
 
 	bool slowDown = true;
+	m_inputDirection = noDirection;
 	//Left
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
@@ -80,11 +81,11 @@ void Player::checkPlayerInput()
 		else m_acceleration.x = -m_speed.x * speedSlowDown;
 	}
 	//Jump
-	if (!m_inAir) m_jumpState = null; // can jump
+	if (!m_inAir) m_jumpState = ready; // can jump
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 
-		if (m_jumpState != released)
+		if (m_jumpState != buttonReleased)
 		{
 
 			//jump while in the air
@@ -100,7 +101,7 @@ void Player::checkPlayerInput()
 			{
 				m_speed.y = -300;
 				m_inAir = true;
-				m_jumpState = pressed;
+				m_jumpState = buttonPressed;
 			}
 		}
 		else //stop jump
@@ -109,9 +110,9 @@ void Player::checkPlayerInput()
 		}
 	}
 	//prevent "re-jump" after releasing button
-	else if (m_jumpState == pressed)
+	else if (m_jumpState == buttonPressed)
 	{
-		m_jumpState = released;
+		m_jumpState = buttonReleased;
 	}
 	//stop the jump
 	else
@@ -123,7 +124,7 @@ void Player::checkPlayerInput()
 
 void Player::updateAnimation(float deltaTime)
 {
-	float runBreakpoint = m_maxSpeed.x * 3 / 4;
+	float runBreakpoint = m_maxSpeed.x * 2 / 3;
 
 
 
@@ -134,9 +135,8 @@ void Player::updateAnimation(float deltaTime)
 		{
 			if (m_state != jump)
 			{
-				m_sprite = &m_spritSheets[1];
-				m_animation.stillFrame(0, 0);
-				//m_animation.stillFrame(1, 3);
+				m_sprite = &m_spritSheets[0];
+				m_animation.loop(0, 3, 7, 5);
 				m_state = jump;
 			}
 		}
@@ -145,9 +145,8 @@ void Player::updateAnimation(float deltaTime)
 		{
 			if (m_state != fall)
 			{
-				m_sprite = &m_spritSheets[1];
-				m_animation.stillFrame(0, 0);
-				//m_animation.stillFrame(7, 3);
+				m_sprite = &m_spritSheets[0];
+				m_animation.loop(0, 3, 7, 5);
 				m_state = fall;
 			}
 		}
@@ -157,21 +156,19 @@ void Player::updateAnimation(float deltaTime)
 	{
 		if (m_state != idle)
 		{
-			m_sprite = &m_spritSheets[1];
-			m_animation.stillFrame(0, 0);
-			//m_animation.loop(0, 3, 0, 5);
+			m_sprite = &m_spritSheets[0];
+			m_animation.stillFrame(0, 3);
 			m_state = idle;
 		}
 	}
-	//SLIDE
+	//TURN
 	else if (m_speed.x < 0 && m_inputDirection == right || 0 < m_speed.x && m_inputDirection == left)
 	{
-		if (m_state != slide)
+		if (m_state != turn)
 		{
-			m_sprite = &m_spritSheets[1];
-			m_animation.stillFrame(0, 0);
-			//m_animation.stillFrame(4, 0);
-			m_state = slide;
+			m_sprite = &m_spritSheets[0];
+			m_animation.playOnce(0, 3, 5, 10);
+			m_state = turn;
 		}
 	}
 	//RUN
@@ -180,34 +177,40 @@ void Player::updateAnimation(float deltaTime)
 		if (m_state != run)
 		{
 			m_sprite = &m_spritSheets[0];
-			m_animation.loop(0, 0, 0, 1, 10);
-			//m_animation.loop(4, 7, 2, 10);
+			m_animation.loop(0, 7, 1, 10);
 			m_state = run;
 		}
-		m_animation.setSpeed(Animation::calcFrameSpeed(10, 20, runBreakpoint, m_maxSpeed.x, abs(m_speed.x)));
+		m_animation.setSpeed(Animation::calcFrameSpeed(10, 15, runBreakpoint, m_maxSpeed.x, abs(m_speed.x)));
 
 	}
-	//WALK
+	//START WALK
+	else if (m_speed.x != 0 && (m_inputDirection == right || m_inputDirection == left))
+	{
+		if (m_state != startWalk)
+		{
+			m_sprite = &m_spritSheets[0];
+			m_animation.playOnce(0, 3, 0, 8);
+			m_state = startWalk;
+		}
+	//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
+	}
+	//END WALK
 	else if (m_speed.x != 0)
 	{
-		if (m_state != walk)
+		if (m_state != endWalk)
 		{
-			m_sprite = &m_spritSheets[1];
-			m_animation.stillFrame(0, 0);
-			//	m_animation.loop(0, 3, 1, 5);
-			m_state = walk;
+			m_sprite = &m_spritSheets[0];
+			m_animation.playOnce(0, 3, 2, 8);
+			m_state = endWalk;
 		}
-		m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
+	//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
 	}
+	//TODO
+	//startJump
+	//endJump
 
 
-	/*	slide, //(turning while running)
-	jump,
-	fall*/
-
-	//blev rörigt här, beroende på vart bildplacering gentemot collisionsplacering så ändras setpoision ev. någon annan stans.
-	//men just nu ändras set position i Unit.cpp genom samma position som collisionsplaceringen så setposition gentemot scale(-1,1) behöver ändras varje gång.
-
+	//Sprite mirroring and offset.
 	if (m_spriteDirection == left)
 	{
 		if (0 < m_speed.x)
