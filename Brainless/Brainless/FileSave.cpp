@@ -3,7 +3,6 @@
 #include <vector>
 #include <memory>
 #include <math.h>
-
 //
 #include "ResourceLoader.h"
 #include "Constants.h"
@@ -134,7 +133,6 @@ void FileSave::loadMap(Level* stage, int stage_number)
 		for (int i = 0; i < texture_count; i++)
 		{
 			LevelSprite* texture = new LevelSprite();
-			stage->getDecorations().push_back(*texture);
 			int texture_x = file_content[file_at + 1] * 256 + file_content[file_at + 2];
 			if (file_content[file_at + 0] == 0) texture_x = -texture_x;
 			int texture_y = file_content[file_at + 4] * 256 + file_content[file_at + 5];
@@ -143,13 +141,14 @@ void FileSave::loadMap(Level* stage, int stage_number)
 			texture->drawToForeground = file_content[file_at + 6];
 			file_at += 7;
 			std::string texture_string;
-			for (int j = 0; j < file_content[file_at]; j++)
+			for (int j = 1; j < file_content[file_at]+1; j++)
 			{
 				texture_string += file_content[file_at + j];
 			}
-			file_at += file_content[file_at];
+			file_at += file_content[file_at]+1;
 			texture->textureName = texture_string;
 			texture->sprite.setTexture(ResourceLoader::instance().retrieveTexture(texture_string));
+			stage->getDecorations().push_back(*texture);
 		}
 	}
 }
