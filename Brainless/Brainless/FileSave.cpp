@@ -197,7 +197,6 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 	}
 }
 
-#include <iostream>
 void FileSave::loadMapText(Level &level, int levelNumber)
 {
 	std::ifstream reader("level" + std::to_string(levelNumber) + ".txt");
@@ -235,11 +234,13 @@ void FileSave::loadMapText(Level &level, int levelNumber)
 
 			std::vector<std::string> itemData = Utility::splitString(line, ',');
 
+			// Read item data
 			int itemID = Utility::stringToNumber<int>(itemData[0]);
 			int syncID = Utility::stringToNumber<int>(itemData[1]);
 			float posX = Utility::stringToNumber<float>(itemData[2]);
 			float posY = Utility::stringToNumber<float>(itemData[3]);
 
+			// Create item from data
 			ItemDatabase::ItemPtr item = std::move(ItemDatabase::instance().extractItem(itemID));
 			item->setSyncID(syncID);
 			item->setPosition(sf::Vector2f(posX, posY));
@@ -257,11 +258,14 @@ void FileSave::loadMapText(Level &level, int levelNumber)
 			reader >> line;
 
 			std::vector<std::string> spriteData = Utility::splitString(line, ',');
+
+			// Read sprite data
 			bool drawToForeground = Utility::stringToNumber<bool>(spriteData[0]);
 			std::string textureName = spriteData[1];
 			float posX = Utility::stringToNumber<float>(spriteData[2]);
 			float posY = Utility::stringToNumber<float>(spriteData[3]);
 
+			// Create sprite from data
 			LevelSprite levelSprite;
 			levelSprite.drawToForeground = drawToForeground;
 			levelSprite.textureName = textureName;
