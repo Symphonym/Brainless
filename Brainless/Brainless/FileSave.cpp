@@ -197,7 +197,7 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 	}
 }
 
-void FileSave::loadMapText(Level &level, int levelNumber)
+bool FileSave::loadMapText(Level &level, int levelNumber)
 {
 	std::ifstream reader("level" + std::to_string(levelNumber) + ".txt");
 
@@ -274,5 +274,9 @@ void FileSave::loadMapText(Level &level, int levelNumber)
 
 			level.getDecorations().push_back(levelSprite);
 		}
+
+		return true;
 	}
+
+	return false;
 }

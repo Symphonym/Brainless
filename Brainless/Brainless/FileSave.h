@@ -10,7 +10,9 @@ public:
 
 	// Text saving
 	static void saveMapText(Level &level, int levelNumber);
-	static void loadMapText(Level &level, int levelNumber);
+
+	// Returns true if the file was loaded
+	static bool loadMapText(Level &level, int levelNumber);
 
 	//Saving & loading player progress and misc info
 	static void saveProgress();

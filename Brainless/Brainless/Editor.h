@@ -40,6 +40,9 @@ private:
 	Level m_level;
 	sf::Sprite m_editorBackground;
 
+	sf::Text m_levelFileText;
+	int m_currentLevelFileIndex;
+
 	EditorModes m_editorMode;
 	EditorGridMode *m_gridMode;
 	EditorSpriteMode *m_spriteMode;
