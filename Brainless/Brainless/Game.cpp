@@ -67,11 +67,11 @@ void Game::run()
 
 void Game::loadFile()
 {
-	FileSave::loadMap(&m_level, 0);
+	FileSave::loadMapText(m_level, 0);
 }
 void Game::saveFile()
 {
-	FileSave::saveMap(&m_level, 0);
+	FileSave::loadMapText(m_level, 0);
 }
 
 void Game::loop()
