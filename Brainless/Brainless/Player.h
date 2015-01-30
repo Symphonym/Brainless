@@ -17,24 +17,26 @@ public:
 	{
 		noAnimation,
 		idle,
-		walk,
+		startWalk,
+		endWalk,
 		run,
-		slide,
+		turn,
 		jump,
 		fall
 	};
 
 	enum Direction
 	{
+		noDirection,
 		left,
 		right
 	};
 
 	enum JumpState
 	{
-		null,
-		pressed,
-		released
+		ready,
+		buttonPressed,
+		buttonReleased
 	};
 
 

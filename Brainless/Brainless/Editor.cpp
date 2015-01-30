@@ -15,6 +15,7 @@
 Editor::Editor()
 :
 m_editor(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless Editor"),
+m_currentLevelFileIndex(0),
 m_editorMode(EditorModes::Grid),
 m_gridMode(nullptr),
 m_spriteMode(nullptr),
@@ -60,6 +61,7 @@ m_currentSyncID(0)
 	// TODO TEST CODE DONT REMOVE
 	shaderTest = 0;
 
+	loadFile();
 
 	m_gridMode = new EditorGridMode(m_level.getTileMap());
 	m_spriteMode = new EditorSpriteMode(m_level.getDecorations());
@@ -72,7 +74,12 @@ m_currentSyncID(0)
 	m_saveText.setString("File is saved!");
 	m_saveText.setColor(sf::Color::Green);
 
-	loadFile();
+	// Initialize level file text
+	m_levelFileText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+	m_levelFileText.setPosition(200, 0);
+	m_levelFileText.setColor(sf::Color::Green);
+	m_levelFileText.setString("Editing level: level" + std::to_string(m_currentLevelFileIndex) + ".txt");
+
 
 }
 Editor::~Editor()
@@ -89,11 +96,19 @@ void Editor::run()
 
 void Editor::loadFile()
 {
-	FileSave::loadMap(&m_level, 0);
+	if (!FileSave::loadMapText(m_level, m_currentLevelFileIndex))
+	{
+		// Reset the level if the user switched to a map file that doesn't exist
+		//m_level.reset();
+	}
+	//FileSave::loadMap(&m_level, 0);
 }
 void Editor::saveFile()
 {
-	FileSave::saveMap(&m_level, 0);
+	//FileSave::saveMap(&m_level, 0);
+	FileSave::saveMapText(m_level, m_currentLevelFileIndex);
+	m_saveText.setString("File is saved!");
+	m_saveText.setColor(sf::Color::Green);
 }
 
 
@@ -126,9 +141,31 @@ void Editor::loop()
 
 			if (event.type == sf::Event::KeyReleased)
 			{
+				// Toggle menu
 				if (event.key.code == sf::Keyboard::Return)
-				{
 					m_isMenu = !m_isMenu;
+				// Save file
+				else if (event.key.code == sf::Keyboard::S && event.key.control)
+					saveFile();
+
+				// Go down in levels
+				else if (event.key.code == sf::Keyboard::Y)
+				{
+					++m_currentLevelFileIndex;
+					m_currentLevelFileIndex = Utility::clampValue<int>(m_currentLevelFileIndex, 0, INT_MAX);
+
+					m_levelFileText.setString("Editing level: level" + std::to_string(m_currentLevelFileIndex) + ".txt");
+					loadFile();
+				}
+
+				// Go up in levels
+				else if (event.key.code == sf::Keyboard::U)
+				{
+					--m_currentLevelFileIndex;
+					m_currentLevelFileIndex = Utility::clampValue<int>(m_currentLevelFileIndex, 0, INT_MAX);
+
+					m_levelFileText.setString("Editing level: level" + std::to_string(m_currentLevelFileIndex) + ".txt");
+					loadFile();
 				}
 			}
 
@@ -229,14 +266,6 @@ void Editor::loop()
 
 		}
 
-		// Save hotkey
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		{
-			saveFile();
-			m_saveText.setString("File is saved!");
-			m_saveText.setColor(sf::Color::Green);
-		}
-
 		// Update editor camera
 		m_editor.setView(m_camera);
 
@@ -289,6 +318,7 @@ void Editor::draw()
 		case EditorModes::Item: m_itemMode->draw(); break;
 	}
 	Renderer::instance().drawHUD(m_saveText);
+	Renderer::instance().drawHUD(m_levelFileText);
 	Renderer::instance().drawBackground(m_editorBackground);
 	
 	Renderer::instance().executeDraws();

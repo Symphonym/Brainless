@@ -3,7 +3,6 @@
 #include <vector>
 #include <memory>
 #include <math.h>
-
 //
 #include "ResourceLoader.h"
 #include "Constants.h"
@@ -15,6 +14,8 @@
 #include "Tile.h"
 #include "Item.h"
 #include "ItemDatabse.h"
+
+#include "Utility.h"
 
 
 void FileSave::saveMap(Level* stage, int stage_number)
@@ -134,7 +135,6 @@ void FileSave::loadMap(Level* stage, int stage_number)
 		for (int i = 0; i < texture_count; i++)
 		{
 			LevelSprite* texture = new LevelSprite();
-			stage->getDecorations().push_back(*texture);
 			int texture_x = file_content[file_at + 1] * 256 + file_content[file_at + 2];
 			if (file_content[file_at + 0] == 0) texture_x = -texture_x;
 			int texture_y = file_content[file_at + 4] * 256 + file_content[file_at + 5];
@@ -143,13 +143,140 @@ void FileSave::loadMap(Level* stage, int stage_number)
 			texture->drawToForeground = file_content[file_at + 6];
 			file_at += 7;
 			std::string texture_string;
-			for (int j = 0; j < file_content[file_at]; j++)
+			for (int j = 1; j < file_content[file_at]+1; j++)
 			{
 				texture_string += file_content[file_at + j];
 			}
-			file_at += file_content[file_at];
+			file_at += file_content[file_at]+1;
 			texture->textureName = texture_string;
 			texture->sprite.setTexture(ResourceLoader::instance().retrieveTexture(texture_string));
+			stage->getDecorations().push_back(*texture);
 		}
 	}
+}
+
+
+void FileSave::saveMapText(Level &level, int levelNumber)
+{
+	std::ofstream writer("level" + std::to_string(levelNumber) + ".txt");
+
+	// First write the number of rows the map has
+	// This is how many lines the loader should read before moving onto items
+	writer << Constants::MapHeight << std::endl;
+
+	for (int y = 0; y < Constants::MapHeight; y++)
+	{
+		for (int x = 0; x < Constants::MapWidth; x++)
+		{
+			int tileType = static_cast<int>(level.getTileMap().getTile(x, y).getType());
+			writer << tileType;
+
+			if (x != Constants::MapWidth - 1)
+				writer << ",";
+
+		}
+		writer << std::endl;
+	}
+
+	// Write the number of items to read
+	writer << level.getItems().size() << std::endl;
+
+	for (std::size_t i = 0; i < level.getItems().size(); i++)
+	{
+		Item& curItem = *level.getItems()[i].get();
+		writer << curItem.getID() << "," << curItem.getSyncID() << "," << curItem.getPosition().x << "," << curItem.getPosition().y << std::endl;
+	}
+
+	// Write the number of sprites to read
+	writer << level.getDecorations().size() << std::endl;
+
+	for (std::size_t i = 0; i < level.getDecorations().size(); i++)
+	{
+		LevelSprite& curSprite = level.getDecorations()[i];
+		writer << curSprite.drawToForeground << "," << curSprite.textureName << "," << curSprite.sprite.getPosition().x << "," << curSprite.sprite.getPosition().y << std::endl;
+	}
+}
+
+bool FileSave::loadMapText(Level &level, int levelNumber)
+{
+	std::ifstream reader("level" + std::to_string(levelNumber) + ".txt");
+
+	if (reader.is_open())
+	{
+		// Read row count
+		int rowCount = 0;
+		reader >> rowCount;
+
+		// Load tile types
+		for (int y = 0; y < rowCount; y++)
+		{
+			// Read a row
+			std::string line;
+			reader >> line;
+
+			// Loop through the row
+			std::vector<std::string> columns = Utility::splitString(line, ',');
+			for (int x = 0; x < columns.size(); x++)
+			{
+				int tileType = Utility::stringToNumber<int>(columns[x]);
+				level.getTileMap().getTile(x, y).setType(static_cast<Tile::TileTypes>(tileType));
+			}
+		}
+
+		// Read item count
+		int itemCount = 0;
+		reader >> itemCount;
+
+		for (std::size_t i = 0; i < itemCount; i++)
+		{
+			std::string line;
+			reader >> line;
+
+			std::vector<std::string> itemData = Utility::splitString(line, ',');
+
+			// Read item data
+			int itemID = Utility::stringToNumber<int>(itemData[0]);
+			int syncID = Utility::stringToNumber<int>(itemData[1]);
+			float posX = Utility::stringToNumber<float>(itemData[2]);
+			float posY = Utility::stringToNumber<float>(itemData[3]);
+
+			// Create item from data
+			ItemDatabase::ItemPtr item = std::move(ItemDatabase::instance().extractItem(itemID));
+			item->setSyncID(syncID);
+			item->setPosition(sf::Vector2f(posX, posY));
+
+			level.getItems().push_back(std::move(item));
+		}
+
+		// Read sprite count
+		int spriteCount = 0;
+		reader >> spriteCount;
+
+		for (std::size_t i = 0; i < spriteCount; i++)
+		{
+			std::string line;
+			reader >> line;
+
+			std::vector<std::string> spriteData = Utility::splitString(line, ',');
+
+			// Read sprite data
+			bool drawToForeground = Utility::stringToNumber<bool>(spriteData[0]);
+			std::string textureName = spriteData[1];
+			float posX = Utility::stringToNumber<float>(spriteData[2]);
+			float posY = Utility::stringToNumber<float>(spriteData[3]);
+
+			// Create sprite from data
+			LevelSprite levelSprite;
+			levelSprite.drawToForeground = drawToForeground;
+			levelSprite.textureName = textureName;
+			levelSprite.sprite.setPosition(posX, posY);
+			levelSprite.sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
+
+			level.getDecorations().push_back(levelSprite);
+		}
+
+		return true;
+	}
+
+	return false;
 }

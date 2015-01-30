@@ -23,8 +23,8 @@ public:
 
 	// If the item needs custom interaction functionality
 	virtual void update() {};
-	virtual void onInteract(Item &otherItem) {}; // Called when this item iteracts with another item
-	virtual void onInteractedWith(Item &otherItem) {}; // Called when another item interactors with THIS item
+	virtual bool onInteract(Item &otherItem) { return false;  }; // Called when this item iteracts with another item, returning TRUE will destroy THIS item
+	virtual bool onInteractedWith(Item &otherItem) { return false;  }; // Called when another item interactors with THIS item, returning TRUE will destroy THIS item
 	virtual std::string examine() const;
 	virtual std::string onUse() const;
 	virtual std::string onPickUp() const;

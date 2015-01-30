@@ -1,6 +1,6 @@
 #include "Animation.h"
 
-#define ENDFRAME 7 //spritesheet storlek
+#define ENDFRAME 8 //spritesheet storlek
 
 Animation::Animation(int width, int height)
 :

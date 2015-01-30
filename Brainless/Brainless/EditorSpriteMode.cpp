@@ -10,6 +10,7 @@ m_sprites(spriteVector)
 	initializeSprites();
 
 	m_highlightSprite.sprite.setTexture(ResourceLoader::instance().retrieveTexture(m_availableDecorations[m_currentSpriteIndex]));
+	m_highlightSprite.textureName = m_availableDecorations[m_currentSpriteIndex];
 
 	m_layerText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
 	m_layerText.setPosition(30, 100);
@@ -25,8 +26,9 @@ bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &ed
 		m_currentSpriteIndex += event.mouseWheel.delta;
 		m_currentSpriteIndex = Utility::clampValue<int>(m_currentSpriteIndex, 0, m_availableDecorations.size() - 1);
 
-		m_highlightSprite.textureName = m_availableDecorations[m_currentSpriteIndex];
+		
 		m_highlightSprite.sprite.setTexture(ResourceLoader::instance().retrieveTexture(m_availableDecorations[m_currentSpriteIndex]));
+		m_highlightSprite.textureName = m_availableDecorations[m_currentSpriteIndex];
 	}
 	else if (event.type == sf::Event::MouseButtonReleased)
 	{
