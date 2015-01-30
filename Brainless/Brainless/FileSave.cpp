@@ -5,6 +5,7 @@
 #include <math.h>
 
 //
+#include "ResourceLoader.h"
 #include "Constants.h"
 #include "FileSave.h"
 
@@ -148,6 +149,7 @@ void FileSave::loadMap(Level* stage, int stage_number)
 			}
 			file_at += file_content[file_at];
 			texture->textureName = texture_string;
+			texture->sprite.setTexture(ResourceLoader::instance().retrieveTexture(texture_string));
 		}
 	}
 }
