@@ -8,6 +8,10 @@ public:
 	static void saveMap(Level* stage, int stage_number);
 	static void loadMap(Level* stage, int stage_number);
 
+	// Text saving
+	static void saveMapText(Level &level, int levelNumber);
+	static void loadMapText(Level &level, int levelNumber);
+
 	//Saving & loading player progress and misc info
 	static void saveProgress();
 	static void loadProgress();

@@ -129,6 +129,7 @@
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="Utility.cpp" />
     <ClCompile Include="WorldButton.cpp" />
     <ClCompile Include="WrappedText.cpp" />
   </ItemGroup>

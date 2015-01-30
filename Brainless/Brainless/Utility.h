@@ -1,6 +1,10 @@
 #ifndef INCLUDED_UTILITY_H
 #define INCLUDED_UTILITY_H
 
+#include <vector>
+#include <string>
+#include <sstream>
+
 class Utility
 {
 public:
@@ -13,6 +17,18 @@ public:
 			return max;
 		else
 			return value;
+	};
+
+	static std::vector<std::string> splitString(const std::string &stringValue, char delimeter);
+
+	template<typename TNumberType> static TNumberType stringToNumber(const std::string &stringValue)
+	{
+		std::stringstream ss;
+		ss << stringValue;
+
+		TNumberType number;
+		ss >> number;
+		return number;
 	};
 };
 
