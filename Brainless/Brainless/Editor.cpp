@@ -99,7 +99,7 @@ void Editor::loadFile()
 	if (!FileSave::loadMapText(m_level, m_currentLevelFileIndex))
 	{
 		// Reset the level if the user switched to a map file that doesn't exist
-		//m_level.reset();
+		m_level.reset();
 	}
 	//FileSave::loadMap(&m_level, 0);
 }

@@ -21,6 +21,8 @@ public:
 	// Adds a unit to the level and returns a pointer to it
 	Unit* addUnit(UnitPtr unit);
 
+	// Reset everything in the level
+	void reset();
 
 	void update(float deltaTime);
 	void draw(const sf::View &cameraView);

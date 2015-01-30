@@ -23,6 +23,19 @@ Unit* Level::addUnit(UnitPtr unit)
 	return m_units.back().get();
 }
 
+void Level::reset()
+{
+	for (int x = 0; x < Constants::MapWidth; x++)
+	{
+		for (int y = 0; y < Constants::MapHeight; y++)
+			m_tileMap->getTile(x, y).setType(Tile::Ground);
+	}
+
+	m_units.clear();
+	m_items.clear();
+	m_sprites.clear();
+}
+
 void Level::update(float deltaTime)
 {
 	const int unitSpeed = 600;
