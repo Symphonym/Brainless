@@ -14,7 +14,7 @@
 Player::Player(sf::Vector2f startPosition)
 :
 Unit(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y)),
-m_state(idle),
+m_state(noAnimation),
 m_spriteDirection(right),
 m_inputDirection(right),
 m_jumpState(null)
@@ -125,8 +125,6 @@ void Player::updateAnimation(float deltaTime)
 {
 	float runBreakpoint = m_maxSpeed.x * 3 / 4;
 
-
-
 	if (m_inAir)
 	{
 		//JUMP
@@ -201,6 +199,8 @@ void Player::updateAnimation(float deltaTime)
 	}
 
 
+
+
 	/*	slide, //(turning while running)
 	jump,
 	fall*/
@@ -228,6 +228,7 @@ void Player::updateAnimation(float deltaTime)
 			m_sprite->setScale(-1, 1);
 			m_sprite->setPosition(m_position.x + m_spriteOffset.x + m_animation.getWidth(), m_position.y + m_spriteOffset.y);
 		}
+
 		m_sprite->setScale(1, 1);
 		m_sprite->setPosition(sf::Vector2f(m_position.x + m_spriteOffset.x, m_position.y + m_spriteOffset.y));
 	}

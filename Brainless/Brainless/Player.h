@@ -15,6 +15,7 @@ public:
 
 	enum AnimationState
 	{
+		noAnimation,
 		idle,
 		walk,
 		run,
