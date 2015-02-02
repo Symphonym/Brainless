@@ -31,6 +31,7 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	ResourceLoader::instance().loadTexture("testImage", "spritesheet.png");
 	ResourceLoader::instance().loadTexture("InventorySlot", "invSlot.png");
 	ResourceLoader::instance().loadTexture("PlayerSheet", "Spritesheet_Test_v3_2.png");
+	ResourceLoader::instance().loadTexture("PlayerSheetJump", "spritesheet_Skelett_hopp_v1.png");
 
 	//ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
 
@@ -53,6 +54,7 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	loadFile();
 	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(sf::Vector2f(Constants::TileSize * 3, Constants::TileSize * 3.4)))));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
+	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
 }
 Game::~Game()
 {

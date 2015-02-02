@@ -1,4 +1,6 @@
 #include "Player.h"
+#include <iostream> // temp
+using namespace std; //temp
 
 #define MAX_SPEED_X 300
 #define MAX_SPEED_Y 500
@@ -17,7 +19,8 @@ Unit(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2
 m_state(noAnimation),
 m_spriteDirection(right),
 m_inputDirection(noDirection),
-m_jumpState(ready)
+m_jumpState(ready),
+m_jumpPower(0)
 {
 
 }
@@ -81,38 +84,60 @@ void Player::checkPlayerInput()
 		else m_acceleration.x = -m_speed.x * speedSlowDown;
 	}
 	//Jump
-	if (!m_inAir) m_jumpState = ready; // can jump
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	if (m_inAir)
 	{
-
-		if (m_jumpState != buttonReleased)
+		if (m_jumpState == buttonPressed)
 		{
-
-			//jump while in the air
-			if (m_inAir)
-			{
-				if (m_speed.y < -200)
-					m_acceleration.y = -1 * calcAcceleration(0, 500, 0, 300, -1 * m_speed.y);
-				else m_acceleration.y = 0;
-				// vid speedY ca 200
-			}
-			//from ground
-			else
-			{
-				m_speed.y = -300;
-				m_inAir = true;
-				m_jumpState = buttonPressed;
-			}
+			if (m_maxSpeed.y < m_jumpPower) m_jumpPower = m_maxSpeed.y;
+			cout << "jumpPower: " << m_jumpPower << endl;
+			m_speed.y = -m_jumpPower;
+			m_jumpState = inAir;
+			m_inAir = true;
 		}
-		else //stop jump
+		m_jumpState = inAir;
+
+	}
+	else if (!m_inAir && m_jumpState == inAir) m_jumpState = landing; // can jump
+	else if (m_jumpState == landing)
+	{
+		if (m_animation.getPlayOnceDone()) m_jumpState = ready; //beroende på animation, ser bra ut/ kanske  funkar dåligt?
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		if (m_inAir)
 		{
-			m_acceleration.y = 0;
+			m_jumpPower = 0;
+			m_jumpState = inAir;
+		//	cout << "noJump " << endl;
+		}
+		else if (m_jumpState == ready)
+		{
+
+			//from ground
+			m_jumpPower = 200;
+			m_jumpState = buttonPressed;
+		}
+		else if (m_jumpState == buttonPressed)
+		{
+			m_jumpPower++; //bör varieras med tiden senare
+			if (m_animation.getPlayOnceDone()) //force jump //beroende på animation, ser bra ut/ kanske  funkar dåligt?
+			{
+				if (m_maxSpeed.y < m_jumpPower) m_jumpPower = m_maxSpeed.y;
+				cout << "jumpPower: " << m_jumpPower << endl;
+				m_speed.y = -m_jumpPower;
+				m_jumpState = inAir;
+				m_inAir = true;
+			}
 		}
 	}
-	//prevent "re-jump" after releasing button
+	//releasing jump button
 	else if (m_jumpState == buttonPressed)
 	{
-		m_jumpState = buttonReleased;
+		if (m_maxSpeed.y < m_jumpPower) m_jumpPower = m_maxSpeed.y;
+		cout << "jumpPower: " << m_jumpPower << endl;
+		m_speed.y = -m_jumpPower;
+		m_inAir = true; //ska bort sen? allt sånt skötas i game
+		m_jumpState = inAir;
 	}
 	//stop the jump
 	else
@@ -127,27 +152,56 @@ void Player::updateAnimation(float deltaTime)
 	float runBreakpoint = m_maxSpeed.x * 2 / 3;
 
 
-
-	if (m_inAir)
+	//TODO
+	//startJump
+	if (m_jumpState == buttonPressed)
+	{
+		if (m_state != startJump)
+		{
+			m_sprite = &m_spritSheets[1];
+			m_animation.playOnce(0, 2, 0, 10);
+			m_state = startJump;
+		}
+	}
+	//endJump
+	//land
+	else if (m_jumpState == landing)
+	{
+		if (m_state != land)
+		{
+			m_sprite = &m_spritSheets[1];
+			m_animation.playOnce(0, 3, 3, 10);
+			m_state = land;
+		}
+	}
+	else if (m_inAir)
 	{
 		//JUMP
 		if (m_speed.y < 0)
 		{
-			if (m_state != jump)
+			if (m_state == inAirUp);
+			else if (m_state == jump && m_animation.getPlayOnceDone())
 			{
-				m_sprite = &m_spritSheets[0];
-				m_animation.loop(0, 3, 7, 5);
+				m_sprite = &m_spritSheets[1];
+				m_animation.loop(0, 1, 1, 6);
+				m_state = inAirUp;
+			}
+			else if (m_state != jump)
+			{
+				m_sprite = &m_spritSheets[1];
+				m_animation.playOnce(3, 5, 0, 10);
 				m_state = jump;
+
 			}
 		}
 		//FALL
 		else if (0 <= m_speed.y)
 		{
-			if (m_state != fall)
+			if (m_state != inAirFall)
 			{
-				m_sprite = &m_spritSheets[0];
-				m_animation.loop(0, 3, 7, 5);
-				m_state = fall;
+				m_sprite = &m_spritSheets[1];
+				m_animation.loop(0, 1, 2, 6);
+				m_state = inAirFall;
 			}
 		}
 	}
@@ -206,9 +260,7 @@ void Player::updateAnimation(float deltaTime)
 		}
 	//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
 	}
-	//TODO
-	//startJump
-	//endJump
+	
 
 
 	//Sprite mirroring and offset.
