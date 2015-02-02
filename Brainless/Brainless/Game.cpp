@@ -118,7 +118,7 @@ void Game::loop()
 
 		// Update game logic and input
 		m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
-		m_player->checkPlayerInput();
+		m_player->checkPlayerInput(deltaTime);
 		m_level.update(deltaTime);
 		m_inventory->update(m_game);
 		m_popup->update(m_game, m_player->getPosition());

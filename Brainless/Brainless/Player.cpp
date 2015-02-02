@@ -25,7 +25,7 @@ m_jumpPower(0)
 
 }
 
-void Player::checkPlayerInput()
+void Player::checkPlayerInput(float deltaTime)
 {
 	float speedTurnAround = 12;
 	float speedStartAcc = 500;
@@ -83,33 +83,34 @@ void Player::checkPlayerInput()
 		//slow
 		else m_acceleration.x = -m_speed.x * speedSlowDown;
 	}
-	//Jump
+	/* Jump states and conditions */
+	//in Air
 	if (m_inAir)
 	{
+		//"cliffjump"
 		if (m_jumpState == buttonPressed)
 		{
-			if (m_maxSpeed.y < m_jumpPower) m_jumpPower = m_maxSpeed.y;
-			cout << "jumpPower: " << m_jumpPower << endl;
-			m_speed.y = -m_jumpPower;
-			m_jumpState = inAir;
-			m_inAir = true;
+			jump();
 		}
 		m_jumpState = inAir;
-
 	}
-	else if (!m_inAir && m_jumpState == inAir) m_jumpState = landing; // can jump
+	//Start to Land
+	else if (!m_inAir && m_jumpState == inAir) m_jumpState = landing; 
+	//If landed, can jump.
 	else if (m_jumpState == landing)
 	{
-		if (m_animation.getPlayOnceDone()) m_jumpState = ready; //beroende på animation, ser bra ut/ kanske  funkar dåligt?
+		if (m_animation.getPlayOnceDone()) m_jumpState = ready;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	//Pressing jump
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
+		//don't jump
 		if (m_inAir)
 		{
 			m_jumpPower = 0;
 			m_jumpState = inAir;
-		//	cout << "noJump " << endl;
 		}
+		//can jump
 		else if (m_jumpState == ready)
 		{
 
@@ -117,34 +118,35 @@ void Player::checkPlayerInput()
 			m_jumpPower = 200;
 			m_jumpState = buttonPressed;
 		}
+		//has started to jump
 		else if (m_jumpState == buttonPressed)
 		{
-			m_jumpPower++; //bör varieras med tiden senare
-			if (m_animation.getPlayOnceDone()) //force jump //beroende på animation, ser bra ut/ kanske  funkar dåligt?
+			m_jumpPower += deltaTime / 0.3 * 300; //magic number, beroende på animation just nu
+			//force jump
+			if (m_animation.getPlayOnceDone())
 			{
-				if (m_maxSpeed.y < m_jumpPower) m_jumpPower = m_maxSpeed.y;
-				cout << "jumpPower: " << m_jumpPower << endl;
-				m_speed.y = -m_jumpPower;
-				m_jumpState = inAir;
-				m_inAir = true;
+				jump();
 			}
 		}
 	}
 	//releasing jump button
 	else if (m_jumpState == buttonPressed)
 	{
-		if (m_maxSpeed.y < m_jumpPower) m_jumpPower = m_maxSpeed.y;
-		cout << "jumpPower: " << m_jumpPower << endl;
-		m_speed.y = -m_jumpPower;
-		m_inAir = true; //ska bort sen? allt sånt skötas i game
-		m_jumpState = inAir;
-	}
-	//stop the jump
-	else
-	{
-		m_acceleration.y = 0;
+		jump();
 	}
 
+
+}
+
+/* jumps based off m_jumpPower */
+void Player::jump()
+{
+	if (m_maxSpeed.y < m_jumpPower) m_jumpPower = m_maxSpeed.y;
+	cout << "jumpPower: " << m_jumpPower << endl;
+	m_speed.y = -m_jumpPower;
+	m_jumpState = inAir;
+	m_inAir = true;
+	
 }
 
 void Player::updateAnimation(float deltaTime)
@@ -152,7 +154,6 @@ void Player::updateAnimation(float deltaTime)
 	float runBreakpoint = m_maxSpeed.x * 2 / 3;
 
 
-	//TODO
 	//startJump
 	if (m_jumpState == buttonPressed)
 	{
@@ -163,7 +164,6 @@ void Player::updateAnimation(float deltaTime)
 			m_state = startJump;
 		}
 	}
-	//endJump
 	//land
 	else if (m_jumpState == landing)
 	{
@@ -179,18 +179,21 @@ void Player::updateAnimation(float deltaTime)
 		//JUMP
 		if (m_speed.y < 0)
 		{
+
+			//inAir
 			if (m_state == inAirUp);
-			else if (m_state == jump && m_animation.getPlayOnceDone())
+			else if (m_state == endJump && m_animation.getPlayOnceDone())
 			{
 				m_sprite = &m_spritSheets[1];
 				m_animation.loop(0, 1, 1, 6);
 				m_state = inAirUp;
 			}
-			else if (m_state != jump)
+			//endJump
+			else if (m_state != endJump)
 			{
 				m_sprite = &m_spritSheets[1];
 				m_animation.playOnce(3, 5, 0, 10);
-				m_state = jump;
+				m_state = endJump;
 
 			}
 		}
@@ -227,7 +230,7 @@ void Player::updateAnimation(float deltaTime)
 	}
 	//RUN
 	//else if (runBreakpoint <= m_speed.x || m_speed.x <= -runBreakpoint)
-	else if (m_state == run  || ((m_state == startWalk || m_state == endWalk) && m_animation.getPlayOnceDone()))
+	else if (m_state == run || ((m_state == startWalk || m_state == endWalk) && m_animation.getPlayOnceDone()))
 	{
 		if (m_state != run)
 		{
@@ -247,7 +250,7 @@ void Player::updateAnimation(float deltaTime)
 			m_animation.playOnce(0, 3, 0, 8);
 			m_state = startWalk;
 		}
-	//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
+		//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
 	}
 	//END WALK
 	else if (m_speed.x != 0)
@@ -258,9 +261,9 @@ void Player::updateAnimation(float deltaTime)
 			m_animation.playOnce(0, 3, 2, 8);
 			m_state = endWalk;
 		}
-	//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
+		//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
 	}
-	
+
 
 
 	//Sprite mirroring and offset.

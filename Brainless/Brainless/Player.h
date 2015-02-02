@@ -9,7 +9,7 @@ class Player : public Unit
 public:
 	Player(sf::Vector2f startPosition);
 	/* kollar efter playerinput, ska köras innan Unit::updateMovement */
-	void checkPlayerInput();
+	void checkPlayerInput(float deltaTime);
 
 	void updateAnimation(float deltaTime);
 
@@ -22,7 +22,7 @@ public:
 		run,
 		turn,
 		startJump,
-		jump,
+		endJump,
 		inAirUp,
 		inAirFall,
 		land
@@ -54,6 +54,7 @@ private:
 	float m_jumpPower;
 	/* gives an acceleration between minAcceleration and maxAcceleration depending on where value is between minValue and maxValue */
 	static float calcAcceleration(float minAcceleration, float maxAcceleration, float useMinValue, float useMaxValue, float value);
+	void jump();
 };
 
 
