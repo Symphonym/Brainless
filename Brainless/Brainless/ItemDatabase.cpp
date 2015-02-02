@@ -3,8 +3,12 @@
 ItemDatabase::ItemDatabase()
 {
 	// TODO Testing item
-	addItem(ItemPtr(new DefaultItem("TestItem", 0)));
-	addItem(ItemPtr(new DefaultItem("TestItem2", 1)));
+	addItem(ItemPtr(new DefaultItem("TestItem", 0, -1, CombineData(1, 2))));
+	addItem(ItemPtr(new DefaultItem("TestItem2", 1, -1, CombineData(0, 2))));
+	addItem(ItemPtr(new DefaultItem("TestItem3", 2, -1, CombineData(4, 3))));
+	addItem(ItemPtr(new DefaultItem("TestItem4", 3)));
+	addItem(ItemPtr(new DefaultItem("TestItem5", 4, -1, CombineData(2, 3))));
+
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)

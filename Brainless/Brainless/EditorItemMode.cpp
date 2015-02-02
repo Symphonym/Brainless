@@ -5,9 +5,8 @@
 #include "Utility.h"
 #include "Renderer.h"
 
-EditorItemMode::EditorItemMode(std::vector<std::unique_ptr<Item> >& itemVector)
+EditorItemMode::EditorItemMode()
 :
-m_items(itemVector),
 m_currentIndex(1),
 m_currentSyncID(-1)
 {
@@ -29,14 +28,14 @@ m_currentSyncID(-1)
 }
 
 
-void EditorItemMode::reloadDebugText()
+void EditorItemMode::reloadDebugText(Level &level)
 {
 	m_itemInfo.clear();
 
 	// Load debug strings for any items already loaded
-	for (std::size_t i = 0; i < m_items.size(); i++)
+	for (std::size_t i = 0; i < level.getItems().size(); i++)
 	{
-		Item& curItem = *m_items[i].get();
+		Item& curItem = *level.getItems()[i].get();
 
 		sf::Text text;
 		text.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
@@ -50,7 +49,7 @@ void EditorItemMode::reloadDebugText()
 	}
 }
 
-bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &editorWindow)
+bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &editorWindow, Level &level)
 {
 	if (event.type == sf::Event::MouseWheelMoved)
 	{
@@ -69,18 +68,23 @@ bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &edit
 		// Place an item
 		if (event.mouseButton.button == sf::Mouse::Left)
 		{
-			m_items.push_back(std::move(std::unique_ptr<Item>(m_currentItem->clone())));
-			m_items.back()->setSyncID(m_currentSyncID);
+			// Clone the currently selected item
+			std::unique_ptr<Item> newItem(m_currentItem->clone());
+			newItem->setSyncID(m_currentSyncID);
 
 			sf::Text text;
 			text.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
-			text.setString("ID: " + std::to_string(m_items.back()->getID()) + " SyncID: " + std::to_string(m_items.back()->getSyncID()));
+			text.setString("ID: " + std::to_string(newItem->getID()) + " SyncID: " + std::to_string(newItem->getSyncID()));
 
 			sf::Vector2f textPos(
-				m_items.back()->getSprite().getPosition().x + m_items.back()->getSprite().getGlobalBounds().width / 2.f - text.getGlobalBounds().width/2.f,
-				m_items.back()->getSprite().getPosition().y - m_items.back()->getSprite().getGlobalBounds().height/2.f);
+				newItem->getSprite().getPosition().x + newItem->getSprite().getGlobalBounds().width / 2.f - text.getGlobalBounds().width / 2.f,
+				newItem->getSprite().getPosition().y - newItem->getSprite().getGlobalBounds().height / 2.f);
 			text.setPosition(textPos);
 			m_itemInfo.push_back(text);
+
+			// Add new item to level
+			level.addItem(std::move(std::unique_ptr<Item>(m_currentItem->clone())));
+
 			return true;
 		}
 		else if (event.mouseButton.button == sf::Mouse::Right)
@@ -88,11 +92,11 @@ bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &edit
 			sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));
 
 			// Loop through existing sprites and see if the cursor collides with them
-			for (int i = m_items.size() - 1; i >= 0; i--)
+			for (int i = level.getItems().size() - 1; i >= 0; i--)
 			{
-				if (m_items[i]->getSprite().getGlobalBounds().contains(mousePos))
+				if (level.getItems()[i]->getSprite().getGlobalBounds().contains(mousePos))
 				{
-					m_items.erase(m_items.begin() + i);
+					level.removeItem(i);
 					m_itemInfo.erase(m_itemInfo.begin() + i);
 					return true;
 				}

@@ -66,9 +66,9 @@ std::string Item::onPickUp() const
 
 
 
-CombineData::CombineData(int combineIDParam, int productItemIDParam)
+CombineData::CombineData(int targetIDIDParam, int productItemIDParam)
 :
-combineID(combineIDParam),
+targetID(targetIDIDParam),
 productItemID(productItemIDParam)
 {
 
@@ -77,9 +77,9 @@ productItemID(productItemIDParam)
 
 
 
-DefaultItem::DefaultItem(const std::string &textureName, int id, int syncID)
+DefaultItem::DefaultItem(const std::string &textureName, int id, int syncID, CombineData combineData)
 :
-Item(textureName, id, syncID)
+Item(textureName, id, syncID, combineData)
 {
 
 };

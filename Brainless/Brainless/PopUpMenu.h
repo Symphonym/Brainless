@@ -1,32 +1,55 @@
 #ifndef INCLUDED_POP_UP_MENU_H
 #define INCLUDED_POP_UP_MENU_H
 
-#include "WorldButton.h"
+#include <SFML\Graphics.hpp>
 #include <array>
+#include <functional>
+#include <bitset>
+#include "Unit.h"
+#include "Item.h"
 
+class Level;
 class PopUpMenu
 {
 public:
-	PopUpMenu(WorldButton *examine, WorldButton *use, WorldButton *pickUp, sf::Vector2f position);
 
-	//returns a number for which button is pressed
-	//1 = examine,  2 = use, 3 = pickUp, 0 = none
-	int getButtonPressed();
+	enum InteractTypes
+	{
+		Nothing,
+		Use,
+		Pickup,
+		Examine
+	};
 
-	//activates the menu
-	//it deactivates when the player clicks outside the pop up menu
-	void activate();
+	// If this returns true, then the item will be removed from the level
+	// and the memory of the item must be managed.
+	typedef std::function<void(Item*, InteractTypes)> ItemCallback;
 
-	void setPosition(sf::Vector2f pos);
+	PopUpMenu();
 
-	void update(sf::RenderWindow *window);
+	void setPosition(const sf::Vector2f &pos);
+	void setItemCallback(ItemCallback callback);
+
+	void events(const sf::Event &event, const sf::RenderWindow &window, Level &level);
+	void update(const sf::RenderWindow &window, const sf::Vector2f &playerOrigo);
 	void draw();
 
 private:
+
+	static const int UseIndex = 0;
+	static const int PickupIndex = 1;
+	static const int ExamineIndex = 2;
+
+	Item *m_interactItem;
+	ItemCallback m_itemInteractCallback;
+
+	bool m_isShowing;
+
+	// Base position of the popup menu
 	sf::Vector2f m_position;
-	std::array<WorldButton*, 3> m_buttons;
-	sf::IntRect m_hitbox;
-	bool m_isActive;
+
+	std::array<sf::Sprite, 3> m_buttons;
+	std::bitset<3> m_buttonsEnabled;
 };
 
 #endif

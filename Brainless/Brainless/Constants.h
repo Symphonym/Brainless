@@ -21,6 +21,8 @@ public:
 	static const int InventoryWidth = 5;
 	static const int InventoryHeight = 4;
 
+	static const int InteractDistance = 150;
+
 	static const std::string CantPickUpString;
 	static const std::string CantUseString;
 };

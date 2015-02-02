@@ -127,7 +127,7 @@ void FileSave::loadMap(Level* stage, int stage_number)
 			if (file_content[file_at + 3] == 0) item_y = -item_y;
 			item->setPosition(sf::Vector2f(item_x, item_y));
 			item->setSyncID(file_content[file_at + 7]);
-			stage->getItems().push_back(std::move(item));
+			stage->addItem(std::move(item));
 			file_at += 8;
 		}
 		//Loading textures
@@ -150,7 +150,7 @@ void FileSave::loadMap(Level* stage, int stage_number)
 			file_at += file_content[file_at]+1;
 			texture->textureName = texture_string;
 			texture->sprite.setTexture(ResourceLoader::instance().retrieveTexture(texture_string));
-			stage->getDecorations().push_back(*texture);
+			stage->addDecoration(*texture);
 		}
 	}
 }
@@ -192,7 +192,7 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 
 	for (std::size_t i = 0; i < level.getDecorations().size(); i++)
 	{
-		LevelSprite& curSprite = level.getDecorations()[i];
+		const LevelSprite& curSprite = level.getDecorations()[i];
 		writer << curSprite.drawToForeground << "," << curSprite.textureName << "," << curSprite.sprite.getPosition().x << "," << curSprite.sprite.getPosition().y << std::endl;
 	}
 }
@@ -245,7 +245,7 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 			item->setSyncID(syncID);
 			item->setPosition(sf::Vector2f(posX, posY));
 
-			level.getItems().push_back(std::move(item));
+			level.addItem(std::move(item));
 		}
 
 		// Read sprite count
@@ -272,7 +272,7 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 			levelSprite.sprite.setPosition(posX, posY);
 			levelSprite.sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
 
-			level.getDecorations().push_back(levelSprite);
+			level.addDecoration(levelSprite);
 		}
 
 		return true;
