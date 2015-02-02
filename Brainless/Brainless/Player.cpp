@@ -172,7 +172,8 @@ void Player::updateAnimation(float deltaTime)
 		}
 	}
 	//RUN
-	else if (runBreakpoint <= m_speed.x || m_speed.x <= -runBreakpoint)
+	//else if (runBreakpoint <= m_speed.x || m_speed.x <= -runBreakpoint)
+	else if (m_state == run  || ((m_state == startWalk || m_state == endWalk) && m_animation.getPlayOnceDone()))
 	{
 		if (m_state != run)
 		{
