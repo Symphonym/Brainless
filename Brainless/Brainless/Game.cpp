@@ -28,15 +28,34 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	ResourceLoader::instance().loadFont("Game", "VCR_OSD_MONO.ttf");
 	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");
 	ResourceLoader::instance().loadTexture("TestItem2", "wizard_idle.png");
+	ResourceLoader::instance().loadTexture("TestItem3", "craftedTomte.png");
+	ResourceLoader::instance().loadTexture("TestItem4", "craftedTomteTwo.png");
+	ResourceLoader::instance().loadTexture("TestItem5", "testBarrel.png");
 	ResourceLoader::instance().loadTexture("testImage", "spritesheet.png");
 	ResourceLoader::instance().loadTexture("InventorySlot", "invSlot.png");
 	ResourceLoader::instance().loadTexture("PlayerSheet", "Spritesheet_Test_v3_2.png");
 	ResourceLoader::instance().loadTexture("PlayerSheetJump", "spritesheet_Skelett_hopp_v1.png");
 
+	ResourceLoader::instance().loadTexture("PickupButton_Normal", "pickup_normal.png");
+	ResourceLoader::instance().loadTexture("PickupButton_Pressed", "pickup_pressed.png");
+	ResourceLoader::instance().loadTexture("PickupButton_Denied", "pickup_denied.png");
+	ResourceLoader::instance().loadTexture("UseButton_Normal", "use_normal.png");
+	ResourceLoader::instance().loadTexture("UseButton_Pressed", "use_pressed.png");
+	ResourceLoader::instance().loadTexture("UseButton_Denied", "use_denied.png");
+	ResourceLoader::instance().loadTexture("ExamineButton_Normal", "examine_normal.png");
+	ResourceLoader::instance().loadTexture("ExamineButton_Pressed", "examine_pressed.png");
+
 	//ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
 
 	// TODO TEMPORARY, SHOULD NOT BE IN FINAL GAME, prolly put inventory in player class
 	m_inventory = new Inventory();
+	m_popup = new PopUpMenu();
+	m_popup->setItemCallback([&](Item* itm, PopUpMenu::InteractTypes type) -> void
+	{
+		if (type == PopUpMenu::InteractTypes::Pickup)
+			m_inventory->addItem(std::move(m_level.removeItem(itm)));
+
+	});
 
 	// Load a default map with nothing but ground tiles
 	TileMap::TileMapLayout layout;
@@ -59,6 +78,7 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 Game::~Game()
 {
 	delete m_inventory;
+	delete m_popup;
 	//Clear units
 }
 
@@ -86,12 +106,6 @@ void Game::loop()
 		const float cameraSpeed = deltaTime*2000.f;
 		const float zoomSpeed = deltaTime;
 
-		// Update game logic and input
-		m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
-		m_player->checkPlayerInput();
-		m_level.update(deltaTime);
-		m_inventory->update(m_game);
-
 		sf::Event event;
 		while (m_game.pollEvent(event))
 		{
@@ -99,7 +113,15 @@ void Game::loop()
 				m_game.close();
 
 			m_inventory->events(event, m_game, m_level);
+			m_popup->events(event, m_game, m_level);
 		}
+
+		// Update game logic and input
+		m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
+		m_player->checkPlayerInput();
+		m_level.update(deltaTime);
+		m_inventory->update(m_game);
+		m_popup->update(m_game, m_player->getPosition());
 
 		// Camera movement
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
@@ -130,5 +152,6 @@ void Game::draw()
 {
 	m_level.draw(m_camera);
 	m_inventory->draw();
+	m_popup->draw();
 	Renderer::instance().executeDraws();
 }

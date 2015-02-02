@@ -27,6 +27,8 @@ public:
 
 	void draw();
 
+	bool holdingItem() const;
+
 private:
 
 	typedef std::pair<ItemPtr, sf::Sprite> InventoryPair;

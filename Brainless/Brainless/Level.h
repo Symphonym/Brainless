@@ -21,6 +21,17 @@ public:
 	// Adds a unit to the level and returns a pointer to it
 	Unit* addUnit(UnitPtr unit);
 
+	void addItem(ItemPtr item);
+	void addDecoration(const LevelSprite &decoration);
+
+	// Removes an item (if found) from the level and returns it
+	// The item will be destroyed if the return value isn't used
+	ItemPtr removeItem(Item *item);
+	// Remove item by index, much faster than the above alternative
+	ItemPtr removeItem(std::size_t index);
+
+	void removeDecoration(std::size_t index);
+
 	// Reset everything in the level
 	void reset();
 
@@ -28,9 +39,9 @@ public:
 	void draw(const sf::View &cameraView);
 
 	TileMap& getTileMap();
-	std::vector<ItemPtr>& getItems();
-	std::vector<LevelSprite>& getDecorations();
-	std::vector<UnitPtr>& getUnits();
+	const std::vector<ItemPtr>& getItems() const;
+	const std::vector<LevelSprite>& getDecorations() const;
+	const std::vector<UnitPtr>& getUnits() const;
 
 private:
 

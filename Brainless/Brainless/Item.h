@@ -8,9 +8,9 @@
 // Data for combining items
 struct CombineData
 {
-	CombineData(int combineIDParam, int productItemIDParam);
+	CombineData(int targetIDParam, int productItemIDParam);
 
-	int combineID; // ID used to match items that can be combined
+	int targetID; // The ID of the item this can be combined with
 	int productItemID; // ID of the item that is crafted
 };
 
@@ -19,7 +19,7 @@ class Item
 public:
 
 	// TODO Item needs clone functionality, prototype pattern, if we want to be able to inherit from item
-	explicit Item(const std::string &textureName, int id, int syncID, CombineData combineData = CombineData(-1, -1));
+	explicit Item(const std::string &textureName, int id, int syncID = -1, CombineData combineData = CombineData(-1, -1));
 
 	// If the item needs custom interaction functionality
 	virtual void update() {};
@@ -58,7 +58,7 @@ class DefaultItem : public Item
 {
 public:
 
-	explicit DefaultItem(const std::string &textureName, int id, int syncID = -1);
+	explicit DefaultItem(const std::string &textureName, int id, int syncID = -1, CombineData combineData = CombineData(-1, -1));
 
 	virtual Item* clone();
 };

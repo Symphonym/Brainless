@@ -29,6 +29,9 @@ m_currentSyncID(0)
 	ResourceLoader::instance().loadFont("EditorFont", "VCR_OSD_MONO.ttf");
 	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");
 	ResourceLoader::instance().loadTexture("TestItem2", "wizard_idle.png");
+	ResourceLoader::instance().loadTexture("TestItem3", "craftedTomte.png");
+	ResourceLoader::instance().loadTexture("TestItem4", "craftedTomteTwo.png");
+	ResourceLoader::instance().loadTexture("TestItem5", "testBarrel.png");
 	ResourceLoader::instance().loadTexture("EditorLevelSize", "levelsize.png");
 	ResourceLoader::instance().loadTexture("TileButton", "images/tileButton.png");
 	ResourceLoader::instance().loadTexture("TileButtonPressed", "images/tileButtonPressed.png");
@@ -63,8 +66,8 @@ m_currentSyncID(0)
 
 	// Initialize the different editor modes
 	m_gridMode = new EditorGridMode(m_level.getTileMap());
-	m_spriteMode = new EditorSpriteMode(m_level.getDecorations());
-	m_itemMode = new EditorItemMode(m_level.getItems());
+	m_spriteMode = new EditorSpriteMode();
+	m_itemMode = new EditorItemMode();
 
 	// Load the file and reload data for all the modes
 	loadFile();
@@ -105,7 +108,7 @@ void Editor::loadFile()
 	FileSave::loadMapText(m_level, m_currentLevelFileIndex);
 
 	// Reload info for different modes
-	m_itemMode->reloadDebugText();
+	m_itemMode->reloadDebugText(m_level);
 }
 void Editor::saveFile()
 {
@@ -181,10 +184,10 @@ void Editor::loop()
 					somethingChanged = m_gridMode->events(event, m_editor) ? true : somethingChanged;
 					break;
 				case EditorModes::Sprite:
-					somethingChanged = m_spriteMode->events(event, m_editor) ? true : somethingChanged;
+					somethingChanged = m_spriteMode->events(event, m_editor, m_level) ? true : somethingChanged;
 					break;
 				case EditorModes::Item:
-					somethingChanged = m_itemMode->events(event, m_editor) ? true : somethingChanged;
+					somethingChanged = m_itemMode->events(event, m_editor, m_level) ? true : somethingChanged;
 					break;
 				}
 			}

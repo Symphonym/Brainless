@@ -3,9 +3,7 @@
 #include "ResourceLoader.h"
 #include "Renderer.h"
 
-EditorSpriteMode::EditorSpriteMode(std::vector<LevelSprite>& spriteVector)
-:
-m_sprites(spriteVector)
+EditorSpriteMode::EditorSpriteMode()
 {
 	initializeSprites();
 
@@ -18,7 +16,7 @@ m_sprites(spriteVector)
 	m_highlightSprite.drawToForeground = true;
 }
 
-bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &editorWindow)
+bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &editorWindow, Level &level)
 {
 	if (event.type == sf::Event::MouseWheelMoved)
 	{
@@ -40,7 +38,7 @@ bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &ed
 			levelSprite.drawToForeground = m_highlightSprite.drawToForeground;
 			levelSprite.textureName = m_highlightSprite.textureName;
 
-			m_sprites.push_back(levelSprite);
+			level.addDecoration(levelSprite);
 			return true;
 		}
 		else if (event.mouseButton.button == sf::Mouse::Right)
@@ -48,11 +46,11 @@ bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &ed
 			sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));
 
 			// Loop through existing sprites and see if the cursor collides with them
-			for (int i = m_sprites.size()-1; i >= 0; i--)
+			for (int i = level.getDecorations().size()-1; i >= 0; i--)
 			{
-				if (m_sprites[i].sprite.getGlobalBounds().contains(mousePos))
+				if (level.getDecorations()[i].sprite.getGlobalBounds().contains(mousePos))
 				{
-					m_sprites.erase(m_sprites.begin() + i);
+					level.removeDecoration(i);
 					return true;
 				}
 			}

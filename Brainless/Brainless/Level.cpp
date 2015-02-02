@@ -23,6 +23,46 @@ Unit* Level::addUnit(UnitPtr unit)
 	return m_units.back().get();
 }
 
+void Level::addItem(ItemPtr item)
+{
+	m_items.push_back(std::move(item));
+}
+void Level::addDecoration(const LevelSprite &decoration)
+{
+	m_sprites.push_back(decoration);
+}
+
+Level::ItemPtr Level::removeItem(Item *item)
+{
+	ItemPtr itemCopy;
+	for (std::size_t i = 0; i < m_items.size(); i++)
+	{
+		if (m_items[i].get() == item)
+		{
+			itemCopy = std::move(m_items[i]);
+			m_items.erase(m_items.begin() + i);
+		}
+	}
+
+	return std::move(itemCopy);
+}
+Level::ItemPtr Level::removeItem(std::size_t index)
+{
+	ItemPtr itemCopy;
+	if (index < m_items.size())
+	{
+		itemCopy = std::move(m_items[index]);
+		m_items.erase(m_items.begin() + index);
+	}
+	return std::move(itemCopy);
+}
+void Level::removeDecoration(std::size_t index)
+{
+	if (index < m_sprites.size())
+		m_sprites.erase(m_sprites.begin() + index);
+}
+
+
 void Level::reset()
 {
 	for (int x = 0; x < Constants::MapWidth; x++)
@@ -70,15 +110,15 @@ TileMap& Level::getTileMap()
 {
 	return *m_tileMap.get();
 }
-std::vector<Level::ItemPtr>& Level::getItems()
+const std::vector<Level::ItemPtr>& Level::getItems() const
 {
 	return m_items;
 }
-std::vector<LevelSprite>& Level::getDecorations()
+const std::vector<LevelSprite>& Level::getDecorations() const
 {
 	return m_sprites;
 }
-std::vector<Level::UnitPtr>& Level::getUnits()
+const std::vector<Level::UnitPtr>& Level::getUnits() const
 {
 	return m_units;
 }

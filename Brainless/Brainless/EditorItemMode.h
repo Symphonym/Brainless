@@ -4,26 +4,24 @@
 #include <SFML\Graphics.hpp>
 #include <memory>
 #include <vector>
+#include "Level.h"
 
 class Item;
 class EditorItemMode
 {
 public:
 
-	explicit EditorItemMode(std::vector<std::unique_ptr<Item> >& itemVector);
+	explicit EditorItemMode();
 
 	// Reset all extra debug text and load it again
-	void reloadDebugText();
+	void reloadDebugText(Level &level);
 
 	// Returns true if something changed (so editor knows if it needs to resave)
-	bool events(const sf::Event &event, const sf::RenderWindow &editorWindow);
+	bool events(const sf::Event &event, const sf::RenderWindow &editorWindow, Level &level);
 	bool update(float deltaTime, const sf::RenderWindow &editorWindow);
 	void draw();
 
 private:
-
-	// Reference to the item list of the level
-	std::vector<std::unique_ptr<Item> >& m_items;
 
 	// Extra text that is shown only in the editor (per item) when placing items
 	std::vector<sf::Text> m_itemInfo;

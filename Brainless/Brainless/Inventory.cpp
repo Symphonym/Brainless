@@ -65,10 +65,11 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 					// There's an item in the slot that the player pressed, initiate a combine action
 					if (invPair->first)
 					{
-						// Matching combine and product ID, then the action can be done
-						if (m_mouseItem->getCombineData().combineID == invPair->first->getCombineData().combineID &&
-							m_mouseItem->getCombineData().productItemID == invPair->first->getCombineData().productItemID &&
-							m_mouseItem->getCombineData().combineID >= 0 && invPair->first->getCombineData().combineID >= 0) // Must be valid combineID's
+						// Matching (and valid) target and product ID, then the action can be done
+						if (m_mouseItem->getCombineData().targetID >= 0 && invPair->first->getCombineData().targetID >= 0 &&
+							m_mouseItem->getCombineData().targetID == invPair->first->getID() && // ID of selected item matches the targetID of inventory item
+							invPair->first->getCombineData().targetID == m_mouseItem->getID() && //ID of inventory item matches the targetID of selected item
+							m_mouseItem->getCombineData().productItemID == invPair->first->getCombineData().productItemID) // Just make sure they have the same product
 						{
 							int newItemID = m_mouseItem->getCombineData().productItemID;
 
@@ -109,7 +110,7 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 					{
 						if(m_mouseItem->onInteract(unit))
 							delete m_mouseItem.release();
-						unit.onInteractedWith(!m_mouseItem.get());
+						unit.onInteractedWith(*m_mouseItem.get());
 
 						interactedWithUnit = true;
 					}*/
@@ -126,7 +127,7 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 					{
 						// Invoke interaction on world item
 						if (item.onInteractedWith(*m_mouseItem.get()))
-							level.getItems().erase(level.getItems().begin() + i);
+							level.removeItem(i);
 
 						// Invoke interaction handling on mouse item
 						if (m_mouseItem->onInteract(item))
@@ -219,6 +220,15 @@ void Inventory::draw()
 		else
 			Renderer::instance().drawAbove(m_mouseItem->getSprite());
 	}
+}
+
+
+bool Inventory::holdingItem() const
+{
+	if (m_mouseItem)
+		return true;
+	else
+		return false;
 }
 
 

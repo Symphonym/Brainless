@@ -3,16 +3,17 @@
 
 #include <SFML\Graphics.hpp>
 #include "LevelSprite.h"
+#include "Level.h"
 #include <vector>
 
 class EditorSpriteMode
 {
 public:
 
-	EditorSpriteMode(std::vector<LevelSprite>& spriteVector);
+	EditorSpriteMode();
 
 	// Returns true if something changed (so editor knows if it needs to resave)
-	bool events(const sf::Event &event, const sf::RenderWindow &editorWindow);
+	bool events(const sf::Event &event, const sf::RenderWindow &editorWindow, Level &level);
 	bool update(float deltaTime, const sf::RenderWindow &editorWindow);
 	void draw();
 
@@ -31,9 +32,6 @@ private:
 
 	int m_currentSpriteIndex;
 	std::vector<std::string> m_availableDecorations; // List of all decorations available (list of texture names)
-
-	// The list of sprites for the level
-	std::vector<LevelSprite>& m_sprites;
 };
 
 #endif
