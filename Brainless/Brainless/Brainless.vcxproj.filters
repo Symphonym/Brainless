@@ -49,6 +49,9 @@
     <Filter Include="Source Files\Game\Inventory">
       <UniqueIdentifier>{50895dc1-b65e-4c00-b061-e794edf338d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Items">
+      <UniqueIdentifier>{ea717b97-3609-43af-8729-dceef5a00631}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -71,12 +74,6 @@
     </ClCompile>
     <ClCompile Include="Camera2D.cpp">
       <Filter>Source Files\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemDatabase.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="EditorGridMode.cpp">
       <Filter>Source Files\Level Editor</Filter>
@@ -132,6 +129,12 @@
     <ClCompile Include="Utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemDatabase.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -157,12 +160,6 @@
     </ClInclude>
     <ClInclude Include="Utility.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Source Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemDatabse.h">
-      <Filter>Source Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Source Files\Game</Filter>
@@ -214,6 +211,12 @@
     </ClInclude>
     <ClInclude Include="WorldButton.h">
       <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDatabse.h">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
