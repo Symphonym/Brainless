@@ -25,6 +25,8 @@ public:
 	virtual void update() {};
 	virtual bool onInteract(Item &otherItem) { return false;  }; // Called when this item iteracts with another item, returning TRUE will destroy THIS item
 	virtual bool onInteractedWith(Item &otherItem) { return false;  }; // Called when another item interactors with THIS item, returning TRUE will destroy THIS item
+	virtual bool onSync(Item &otherItem) { return false; } // Called this item is used, returning TRUE will destroy this item
+	virtual bool onSyncedWith(Item &otherItem) { return false; } // Called when another item with the same syncID is triggered, returning TRUE will destroy this item
 	virtual std::string examine() const;
 	virtual std::string onUse() const;
 	virtual std::string onPickUp() const;
