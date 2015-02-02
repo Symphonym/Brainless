@@ -6,7 +6,8 @@ Animation::Animation(int width, int height)
 :
 m_width(width),
 m_height(height),
-m_rectangle(0, 0, width, height)
+m_rectangle(0, 0, width, height),
+m_playOnceDone(false)
 {
 }
 
@@ -22,6 +23,7 @@ void Animation::loop(int startFrame, int endFrame, int frameRow, float speed)
 	m_startRow = frameRow;
 	m_endRow = frameRow;
 	m_currentRow = frameRow;
+	m_playOnceDone = false;
 }
 
 void Animation::loop(int startFrame, int endFrame, int startRow, int endRow, float speed)
@@ -35,6 +37,7 @@ void Animation::loop(int startFrame, int endFrame, int startRow, int endRow, flo
 	m_startRow = startRow;
 	m_endRow = endRow;
 	m_currentRow = startRow;
+	m_playOnceDone = false;
 }
 void Animation::playOnce(int startFrame, int endFrame, int frameRow, float speed)
 {
@@ -47,6 +50,7 @@ void Animation::playOnce(int startFrame, int endFrame, int frameRow, float speed
 	m_startRow = frameRow;
 	m_endRow = frameRow;
 	m_currentRow = frameRow;
+	m_playOnceDone = false;
 }
 void Animation::playOnce(int startFrame, int endFrame, int startRow, int endRow, float speed)
 {
@@ -59,6 +63,7 @@ void Animation::playOnce(int startFrame, int endFrame, int startRow, int endRow,
 	m_startRow = startRow;
 	m_endRow = endRow;
 	m_currentRow = startRow;
+	m_playOnceDone = false;
 }
 
 void Animation::stillFrame(int frame, int row)
@@ -83,6 +88,7 @@ sf::IntRect Animation::getRectangle(float deltaTime)
 			//restart loop
 			if (m_currentRow == m_endRow && m_currentFrame > m_endFrame)
 			{
+				m_playOnceDone = true;
 				m_currentFrame = m_startFrame;
 				m_currentRow = m_startRow;
 			}
@@ -108,6 +114,7 @@ sf::IntRect Animation::getRectangle(float deltaTime)
 			//stop loop at endFrame
 			if (m_currentRow == m_endRow && m_currentFrame > m_endFrame)
 			{
+				m_playOnceDone = true;
 				stillFrame(m_endFrame, m_endRow);
 			}
 			//next row
@@ -133,6 +140,10 @@ void Animation::setSpeed(float speed)
 
 }
 
+float Animation::getWidth(){ return m_width; }
+float Animation::getHeight(){ return m_height; }
+int Animation::getCurrentFrame(){ return m_currentFrame; }
+bool Animation::getPlayOnceDone(){ return m_playOnceDone; }
 /*
 returns speed closer minSpeed when value is closer to useMinValue
 returns speed closer maxSpeed when value is closer to useMaxValue

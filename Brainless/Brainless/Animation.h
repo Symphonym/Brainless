@@ -33,8 +33,10 @@ public:
 
 	//Updates the rectangles position
 	sf::IntRect getRectangle(float deltaTime);
-	float getWidth(){ return m_width; }
-	float getHeight(){ return m_height; }
+	float getWidth();
+	float getHeight();
+	int getCurrentFrame();
+	bool getPlayOnceDone();
 
 	/* gives a speed between minSpeed and maxSpeed depending on where value is between minValue and maxValue */
 	static float calcFrameSpeed(float minSpeed, float maxSpeed, float useMinValue, float useMaxValue, float value);
@@ -45,6 +47,7 @@ private:
 	int m_startFrame;
 	int m_endFrame;
 	int m_currentFrame;
+	bool m_playOnceDone;
 	int m_startRow;
 	int m_endRow;
 	int m_currentRow;
