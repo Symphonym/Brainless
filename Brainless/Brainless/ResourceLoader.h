@@ -1,11 +1,8 @@
 #ifndef INCLUDED_RESOURCE_LOADER_H
 #define INCLUDED_RESOURCE_LOADER_H
 
-#include <SFML\Graphics\Texture.hpp>
-#include <SFML\Graphics\Shader.hpp>
-#include <SFML\Graphics\Font.hpp>
-#include <SFML\Audio\Sound.hpp>
-#include <SFML\Audio\Music.hpp>
+#include <SFML\Graphics.hpp>
+#include <SFML\Audio.hpp>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -24,7 +21,7 @@ public:
 	// Retrieve a resource by name
 	sf::Texture& retrieveTexture(const std::string &name);
 	sf::Shader& retrieveShader(const std::string &name);
-	sf::Sound& retrieveSound(const std::string &name);
+	sf::SoundBuffer& retrieveSound(const std::string &name);
 	sf::Music& retrieveMusic(const std::string &name);
 	sf::Font& retrieveFont(const std::string &name);
 
@@ -48,7 +45,7 @@ private:
 
 	typedef std::unique_ptr<sf::Texture> TexturePtr;
 	typedef std::unique_ptr<sf::Shader> ShaderPtr;
-	typedef std::unique_ptr<sf::Sound> SoundPtr;
+	typedef std::unique_ptr<sf::SoundBuffer> SoundPtr;
 	typedef std::unique_ptr<sf::Music> MusicPtr;
 	typedef std::unique_ptr<sf::Font> FontPtr;
 

@@ -49,7 +49,7 @@ const CombineData& Item::getCombineData() const
 	return m_combineData;
 }
 
-std::string Item::examine() const
+std::string Item::onExamine() const
 {
 	return "Nothing interesting.";
 }

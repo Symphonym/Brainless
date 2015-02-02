@@ -43,6 +43,10 @@ public:
 	const std::vector<LevelSprite>& getDecorations() const;
 	const std::vector<UnitPtr>& getUnits() const;
 
+	// Get non-const access to level stuff
+	Item& getItem(std::size_t index);
+	Unit& getUnit(std::size_t index);
+
 private:
 
 	void updateUnitCollision(float deltaTime);

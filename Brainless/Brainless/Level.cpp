@@ -123,6 +123,15 @@ const std::vector<Level::UnitPtr>& Level::getUnits() const
 	return m_units;
 }
 
+Item& Level::getItem(std::size_t index)
+{
+	return *m_items.at(index).get();
+}
+Unit& Level::getUnit(std::size_t index)
+{
+	return *m_units.at(index).get();
+}
+
 
 
 

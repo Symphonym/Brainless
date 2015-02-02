@@ -13,6 +13,7 @@
 #include "FileSave.h"
 #include "TileMap.h"
 #include "Tile.h"
+#include "SoundPlayer.h"
 
 
 
@@ -45,7 +46,8 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	ResourceLoader::instance().loadTexture("ExamineButton_Normal", "examine_normal.png");
 	ResourceLoader::instance().loadTexture("ExamineButton_Pressed", "examine_pressed.png");
 
-	//ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
+	ResourceLoader::instance().loadSound("CoinTestSound", "COINV3.wav");
+
 
 	// TODO TEMPORARY, SHOULD NOT BE IN FINAL GAME, prolly put inventory in player class
 	m_inventory = new Inventory();
@@ -53,7 +55,25 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	m_popup->setItemCallback([&](Item* itm, PopUpMenu::InteractTypes type) -> void
 	{
 		if (type == PopUpMenu::InteractTypes::Pickup)
+		{
+			itm->onPickUp();
 			m_inventory->addItem(std::move(m_level.removeItem(itm)));
+		}
+		else if (type == PopUpMenu::InteractTypes::Use)
+		{
+			itm->onUse();
+
+			// Sync use functionality for sync
+			for (std::size_t i = 0; i < m_level.getItems().size(); i++)
+			{
+				if (m_level.getItems()[i]->getSyncID() == itm->getSyncID())
+					m_level.getItems()[i]->onSyncedWith(*itm);
+			}
+		}
+		else if (type == PopUpMenu::InteractTypes::Examine)
+		{
+			itm->onExamine();
+		}
 
 	});
 
@@ -103,7 +123,6 @@ void Game::loop()
 	{
 		// Get delta time for time based movement
 		float deltaTime = tickClock.restart().asSeconds();
-		const float cameraSpeed = deltaTime*2000.f;
 		const float zoomSpeed = deltaTime;
 
 		sf::Event event;
@@ -111,6 +130,11 @@ void Game::loop()
 		{
 			if (event.type == sf::Event::Closed)
 				m_game.close();
+			if (event.type == sf::Event::KeyReleased)
+			{
+				sf::Vector2f mousePos = m_game.mapPixelToCoords(sf::Mouse::getPosition(m_game));
+				SoundPlayer::instance().playSound("CoinTestSound", mousePos);
+			}
 
 			m_inventory->events(event, m_game, m_level);
 			m_popup->events(event, m_game, m_level);
@@ -122,16 +146,9 @@ void Game::loop()
 		m_level.update(deltaTime);
 		m_inventory->update(m_game);
 		m_popup->update(m_game, m_player->getPosition());
-
-		// Camera movement
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			m_camera.move(0, -cameraSpeed);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			m_camera.move(0, cameraSpeed);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			m_camera.move(-cameraSpeed, 0);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			m_camera.move(cameraSpeed, 0);
+		SoundPlayer::instance().update(
+			deltaTime,
+			sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
 
 		// Camera zoom
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))

@@ -44,11 +44,31 @@ void ResourceLoader::loadShader(const std::string &name, const std::string &file
 }
 void ResourceLoader::loadSound(const std::string &name, const std::string &filePath)
 {
+	auto itr = m_sounds.find(name);
 
+	// A sound by this name does not exist already
+	if (itr == m_sounds.end())
+	{
+		SoundPtr soundPtr = SoundPtr(new sf::SoundBuffer());
+		if (soundPtr->loadFromFile(filePath))
+			m_sounds[name] = std::move(soundPtr);
+		else
+			BRAINLESS_ERROR("The file '" + filePath + "' could not be loaded!");
+	}
 }
 void ResourceLoader::loadMusic(const std::string &name, const std::string &filePath)
 {
+	auto itr = m_music.find(name);
 
+	// A music file by this name does not exist already
+	if (itr == m_music.end())
+	{
+		MusicPtr musicPtr = MusicPtr(new sf::Music());
+		if (musicPtr->openFromFile(filePath))
+			m_music[name] = std::move(musicPtr);
+		else
+			BRAINLESS_ERROR("The file '" + filePath + "' could not be loaded!");
+	}
 }
 void ResourceLoader::loadFont(const std::string &name, const std::string &filePath)
 {
@@ -85,7 +105,7 @@ sf::Shader& ResourceLoader::retrieveShader(const std::string &name)
 	else
 		return *itr->second.get();
 }
-sf::Sound& ResourceLoader::retrieveSound(const std::string &name)
+sf::SoundBuffer& ResourceLoader::retrieveSound(const std::string &name)
 {
 	auto itr = m_sounds.find(name);
 
