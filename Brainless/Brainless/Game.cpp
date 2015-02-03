@@ -142,9 +142,7 @@ void Game::loop()
 			m_level.update(deltaTime);
 			m_inventory->update(m_game);
 			m_popup->update(m_game, m_player->getPosition());
-		}
-		else
-			m_game.setActive(false);
+	
 
 		SoundPlayer::instance().update(
 			deltaTime,
@@ -163,7 +161,9 @@ void Game::loop()
 		draw();
 
 		m_game.display();
-
+		}
+		else
+			m_game.setActive(false);
 	}
 }
 
