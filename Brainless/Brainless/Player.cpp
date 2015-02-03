@@ -1,7 +1,4 @@
 #include "Player.h"
-#include <iostream> // temp
-using namespace std; //temp
-
 #define MAX_SPEED_X (float) 300
 #define MAX_SPEED_Y (float) 700
 #define COLLISION_WIDTH (int) 80
@@ -146,7 +143,6 @@ void Player::checkPlayerInput(float deltaTime)
 void Player::jump()
 {
 	if (m_maxSpeed.y < m_jumpPower) m_jumpPower = m_maxSpeed.y;
-	cout << "jumpPower: " << m_jumpPower << endl;
 	m_jumpFrame = m_animation.getCurrentFrame(); //experimental
 	m_speed.y = -m_jumpPower;
 	m_jumpState = inAir;

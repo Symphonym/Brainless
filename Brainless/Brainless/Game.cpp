@@ -9,6 +9,7 @@
 #include "Utility.h"
 #include "Unit.h"
 #include "Player.h"
+#include "Zombie.h"
 #include "Level.h"
 #include "FileSave.h"
 #include "TileMap.h"
@@ -39,6 +40,7 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	ResourceLoader::instance().loadTexture("InventorySlot", "invSlot.png");
 	ResourceLoader::instance().loadTexture("PlayerSheet", "Spritesheet_Test_v3_2.png");
 	ResourceLoader::instance().loadTexture("PlayerSheetJump", "spritesheet_Skelett_hopp_v1.png");
+	ResourceLoader::instance().loadTexture("Zombie", "Spritesheet_Test_Zombie_v2.png");
 
 	ResourceLoader::instance().loadTexture("PickupButton_Normal", "pickup_normal.png");
 	ResourceLoader::instance().loadTexture("PickupButton_Pressed", "pickup_pressed.png");
@@ -48,7 +50,7 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	ResourceLoader::instance().loadTexture("UseButton_Denied", "use_denied.png");
 	ResourceLoader::instance().loadTexture("ExamineButton_Normal", "examine_normal.png");
 	ResourceLoader::instance().loadTexture("ExamineButton_Pressed", "examine_pressed.png");
-
+	
 	ResourceLoader::instance().loadSound("CoinTestSound", "COINV3.wav");
 
 
@@ -95,6 +97,11 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 
 	loadFile();
 	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(sf::Vector2f(Constants::TileSize * 3, Constants::TileSize * 3.4)))));
+
+	//temp, texture borde laddas in på annat sätt.
+	Zombie* temp = new Zombie(sf::Vector2f(Constants::TileSize * 9, Constants::TileSize * 3));
+	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+	m_level.addUnit(Level::UnitPtr(temp));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
 }

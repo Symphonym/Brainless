@@ -141,6 +141,9 @@
     <ClCompile Include="DialogTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Zombie.cpp">
+      <Filter>Source Files\Unit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="DialogTree.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Zombie.h">
+      <Filter>Source Files\Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
