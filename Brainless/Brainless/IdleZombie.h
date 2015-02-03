@@ -1,8 +1,8 @@
-#ifndef _ZOMBIE
-#define _ZOMBIE
-#include "Unit.h"
+#ifndef _IDLE_ZOMBIE
+#define _IDLE_ZOMBIE
+#include "Zombie.h"
 
-class IdleZombie : public Unit
+class IdleZombie : public Zombie
 {
 public:
 	IdleZombie(sf::Vector2f startPosition);

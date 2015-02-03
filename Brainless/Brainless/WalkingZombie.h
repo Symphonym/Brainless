@@ -1,8 +1,8 @@
 #ifndef _WALKING_ZOMBIE
 #define _WALKING_ZOMBIE
-#include "Unit.h"
+#include "Zombie.h"
 
-class WalkingZombie : public Unit
+class WalkingZombie : public Zombie
 {
 public:
 	WalkingZombie(sf::Vector2f startPosition, int maxLengthX);

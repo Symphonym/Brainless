@@ -13,7 +13,7 @@
 
 WalkingZombie::WalkingZombie(sf::Vector2f startPosition, int maxDisparityX)
 :
-Unit(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y)),
+Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y)),
 m_maxPositionX(maxDisparityX + startPosition.x),
 m_direction(right),
 m_minPositionX(startPosition.x),
