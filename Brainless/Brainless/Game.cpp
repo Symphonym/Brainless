@@ -141,6 +141,30 @@ void Game::loop()
 		//	m_player->checkPlayerInput(deltaTime);
 			m_level.update(deltaTime);
 			m_inventory->update(m_game);
+		//kollision, flytta hjärna
+			for (unsigned int i = 0; i < m_level.getUnits().size(); i++)
+			{
+				Unit* currentUnit = m_level.getUnits()[i].get();
+				if (m_player != currentUnit)
+				{
+					if (currentUnit->getCollisionRect().intersects(m_player->getCollisionRect()))
+					{
+						std::cout << "JAG DOG" << std::endl;
+					}
+				}
+			}
+			/*
+			 for(alla units)
+			 {
+				 if(m_player != currentUnit)
+				 {
+					if(collision)
+					{
+						spelaren Dööööörr dramatiskt
+					}
+				 }
+			 }
+			*/
 			m_popup->update(m_game, m_player->getPosition());
 	
 
