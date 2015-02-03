@@ -20,7 +20,7 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 	m_currentTile.getSprite().setScale(0.8f, 0.8f);
 
 	// Initialize index text
-	m_indexText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+	m_indexText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_indexText.setString("X: 0  Y: 0");
 	m_indexText.setPosition(10, 200);
 }

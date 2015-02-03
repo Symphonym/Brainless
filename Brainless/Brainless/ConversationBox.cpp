@@ -8,7 +8,7 @@ m_playerPortraitTextureName("TestItem5"),
 m_isShown(false),
 m_conversationState(ConversationStates::NPC),
 m_basePosition(0, 0),
-m_dialogBox(sf::Vector2f(0, 0), sf::Vector2f(100, 100), ResourceLoader::instance().retrieveFont("Game"))
+m_dialogBox(sf::Vector2f(0, 0), sf::Vector2f(100, 100), ResourceLoader::instance().retrieveFont("DefaultFont"))
 {
 	m_background.setTexture(ResourceLoader::instance().retrieveTexture("BackgroundTest"));
 	m_dialogBox.setSize(sf::Vector2f(m_background.getGlobalBounds().width / 1.6, m_background.getGlobalBounds().height / 1.3f));
@@ -170,7 +170,7 @@ void ConversationBox::loadNextOptions()
 	for (std::size_t i = 0; i < m_dialog.getCurrentOptions().size(); i++)
 	{
 		sf::Text option;
-		option.setFont(ResourceLoader::instance().retrieveFont("Game"));
+		option.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 		option.setString(m_dialog.getCurrentOptions()[i].first);
 		option.setCharacterSize(15);
 	

@@ -10,9 +10,9 @@ EditorItemMode::EditorItemMode()
 m_currentIndex(1),
 m_currentSyncID(-1)
 {
-	m_currentIndexText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
-	m_currentSyncIDText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
-	m_currentIDText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+	m_currentIndexText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+	m_currentSyncIDText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+	m_currentIDText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 
 	m_currentIndexText.setString("Item index: " + std::to_string(m_currentIndex));
 	m_currentSyncIDText.setString("Sync ID: " + std::to_string(m_currentSyncID));
@@ -38,7 +38,7 @@ void EditorItemMode::reloadDebugText(Level &level)
 		Item& curItem = *level.getItems()[i].get();
 
 		sf::Text text;
-		text.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+		text.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 		text.setString("ID: " + std::to_string(curItem.getID()) + " SyncID: " + std::to_string(curItem.getSyncID()));
 
 		sf::Vector2f textPos(
@@ -73,7 +73,7 @@ bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &edit
 			newItem->setSyncID(m_currentSyncID);
 
 			sf::Text text;
-			text.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+			text.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 			text.setString("ID: " + std::to_string(newItem->getID()) + " SyncID: " + std::to_string(newItem->getSyncID()));
 
 			sf::Vector2f textPos(

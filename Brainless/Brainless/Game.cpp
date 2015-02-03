@@ -23,36 +23,12 @@ Game::Game()
 :
 m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 {
-	DialogTree tree;
-	tree.loadDialogFile("dialog.txt");
-
 	// Set render target to the game
 	Renderer::instance().setTarget(m_game);
 	m_camera = m_game.getDefaultView();
 
 	// Load game resources
-	ResourceLoader::instance().loadFont("Game", "VCR_OSD_MONO.ttf");
-	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");
-	ResourceLoader::instance().loadTexture("TestItem2", "wizard_idle.png");
-	ResourceLoader::instance().loadTexture("TestItem3", "craftedTomte.png");
-	ResourceLoader::instance().loadTexture("TestItem4", "craftedTomteTwo.png");
-	ResourceLoader::instance().loadTexture("TestItem5", "testBarrel.png");
-	ResourceLoader::instance().loadTexture("testImage", "spritesheet.png");
-	ResourceLoader::instance().loadTexture("InventorySlot", "invSlot.png");
-	ResourceLoader::instance().loadTexture("PlayerSheet", "Spritesheet_Test_v3_2.png");
-	ResourceLoader::instance().loadTexture("PlayerSheetJump", "spritesheet_Skelett_hopp_v1.png");
-	ResourceLoader::instance().loadTexture("Zombie", "Spritesheet_Test_Zombie_v2.png");
-
-	ResourceLoader::instance().loadTexture("PickupButton_Normal", "pickup_normal.png");
-	ResourceLoader::instance().loadTexture("PickupButton_Pressed", "pickup_pressed.png");
-	ResourceLoader::instance().loadTexture("PickupButton_Denied", "pickup_denied.png");
-	ResourceLoader::instance().loadTexture("UseButton_Normal", "use_normal.png");
-	ResourceLoader::instance().loadTexture("UseButton_Pressed", "use_pressed.png");
-	ResourceLoader::instance().loadTexture("UseButton_Denied", "use_denied.png");
-	ResourceLoader::instance().loadTexture("ExamineButton_Normal", "examine_normal.png");
-	ResourceLoader::instance().loadTexture("ExamineButton_Pressed", "examine_pressed.png");
-	
-	ResourceLoader::instance().loadSound("CoinTestSound", "COINV3.wav");
+	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Game.txt");
 
 
 	// TODO TEMPORARY, SHOULD NOT BE IN FINAL GAME, prolly put inventory in player class

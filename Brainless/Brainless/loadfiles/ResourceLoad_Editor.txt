@@ -1,0 +1,17 @@
+
+# EDITOR BUTTON TEXTURES
++Texture,images/UI/levelsize.png,EditorLevelSize
++Texture,images/UI/tileButton.png,TileButton
++Texture,images/UI/tileButtonPressed.png,TileButtonPressed
++Texture,images/UI/spriteButton.png,SpriteButton
++Texture,images/UI/spriteButtonPressed.png,SpriteButtonPressed
++Texture,images/UI/itemButton.png,ItemButton
++Texture,images/UI/itemButtonPressed.png,ItemButtonPressed
++Texture,images/UI/resetCameraButton.png,CameraButton
++Texture,images/UI/resetCameraButtonPressed.png,CameraButtonPressed
++Texture,images/UI/saveButton.png,SaveButton
++Texture,images/UI/saveButtonPressed.png,SaveButtonPressed
+
+
+# LOAD EDITOR SHADER
++Shader,shaders/BlackAndWhite.txt,BlackAndWhiteShader

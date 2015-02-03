@@ -8,17 +8,8 @@ m_type(tileType),
 m_tileSprite(),
 m_bounds(bounds)
 {
-	ResourceLoader::instance().loadTexture("GroundCube", "cube.png");
-	ResourceLoader::instance().loadTexture("RedCube", "cubeRed.png");
-	ResourceLoader::instance().loadTexture("BlueCube", "cubeBlue.png");
-	ResourceLoader::instance().loadTexture("AirCube", "cubeNada.png");
-	ResourceLoader::instance().loadTexture("StandardCube", "cubeStandard.png");
-	ResourceLoader::instance().loadTexture("SmoothCube", "cubeSmooth.png");
-
 	updateType();
 
-	// sprite.setTexture(ResourceLoader......);
-	
 	m_tileSprite.setPosition(bounds.left, bounds.top);
 	m_tileSprite.move(spriteOffset);
 }
