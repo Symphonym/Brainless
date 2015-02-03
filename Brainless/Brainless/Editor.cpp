@@ -316,6 +316,7 @@ void Editor::loop()
 
 void Editor::draw()
 {
+	Renderer::instance().drawBackground(m_editorBackground);
 	m_level.draw(m_camera);
 
 	switch (m_editorMode)
@@ -326,7 +327,6 @@ void Editor::draw()
 	}
 	Renderer::instance().drawHUD(m_saveText);
 	Renderer::instance().drawHUD(m_levelFileText);
-	Renderer::instance().drawBackground(m_editorBackground);
 	
 	Renderer::instance().executeDraws();
 }

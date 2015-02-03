@@ -124,9 +124,11 @@ void Game::loop()
 	sf::Clock tickClock;
 	while (m_game.isOpen())
 	{
+
 		// Get delta time for time based movement
 		float deltaTime = tickClock.restart().asSeconds();
 		const float zoomSpeed = deltaTime;
+
 
 		sf::Event event;
 		while (m_game.pollEvent(event))
@@ -142,13 +144,21 @@ void Game::loop()
 			m_inventory->events(event, m_game, m_level);
 			m_popup->events(event, m_game, m_level);
 		}
+		
+		//Pause if out of focus
+		if (m_game.hasFocus())
+		{
+			m_game.setActive(true);
+			// Update game logic and input
+			m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
+			m_player->checkPlayerInput(deltaTime);
+			m_level.update(deltaTime);
+			m_inventory->update(m_game);
+			m_popup->update(m_game, m_player->getPosition());
+		}
+		else
+			m_game.setActive(false);
 
-		// Update game logic and input
-		m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
-		m_player->checkPlayerInput(deltaTime);
-		m_level.update(deltaTime);
-		m_inventory->update(m_game);
-		m_popup->update(m_game, m_player->getPosition());
 		SoundPlayer::instance().update(
 			deltaTime,
 			sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
@@ -164,7 +174,9 @@ void Game::loop()
 
 		m_game.clear(sf::Color::Black);
 		draw();
+
 		m_game.display();
+
 	}
 }
 
