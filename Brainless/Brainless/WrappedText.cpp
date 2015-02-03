@@ -74,7 +74,7 @@ void WrappedText::Update(float deltaTime)
 			m_thisTextRow.setString(m_linesOfText[currentRow]);
 
 			//Removes the highest line if the text height is to big for the box
-			while (m_text.getLocalBounds().height > m_messageBoxSize.y)
+			while (m_text.getGlobalBounds().height > m_messageBoxSize.y)
 			{
 				std::string croppedText = m_text.getString();
 
@@ -92,7 +92,7 @@ void WrappedText::Update(float deltaTime)
 
 			//If the current line of text is to wide,
 			//add the last word to the next line and delete it from the current line
-			if (m_thisTextRow.getLocalBounds().width > m_messageBoxSize.x)
+			if (m_thisTextRow.getGlobalBounds().width > m_messageBoxSize.x)
 			{
 				m_linesOfText.push_back("");
 				currentRow++;
@@ -116,9 +116,12 @@ void WrappedText::Update(float deltaTime)
 	}
 }
 
-void WrappedText::Draw()
+void WrappedText::Draw(bool drawAsHud)
 {
-	Renderer::instance().drawHUD(m_text);
+	if (drawAsHud)
+		Renderer::instance().drawHUD(m_text);
+	else
+		Renderer::instance().drawAbove(m_text);
 }
 
 

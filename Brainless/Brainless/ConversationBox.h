@@ -10,8 +10,6 @@ class ConversationBox
 {
 public:
 
-	ConversationBox();
-
 	void setPosition(const sf::Vector2f &position);
 	void setShown(bool shown);
 
@@ -25,7 +23,13 @@ public:
 	// Change the dialog in use by the box
 	void setDialog(const DialogTree &dialog);
 
+	sf::Vector2f getSize() const;
+
+	static ConversationBox& instance();
+
 private:
+
+	ConversationBox();
 
 	void loadNextOptions();
 

@@ -5,6 +5,11 @@
 
 Item::Item(const std::string &textureName, int id, int syncID, CombineData combineData)
 :
+m_lootable(false),
+m_usable(false),
+m_useString(Constants::CantUseString),
+m_pickupString(Constants::CantPickUpString),
+m_examineString("A pretty normal object, nothing out of the ordinary"),
 m_id(id),
 m_syncID(syncID),
 m_combineData(combineData)
@@ -49,22 +54,26 @@ const CombineData& Item::getCombineData() const
 	return m_combineData;
 }
 
-std::string Item::onExamine() const
+bool Item::isLootable() const
 {
-	return "Nothing interesting.";
+	return m_lootable;
 }
-
-std::string Item::onUse() const
+bool Item::isUsable() const
 {
-	return Constants::CantUseString;
+	return m_usable;
 }
-
-std::string Item::onPickUp() const
+std::string Item::getUseString() const
 {
-	return Constants::CantPickUpString;
+	return m_useString;
 }
-
-
+std::string Item::getPickupString() const
+{
+	return m_pickupString;
+}
+std::string Item::getExamineString() const
+{
+	return m_examineString;
+}
 
 CombineData::CombineData(int targetIDIDParam, int productItemIDParam)
 :
@@ -81,7 +90,7 @@ DefaultItem::DefaultItem(const std::string &textureName, int id, int syncID, Com
 :
 Item(textureName, id, syncID, combineData)
 {
-
+	m_lootable = true;
 };
 
 Item* DefaultItem::clone()

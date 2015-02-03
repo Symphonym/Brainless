@@ -39,6 +39,9 @@ void ConversationBox::setPosition(const sf::Vector2f &position)
 void ConversationBox::setShown(bool shown)
 {
 	m_isShown = shown;
+
+	if (m_isShown)
+		m_conversationState = ConversationStates::NPC;
 }
 
 void ConversationBox::resetCurrentDialog()
@@ -155,6 +158,11 @@ void ConversationBox::draw()
 
 }
 
+sf::Vector2f ConversationBox::getSize() const
+{
+	return sf::Vector2f(m_background.getGlobalBounds().width, m_background.getGlobalBounds().height);
+}
+
 void ConversationBox::setDialog(const DialogTree &dialog)
 {
 	// Copy over the dialog and set the sprite to that of the NPC
@@ -181,4 +189,11 @@ void ConversationBox::loadNextOptions()
 			);
 		m_answers.push_back(option);
 	}
+}
+
+
+ConversationBox& ConversationBox::instance()
+{
+	static ConversationBox convBox;
+	return convBox;
 }

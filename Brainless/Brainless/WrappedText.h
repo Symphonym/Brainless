@@ -21,7 +21,7 @@ public:
 
 	void Update(float deltaTime);
 
-	void Draw();
+	void Draw(bool drawAsHud = true);
 
 	bool isFinished() const;
 

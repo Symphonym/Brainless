@@ -16,8 +16,8 @@
 #include "TileMap.h"
 #include "Tile.h"
 #include "SoundPlayer.h"
-#include "DialogTree.h"
-
+#include "Notification.h"
+#include "ConversationBox.h"
 
 Game::Game()
 :
@@ -36,25 +36,38 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	m_popup = new PopUpMenu();
 	m_popup->setItemCallback([&](Item* itm, PopUpMenu::InteractTypes type) -> void
 	{
+		Notification::instance().setPosition(itm->getPosition());
 		if (type == PopUpMenu::InteractTypes::Pickup)
 		{
-			itm->onPickUp();
-			m_inventory->addItem(std::move(m_level.removeItem(itm)));
+			if (itm->isLootable())
+			{
+				itm->onPickUp();
+				m_inventory->addItem(std::move(m_level.removeItem(itm)));
+			}
+			else
+				Notification::instance().write(itm->getPickupString());
+
 		}
 		else if (type == PopUpMenu::InteractTypes::Use)
 		{
-			itm->onUse();
-
-			// Sync use functionality for sync
-			for (std::size_t i = 0; i < m_level.getItems().size(); i++)
+			if (itm->isUsable())
 			{
-				if (m_level.getItems()[i]->getSyncID() == itm->getSyncID())
-					m_level.getItems()[i]->onSyncedWith(*itm);
+				itm->onUse(m_game);
+
+				// Sync use functionality for sync
+				for (std::size_t i = 0; i < m_level.getItems().size(); i++)
+				{
+					if (m_level.getItems()[i]->getSyncID() == itm->getSyncID())
+						m_level.getItems()[i]->onSyncedWith(*itm);
+				}
 			}
+			else
+				Notification::instance().write(itm->getUseString());
 		}
 		else if (type == PopUpMenu::InteractTypes::Examine)
 		{
 			itm->onExamine();
+			Notification::instance().write(itm->getExamineString());
 		}
 
 	});
@@ -130,6 +143,7 @@ void Game::loop()
 
 			m_inventory->events(event, m_game, m_level);
 			m_popup->events(event, m_game, m_level);
+			ConversationBox::instance().events(event, m_game);
 		}
 		
 		//Pause if out of focus
@@ -141,6 +155,8 @@ void Game::loop()
 		//	m_player->checkPlayerInput(deltaTime);
 			m_level.update(deltaTime);
 			m_inventory->update(m_game);
+			Notification::instance().update(deltaTime);
+			ConversationBox::instance().update(deltaTime, m_game);
 		//kollision, flytta hjärna
 			for (unsigned int i = 0; i < m_level.getUnits().size(); i++)
 			{
@@ -196,5 +212,7 @@ void Game::draw()
 	m_level.draw(m_camera);
 	m_inventory->draw();
 	m_popup->draw();
+	Notification::instance().draw();
+	ConversationBox::instance().draw();
 	Renderer::instance().executeDraws();
 }

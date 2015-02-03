@@ -1,4 +1,5 @@
 #include "ItemDatabse.h"
+#include "GhostItem.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -8,6 +9,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new DefaultItem("TestItem3", 2, -1, CombineData(4, 3))));
 	addItem(ItemPtr(new DefaultItem("TestItem4", 3)));
 	addItem(ItemPtr(new DefaultItem("TestItem5", 4, -1, CombineData(2, 3))));
+	addItem(ItemPtr(new GhostItem("dialog.txt", 5)));
 
 }
 

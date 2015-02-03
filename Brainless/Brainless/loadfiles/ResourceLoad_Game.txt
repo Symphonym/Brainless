@@ -18,5 +18,8 @@
 # INVENTORY TEXTURES
 +Texture,images/UI/invSlot.png,InventorySlot
 
+# CONVERSATION TEXTURES
++Texture,images/UI/convBox.png,BackgroundTest
+
 # TEST SOUND
 +Sound,sounds/COINV3.wav,CoinTestSound
