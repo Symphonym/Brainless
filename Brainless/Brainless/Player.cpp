@@ -1,4 +1,6 @@
 #include "Player.h"
+#include <iostream>
+
 #define MAX_SPEED_X (float) 300
 #define MAX_SPEED_Y (float) 700
 #define COLLISION_WIDTH (int) 80
@@ -210,7 +212,7 @@ void Player::updateAnimation(float deltaTime)
 		}
 	}
 	//IDLE
-	else if (m_speed.x == 0)
+	else if ((-5 < m_speed.x && m_speed.x < 5 ))
 	{
 		if (m_state != idle)
 		{
@@ -264,10 +266,9 @@ void Player::updateAnimation(float deltaTime)
 		}
 		//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
 	}
-	else
+	else 
 	{
-		m_sprite = &m_spriteSheets[0];
-		m_animation.stillFrame(0, 0);
+		std::cout << "FIXA Får ingen animation" << std::endl; //bör inte uppstå, har hittils inte uppstått
 	}
 
 	updateSpriteDirection();
