@@ -51,6 +51,7 @@ private:
 	Direction m_spriteDirection;
 	Direction m_inputDirection;
 	JumpState m_jumpState;
+	int m_jumpFrame;
 	float m_jumpPower;
 	/* gives an acceleration between minAcceleration and maxAcceleration depending on where value is between minValue and maxValue */
 	static float calcAcceleration(float minAcceleration, float maxAcceleration, float useMinValue, float useMaxValue, float value);

@@ -2,12 +2,15 @@
 #include <iostream> // temp
 using namespace std; //temp
 
-#define MAX_SPEED_X 300
-#define MAX_SPEED_Y 500
-#define COLLISION_WIDTH 80
-#define COLLISION_HEIGHT 190
-#define SPRITE_OFFSET_X -85
-#define SPRITE_OFFSET_Y -50
+#define MAX_SPEED_X (float) 300
+#define MAX_SPEED_Y (float) 700
+#define COLLISION_WIDTH (int) 80
+#define COLLISION_HEIGHT (int) 190
+#define SPRITE_OFFSET_X (int) -85
+#define SPRITE_OFFSET_Y (int) -50
+#define JUMP_POWER (float) 400
+#define JUMP_POWER_PER_SEC (float) 200
+#define JUMPANIMFPS (float) 12 //hopp beroende på denna, jumpPower skalas därför beroende på den för att få lika högt hopp
 
 //m_size(sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT)),
 //m_maxSpeed(sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y)),
@@ -20,7 +23,8 @@ m_state(noAnimation),
 m_spriteDirection(right),
 m_inputDirection(noDirection),
 m_jumpState(ready),
-m_jumpPower(0)
+m_jumpPower(0),
+m_jumpFrame(2)
 {
 
 }
@@ -115,13 +119,13 @@ void Player::checkPlayerInput(float deltaTime)
 		{
 
 			//from ground
-			m_jumpPower = 200;
+			m_jumpPower = JUMP_POWER;
 			m_jumpState = buttonPressed;
 		}
 		//has started to jump
 		else if (m_jumpState == buttonPressed)
 		{
-			m_jumpPower += deltaTime / 0.3 * 300; //magic number, beroende på animation just nu
+			m_jumpPower += deltaTime / (3 / JUMPANIMFPS) * JUMP_POWER_PER_SEC; //magic number, beroende på animation just nu
 			//force jump
 			if (m_animation.getPlayOnceDone())
 			{
@@ -143,6 +147,7 @@ void Player::jump()
 {
 	if (m_maxSpeed.y < m_jumpPower) m_jumpPower = m_maxSpeed.y;
 	cout << "jumpPower: " << m_jumpPower << endl;
+	m_jumpFrame = m_animation.getCurrentFrame(); //experimental
 	m_speed.y = -m_jumpPower;
 	m_jumpState = inAir;
 	m_inAir = true;
@@ -151,7 +156,7 @@ void Player::jump()
 
 void Player::updateAnimation(float deltaTime)
 {
-	float runBreakpoint = m_maxSpeed.x * 2 / 3;
+	float runBreakpoint = m_maxSpeed.x * 2 / 3; //används nu endast för att snabba upp run animation beroende på maxSpeed och runBreakpoint
 
 
 	//startJump
@@ -160,7 +165,7 @@ void Player::updateAnimation(float deltaTime)
 		if (m_state != startJump)
 		{
 			m_sprite = &m_spritSheets[1];
-			m_animation.playOnce(0, 2, 0, 10);
+			m_animation.playOnce(0, 2, 0, JUMPANIMFPS);
 			m_state = startJump;
 		}
 	}
@@ -170,8 +175,9 @@ void Player::updateAnimation(float deltaTime)
 		if (m_state != land)
 		{
 			m_sprite = &m_spritSheets[1];
-			m_animation.playOnce(0, 3, 3, 10);
+			m_animation.playOnce(0, 1+m_jumpFrame, 3, JUMPANIMFPS); //jumpFrame = experimental 3
 			m_state = land;
+			m_jumpFrame = 2; //experimental 
 		}
 	}
 	else if (m_inAir)
@@ -185,7 +191,7 @@ void Player::updateAnimation(float deltaTime)
 			else if (m_state == endJump && m_animation.getPlayOnceDone())
 			{
 				m_sprite = &m_spritSheets[1];
-				m_animation.loop(0, 1, 1, 6);
+				m_animation.loop(0, 1, 1, 5);
 				m_state = inAirUp;
 			}
 			//endJump
@@ -235,14 +241,14 @@ void Player::updateAnimation(float deltaTime)
 		if (m_state != run)
 		{
 			m_sprite = &m_spritSheets[0];
-			m_animation.loop(0, 7, 1, 10);
+			m_animation.loop(0, 7, 1, 8);
 			m_state = run;
 		}
-		m_animation.setSpeed(Animation::calcFrameSpeed(10, 15, runBreakpoint, m_maxSpeed.x, abs(m_speed.x)));
+		m_animation.setSpeed(Animation::calcFrameSpeed(8, 12, runBreakpoint, m_maxSpeed.x, abs(m_speed.x)));
 
 	}
 	//START WALK
-	else if (m_speed.x != 0 && (m_inputDirection == right || m_inputDirection == left))
+	else if ((m_speed.x < -5 || 5 < m_speed.x) && (m_inputDirection == right || m_inputDirection == left))
 	{
 		if (m_state != startWalk)
 		{
@@ -253,7 +259,7 @@ void Player::updateAnimation(float deltaTime)
 		//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
 	}
 	//END WALK
-	else if (m_speed.x != 0)
+	else if ((m_speed.x < -5 || 5 < m_speed.x))
 	{
 		if (m_state != endWalk)
 		{
