@@ -145,6 +145,7 @@ void Level::updateUnitCollision(float deltaTime)
 		//std::cout << "BOUNDS X: " << unitBounds.left << " BOUNDS Y: " << unitBounds.top << std::endl;
 		//std::cout << "SIZE X: " << unitBounds.width << " SIZE Y: " << unitBounds.height << std::endl;
 
+		currentUnit->updateTask(deltaTime);
 		currentUnit->updateMovement(Constants::Gravity, deltaTime);
 
 		sf::Vector2i startIndex = m_tileMap->positionToIndex(sf::Vector2f(currentUnit->getPosition().x, currentUnit->getPosition().y));

@@ -118,6 +118,7 @@
     <ClCompile Include="FileSave.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GUIElement.cpp" />
+    <ClCompile Include="IdleZombie.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemDatabase.cpp" />
@@ -132,6 +133,7 @@
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="WalkingZombie.cpp" />
     <ClCompile Include="WorldButton.cpp" />
     <ClCompile Include="WrappedText.cpp" />
     <ClCompile Include="Zombie.cpp" />
@@ -150,6 +152,7 @@
     <ClInclude Include="FileSave.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GUIElement.h" />
+    <ClInclude Include="IdleZombie.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemDatabse.h" />
@@ -164,6 +167,7 @@
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="WalkingZombie.h" />
     <ClInclude Include="WorldButton.h" />
     <ClInclude Include="WrappedText.h" />
     <ClInclude Include="Zombie.h" />

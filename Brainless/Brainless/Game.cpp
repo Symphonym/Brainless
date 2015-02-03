@@ -9,7 +9,8 @@
 #include "Utility.h"
 #include "Unit.h"
 #include "Player.h"
-#include "Zombie.h"
+#include "IdleZombie.h"
+#include "WalkingZombie.h"
 #include "Level.h"
 #include "FileSave.h"
 #include "TileMap.h"
@@ -99,7 +100,10 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(sf::Vector2f(Constants::TileSize * 3, Constants::TileSize * 3.4)))));
 
 	//temp, texture borde laddas in på annat sätt.
-	Zombie* temp = new Zombie(sf::Vector2f(Constants::TileSize * 9, Constants::TileSize * 3));
+	Unit* temp = new WalkingZombie(sf::Vector2f(Constants::TileSize * 9, Constants::TileSize * 3), 100);
+	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+	m_level.addUnit(Level::UnitPtr(temp));
+	temp = new IdleZombie(sf::Vector2f(Constants::TileSize * 8, Constants::TileSize * 3));
 	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 	m_level.addUnit(Level::UnitPtr(temp));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
@@ -158,7 +162,7 @@ void Game::loop()
 			m_game.setActive(true);
 			// Update game logic and input
 			m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
-			m_player->checkPlayerInput(deltaTime);
+		//	m_player->checkPlayerInput(deltaTime);
 			m_level.update(deltaTime);
 			m_inventory->update(m_game);
 			m_popup->update(m_game, m_player->getPosition());

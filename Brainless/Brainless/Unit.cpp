@@ -70,15 +70,15 @@ void Unit::setTexture(int index, sf::Texture& texture)
 	m_sprite->setTexture(texture);
 	//error sheet.size() < 1
 	//error index < 0
-	if (index < m_spritSheets.size())
+	if (index < m_spriteSheets.size())
 	{
-		m_spritSheets[index].setTexture(texture);
+		m_spriteSheets[index].setTexture(texture);
 	}
 }
 
 void Unit::addTexture(sf::Texture& texture)
 {
-	m_spritSheets.push_back(sf::Sprite(texture));
+	m_spriteSheets.push_back(sf::Sprite(texture));
 
 }
 

@@ -147,6 +147,12 @@
     <ClCompile Include="Zombie.cpp">
       <Filter>Source Files\Unit\Zombies</Filter>
     </ClCompile>
+    <ClCompile Include="WalkingZombie.cpp">
+      <Filter>Source Files\Unit\Zombies</Filter>
+    </ClCompile>
+    <ClCompile Include="IdleZombie.cpp">
+      <Filter>Source Files\Unit\Zombies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -237,6 +243,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Zombie.h">
+      <Filter>Source Files\Unit\Zombies</Filter>
+    </ClInclude>
+    <ClInclude Include="WalkingZombie.h">
+      <Filter>Source Files\Unit\Zombies</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleZombie.h">
       <Filter>Source Files\Unit\Zombies</Filter>
     </ClInclude>
   </ItemGroup>
