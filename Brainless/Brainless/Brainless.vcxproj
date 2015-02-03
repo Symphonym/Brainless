@@ -109,6 +109,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Constants.cpp" />
+    <ClCompile Include="ConversationBox.cpp" />
     <ClCompile Include="DialogTree.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorGridMode.cpp" />
@@ -127,6 +128,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PopUpMenu.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="ResourceFile.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -143,6 +145,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="ConversationBox.h" />
     <ClInclude Include="DialogTree.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EditorGridMode.h" />
@@ -161,6 +164,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PopUpMenu.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="ResourceFile.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="Tile.h" />

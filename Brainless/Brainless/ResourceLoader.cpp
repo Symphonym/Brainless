@@ -1,6 +1,7 @@
 #include "ResourceLoader.h"
 #include <stdexcept>
 #include "Error.h"
+#include "ResourceFile.h"
 
 ResourceLoader::ResourceLoader()
 {
@@ -191,4 +192,11 @@ bool ResourceLoader::unloadFont(const std::string &name)
 	}
 	else
 		return false;
+}
+
+
+bool ResourceLoader::loadFromFile(const std::string &fileName)
+{
+	ResourceFile file(fileName);
+	return file.hasLoaded();
 }

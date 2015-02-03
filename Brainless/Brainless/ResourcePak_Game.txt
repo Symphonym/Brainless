@@ -1,0 +1,4 @@
+# Items
++Texture,wizard_idle.png,TestItem2
++Texture,craftedTomte.png,TestItem3
++Texture,craftedTomteTwo.png,TestItem4
