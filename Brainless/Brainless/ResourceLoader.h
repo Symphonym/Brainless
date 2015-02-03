@@ -32,6 +32,9 @@ public:
 	bool unloadMusic(const std::string &name);
 	bool unloadFont(const std::string &name);
 
+	// Load multiple resources from a resource file
+	bool loadFromFile(const std::string &fileName);
+
 	// Returns the names of all textures currently loaded in memory
 	// TODO std::vector<std::string> getTexturesInMemory() const;
 

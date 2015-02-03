@@ -15,7 +15,13 @@
 #include "Tile.h"
 #include "SoundPlayer.h"
 #include "DialogTree.h"
+#include "ConversationBox.h"
 
+
+namespace Test
+{
+	ConversationBox *theBox;
+};
 
 Game::Game()
 :
@@ -29,14 +35,16 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	m_camera = m_game.getDefaultView();
 
 	// Load game resources
+	ResourceLoader::instance().loadFromFile("ResourcePak_Game.txt");
 	ResourceLoader::instance().loadFont("Game", "VCR_OSD_MONO.ttf");
 	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");
-	ResourceLoader::instance().loadTexture("TestItem2", "wizard_idle.png");
-	ResourceLoader::instance().loadTexture("TestItem3", "craftedTomte.png");
-	ResourceLoader::instance().loadTexture("TestItem4", "craftedTomteTwo.png");
+	//ResourceLoader::instance().loadTexture("TestItem2", "wizard_idle.png");
+	//ResourceLoader::instance().loadTexture("TestItem3", "craftedTomte.png");
+	//ResourceLoader::instance().loadTexture("TestItem4", "craftedTomteTwo.png");
 	ResourceLoader::instance().loadTexture("TestItem5", "testBarrel.png");
 	ResourceLoader::instance().loadTexture("testImage", "spritesheet.png");
 	ResourceLoader::instance().loadTexture("InventorySlot", "invSlot.png");
+	ResourceLoader::instance().loadTexture("BackgroundTest", "convBox.png");
 	ResourceLoader::instance().loadTexture("PlayerSheet", "Spritesheet_Test_v3_2.png");
 	ResourceLoader::instance().loadTexture("PlayerSheetJump", "spritesheet_Skelett_hopp_v1.png");
 
@@ -52,7 +60,12 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	ResourceLoader::instance().loadSound("CoinTestSound", "COINV3.wav");
 
 
+
 	// TODO TEMPORARY, SHOULD NOT BE IN FINAL GAME, prolly put inventory in player class
+	Test::theBox = new ConversationBox();
+	Test::theBox->setPosition(sf::Vector2f(100, 100));
+	Test::theBox->setDialog(tree);
+	Test::theBox->setShown(true);
 	m_inventory = new Inventory();
 	m_popup = new PopUpMenu();
 	m_popup->setItemCallback([&](Item* itm, PopUpMenu::InteractTypes type) -> void
@@ -102,6 +115,7 @@ Game::~Game()
 {
 	delete m_inventory;
 	delete m_popup;
+	delete Test::theBox;
 	//Clear units
 }
 
@@ -139,6 +153,7 @@ void Game::loop()
 				SoundPlayer::instance().playSound("CoinTestSound", mousePos);
 			}
 
+			Test::theBox->events(event, m_game);
 			m_inventory->events(event, m_game, m_level);
 			m_popup->events(event, m_game, m_level);
 		}
@@ -149,6 +164,7 @@ void Game::loop()
 		m_level.update(deltaTime);
 		m_inventory->update(m_game);
 		m_popup->update(m_game, m_player->getPosition());
+		Test::theBox->update(deltaTime, m_game);
 		SoundPlayer::instance().update(
 			deltaTime,
 			sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
@@ -173,5 +189,6 @@ void Game::draw()
 	m_level.draw(m_camera);
 	m_inventory->draw();
 	m_popup->draw();
+	Test::theBox->draw();
 	Renderer::instance().executeDraws();
 }

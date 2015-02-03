@@ -1,17 +1,49 @@
 #include "DialogTree.h"
+#include <iostream>
 #include <fstream>
+#include "ResourceLoader.h"
 
 DialogTree::DialogTree()
-{
-}
-
-void DialogTree::update(const sf::RenderWindow &gameWindow)
+:
+m_currentBranch(&m_rootBranch)
 {
 
 }
-void DialogTree::draw()
+DialogTree::DialogTree(const DialogTree &other)
+:
+m_currentBranch(nullptr)
 {
+	operator=(other);
 
+}
+
+DialogTree& DialogTree::operator= (const DialogTree& other)
+{
+	m_rootBranch = other.m_rootBranch;
+	m_currentBranch = &m_rootBranch;
+	m_portraitTextureName = other.m_portraitTextureName;
+	return *this;
+}
+
+void DialogTree::changeBranch(const DialogBranch &branch)
+{
+	m_currentBranch = &branch;
+}
+void DialogTree::resetDialog()
+{
+	m_currentBranch = &m_rootBranch;
+}
+std::string DialogTree::getCurrentDialog() const
+{
+	return m_currentBranch->description;
+}
+const std::vector<DialogBranch::ChildBranch>& DialogTree::getCurrentOptions()
+{
+	return m_currentBranch->branches;
+}
+std::string DialogTree::getPortraitTextureName() const
+{
+	return m_portraitTextureName;
 }
 
 void DialogTree::loadDialogFile(const std::string &fileName)
@@ -20,14 +52,15 @@ void DialogTree::loadDialogFile(const std::string &fileName)
 
 	if (reader.is_open())
 	{
+		std::getline(reader, m_portraitTextureName);
+
 		recursiveLoadFile(m_rootBranch, 0, reader);
 		reader.close();
 	}
-
+	std::cout << "Portrait Texture Name: " << m_portraitTextureName << std::endl;
 	printBranch(m_rootBranch, 0);
 }
 
-#include <iostream>
 void DialogTree::printBranch(DialogBranch &branch, std::size_t indent)
 {
 	std::string indentStr;
@@ -35,18 +68,19 @@ void DialogTree::printBranch(DialogBranch &branch, std::size_t indent)
 	for (int i = 0; i < indent; i++)
 		indentStr += '\t';
 
-	std::cout << indentStr << "DESC: " << std::endl;
+	if (!branch.description.empty())
+		std::cout << indentStr << "Description: " << branch.description <<  std::endl;
 
+	++indent;
 	for (std::size_t i = 0; i < branch.branches.size(); i++)
 	{
-		std::cout << indentStr << "CHILD " << i << ": " << branch.branches[i].first << std::endl;
-		printBranch(*branch.branches[i].second.get(), ++indent);
+		std::cout << indentStr << "Answer " << i << ": " << branch.branches[i].first << std::endl;
+		printBranch(branch.branches[i].second, indent);
 	}
 }
 
-
 // Returns the name of the choice it encountered before exiting
-std::string DialogTree::recursiveLoadFile(DialogBranch &branch, std::size_t indent, std::ifstream &reader)
+std::size_t DialogTree::recursiveLoadFile(DialogBranch &branch, std::size_t indent, std::ifstream &reader)
 {
 	std::string line;
 	std::string optionName;
@@ -54,67 +88,60 @@ std::string DialogTree::recursiveLoadFile(DialogBranch &branch, std::size_t inde
 
 	while (std::getline(reader, line))
 	{
-		// Remove indents (used for readability)
-		std::string::size_type curIndent = line.find_last_of('\t');
-		//line.erase(std::remove(line.begin(), line.end(), '\t'));
-
-		if (curIndent == std::string::npos)
-			curIndent = 0;
-
 		// Skip empty lines
 		if (line.empty())
 			continue;
 
-		char firstChar = line[curIndent];
+		// Check if the next line is earlier in the hierarchy
+		std::size_t nextIndent = 0;
 
+		// Peek first because we don't want to unget incorrectly
+		if (reader.peek() == '\t')
+		{
+			while (reader.get() == '\t')
+				++nextIndent;
+			reader.unget(); // Unget the fail condition on the loop
+		}
+
+		char firstChar = line[0];
+
+		// Lines starting with '#' are choices
 		if (firstChar == '#')
 		{
-			// A new choice was found, add all the description text that's been read to the current branch
-			if (!description.empty())
-				branch.description = description;
-
-			// Get name of the new choice
+			// Parse the text of the choice
 			optionName = line.substr(1, line.size());
+			branch.description = description;
 
-			// If the next line has lower indent, it is earlier in the hierarchy, so end recursion
-			//if (curIndent < indent)
-				//return optionName;
-
-			branch.branches.push_back(std::make_pair(optionName, std::move(DialogBranch::BranchPtr(new DialogBranch()))));
-			recursiveLoadFile(*branch.branches.back().second.get(), curIndent, reader);
+			// Push this new choice as a branch to the parent branch
+			branch.branches.push_back(std::make_pair(optionName, DialogBranch()));
+			
+			// If the next line has more indention, then it has nested information that we can recurse into
+			// The indentation of the nextline is propagated upwards from the recursion
+			if (nextIndent > indent)
+				nextIndent = recursiveLoadFile(branch.branches.back().second, nextIndent, reader);
+			
+			// If the next line is higher up in the hierarchy, do not recurse further
+			if (nextIndent < indent)
+			{
+				branch.description = description;
+				return nextIndent;
+			}
 		}
+
+		// Everything else is description text (not choices)
 		else
 		{
 			description += line;
 
-			std::cout << "PEEK: " << reader.peek() << std::endl;
-
-			// Check if the next line is earlier in the hierarchy
-			std::size_t nextIndent = 0;
-
-			if (reader.peek() == '\t')
-			{
-				while (reader.get() != '\t')
-					++nextIndent;
-			}
-
-
-			// Next line is higher up in the hierarchy, so terminate further reading
-			if (nextIndent < curIndent)
+			// If the next line is higher up in the hierarchy, do not recurse further
+			if (nextIndent < indent)
 			{
 				branch.description = description;
-				return "";
+				return nextIndent;
 			}
-
-			for (std::size_t i = 0; i < nextIndent; i++)
-				reader.unget();
-
-			std::cout << "PEEK: " << reader.peek() << std::endl;
 		}
-
-		
 	}
 
-	return "";
+	return 0;
 }
 

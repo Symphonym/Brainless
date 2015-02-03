@@ -52,6 +52,9 @@
     <Filter Include="Source Files\Game\Items">
       <UniqueIdentifier>{ea717b97-3609-43af-8729-dceef5a00631}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Conversation">
+      <UniqueIdentifier>{f23139c8-aae0-4741-977e-15ec316a5c87}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -139,7 +142,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DialogTree.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Conversation</Filter>
+    </ClCompile>
+    <ClCompile Include="ConversationBox.cpp">
+      <Filter>Source Files\Conversation</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceFile.cpp">
+      <Filter>Source Files\Resource Loading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -228,7 +237,13 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="DialogTree.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Conversation</Filter>
+    </ClInclude>
+    <ClInclude Include="ConversationBox.h">
+      <Filter>Source Files\Conversation</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceFile.h">
+      <Filter>Source Files\Resource Loading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
