@@ -165,15 +165,34 @@ void Level::updateUnitCollision(float deltaTime)
 		currentUnit->setStatus(true);
 
 		bool collision = false;
+		bool onGround = false;
+		bool leftEdge = false;
+		bool rightEdge = false;
+		float glideSpeed = 80;
+
+		sf::FloatRect testRectLeft = sf::FloatRect(unitBounds.left + 1, unitBounds.top + unitBounds.height, 1, 1);
+		sf::FloatRect testRectRight = sf::FloatRect(unitBounds.left + unitBounds.width - 1, unitBounds.top + unitBounds.height, 1, 1);
+
 		for (int x = startIndex.x; x < endIndex.x; x++)
 		{
 			for (int y = startIndex.y; y < endIndex.y; y++)
 			{
 				Tile& currentTile = m_tileMap->getTile(x, y);
 
-				if (currentTile.getType() != Tile::Nothing && currentTile.collidesWith(sf::FloatRect(unitBounds.left + unitBounds.width / 2,unitBounds.top + unitBounds.height,1,1)))
+				if (currentTile.getType() != Tile::Nothing && currentTile.collidesWith(sf::FloatRect(unitBounds.left + 20, unitBounds.top + unitBounds.height, unitBounds.width - 40, 1)))
 				{
-						currentUnit->setStatus(false);
+						currentUnit->setStatus(false);	
+						onGround = true;
+				}
+
+				if (currentTile.getType() != Tile::Nothing && currentTile.collidesWith(testRectLeft))
+				{
+					leftEdge = true;
+				}
+
+				if (currentTile.getType() != Tile::Nothing && currentTile.collidesWith(testRectRight))
+				{
+					rightEdge = true;
 				}
 
 				bool hasCollided = false;
@@ -275,6 +294,24 @@ void Level::updateUnitCollision(float deltaTime)
 				unitBounds = originalBounds;
 
 			}
+		}
+
+		//Checks if the unit is standing at an edge and pushes it off the edge if it does
+		if (!onGround)
+		{
+			if (currentUnit->getSpeed().y == 0)
+			{
+				if (leftEdge && currentUnit->getSpeed().x < glideSpeed && currentUnit->getSpeed().x > -glideSpeed)
+				{
+					currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x + glideSpeed, currentUnit->getSpeed().y));
+					std::cout << "what";
+				}
+				else if (rightEdge && currentUnit->getSpeed().x < glideSpeed && currentUnit->getSpeed().x > -glideSpeed)
+				{
+					currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x - glideSpeed, currentUnit->getSpeed().y));
+					std::cout << "yupp";
+				}
+			}	
 		}
 
 		currentUnit->updateAnimation(deltaTime);
