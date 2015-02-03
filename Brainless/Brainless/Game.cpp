@@ -148,7 +148,7 @@ void Game::loop()
 		//Pause if out of focus
 		if (m_game.hasFocus())
 		{
-			m_game.setFramerateLimit(0);
+			m_game.setActive(true);
 			// Update game logic and input
 			m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
 			m_player->checkPlayerInput(deltaTime);
@@ -157,7 +157,7 @@ void Game::loop()
 			m_popup->update(m_game, m_player->getPosition());
 		}
 		else
-			m_game.setFramerateLimit(10);
+			m_game.setActive(false);
 
 		SoundPlayer::instance().update(
 			deltaTime,
