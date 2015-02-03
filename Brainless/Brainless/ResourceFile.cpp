@@ -47,10 +47,7 @@ void ResourceFile::loadResourceFile(const std::string &fileName)
 				}
 
 				if (resourceType == "Texture")
-				{
 					ResourceLoader::instance().loadTexture(stringData[2], stringData[1]);
-					std::cout << "Loaded texture: " << stringData[2] << "::::" << stringData[1] << std::endl;
-				}
 				else if (resourceType == "Font")
 					ResourceLoader::instance().loadFont(stringData[2], stringData[1]);
 				else if (resourceType == "Sound")
@@ -74,10 +71,7 @@ void ResourceFile::loadResourceFile(const std::string &fileName)
 				}
 
 				if (resourceType == "Texture")
-				{
 					ResourceLoader::instance().unloadTexture(stringData[1]);
-					std::cout << "Removed texture: " << stringData[1] << std::endl;
-				}
 				else if (resourceType == "Font")
 					ResourceLoader::instance().unloadFont(stringData[1]);
 				else if (resourceType == "Sound")
