@@ -28,12 +28,6 @@ public:
 		land
 	};
 
-	enum Direction
-	{
-		noDirection,
-		left,
-		right
-	};
 
 	enum JumpState
 	{
@@ -48,7 +42,7 @@ protected:
 
 private:
 	AnimationState m_state;
-	Direction m_spriteDirection;
+
 	Direction m_inputDirection;
 	JumpState m_jumpState;
 	int m_jumpFrame;

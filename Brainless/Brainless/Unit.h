@@ -31,8 +31,15 @@ public:
 
 	//updates animation
 	virtual void updateAnimation(float deltaTime) = 0;
-
 	sf::Sprite getSprite();
+
+	enum Direction
+	{
+		noDirection,
+		left,
+		right
+	};
+
 
 	sf::Vector2f getPosition() const;
 	sf::Vector2f getSpeed() const;
@@ -55,7 +62,8 @@ protected:
 
 	bool m_inAir;
 	Animation m_animation;
-
+	void updateSpriteDirection();
+	Direction m_spriteDirection;
 private:
 };
 

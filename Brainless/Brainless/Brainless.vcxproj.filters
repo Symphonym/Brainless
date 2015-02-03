@@ -52,6 +52,9 @@
     <Filter Include="Source Files\Game\Items">
       <UniqueIdentifier>{ea717b97-3609-43af-8729-dceef5a00631}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Unit\Zombies">
+      <UniqueIdentifier>{80725798-7b99-480b-8c0f-55c7c7a1aa34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -142,7 +145,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Zombie.cpp">
-      <Filter>Source Files\Unit</Filter>
+      <Filter>Source Files\Unit\Zombies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -234,7 +237,7 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Zombie.h">
-      <Filter>Source Files\Unit</Filter>
+      <Filter>Source Files\Unit\Zombies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
