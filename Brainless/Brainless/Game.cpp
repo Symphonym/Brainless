@@ -9,19 +9,15 @@
 #include "Utility.h"
 #include "Unit.h"
 #include "Player.h"
+#include "IdleZombie.h"
+#include "WalkingZombie.h"
 #include "Level.h"
 #include "FileSave.h"
 #include "TileMap.h"
 #include "Tile.h"
 #include "SoundPlayer.h"
 #include "DialogTree.h"
-#include "ConversationBox.h"
 
-
-namespace Test
-{
-	ConversationBox *theBox;
-};
 
 Game::Game()
 :
@@ -35,18 +31,17 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	m_camera = m_game.getDefaultView();
 
 	// Load game resources
-	ResourceLoader::instance().loadFromFile("ResourcePak_Game.txt");
 	ResourceLoader::instance().loadFont("Game", "VCR_OSD_MONO.ttf");
 	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");
-	//ResourceLoader::instance().loadTexture("TestItem2", "wizard_idle.png");
-	//ResourceLoader::instance().loadTexture("TestItem3", "craftedTomte.png");
-	//ResourceLoader::instance().loadTexture("TestItem4", "craftedTomteTwo.png");
+	ResourceLoader::instance().loadTexture("TestItem2", "wizard_idle.png");
+	ResourceLoader::instance().loadTexture("TestItem3", "craftedTomte.png");
+	ResourceLoader::instance().loadTexture("TestItem4", "craftedTomteTwo.png");
 	ResourceLoader::instance().loadTexture("TestItem5", "testBarrel.png");
 	ResourceLoader::instance().loadTexture("testImage", "spritesheet.png");
 	ResourceLoader::instance().loadTexture("InventorySlot", "invSlot.png");
-	ResourceLoader::instance().loadTexture("BackgroundTest", "convBox.png");
 	ResourceLoader::instance().loadTexture("PlayerSheet", "Spritesheet_Test_v3_2.png");
 	ResourceLoader::instance().loadTexture("PlayerSheetJump", "spritesheet_Skelett_hopp_v1.png");
+	ResourceLoader::instance().loadTexture("Zombie", "Spritesheet_Test_Zombie_v2.png");
 
 	ResourceLoader::instance().loadTexture("PickupButton_Normal", "pickup_normal.png");
 	ResourceLoader::instance().loadTexture("PickupButton_Pressed", "pickup_pressed.png");
@@ -56,16 +51,11 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	ResourceLoader::instance().loadTexture("UseButton_Denied", "use_denied.png");
 	ResourceLoader::instance().loadTexture("ExamineButton_Normal", "examine_normal.png");
 	ResourceLoader::instance().loadTexture("ExamineButton_Pressed", "examine_pressed.png");
-
+	
 	ResourceLoader::instance().loadSound("CoinTestSound", "COINV3.wav");
 
 
-
 	// TODO TEMPORARY, SHOULD NOT BE IN FINAL GAME, prolly put inventory in player class
-	Test::theBox = new ConversationBox();
-	Test::theBox->setPosition(sf::Vector2f(100, 100));
-	Test::theBox->setDialog(tree);
-	Test::theBox->setShown(true);
 	m_inventory = new Inventory();
 	m_popup = new PopUpMenu();
 	m_popup->setItemCallback([&](Item* itm, PopUpMenu::InteractTypes type) -> void
@@ -108,6 +98,14 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 
 	loadFile();
 	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(sf::Vector2f(Constants::TileSize * 3, Constants::TileSize * 3.4)))));
+
+	//temp, texture borde laddas in på annat sätt.
+	Unit* temp = new WalkingZombie(sf::Vector2f(Constants::TileSize * 9, Constants::TileSize * 3), 100);
+	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+	m_level.addUnit(Level::UnitPtr(temp));
+	temp = new IdleZombie(sf::Vector2f(Constants::TileSize * 8, Constants::TileSize * 3));
+	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+	m_level.addUnit(Level::UnitPtr(temp));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
 }
@@ -115,7 +113,6 @@ Game::~Game()
 {
 	delete m_inventory;
 	delete m_popup;
-	delete Test::theBox;
 	//Clear units
 }
 
@@ -138,9 +135,11 @@ void Game::loop()
 	sf::Clock tickClock;
 	while (m_game.isOpen())
 	{
+
 		// Get delta time for time based movement
 		float deltaTime = tickClock.restart().asSeconds();
 		const float zoomSpeed = deltaTime;
+
 
 		sf::Event event;
 		while (m_game.pollEvent(event))
@@ -153,18 +152,24 @@ void Game::loop()
 				SoundPlayer::instance().playSound("CoinTestSound", mousePos);
 			}
 
-			Test::theBox->events(event, m_game);
 			m_inventory->events(event, m_game, m_level);
 			m_popup->events(event, m_game, m_level);
 		}
+		
+		//Pause if out of focus
+		if (m_game.hasFocus())
+		{
+			m_game.setActive(true);
+			// Update game logic and input
+			m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
+		//	m_player->checkPlayerInput(deltaTime);
+			m_level.update(deltaTime);
+			m_inventory->update(m_game);
+			m_popup->update(m_game, m_player->getPosition());
+		}
+		else
+			m_game.setActive(false);
 
-		// Update game logic and input
-		m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
-		m_player->checkPlayerInput(deltaTime);
-		m_level.update(deltaTime);
-		m_inventory->update(m_game);
-		m_popup->update(m_game, m_player->getPosition());
-		Test::theBox->update(deltaTime, m_game);
 		SoundPlayer::instance().update(
 			deltaTime,
 			sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
@@ -180,7 +185,9 @@ void Game::loop()
 
 		m_game.clear(sf::Color::Black);
 		draw();
+
 		m_game.display();
+
 	}
 }
 
@@ -189,6 +196,5 @@ void Game::draw()
 	m_level.draw(m_camera);
 	m_inventory->draw();
 	m_popup->draw();
-	Test::theBox->draw();
 	Renderer::instance().executeDraws();
 }

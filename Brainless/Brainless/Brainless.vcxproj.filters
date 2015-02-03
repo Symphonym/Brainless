@@ -52,8 +52,8 @@
     <Filter Include="Source Files\Game\Items">
       <UniqueIdentifier>{ea717b97-3609-43af-8729-dceef5a00631}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Conversation">
-      <UniqueIdentifier>{f23139c8-aae0-4741-977e-15ec316a5c87}</UniqueIdentifier>
+    <Filter Include="Source Files\Unit\Zombies">
+      <UniqueIdentifier>{80725798-7b99-480b-8c0f-55c7c7a1aa34}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -142,13 +142,16 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DialogTree.cpp">
-      <Filter>Source Files\Conversation</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConversationBox.cpp">
-      <Filter>Source Files\Conversation</Filter>
+    <ClCompile Include="Zombie.cpp">
+      <Filter>Source Files\Unit\Zombies</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceFile.cpp">
-      <Filter>Source Files\Resource Loading</Filter>
+    <ClCompile Include="WalkingZombie.cpp">
+      <Filter>Source Files\Unit\Zombies</Filter>
+    </ClCompile>
+    <ClCompile Include="IdleZombie.cpp">
+      <Filter>Source Files\Unit\Zombies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -237,13 +240,16 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="DialogTree.h">
-      <Filter>Source Files\Conversation</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="ConversationBox.h">
-      <Filter>Source Files\Conversation</Filter>
+    <ClInclude Include="Zombie.h">
+      <Filter>Source Files\Unit\Zombies</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceFile.h">
-      <Filter>Source Files\Resource Loading</Filter>
+    <ClInclude Include="WalkingZombie.h">
+      <Filter>Source Files\Unit\Zombies</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleZombie.h">
+      <Filter>Source Files\Unit\Zombies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
