@@ -1,0 +1,13 @@
+Would you like this item?
+#Yes
+	Why do you want it?
+	#Because I'm god
+		That's stupider
+	#Because I'm sad
+		That's stupid
+		#I Know
+		#No it's not
+#No
+Well fack you then
+
+
