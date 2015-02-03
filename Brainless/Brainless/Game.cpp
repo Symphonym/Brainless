@@ -14,13 +14,16 @@
 #include "TileMap.h"
 #include "Tile.h"
 #include "SoundPlayer.h"
-
+#include "DialogTree.h"
 
 
 Game::Game()
 :
 m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 {
+	DialogTree tree;
+	tree.loadDialogFile("dialog.txt");
+
 	// Set render target to the game
 	Renderer::instance().setTarget(m_game);
 	m_camera = m_game.getDefaultView();

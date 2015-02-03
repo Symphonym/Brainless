@@ -138,6 +138,9 @@
     <ClCompile Include="SoundPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DialogTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -222,6 +225,9 @@
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
     <ClInclude Include="SoundPlayer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogTree.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
