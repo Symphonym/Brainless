@@ -9,5 +9,5 @@ Unit(startPosition, size, maxSpeed, spriteOffset)
 
 bool Zombie::collide(Unit *unit)
 {
-
+	return false;
 }
