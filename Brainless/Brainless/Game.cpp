@@ -145,19 +145,19 @@ void Game::loop()
 			m_popup->events(event, m_game, m_level);
 			ConversationBox::instance().events(event, m_game);
 		}
-		
+
 		//Pause if out of focus
 		if (m_game.hasFocus())
 		{
 			m_game.setActive(true);
 			// Update game logic and input
 			m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
-		//	m_player->checkPlayerInput(deltaTime);
+			//	m_player->checkPlayerInput(deltaTime);
 			m_level.update(deltaTime);
 			m_inventory->update(m_game);
 			Notification::instance().update(deltaTime);
 			ConversationBox::instance().update(deltaTime, m_game);
-		//kollision, flytta hjärna
+			//kollision, flytta hjärna
 			for (unsigned int i = 0; i < m_level.getUnits().size(); i++)
 			{
 				Unit* currentUnit = m_level.getUnits()[i].get();
@@ -165,45 +165,34 @@ void Game::loop()
 				{
 					if (currentUnit->getCollisionRect().intersects(m_player->getCollisionRect()))
 					{
-						std::cout << "JAG DOG" << std::endl;
+						//std::cout << "JAG DOG" << std::endl;
+						m_player->setSpeed(sf::Vector2f(m_player->getSpeed().x + (m_player->getPosition().x - currentUnit->getPosition().x), -200));
 					}
 				}
 			}
-			/*
-			 for(alla units)
-			 {
-				 if(m_player != currentUnit)
-				 {
-					if(collision)
-					{
-						spelaren Dööööörr dramatiskt
-					}
-				 }
-			 }
-			*/
 			m_popup->update(m_game, m_player->getPosition());
-	
 
-		SoundPlayer::instance().update(
-			deltaTime,
-			sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
 
-		// Camera zoom
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-			m_camera.zoom(1.f + zoomSpeed);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-			m_camera.zoom(1.f - zoomSpeed);
+			SoundPlayer::instance().update(
+				deltaTime,
+				sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
 
-		// Update editor camera
-		m_game.setView(m_camera);
+			// Camera zoom
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+				m_camera.zoom(1.f + zoomSpeed);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+				m_camera.zoom(1.f - zoomSpeed);
 
-		m_game.clear(sf::Color::Black);
-		draw();
+			// Update editor camera
+			m_game.setView(m_camera);
 
-		m_game.display();
+			m_game.clear(sf::Color::Black);
+			draw();
 		}
 		else
 			m_game.setActive(false);
+		m_game.display();
+
 	}
 }
 
