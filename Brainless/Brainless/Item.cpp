@@ -3,7 +3,7 @@
 #include "Renderer.h"
 #include "Constants.h"
 
-Item::Item(const std::string &textureName, int id, int syncID, CombineData combineData)
+Item::Item(const std::string &textureName, int id, CombineData combineData)
 :
 m_lootable(false),
 m_usable(false),
@@ -14,7 +14,7 @@ m_useString(Constants::CantUseString),
 m_pickupString(Constants::CantPickUpString),
 m_examineString("A pretty normal object, nothing out of the ordinary"),
 m_id(id),
-m_syncID(syncID),
+m_syncID(-1),
 m_combineData(combineData)
 {
 	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
@@ -97,9 +97,9 @@ productItemID(productItemIDParam)
 
 
 
-DefaultItem::DefaultItem(const std::string &textureName, int id, int syncID, CombineData combineData)
+DefaultItem::DefaultItem(const std::string &textureName, int id, CombineData combineData)
 :
-Item(textureName, id, syncID, combineData)
+Item(textureName, id, combineData)
 {
 	m_lootable = true;
 };

@@ -22,3 +22,8 @@
 
 # GHOST TEST ITEM
 +Texture,images/items/ghostTest.png,GhostTest
+
+# DOOR TEST ITEM
++Texture,images/items/doorOpen.png,DoorOpen
++Texture,images/items/doorClosed.png,DoorClosed
++Texture,images/items/keyTest.png,KeyTest

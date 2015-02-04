@@ -176,9 +176,9 @@ void Editor::loop()
 		}
 
 		//////////////////////////////////////////////////////////////////////////// SHADER TEST CODE
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::T))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 			shaderTest += deltaTime;
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
 			shaderTest -= deltaTime;
 
 		shaderTest = Utility::clampValue<float>(shaderTest, 0, 1);
