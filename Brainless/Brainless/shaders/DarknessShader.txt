@@ -1,0 +1,31 @@
+uniform sampler2D image;
+uniform vec2 playerScreenPosition;
+uniform float lightReachDistance;
+
+void main() {
+	vec4 texel = texture2D(image, gl_TexCoord[0].xy).rgba;
+	gl_FragColor = gl_Color * texel; // Get normal pixel color
+
+	vec2 distanceVector = playerScreenPosition - gl_FragCoord;
+	float distanceToPlayer = sqrt(distanceVector.x*distanceVector.x) + sqrt(distanceVector.y*distanceVector.y);
+
+	const float LightDistance
+	
+	// BLACK AND WHITE CODE
+	/*float greyValue = (texel.r+texel.g+texel.b) / 6.f;
+	gl_FragColor.r = mix(gl_FragColor.r, greyValue, intensityValue);
+	gl_FragColor.g = mix(gl_FragColor.g, greyValue, intensityValue);
+	gl_FragColor.b = mix(gl_FragColor.b, greyValue, intensityValue);*/
+	
+	// SEPIA CODE
+	vec3 tmpSepia = vec3(0,0,0);
+	tmpSepia.r = dot(texel, vec3(.393, .769, .189));
+	tmpSepia.g = dot(texel, vec3(.349, .686, .168));
+	tmpSepia.b = dot(texel, vec3(.272, .534, .131));  
+
+	tmpSepia.rgb = tmpSepia.rgb / 3.f;
+
+	gl_FragColor.r = mix(gl_FragColor.r, tmpSepia.r, intensityValue);
+	gl_FragColor.g = mix(gl_FragColor.g, tmpSepia.g, intensityValue);
+	gl_FragColor.b = mix(gl_FragColor.b, tmpSepia.b, intensityValue);
+}
