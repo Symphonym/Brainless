@@ -30,6 +30,12 @@ void ResourceLoader::loadTexture(const std::string &name, const std::string &fil
 }
 void ResourceLoader::loadShader(const std::string &name, const std::string &filePath)
 {
+	if (!sf::Shader::isAvailable())
+	{
+		BRAINLESS_ERROR("This system does not support shaders, you can't play this game!");
+		return;
+	}
+
 	auto itr = m_shaders.find(name);
 
 	// A shader by this name does not exist already

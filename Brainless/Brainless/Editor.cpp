@@ -189,6 +189,8 @@ void Editor::loop()
 		//sf::Shader &shader = ResourceLoader::instance().retrieveShader("DarknessShader");
 		//shader.setParameter("playerScreenPosition", m_editor.getSize().x/2, m_editor.getSize().y / 2);
 		//shader.setParameter("lightReachDistance", 300);
+
+		//shader.setParameter("mousePos", sf::Mouse::getPosition(m_editor).x, m_editor.getSize().y - sf::Mouse::getPosition(m_editor).y);
 		//////////////////////////////////////////////////////////////////////////// SHADER TEST CODE END
 
 		if (m_isMenu)
