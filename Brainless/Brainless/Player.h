@@ -13,6 +13,8 @@ public:
 
 	void updateAnimation(float deltaTime);
 
+	sf::Vector2f getCameraPosition();
+
 	enum AnimationState
 	{
 		noAnimation,
@@ -50,6 +52,7 @@ private:
 	/* gives an acceleration between minAcceleration and maxAcceleration depending on where value is between minValue and maxValue */
 	static float calcAcceleration(float minAcceleration, float maxAcceleration, float useMinValue, float useMaxValue, float value);
 	void jump();
+	sf::Vector2f m_cameraPos;
 };
 
 
