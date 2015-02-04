@@ -11,6 +11,7 @@
 +Texture,images/tiles/cubeNada.png,AirCube
 +Texture,images/tiles/cubeStandard.png,StandardCube
 +Texture,images/tiles/cubeSmooth.png,SmoothCube
++Texture,images/tiles/cubeTilted.png,TiltCube
 
 # ITEM TEXTURE LOADING
 

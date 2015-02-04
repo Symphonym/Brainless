@@ -186,7 +186,7 @@ void Level::updateUnitCollision(float deltaTime)
 				if (currentUnit->getSpeed().y >= 0)
 				if (currentTile.getType() != Tile::Nothing && currentTile.collidesWith(sf::FloatRect(unitBounds.left + 20, unitBounds.top + unitBounds.height, unitBounds.width - 40, 1)))
 				{
-					if (currentTile.getType() == Tile::TiltUp)
+					if (currentTile.getType() == Tile::Tilt)
 					{
 						if ((unitBounds.left + unitBounds.width + unitBounds.top + unitBounds.height > tileCenter.x + tileCenter.y - 3))
 						{
@@ -202,7 +202,7 @@ void Level::updateUnitCollision(float deltaTime)
 				}
 
 				if (currentUnit->getSpeed().y >= 0)
-				if (currentTile.getType() == Tile::TiltUp && currentTile.collidesWith(leftEdgeRect) || currentTile.getType() == Tile::TiltUp && currentTile.collidesWith(rightEdgeRect))
+				if (currentTile.getType() == Tile::Tilt && currentTile.collidesWith(leftEdgeRect) || currentTile.getType() == Tile::Tilt && currentTile.collidesWith(rightEdgeRect))
 				{
 					if (unitBounds.left + unitBounds.width + unitBounds.top + unitBounds.height > tileCenter.x + tileCenter.y - 3)
 					{
@@ -210,12 +210,12 @@ void Level::updateUnitCollision(float deltaTime)
 					}
 				}
 
-				if (currentTile.getType() != Tile::Nothing && currentTile.getType() != Tile::TiltUp)
+				if (currentTile.getType() != Tile::Nothing && currentTile.getType() != Tile::Tilt)
 				{
 					leftEdge = true;
 				}
 
-				if (currentTile.getType() != Tile::Nothing && currentTile.getType() != Tile::TiltUp)
+				if (currentTile.getType() != Tile::Nothing && currentTile.getType() != Tile::Tilt)
 				{
 					rightEdge = true;
 				}
@@ -236,7 +236,7 @@ void Level::updateUnitCollision(float deltaTime)
 					}
 
 					if (currentUnit->getSpeed().y >= 0)
-					if (currentTile.getType() == Tile::TiltUp && currentTile.collidesWith(unitBounds) && !hasCollided)
+					if (currentTile.getType() == Tile::Tilt && currentTile.collidesWith(unitBounds) && !hasCollided)
 					{
 						collision = true;
 						hasCollided = true;
@@ -245,7 +245,7 @@ void Level::updateUnitCollision(float deltaTime)
 
 						if (currentUnit->getInAir() == false)
 						{
-							if (currentTile.getType() == Tile::TiltUp)
+							if (currentTile.getType() == Tile::Tilt)
 							{
 								currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top - originalBounds.height + tileBounds.width - (originalBounds.left + originalBounds.width - tileBounds.left) + 1));
 								
@@ -260,7 +260,7 @@ void Level::updateUnitCollision(float deltaTime)
 							}
 						}
 
-						if (currentTile.getType() == Tile::TiltUp && unitBounds.left + unitBounds.width + unitBounds.top + unitBounds.height - 2 > tileCenter.x + tileCenter.y)
+						if (currentTile.getType() == Tile::Tilt && unitBounds.left + unitBounds.width + unitBounds.top + unitBounds.height - 2 > tileCenter.x + tileCenter.y)
 						{
 								currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x, 0));
 								currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
@@ -269,7 +269,7 @@ void Level::updateUnitCollision(float deltaTime)
 					}
 
 					// If tile isn't empty and is colliding with the unit
-					if (currentTile.getType() != Tile::Nothing && currentTile.getType() != Tile::TiltUp  && currentTile.collidesWith(unitBounds) && !hasCollided)
+					if (currentTile.getType() != Tile::Nothing && currentTile.getType() != Tile::Tilt  && currentTile.collidesWith(unitBounds) && !hasCollided)
 					{
 						collision = true;
 						hasCollided = true;
