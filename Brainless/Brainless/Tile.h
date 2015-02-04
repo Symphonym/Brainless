@@ -12,7 +12,8 @@ public:
 		Nothing = 0,
 		Ground = 1,
 		Red = 2,
-		Blue = 3
+		Blue = 3,
+		Tilt = 4
 		// Etc
 	};
 
@@ -29,6 +30,7 @@ public:
 
 	const sf::FloatRect& getBounds() const;
 	TileTypes getType() const;
+	bool getTilt() const;
 
 	// Raw acceess to sprite, do not modify if using tile with tilemap
 	sf::Sprite& getSprite();
