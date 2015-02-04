@@ -86,13 +86,13 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	markerImg.create(60, 90, sf::Color::Yellow);
 
 	loadFile();
-	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(sf::Vector2f(Constants::TileSize * 3, Constants::TileSize * 3.4)))));
+	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(sf::Vector2f(Constants::TileSize * 10, Constants::TileSize * 8)))));
 
 	//temp, texture borde laddas in på annat sätt.
 	Unit* temp = new WalkingZombie(sf::Vector2f(Constants::TileSize * 9, Constants::TileSize * 3), 100);
 	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 	m_level.addUnit(Level::UnitPtr(temp));
-	temp = new IdleZombie(sf::Vector2f(Constants::TileSize * 8, Constants::TileSize * 3));
+	temp = new WalkingZombie(sf::Vector2f(Constants::TileSize * 13, Constants::TileSize * 8), 1000);
 	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 	m_level.addUnit(Level::UnitPtr(temp));
 	temp = new IdleZombie(sf::Vector2f(Constants::TileSize * 5, Constants::TileSize * 8));

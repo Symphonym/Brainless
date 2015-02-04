@@ -54,126 +54,128 @@ void Player::updateTask(float deltaTime)
 
 	if (m_damageState == normal)
 	{
-	float speedTurnAround = 12;
-	float speedStartAcc = 500;
-	float speedNormalAcc = 200;
-	float speedSlowDown = 6;
+		float speedTurnAround = 12;
+		float speedStartAcc = 500;
+		float speedNormalAcc = 200;
+		float speedSlowDown = 6;
 
-	float startAccBreakpoint = 150;
-	float minSpeedBeforeStop = 10;
+		float startAccBreakpoint = 150;
+		float minSpeedBeforeStop = 10;
 
 
 
-	bool slowDown = true;
-	m_inputDirection = noDirection;
-	//Left
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	{
-		if (20 < m_speed.x) //wrong direcion - slow character
+		bool slowDown = true;
+		m_inputDirection = noDirection;
+		//Left
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			m_acceleration.x = -m_speed.x * speedTurnAround;
-		}
-		else
-		{
-			if (abs(m_speed.x) < startAccBreakpoint)
-				m_acceleration.x = -speedStartAcc;
+			if (20 < m_speed.x) //wrong direcion - slow character
+			{
+				m_acceleration.x = -m_speed.x * speedTurnAround;
+			}
 			else
-				m_acceleration.x = -speedNormalAcc;
-		}
+			{
+				if (abs(m_speed.x) < startAccBreakpoint)
+					m_acceleration.x = -speedStartAcc;
+				else
+					m_acceleration.x = -speedNormalAcc;
+			}
 
-		slowDown = false;
-		m_inputDirection = left;
-	}
-	//Right
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
-		if (m_speed.x < -20) //wrong direcion - slow character
-		{
-			m_acceleration.x = -m_speed.x * speedTurnAround;
+			slowDown = false;
+			m_inputDirection = left;
 		}
-		else
+		//Right
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			if (abs(m_speed.x) < startAccBreakpoint)
-				m_acceleration.x = speedStartAcc;
+			if (m_speed.x < -20) //wrong direcion - slow character
+			{
+				m_acceleration.x = -m_speed.x * speedTurnAround;
+			}
 			else
-				m_acceleration.x = speedNormalAcc;
+			{
+				if (abs(m_speed.x) < startAccBreakpoint)
+					m_acceleration.x = speedStartAcc;
+				else
+					m_acceleration.x = speedNormalAcc;
+			}
+			slowDown = false;
+			m_inputDirection = right;
 		}
-		slowDown = false;
-		m_inputDirection = right;
-	}
 
 
 
 
-	if (slowDown)
-	{
-		//small values = stop totally
-		if (m_speed.x < minSpeedBeforeStop && m_speed.x > -minSpeedBeforeStop)
+		if (slowDown)
 		{
-			m_speed.x = 0;
-			m_acceleration.x = 0;
+			//small values = stop totally
+			if (m_speed.x < minSpeedBeforeStop && m_speed.x > -minSpeedBeforeStop)
+			{
+				m_speed.x = 0;
+				m_acceleration.x = 0;
+			}
+			//slow
+			else m_acceleration.x = -m_speed.x * speedSlowDown;
 		}
-		//slow
-		else m_acceleration.x = -m_speed.x * speedSlowDown;
-	}
-	/* Jump states and conditions */
-	//in Air
-	if (m_inAir)
-	{
-		//"cliffjump"
-		if (m_jumpState == buttonPressed)
-		{
-			jump();
-		}
-		m_jumpState = inAir;
-	}
-	//Start to Land
-	else if (!m_inAir && m_jumpState == inAir) m_jumpState = landing; 
-	//If landed, can jump.
-	else if (m_jumpState == landing)
-	{
-		if (m_animation.getPlayOnceDone()) m_jumpState = ready;
-	}
-	//Pressing jump
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-	{
-		//don't jump
+		/* Jump states and conditions */
+		//in Air
 		if (m_inAir)
 		{
-			m_jumpPower = 0;
-			m_jumpState = inAir;
-		}
-		//can jump
-		else if (m_jumpState == ready)
-		{
-
-			//from ground
-			m_jumpPower = JUMP_POWER;
-			m_jumpState = buttonPressed;
-		}
-		//has started to jump
-		else if (m_jumpState == buttonPressed)
-		{
-			m_jumpPower += deltaTime / (3 / JUMPANIMFPS) * JUMP_POWER_PER_SEC; //magic number, beroende på animation just nu
-			//force jump
-			if (m_animation.getPlayOnceDone())
+			//"cliffjump"
+			if (m_jumpState == buttonPressed)
 			{
 				jump();
 			}
+			m_jumpState = inAir;
 		}
-	}
-	//releasing jump button
-	else if (m_jumpState == buttonPressed)
-	{
-		jump();
-	}
+		//Start to Land
+		else if (!m_inAir && m_jumpState == inAir) m_jumpState = landing; 
+		//If landed, can jump.
+		else if (m_jumpState == landing)
+		{
+			if (m_animation.getPlayOnceDone()) m_jumpState = ready;
+		}
+		//Pressing jump
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		{
+			//don't jump
+			if (m_inAir)
+			{
+				m_jumpPower = 0;
+				m_jumpState = inAir;
+			}
+			//can jump
+			else if (m_jumpState == ready)
+			{
+
+				//from ground
+				m_jumpPower = JUMP_POWER;
+				m_jumpState = buttonPressed;
+			}
+			//has started to jump
+			else if (m_jumpState == buttonPressed)
+			{
+				m_jumpPower += deltaTime / (3 / JUMPANIMFPS) * JUMP_POWER_PER_SEC; //magic number, beroende på animation just nu
+				//force jump
+				if (m_animation.getPlayOnceDone())
+				{
+					jump();
+				}
+			}
+		}
+		//releasing jump button
+		else if (m_jumpState == buttonPressed)
+		{
+			jump();
+		}
 
 	}
 	else if (m_damageState == takingDamage)
 	{
-		if (m_animState == takingDamageAnim && m_animation.getPlayOnceDone())
+		//if (m_animState == takingDamageAnim && m_animation.getPlayOnceDone())
+		if (!m_inAir)
 		{
 			m_damageState = normal;
+			m_speed.x = 0;
 		}
 		//gör cool pushback rörelse
 	}
@@ -184,8 +186,7 @@ void Player::updateTask(float deltaTime)
 			m_acceleration = sf::Vector2f(0, 0);
 			m_speed.x = 0;
 		}
-
-}
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
 		m_damageState = normal;
@@ -206,7 +207,7 @@ void Player::takesDamage(sf::Vector2f collisionDifference)
 		m_inAir = true;
 		//deny jump
 		m_jumpPower = 0;
-		m_jumpState = inAir;
+		m_jumpState = ready;
 		//specialSpriteDirection is set in animationUpdate
 		if (0 < collisionDifference.x) m_spriteDirection = right;
 		else m_spriteDirection = left;
@@ -262,7 +263,7 @@ void Player::updateAnimation(float deltaTime)
 		if (m_animState != takingDamageAnim)
 		{
 			m_sprite = &m_spriteSheets[0];
-			m_animation.playOnce(0, 1, 6, 3);
+			m_animation.playOnce(0, 1, 6, 2);
 			m_animState = takingDamageAnim;
 		}
 	}
