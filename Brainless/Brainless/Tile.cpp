@@ -49,6 +49,10 @@ bool Tile::getTilt() const
 	return m_type == Tilt;
 }
 
+bool Tile::getPlatform() const
+{
+	return m_type == Platform;
+}
 
 void Tile::updateType()
 {
@@ -68,6 +72,9 @@ void Tile::updateType()
 		break;
 	case Tilt:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("TiltCube"));
+		break;
+	case Platform:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("PlatformCube"));
 		break;
 		// TODO Load texture based on type
 	}
