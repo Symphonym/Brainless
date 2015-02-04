@@ -61,6 +61,7 @@ protected:
 	sf::Sprite* m_sprite;
 	sf::Vector2f m_spriteOffset;
 
+	bool m_specialSpriteDirection; //if true, don't calculate a direction, use the current set direction
 	bool m_inAir;
 	Animation m_animation;
 	void updateSpriteDirection();

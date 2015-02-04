@@ -1,7 +1,8 @@
 GhostTest
 Would you like this item?
 #Yes
-	Why do you want it? Actually I'm going to say something really long to see if this box is sized properly.
+	Why do you want it? Actually I'm going to say something really long to see if this box is sized properly. LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOONG text is very long because long text is nice
+	You can also write here and it works but don't forget to tab, vaska blaska slaska braska.
 	#Because I'm god
 		That's stupider
 	#Because I'm sad

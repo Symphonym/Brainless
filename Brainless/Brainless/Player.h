@@ -13,6 +13,8 @@ public:
 
 	void updateAnimation(float deltaTime);
 
+	void takesDamage(sf::Vector2f collisionPos);
+
 	enum AnimationState
 	{
 		noAnimation,
@@ -25,7 +27,9 @@ public:
 		endJump,
 		inAirUp,
 		inAirFall,
-		land
+		land,
+		dying,
+		takingDamageAnim
 	};
 
 
@@ -37,19 +41,27 @@ public:
 		landing
 	};
 
+	enum DamageState
+	{
+		normal,
+		dead,
+		takingDamage
+	};
+
 
 protected:
 
 private:
-	AnimationState m_state;
-
+	AnimationState m_animState;
 	Direction m_inputDirection;
 	JumpState m_jumpState;
+	DamageState m_damageState;
 	int m_jumpFrame;
 	float m_jumpPower;
 	/* gives an acceleration between minAcceleration and maxAcceleration depending on where value is between minValue and maxValue */
 	static float calcAcceleration(float minAcceleration, float maxAcceleration, float useMinValue, float useMaxValue, float value);
 	void jump();
+	int m_hp;
 };
 
 

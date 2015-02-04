@@ -95,6 +95,9 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	temp = new IdleZombie(sf::Vector2f(Constants::TileSize * 8, Constants::TileSize * 3));
 	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 	m_level.addUnit(Level::UnitPtr(temp));
+	temp = new IdleZombie(sf::Vector2f(Constants::TileSize * 5, Constants::TileSize * 8));
+	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+	m_level.addUnit(Level::UnitPtr(temp));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
 }
@@ -165,7 +168,7 @@ void Game::loop()
 				{
 					if (currentUnit->getCollisionRect().intersects(m_player->getCollisionRect()))
 					{
-						std::cout << "JAG DOG" << std::endl;
+						m_player->takesDamage(currentUnit->getPosition() - m_player->getPosition());
 					}
 				}
 			}

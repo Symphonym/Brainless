@@ -14,7 +14,8 @@ m_maxSpeed(maxSpeed),
 m_inAir(false),
 m_animation(SPRITESIZE, SPRITESIZE),
 m_spriteOffset(spriteOffset),
-m_spriteDirection(right)
+m_spriteDirection(right),
+m_specialSpriteDirection(false)
 {
 
 }
@@ -89,29 +90,45 @@ void Unit::draw()
 
 void Unit::updateSpriteDirection()
 {
-	//Sprite mirroring and offset.
-	if (m_spriteDirection == left)
+	if (!m_specialSpriteDirection)
 	{
-		if (0 < m_speed.x)
+		//Sprite mirroring and offset.
+		if (m_spriteDirection == left)
 		{
-			m_spriteDirection = right;
-			m_sprite->setScale(1, 1);
-			m_sprite->setPosition(sf::Vector2f(m_position.x + m_spriteOffset.x, m_position.y + m_spriteOffset.y + m_spriteOffset.y));
+			if (0 < m_speed.x)
+			{
+				m_spriteDirection = right;
+				m_sprite->setScale(1, 1);
+				m_sprite->setPosition(sf::Vector2f(m_position.x + m_spriteOffset.x, m_position.y + m_spriteOffset.y + m_spriteOffset.y));
 
-		}
-		m_sprite->setScale(-1, 1);
-		m_sprite->setPosition(m_position.x + m_spriteOffset.x + m_animation.getWidth(), m_position.y + m_spriteOffset.y);
-	}
-	else if (m_spriteDirection == right)
-	{
-		if (m_speed.x < 0)
-		{
-			m_spriteDirection = left;
+			}
 			m_sprite->setScale(-1, 1);
 			m_sprite->setPosition(m_position.x + m_spriteOffset.x + m_animation.getWidth(), m_position.y + m_spriteOffset.y);
 		}
-		m_sprite->setScale(1, 1);
-		m_sprite->setPosition(sf::Vector2f(m_position.x + m_spriteOffset.x, m_position.y + m_spriteOffset.y));
+		else if (m_spriteDirection == right)
+		{
+			if (m_speed.x < 0)
+			{
+				m_spriteDirection = left;
+				m_sprite->setScale(-1, 1);
+				m_sprite->setPosition(m_position.x + m_spriteOffset.x + m_animation.getWidth(), m_position.y + m_spriteOffset.y);
+			}
+			m_sprite->setScale(1, 1);
+			m_sprite->setPosition(sf::Vector2f(m_position.x + m_spriteOffset.x, m_position.y + m_spriteOffset.y));
+		}
+	}
+	else
+	{
+		if (m_spriteDirection == left)
+		{
+			m_sprite->setScale(-1, 1);
+			m_sprite->setPosition(m_position.x + m_spriteOffset.x + m_animation.getWidth(), m_position.y + m_spriteOffset.y);
+		}
+		else if (m_spriteDirection == right)
+		{
+			m_sprite->setScale(1, 1);
+			m_sprite->setPosition(sf::Vector2f(m_position.x + m_spriteOffset.x, m_position.y + m_spriteOffset.y));
+		}
 	}
 
 }
