@@ -7,6 +7,9 @@ Item::Item(const std::string &textureName, int id, int syncID, CombineData combi
 :
 m_lootable(false),
 m_usable(false),
+m_collidable(false),
+m_collisionOffset(0, 0),
+m_collisionSize(0, 0),
 m_useString(Constants::CantUseString),
 m_pickupString(Constants::CantPickUpString),
 m_examineString("A pretty normal object, nothing out of the ordinary"),
@@ -62,6 +65,10 @@ bool Item::isUsable() const
 {
 	return m_usable;
 }
+bool Item::isCollidable() const
+{
+	return m_collidable;
+}
 std::string Item::getUseString() const
 {
 	return m_useString;
@@ -73,6 +80,10 @@ std::string Item::getPickupString() const
 std::string Item::getExamineString() const
 {
 	return m_examineString;
+}
+sf::FloatRect Item::getCollisionBounds() const
+{
+	return sf::FloatRect(getPosition().x + m_collisionOffset.x, getPosition().y + m_collisionOffset.y, m_collisionSize.x, m_collisionSize.y);
 }
 
 CombineData::CombineData(int targetIDIDParam, int productItemIDParam)

@@ -49,15 +49,20 @@ public:
 
 	bool isLootable() const;
 	bool isUsable() const;
+	bool isCollidable() const;
 	std::string getUseString() const;
 	std::string getPickupString() const;
 	std::string getExamineString() const;
+	sf::FloatRect getCollisionBounds() const; // Will be zero if collidable is false
 
 protected:
 
 	// Interaction variables that should be set by the deriving class's constructor
 	bool m_lootable;
 	bool m_usable;
+	bool m_collidable;
+	sf::Vector2f m_collisionOffset;
+	sf::Vector2f m_collisionSize;
 	std::string m_useString;
 	std::string m_pickupString;
 	std::string m_examineString;
