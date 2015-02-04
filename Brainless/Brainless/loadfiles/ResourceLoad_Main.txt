@@ -11,6 +11,7 @@
 +Texture,images/tiles/cubeNada.png,AirCube
 +Texture,images/tiles/cubeStandard.png,StandardCube
 +Texture,images/tiles/cubeSmooth.png,SmoothCube
++Texture,images/tiles/cubeTilted.png,TiltCube
 
 # ITEM TEXTURE LOADING
 
@@ -22,3 +23,8 @@
 
 # GHOST TEST ITEM
 +Texture,images/items/ghostTest.png,GhostTest
+
+# DOOR TEST ITEM
++Texture,images/items/doorOpen.png,DoorOpen
++Texture,images/items/doorClosed.png,DoorClosed
++Texture,images/items/keyTest.png,KeyTest

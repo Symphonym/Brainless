@@ -168,6 +168,12 @@
     <ClCompile Include="Notification.cpp">
       <Filter>Source Files\Dialog</Filter>
     </ClCompile>
+    <ClCompile Include="DoorItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -278,10 +284,11 @@
     <ClInclude Include="Notification.h">
       <Filter>Source Files\Dialog</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="BlackAndWhite.txt">
-      <Filter>Source Files\Game</Filter>
-    </Text>
+    <ClInclude Include="DoorItem.h">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyItem.h">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

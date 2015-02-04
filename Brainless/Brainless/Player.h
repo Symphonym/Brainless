@@ -13,6 +13,8 @@ public:
 
 	void updateAnimation(float deltaTime);
 
+	sf::Vector2f getCameraPosition();
+
 	void takesDamage(sf::Vector2f collisionPos);
 
 	enum AnimationState
@@ -62,6 +64,10 @@ private:
 	static float calcAcceleration(float minAcceleration, float maxAcceleration, float useMinValue, float useMaxValue, float value);
 	void jump();
 	int m_hp;
+	sf::Vector2f m_cameraPos;
+	float cameraOffset;
+	float m_cameraSpeed = 5;
+	float m_cameraMaxOffset = 250;
 };
 
 

@@ -154,11 +154,13 @@ void Game::loop()
 		{
 			m_game.setActive(true);
 			// Update game logic and input
-			m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
+			m_camera.setCenter(m_player->getCameraPosition());
 		//	m_player->checkPlayerInput(deltaTime);
 			m_level.update(deltaTime);
 			m_inventory->update(m_game);
-			Notification::instance().update(deltaTime);
+			m_popup->update(m_game, 
+				sf::Vector2f(m_player->getPosition().x + m_player->getSize().x/2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
+			Notification::instance().update(deltaTime, m_game);
 			ConversationBox::instance().update(deltaTime, m_game);
 		//kollision, flytta hjärna
 			for (unsigned int i = 0; i < m_level.getUnits().size(); i++)
@@ -172,41 +174,23 @@ void Game::loop()
 					}
 				}
 			}
-			/*
-			 for(alla units)
-			 {
-				 if(m_player != currentUnit)
-				 {
-					if(collision)
-					{
-						spelaren Dööööörr dramatiskt
-					}
-				 }
-			 }
-			*/
-			m_popup->update(m_game, m_player->getPosition());
+
 	
 
 		SoundPlayer::instance().update(
 			deltaTime,
 			sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
 
-		// Camera zoom
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-			m_camera.zoom(1.f + zoomSpeed);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-			m_camera.zoom(1.f - zoomSpeed);
-
 		// Update editor camera
 		m_game.setView(m_camera);
 
 		m_game.clear(sf::Color::Black);
 		draw();
-
 		m_game.display();
 		}
 		else
 			m_game.setActive(false);
+
 	}
 }
 

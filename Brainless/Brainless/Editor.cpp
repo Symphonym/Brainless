@@ -28,7 +28,8 @@ m_currentSyncID(0)
 	// Load editor resources
 	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Editor.txt");
 
-	Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("BlackAndWhiteShader"));
+	//Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("BlackAndWhiteShader"));
+	//Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("DarknessShader"));
 	//ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
 
 	m_editorBackground.setPosition(0, -40);
@@ -176,15 +177,20 @@ void Editor::loop()
 		}
 
 		//////////////////////////////////////////////////////////////////////////// SHADER TEST CODE
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::T))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 			shaderTest += deltaTime;
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
 			shaderTest -= deltaTime;
 
 		shaderTest = Utility::clampValue<float>(shaderTest, 0, 1);
-		sf::Shader &shader = ResourceLoader::instance().retrieveShader("BlackAndWhiteShader");
-		shader.setParameter("intensityValue", shaderTest);
-		shader.setParameter("image", sf::Shader::CurrentTexture);
+		//sf::Shader &shader = ResourceLoader::instance().retrieveShader("BlackAndWhiteShader");
+		//shader.setParameter("intensityValue", shaderTest);
+		//shader.setParameter("image", sf::Shader::CurrentTexture);
+		//sf::Shader &shader = ResourceLoader::instance().retrieveShader("DarknessShader");
+		//shader.setParameter("playerScreenPosition", m_editor.getSize().x/2, m_editor.getSize().y / 2);
+		//shader.setParameter("lightReachDistance", 300);
+
+		//shader.setParameter("mousePos", sf::Mouse::getPosition(m_editor).x, m_editor.getSize().y - sf::Mouse::getPosition(m_editor).y);
 		//////////////////////////////////////////////////////////////////////////// SHADER TEST CODE END
 
 		if (m_isMenu)

@@ -1,6 +1,7 @@
 #ifndef INCLUDED_NOTIFICATION_H
 #define INCLUDED_NOTIFICATION_H
 
+#include <SFML\Graphics.hpp>
 #include "WrappedText.h"
 
 class Notification
@@ -15,7 +16,7 @@ public:
 
 	void setPosition(const sf::Vector2f &position);
 
-	void update(float deltaTime);
+	void update(float deltaTime, const sf::RenderWindow &gameWindow);
 	void draw();
 
 	static Notification& instance();
@@ -23,6 +24,9 @@ public:
 private:
 
 	Notification();
+
+	bool m_isShown;
+	sf::Sprite m_background;
 
 	float m_curDelay;
 	float m_maxDelay;

@@ -1,0 +1,36 @@
+uniform sampler2D image;
+uniform vec2 playerScreenPosition;
+uniform float lightReachDistance;
+uniform vec2 mousePos;
+
+void main() {
+	vec4 texel = texture2D(image, gl_TexCoord[0].xy).rgba;
+	gl_FragColor = gl_Color * texel; // Get normal pixel color
+	//gl_FragColor.rgb *= 0.4f;
+
+	vec2 distanceVector = gl_FragCoord - (mousePos);
+	float distanceToPlayer = sqrt(distanceVector.x*distanceVector.x + distanceVector.y*distanceVector.y);
+
+	vec3 baseDarkness = gl_FragColor.rgb * 0.09;
+	if(distanceToPlayer > lightReachDistance)
+	{
+	float distRelation = lightReachDistance / distanceToPlayer;
+		gl_FragColor.rgb = baseDarkness;
+		//gl_FragColor.rgb *= distRelation;
+
+		if(gl_FragColor.r < baseDarkness.r || gl_FragColor.g < baseDarkness.g || gl_FragColor.b < baseDarkness.b)
+		{
+			gl_FragColor.rgb = baseDarkness;
+		}
+	}
+	else
+	{
+		float distRelation = distanceToPlayer / lightReachDistance;
+		vec3 multiplier = vec3(1) - vec3(distRelation, distRelation, distRelation);
+		gl_FragColor.rgb = baseDarkness + (gl_FragColor.rgb - baseDarkness) * (1-distRelation); //(gl_FragColor.rgb * 0.09) + multiplier;
+
+		//gl_FragColor.rgb += vec3(distRelation, distRelation, distRelation);
+		//gl_FragColor.rgb *= sin(distanceToPlayer) + cos(distanceToPlayer);
+		//gl_FragColor.a *= 1.f - 1.f*distRelation;
+	}
+}
