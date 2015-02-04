@@ -1,0 +1,25 @@
+# SPRITE SHEET TEXTURES
+
++Texture,images/animations/spritesheet.png,testImage
++Texture,images/animations/Spritesheet_Test_v3_2.png,PlayerSheet
++Texture,images/animations/spritesheet_Skelett_hopp_v1.png,PlayerSheetJump
++Texture,images/animations/Spritesheet_Test_Zombie_v2.png,Zombie
+
+# PICKUP MENU TEXTURES
++Texture,images/UI/pickup_normal.png,PickupButton_Normal
++Texture,images/UI/pickup_pressed.png,PickupButton_Pressed
++Texture,images/UI/pickup_denied.png,PickupButton_Denied
++Texture,images/UI/use_normal.png,UseButton_Normal
++Texture,images/UI/use_pressed.png,UseButton_Pressed
++Texture,images/UI/use_denied.png,UseButton_Denied
++Texture,images/UI/examine_normal.png,ExamineButton_Normal
++Texture,images/UI/examine_pressed.png,ExamineButton_Pressed
+
+# INVENTORY TEXTURES
++Texture,images/UI/invSlot.png,InventorySlot
+
+# CONVERSATION TEXTURES
++Texture,images/UI/convBox.png,BackgroundTest
+
+# TEST SOUND
++Sound,sounds/COINV3.wav,CoinTestSound

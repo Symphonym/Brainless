@@ -1,4 +1,6 @@
 #include "Player.h"
+#include <iostream>
+
 #define MAX_SPEED_X (float) 300
 #define MAX_SPEED_Y (float) 700
 #define COLLISION_WIDTH (int) 80
@@ -25,7 +27,7 @@ m_jumpFrame(2)
 
 }
 
-void Player::checkPlayerInput(float deltaTime)
+void Player::updateTask(float deltaTime)
 {
 	float speedTurnAround = 12;
 	float speedStartAcc = 500;
@@ -159,7 +161,7 @@ void Player::updateAnimation(float deltaTime)
 	{
 		if (m_state != startJump)
 		{
-			m_sprite = &m_spritSheets[1];
+			m_sprite = &m_spriteSheets[1];
 			m_animation.playOnce(0, 2, 0, JUMPANIMFPS);
 			m_state = startJump;
 		}
@@ -169,7 +171,7 @@ void Player::updateAnimation(float deltaTime)
 	{
 		if (m_state != land)
 		{
-			m_sprite = &m_spritSheets[1];
+			m_sprite = &m_spriteSheets[1];
 			m_animation.playOnce(0, 1+m_jumpFrame, 3, JUMPANIMFPS); //jumpFrame = experimental 3
 			m_state = land;
 			m_jumpFrame = 2; //experimental 
@@ -185,14 +187,14 @@ void Player::updateAnimation(float deltaTime)
 			if (m_state == inAirUp);
 			else if (m_state == endJump && m_animation.getPlayOnceDone())
 			{
-				m_sprite = &m_spritSheets[1];
+				m_sprite = &m_spriteSheets[1];
 				m_animation.loop(0, 1, 1, 5);
 				m_state = inAirUp;
 			}
 			//endJump
 			else if (m_state != endJump)
 			{
-				m_sprite = &m_spritSheets[1];
+				m_sprite = &m_spriteSheets[1];
 				m_animation.playOnce(3, 5, 0, 10);
 				m_state = endJump;
 
@@ -203,18 +205,18 @@ void Player::updateAnimation(float deltaTime)
 		{
 			if (m_state != inAirFall)
 			{
-				m_sprite = &m_spritSheets[1];
+				m_sprite = &m_spriteSheets[1];
 				m_animation.loop(0, 1, 2, 6);
 				m_state = inAirFall;
 			}
 		}
 	}
 	//IDLE
-	else if (m_speed.x == 0)
+	else if ((-5 < m_speed.x && m_speed.x < 5 ))
 	{
 		if (m_state != idle)
 		{
-			m_sprite = &m_spritSheets[0];
+			m_sprite = &m_spriteSheets[0];
 			m_animation.stillFrame(0, 3);
 			m_state = idle;
 		}
@@ -224,7 +226,7 @@ void Player::updateAnimation(float deltaTime)
 	{
 		if (m_state != turn)
 		{
-			m_sprite = &m_spritSheets[0];
+			m_sprite = &m_spriteSheets[0];
 			m_animation.playOnce(0, 3, 5, 10);
 			m_state = turn;
 		}
@@ -235,7 +237,7 @@ void Player::updateAnimation(float deltaTime)
 	{
 		if (m_state != run)
 		{
-			m_sprite = &m_spritSheets[0];
+			m_sprite = &m_spriteSheets[0];
 			m_animation.loop(0, 7, 1, 8);
 			m_state = run;
 		}
@@ -247,7 +249,7 @@ void Player::updateAnimation(float deltaTime)
 	{
 		if (m_state != startWalk)
 		{
-			m_sprite = &m_spritSheets[0];
+			m_sprite = &m_spriteSheets[0];
 			m_animation.playOnce(0, 3, 0, 8);
 			m_state = startWalk;
 		}
@@ -258,11 +260,15 @@ void Player::updateAnimation(float deltaTime)
 	{
 		if (m_state != endWalk)
 		{
-			m_sprite = &m_spritSheets[0];
+			m_sprite = &m_spriteSheets[0];
 			m_animation.playOnce(0, 3, 2, 8);
 			m_state = endWalk;
 		}
 		//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
+	}
+	else 
+	{
+		std::cout << "FIXA Får ingen animation" << std::endl; //bör inte uppstå, har hittils inte uppstått
 	}
 
 	updateSpriteDirection();

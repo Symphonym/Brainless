@@ -15,6 +15,7 @@ public:
 	Updates the collisionbox's position, speed, acceleration
 	*/
 	void updateMovement(float gravity, float deltaTime);
+	virtual void updateTask(float deltaTime) = 0;
 
 	// Set player status
 	void setStatus(bool inAir);
@@ -56,7 +57,7 @@ protected:
 	sf::Vector2f m_size;
 
 	typedef std::vector<sf::Sprite> SpriteVector;
-	SpriteVector m_spritSheets;
+	SpriteVector m_spriteSheets;
 	sf::Sprite* m_sprite;
 	sf::Vector2f m_spriteOffset;
 

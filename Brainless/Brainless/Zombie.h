@@ -2,32 +2,15 @@
 #define _ZOMBIE
 #include "Unit.h"
 
-class Zombie :	public Unit
+class Zombie : public Unit
 {
 public:
-	Zombie(sf::Vector2f startPosition);
+	Zombie(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset);
 
-	void updateAnimation(float deltaTime);
-
-	enum AnimationState
-	{
-		noAnimation,
-		idle
-	};
-
-	//ev. flytta till unit, och slutet av updateAnimation (samma för alla)
-	enum Direction
-	{
-		noDirection,
-		left,
-		right
-	};
-
+	bool collide(Unit *unit);
 protected:
 
 private:
-	AnimationState m_animState;
-	Direction m_spriteDirection;
 };
 
 #endif

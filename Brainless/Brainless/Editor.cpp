@@ -26,25 +26,7 @@ m_currentSyncID(0)
 
 
 	// Load editor resources
-	ResourceLoader::instance().loadFont("EditorFont", "VCR_OSD_MONO.ttf");
-	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");
-	ResourceLoader::instance().loadTexture("TestItem2", "wizard_idle.png");
-	ResourceLoader::instance().loadTexture("TestItem3", "craftedTomte.png");
-	ResourceLoader::instance().loadTexture("TestItem4", "craftedTomteTwo.png");
-	ResourceLoader::instance().loadTexture("TestItem5", "testBarrel.png");
-	ResourceLoader::instance().loadTexture("EditorLevelSize", "levelsize.png");
-	ResourceLoader::instance().loadTexture("TileButton", "images/tileButton.png");
-	ResourceLoader::instance().loadTexture("TileButtonPressed", "images/tileButtonPressed.png");
-	ResourceLoader::instance().loadTexture("SpriteButton", "images/spriteButton.png");
-	ResourceLoader::instance().loadTexture("SpriteButtonPressed", "images/spriteButtonPressed.png");
-	ResourceLoader::instance().loadTexture("ItemButton", "images/itemButton.png");
-	ResourceLoader::instance().loadTexture("ItemButtonPressed", "images/itemButtonPressed.png");
-	ResourceLoader::instance().loadTexture("CameraButton", "images/resetCameraButton.png");
-	ResourceLoader::instance().loadTexture("CameraButtonPressed", "images/resetCameraButtonPressed.png");
-	ResourceLoader::instance().loadTexture("SaveButton", "images/saveButton.png");
-	ResourceLoader::instance().loadTexture("SaveButtonPressed", "images/saveButtonPressed.png");
-	ResourceLoader::instance().loadShader("BlackAndWhiteShader", "BlackAndWhite.txt");
-
+	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Editor.txt");
 
 	Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("BlackAndWhiteShader"));
 	//ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
@@ -75,14 +57,14 @@ m_currentSyncID(0)
 
 
 	// Initialize save text
-	m_saveText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+	m_saveText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_saveText.setPosition(0, 0);
 	m_saveText.setCharacterSize(16);
 	m_saveText.setString("File is saved!");
 	m_saveText.setColor(sf::Color::Green);
 
 	// Initialize level file text
-	m_levelFileText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+	m_levelFileText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_levelFileText.setPosition(200, 0);
 	m_levelFileText.setColor(sf::Color::Green);
 	m_levelFileText.setString("Editing level: level" + std::to_string(m_currentLevelFileIndex) + ".txt");

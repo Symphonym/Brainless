@@ -10,7 +10,7 @@ EditorSpriteMode::EditorSpriteMode()
 	m_highlightSprite.sprite.setTexture(ResourceLoader::instance().retrieveTexture(m_availableDecorations[m_currentSpriteIndex]));
 	m_highlightSprite.textureName = m_availableDecorations[m_currentSpriteIndex];
 
-	m_layerText.setFont(ResourceLoader::instance().retrieveFont("EditorFont"));
+	m_layerText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_layerText.setPosition(30, 100);
 	m_layerText.setString("Drawing to: FOREGROUND");
 	m_highlightSprite.drawToForeground = true;
@@ -100,10 +100,6 @@ void EditorSpriteMode::addTexture(const std::string &textureName)
 
 void EditorSpriteMode::initializeSprites()
 {
-	ResourceLoader::instance().loadTexture("GroundCube", "cube.png");
-	ResourceLoader::instance().loadTexture("RedCube", "cubeRed.png");
-	ResourceLoader::instance().loadTexture("BlueCube", "cubeBlue.png");
-
 	addTexture("GroundCube");
 	addTexture("RedCube");
 	addTexture("BlueCube");

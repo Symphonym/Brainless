@@ -8,18 +8,26 @@
 class WrappedText
 {
 public:
-	WrappedText(sf::Vector2f position, sf::FloatRect messageBoxSize, sf::Font font);
+	WrappedText(sf::Vector2f position, sf::Vector2f messageBoxSize, sf::Font font);
+
+	void setPosition(const sf::Vector2f &position);
+	void setSize(const sf::Vector2f &size);
+
+	const sf::Vector2f& getPosition() const;
+	const sf::Vector2f& getBoxSize() const;
 
 	//Put in a string that will be written
 	void Type(std::string text, float speed = 1, sf::Color color = sf::Color::Black, int textSize = 16);
 
 	void Update(float deltaTime);
 
-	void Draw();
+	void Draw(bool drawAsHud = true);
+
+	bool isFinished() const;
 
 private:
 	//The size of the box which the text will be displayed in
-	sf::FloatRect m_messageBoxSize;
+	sf::Vector2f m_messageBoxSize;
 	std::vector<std::string> m_linesOfText;
 	sf::Vector2f m_position;
 	sf::Text m_text;

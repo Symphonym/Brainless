@@ -1,0 +1,24 @@
+
+# FONT LOADING
+
++Font,fonts/VCR_OSD_MONO.ttf,DefaultFont
+
+# TILE TEXTURE LOADING
+
++Texture,images/tiles/cube.png,GroundCube
++Texture,images/tiles/cubeRed.png,RedCube
++Texture,images/tiles/cubeBlue.png,BlueCube
++Texture,images/tiles/cubeNada.png,AirCube
++Texture,images/tiles/cubeStandard.png,StandardCube
++Texture,images/tiles/cubeSmooth.png,SmoothCube
+
+# ITEM TEXTURE LOADING
+
++Texture,images/items/pickup.png,TestItem
++Texture,images/items/wizard_idle.png,TestItem2
++Texture,images/items/craftedTomte.png,TestItem3
++Texture,images/items/craftedTomteTwo.png,TestItem4
++Texture,images/items/testBarrel.png,TestItem5
+
+# GHOST TEST ITEM
++Texture,images/items/ghostTest.png,GhostTest

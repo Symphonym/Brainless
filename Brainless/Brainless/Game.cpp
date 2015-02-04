@@ -9,49 +9,26 @@
 #include "Utility.h"
 #include "Unit.h"
 #include "Player.h"
-#include "Zombie.h"
+#include "IdleZombie.h"
+#include "WalkingZombie.h"
 #include "Level.h"
 #include "FileSave.h"
 #include "TileMap.h"
 #include "Tile.h"
 #include "SoundPlayer.h"
-#include "DialogTree.h"
-
+#include "Notification.h"
+#include "ConversationBox.h"
 
 Game::Game()
 :
 m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 {
-	DialogTree tree;
-	tree.loadDialogFile("dialog.txt");
-
 	// Set render target to the game
 	Renderer::instance().setTarget(m_game);
 	m_camera = m_game.getDefaultView();
 
 	// Load game resources
-	ResourceLoader::instance().loadFont("Game", "VCR_OSD_MONO.ttf");
-	ResourceLoader::instance().loadTexture("TestItem", "pickup.png");
-	ResourceLoader::instance().loadTexture("TestItem2", "wizard_idle.png");
-	ResourceLoader::instance().loadTexture("TestItem3", "craftedTomte.png");
-	ResourceLoader::instance().loadTexture("TestItem4", "craftedTomteTwo.png");
-	ResourceLoader::instance().loadTexture("TestItem5", "testBarrel.png");
-	ResourceLoader::instance().loadTexture("testImage", "spritesheet.png");
-	ResourceLoader::instance().loadTexture("InventorySlot", "invSlot.png");
-	ResourceLoader::instance().loadTexture("PlayerSheet", "Spritesheet_Test_v3_2.png");
-	ResourceLoader::instance().loadTexture("PlayerSheetJump", "spritesheet_Skelett_hopp_v1.png");
-	ResourceLoader::instance().loadTexture("Zombie", "Spritesheet_Test_Zombie_v2.png");
-
-	ResourceLoader::instance().loadTexture("PickupButton_Normal", "pickup_normal.png");
-	ResourceLoader::instance().loadTexture("PickupButton_Pressed", "pickup_pressed.png");
-	ResourceLoader::instance().loadTexture("PickupButton_Denied", "pickup_denied.png");
-	ResourceLoader::instance().loadTexture("UseButton_Normal", "use_normal.png");
-	ResourceLoader::instance().loadTexture("UseButton_Pressed", "use_pressed.png");
-	ResourceLoader::instance().loadTexture("UseButton_Denied", "use_denied.png");
-	ResourceLoader::instance().loadTexture("ExamineButton_Normal", "examine_normal.png");
-	ResourceLoader::instance().loadTexture("ExamineButton_Pressed", "examine_pressed.png");
-	
-	ResourceLoader::instance().loadSound("CoinTestSound", "COINV3.wav");
+	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Game.txt");
 
 
 	// TODO TEMPORARY, SHOULD NOT BE IN FINAL GAME, prolly put inventory in player class
@@ -59,25 +36,38 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	m_popup = new PopUpMenu();
 	m_popup->setItemCallback([&](Item* itm, PopUpMenu::InteractTypes type) -> void
 	{
+		Notification::instance().setPosition(itm->getPosition());
 		if (type == PopUpMenu::InteractTypes::Pickup)
 		{
-			itm->onPickUp();
-			m_inventory->addItem(std::move(m_level.removeItem(itm)));
+			if (itm->isLootable())
+			{
+				itm->onPickUp();
+				m_inventory->addItem(std::move(m_level.removeItem(itm)));
+			}
+			else
+				Notification::instance().write(itm->getPickupString());
+
 		}
 		else if (type == PopUpMenu::InteractTypes::Use)
 		{
-			itm->onUse();
-
-			// Sync use functionality for sync
-			for (std::size_t i = 0; i < m_level.getItems().size(); i++)
+			if (itm->isUsable())
 			{
-				if (m_level.getItems()[i]->getSyncID() == itm->getSyncID())
-					m_level.getItems()[i]->onSyncedWith(*itm);
+				itm->onUse(m_game);
+
+				// Sync use functionality for sync
+				for (std::size_t i = 0; i < m_level.getItems().size(); i++)
+				{
+					if (m_level.getItems()[i]->getSyncID() == itm->getSyncID())
+						m_level.getItems()[i]->onSyncedWith(*itm);
+				}
 			}
+			else
+				Notification::instance().write(itm->getUseString());
 		}
 		else if (type == PopUpMenu::InteractTypes::Examine)
 		{
 			itm->onExamine();
+			Notification::instance().write(itm->getExamineString());
 		}
 
 	});
@@ -99,7 +89,10 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(sf::Vector2f(Constants::TileSize * 3, Constants::TileSize * 3.4)))));
 
 	//temp, texture borde laddas in på annat sätt.
-	Zombie* temp = new Zombie(sf::Vector2f(Constants::TileSize * 9, Constants::TileSize * 3));
+	Unit* temp = new WalkingZombie(sf::Vector2f(Constants::TileSize * 9, Constants::TileSize * 3), 100);
+	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+	m_level.addUnit(Level::UnitPtr(temp));
+	temp = new IdleZombie(sf::Vector2f(Constants::TileSize * 8, Constants::TileSize * 3));
 	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 	m_level.addUnit(Level::UnitPtr(temp));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
@@ -150,38 +143,54 @@ void Game::loop()
 
 			m_inventory->events(event, m_game, m_level);
 			m_popup->events(event, m_game, m_level);
+			ConversationBox::instance().events(event, m_game);
 		}
-		
+
 		//Pause if out of focus
 		if (m_game.hasFocus())
 		{
 			m_game.setActive(true);
 			// Update game logic and input
 			m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
-			m_player->checkPlayerInput(deltaTime);
+			//	m_player->checkPlayerInput(deltaTime);
 			m_level.update(deltaTime);
 			m_inventory->update(m_game);
+			Notification::instance().update(deltaTime);
+			ConversationBox::instance().update(deltaTime, m_game);
+			//kollision, flytta hjärna
+			for (unsigned int i = 0; i < m_level.getUnits().size(); i++)
+			{
+				Unit* currentUnit = m_level.getUnits()[i].get();
+				if (m_player != currentUnit)
+				{
+					if (currentUnit->getCollisionRect().intersects(m_player->getCollisionRect()))
+					{
+						//std::cout << "JAG DOG" << std::endl;
+						m_player->setSpeed(sf::Vector2f(m_player->getSpeed().x + (m_player->getPosition().x - currentUnit->getPosition().x), -200));
+					}
+				}
+			}
 			m_popup->update(m_game, m_player->getPosition());
+
+
+			SoundPlayer::instance().update(
+				deltaTime,
+				sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
+
+			// Camera zoom
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+				m_camera.zoom(1.f + zoomSpeed);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+				m_camera.zoom(1.f - zoomSpeed);
+
+			// Update editor camera
+			m_game.setView(m_camera);
+
+			m_game.clear(sf::Color::Black);
+			draw();
 		}
 		else
 			m_game.setActive(false);
-
-		SoundPlayer::instance().update(
-			deltaTime,
-			sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
-
-		// Camera zoom
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-			m_camera.zoom(1.f + zoomSpeed);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-			m_camera.zoom(1.f - zoomSpeed);
-
-		// Update editor camera
-		m_game.setView(m_camera);
-
-		m_game.clear(sf::Color::Black);
-		draw();
-
 		m_game.display();
 
 	}
@@ -192,5 +201,7 @@ void Game::draw()
 	m_level.draw(m_camera);
 	m_inventory->draw();
 	m_popup->draw();
+	Notification::instance().draw();
+	ConversationBox::instance().draw();
 	Renderer::instance().executeDraws();
 }

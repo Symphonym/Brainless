@@ -22,18 +22,20 @@ public:
 	explicit Item(const std::string &textureName, int id, int syncID = -1, CombineData combineData = CombineData(-1, -1));
 
 	// If the item needs custom interaction functionality
-	virtual void update() {};
+	virtual void update(float deltaTime) {};
+
 	virtual bool onInteract(Item &otherItem) { return false;  }; // Called when this item iteracts with another item, returning TRUE will destroy THIS item
 	virtual bool onInteractedWith(Item &otherItem) { return false;  }; // Called when another item interactors with THIS item, returning TRUE will destroy THIS item
 	virtual bool onSyncedWith(Item &otherItem) { return false; } // Called when another item with the same syncID is triggered, returning TRUE will destroy this item
-	virtual std::string onExamine() const;
-	virtual std::string onUse() const;
-	virtual std::string onPickUp() const;
+
+	virtual void onUse(const sf::RenderWindow &window) {};
+	virtual void onExamine() {};
+	virtual void onPickUp() {};
 
 	// Prototype pattern so we can clone item hierarchies
 	virtual Item* clone() = 0;
 
-	void draw();
+	virtual void draw();
 
 	void setPosition(const sf::Vector2f &pos);
 	sf::Vector2f getPosition() const;
@@ -44,6 +46,26 @@ public:
 	void setSyncID(int id);
 	int getSyncID() const;
 	const CombineData& getCombineData() const;
+
+	bool isLootable() const;
+	bool isUsable() const;
+	bool isCollidable() const;
+	std::string getUseString() const;
+	std::string getPickupString() const;
+	std::string getExamineString() const;
+	sf::FloatRect getCollisionBounds() const; // Will be zero if collidable is false
+
+protected:
+
+	// Interaction variables that should be set by the deriving class's constructor
+	bool m_lootable;
+	bool m_usable;
+	bool m_collidable;
+	sf::Vector2f m_collisionOffset;
+	sf::Vector2f m_collisionSize;
+	std::string m_useString;
+	std::string m_pickupString;
+	std::string m_examineString;
 
 private:
 

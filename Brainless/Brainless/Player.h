@@ -9,7 +9,7 @@ class Player : public Unit
 public:
 	Player(sf::Vector2f startPosition);
 	/* kollar efter playerinput, ska köras innan Unit::updateMovement */
-	void checkPlayerInput(float deltaTime);
+	void updateTask(float deltaTime);
 
 	void updateAnimation(float deltaTime);
 

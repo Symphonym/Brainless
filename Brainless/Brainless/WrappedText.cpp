@@ -2,12 +2,30 @@
 #include "ResourceLoader.h"
 #include "Renderer.h"
 
-WrappedText::WrappedText(sf::Vector2f position, sf::FloatRect messageBoxSize, sf::Font font)
+WrappedText::WrappedText(sf::Vector2f position, sf::Vector2f messageBoxSize, sf::Font font)
 :
 m_position(position),
 m_messageBoxSize(messageBoxSize),
 m_font(font)
 {
+}
+
+void WrappedText::setPosition(const sf::Vector2f &position)
+{
+	m_position = position;
+}
+void WrappedText::setSize(const sf::Vector2f &size)
+{
+	m_messageBoxSize = size;
+}
+
+const sf::Vector2f& WrappedText::getPosition() const
+{
+	return m_position;
+}
+const sf::Vector2f& WrappedText::getBoxSize() const
+{
+	return m_messageBoxSize;
 }
 
 void WrappedText::Type(std::string text, float speed, sf::Color color, int textSize)
@@ -20,9 +38,11 @@ void WrappedText::Type(std::string text, float speed, sf::Color color, int textS
 	m_text.setCharacterSize(textSize);
 	m_thisTextRow.setCharacterSize(textSize);
 	m_text.setColor(color);
+	m_linesOfText.clear();
 	m_linesOfText.push_back("");
 	m_string = text;
 	m_speed = speed;
+	m_text.setString("");
 	m_text.setFont(m_font);
 	m_thisTextRow.setFont(m_font);
 }
@@ -54,7 +74,7 @@ void WrappedText::Update(float deltaTime)
 			m_thisTextRow.setString(m_linesOfText[currentRow]);
 
 			//Removes the highest line if the text height is to big for the box
-			while (m_text.getLocalBounds().height > m_messageBoxSize.height)
+			while (m_text.getGlobalBounds().height > m_messageBoxSize.y)
 			{
 				std::string croppedText = m_text.getString();
 
@@ -72,7 +92,7 @@ void WrappedText::Update(float deltaTime)
 
 			//If the current line of text is to wide,
 			//add the last word to the next line and delete it from the current line
-			if (m_thisTextRow.getLocalBounds().width > m_messageBoxSize.width)
+			if (m_thisTextRow.getGlobalBounds().width > m_messageBoxSize.x)
 			{
 				m_linesOfText.push_back("");
 				currentRow++;
@@ -96,7 +116,16 @@ void WrappedText::Update(float deltaTime)
 	}
 }
 
-void WrappedText::Draw()
+void WrappedText::Draw(bool drawAsHud)
 {
-	Renderer::instance().drawAbove(m_text);
+	if (drawAsHud)
+		Renderer::instance().drawHUD(m_text);
+	else
+		Renderer::instance().drawAbove(m_text);
+}
+
+
+bool WrappedText::isFinished() const
+{
+	return currentLetter >= m_string.length();
 }
