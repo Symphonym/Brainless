@@ -35,6 +35,10 @@ m_currentSyncID(0)
 	m_editorBackground.setPosition(0, -40);
 	m_editorBackground.setTexture(ResourceLoader::instance().retrieveTexture("EditorLevelSize"));
 
+	m_spawnSprite.setTexture(ResourceLoader::instance().retrieveTexture("PlayerSpawnItem"));
+	m_spawnSprite.setOrigin(m_spawnSprite.getGlobalBounds().width / 2.f, m_spawnSprite.getGlobalBounds().height / 2.f);
+	m_spawnSprite.setPosition(300, 300);
+
 	// Load a default map with nothing but ground tiles
 	TileMap::TileMapLayout layout;
 	for (int x = 0; x < Constants::MapWidth; x++)
@@ -90,6 +94,8 @@ void Editor::loadFile()
 	m_level.reset();
 	FileSave::loadMapText(m_level, m_currentLevelFileIndex);
 
+	m_spawnSprite.setPosition(m_level.getSpawnPos());
+
 	// Reload info for different modes
 	m_itemMode->reloadDebugText(m_level);
 }
@@ -137,6 +143,12 @@ void Editor::loop()
 				// Save file
 				else if (event.key.code == sf::Keyboard::S && event.key.control)
 					saveFile();
+				else if (event.key.code == sf::Keyboard::F)
+				{
+					m_spawnSprite.setPosition(m_editor.mapPixelToCoords(sf::Mouse::getPosition(m_editor)));
+					m_level.setSpawnPosition(m_spawnSprite.getPosition());
+					somethingChanged = true;
+				}
 
 				// Go down in levels
 				else if (event.key.code == sf::Keyboard::Y)
@@ -315,6 +327,7 @@ void Editor::draw()
 	}
 	Renderer::instance().drawHUD(m_saveText);
 	Renderer::instance().drawHUD(m_levelFileText);
+	Renderer::instance().drawAbove(m_spawnSprite);
 	
 	Renderer::instance().executeDraws();
 }

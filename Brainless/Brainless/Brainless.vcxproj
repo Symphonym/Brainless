@@ -108,6 +108,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera2D.cpp" />
+    <ClCompile Include="ChestItem.cpp" />
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="ConversationBox.cpp" />
     <ClCompile Include="DialogTree.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera2D.h" />
+    <ClInclude Include="ChestItem.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ConversationBox.h" />
     <ClInclude Include="DialogTree.h" />

@@ -39,6 +39,9 @@ private:
 
 	Level m_level;
 	sf::Sprite m_editorBackground;
+	
+	// Spawn position sprite
+	sf::Sprite m_spawnSprite;
 
 	sf::Text m_levelFileText;
 	int m_currentLevelFileIndex;

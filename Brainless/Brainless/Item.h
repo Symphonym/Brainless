@@ -14,6 +14,7 @@ struct CombineData
 	int productItemID; // ID of the item that is crafted
 };
 
+class Game;
 class Item
 {
 public:
@@ -22,13 +23,13 @@ public:
 	explicit Item(const std::string &textureName, int id, CombineData combineData = CombineData(-1, -1));
 
 	// If the item needs custom interaction functionality
-	virtual void update(float deltaTime) {};
+	virtual void update(float deltaTime, Game &game) {};
 
 	virtual bool onInteract(Item &otherItem) { return false;  }; // Called when this item iteracts with another item, returning TRUE will destroy THIS item
-	virtual bool onInteractedWith(Item &otherItem) { return false;  }; // Called when another item interactors with THIS item, returning TRUE will destroy THIS item
+	virtual bool onInteractedWith(Item &otherItem) { return false; }; // Called when another item interactors with THIS item, returning TRUE will destroy THIS item
 	virtual bool onSyncedWith(Item &otherItem) { return false; } // Called when another item with the same syncID is triggered, returning TRUE will destroy this item
 
-	virtual void onUse(const sf::RenderWindow &window) {};
+	virtual void onUse(Game &game) {};
 	virtual void onExamine() {};
 	virtual void onPickUp() {};
 

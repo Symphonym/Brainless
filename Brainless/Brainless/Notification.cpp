@@ -6,15 +6,14 @@ Notification::Notification()
 :
 m_isShown(false),
 m_curDelay(0),
-m_maxDelay(2.f),
+m_maxDelay(1.f),
 m_textBox(sf::Vector2f(0, 0), sf::Vector2f(300, 100), ResourceLoader::instance().retrieveFont("DefaultFont"))
 {
 	m_background.setTexture(ResourceLoader::instance().retrieveTexture("DialogBoxBackground"));
-	m_textBox.setSize(sf::Vector2f(m_background.getGlobalBounds().width - 20.f, m_background.getGlobalBounds().height - 20.f));
+	m_textBox.setSize(sf::Vector2f(m_background.getGlobalBounds().width - 30.f, m_background.getGlobalBounds().height - 20.f));
 	setPosition(sf::Vector2f(0, 0));
 }
 
-// Text to write
 void Notification::write(const std::string &text)
 {
 	m_textBox.Type(text, 5000.f, sf::Color::White, 20);
@@ -23,7 +22,6 @@ void Notification::write(const std::string &text)
 	m_background.setColor(sf::Color::White);
 }
 
-// Time the text will remain after being written
 void Notification::setFinishDelay(float delay)
 {
 	m_maxDelay = delay;

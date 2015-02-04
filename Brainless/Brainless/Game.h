@@ -24,6 +24,15 @@ public:
 	// starts the game
 	void run();
 
+	// Add item to inventory
+	void lootItem(Inventory::ItemPtr item);
+
+	// Loads a new level, resetting player position to starting position, resetting HUD etc
+	void changeLevel(int levelIndex);
+
+	Level& getLevel();
+	const sf::RenderWindow& getWindow() const;
+
 private:
 
 	sf::RenderWindow m_game;
@@ -36,10 +45,6 @@ private:
 	Inventory* m_inventory;
 	// TESTING CODE, POPUP SHOULD PROBABLY BE IN MENU CLASS (MAYBE?!?!?!?)
 	PopUpMenu* m_popup;
-
-	// Load/save functionality
-	void loadFile();
-	void saveFile();
 
 	// Update loop
 	void loop();

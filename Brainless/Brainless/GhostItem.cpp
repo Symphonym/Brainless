@@ -1,6 +1,7 @@
 #include "GhostItem.h"
 #include "ConversationBox.h"
 #include "Renderer.h"
+#include "Game.h"
 
 GhostItem::GhostItem(const std::string &dialogFile, int id)
 :
@@ -14,7 +15,7 @@ Item("GhostTest", id)
 	m_examineString = "It's a ghost alright, maybe I should talk to it";
 }
 
-void GhostItem::update(float deltaTime)
+void GhostItem::update(float deltaTime, Game &game)
 {
 }
 void GhostItem::draw()
@@ -23,9 +24,9 @@ void GhostItem::draw()
 	Renderer::instance().drawDepth(getSprite());
 }
 
-void GhostItem::onUse(const sf::RenderWindow &window)
+void GhostItem::onUse(Game &game)
 {
-	sf::Vector2i onScreenPos = window.mapCoordsToPixel(getPosition());
+	sf::Vector2i onScreenPos = game.getWindow().mapCoordsToPixel(getPosition());
 
 	m_dialog.resetDialog();
 	ConversationBox::instance().setPosition(sf::Vector2f(onScreenPos.x, onScreenPos.y));

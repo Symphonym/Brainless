@@ -17,3 +17,16 @@ Would you like this item?
 #Test
 	Yup I'm working properly
 #Bullshit answer
+#How much shit can you say?
+	A fair amount
+	#That's nothing
+		That's true
+		#Still pretty lame
+			I can keep on all day
+			#So can I
+				This is boring
+				#Your dialog is shitty
+					Well it was written by a programmer
+					#Fair point
+						But screw this, away you go
+						#Mkay

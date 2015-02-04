@@ -12,10 +12,10 @@ public:
 
 	explicit GhostItem(const std::string &dialogFile, int id);
 
-	virtual void update(float deltaTime);
+	virtual void update(float deltaTime, Game &game);
 	virtual void draw();
 
-	virtual void onUse(const sf::RenderWindow &window);
+	virtual void onUse(Game &game);
 
 	virtual Item* clone();
 

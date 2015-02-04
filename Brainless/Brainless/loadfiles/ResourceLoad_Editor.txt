@@ -1,4 +1,7 @@
 
+# SPAWN POSITION TEXTURE
++Texture,images/items/playerSpawn.png,PlayerSpawnItem
+
 # EDITOR BUTTON TEXTURES
 +Texture,images/UI/levelsize.png,EditorLevelSize
 +Texture,images/UI/tileButton.png,TileButton

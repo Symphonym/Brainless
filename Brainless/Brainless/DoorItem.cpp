@@ -27,7 +27,7 @@ bool DoorItem::onInteractedWith(Item &otherItem)
 	return false;
 }
 
-void DoorItem::onUse(const sf::RenderWindow &window)
+void DoorItem::onUse(Game &game)
 {
 	// Toggle collision and open state
 	if (!m_isLocked)

@@ -17,6 +17,11 @@ Level::Level()
 	m_tileMap = MapPtr(new TileMap(layout, Constants::TileSize));
 }
 
+void Level::setSpawnPosition(const sf::Vector2f &spawnPos)
+{
+	m_spawnPos = spawnPos;
+}
+
 Unit* Level::addUnit(UnitPtr unit)
 {
 	m_units.push_back(std::move(unit));
@@ -76,7 +81,7 @@ void Level::reset()
 	m_sprites.clear();
 }
 
-void Level::update(float deltaTime)
+void Level::update(float deltaTime, Game &game)
 {
 	const int unitSpeed = 600;
 	for (std::size_t i = 0; i < m_units.size(); i++)
@@ -84,6 +89,8 @@ void Level::update(float deltaTime)
 		// TODO update units
 		
 	}
+	for (std::size_t i = 0; i < m_items.size(); i++)
+		m_items[i]->update(deltaTime, game);
 
 	updateUnitCollision(deltaTime);
 }
@@ -132,6 +139,10 @@ Unit& Level::getUnit(std::size_t index)
 	return *m_units.at(index).get();
 }
 
+const sf::Vector2f& Level::getSpawnPos() const
+{
+	return m_spawnPos;
+}
 
 
 

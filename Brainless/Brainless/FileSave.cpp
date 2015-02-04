@@ -160,7 +160,11 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 {
 	std::ofstream writer("level" + std::to_string(levelNumber) + ".txt");
 
-	// First write the number of rows the map has
+	// First write the player spawn point
+	writer << level.getSpawnPos().x << std::endl;
+	writer << level.getSpawnPos().y << std::endl;
+
+	// Second write the number of rows the map has
 	// This is how many lines the loader should read before moving onto items
 	writer << Constants::MapHeight << std::endl;
 
@@ -203,6 +207,11 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 
 	if (reader.is_open())
 	{
+		// Read spawn pos
+		float spawnX = 0, spawnY = 0;
+		reader >> spawnX >> spawnY;
+		level.setSpawnPosition(sf::Vector2f(spawnX, spawnY));
+
 		// Read row count
 		int rowCount = 0;
 		reader >> rowCount;

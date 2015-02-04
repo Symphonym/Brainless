@@ -13,7 +13,7 @@ public:
 	virtual bool onInteractedWith(Item &otherItem);
 
 	// To handle opening of door, if it is unlocked
-	virtual void onUse(const sf::RenderWindow &window);
+	virtual void onUse(Game &game);
 	virtual void onExamine();
 
 	virtual void draw();

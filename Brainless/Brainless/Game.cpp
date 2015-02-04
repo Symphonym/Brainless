@@ -52,7 +52,7 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 		{
 			if (itm->isUsable())
 			{
-				itm->onUse(m_game);
+				itm->onUse(*this);
 
 				// Sync use functionality for sync
 				for (std::size_t i = 0; i < m_level.getItems().size(); i++)
@@ -85,8 +85,11 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	sf::Image markerImg;
 	markerImg.create(60, 90, sf::Color::Yellow);
 
-	loadFile();
 	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(sf::Vector2f(Constants::TileSize * 10, Constants::TileSize * 8)))));
+
+	// TEST CODE FOR LOADING DEFAULT LEVEL
+	changeLevel(0);
+
 
 	//temp, texture borde laddas in på annat sätt.
 	Unit* temp = new WalkingZombie(sf::Vector2f(Constants::TileSize * 9, Constants::TileSize * 3), 100);
@@ -108,18 +111,29 @@ Game::~Game()
 	//Clear units
 }
 
+void Game::lootItem(Inventory::ItemPtr item)
+{
+	m_inventory->addItem(std::move(item));
+}
+
+void Game::changeLevel(int levelIndex)
+{
+	FileSave::loadMapText(m_level, levelIndex);
+	m_player->setPosition(m_level.getSpawnPos());
+}
+
+Level& Game::getLevel()
+{
+	return m_level;
+}
+const sf::RenderWindow& Game::getWindow() const
+{
+	return m_game;
+}
+
 void Game::run()
 {
 	loop();
-}
-
-void Game::loadFile()
-{
-	FileSave::loadMapText(m_level, 0);
-}
-void Game::saveFile()
-{
-	FileSave::loadMapText(m_level, 0);
 }
 
 void Game::loop()
@@ -138,12 +152,8 @@ void Game::loop()
 		{
 			if (event.type == sf::Event::Closed)
 				m_game.close();
-			if (event.type == sf::Event::KeyReleased)
-			{
-				sf::Vector2f mousePos = m_game.mapPixelToCoords(sf::Mouse::getPosition(m_game));
-				SoundPlayer::instance().playSound("CoinTestSound", mousePos);
-			}
 
+			// Pump events to everything that needs it
 			m_inventory->events(event, m_game, m_level);
 			m_popup->events(event, m_game, m_level);
 			ConversationBox::instance().events(event, m_game);
@@ -153,15 +163,23 @@ void Game::loop()
 		if (m_game.hasFocus())
 		{
 			m_game.setActive(true);
+
 			// Update game logic and input
 			m_camera.setCenter(m_player->getCameraPosition());
 		//	m_player->checkPlayerInput(deltaTime);
-			m_level.update(deltaTime);
+			m_level.update(deltaTime, *this);
 			m_inventory->update(m_game);
 			m_popup->update(m_game, 
 				sf::Vector2f(m_player->getPosition().x + m_player->getSize().x/2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
 			Notification::instance().update(deltaTime, m_game);
 			ConversationBox::instance().update(deltaTime, m_game);
+
+			// Update positional sound with player position
+			SoundPlayer::instance().update(
+				deltaTime,
+				sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
+
+
 		//kollision, flytta hjärna
 			for (unsigned int i = 0; i < m_level.getUnits().size(); i++)
 			{
@@ -177,9 +195,6 @@ void Game::loop()
 
 	
 
-		SoundPlayer::instance().update(
-			deltaTime,
-			sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
 
 		// Update editor camera
 		m_game.setView(m_camera);

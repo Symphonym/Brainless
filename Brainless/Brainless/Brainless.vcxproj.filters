@@ -174,6 +174,9 @@
     <ClCompile Include="KeyItem.cpp">
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
+    <ClCompile Include="ChestItem.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -288,6 +291,9 @@
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
     <ClInclude Include="KeyItem.h">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ChestItem.h">
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
   </ItemGroup>

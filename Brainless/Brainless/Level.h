@@ -18,6 +18,8 @@ public:
 
 	Level();
 
+	void setSpawnPosition(const sf::Vector2f &spawnPos);
+
 	// Adds a unit to the level and returns a pointer to it
 	Unit* addUnit(UnitPtr unit);
 
@@ -35,7 +37,7 @@ public:
 	// Reset everything in the level
 	void reset();
 
-	void update(float deltaTime);
+	void update(float deltaTime, Game &game);
 	void draw(const sf::View &cameraView);
 
 	TileMap& getTileMap();
@@ -47,9 +49,13 @@ public:
 	Item& getItem(std::size_t index);
 	Unit& getUnit(std::size_t index);
 
+	const sf::Vector2f& getSpawnPos() const;
+
 private:
 
 	void updateUnitCollision(float deltaTime);
+
+	sf::Vector2f m_spawnPos;
 
 	MapPtr m_tileMap; // Tilemap of all the tiles in the level
 	std::vector<ItemPtr> m_items; // Items in the level

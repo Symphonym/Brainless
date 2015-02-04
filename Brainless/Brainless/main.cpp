@@ -4,6 +4,9 @@
 
 int main(int argc, const char *args[])
 {
+	// Seed random generator
+	std::srand(std::time(NULL));
+
 	// Load resources that are used pretty much everywhere
 	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Main.txt");
 

@@ -29,3 +29,7 @@
 +Texture,images/items/doorOpen.png,DoorOpen
 +Texture,images/items/doorClosed.png,DoorClosed
 +Texture,images/items/keyTest.png,KeyTest
+
+# CHEST TEST ITEM
++Texture,images/items/chestOpen.png,ChestOpen
++Texture,images/items/chestClosed.png,ChestClosed
