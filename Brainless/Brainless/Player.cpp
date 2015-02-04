@@ -24,6 +24,7 @@ m_jumpState(ready),
 m_jumpPower(0),
 m_jumpFrame(2)
 {
+	m_cameraPos = m_position;
 }
 
 void Player::updateTask(float deltaTime)
@@ -35,6 +36,9 @@ void Player::updateTask(float deltaTime)
 
 	float startAccBreakpoint = 150;
 	float minSpeedBeforeStop = 10;
+
+	m_cameraPos.x = m_position.x;
+	m_cameraPos.y = m_position.y + cameraOffset;
 
 	bool slowDown = true;
 	m_inputDirection = noDirection;
@@ -74,16 +78,24 @@ void Player::updateTask(float deltaTime)
 		m_inputDirection = right;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-	{
-		if (m_cameraPos.y < m_position.y + 100)
-			m_cameraPos.y += deltaTime;
-	}
-	else
-	{
-		if (m_cameraPos.y > m_position.y)
-			m_cameraPos.y -= deltaTime;
-	}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && m_speed.x == 0 && m_speed.y == 0)
+		{
+			cameraOffset = cameraOffset + (m_cameraMaxOffset - cameraOffset) * deltaTime * m_cameraSpeed;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && m_speed.x == 0 && m_speed.y == 0)
+		{
+			cameraOffset = cameraOffset + (-m_cameraMaxOffset - cameraOffset) * deltaTime * m_cameraSpeed;
+		}
+		else
+		{
+			cameraOffset = cameraOffset + (0 - cameraOffset) * deltaTime * m_cameraSpeed;
+
+			if (abs(m_cameraPos.y - m_position.y) < 2)
+				cameraOffset = 0;
+		}
+
+	//startpos + (endpos - startpos)*u;
 
 	if (slowDown)
 	{

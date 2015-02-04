@@ -151,7 +151,7 @@ void Game::loop()
 		{
 			m_game.setActive(true);
 			// Update game logic and input
-			m_camera.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
+			m_camera.setCenter(m_player->getCameraPosition());
 			//	m_player->checkPlayerInput(deltaTime);
 			m_level.update(deltaTime);
 			m_inventory->update(m_game);
@@ -177,12 +177,6 @@ void Game::loop()
 			SoundPlayer::instance().update(
 				deltaTime,
 				sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
-
-			// Camera zoom
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-				m_camera.zoom(1.f + zoomSpeed);
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-				m_camera.zoom(1.f - zoomSpeed);
 
 			// Update editor camera
 			m_game.setView(m_camera);
