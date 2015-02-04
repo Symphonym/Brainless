@@ -111,6 +111,7 @@
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="ConversationBox.cpp" />
     <ClCompile Include="DialogTree.cpp" />
+    <ClCompile Include="DoorItem.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorGridMode.cpp" />
     <ClCompile Include="EditorItemMode.cpp" />
@@ -124,6 +125,7 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemDatabase.cpp" />
+    <ClCompile Include="KeyItem.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Notification.cpp" />
@@ -149,6 +151,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ConversationBox.h" />
     <ClInclude Include="DialogTree.h" />
+    <ClInclude Include="DoorItem.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EditorGridMode.h" />
     <ClInclude Include="EditorItemMode.h" />
@@ -162,6 +165,7 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemDatabse.h" />
+    <ClInclude Include="KeyItem.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelSprite.h" />
     <ClInclude Include="Notification.h" />
@@ -179,9 +183,6 @@
     <ClInclude Include="WorldButton.h" />
     <ClInclude Include="WrappedText.h" />
     <ClInclude Include="Zombie.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="BlackAndWhite.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

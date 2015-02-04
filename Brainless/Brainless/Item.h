@@ -19,7 +19,7 @@ class Item
 public:
 
 	// TODO Item needs clone functionality, prototype pattern, if we want to be able to inherit from item
-	explicit Item(const std::string &textureName, int id, int syncID = -1, CombineData combineData = CombineData(-1, -1));
+	explicit Item(const std::string &textureName, int id, CombineData combineData = CombineData(-1, -1));
 
 	// If the item needs custom interaction functionality
 	virtual void update(float deltaTime) {};
@@ -49,15 +49,20 @@ public:
 
 	bool isLootable() const;
 	bool isUsable() const;
+	bool isCollidable() const;
 	std::string getUseString() const;
 	std::string getPickupString() const;
 	std::string getExamineString() const;
+	sf::FloatRect getCollisionBounds() const; // Will be zero if collidable is false
 
 protected:
 
 	// Interaction variables that should be set by the deriving class's constructor
 	bool m_lootable;
 	bool m_usable;
+	bool m_collidable;
+	sf::Vector2f m_collisionOffset;
+	sf::Vector2f m_collisionSize;
 	std::string m_useString;
 	std::string m_pickupString;
 	std::string m_examineString;
@@ -76,7 +81,7 @@ class DefaultItem : public Item
 {
 public:
 
-	explicit DefaultItem(const std::string &textureName, int id, int syncID = -1, CombineData combineData = CombineData(-1, -1));
+	explicit DefaultItem(const std::string &textureName, int id, CombineData combineData = CombineData(-1, -1));
 
 	virtual Item* clone();
 };

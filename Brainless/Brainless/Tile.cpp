@@ -44,6 +44,10 @@ sf::Sprite& Tile::getSprite()
 	return m_tileSprite;
 }
 
+bool Tile::getTilt() const
+{
+	return m_type == Tilt;
+}
 
 
 void Tile::updateType()
@@ -61,6 +65,9 @@ void Tile::updateType()
 		break;
 	case Blue:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("BlueCube"));
+		break;
+	case Tilt:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("TiltCube"));
 		break;
 		// TODO Load texture based on type
 	}

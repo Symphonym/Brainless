@@ -23,3 +23,6 @@
 
 # TEST SOUND
 +Sound,sounds/COINV3.wav,CoinTestSound
+
+# TEST NOTIFICATION TEXTURE
++Texture,images/UI/dialoguebox.png,DialogBoxBackground

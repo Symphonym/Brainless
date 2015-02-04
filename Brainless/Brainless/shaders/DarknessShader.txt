@@ -1,0 +1,22 @@
+uniform sampler2D image;
+uniform vec2 playerScreenPosition;
+uniform float lightReachDistance;
+
+void main() {
+	vec4 texel = texture2D(image, gl_TexCoord[0].xy).rgba;
+	gl_FragColor = gl_Color * texel; // Get normal pixel color
+
+	vec2 distanceVector = playerScreenPosition - gl_FragCoord;
+	float distanceToPlayer = sqrt(distanceVector.x*distanceVector.x) + sqrt(distanceVector.y*distanceVector.y);
+
+	if(distanceToPlayer > lightReachDistance)
+	{
+		discard;
+	}
+	else
+	{
+		float distRelation = distanceToPlayer / lightReachDistance;
+		gl_FragColor.a *= 1.f - 1.f*distRelation;
+		gl_FragColor.a *= 0.2f * noise(1337);
+	}
+}

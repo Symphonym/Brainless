@@ -18,6 +18,10 @@ void WrappedText::setSize(const sf::Vector2f &size)
 {
 	m_messageBoxSize = size;
 }
+void WrappedText::setTextColor(const sf::Color &color)
+{
+	m_text.setColor(color);
+}
 
 const sf::Vector2f& WrappedText::getPosition() const
 {

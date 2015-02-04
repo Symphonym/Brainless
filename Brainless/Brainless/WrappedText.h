@@ -13,6 +13,9 @@ public:
 	void setPosition(const sf::Vector2f &position);
 	void setSize(const sf::Vector2f &size);
 
+	// Used to override color during drawing
+	void setTextColor(const sf::Color &color);
+
 	const sf::Vector2f& getPosition() const;
 	const sf::Vector2f& getBoxSize() const;
 

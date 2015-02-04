@@ -24,7 +24,6 @@ m_jumpState(ready),
 m_jumpPower(0),
 m_jumpFrame(2)
 {
-
 }
 
 void Player::updateTask(float deltaTime)
@@ -74,6 +73,18 @@ void Player::updateTask(float deltaTime)
 		slowDown = false;
 		m_inputDirection = right;
 	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	{
+		if (m_cameraPos.y < m_position.y + 100)
+			m_cameraPos.y += deltaTime;
+	}
+	else
+	{
+		if (m_cameraPos.y > m_position.y)
+			m_cameraPos.y -= deltaTime;
+	}
+
 	if (slowDown)
 	{
 		//small values = stop totally
@@ -149,6 +160,11 @@ void Player::jump()
 	m_jumpState = inAir;
 	m_inAir = true;
 	
+}
+
+sf::Vector2f Player::getCameraPosition()
+{
+	return m_cameraPos;
 }
 
 void Player::updateAnimation(float deltaTime)
