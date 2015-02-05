@@ -6,6 +6,7 @@
 #include "DialogTree.h"
 #include "WrappedText.h"
 
+class Game;
 class ConversationBox
 {
 public:
@@ -16,14 +17,15 @@ public:
 	// Reset the current dialog being displayed
 	void resetCurrentDialog();
 
-	void events(const sf::Event &event, const sf::RenderWindow &gameWindow);
-	void update(float deltaTime, const sf::RenderWindow &gameWindow);
+	void events(const sf::Event &event, Game &game);
+	void update(float deltaTime, Game &game);
 	void draw();
 
 	// Change the dialog in use by the box
 	void setDialog(const DialogTree &dialog);
 
 	sf::Vector2f getSize() const;
+	bool isShown() const;
 
 	static ConversationBox& instance();
 

@@ -32,13 +32,13 @@ void Level::addItem(ItemPtr item)
 {
 	m_items.push_back(std::move(item));
 }
+void Level::removeAllItems()
+{
+	m_items.clear();
+}
 void Level::addDecoration(const LevelSprite &decoration)
 {
 	m_sprites.push_back(decoration);
-}
-void Level::addZombie(const EditorZombie &zombie)
-{
-	m_zombies.push_back(zombie);
 }
 
 Level::ItemPtr Level::removeItem(Item *item)
@@ -70,10 +70,10 @@ void Level::removeDecoration(std::size_t index)
 	if (index < m_sprites.size())
 		m_sprites.erase(m_sprites.begin() + index);
 }
-void Level::removeZombie(std::size_t index)
+void Level::removeUnit(std::size_t index)
 {
-	if (index < m_zombies.size())
-		m_zombies.erase(m_zombies.begin() + index);
+	if (index < m_units.size())
+		m_units.erase(m_units.begin() + index);
 }
 
 
@@ -108,12 +108,6 @@ void Level::draw(const sf::View &cameraView)
 {
 	m_tileMap->draw(cameraView);
 
-	for (std::size_t i = 0; i < m_zombies.size(); i++)
-	{
-		m_zombies[i].sprite.setTextureRect(sf::IntRect(0, 256 * m_zombies[i].type, 256, 256));
-		Renderer::instance().drawForeground(m_zombies[i].sprite);
-
-	}
 	for (std::size_t i = 0; i < m_sprites.size(); i++)
 	{
 		if (m_sprites[i].drawToForeground)
@@ -140,10 +134,6 @@ const std::vector<Level::ItemPtr>& Level::getItems() const
 const std::vector<LevelSprite>& Level::getDecorations() const
 {
 	return m_sprites;
-}
-const std::vector<EditorZombie>& Level::getZombies() const
-{
-	return m_zombies;
 }
 const std::vector<Level::UnitPtr>& Level::getUnits() const
 {

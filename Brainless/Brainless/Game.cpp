@@ -21,7 +21,8 @@
 
 Game::Game()
 :
-m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
+m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless"),
+m_levelIndex(0)
 {
 	// Set render target to the game
 	Renderer::instance().setTarget(m_game);
@@ -36,7 +37,10 @@ m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
 	m_popup = new PopUpMenu();
 	m_popup->setItemCallback([&](Item* itm, PopUpMenu::InteractTypes type) -> void
 	{
-		Notification::instance().setPosition(itm->getPosition());
+		// Can't do anything if you're talking to someone
+		if (ConversationBox::instance().isShown())
+			return;
+
 		if (type == PopUpMenu::InteractTypes::Pickup)
 		{
 			if (itm->isLootable())
@@ -118,10 +122,24 @@ void Game::lootItem(Inventory::ItemPtr item)
 
 void Game::changeLevel(int levelIndex)
 {
-	FileSave::loadMapText(m_level, levelIndex);
+	m_levelIndex = levelIndex;
+	FileSave::loadMapText(m_level, m_levelIndex);
 	m_player->setPosition(m_level.getSpawnPos());
+	FileSave::loadLevelProgress(m_level, m_levelIndex);
+	FileSave::loadInventory(*m_inventory);
 }
 
+void Game::saveGame()
+{
+	FileSave::saveInventory(*m_inventory);
+	FileSave::saveLevelProgress(m_level, m_levelIndex);
+	Notification::instance().write("Game saved successfully!");
+}
+
+Player& Game::getPlayer()
+{
+	return *m_player;
+}
 Level& Game::getLevel()
 {
 	return m_level;
@@ -152,11 +170,18 @@ void Game::loop()
 		{
 			if (event.type == sf::Event::Closed)
 				m_game.close();
+			if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::N)
+				saveGame();
 
 			// Pump events to everything that needs it
-			m_inventory->events(event, m_game, m_level);
-			m_popup->events(event, m_game, m_level);
-			ConversationBox::instance().events(event, m_game);
+			// Disable game input when conversation is ongoing
+			if (!ConversationBox::instance().isShown())
+			{
+				m_inventory->events(event, m_game, m_level);
+				m_popup->events(event, m_game, m_level);
+			}
+			else
+				ConversationBox::instance().events(event, *this);
 		}
 		
 		//Pause if out of focus
@@ -167,12 +192,18 @@ void Game::loop()
 			// Update game logic and input
 			m_camera.setCenter(m_player->getCameraPosition());
 		//	m_player->checkPlayerInput(deltaTime);
-			m_level.update(deltaTime, *this);
-			m_inventory->update(m_game);
-			m_popup->update(m_game, 
-				sf::Vector2f(m_player->getPosition().x + m_player->getSize().x/2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
+
+			// Disable game input when conversation is ongoing
+			if (!ConversationBox::instance().isShown())
+			{
+				m_level.update(deltaTime, *this);
+				m_inventory->update(m_game);
+				m_popup->update(m_game,
+					sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
+			}
+				
 			Notification::instance().update(deltaTime, m_game);
-			ConversationBox::instance().update(deltaTime, m_game);
+			ConversationBox::instance().update(deltaTime, *this);
 
 			// Update positional sound with player position
 			SoundPlayer::instance().update(
@@ -192,8 +223,6 @@ void Game::loop()
 					}
 				}
 			}
-
-	
 
 
 		// Update editor camera

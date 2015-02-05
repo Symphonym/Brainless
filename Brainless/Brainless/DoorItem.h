@@ -16,6 +16,9 @@ public:
 	virtual void onUse(Game &game);
 	virtual void onExamine();
 
+	virtual void serialize(std::ofstream &writer) const;
+	virtual void deserialize(std::ifstream &reader);
+
 	virtual void draw();
 
 	virtual Item* clone();

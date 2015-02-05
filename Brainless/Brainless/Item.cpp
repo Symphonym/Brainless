@@ -3,7 +3,7 @@
 #include "Renderer.h"
 #include "Constants.h"
 
-Item::Item(const std::string &textureName, int id, CombineData combineData)
+Item::Item(const std::string &itemName, const std::string &textureName, int id, CombineData combineData)
 :
 m_lootable(false),
 m_usable(false),
@@ -13,11 +13,37 @@ m_collisionSize(0, 0),
 m_useString(Constants::CantUseString),
 m_pickupString(Constants::CantPickUpString),
 m_examineString("A pretty normal object, nothing out of the ordinary"),
+m_itemName(itemName),
 m_id(id),
 m_syncID(-1),
 m_combineData(combineData)
 {
 	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
+}
+
+void Item::serialize(std::ofstream &writer) const
+{
+	// This is so the reader can quickly grab the item from the database
+	writer << m_id << std::endl;
+
+	writer << m_syncID << std::endl;
+	writer << getPosition().x << std::endl;
+	writer << getPosition().y << std::endl;
+	writer << m_lootable << std::endl;
+	writer << m_usable << std::endl;
+	writer << m_collidable << std::endl;
+	//writer << m_id << "," << m_syncID << "," << getPosition().x << "," << getPosition().y << ",";
+	//writer << m_lootable << "," << m_usable << "," << m_collidable;
+}
+void Item::deserialize(std::ifstream &reader)
+{
+	// ID is read initially outside this function to grab the item from the database
+	float posX = 0, posY = 0;
+	reader >> m_syncID >> posX >> posY;
+
+	setPosition(sf::Vector2f(posX, posY));
+
+	reader >> m_lootable >> m_usable >> m_collidable;
 }
 
 void Item::setPosition(const sf::Vector2f &pos)
@@ -37,6 +63,10 @@ void Item::draw()
 sf::Sprite& Item::getSprite()
 {
 	return m_sprite;
+}
+std::string Item::getName() const
+{
+	return m_itemName;
 }
 int Item::getID() const
 {
@@ -99,7 +129,7 @@ productItemID(productItemIDParam)
 
 DefaultItem::DefaultItem(const std::string &textureName, int id, CombineData combineData)
 :
-Item(textureName, id, combineData)
+Item("DefaultItem", textureName, id, combineData)
 {
 	m_lootable = true;
 };

@@ -5,7 +5,7 @@
 
 GhostItem::GhostItem(const std::string &dialogFile, int id)
 :
-Item("GhostTest", id)
+Item("Ghost", "GhostTest", id)
 {
 	m_dialog.loadDialogFile(dialogFile);
 
@@ -17,6 +17,7 @@ Item("GhostTest", id)
 
 void GhostItem::update(float deltaTime, Game &game)
 {
+
 }
 void GhostItem::draw()
 {

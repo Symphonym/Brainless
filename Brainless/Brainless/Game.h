@@ -30,6 +30,9 @@ public:
 	// Loads a new level, resetting player position to starting position, resetting HUD etc
 	void changeLevel(int levelIndex);
 
+	void saveGame();
+
+	Player& getPlayer();
 	Level& getLevel();
 	const sf::RenderWindow& getWindow() const;
 
@@ -38,6 +41,7 @@ private:
 	sf::RenderWindow m_game;
 	sf::View m_camera;
 
+	int m_levelIndex;
 	Level m_level;
 	Player* m_player;
 

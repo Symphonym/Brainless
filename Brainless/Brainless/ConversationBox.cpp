@@ -1,6 +1,7 @@
 #include "ConversationBox.h"
 #include "ResourceLoader.h"
 #include "Renderer.h"
+#include "Game.h"
 
 ConversationBox::ConversationBox()
 :
@@ -10,7 +11,7 @@ m_conversationState(ConversationStates::NPC),
 m_basePosition(0, 0),
 m_dialogBox(sf::Vector2f(0, 0), sf::Vector2f(100, 100), ResourceLoader::instance().retrieveFont("DefaultFont"))
 {
-	m_background.setTexture(ResourceLoader::instance().retrieveTexture("BackgroundTest"));
+	m_background.setTexture(ResourceLoader::instance().retrieveTexture("DialogBoxBackground"));
 	m_dialogBox.setSize(sf::Vector2f(m_background.getGlobalBounds().width / 1.6, m_background.getGlobalBounds().height / 1.3f));
 	m_portraitSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_playerPortraitTextureName));
 }
@@ -31,7 +32,7 @@ void ConversationBox::setPosition(const sf::Vector2f &position)
 		sf::Text &text = m_answers[i];
 		
 		text.setPosition(
-			m_background.getGlobalBounds().left + m_background.getGlobalBounds().width - text.getGlobalBounds().width - 10.f,
+			m_portraitSprite.getPosition().x + m_portraitSprite.getGlobalBounds().width + 10.f,//m_background.getGlobalBounds().left + m_background.getGlobalBounds().width - text.getGlobalBounds().width - 10.f,
 			m_background.getPosition().y + 10.f + i*(text.getGlobalBounds().height + 5.f)
 			);
 	}
@@ -49,7 +50,7 @@ void ConversationBox::resetCurrentDialog()
 	m_dialogBox.Type(m_dialog.getCurrentDialog(), 5000.f, sf::Color::White);
 }
 
-void ConversationBox::events(const sf::Event &event, const sf::RenderWindow &gameWindow)
+void ConversationBox::events(const sf::Event &event, Game &game)
 {
 	if (m_isShown)
 	{
@@ -57,9 +58,17 @@ void ConversationBox::events(const sf::Event &event, const sf::RenderWindow &gam
 		{
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
+				sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
+
+				// Clicking outside the conversation box will close it
+				if (!m_background.getGlobalBounds().contains(sf::Vector2f(mousePos.x, mousePos.y)))
+				{
+					setShown(false);
+					return;
+				}
+
 				if (m_conversationState == ConversationStates::Player)
 				{
-					sf::Vector2i mousePos = sf::Mouse::getPosition(gameWindow);
 
 					// Go through answers and check if an answer was clicked
 					for (std::size_t i = 0; i < m_answers.size(); i++)
@@ -104,14 +113,19 @@ void ConversationBox::events(const sf::Event &event, const sf::RenderWindow &gam
 		}
 	}
 }
-void ConversationBox::update(float deltaTime, const sf::RenderWindow &gameWindow)
+void ConversationBox::update(float deltaTime, Game &game)
 {
 	if (m_isShown)
 	{
+		sf::Vector2f pos(
+			game.getWindow().getSize().x / 2.f - m_background.getGlobalBounds().width / 2.f,
+			game.getWindow().getSize().y - m_background.getGlobalBounds().height);
+		setPosition(pos);
+
 		// Just highlight answers if you hover above them
 		if (m_conversationState == ConversationStates::Player)
 		{
-			sf::Vector2i mousePos = sf::Mouse::getPosition(gameWindow);
+			sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
 
 			for (std::size_t i = 0; i < m_answers.size(); i++)
 			{
@@ -162,6 +176,10 @@ sf::Vector2f ConversationBox::getSize() const
 {
 	return sf::Vector2f(m_background.getGlobalBounds().width, m_background.getGlobalBounds().height);
 }
+bool ConversationBox::isShown() const
+{
+	return m_isShown;
+}
 
 void ConversationBox::setDialog(const DialogTree &dialog)
 {
@@ -183,10 +201,10 @@ void ConversationBox::loadNextOptions()
 		option.setCharacterSize(15);
 	
 		// Set text position to match that of the dialog box
-		option.setPosition(
-			m_dialogBox.getPosition().x,
+		/*option.setPosition(
+			0,//m_dialogBox.getPosition().x,
 			m_dialogBox.getPosition().y + i*(option.getGlobalBounds().height + 5.f)
-			);
+			);*/
 		m_answers.push_back(option);
 	}
 }

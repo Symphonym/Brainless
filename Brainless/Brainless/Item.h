@@ -3,7 +3,7 @@
 
 #include <string>
 #include <SFML\Graphics.hpp>
-
+#include <fstream>
 
 // Data for combining items
 struct CombineData
@@ -20,7 +20,7 @@ class Item
 public:
 
 	// TODO Item needs clone functionality, prototype pattern, if we want to be able to inherit from item
-	explicit Item(const std::string &textureName, int id, CombineData combineData = CombineData(-1, -1));
+	explicit Item(const std::string &itemName, const std::string &textureName, int id, CombineData combineData = CombineData(-1, -1));
 
 	// If the item needs custom interaction functionality
 	virtual void update(float deltaTime, Game &game) {};
@@ -33,6 +33,12 @@ public:
 	virtual void onExamine() {};
 	virtual void onPickUp() {};
 
+	// Base functionality for loading/saving ID, syncID and usability status to a file
+	// These should be called with Item::serialize() etc if you don't want to save the base Item
+	// settings yourself
+	virtual void serialize(std::ofstream &writer) const;
+	virtual void deserialize(std::ifstream &reader);
+
 	// Prototype pattern so we can clone item hierarchies
 	virtual Item* clone() = 0;
 
@@ -43,6 +49,7 @@ public:
 
 	sf::Sprite& getSprite();
 	
+	std::string getName() const;
 	int getID() const;
 	void setSyncID(int id);
 	int getSyncID() const;
@@ -70,6 +77,7 @@ protected:
 
 private:
 
+	std::string m_itemName;
 	sf::Sprite m_sprite;
 	int m_id; // Unique identifier for the item
 	int m_syncID; // ID to connect the item to other items

@@ -5,7 +5,7 @@
 
 ChestItem::ChestItem(bool locked, std::vector<int> itemsWithin, int id)
 :
-Item("ChestClosed", id),
+Item("Chest", "ChestClosed", id),
 m_itemsWithin(itemsWithin),
 m_isLocked(locked),
 m_isOpen(false)
@@ -56,13 +56,33 @@ void ChestItem::onUse(Game &game)
 }
 bool ChestItem::onInteractedWith(Item &otherItem)
 {
-	if (m_isLocked && otherItem.getSyncID() == getSyncID())
+	if (m_isLocked && otherItem.getSyncID() == getSyncID() && otherItem.getName() == "Key")
 	{
 		m_isLocked = false;
 		// TODO play open sound?
 	}
 
 	return false;
+}
+
+void ChestItem::serialize(std::ofstream &writer) const
+{
+	Item::serialize(writer);
+	writer << m_isLocked << std::endl;
+	writer << m_isOpen << std::endl;
+}
+void ChestItem::deserialize(std::ifstream &reader)
+{
+	Item::deserialize(reader);
+	reader >> m_isLocked >> m_isOpen;
+
+	if (m_isOpen)
+	{
+		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("ChestOpen"));
+		m_itemsWithin.clear();
+	}
+	else
+		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("ChestClosed"));
 }
 
 Item* ChestItem::clone()
