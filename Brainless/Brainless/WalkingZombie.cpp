@@ -20,7 +20,12 @@ m_minPositionX(startPosition.x),
 m_currentDisparity(0),
 m_animState(anim_noAnimation)
 {
-
+	if (maxDisparityX < 0)
+	{
+		m_maxPositionX = startPosition.x;
+		m_minPositionX = m_maxPositionX+maxDisparityX;
+		m_currentDisparity = -1 * maxDisparityX;
+	}
 }
 
 void WalkingZombie::updateTask(float deltaTime)
