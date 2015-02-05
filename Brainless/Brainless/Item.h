@@ -3,7 +3,7 @@
 
 #include <string>
 #include <SFML\Graphics.hpp>
-
+#include <fstream>
 
 // Data for combining items
 struct CombineData
@@ -32,6 +32,12 @@ public:
 	virtual void onUse(Game &game) {};
 	virtual void onExamine() {};
 	virtual void onPickUp() {};
+
+	// Base functionality for loading/saving ID, syncID and usability status to a file
+	// These should be called with Item::serialize() etc if you don't want to save the base Item
+	// settings yourself
+	virtual void serialize(std::ofstream &writer) const;
+	virtual void deserialize(std::ifstream &reader);
 
 	// Prototype pattern so we can clone item hierarchies
 	virtual Item* clone() = 0;

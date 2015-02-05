@@ -12,6 +12,9 @@ public:
 	virtual void onUse(Game &game);
 	virtual bool onInteractedWith(Item &otherItem);
 
+	virtual void serialize(std::ofstream &writer) const;
+	virtual void deserialize(std::ifstream &reader);
+
 	Item* clone();
 
 private:

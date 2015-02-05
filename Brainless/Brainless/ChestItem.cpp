@@ -65,6 +65,26 @@ bool ChestItem::onInteractedWith(Item &otherItem)
 	return false;
 }
 
+void ChestItem::serialize(std::ofstream &writer) const
+{
+	Item::serialize(writer);
+	writer << m_isLocked << std::endl;
+	writer << m_isOpen << std::endl;
+}
+void ChestItem::deserialize(std::ifstream &reader)
+{
+	Item::deserialize(reader);
+	reader >> m_isLocked >> m_isOpen;
+
+	if (m_isOpen)
+	{
+		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("ChestOpen"));
+		m_itemsWithin.clear();
+	}
+	else
+		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("ChestClosed"));
+}
+
 Item* ChestItem::clone()
 {
 	return new ChestItem(*this);

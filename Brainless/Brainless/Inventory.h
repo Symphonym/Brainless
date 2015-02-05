@@ -29,6 +29,9 @@ public:
 
 	bool holdingItem() const;
 
+	// Returns a read-only list of all items in the inventory
+	std::vector<const Item*> getInventoryItems() const;
+
 private:
 
 	typedef std::pair<ItemPtr, sf::Sprite> InventoryPair;

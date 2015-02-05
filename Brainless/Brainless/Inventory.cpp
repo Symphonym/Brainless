@@ -18,9 +18,6 @@ m_isOpen(false)
 			slotSprite.setPosition(x*slotSprite.getGlobalBounds().width, y*slotSprite.getGlobalBounds().height);
 		}
 	}
-
-	// TODO remove example item here
-	addItem(std::move(ItemDatabase::instance().extractItemByCount(1)));
 }
 
 void Inventory::addItem(ItemPtr item)
@@ -231,7 +228,24 @@ bool Inventory::holdingItem() const
 		return false;
 }
 
+std::vector<const Item*> Inventory::getInventoryItems() const
+{
+	std::vector<const Item*> items;
+	for (std::size_t x = 0; x < m_slots.size(); x++)
+	{
+		for (std::size_t y = 0; y < m_slots[x].size(); y++)
+		{
+			const InventoryPair& invPair = m_slots[x][y];
+			if (invPair.first)
+				items.push_back(invPair.first.get());
+		}
+	}
 
+	if (m_mouseItem)
+		items.push_back(m_mouseItem.get());
+
+	return items;
+}
 
 Inventory::InventoryPair* Inventory::getSlotAt(const sf::Vector2f &position)
 {

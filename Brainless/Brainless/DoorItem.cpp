@@ -56,6 +56,23 @@ void DoorItem::onExamine()
 	}
 }
 
+void DoorItem::serialize(std::ofstream &writer) const
+{
+	Item::serialize(writer);
+	writer << m_isLocked << std::endl;
+	writer << m_isOpen << std::endl;
+}
+void DoorItem::deserialize(std::ifstream &reader)
+{
+	Item::deserialize(reader);
+	reader >> m_isLocked >> m_isOpen;
+
+	if (m_isOpen)
+		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("DoorOpen"));
+	else
+		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("DoorClosed"));
+}
+
 void DoorItem::draw()
 {
 	if (m_isOpen)

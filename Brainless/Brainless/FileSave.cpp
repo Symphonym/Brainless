@@ -14,6 +14,7 @@
 #include "Tile.h"
 #include "Item.h"
 #include "ItemDatabse.h"
+#include "Inventory.h"
 
 #include "Utility.h"
 
@@ -288,4 +289,81 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 	}
 
 	return false;
+}
+
+
+void FileSave::saveInventory(Inventory &inventory)
+{
+	std::ofstream writer("inventory.txt");
+
+	std::vector<const Item*> items = inventory.getInventoryItems();
+	for (std::size_t i = 0; i < items.size(); i++)
+	{
+		items[i]->serialize(writer);
+		//writer >> items[i]->getID() >>
+	}
+	writer.close();
+}
+bool FileSave::loadInventory(Inventory &inventory)
+{
+	std::ifstream reader("inventory.txt");
+
+	bool opened = false;
+	if (reader.is_open())
+	{
+		opened = true;
+
+		std::string line;
+		while (std::getline(reader, line))
+		{
+			// Skip empty lines
+			if (line.empty())
+				continue;
+
+			int itemID = Utility::stringToNumber<int>(line);
+			ItemDatabase::ItemPtr item = std::move(ItemDatabase::instance().extractItem(itemID));
+
+			item->deserialize(reader);
+			inventory.addItem(std::move(item));
+		}
+	}
+	reader.close();
+	return opened;
+}
+
+void FileSave::saveLevelProgress(Level &level, int levelNumber)
+{
+	std::ofstream writer("game_level" + std::to_string(levelNumber) + ".txt");
+	for (std::size_t i = 0; i < level.getItems().size(); i++)
+	{
+		level.getItems()[i]->serialize(writer);
+	}
+	writer.close();
+
+}
+bool FileSave::loadLevelProgress(Level &level, int levelNumber)
+{
+	std::ifstream reader("game_level" + std::to_string(levelNumber) + ".txt");
+
+	bool opened = false;
+	if (reader.is_open())
+	{
+		opened = true;
+
+		std::string line;
+		while (std::getline(reader, line))
+		{
+			// Skip empty lines
+			if (line.empty())
+				continue;
+
+			int itemID = Utility::stringToNumber<int>(line);
+			ItemDatabase::ItemPtr item = std::move(ItemDatabase::instance().extractItem(itemID));
+
+			item->deserialize(reader);
+			level.addItem(std::move(item));
+		}
+	}
+	reader.close();
+	return opened;
 }

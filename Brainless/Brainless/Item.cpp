@@ -20,6 +20,31 @@ m_combineData(combineData)
 	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
 }
 
+void Item::serialize(std::ofstream &writer) const
+{
+	// This is so the reader can quickly grab the item from the database
+	writer << m_id << std::endl;
+
+	writer << m_syncID << std::endl;
+	writer << getPosition().x << std::endl;
+	writer << getPosition().y << std::endl;
+	writer << m_lootable << std::endl;
+	writer << m_usable << std::endl;
+	writer << m_collidable << std::endl;
+	//writer << m_id << "," << m_syncID << "," << getPosition().x << "," << getPosition().y << ",";
+	//writer << m_lootable << "," << m_usable << "," << m_collidable;
+}
+void Item::deserialize(std::ifstream &reader)
+{
+	// ID is read initially outside this function to grab the item from the database
+	float posX = 0, posY = 0;
+	reader >> m_syncID >> posX >> posY;
+
+	setPosition(sf::Vector2f(posX, posY));
+
+	reader >> m_lootable >> m_usable >> m_collidable;
+}
+
 void Item::setPosition(const sf::Vector2f &pos)
 {
 	m_sprite.setPosition(pos);

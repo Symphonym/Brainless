@@ -21,7 +21,8 @@
 
 Game::Game()
 :
-m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless")
+m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless"),
+m_levelIndex(0)
 {
 	// Set render target to the game
 	Renderer::instance().setTarget(m_game);
@@ -118,8 +119,17 @@ void Game::lootItem(Inventory::ItemPtr item)
 
 void Game::changeLevel(int levelIndex)
 {
-	FileSave::loadMapText(m_level, levelIndex);
+	m_levelIndex = levelIndex;
+	FileSave::loadMapText(m_level, m_levelIndex);
 	m_player->setPosition(m_level.getSpawnPos());
+	FileSave::loadLevelProgress(m_level, m_levelIndex);
+	FileSave::loadInventory(*m_inventory);
+}
+
+void Game::saveGame()
+{
+	FileSave::saveInventory(*m_inventory);
+	FileSave::saveLevelProgress(m_level, m_levelIndex);
 }
 
 Level& Game::getLevel()
@@ -152,6 +162,8 @@ void Game::loop()
 		{
 			if (event.type == sf::Event::Closed)
 				m_game.close();
+			if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::N)
+				saveGame();
 
 			// Pump events to everything that needs it
 			m_inventory->events(event, m_game, m_level);
