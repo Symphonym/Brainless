@@ -19,35 +19,35 @@ public:
 
 	enum AnimationState
 	{
-		noAnimation,
-		idle,
-		startWalk,
-		endWalk,
-		run,
-		turn,
-		startJump,
-		endJump,
-		inAirUp,
-		inAirFall,
-		land,
-		dying,
-		takingDamageAnim
+		anim_noAnimation,
+		anim_idle,
+		anim_startWalk,
+		anim_endWalk,
+		anim_run,
+		anim_turn,
+		anim_startJump,
+		anim_endJump,
+		anim_inAirUp,
+		anim_inAirFall,
+		anim_land,
+		anim_dead,
+		anim_damaged
 	};
 
 
 	enum JumpState
 	{
-		ready,
-		buttonPressed,
-		inAir,
-		landing
+		jump_ready,
+		jump_buttonPressed,
+		jump_inAir,
+		jump_land
 	};
 
 	enum DamageState
 	{
-		normal,
-		dead,
-		takingDamage
+		dmg_normal,
+		dmg_dead,
+		dmg_damaged
 	};
 
 

@@ -18,13 +18,13 @@
 Player::Player(sf::Vector2f startPosition)
 :
 Unit(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y)),
-m_animState(noAnimation),
-m_inputDirection(noDirection),
-m_jumpState(ready),
+m_animState(anim_noAnimation),
+m_inputDirection(dir_noDirection),
+m_jumpState(jump_ready),
 m_jumpPower(0),
 m_jumpFrame(2),
 m_hp(3),
-m_damageState(normal)
+m_damageState(dmg_normal)
 {
 	m_cameraPos = m_position;
 }
@@ -52,7 +52,7 @@ void Player::updateTask(float deltaTime)
 
 	//startpos + (endpos - startpos)*u;
 
-	if (m_damageState == normal)
+	if (m_damageState == dmg_normal)
 	{
 		float speedTurnAround = 12;
 		float speedStartAcc = 500;
@@ -65,7 +65,7 @@ void Player::updateTask(float deltaTime)
 
 
 		bool slowDown = true;
-		m_inputDirection = noDirection;
+		m_inputDirection = dir_noDirection;
 		//Left
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
@@ -82,7 +82,7 @@ void Player::updateTask(float deltaTime)
 			}
 
 			slowDown = false;
-			m_inputDirection = left;
+			m_inputDirection = dir_left;
 		}
 		//Right
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -99,7 +99,7 @@ void Player::updateTask(float deltaTime)
 					m_acceleration.x = speedNormalAcc;
 			}
 			slowDown = false;
-			m_inputDirection = right;
+			m_inputDirection = dir_right;
 		}
 
 
@@ -121,18 +121,18 @@ void Player::updateTask(float deltaTime)
 		if (m_inAir)
 		{
 			//"cliffjump"
-			if (m_jumpState == buttonPressed)
+			if (m_jumpState == jump_buttonPressed)
 			{
 				jump();
 			}
-			m_jumpState = inAir;
+			m_jumpState = jump_inAir;
 		}
 		//Start to Land
-		else if (!m_inAir && m_jumpState == inAir) m_jumpState = landing; 
+		else if (!m_inAir && m_jumpState == jump_inAir) m_jumpState = jump_land;
 		//If landed, can jump.
-		else if (m_jumpState == landing)
+		else if (m_jumpState == jump_land)
 		{
-			if (m_animation.getPlayOnceDone()) m_jumpState = ready;
+			if (m_animation.getPlayOnceDone()) m_jumpState = jump_ready;
 		}
 		//Pressing jump
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -141,18 +141,18 @@ void Player::updateTask(float deltaTime)
 			if (m_inAir)
 			{
 				m_jumpPower = 0;
-				m_jumpState = inAir;
+				m_jumpState = jump_inAir;
 			}
 			//can jump
-			else if (m_jumpState == ready)
+			else if (m_jumpState == jump_ready)
 			{
 
 				//from ground
 				m_jumpPower = JUMP_POWER;
-				m_jumpState = buttonPressed;
+				m_jumpState = jump_buttonPressed;
 			}
 			//has started to jump
-			else if (m_jumpState == buttonPressed)
+			else if (m_jumpState == jump_buttonPressed)
 			{
 				m_jumpPower += deltaTime / (3 / JUMPANIMFPS) * JUMP_POWER_PER_SEC; //magic number, beroende på animation just nu
 				//force jump
@@ -163,25 +163,25 @@ void Player::updateTask(float deltaTime)
 			}
 		}
 		//releasing jump button
-		else if (m_jumpState == buttonPressed)
+		else if (m_jumpState == jump_buttonPressed)
 		{
 			jump();
 		}
 
 	}
-	else if (m_damageState == takingDamage)
+	else if (m_damageState == dmg_damaged)
 	{
 		//if (m_animState == takingDamageAnim && m_animation.getPlayOnceDone())
 		if (!m_inAir)
 		{
-			m_damageState = normal;
+			m_damageState = dmg_normal;
 			m_speed.x = 0;
 		}
 		//gör cool pushback rörelse
 	}
 	else //dying
 	{
-		if (m_animState == dying && m_animation.getPlayOnceDone())
+		if (m_animState == anim_dead && m_animation.getPlayOnceDone())
 		{
 			m_acceleration = sf::Vector2f(0, 0);
 			m_speed.x = 0;
@@ -189,14 +189,14 @@ void Player::updateTask(float deltaTime)
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
-		m_damageState = normal;
+		m_damageState = dmg_normal;
 		m_hp = 3;
 	}
 }
 
 void Player::takesDamage(sf::Vector2f collisionDifference)
 {
-	if (m_damageState == normal)
+	if (m_damageState == dmg_normal)
 	{
 		m_hp--;
 		
@@ -207,18 +207,18 @@ void Player::takesDamage(sf::Vector2f collisionDifference)
 		m_inAir = true;
 		//deny jump
 		m_jumpPower = 0;
-		m_jumpState = ready;
+		m_jumpState = jump_ready;
 		//specialSpriteDirection is set in animationUpdate
-		if (0 < collisionDifference.x) m_spriteDirection = right;
-		else m_spriteDirection = left;
+		if (0 < collisionDifference.x) m_spriteDirection = dir_right;
+		else m_spriteDirection = dir_left;
 
 		if (0 < m_hp)
 		{
-			m_damageState = takingDamage;
+			m_damageState = dmg_damaged;
 		}
 		else
 		{
-			m_damageState = dead;
+			m_damageState = dmg_dead;
 		}
 	}
 }
@@ -229,7 +229,7 @@ void Player::jump()
 	if (m_maxSpeed.y < m_jumpPower) m_jumpPower = m_maxSpeed.y;
 	m_jumpFrame = m_animation.getCurrentFrame(); //experimental
 	m_speed.y = -m_jumpPower;
-	m_jumpState = inAir;
+	m_jumpState = jump_inAir;
 	m_inAir = true;
 	
 }
@@ -246,45 +246,45 @@ void Player::updateAnimation(float deltaTime)
 	m_specialSpriteDirection = false;
 
 	//Dead
-	if (m_damageState == dead)
+	if (m_damageState == dmg_dead)
 	{
 		m_specialSpriteDirection = true;
-		if (m_animState != dying)
+		if (m_animState != anim_dead)
 		{
 			m_sprite = &m_spriteSheets[0];
 			m_animation.playOnce(0, 4, 6, 5);
-			m_animState = dying;
+			m_animState = anim_dead;
 		}
 	}
 	//TakingDamage
-	else if (m_damageState == takingDamage)
+	else if (m_damageState == dmg_damaged)
 	{
 		m_specialSpriteDirection = true;
-		if (m_animState != takingDamageAnim)
+		if (m_animState != anim_damaged)
 		{
 			m_sprite = &m_spriteSheets[0];
 			m_animation.playOnce(0, 1, 6, 2);
-			m_animState = takingDamageAnim;
+			m_animState = anim_damaged;
 		}
 	}
 	//startJump
-	else if (m_jumpState == buttonPressed)
+	else if (m_jumpState == jump_buttonPressed)
 	{
-		if (m_animState != startJump)
+		if (m_animState != anim_startJump)
 		{
 			m_sprite = &m_spriteSheets[1];
 			m_animation.playOnce(0, 2, 0, JUMPANIMFPS);
-			m_animState = startJump;
+			m_animState = anim_startJump;
 		}
 	}
 	//land
-	else if (m_jumpState == landing)
+	else if (m_jumpState == jump_land)
 	{
-		if (m_animState != land)
+		if (m_animState != anim_land)
 		{
 			m_sprite = &m_spriteSheets[1];
 			m_animation.playOnce(0, 1 + m_jumpFrame, 3, JUMPANIMFPS); //jumpFrame = experimental 3
-			m_animState = land;
+			m_animState = anim_land;
 			m_jumpFrame = 2; //experimental 
 		}
 	}
@@ -295,85 +295,85 @@ void Player::updateAnimation(float deltaTime)
 		{
 
 			//inAir
-			if (m_animState == inAirUp);
-			else if (m_animState == endJump && m_animation.getPlayOnceDone())
+			if (m_animState == anim_inAirUp);
+			else if (m_animState == anim_endJump && m_animation.getPlayOnceDone())
 			{
 				m_sprite = &m_spriteSheets[1];
 				m_animation.loop(0, 1, 1, 5);
-				m_animState = inAirUp;
+				m_animState = anim_inAirUp;
 			}
 			//endJump
-			else if (m_animState != endJump)
+			else if (m_animState != anim_endJump)
 			{
 				m_sprite = &m_spriteSheets[1];
 				m_animation.playOnce(3, 5, 0, 10);
-				m_animState = endJump;
+				m_animState = anim_endJump;
 
 			}
 		}
 		//FALL
 		else if (0 <= m_speed.y)
 		{
-			if (m_animState != inAirFall)
+			if (m_animState != anim_inAirFall)
 			{
 				m_sprite = &m_spriteSheets[1];
 				m_animation.loop(0, 1, 2, 6);
-				m_animState = inAirFall;
+				m_animState = anim_inAirFall;
 			}
 		}
 	}
 	//IDLE
 	else if ((-5 < m_speed.x && m_speed.x < 5 ))
 	{
-		if (m_animState != idle)
+		if (m_animState != anim_idle)
 		{
 			m_sprite = &m_spriteSheets[0];
 			m_animation.stillFrame(0, 3);
-			m_animState = idle;
+			m_animState = anim_idle;
 		}
 	}
 	//TURN
-	else if (m_speed.x < 0 && m_inputDirection == right || 0 < m_speed.x && m_inputDirection == left)
+	else if (m_speed.x < 0 && m_inputDirection == dir_right || 0 < m_speed.x && m_inputDirection == dir_left)
 	{
-		if (m_animState != turn)
+		if (m_animState != anim_turn)
 		{
 			m_sprite = &m_spriteSheets[0];
 			m_animation.playOnce(0, 3, 5, 10);
-			m_animState = turn;
+			m_animState = anim_turn;
 		}
 	}
 	//RUN
 	//else if (runBreakpoint <= m_speed.x || m_speed.x <= -runBreakpoint)
-	else if (m_animState == run || ((m_animState == startWalk || m_animState == endWalk) && m_animation.getPlayOnceDone()))
+	else if (m_animState == anim_run || ((m_animState == anim_startWalk || m_animState == anim_endWalk) && m_animation.getPlayOnceDone()))
 	{
-		if (m_animState != run)
+		if (m_animState != anim_run)
 		{
 			m_sprite = &m_spriteSheets[0];
 			m_animation.loop(0, 7, 1, 8);
-			m_animState = run;
+			m_animState = anim_run;
 		}
 		m_animation.setSpeed(Animation::calcFrameSpeed(8, 12, runBreakpoint, m_maxSpeed.x, abs(m_speed.x)));
 
 	}
 	//START WALK
-	else if ((m_speed.x < -5 || 5 < m_speed.x) && (m_inputDirection == right || m_inputDirection == left))
+	else if ((m_speed.x < -5 || 5 < m_speed.x) && (m_inputDirection == dir_right || m_inputDirection == dir_left))
 	{
-		if (m_animState != startWalk)
+		if (m_animState != anim_startWalk)
 		{
 			m_sprite = &m_spriteSheets[0];
 			m_animation.playOnce(0, 3, 0, 8);
-			m_animState = startWalk;
+			m_animState = anim_startWalk;
 		}
 		//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
 	}
 	//END WALK
 	else if ((m_speed.x < -5 || 5 < m_speed.x))
 	{
-		if (m_animState != endWalk)
+		if (m_animState != anim_endWalk)
 		{
 			m_sprite = &m_spriteSheets[0];
 			m_animation.playOnce(0, 3, 2, 8);
-			m_animState = endWalk;
+			m_animState = anim_endWalk;
 		}
 		//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
 	}

@@ -12,8 +12,8 @@ public:
 
 	enum AnimationState
 	{
-		noAnimation,
-		idle
+		anim_noAnimation,
+		anim_walking
 	};
 
 

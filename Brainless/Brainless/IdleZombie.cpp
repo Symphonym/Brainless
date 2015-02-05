@@ -15,7 +15,7 @@
 IdleZombie::IdleZombie(sf::Vector2f startPosition)
 :
 Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y)),
-m_animState(noAnimation)
+m_animState(anim_noAnimation)
 {
 
 }
@@ -28,11 +28,11 @@ void IdleZombie::updateTask(float deltaTime)
 void IdleZombie::updateAnimation(float deltaTime)
 {
 
-	if (m_animState != idle)
+	if (m_animState != anim_idle)
 	{
 		m_sprite = &m_spriteSheets[0];
 		m_animation.loop(0, 7, 2, 5);
-		m_animState = idle;
+		m_animState = anim_idle;
 	}
 
 	updateSpriteDirection();

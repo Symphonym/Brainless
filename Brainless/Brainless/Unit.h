@@ -36,9 +36,9 @@ public:
 
 	enum Direction
 	{
-		noDirection,
-		left,
-		right
+		dir_noDirection,
+		dir_left,
+		dir_right
 	};
 
 
