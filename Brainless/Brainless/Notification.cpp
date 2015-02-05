@@ -74,6 +74,11 @@ void Notification::draw()
 	}
 }
 
+bool Notification::isShown() const
+{
+	return m_isShown;
+}
+
 Notification& Notification::instance()
 {
 	static Notification not;

@@ -4,7 +4,7 @@
 
 DoorItem::DoorItem(bool locked, int id)
 :
-Item("DoorClosed", id),
+Item("Door", "DoorClosed", id),
 m_isOpen(false),
 m_isLocked(locked)
 {
@@ -54,6 +54,23 @@ void DoorItem::onExamine()
 		else
 			m_examineString = "It's a closed door, maybe I should open it.";
 	}
+}
+
+void DoorItem::serialize(std::ofstream &writer) const
+{
+	Item::serialize(writer);
+	writer << m_isLocked << std::endl;
+	writer << m_isOpen << std::endl;
+}
+void DoorItem::deserialize(std::ifstream &reader)
+{
+	Item::deserialize(reader);
+	reader >> m_isLocked >> m_isOpen;
+
+	if (m_isOpen)
+		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("DoorOpen"));
+	else
+		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("DoorClosed"));
 }
 
 void DoorItem::draw()

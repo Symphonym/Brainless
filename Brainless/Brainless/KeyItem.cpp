@@ -3,7 +3,7 @@
 
 KeyItem::KeyItem(const std::string &textureName, int id)
 :
-Item(textureName, id)
+Item("Key", textureName, id)
 {
 	m_lootable = true;
 }

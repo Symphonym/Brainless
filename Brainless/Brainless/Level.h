@@ -33,6 +33,8 @@ public:
 	ItemPtr removeItem(Item *item);
 	// Remove item by index, much faster than the above alternative
 	ItemPtr removeItem(std::size_t index);
+	void removeAllItems();
+
 	void removeDecoration(std::size_t index);
 	void removeZombie(std::size_t index);
 

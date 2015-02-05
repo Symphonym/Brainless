@@ -24,6 +24,7 @@ public:
 	void setDialog(const DialogTree &dialog);
 
 	sf::Vector2f getSize() const;
+	bool isShown() const;
 
 	static ConversationBox& instance();
 
