@@ -6,9 +6,15 @@
 
 struct EditorZombie
 {
+	enum ZombieTypes
+	{
+		Walk = 0,
+		Idle = 1
+		// Etc
+	};
 	sf::Sprite sprite;
 	//std::string textureName;
-	int type = 0, distance = 0, facing = 1;
+	int type = Walk, walk_distance = 0, facing = 1;
 };
 
 #endif

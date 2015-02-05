@@ -80,7 +80,7 @@ void Unit::setTexture(int index, sf::Texture& texture)
 void Unit::addTexture(sf::Texture& texture)
 {
 	m_spriteSheets.push_back(sf::Sprite(texture));
-
+	m_sprite = &m_spriteSheets[0];
 }
 
 void Unit::draw()
