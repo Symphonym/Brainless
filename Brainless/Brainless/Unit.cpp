@@ -22,10 +22,6 @@ m_specialSpriteDirection(false)
 }
 void Unit::updateMovement(float gravity, float deltaTime)
 {
-	// No movement allowed during conversations
-	if (ConversationBox::instance().isShown())
-		return;
-
 	float accelYtrue;
 	if (m_inAir)
 	{

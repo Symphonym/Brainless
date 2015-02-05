@@ -9,7 +9,6 @@
 
 EditorZombieMode::EditorZombieMode()
 {
-	initializeSprites();
 	m_highlightSprite.sprite.setTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 	m_highlightSprite.type = 0;
 
@@ -20,6 +19,20 @@ EditorZombieMode::EditorZombieMode()
 
 bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &editorWindow, Level &level)
 {
+	//Replace mask
+	while (m_zombieMasks.size()!=0)
+	{
+		//delete m_zombieMasks[m_zombieMasks.size() - 1];
+		m_zombieMasks.pop_back();
+	}
+	for (int i = 0; i < level.getUnits().size(); i++)
+	{
+		EditorZombie temp;
+		temp.sprite = level.getUnit(i).getSprite();
+		temp.sprite.setPosition(temp.sprite.getPosition() + sf::Vector2f(500, 0));
+		temp.sprite.setColor(sf::Color(255, 255, 255, 128));
+		m_zombieMasks.push_back(temp);
+	}
 	if (event.type == sf::Event::MouseWheelMoved)
 	{
 		// Scroll Zombie types
@@ -94,20 +107,15 @@ bool EditorZombieMode::update(float deltaTime, const sf::RenderWindow &editorWin
 }
 void EditorZombieMode::draw()
 {
-	Renderer::instance().drawForeground(m_highlightSprite.sprite);
+	
+	Renderer::instance().drawDepth(m_highlightSprite.sprite);
 	if (zombie_created)
 	{
 		Renderer::instance().drawForeground(m_createdZombie.sprite);
 	}
+	for (int i = 0; i < m_zombieMasks.size(); i++)
+	{
+		Renderer::instance().drawForeground(m_zombieMasks[i].sprite);
+	}
 	Renderer::instance().drawHUD(m_infoText);
-}
-
-void EditorZombieMode::addTexture(const std::string &textureName)
-{
-	m_availableDecorations.push_back(textureName);
-}
-
-void EditorZombieMode::initializeSprites()
-{
-	addTexture("GroundCube");
 }

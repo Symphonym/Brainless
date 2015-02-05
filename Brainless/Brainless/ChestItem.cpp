@@ -56,7 +56,7 @@ void ChestItem::onUse(Game &game)
 }
 bool ChestItem::onInteractedWith(Item &otherItem)
 {
-	if (m_isLocked && otherItem.getSyncID() == getSyncID())
+	if (m_isLocked && otherItem.getSyncID() == getSyncID() && otherItem.getName() == "Key")
 	{
 		m_isLocked = false;
 		// TODO play open sound?
