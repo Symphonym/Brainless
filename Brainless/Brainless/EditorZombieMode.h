@@ -24,10 +24,14 @@ private:
 	// Initialize list of available sprites
 	void initializeSprites();
 
-	sf::Text m_infoText; // unused for now
+	// Display current task
+	sf::Text m_infoText; 
 
 	// Used as a preview to how it would look like if the Zombie was placed
 	EditorZombie m_highlightSprite;
+	bool zombie_created = false;
+	EditorZombie m_createdZombie;
+	
 
 	const int Zombie_types = 2;
 

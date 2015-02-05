@@ -4,7 +4,6 @@
 #include "TileMap.h"
 #include "Item.h"
 #include "LevelSprite.h"
-#include "EditorZombie.h"
 #include "Unit.h"
 #include <memory>
 #include <vector>
@@ -26,18 +25,17 @@ public:
 
 	void addItem(ItemPtr item);
 	void addDecoration(const LevelSprite &decoration);
-	void addZombie(const EditorZombie &zombie);
 
 	// Removes an item (if found) from the level and returns it
 	// The item will be destroyed if the return value isn't used
 	ItemPtr removeItem(Item *item);
 	// Remove item by index, much faster than the above alternative
 	ItemPtr removeItem(std::size_t index);
+	
 	void removeAllItems();
 
 	void removeDecoration(std::size_t index);
-	void removeZombie(std::size_t index);
-
+	void removeUnit(std::size_t index);
 	// Reset everything in the level
 	void reset();
 
@@ -47,7 +45,6 @@ public:
 	TileMap& getTileMap();
 	const std::vector<ItemPtr>& getItems() const;
 	const std::vector<LevelSprite>& getDecorations() const;
-	const std::vector<EditorZombie>& getZombies() const;
 	const std::vector<UnitPtr>& getUnits() const;
 
 	// Get non-const access to level stuff
@@ -65,7 +62,6 @@ private:
 	MapPtr m_tileMap; // Tilemap of all the tiles in the level
 	std::vector<ItemPtr> m_items; // Items in the level
 	std::vector<LevelSprite> m_sprites; // Decoration sprites in the level
-	std::vector<EditorZombie> m_zombies; // Decoration sprites in the level
 	std::vector<UnitPtr> m_units; // Units in the level
 
 
