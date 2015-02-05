@@ -17,7 +17,7 @@ m_isLocked(locked)
 
 bool DoorItem::onInteractedWith(Item &otherItem)
 {
-	if (m_isLocked && otherItem.getSyncID() == getSyncID())
+	if (m_isLocked && otherItem.getSyncID() == getSyncID() && otherItem.getName() == "Key")
 	{
 		m_isLocked = false;
 		// TODO Play unlock sound?
