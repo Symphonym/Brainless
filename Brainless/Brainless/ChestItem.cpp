@@ -5,7 +5,7 @@
 
 ChestItem::ChestItem(bool locked, std::vector<int> itemsWithin, int id)
 :
-Item("ChestClosed", id),
+Item("Chest", "ChestClosed", id),
 m_itemsWithin(itemsWithin),
 m_isLocked(locked),
 m_isOpen(false)

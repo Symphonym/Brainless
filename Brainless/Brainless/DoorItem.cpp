@@ -4,7 +4,7 @@
 
 DoorItem::DoorItem(bool locked, int id)
 :
-Item("DoorClosed", id),
+Item("Door", "DoorClosed", id),
 m_isOpen(false),
 m_isLocked(locked)
 {

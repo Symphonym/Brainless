@@ -3,7 +3,7 @@
 #include "Renderer.h"
 #include "Constants.h"
 
-Item::Item(const std::string &textureName, int id, CombineData combineData)
+Item::Item(const std::string &itemName, const std::string &textureName, int id, CombineData combineData)
 :
 m_lootable(false),
 m_usable(false),
@@ -13,6 +13,7 @@ m_collisionSize(0, 0),
 m_useString(Constants::CantUseString),
 m_pickupString(Constants::CantPickUpString),
 m_examineString("A pretty normal object, nothing out of the ordinary"),
+m_itemName(itemName),
 m_id(id),
 m_syncID(-1),
 m_combineData(combineData)
@@ -62,6 +63,10 @@ void Item::draw()
 sf::Sprite& Item::getSprite()
 {
 	return m_sprite;
+}
+std::string Item::getName() const
+{
+	return m_itemName;
 }
 int Item::getID() const
 {
@@ -124,7 +129,7 @@ productItemID(productItemIDParam)
 
 DefaultItem::DefaultItem(const std::string &textureName, int id, CombineData combineData)
 :
-Item(textureName, id, combineData)
+Item("DefaultItem", textureName, id, combineData)
 {
 	m_lootable = true;
 };
