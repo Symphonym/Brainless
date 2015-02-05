@@ -30,7 +30,14 @@ void ChestItem::onUse(Game &game)
 			// Spawn items when chest is opened
 			for (std::size_t i = 0; i < m_itemsWithin.size(); i++)
 			{
+			
+
 				ItemDatabase::ItemPtr item = std::move(ItemDatabase::instance().extractItem(m_itemsWithin[i]));
+				
+				// Make sure items in the chest are lootable
+				if (!item->isLootable())
+					continue;
+
 				item->setPosition(sf::Vector2f(floorPosition.x, floorPosition.y - item->getSprite().getGlobalBounds().height));
 
 				int offset = std::rand() % 100;
