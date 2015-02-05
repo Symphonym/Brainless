@@ -5,7 +5,7 @@
 #define SPRITESIZE 256 //storleken på varje bild i texturesheet
 
 //V0.02
-Unit::Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset)
+Unit::Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID)
 :
 m_position(startPosition),
 m_speed(sf::Vector2f(0, 0)),
@@ -16,7 +16,8 @@ m_inAir(false),
 m_animation(SPRITESIZE, SPRITESIZE),
 m_spriteOffset(spriteOffset),
 m_spriteDirection(dir_right),
-m_specialSpriteDirection(false)
+m_specialSpriteDirection(false),
+m_UnitID(ID)
 {
 
 }
@@ -169,3 +170,7 @@ sf::FloatRect Unit::getCollisionRect()
 	return sf::FloatRect(m_position, m_size);
 }
 
+Unit::UnitType Unit::getUnitType()
+{
+	return m_UnitID;
+}

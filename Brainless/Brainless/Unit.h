@@ -9,7 +9,14 @@
 class Unit
 {
 public:
-	Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset);
+	enum UnitType
+	{
+		ID_Player,
+		ID_IdleZombie,
+		ID_WalkingZombie
+	};
+
+	Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID);
 
 	/*
 	Updates the collisionbox's position, speed, acceleration
@@ -41,14 +48,14 @@ public:
 		dir_right
 	};
 
-
+	
 	sf::Vector2f getPosition() const;
 	sf::Vector2f getSpeed() const;
 	sf::Vector2f getAcceleration() const;
 	sf::Vector2f getSize() const;
 	bool getInAir() const;
 	sf::FloatRect getCollisionRect();
-
+	UnitType getUnitType();
 protected:
 	sf::Vector2f m_position;
 	sf::Vector2f m_speed;
@@ -67,7 +74,7 @@ protected:
 	void updateSpriteDirection();
 	Direction m_spriteDirection;
 private:
-
+	UnitType m_UnitID;
 	bool m_isBusy;
 };
 

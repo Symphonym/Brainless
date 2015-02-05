@@ -17,7 +17,7 @@
 //v0.02
 Player::Player(sf::Vector2f startPosition)
 :
-Unit(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y)),
+Unit(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_Player),
 m_animState(anim_noAnimation),
 m_inputDirection(dir_noDirection),
 m_jumpState(jump_ready),
