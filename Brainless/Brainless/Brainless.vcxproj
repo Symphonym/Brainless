@@ -117,6 +117,7 @@
     <ClCompile Include="EditorGridMode.cpp" />
     <ClCompile Include="EditorItemMode.cpp" />
     <ClCompile Include="EditorSpriteMode.cpp" />
+    <ClCompile Include="EditorZombieMode.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="FileSave.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -158,6 +159,8 @@
     <ClInclude Include="EditorGridMode.h" />
     <ClInclude Include="EditorItemMode.h" />
     <ClInclude Include="EditorSpriteMode.h" />
+    <ClInclude Include="EditorZombie.h" />
+    <ClInclude Include="EditorZombieMode.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="FileSave.h" />
     <ClInclude Include="Game.h" />
