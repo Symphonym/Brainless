@@ -348,6 +348,7 @@ bool FileSave::loadLevelProgress(Level &level, int levelNumber)
 	bool opened = false;
 	if (reader.is_open())
 	{
+		level.removeAllItems();
 		opened = true;
 
 		std::string line;

@@ -32,6 +32,10 @@ void Level::addItem(ItemPtr item)
 {
 	m_items.push_back(std::move(item));
 }
+void Level::removeAllItems()
+{
+	m_items.clear();
+}
 void Level::addDecoration(const LevelSprite &decoration)
 {
 	m_sprites.push_back(decoration);
