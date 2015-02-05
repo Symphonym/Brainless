@@ -17,13 +17,6 @@ public:
 	void draw();
 
 private:
-
-	// Add a texture to the list of available decorations
-	void addTexture(const std::string &textureName);
-
-	// Initialize list of available sprites
-	void initializeSprites();
-
 	// Display current task
 	sf::Text m_infoText; 
 
@@ -34,8 +27,7 @@ private:
 	
 
 	const int Zombie_types = 2;
-
-	std::vector<std::string> m_availableDecorations; // List of all decorations available (list of texture names)
+	std::vector<EditorZombie> m_zombieMasks;
 };
 
 #endif
