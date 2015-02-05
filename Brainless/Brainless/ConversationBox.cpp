@@ -1,6 +1,7 @@
 #include "ConversationBox.h"
 #include "ResourceLoader.h"
 #include "Renderer.h"
+#include "Game.h"
 
 ConversationBox::ConversationBox()
 :
@@ -49,7 +50,7 @@ void ConversationBox::resetCurrentDialog()
 	m_dialogBox.Type(m_dialog.getCurrentDialog(), 5000.f, sf::Color::White);
 }
 
-void ConversationBox::events(const sf::Event &event, const sf::RenderWindow &gameWindow)
+void ConversationBox::events(const sf::Event &event, Game &game)
 {
 	if (m_isShown)
 	{
@@ -57,9 +58,17 @@ void ConversationBox::events(const sf::Event &event, const sf::RenderWindow &gam
 		{
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
+				sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
+
+				// Clicking outside the conversation box will close it
+				if (!m_background.getGlobalBounds().contains(sf::Vector2f(mousePos.x, mousePos.y)))
+				{
+					setShown(false);
+					return;
+				}
+
 				if (m_conversationState == ConversationStates::Player)
 				{
-					sf::Vector2i mousePos = sf::Mouse::getPosition(gameWindow);
 
 					// Go through answers and check if an answer was clicked
 					for (std::size_t i = 0; i < m_answers.size(); i++)
@@ -104,19 +113,19 @@ void ConversationBox::events(const sf::Event &event, const sf::RenderWindow &gam
 		}
 	}
 }
-void ConversationBox::update(float deltaTime, const sf::RenderWindow &gameWindow)
+void ConversationBox::update(float deltaTime, Game &game)
 {
 	if (m_isShown)
 	{
 		sf::Vector2f pos(
-			gameWindow.getSize().x / 2.f - m_background.getGlobalBounds().width / 2.f,
-			gameWindow.getSize().y - m_background.getGlobalBounds().height);
+			game.getWindow().getSize().x / 2.f - m_background.getGlobalBounds().width / 2.f,
+			game.getWindow().getSize().y - m_background.getGlobalBounds().height);
 		setPosition(pos);
 
 		// Just highlight answers if you hover above them
 		if (m_conversationState == ConversationStates::Player)
 		{
-			sf::Vector2i mousePos = sf::Mouse::getPosition(gameWindow);
+			sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
 
 			for (std::size_t i = 0; i < m_answers.size(); i++)
 			{

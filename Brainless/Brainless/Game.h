@@ -32,6 +32,7 @@ public:
 
 	void saveGame();
 
+	Player& getPlayer();
 	Level& getLevel();
 	const sf::RenderWindow& getWindow() const;
 

@@ -67,6 +67,8 @@ protected:
 	void updateSpriteDirection();
 	Direction m_spriteDirection;
 private:
+
+	bool m_isBusy;
 };
 
 

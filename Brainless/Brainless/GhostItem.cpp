@@ -17,6 +17,7 @@ Item("Ghost", "GhostTest", id)
 
 void GhostItem::update(float deltaTime, Game &game)
 {
+
 }
 void GhostItem::draw()
 {
