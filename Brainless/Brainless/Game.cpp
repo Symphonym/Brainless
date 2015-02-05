@@ -37,7 +37,10 @@ m_levelIndex(0)
 	m_popup = new PopUpMenu();
 	m_popup->setItemCallback([&](Item* itm, PopUpMenu::InteractTypes type) -> void
 	{
-		Notification::instance().setPosition(itm->getPosition());
+		// Can't do anything if you're talking to someone
+		if (ConversationBox::instance().isShown())
+			return;
+
 		if (type == PopUpMenu::InteractTypes::Pickup)
 		{
 			if (itm->isLootable())
@@ -130,6 +133,7 @@ void Game::saveGame()
 {
 	FileSave::saveInventory(*m_inventory);
 	FileSave::saveLevelProgress(m_level, m_levelIndex);
+	Notification::instance().write("Game saved successfully!");
 }
 
 Level& Game::getLevel()

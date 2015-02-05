@@ -10,7 +10,7 @@ m_conversationState(ConversationStates::NPC),
 m_basePosition(0, 0),
 m_dialogBox(sf::Vector2f(0, 0), sf::Vector2f(100, 100), ResourceLoader::instance().retrieveFont("DefaultFont"))
 {
-	m_background.setTexture(ResourceLoader::instance().retrieveTexture("BackgroundTest"));
+	m_background.setTexture(ResourceLoader::instance().retrieveTexture("DialogBoxBackground"));
 	m_dialogBox.setSize(sf::Vector2f(m_background.getGlobalBounds().width / 1.6, m_background.getGlobalBounds().height / 1.3f));
 	m_portraitSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_playerPortraitTextureName));
 }
@@ -31,7 +31,7 @@ void ConversationBox::setPosition(const sf::Vector2f &position)
 		sf::Text &text = m_answers[i];
 		
 		text.setPosition(
-			m_background.getGlobalBounds().left + m_background.getGlobalBounds().width - text.getGlobalBounds().width - 10.f,
+			m_portraitSprite.getPosition().x + m_portraitSprite.getGlobalBounds().width + 10.f,//m_background.getGlobalBounds().left + m_background.getGlobalBounds().width - text.getGlobalBounds().width - 10.f,
 			m_background.getPosition().y + 10.f + i*(text.getGlobalBounds().height + 5.f)
 			);
 	}
@@ -108,6 +108,11 @@ void ConversationBox::update(float deltaTime, const sf::RenderWindow &gameWindow
 {
 	if (m_isShown)
 	{
+		sf::Vector2f pos(
+			gameWindow.getSize().x / 2.f - m_background.getGlobalBounds().width / 2.f,
+			gameWindow.getSize().y - m_background.getGlobalBounds().height);
+		setPosition(pos);
+
 		// Just highlight answers if you hover above them
 		if (m_conversationState == ConversationStates::Player)
 		{
@@ -162,6 +167,10 @@ sf::Vector2f ConversationBox::getSize() const
 {
 	return sf::Vector2f(m_background.getGlobalBounds().width, m_background.getGlobalBounds().height);
 }
+bool ConversationBox::isShown() const
+{
+	return m_isShown;
+}
 
 void ConversationBox::setDialog(const DialogTree &dialog)
 {
@@ -183,10 +192,10 @@ void ConversationBox::loadNextOptions()
 		option.setCharacterSize(15);
 	
 		// Set text position to match that of the dialog box
-		option.setPosition(
-			m_dialogBox.getPosition().x,
+		/*option.setPosition(
+			0,//m_dialogBox.getPosition().x,
 			m_dialogBox.getPosition().y + i*(option.getGlobalBounds().height + 5.f)
-			);
+			);*/
 		m_answers.push_back(option);
 	}
 }

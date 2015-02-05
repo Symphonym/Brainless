@@ -19,6 +19,8 @@ public:
 	void update(float deltaTime, const sf::RenderWindow &gameWindow);
 	void draw();
 
+	bool isShown() const;
+
 	static Notification& instance();
 
 private:
