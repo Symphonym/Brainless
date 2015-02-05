@@ -7,6 +7,7 @@
 #include "ResourceLoader.h"
 #include "EditorGridMode.h"
 #include "EditorSpriteMode.h"
+#include "EditorZombieMode.h"
 #include "EditorItemMode.h"
 #include "Button.h"
 
@@ -54,6 +55,7 @@ m_currentSyncID(0)
 	// Initialize the different editor modes
 	m_gridMode = new EditorGridMode(m_level.getTileMap());
 	m_spriteMode = new EditorSpriteMode();
+	m_zombieMode = new EditorZombieMode();
 	m_itemMode = new EditorItemMode();
 
 	// Load the file and reload data for all the modes
@@ -181,6 +183,9 @@ void Editor::loop()
 				case EditorModes::Sprite:
 					somethingChanged = m_spriteMode->events(event, m_editor, m_level) ? true : somethingChanged;
 					break;
+				case EditorModes::Zombie:
+					somethingChanged = m_zombieMode->events(event, m_editor, m_level) ? true : somethingChanged;
+					break;
 				case EditorModes::Item:
 					somethingChanged = m_itemMode->events(event, m_editor, m_level) ? true : somethingChanged;
 					break;
@@ -243,6 +248,10 @@ void Editor::loop()
 		{
 			m_editorMode = EditorModes::Sprite;
 		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::H))
+		{
+			m_editorMode = EditorModes::Zombie;
+		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::L))
 		{
 			m_editorMode = EditorModes::Item;
@@ -287,6 +296,9 @@ void Editor::loop()
 			case EditorModes::Sprite:
 				somethingChanged = m_spriteMode->update(deltaTime, m_editor) ? true : somethingChanged;
 				break;
+			case EditorModes::Zombie:
+				somethingChanged = m_zombieMode->update(deltaTime, m_editor) ? true : somethingChanged;
+				break;
 			case EditorModes::Item:
 				somethingChanged = m_itemMode->update(deltaTime, m_editor) ? true : somethingChanged;
 				break;
@@ -321,13 +333,14 @@ void Editor::draw()
 
 	switch (m_editorMode)
 	{
-		case EditorModes::Grid: m_gridMode->draw(); break;
-		case EditorModes::Sprite: m_spriteMode->draw(); break;
-		case EditorModes::Item: m_itemMode->draw(); break;
+	case EditorModes::Grid: m_gridMode->draw(); break;
+	case EditorModes::Sprite: m_spriteMode->draw(); break;
+	case EditorModes::Zombie: m_zombieMode->draw(); break;
+	case EditorModes::Item: m_itemMode->draw(); break;
 	}
 	Renderer::instance().drawHUD(m_saveText);
 	Renderer::instance().drawHUD(m_levelFileText);
 	Renderer::instance().drawAbove(m_spawnSprite);
-	
+
 	Renderer::instance().executeDraws();
 }

@@ -9,7 +9,6 @@
 class EditorZombieMode
 {
 public:
-
 	EditorZombieMode();
 
 	// Returns true if something changed (so editor knows if it needs to resave)
@@ -25,12 +24,13 @@ private:
 	// Initialize list of available sprites
 	void initializeSprites();
 
-	sf::Text m_layerText; // Shows what layer you're drawing to
+	sf::Text m_infoText; // unused for now
 
-	// Used as a preview to how it would look like if the sprite was placed
-	LevelSprite m_highlightSprite;
+	// Used as a preview to how it would look like if the Zombie was placed
+	EditorZombie m_highlightSprite;
 
-	int m_currentSpriteIndex;
+	const int Zombie_types = 2;
+
 	std::vector<std::string> m_availableDecorations; // List of all decorations available (list of texture names)
 };
 

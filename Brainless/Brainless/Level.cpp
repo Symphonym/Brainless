@@ -36,6 +36,10 @@ void Level::addDecoration(const LevelSprite &decoration)
 {
 	m_sprites.push_back(decoration);
 }
+void Level::addZombie(const EditorZombie &zombie)
+{
+	m_zombies.push_back(zombie);
+}
 
 Level::ItemPtr Level::removeItem(Item *item)
 {
@@ -66,6 +70,11 @@ void Level::removeDecoration(std::size_t index)
 	if (index < m_sprites.size())
 		m_sprites.erase(m_sprites.begin() + index);
 }
+void Level::removeZombie(std::size_t index)
+{
+	if (index < m_zombies.size())
+		m_zombies.erase(m_zombies.begin() + index);
+}
 
 
 void Level::reset()
@@ -87,7 +96,7 @@ void Level::update(float deltaTime, Game &game)
 	for (std::size_t i = 0; i < m_units.size(); i++)
 	{
 		// TODO update units
-		
+
 	}
 	for (std::size_t i = 0; i < m_items.size(); i++)
 		m_items[i]->update(deltaTime, game);
@@ -99,6 +108,12 @@ void Level::draw(const sf::View &cameraView)
 {
 	m_tileMap->draw(cameraView);
 
+	for (std::size_t i = 0; i < m_zombies.size(); i++)
+	{
+		m_zombies[i].sprite.setTextureRect(sf::IntRect(0, 256 * m_zombies[i].type, 256, 256));
+		Renderer::instance().drawForeground(m_zombies[i].sprite);
+
+	}
 	for (std::size_t i = 0; i < m_sprites.size(); i++)
 	{
 		if (m_sprites[i].drawToForeground)
@@ -106,6 +121,7 @@ void Level::draw(const sf::View &cameraView)
 		else
 			Renderer::instance().drawBackground(m_sprites[i].sprite);
 	}
+
 
 	for (std::size_t i = 0; i < m_items.size(); i++)
 		m_items[i]->draw();
@@ -124,6 +140,10 @@ const std::vector<Level::ItemPtr>& Level::getItems() const
 const std::vector<LevelSprite>& Level::getDecorations() const
 {
 	return m_sprites;
+}
+const std::vector<EditorZombie>& Level::getZombies() const
+{
+	return m_zombies;
 }
 const std::vector<Level::UnitPtr>& Level::getUnits() const
 {
@@ -163,7 +183,7 @@ void Level::updateUnitCollision(float deltaTime)
 		startIndex -= sf::Vector2i(1, 1);
 
 		sf::Vector2i endIndex = m_tileMap->positionToIndex(
-			sf::Vector2f(currentUnit->getPosition().x+currentUnit->getSize().x, currentUnit->getPosition().y+currentUnit->getSize().y));
+			sf::Vector2f(currentUnit->getPosition().x + currentUnit->getSize().x, currentUnit->getPosition().y + currentUnit->getSize().y));
 		endIndex += sf::Vector2i(1, 1);
 
 		startIndex.x = Utility::clampValue(startIndex.x, 0, Constants::MapWidth - 1);
@@ -206,7 +226,7 @@ void Level::updateUnitCollision(float deltaTime)
 							onGround = true;
 						}
 					}
-					else 
+					else
 					{
 						currentUnit->setStatus(false);
 						onGround = true;
@@ -262,7 +282,7 @@ void Level::updateUnitCollision(float deltaTime)
 							if (currentTile.getType() == Tile::Tilt)
 							{
 								currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top - originalBounds.height + tileBounds.width - (originalBounds.left + originalBounds.width - tileBounds.left) + 1));
-								
+
 								if (originalBounds.left + originalBounds.width >= tileBounds.left + tileBounds.width - 1 && currentUnit->getSpeed().x > 0)
 									currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x + 2, currentUnit->getPosition().y - 1));
 
@@ -276,9 +296,9 @@ void Level::updateUnitCollision(float deltaTime)
 
 						if (currentTile.getType() == Tile::Tilt && unitBounds.left + unitBounds.width + unitBounds.top + unitBounds.height - 2 > tileCenter.x + tileCenter.y)
 						{
-								currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x, 0));
-								currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
-								currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top - originalBounds.height + tileBounds.width - (originalBounds.left + originalBounds.width - tileBounds.left) + 1));
+							currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x, 0));
+							currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
+							currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top - originalBounds.height + tileBounds.width - (originalBounds.left + originalBounds.width - tileBounds.left) + 1));
 						}
 					}
 

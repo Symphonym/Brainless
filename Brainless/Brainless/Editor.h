@@ -9,6 +9,7 @@
 class TileMap;
 class EditorGridMode;
 class EditorSpriteMode;
+class EditorZombieMode;
 class EditorItemMode;
 class Editor
 {
@@ -26,6 +27,7 @@ private:
 	{
 		Grid,
 		Sprite,
+		Zombie,
 		Item
 	};
 
@@ -49,6 +51,7 @@ private:
 	EditorModes m_editorMode;
 	EditorGridMode *m_gridMode;
 	EditorSpriteMode *m_spriteMode;
+	EditorZombieMode *m_zombieMode;
 	EditorItemMode *m_itemMode;
 
 	// Whether or not you have saved
