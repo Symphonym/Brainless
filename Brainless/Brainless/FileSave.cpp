@@ -215,7 +215,7 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 		switch (curUnit.getUnitType())
 		{
 		case Unit::ID_IdleZombie:
-			writer << curUnit.getPosition().x << "," << curUnit.getPosition().y << std::endl;
+			writer << curUnit.getPosition().x << "," << curUnit.getPosition().y << "," << (int)curUnit.getDirection() << std::endl;
 			break;
 		case Unit::ID_WalkingZombie:
 			writer << curUnit.getPosition().x << "," << curUnit.getPosition().y << "," << (((WalkingZombie&) curUnit)).getWalkLenght() << std::endl;
@@ -328,7 +328,7 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 			switch (unitID)
 			{
 			case Unit::ID_IdleZombie:
-				temp = new IdleZombie(sf::Vector2f(posX,posY));
+				temp = new IdleZombie(sf::Vector2f(posX, posY),(Unit::Direction)Utility::stringToNumber<int>(unitData[3]));
 				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				temp->updateAnimation(0);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
