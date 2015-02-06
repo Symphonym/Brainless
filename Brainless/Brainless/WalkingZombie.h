@@ -9,6 +9,7 @@ public:
 
 	void updateTask(float deltaTime);
 	void updateAnimation(float deltaTime);
+	int getWalkLenght();
 
 	enum AnimationState
 	{
@@ -22,8 +23,9 @@ protected:
 private:
 	AnimationState m_animState;
 	Direction m_spriteDirection;
-	int m_maxPositionX;
-	int m_minPositionX;
+	float m_maxPositionX;
+	float m_minPositionX;
+	int m_walkLenght;
 	int m_currentDisparity;
 	Direction m_direction;
 };

@@ -125,7 +125,7 @@ void Player::updateTask(float deltaTime)
 			{
 				jump();
 			}
-			m_jumpState = jump_inAir;
+			if (30 < m_speed.y)m_jumpState = jump_inAir; //spelaren är förmodligen inAir på "riktigt", faka ett hopp för att få landanimation.
 		}
 		//Start to Land
 		else if (!m_inAir && m_jumpState == jump_inAir) m_jumpState = jump_land;
@@ -291,7 +291,7 @@ void Player::updateAnimation(float deltaTime)
 	else if (m_inAir)
 	{
 		//JUMP
-		if (m_speed.y < 0)
+		if (m_speed.y < -30)
 		{
 
 			//inAir
@@ -312,7 +312,7 @@ void Player::updateAnimation(float deltaTime)
 			}
 		}
 		//FALL
-		else if (0 <= m_speed.y)
+		else if (30 < m_speed.y)
 		{
 			if (m_animState != anim_inAirFall)
 			{
