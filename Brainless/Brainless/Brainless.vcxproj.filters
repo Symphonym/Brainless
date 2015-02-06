@@ -195,6 +195,9 @@
     <ClCompile Include="MovingPlatformItem.cpp">
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
+    <ClCompile Include="ChasingZombie.cpp">
+      <Filter>Source Files\Unit\Zombies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -331,6 +334,9 @@
     </ClInclude>
     <ClInclude Include="MovingPlatformItem.h">
       <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ChasingZombie.h">
+      <Filter>Source Files\Unit\Zombies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
