@@ -101,7 +101,7 @@ void Unit::updateSpriteDirection()
 			{
 				m_spriteDirection = dir_right;
 				m_sprite->setScale(1, 1);
-				m_sprite->setPosition(sf::Vector2f(m_position.x + m_spriteOffset.x, m_position.y + m_spriteOffset.y + m_spriteOffset.y));
+				m_sprite->setPosition(sf::Vector2f(m_position.x + m_spriteOffset.x, m_position.y + m_spriteOffset.y));
 
 			}
 			m_sprite->setScale(-1, 1);
@@ -173,4 +173,9 @@ sf::FloatRect Unit::getCollisionRect()
 Unit::UnitType Unit::getUnitType()
 {
 	return m_UnitID;
+}
+
+Unit::Direction Unit::getDirection()
+{
+	return m_spriteDirection;
 }

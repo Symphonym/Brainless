@@ -56,6 +56,7 @@ public:
 	bool getInAir() const;
 	sf::FloatRect getCollisionRect();
 	UnitType getUnitType();
+	Direction getDirection();
 protected:
 	sf::Vector2f m_position;
 	sf::Vector2f m_speed;
