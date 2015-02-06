@@ -19,10 +19,9 @@ EditorZombieMode::EditorZombieMode()
 
 bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &editorWindow, Level &level)
 {
-	//Replace mask
+	//Replace mask & add new masks for all zombies
 	while (m_zombieMasks.size()!=0)
 	{
-		//delete m_zombieMasks[m_zombieMasks.size() - 1];
 		m_zombieMasks.pop_back();
 	}
 	for (int i = 0; i < level.getUnits().size(); i++)
@@ -45,6 +44,7 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 		// Place a Zombie
 		if (event.mouseButton.button == sf::Mouse::Left)
 		{
+			//Create zombie mask untill all variables are decided
 			if (!zombie_created)
 			{
 				zombie_created = true;
@@ -54,27 +54,28 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 				m_createdZombie.sprite.setColor(sf::Color(255, 255, 255, 128));
 				return false;
 			}
+			//Create the zombie & add it to level
 			else
 			{
 				zombie_created = false;
 				sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));
 				Unit* temp;
-				switch (m_createdZombie.type)
+				switch (m_createdZombie.type+1)
 				{
-				case 0: //Walking zombie
+				case Unit::ID_IdleZombie: //Idle zombie
+					temp = new IdleZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50));
+					temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+					temp->updateAnimation(0);
+					level.addUnit(std::move(Level::UnitPtr(temp)));
+					break;
+				case Unit::ID_WalkingZombie: //Walking zombie
 					m_createdZombie.walk_distance = mousePos.x - m_createdZombie.sprite.getPosition().x;
 					temp = new WalkingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85,50), m_createdZombie.walk_distance);
 					temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 					temp->updateAnimation(0);
 					level.addUnit(std::move(Level::UnitPtr(temp)));
 					break;
-				case 1: //Idle zombie
-					temp = new IdleZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50));
-					temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-					temp->updateAnimation(0);
-					level.addUnit(std::move(Level::UnitPtr(temp)));
-					break;
-				}
+				}					
 				return true;
 			}
 		}
