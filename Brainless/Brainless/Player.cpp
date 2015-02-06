@@ -205,6 +205,8 @@ void Player::updateTask(float deltaTime)
 
 void Player::takesDamage(sf::Vector2f collisionDifference)
 {
+	if (!m_isMovementEnabled)
+		return;
 	if (m_damageState == dmg_normal)
 	{
 		m_hp--;
@@ -254,8 +256,31 @@ void Player::updateAnimation(float deltaTime)
 
 	m_specialSpriteDirection = false;
 
+	//Ladder Climbing
+	if (m_climbing)
+	{
+		if (m_speed.y == -1)
+		{
+			if (m_animState != anim_climbingUp)
+			{
+				m_sprite = &m_spriteSheets[0];
+				m_animation.loop(0, 3, 7, 6);
+				m_animState = anim_climbingUp;
+			}
+		}
+		else if (m_speed.y == 1)
+		{
+			if (m_animState != anim_climbingDown)
+			{
+				m_sprite = &m_spriteSheets[0];
+				m_animation.loop(0, 3, 7, 6);
+				m_animState = anim_climbingDown;
+				m_animation.setReverse(true);
+			}
+		}
+	}
 	//Dead
-	if (m_damageState == dmg_dead)
+	else if (m_damageState == dmg_dead)
 	{
 		m_specialSpriteDirection = true;
 		if (m_animState != anim_dead)
@@ -338,6 +363,9 @@ void Player::updateAnimation(float deltaTime)
 		{
 			m_sprite = &m_spriteSheets[0];
 			m_animation.stillFrame(0, 3);
+			//m_animation.loop(0, 3, 7, 3);
+			//m_animation.setReverse(true); //ger neråt
+
 			m_animState = anim_idle;
 		}
 	}
@@ -360,6 +388,7 @@ void Player::updateAnimation(float deltaTime)
 			m_sprite = &m_spriteSheets[0];
 			m_animation.loop(0, 7, 1, 8);
 			m_animState = anim_run;
+			m_animation.setReverse(true);
 		}
 		m_animation.setSpeed(Animation::calcFrameSpeed(8, 12, runBreakpoint, m_maxSpeed.x, abs(m_speed.x)));
 

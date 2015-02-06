@@ -35,7 +35,9 @@ public:
 		anim_inAirFall,
 		anim_land,
 		anim_dead,
-		anim_damaged
+		anim_damaged,
+		anim_climbingUp,
+		anim_climbingDown,
 	};
 
 

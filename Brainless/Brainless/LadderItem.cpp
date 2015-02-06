@@ -27,8 +27,7 @@ void LadderItem::onUse(Game &game)
 		game.getPlayer().setClimbing(true);
 		game.getPlayer().setRenderingMode(Unit::RenderingModes::Above);
 		game.getPlayer().setAcceleration(sf::Vector2f(0, 0));
-		game.getPlayer().setSpeed(sf::Vector2f(0, 0));
-
+	
 
 		m_inUse = true;
 		m_reachedStartPos = false;
@@ -43,6 +42,8 @@ void LadderItem::onUse(Game &game)
 			m_endPos = sf::Vector2f(
 				getSprite().getPosition().x + game.getPlayer().getCollisionRect().width / 2.f,
 				getSprite().getPosition().y - game.getPlayer().getCollisionRect().height + 5.f); // Add some margin to ground
+			game.getPlayer().setSpeed(sf::Vector2f(0, -1));
+
 		}
 
 		// Player is above ladder
@@ -54,6 +55,8 @@ void LadderItem::onUse(Game &game)
 			m_endPos = sf::Vector2f(
 				getSprite().getPosition().x + game.getPlayer().getCollisionRect().width / 2.f,
 				getSprite().getPosition().y + getSprite().getGlobalBounds().height - game.getPlayer().getCollisionRect().height - 5.f); // Add some margin to ground
+			game.getPlayer().setSpeed(sf::Vector2f(0, 1));
+
 		}
 
 	}
