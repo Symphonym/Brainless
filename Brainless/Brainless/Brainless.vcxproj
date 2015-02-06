@@ -108,6 +108,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera2D.cpp" />
+    <ClCompile Include="ChasingZombie.cpp" />
     <ClCompile Include="ChestItem.cpp" />
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="ConversationBox.cpp" />
@@ -133,6 +134,7 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="MagnifyingGlassItem.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MovingPlatformItem.cpp" />
     <ClCompile Include="Notification.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PopUpMenu.cpp" />
@@ -153,6 +155,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera2D.h" />
+    <ClInclude Include="ChasingZombie.h" />
     <ClInclude Include="ChestItem.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ConversationBox.h" />
@@ -179,6 +182,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelSprite.h" />
     <ClInclude Include="MagnifyingGlassItem.h" />
+    <ClInclude Include="MovingPlatformItem.h" />
     <ClInclude Include="Notification.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PopUpMenu.h" />

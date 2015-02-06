@@ -388,7 +388,6 @@ void Player::updateAnimation(float deltaTime)
 			m_sprite = &m_spriteSheets[0];
 			m_animation.loop(0, 7, 1, 8);
 			m_animState = anim_run;
-			m_animation.setReverse(true);
 		}
 		m_animation.setSpeed(Animation::calcFrameSpeed(8, 12, runBreakpoint, m_maxSpeed.x, abs(m_speed.x)));
 

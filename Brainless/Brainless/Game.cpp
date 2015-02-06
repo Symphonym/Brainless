@@ -32,7 +32,6 @@ m_levelIndex(0)
 
 	// Hide mouse cursor
 	m_game.setMouseCursorVisible(false);
-
 	// Load game resources
 	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Game.txt");
 
