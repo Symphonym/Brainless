@@ -18,6 +18,7 @@
 #include "SoundPlayer.h"
 #include "Notification.h"
 #include "ConversationBox.h"
+#include "Cursor.h"
 
 Game::Game()
 :
@@ -28,6 +29,9 @@ m_levelIndex(0)
 	// Set render target to the game
 	Renderer::instance().setTarget(m_game);
 	m_camera = m_game.getDefaultView();
+
+	// Hide mouse cursor
+	m_game.setMouseCursorVisible(false);
 
 	// Load game resources
 	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Game.txt");
@@ -97,15 +101,6 @@ m_levelIndex(0)
 
 
 	//temp, texture borde laddas in på annat sätt.
-	Unit* temp = new WalkingZombie(sf::Vector2f(Constants::TileSize * 9, Constants::TileSize * 3), 100);
-	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-	m_level.addUnit(Level::UnitPtr(temp));
-	temp = new WalkingZombie(sf::Vector2f(Constants::TileSize * 13, Constants::TileSize * 8), 1000);
-	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-	m_level.addUnit(Level::UnitPtr(temp));
-	temp = new IdleZombie(sf::Vector2f(Constants::TileSize * 5, Constants::TileSize * 8));
-	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-	m_level.addUnit(Level::UnitPtr(temp));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
 }
@@ -133,6 +128,10 @@ void Game::changeLevel(int levelIndex)
 	m_player->setPosition(m_level.getSpawnPos());
 	FileSave::loadLevelProgress(m_level, m_levelIndex);
 	FileSave::loadInventory(*m_inventory);
+}
+void Game::addCamera(const sf::View &camera)
+{
+	m_extraCameras.push_back(camera);
 }
 
 void Game::saveGame()
@@ -186,7 +185,7 @@ void Game::loop()
 				if (!ConversationBox::instance().isShown())
 				{
 					m_inventory->events(event, m_game, m_level);
-					m_popup->events(event, m_game, m_level);
+					m_popup->events(event, *this);
 				}
 				else
 					ConversationBox::instance().events(event, *this);
@@ -207,8 +206,8 @@ void Game::loop()
 				if (!ConversationBox::instance().isShown())
 				{
 					m_level.update(deltaTime, *this);
-					m_inventory->update(m_game);
-					m_popup->update(m_game,
+					m_inventory->update(deltaTime, *this);
+					m_popup->update(*this,
 						sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
 				}
 				Notification::instance().update(deltaTime, m_game);
@@ -234,16 +233,34 @@ void Game::loop()
 				}
 			}
 
-
-			// Update editor camera
-			m_game.setView(m_camera);
+			// Update cursor
+			Cursor::instance().update(*this);
 
 			m_game.clear(sf::Color::Black);
+
+			
+
+			// Draw with normal camera
+			m_game.setView(m_camera);
 			draw();
+
+			// Draw extra cameras
+			for (std::size_t i = 0; i < m_extraCameras.size(); i++)
+			{
+				m_game.setView(m_extraCameras[i]);
+				m_level.draw(m_camera);
+				Renderer::instance().executeDraws();
+			}
+
+			// Reset to normal view
+			m_game.setView(m_camera);
+
 			m_game.display();
+			m_extraCameras.clear();
 		}
 		else
 			m_isPaused = true;
+
 
 	}
 }
@@ -255,5 +272,6 @@ void Game::draw()
 	m_popup->draw();
 	Notification::instance().draw();
 	ConversationBox::instance().draw();
+	Cursor::instance().draw();
 	Renderer::instance().executeDraws();
 }

@@ -7,6 +7,7 @@
 #include <memory>
 #include <array>
 
+class Game;
 class Level;
 class Inventory
 {
@@ -23,7 +24,7 @@ public:
 	void setCurrentLevel(Level* level);
 
 	void events(const sf::Event &event, const sf::RenderWindow &gameWindow, Level &level);
-	void update(const sf::RenderWindow &gameWindow);
+	void update(float deltaTime, Game &game);
 
 	void draw();
 

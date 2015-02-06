@@ -29,8 +29,12 @@ public:
 	// TODO Item needs clone functionality, prototype pattern, if we want to be able to inherit from item
 	explicit Item(const std::string &itemName, const std::string &textureName, int id, CombineData combineData = CombineData(-1, -1));
 
+	
+	// Updated when the item is held, when picked up from the inventory
+	virtual void heldUpdate(float detlaTime, Game &game) {};
 	// If the item needs custom interaction functionality
 	virtual void update(float deltaTime, Game &game) {};
+
 
 	virtual bool onInteract(Item &otherItem) { return false;  }; // Called when this item iteracts with another item, returning TRUE will destroy THIS item
 	virtual bool onInteractedWith(Item &otherItem) { return false; }; // Called when another item interactors with THIS item, returning TRUE will destroy THIS item
@@ -49,6 +53,8 @@ public:
 	// Prototype pattern so we can clone item hierarchies
 	virtual Item* clone() = 0;
 
+	// Extra draw function that is only called when item is held in inventory
+	virtual void heldDraw() {};
 	virtual void draw();
 
 	void setPosition(const sf::Vector2f &pos);

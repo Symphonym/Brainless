@@ -455,7 +455,7 @@ void Level::updateUnitCollision(float deltaTime)
 							//unit vänster om tile
 							if (unitCenter.x < tileCenter.x)
 							{
-								if (currentUnit->getSpeed().x > 0)
+								if (currentUnit->getSpeed().x > -50)
 								{
 									currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 									currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
@@ -467,7 +467,7 @@ void Level::updateUnitCollision(float deltaTime)
 							//unit höger om tile
 							else if (unitCenter.x > tileCenter.x)
 							{
-								if (currentUnit->getSpeed().x < 0)
+								if (currentUnit->getSpeed().x < 50)
 								{
 									currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 									currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
