@@ -15,6 +15,10 @@
 #include "Item.h"
 #include "ItemDatabse.h"
 #include "Inventory.h"
+#include "Unit.h"
+#include "Zombie.h"
+#include "WalkingZombie.h"
+#include "IdleZombie.h"
 
 #include "Utility.h"
 
@@ -200,6 +204,24 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 		const LevelSprite& curSprite = level.getDecorations()[i];
 		writer << curSprite.drawToForeground << "," << curSprite.textureName << "," << curSprite.sprite.getPosition().x << "," << curSprite.sprite.getPosition().y << std::endl;
 	}
+
+	// Write numbers of units
+	writer << level.getUnits().size() << std::endl;
+
+	for (std::size_t i = 0; i < level.getUnits().size(); i++)
+	{
+		Unit& curUnit = *level.getUnits()[i].get();
+		writer << (int)curUnit.getUnitType() << ",";
+		switch (curUnit.getUnitType())
+		{
+		case Unit::ID_IdleZombie:
+			writer << curUnit.getPosition().x << "," << curUnit.getPosition().y << std::endl;
+			break;
+		case Unit::ID_WalkingZombie:
+			writer << curUnit.getPosition().x << "," << curUnit.getPosition().y << "," << (((WalkingZombie&) curUnit)).getWalkLenght() << std::endl;
+			break;
+		}
+	}
 }
 
 bool FileSave::loadMapText(Level &level, int levelNumber)
@@ -283,6 +305,42 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 			levelSprite.sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
 
 			level.addDecoration(levelSprite);
+		}
+
+		// Read Unit count
+		int unitCount = 0;
+		reader >> unitCount;
+
+		for (std::size_t i = 0; i < unitCount; i++)
+		{
+			std::string line;
+			reader >> line;
+
+			std::vector<std::string> unitData = Utility::splitString(line, ',');
+
+			// Read unit data
+			Unit::UnitType unitID = (Unit::UnitType)(Utility::stringToNumber<int>(unitData[0]));
+			float posX = Utility::stringToNumber<float>(unitData[1]);
+			float posY = Utility::stringToNumber<float>(unitData[2]);
+
+			// Create unit & assign values, then add the unit to level
+			Unit* temp;
+			switch (unitID)
+			{
+			case Unit::ID_IdleZombie:
+				temp = new IdleZombie(sf::Vector2f(posX,posY));
+				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+				temp->updateAnimation(0);
+				level.addUnit(std::move(Level::UnitPtr(temp)));
+				break;
+			case Unit::ID_WalkingZombie:
+				temp = new WalkingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[3]));
+				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+				temp->updateAnimation(0);
+				level.addUnit(std::move(Level::UnitPtr(temp)));
+				break;
+			}
+
 		}
 
 		return true;
