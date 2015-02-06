@@ -15,7 +15,7 @@ public:
 	virtual void serialize(std::ofstream &writer) const;
 	virtual void deserialize(std::ifstream &reader);
 
-	Item* clone();
+	virtual Item* clone();
 
 private:
 

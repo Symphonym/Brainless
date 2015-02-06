@@ -37,6 +37,8 @@ public:
 	void addTexture(sf::Texture& texture);
 	void draw();
 
+	bool isMovementEnabled() const;
+
 	//updates animation
 	virtual void updateAnimation(float deltaTime) = 0;
 	sf::Sprite getSprite();
@@ -48,6 +50,15 @@ public:
 		dir_right
 	};
 
+	enum RenderingModes
+	{
+		Above,
+		Depth,
+		Behind
+	};
+
+	void setRenderingMode(RenderingModes mode);
+
 	
 	sf::Vector2f getPosition() const;
 	sf::Vector2f getSpeed() const;
@@ -58,6 +69,9 @@ public:
 	UnitType getUnitType();
 	Direction getDirection();
 protected:
+	RenderingModes m_renderingMode;
+	bool m_isMovementEnabled;
+
 	sf::Vector2f m_position;
 	sf::Vector2f m_speed;
 	sf::Vector2f m_acceleration;
@@ -75,8 +89,9 @@ protected:
 	void updateSpriteDirection();
 	Direction m_spriteDirection;
 private:
+
+
 	UnitType m_UnitID;
-	bool m_isBusy;
 };
 
 

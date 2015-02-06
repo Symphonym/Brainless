@@ -21,8 +21,10 @@ public:
 	void drawDepth(const sf::Drawable &drawable, const sf::FloatRect &bounds);
 	void drawDepth(const sf::Sprite &sprite); // Bounds are grabbed from sprite
 
-	// Draw a drawable with depth sorting, but make it's depth value so that it's in front of everything
+	// Draw a drawable on top of all depth sorted drawables
 	void drawAbove(const sf::Drawable &drawable);
+	// Draw a drawable behind all depth sorted drawables
+	void drawBehind(const sf::Drawable &drawable);
 
 	// Draws the drawable in a separate layer using the default camera view, and ontop of everything else
 	void drawHUD(const sf::Drawable &drawable);
@@ -42,8 +44,9 @@ private:
 
 	Renderer();
 
-	//typedef std::pair<const sf::Drawable*, float> RenderPair;
 	std::vector<RenderPair> m_renderTasks;
+	std::vector<const sf::Drawable*> m_aboveRenderTasks; // Used for specific items that needs to be between the game and foreground
+	std::vector<const sf::Drawable*> m_behindRenderTasks; // Used for specific items that needs to be between the game and background
 	std::vector<const sf::Drawable*> m_hudRenderTasks;
 
 	// Foreground and background render tasks are separate from the semi depth

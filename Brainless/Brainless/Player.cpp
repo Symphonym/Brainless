@@ -29,10 +29,19 @@ m_damageState(dmg_normal)
 	m_cameraPos = m_position;
 }
 
+void Player::setClimbing(bool climbing)
+{
+	m_climbing = climbing;
+	m_isMovementEnabled = !climbing;
+}
+
 void Player::updateTask(float deltaTime)
 {
 	m_cameraPos.x = m_position.x;
 	m_cameraPos.y = m_position.y + cameraOffset;
+
+	if (!m_isMovementEnabled)
+		return;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && m_speed.x == 0 && m_speed.y == 0)
 	{

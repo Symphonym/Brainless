@@ -98,7 +98,7 @@ void PopUpMenu::update(const sf::RenderWindow &window, const sf::Vector2f &playe
 		for (std::size_t i = 0; i < m_buttons.size(); i++)
 		{
 			sf::FloatRect buttonBounds = m_buttons[i].getGlobalBounds();
-			float distanceToPlayer = 0;
+			bool isWithinRange = false;
 
 			// Calculate distance from player to item
 			if (m_interactItem)
@@ -106,22 +106,26 @@ void PopUpMenu::update(const sf::RenderWindow &window, const sf::Vector2f &playe
 				sf::Vector2f itemCenter(
 					m_interactItem->getPosition().x + m_interactItem->getSprite().getGlobalBounds().width / 2.f,
 					m_interactItem->getPosition().y + m_interactItem->getSprite().getGlobalBounds().height / 2.f);
-				sf::Vector2f distanceVec = itemCenter - playerOrigo;
 
-				distanceToPlayer = std::sqrt(distanceVec.x*distanceVec.x) + std::sqrt(distanceVec.y*distanceVec.y);
+				sf::Vector2f distanceVec = itemCenter - playerOrigo;
+				distanceVec.x = std::abs(distanceVec.x);
+				distanceVec.y = std::abs(distanceVec.y);
+				isWithinRange = distanceVec.x <= m_interactItem->getInteractDistance().x && distanceVec.y <= m_interactItem->getInteractDistance().y;
+
+				//distanceToPlayer = std::sqrt(distanceVec.x*distanceVec.x) + std::sqrt(distanceVec.y*distanceVec.y);
 			}
 
 			std::string textureName = "";
 			if (i == UseIndex)
 			{
 				textureName = "UseButton";
-				m_buttonsEnabled.set(i, distanceToPlayer <= Constants::InteractDistance);
+				m_buttonsEnabled.set(i, isWithinRange);// distanceToPlayer <= Constants::InteractDistance);
 
 			}
 			else if (i == PickupIndex)
 			{
 				textureName = "PickupButton";
-				m_buttonsEnabled.set(i, distanceToPlayer <= Constants::InteractDistance);
+				m_buttonsEnabled.set(i, isWithinRange);// distanceToPlayer <= Constants::InteractDistance);
 			}
 			else if (i == ExamineIndex)
 				textureName = "ExamineButton";

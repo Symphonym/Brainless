@@ -33,3 +33,6 @@
 # CHEST TEST ITEM
 +Texture,images/items/chestOpen.png,ChestOpen
 +Texture,images/items/chestClosed.png,ChestClosed
+
+# LADDER TEST ITEM
++Texture,images/items/ladderTest.png,LadderTest

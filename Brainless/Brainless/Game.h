@@ -27,6 +27,9 @@ public:
 	// Add item to inventory
 	void lootItem(Inventory::ItemPtr item);
 
+	// Pauses game logic
+	void setPaused(bool paused);
+
 	// Loads a new level, resetting player position to starting position, resetting HUD etc
 	void changeLevel(int levelIndex);
 
@@ -40,6 +43,8 @@ private:
 
 	sf::RenderWindow m_game;
 	sf::View m_camera;
+
+	bool m_isPaused;
 
 	int m_levelIndex;
 	Level m_level;

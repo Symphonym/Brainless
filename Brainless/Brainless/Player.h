@@ -8,6 +8,10 @@ class Player : public Unit
 {
 public:
 	Player(sf::Vector2f startPosition);
+	
+	
+	void setClimbing(bool climbing);
+
 	/* kollar efter playerinput, ska köras innan Unit::updateMovement */
 	void updateTask(float deltaTime);
 
@@ -68,6 +72,8 @@ private:
 	float cameraOffset;
 	float m_cameraSpeed = 5;
 	float m_cameraMaxOffset = 250;
+
+	bool m_climbing;
 };
 
 
