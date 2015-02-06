@@ -36,3 +36,6 @@
 
 # LADDER TEST ITEM
 +Texture,images/items/ladderTest.png,LadderTest
+
+# MAGNIFYING GLASS TEST ITEM
++Texture,images/items/magnifyingGlassTest.png,MagnifyingGlass

@@ -3,6 +3,8 @@
 #include "Renderer.h"
 #include "ResourceLoader.h"
 #include "Constants.h"
+#include "Cursor.h"
+#include "Game.h"
 #include <iostream>
 
 PopUpMenu::PopUpMenu()
@@ -32,9 +34,9 @@ void PopUpMenu::setItemCallback(PopUpMenu::ItemCallback callback)
 	m_itemInteractCallback = callback;
 }
 
-void PopUpMenu::events(const sf::Event &event, const sf::RenderWindow &window, Level &level)
+void PopUpMenu::events(const sf::Event &event, Game &game)
 {
-	sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+	sf::Vector2f mousePos = game.getWindow().mapPixelToCoords(sf::Mouse::getPosition(game.getWindow()));
 
 	// Key presses will hide the menu
 	if (event.type == sf::Event::KeyReleased)
@@ -46,15 +48,15 @@ void PopUpMenu::events(const sf::Event &event, const sf::RenderWindow &window, L
 		// Show menu if right clicking on item/unit
 		if (event.mouseButton.button == sf::Mouse::Right && !m_isShowing)
 		{
-			for (std::size_t i = 0; i < level.getItems().size(); i++)
+			for (std::size_t i = 0; i < game.getLevel().getItems().size(); i++)
 			{
-				sf::FloatRect itemBounds = level.getItems()[i]->getSprite().getGlobalBounds();
+				sf::FloatRect itemBounds = game.getLevel().getItems()[i]->getSprite().getGlobalBounds();
 			
 				// Right clicked on item
 				if (itemBounds.contains(mousePos))
 				{
 					setPosition(mousePos);
-					m_interactItem = level.getItems()[i].get();
+					m_interactItem = game.getLevel().getItems()[i].get();
 					m_isShowing = true;
 					break;
 				}
@@ -88,11 +90,12 @@ void PopUpMenu::events(const sf::Event &event, const sf::RenderWindow &window, L
 		}
 	}
 }
-void PopUpMenu::update(const sf::RenderWindow &window, const sf::Vector2f &playerOrigo)
+void PopUpMenu::update(Game &game, const sf::Vector2f &playerOrigo)
 {
+	sf::Vector2f mousePos = game.getWindow().mapPixelToCoords(sf::Mouse::getPosition(game.getWindow()));
+
 	if (m_isShowing)
 	{
-		sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 
 		// Update texture of button
 		for (std::size_t i = 0; i < m_buttons.size(); i++)

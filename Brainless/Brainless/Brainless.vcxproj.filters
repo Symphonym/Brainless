@@ -58,6 +58,9 @@
     <Filter Include="Source Files\Dialog">
       <UniqueIdentifier>{243e0e38-b6f4-4359-85dc-83b8bea8f23f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Mouse">
+      <UniqueIdentifier>{933dcbc6-c668-4149-8b66-f1809ed66464}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -181,6 +184,12 @@
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
     <ClCompile Include="LadderItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>Source Files\Game\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="MagnifyingGlassItem.cpp">
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
   </ItemGroup>
@@ -309,6 +318,12 @@
       <Filter>Source Files\Level Editor</Filter>
     </ClInclude>
     <ClInclude Include="LadderItem.h">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>Source Files\Game\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="MagnifyingGlassItem.h">
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
   </ItemGroup>

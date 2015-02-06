@@ -3,7 +3,7 @@
 #include "ItemDatabse.h"
 #include "Level.h"
 #include "ResourceLoader.h"
-
+#include "Game.h"
 
 Inventory::Inventory()
 :
@@ -158,21 +158,27 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 		}
 	}
 }
-void Inventory::update(const sf::RenderWindow &gameWindow)
+void Inventory::update(float deltaTime, Game &game)
 {
-	sf::Vector2i mousePos = sf::Mouse::getPosition(gameWindow);
+	sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
 
 	if (m_mouseItem)
 	{
 		// Place selected item in HUD space
 		if (m_isOpen)
+		{
+			// Held item gets special update calls in HUD space
+			m_mouseItem->heldUpdate(deltaTime, game);
+
 			m_mouseItem->getSprite().setPosition(
 				sf::Vector2f(mousePos.x - m_mouseItem->getSprite().getGlobalBounds().width / 2.f, mousePos.y - m_mouseItem->getSprite().getGlobalBounds().height / 2.f));
+		}
+			
 
 		// Place selected item in WORLD space
 		else
 		{
-			sf::Vector2f worldPos = gameWindow.mapPixelToCoords(mousePos);
+			sf::Vector2f worldPos = game.getWindow().mapPixelToCoords(mousePos);
 			worldPos.x -= m_mouseItem->getSprite().getGlobalBounds().width / 2.f;
 			worldPos.y -= m_mouseItem->getSprite().getGlobalBounds().height / 2.f;
 
@@ -213,7 +219,10 @@ void Inventory::draw()
 	if (m_mouseItem)
 	{
 		if (m_isOpen)
+		{
 			Renderer::instance().drawHUD(m_mouseItem->getSprite());
+			m_mouseItem->heldDraw();
+		}
 		else
 			Renderer::instance().drawAbove(m_mouseItem->getSprite());
 	}

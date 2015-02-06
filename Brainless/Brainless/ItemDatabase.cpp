@@ -4,6 +4,7 @@
 #include "KeyItem.h"
 #include "ChestItem.h"
 #include "LadderItem.h"
+#include "MagnifyingGlassItem.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -18,6 +19,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new KeyItem("KeyTest", 7))); // Key to said door
 	addItem(ItemPtr(new ChestItem(false, { 0, 2, 7 }, 8)));
 	addItem(ItemPtr(new LadderItem("LadderTest", 9)));
+	addItem(ItemPtr(new MagnifyingGlassItem(10)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)

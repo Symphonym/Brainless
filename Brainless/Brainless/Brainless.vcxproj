@@ -111,6 +111,7 @@
     <ClCompile Include="ChestItem.cpp" />
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="ConversationBox.cpp" />
+    <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DialogTree.cpp" />
     <ClCompile Include="DoorItem.cpp" />
     <ClCompile Include="Editor.cpp" />
@@ -130,6 +131,7 @@
     <ClCompile Include="KeyItem.cpp" />
     <ClCompile Include="LadderItem.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="MagnifyingGlassItem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Notification.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -154,6 +156,7 @@
     <ClInclude Include="ChestItem.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ConversationBox.h" />
+    <ClInclude Include="Cursor.h" />
     <ClInclude Include="DialogTree.h" />
     <ClInclude Include="DoorItem.h" />
     <ClInclude Include="Editor.h" />
@@ -175,6 +178,7 @@
     <ClInclude Include="LadderItem.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelSprite.h" />
+    <ClInclude Include="MagnifyingGlassItem.h" />
     <ClInclude Include="Notification.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PopUpMenu.h" />

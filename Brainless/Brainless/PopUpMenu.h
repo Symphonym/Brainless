@@ -30,8 +30,8 @@ public:
 	void setPosition(const sf::Vector2f &pos);
 	void setItemCallback(ItemCallback callback);
 
-	void events(const sf::Event &event, const sf::RenderWindow &window, Level &level);
-	void update(const sf::RenderWindow &window, const sf::Vector2f &playerOrigo);
+	void events(const sf::Event &event, Game &game);
+	void update(Game &game, const sf::Vector2f &playerOrigo);
 	void draw();
 
 private:

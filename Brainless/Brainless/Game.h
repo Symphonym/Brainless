@@ -33,7 +33,12 @@ public:
 	// Loads a new level, resetting player position to starting position, resetting HUD etc
 	void changeLevel(int levelIndex);
 
+	// Add a rendering camera, the list of extra cameras is cleared each frame
+	void addCamera(const sf::View &camera);
+
 	void saveGame();
+
+
 
 	Player& getPlayer();
 	Level& getLevel();
@@ -43,6 +48,8 @@ private:
 
 	sf::RenderWindow m_game;
 	sf::View m_camera;
+
+	std::vector<sf::View> m_extraCameras;
 
 	bool m_isPaused;
 
@@ -60,6 +67,7 @@ private:
 
 	// Rendering function
 	void draw();
+
 };
 
 #endif
