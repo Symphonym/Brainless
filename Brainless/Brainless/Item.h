@@ -19,6 +19,13 @@ class Item
 {
 public:
 
+	enum RenderingModes
+	{
+		Above,
+		Depth,
+		Behind
+	};
+
 	// TODO Item needs clone functionality, prototype pattern, if we want to be able to inherit from item
 	explicit Item(const std::string &itemName, const std::string &textureName, int id, CombineData combineData = CombineData(-1, -1));
 
@@ -62,13 +69,16 @@ public:
 	std::string getPickupString() const;
 	std::string getExamineString() const;
 	sf::FloatRect getCollisionBounds() const; // Will be zero if collidable is false
+	sf::Vector2f getInteractDistance() const;
 
 protected:
 
 	// Interaction variables that should be set by the deriving class's constructor
-	bool m_lootable;
-	bool m_usable;
-	bool m_collidable;
+	bool m_lootable; // Saved to file
+	bool m_usable; // Saved to file
+	bool m_collidable; // Saved to file
+	RenderingModes m_renderingMode; // Saved to file
+	sf::Vector2f m_interactDistance; // Allowed X and Y distance from player to interact with this item
 	sf::Vector2f m_collisionOffset;
 	sf::Vector2f m_collisionSize;
 	std::string m_useString;

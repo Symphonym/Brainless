@@ -8,6 +8,8 @@ Item::Item(const std::string &itemName, const std::string &textureName, int id, 
 m_lootable(false),
 m_usable(false),
 m_collidable(false),
+m_renderingMode(RenderingModes::Depth),
+m_interactDistance(Constants::InteractDistance, Constants::InteractDistance),
 m_collisionOffset(0, 0),
 m_collisionSize(0, 0),
 m_useString(Constants::CantUseString),
@@ -32,8 +34,7 @@ void Item::serialize(std::ofstream &writer) const
 	writer << m_lootable << std::endl;
 	writer << m_usable << std::endl;
 	writer << m_collidable << std::endl;
-	//writer << m_id << "," << m_syncID << "," << getPosition().x << "," << getPosition().y << ",";
-	//writer << m_lootable << "," << m_usable << "," << m_collidable;
+	writer << static_cast<int>(m_renderingMode) << std::endl;
 }
 void Item::deserialize(std::ifstream &reader)
 {
@@ -44,6 +45,10 @@ void Item::deserialize(std::ifstream &reader)
 	setPosition(sf::Vector2f(posX, posY));
 
 	reader >> m_lootable >> m_usable >> m_collidable;
+
+	int renderMode = 0;
+	reader >> renderMode;
+	m_renderingMode = static_cast<RenderingModes>(renderMode);
 }
 
 void Item::setPosition(const sf::Vector2f &pos)
@@ -57,7 +62,12 @@ sf::Vector2f Item::getPosition() const
 
 void Item::draw()
 {
-	Renderer::instance().drawDepth(m_sprite);
+	if (m_renderingMode == RenderingModes::Above)
+		Renderer::instance().drawAbove(m_sprite);
+	else if (m_renderingMode == RenderingModes::Depth)
+		Renderer::instance().drawDepth(m_sprite);
+	else if (m_renderingMode == RenderingModes::Behind)
+		Renderer::instance().drawBehind(m_sprite);
 }
 
 sf::Sprite& Item::getSprite()
@@ -114,6 +124,10 @@ std::string Item::getExamineString() const
 sf::FloatRect Item::getCollisionBounds() const
 {
 	return sf::FloatRect(getPosition().x + m_collisionOffset.x, getPosition().y + m_collisionOffset.y, m_collisionSize.x, m_collisionSize.y);
+}
+sf::Vector2f Item::getInteractDistance() const
+{
+	return m_interactDistance;
 }
 
 CombineData::CombineData(int targetIDIDParam, int productItemIDParam)

@@ -41,7 +41,11 @@ void Renderer::drawDepth(const sf::Sprite &sprite)
 
 void Renderer::drawAbove(const sf::Drawable &drawable)
 {
-	m_renderTasks.push_back(std::make_pair(&drawable, -1));
+	m_aboveRenderTasks.push_back(&drawable);
+}
+void Renderer::drawBehind(const sf::Drawable &drawable)
+{
+	m_behindRenderTasks.push_back(&drawable);
 }
 
 void Renderer::drawHUD(const sf::Drawable &drawable)
@@ -76,6 +80,15 @@ void Renderer::executeDraws()
 			m_renderTarget->draw(*m_backgroundRenderTasks[i]);
 	}
 
+	// Draw "behind" stuff
+	for (std::size_t i = 0; i < m_behindRenderTasks.size(); i++)
+	{
+		if (m_shader != nullptr)
+			m_renderTarget->draw(*m_behindRenderTasks[i], m_shader);
+		else
+			m_renderTarget->draw(*m_behindRenderTasks[i]);
+	}
+
 	// Draw depth sorted stuff
 	for (std::size_t i = 0; i < m_renderTasks.size(); i++)
 	{
@@ -85,7 +98,14 @@ void Renderer::executeDraws()
 			m_renderTarget->draw(*m_renderTasks[i].first);
 	}
 
-	
+	// Draw "above" stuff
+	for (std::size_t i = 0; i < m_aboveRenderTasks.size(); i++)
+	{
+		if (m_shader != nullptr)
+			m_renderTarget->draw(*m_aboveRenderTasks[i], m_shader);
+		else
+			m_renderTarget->draw(*m_aboveRenderTasks[i]);
+	}
 
 	// Draw foreground stuff
 	for (std::size_t i = 0; i < m_foregroundRenderTasks.size(); i++)
@@ -111,6 +131,8 @@ void Renderer::executeDraws()
 
 	m_renderTarget->setView(tempView);
 
+	m_aboveRenderTasks.clear();
+	m_behindRenderTasks.clear();
 	m_foregroundRenderTasks.clear();
 	m_backgroundRenderTasks.clear();
 	m_hudRenderTasks.clear();

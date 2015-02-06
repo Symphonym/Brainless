@@ -7,6 +7,8 @@
 //V0.02
 Unit::Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID)
 :
+m_renderingMode(RenderingModes::Depth),
+m_isMovementEnabled(true),
 m_position(startPosition),
 m_speed(sf::Vector2f(0, 0)),
 m_acceleration(sf::Vector2f(0, 0)),
@@ -23,6 +25,9 @@ m_UnitID(ID)
 }
 void Unit::updateMovement(float gravity, float deltaTime)
 {
+	if (!m_isMovementEnabled)
+		return;
+
 	float accelYtrue;
 	if (m_inAir)
 	{
@@ -62,10 +67,19 @@ void Unit::setAcceleration(sf::Vector2f acceleration)
 {
 	m_acceleration = acceleration;
 }
+void Unit::setRenderingMode(RenderingModes mode)
+{
+	m_renderingMode = mode;
+}
 
 sf::Sprite Unit::getSprite()
 {
 	return (*m_sprite);
+}
+
+bool Unit::isMovementEnabled() const
+{
+	return m_isMovementEnabled;
 }
 
 void Unit::setTexture(int index, sf::Texture& texture)
@@ -87,7 +101,12 @@ void Unit::addTexture(sf::Texture& texture)
 
 void Unit::draw()
 {
-	Renderer::instance().drawDepth((*m_sprite));
+	if (m_renderingMode == RenderingModes::Above)
+		Renderer::instance().drawAbove((*m_sprite));
+	else if (m_renderingMode == RenderingModes::Depth)
+		Renderer::instance().drawDepth((*m_sprite));
+	else if (m_renderingMode == RenderingModes::Behind)
+		Renderer::instance().drawBehind((*m_sprite));
 }
 
 void Unit::updateSpriteDirection()
@@ -101,7 +120,7 @@ void Unit::updateSpriteDirection()
 			{
 				m_spriteDirection = dir_right;
 				m_sprite->setScale(1, 1);
-				m_sprite->setPosition(sf::Vector2f(m_position.x + m_spriteOffset.x, m_position.y + m_spriteOffset.y + m_spriteOffset.y));
+				m_sprite->setPosition(sf::Vector2f(m_position.x + m_spriteOffset.x, m_position.y + m_spriteOffset.y));
 
 			}
 			m_sprite->setScale(-1, 1);
