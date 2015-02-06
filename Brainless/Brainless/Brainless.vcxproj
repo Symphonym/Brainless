@@ -131,6 +131,7 @@
     <ClCompile Include="LadderItem.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MovingPlatformItem.cpp" />
     <ClCompile Include="Notification.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PopUpMenu.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="LadderItem.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelSprite.h" />
+    <ClInclude Include="MovingPlatformItem.h" />
     <ClInclude Include="Notification.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PopUpMenu.h" />

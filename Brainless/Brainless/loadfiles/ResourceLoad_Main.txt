@@ -36,3 +36,6 @@
 
 # LADDER TEST ITEM
 +Texture,images/items/ladderTest.png,LadderTest
+
+# MOVING PLATFORM TEST ITEM
++Texture,images/items/movingPlatform.png,MovingPlatform
