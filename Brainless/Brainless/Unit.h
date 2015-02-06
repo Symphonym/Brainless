@@ -13,7 +13,8 @@ public:
 	{
 		ID_Player,
 		ID_IdleZombie,
-		ID_WalkingZombie
+		ID_WalkingZombie,
+		ID_ChasingZombie
 	};
 
 	Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID);
