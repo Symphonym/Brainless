@@ -5,6 +5,7 @@
 #include "ChestItem.h"
 #include "LadderItem.h"
 #include "MagnifyingGlassItem.h"
+#include "MovingPlatformItem.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -20,6 +21,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new ChestItem(false, { 0, 2, 7 }, 8)));
 	addItem(ItemPtr(new LadderItem("LadderTest", 9)));
 	addItem(ItemPtr(new MagnifyingGlassItem(10)));
+	addItem(ItemPtr(new MovingPlatformItem(sf::Vector2f(0.3f, 0), 1000, 11)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)
