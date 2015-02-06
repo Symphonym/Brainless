@@ -17,8 +17,6 @@ public:
 
 private:
 
-	bool m_isHeld;
-
 	sf::Sprite m_background;
 	sf::View m_magnifyingView;
 
