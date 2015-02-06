@@ -97,15 +97,6 @@ m_levelIndex(0)
 
 
 	//temp, texture borde laddas in på annat sätt.
-	Unit* temp = new WalkingZombie(sf::Vector2f(Constants::TileSize * 9, Constants::TileSize * 3), 100);
-	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-	m_level.addUnit(Level::UnitPtr(temp));
-	temp = new WalkingZombie(sf::Vector2f(Constants::TileSize * 13, Constants::TileSize * 8), 1000);
-	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-	m_level.addUnit(Level::UnitPtr(temp));
-	temp = new IdleZombie(sf::Vector2f(Constants::TileSize * 5, Constants::TileSize * 8));
-	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-	m_level.addUnit(Level::UnitPtr(temp));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
 }
