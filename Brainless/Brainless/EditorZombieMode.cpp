@@ -105,7 +105,18 @@ bool EditorZombieMode::update(float deltaTime, const sf::RenderWindow &editorWin
 {
 	sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));
 	m_highlightSprite.sprite.setPosition(mousePos);
-	m_highlightSprite.sprite.setTextureRect(sf::IntRect(0, 256 * (1-m_highlightSprite.type), 256, 256));
+	switch ((Unit::UnitType)(m_highlightSprite.type+1))
+	{
+	case Unit::ID_IdleZombie:
+		m_highlightSprite.sprite.setTextureRect(sf::IntRect(0, 256, 256, 256));
+		break;
+	case Unit::ID_WalkingZombie:
+		m_highlightSprite.sprite.setTextureRect(sf::IntRect(0, 0, 256, 256));
+		break;
+	case Unit::ID_ChasingZombie:
+		m_highlightSprite.sprite.setTextureRect(sf::IntRect(0,512, 256, 256));
+		break;
+	}
 
 	return false;
 }
