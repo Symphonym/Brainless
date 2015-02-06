@@ -102,7 +102,7 @@ bool EditorZombieMode::update(float deltaTime, const sf::RenderWindow &editorWin
 {
 	sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));
 	m_highlightSprite.sprite.setPosition(mousePos);
-	m_highlightSprite.sprite.setTextureRect(sf::IntRect(0, 256 * m_highlightSprite.type, 256, 256));
+	m_highlightSprite.sprite.setTextureRect(sf::IntRect(0, 256 * (1-m_highlightSprite.type), 256, 256));
 
 	return false;
 }
