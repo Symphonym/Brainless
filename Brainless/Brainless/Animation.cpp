@@ -7,7 +7,8 @@ Animation::Animation(int width, int height)
 m_width(width),
 m_height(height),
 m_rectangle(0, 0, width, height),
-m_playOnceDone(false)
+m_playOnceDone(false),
+m_reverse(false)
 {
 }
 
@@ -24,6 +25,7 @@ void Animation::loop(int startFrame, int endFrame, int frameRow, float speed)
 	m_endRow = frameRow;
 	m_currentRow = frameRow;
 	m_playOnceDone = false;
+	m_reverse = false;
 }
 
 void Animation::loop(int startFrame, int endFrame, int startRow, int endRow, float speed)
@@ -38,6 +40,7 @@ void Animation::loop(int startFrame, int endFrame, int startRow, int endRow, flo
 	m_endRow = endRow;
 	m_currentRow = startRow;
 	m_playOnceDone = false;
+	m_reverse = false;
 }
 void Animation::playOnce(int startFrame, int endFrame, int frameRow, float speed)
 {
@@ -51,6 +54,7 @@ void Animation::playOnce(int startFrame, int endFrame, int frameRow, float speed
 	m_endRow = frameRow;
 	m_currentRow = frameRow;
 	m_playOnceDone = false;
+	m_reverse = false;
 }
 void Animation::playOnce(int startFrame, int endFrame, int startRow, int endRow, float speed)
 {
@@ -64,6 +68,7 @@ void Animation::playOnce(int startFrame, int endFrame, int startRow, int endRow,
 	m_endRow = endRow;
 	m_currentRow = startRow;
 	m_playOnceDone = false;
+	m_reverse = false;
 }
 
 void Animation::stillFrame(int frame, int row)
@@ -83,23 +88,46 @@ sf::IntRect Animation::getRectangle(float deltaTime)
 		//1/speed = number of seconds per frame.
 		if (1 / m_speed <= m_timer)
 		{
-			m_currentFrame++;
-
-			//restart loop
-			if (m_currentRow == m_endRow && m_currentFrame > m_endFrame)
+			//play animation forward
+			if (!m_reverse)
 			{
-				m_playOnceDone = true;
-				m_currentFrame = m_startFrame;
-				m_currentRow = m_startRow;
+				m_currentFrame++;
+
+				//restart loop
+				if (m_currentRow == m_endRow && m_currentFrame > m_endFrame)
+				{
+					m_playOnceDone = true;
+					m_currentFrame = m_startFrame;
+					m_currentRow = m_startRow;
+				}
+				//next row
+				else if (m_currentFrame == ENDFRAME)
+				{
+					m_currentRow += 1;
+					m_currentFrame = 0;
+				}
+
 			}
-			//next row
-			else if (m_currentFrame == ENDFRAME)
+			//play backward
+			else
 			{
-				m_currentRow += 1;
-				m_currentFrame = 0;
+				m_currentFrame--;
+
+				//restart loop
+				if (m_currentRow == m_startRow && m_currentFrame < m_startFrame)
+				{
+					m_playOnceDone = true;
+					m_currentFrame = m_endFrame;
+					m_currentRow = m_endRow;
+				}
+				//next row
+				else if (m_currentFrame == -1)
+				{
+					m_currentRow -= 1;
+					m_currentFrame = ENDFRAME-1;
+				}
+
 			}
-
-
 			//decrease timer with time taken per frame
 			m_timer -= 1 / m_speed;
 		}
@@ -109,20 +137,44 @@ sf::IntRect Animation::getRectangle(float deltaTime)
 	{
 		if (1 / m_speed <= m_timer)
 		{
-			m_currentFrame++;
+			//play animation forward
+			if (!m_reverse)
+			{
+				m_currentFrame++;
 
-			//stop loop at endFrame
-			if (m_currentRow == m_endRow && m_currentFrame > m_endFrame)
-			{
-				m_playOnceDone = true;
-				stillFrame(m_endFrame, m_endRow);
+				//stop loop at endFrame
+				if (m_currentRow == m_endRow && m_currentFrame > m_endFrame)
+				{
+					m_playOnceDone = true;
+					stillFrame(m_endFrame, m_endRow);
+				}
+				//next row
+				else if (m_currentFrame == ENDFRAME)
+				{
+					m_currentRow += 1;
+					m_currentFrame = 0;
+				}
 			}
-			//next row
-			else if (m_currentFrame == ENDFRAME)
+			else
 			{
-				m_currentRow += 1;
-				m_currentFrame = 0;
+				//EJ IMPLEMENTERAT
+
+				//m_currentFrame++;
+
+				////stop loop at endFrame
+				//if (m_currentRow == m_endRow && m_currentFrame > m_endFrame)
+				//{
+				//	m_playOnceDone = true;
+				//	stillFrame(m_endFrame, m_endRow);
+				//}
+				////next row
+				//else if (m_currentFrame == ENDFRAME)
+				//{
+				//	m_currentRow += 1;
+				//	m_currentFrame = 0;
+				//}
 			}
+			
 
 			m_timer -= 1 / m_speed;
 		}
@@ -137,7 +189,11 @@ sf::IntRect Animation::getRectangle(float deltaTime)
 void Animation::setSpeed(float speed)
 {
 	m_speed = speed;
+}
 
+void Animation::setReverse(bool reverse)
+{
+	m_reverse = reverse;
 }
 
 float Animation::getWidth(){ return m_width; }

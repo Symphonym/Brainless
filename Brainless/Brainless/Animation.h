@@ -28,8 +28,11 @@ public:
 	//Shows only the selected frame
 	void stillFrame(int Frame, int Row);
 
-	//sets the number of frames per second
+	//sets the number of frames per second - FUNKAR BARA FÖR LOOP
 	void setSpeed(float speed);
+
+	//sets if the animation will be reversed order or not
+	void setReverse(bool reverse);
 
 	//Updates the rectangles position
 	sf::IntRect getRectangle(float deltaTime);
@@ -53,7 +56,7 @@ private:
 	int m_currentRow;
 	sf::IntRect m_rectangle;
 	AnimationType m_type;
-	
+	bool m_reverse;
 	float m_timer = 0;
 };
 

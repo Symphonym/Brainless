@@ -101,6 +101,15 @@ m_levelIndex(0)
 
 
 	//temp, texture borde laddas in på annat sätt.
+	Unit* temp = new WalkingZombie(sf::Vector2f(Constants::TileSize * 9, Constants::TileSize * 3), 100);
+	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+	m_level.addUnit(Level::UnitPtr(temp));
+	temp = new WalkingZombie(sf::Vector2f(Constants::TileSize * 13, Constants::TileSize * 8), 1000);
+	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+	m_level.addUnit(Level::UnitPtr(temp));
+	temp = new IdleZombie(sf::Vector2f(Constants::TileSize * 5, Constants::TileSize * 8));
+	temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+	m_level.addUnit(Level::UnitPtr(temp));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
 }
@@ -175,7 +184,7 @@ void Game::loop()
 		{
 			if (event.type == sf::Event::Closed)
 				m_game.close();
-			else if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::N)
+			if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::N)
 				saveGame();
 
 			// Pump events to everything that needs it, if not paused
@@ -196,7 +205,7 @@ void Game::loop()
 		//Pause if out of focus
 		if (m_game.hasFocus())
 		{
-			m_game.setActive(true);
+
 			m_camera.setCenter(m_player->getCameraPosition());
 
 			// Update game logic and input, if not paused
@@ -259,7 +268,7 @@ void Game::loop()
 			m_extraCameras.clear();
 		}
 		else
-			m_game.setActive(false);
+			m_isPaused = true;
 
 
 	}

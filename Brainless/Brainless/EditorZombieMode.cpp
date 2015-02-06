@@ -60,10 +60,13 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 				zombie_created = false;
 				sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));
 				Unit* temp;
+				Unit::Direction temp_direction = Unit::dir_right;
 				switch (m_createdZombie.type+1)
 				{
 				case Unit::ID_IdleZombie: //Idle zombie
-					temp = new IdleZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50));
+					if (mousePos.x - m_createdZombie.sprite.getPosition().x < 0)
+						temp_direction = Unit::dir_left;
+					temp = new IdleZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50),temp_direction);
 					temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 					temp->updateAnimation(0);
 					level.addUnit(std::move(Level::UnitPtr(temp)));
