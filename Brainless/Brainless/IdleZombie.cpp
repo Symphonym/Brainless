@@ -31,7 +31,7 @@ void IdleZombie::updateAnimation(float deltaTime)
 	if (m_animState != anim_idle)
 	{
 		m_sprite = &m_spriteSheets[0];
-		m_animation.loop(0, 7, 2, 5);
+		m_animation.loop(0, 7, 1, 5);
 		m_animState = anim_idle;
 	}
 
