@@ -39,3 +39,9 @@
 
 # MAGNIFYING GLASS TEST ITEM
 +Texture,images/items/magnifyingGlassTest.png,MagnifyingGlass
+
+# TEST MAGNIFYING GLASS BG
++Texture,images/UI/magnifyingBGTest.png,MagnifyingGlassBG
+
+# MOVING PLATFORM ITEM
++Texture,images/items/movingPlatform.png,MovingPlatform

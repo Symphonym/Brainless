@@ -192,6 +192,9 @@
     <ClCompile Include="MagnifyingGlassItem.cpp">
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
+    <ClCompile Include="MovingPlatformItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -324,6 +327,9 @@
       <Filter>Source Files\Game\Mouse</Filter>
     </ClInclude>
     <ClInclude Include="MagnifyingGlassItem.h">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingPlatformItem.h">
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
   </ItemGroup>

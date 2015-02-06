@@ -29,6 +29,3 @@
 
 # TEST CURSOR TEXTURES
 +Texture,images/UI/defaultCursor.png,DefaultCursor
-
-# TEST MAGNIFYING GLASS BG
-+Texture,images/UI/magnifyingBGTest.png,MagnifyingGlassBG
