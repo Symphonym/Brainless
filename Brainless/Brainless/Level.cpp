@@ -225,12 +225,6 @@ void Level::updateUnitCollision(float deltaTime)
 				newPos.y++;
 			}
 
-			
-
-			tileBounds.width = tileBounds.width + 1;
-			tileBounds.left = tileBounds.left - 1;
-			tileBounds.height = tileBounds.height + tileBounds.height;
-
 			unitBounds.top = unitBounds.top + unitBounds.height - unitBounds.width;
 			unitBounds.height = unitBounds.width;
 
@@ -240,18 +234,20 @@ void Level::updateUnitCollision(float deltaTime)
 				newPos.y = tileBounds.top - originalBounds.height;
 
 			if (currentUnit->getSpeed().y >= 0)
-			if (unitBounds.intersects(unitBounds))
+			if (tileBounds.intersects(unitBounds))
 			{
-				if (unitBounds.left + unitBounds.width < tileBounds.left && currentUnit->getSpeed().x < 0)
-				{
-					newPos.y = tileBounds.top - originalBounds.height + tileBounds.height + 1;
-					currentUnit->setPosition(newPos);
-				}
-
 				if ((unitBounds.left + originalBounds.width + unitBounds.top + unitBounds.height > tileCenter.x + tileCenter.y - 6) && unitBounds.left + unitBounds.width - unitLedgeOffset < tileBounds.left + tileBounds.width)
 				{
 					collision = true;
 					currentUnit->setStatus(false);
+					currentUnit->setPosition(newPos);
+				}
+			}
+
+			if (currentUnit->getInAir() == false)
+			{
+				if (unitBounds.left + unitBounds.width < tileBounds.left + tileBounds.width)
+				{
 					currentUnit->setPosition(newPos);
 				}
 			}
