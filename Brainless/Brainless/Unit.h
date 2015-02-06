@@ -67,6 +67,7 @@ public:
 	bool getInAir() const;
 	sf::FloatRect getCollisionRect();
 	UnitType getUnitType();
+	Direction getDirection();
 protected:
 	RenderingModes m_renderingMode;
 	bool m_isMovementEnabled;

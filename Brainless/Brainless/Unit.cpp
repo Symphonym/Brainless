@@ -104,7 +104,7 @@ void Unit::draw()
 	if (m_renderingMode == RenderingModes::Above)
 		Renderer::instance().drawAbove((*m_sprite));
 	else if (m_renderingMode == RenderingModes::Depth)
-		Renderer::instance().drawDepth((*m_sprite));
+	Renderer::instance().drawDepth((*m_sprite));
 	else if (m_renderingMode == RenderingModes::Behind)
 		Renderer::instance().drawBehind((*m_sprite));
 }
@@ -192,4 +192,9 @@ sf::FloatRect Unit::getCollisionRect()
 Unit::UnitType Unit::getUnitType()
 {
 	return m_UnitID;
+}
+
+Unit::Direction Unit::getDirection()
+{
+	return m_spriteDirection;
 }
