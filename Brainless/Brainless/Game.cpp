@@ -22,7 +22,7 @@
 
 Game::Game()
 :
-m_game(sf::VideoMode(1280, 720, sf::Style::Close), "Brainless"),
+m_game(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close),
 m_isPaused(false),
 m_levelIndex(0)
 {
@@ -192,7 +192,7 @@ void Game::loop()
 			}
 
 		}
-		
+
 		//Pause if out of focus
 		if (m_game.hasFocus())
 		{
