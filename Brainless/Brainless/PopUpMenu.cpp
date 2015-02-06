@@ -98,8 +98,6 @@ void PopUpMenu::update(const sf::RenderWindow &window, const sf::Vector2f &playe
 		for (std::size_t i = 0; i < m_buttons.size(); i++)
 		{
 			sf::FloatRect buttonBounds = m_buttons[i].getGlobalBounds();
-			float distanceToPlayer = 0;
-			sf::Vector2f distToPlayer = sf::Vector2f(0, 0);
 			bool isWithinRange = false;
 
 			// Calculate distance from player to item
@@ -110,10 +108,11 @@ void PopUpMenu::update(const sf::RenderWindow &window, const sf::Vector2f &playe
 					m_interactItem->getPosition().y + m_interactItem->getSprite().getGlobalBounds().height / 2.f);
 
 				sf::Vector2f distanceVec = itemCenter - playerOrigo;
-				distToPlayer = distanceVec;
+				distanceVec.x = std::abs(distanceVec.x);
+				distanceVec.y = std::abs(distanceVec.y);
 				isWithinRange = distanceVec.x <= m_interactItem->getInteractDistance().x && distanceVec.y <= m_interactItem->getInteractDistance().y;
 
-				distanceToPlayer = std::sqrt(distanceVec.x*distanceVec.x) + std::sqrt(distanceVec.y*distanceVec.y);
+				//distanceToPlayer = std::sqrt(distanceVec.x*distanceVec.x) + std::sqrt(distanceVec.y*distanceVec.y);
 			}
 
 			std::string textureName = "";
