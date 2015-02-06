@@ -13,8 +13,8 @@ public:
 	static const int LeftTileOffset = -20;
 	static const int TopTileOffset = -20;
 
-	static const int MapWidth = 200;
-	static const int MapHeight = 50;
+	static const int MapWidth = 40;
+	static const int MapHeight = 15;
 
 	static const int BlockTypeCount = 6;
 

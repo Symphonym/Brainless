@@ -176,7 +176,7 @@ void Game::loop()
 		{
 			if (event.type == sf::Event::Closed)
 				m_game.close();
-			if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::N)
+			else if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::N)
 				saveGame();
 
 			// Pump events to everything that needs it, if not paused
@@ -197,7 +197,7 @@ void Game::loop()
 		//Pause if out of focus
 		if (m_game.hasFocus())
 		{
-
+			m_game.setActive(true);
 			m_camera.setCenter(m_player->getCameraPosition());
 
 			// Update game logic and input, if not paused
@@ -243,7 +243,7 @@ void Game::loop()
 			m_game.display();
 		}
 		else
-			m_isPaused = true;
+			m_game.setActive(false);
 
 	}
 }
