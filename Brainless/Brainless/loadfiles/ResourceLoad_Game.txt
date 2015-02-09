@@ -3,6 +3,7 @@
 +Texture,images/animations/spritesheet.png,testImage
 +Texture,images/animations/Spritesheet_Test_v3_3.png,PlayerSheet
 +Texture,images/animations/spritesheet_Skelett_hopp_v1.png,PlayerSheetJump
++Texture,images/animations/spritesheet_skeleton_runjump_v1.png,PlayerSheetJumpRun
 +Texture,images/animations/Spritesheet_Test_Zombie_v2.png,Zombie
 
 # PICKUP MENU TEXTURES

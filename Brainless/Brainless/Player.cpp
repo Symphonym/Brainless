@@ -24,6 +24,7 @@ m_hp(3),
 m_damageState(dmg_normal)
 {
 	m_cameraPos = m_position;
+	s_playerPointer = this;
 }
 
 void Player::setClimbing(bool climbing)
@@ -400,9 +401,7 @@ void Player::animation_idle()
 	{
 		m_animLoopsDone = 0;
 		m_sprite = &m_spriteSheets[0];
-		m_animation.loop(0, 2, 3, 4, 5);
-		//m_animation.loop(0, 3, 7, 3);
-		//m_animation.setReverse(true); //ger neråt
+	
 		m_animation.loop(0,7, 3, 8);
 
 		m_animState = anim_idle;
@@ -414,7 +413,7 @@ void Player::animation_idle()
 		if (m_animLoopsDone == 8)
 		{
 			m_animation.playOnce(0, 7, 4, 8);
-}
+		}
 		else
 		m_animation.playOnce(0, 7, 3, 8);
 	}
@@ -475,8 +474,8 @@ void Player::animation_startJumpRun()
 {
 	if (m_animState != anim_startJumpRun)
 	{
-		m_sprite = &m_spriteSheets[1];
-		m_animation.playOnce(0, 2, 0, JUMPANIMFPS);
+		m_sprite = &m_spriteSheets[2];
+		m_animation.playOnce(0, 1, 0, JUMPANIMFPS);
 		m_animState = anim_startJumpRun;
 		std::cout << "JumpRun" << std::endl;
 		std::cout << m_speed.x << std::endl;
@@ -525,8 +524,8 @@ void Player::animation_landRun()
 {
 	if (m_animState != anim_landRun)
 	{
-		m_sprite = &m_spriteSheets[1];
-		m_animation.playOnce(0, 1 + m_jumpFrame, 3, JUMPANIMFPS); //jumpFrame = experimental 3
+		m_sprite = &m_spriteSheets[2];
+		m_animation.playOnce(0, 1, 4, 8); //jumpFrame = experimental 3
 		m_animState = anim_landRun;
 		m_jumpFrame = 2; //experimental 
 		std::cout << "LandRun" << std::endl;

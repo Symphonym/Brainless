@@ -4,6 +4,8 @@
 
 #define SPRITESIZE 256 //storleken på varje bild i texturesheet
 
+Unit* Unit::s_playerPointer = nullptr;
+
 //V0.02
 Unit::Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID)
 :

@@ -17,6 +17,7 @@
 #include "Inventory.h"
 #include "Unit.h"
 #include "Zombie.h"
+#include "ChasingZombie.h"
 #include "WalkingZombie.h"
 #include "IdleZombie.h"
 
@@ -220,6 +221,9 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 		case Unit::ID_WalkingZombie:
 			writer << curUnit.getPosition().x << "," << curUnit.getPosition().y << "," << (((WalkingZombie&) curUnit)).getWalkLenght() << std::endl;
 			break;
+		case Unit::ID_ChasingZombie:
+			writer << curUnit.getPosition().x << "," << curUnit.getPosition().y << "," << (((ChasingZombie&)curUnit)).getWalkLenght() << std::endl;
+			break;
 		}
 	}
 }
@@ -335,6 +339,12 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 				break;
 			case Unit::ID_WalkingZombie:
 				temp = new WalkingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[3]));
+				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+				temp->updateAnimation(0);
+				level.addUnit(std::move(Level::UnitPtr(temp)));
+				break;
+			case Unit::ID_ChasingZombie:
+				temp = new ChasingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[3]));
 				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				temp->updateAnimation(0);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
