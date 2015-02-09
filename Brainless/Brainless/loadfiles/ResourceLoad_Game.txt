@@ -26,6 +26,3 @@
 
 # TEST NOTIFICATION TEXTURE
 +Texture,images/UI/dialoguebox.png,DialogBoxBackground
-
-# TEST CURSOR TEXTURES
-+Texture,images/UI/defaultCursor.png,DefaultCursor

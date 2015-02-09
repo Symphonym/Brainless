@@ -10,7 +10,7 @@ class Cursor
 public:
 
 	void changeCursor(const std::string &cursorTextureName);
-	void update(Game &game);
+	void update(const sf::RenderWindow &window);
 	void draw();
 
 	void resetToDefault();
