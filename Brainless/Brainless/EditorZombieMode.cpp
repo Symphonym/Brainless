@@ -28,14 +28,23 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 	}
 	for (int i = 0; i < level.getUnits().size(); i++)
 	{
+		EditorZombie temp1,temp2;
 		switch (level.getUnit(i).getUnitType())
 		{
 		case Unit::ID_WalkingZombie:
-			EditorZombie temp;
-			temp.sprite = level.getUnit(i).getSprite();
-			temp.sprite.setPosition(temp.sprite.getPosition() + sf::Vector2f((dynamic_cast<WalkingZombie*>(&level.getUnit(i)))->getWalkLenght(), 0));
-			temp.sprite.setColor(sf::Color(255, 255, 255, 128));
-			m_zombieMasks.push_back(temp);
+			temp1.sprite = level.getUnit(i).getSprite();
+			temp1.sprite.setPosition(temp1.sprite.getPosition() + sf::Vector2f((dynamic_cast<WalkingZombie*>(&level.getUnit(i)))->getWalkLenght(), 0));
+			temp1.sprite.setColor(sf::Color(255, 255, 255, 128));
+			m_zombieMasks.push_back(temp1);
+			break;
+		case Unit::ID_ChasingZombie:
+			temp1.sprite = level.getUnit(i).getSprite(); temp2.sprite = level.getUnit(i).getSprite();
+			temp1.sprite.setPosition(temp1.sprite.getPosition() + sf::Vector2f((dynamic_cast<ChasingZombie*>(&level.getUnit(i)))->getWalkLenght(), 0));
+			temp2.sprite.setPosition(temp2.sprite.getPosition() - sf::Vector2f((dynamic_cast<ChasingZombie*>(&level.getUnit(i)))->getWalkLenght(), 0));
+			temp1.sprite.setColor(sf::Color(255, 255, 255, 128));
+			temp2.sprite.setColor(sf::Color(255, 255, 255, 128));
+			m_zombieMasks.push_back(temp1);
+			m_zombieMasks.push_back(temp2);
 			break;
 		}
 	}
@@ -86,7 +95,7 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 					break;
 				case Unit::ID_ChasingZombie: //Chasing Zombie
 					m_createdZombie.walk_distance = mousePos.x - m_createdZombie.sprite.getPosition().x;
-					temp = new ChasingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, NULL);
+					temp = new ChasingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance);
 					temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 					temp->updateAnimation(0);
 					level.addUnit(std::move(Level::UnitPtr(temp)));
