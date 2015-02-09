@@ -18,6 +18,9 @@ public:
 
 	virtual Item* clone();
 
+	virtual sf::Vector2f getSpeed() const;
+
+
 private:
 
 	sf::Vector2f m_speed;

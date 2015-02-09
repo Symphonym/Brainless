@@ -8,6 +8,7 @@ m_speed(speed),
 m_maxDistanceMoved(maxDistance)
 {
 	m_collidable = true;
+	m_solid = false;
 
 	m_collisionSize = sf::Vector2f(250, 50);
 	m_collisionOffset = sf::Vector2f(0, 0);
@@ -40,4 +41,9 @@ void MovingPlatformItem::draw()
 Item* MovingPlatformItem::clone()
 {
 	return new MovingPlatformItem(*this);
+}
+
+sf::Vector2f MovingPlatformItem::getSpeed() const
+{
+	return m_speed;
 }
