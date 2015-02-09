@@ -22,7 +22,7 @@
 
 #include "Utility.h"
 
-
+/*
 void FileSave::saveMap(Level* stage, int stage_number)
 {
 	//Obtaining level parts
@@ -159,7 +159,7 @@ void FileSave::loadMap(Level* stage, int stage_number)
 		}
 	}
 }
-
+*/
 
 void FileSave::saveMapText(Level &level, int levelNumber)
 {
@@ -349,7 +349,6 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 	return false;
 }
 
-
 void FileSave::saveInventory(Inventory &inventory)
 {
 	std::ofstream writer("inventory.txt");
@@ -425,4 +424,20 @@ bool FileSave::loadLevelProgress(Level &level, int levelNumber)
 	}
 	reader.close();
 	return opened;
+}
+
+void FileSave::wipeProgress()
+{
+	// Rename the file first so that the game won't misstakenly interact with a non-existing file
+	std::rename("inventory.txt", "inventory_old.txt");
+	std::remove("inventory_old.txt");
+	
+	for (int i = 0; i < 10; i++)
+	{
+
+		std::string levelFile = "game_level" + std::to_string(i) + ".txt";
+		std::string levelFileNew = "game_level" + std::to_string(i) + "_old.txt";
+		std::rename(levelFile.c_str(), levelFileNew.c_str());
+		std::remove(levelFileNew.c_str());
+	}
 }

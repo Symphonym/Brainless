@@ -8,13 +8,14 @@
 class Button : public GUIElement
 {
 public:
+	Button(sf::Texture &notPressed, sf::Texture &pressed, const sf::Vector2f &position, sf::RenderWindow *window);
 	Button(sf::Texture &notPressed, sf::Texture &pressed, sf::IntRect placement, sf::RenderWindow *window);
 
 	//Checks if the button is pressed and released
 	virtual bool getReleased();
 	virtual std::string getType();
 
-	void draw();
+	virtual void draw();
 
 private:
 	sf::IntRect m_sizeRectangle;
