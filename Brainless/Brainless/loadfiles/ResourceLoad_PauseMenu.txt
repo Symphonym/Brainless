@@ -1,0 +1,5 @@
+# BUTTON TEXTURES
++Texture,images/UI/resume_normal.png,Resume_Normal
++Texture,images/UI/resume_pressed.png,Resume_Pressed
++Texture,images/UI/mainmenu_normal.png,MainMenuBack_Normal
++Texture,images/UI/mainmenu_pressed.png,MainMenuBack_Pressed
