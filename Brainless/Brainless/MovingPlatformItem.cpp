@@ -35,8 +35,9 @@ void MovingPlatformItem::deserialize(std::ifstream &reader)
 
 void MovingPlatformItem::update(float deltaTime, Game &game)
 {
-	setPosition(sf::Vector2f(getPosition().x + m_speed.x, getPosition().y + m_speed.y));
-	m_distanceMoved += sf::Vector2f(abs(m_speed.x), abs(m_speed.y));
+	sf::Vector2f speed = m_speed * deltaTime;
+	setPosition(sf::Vector2f(getPosition().x + speed.x, getPosition().y + speed.y));
+	m_distanceMoved += sf::Vector2f(abs(speed.x), abs(speed.y));
 
 	if (m_distanceMoved.x > m_maxDistanceMoved || m_distanceMoved.y > m_maxDistanceMoved)
 	{

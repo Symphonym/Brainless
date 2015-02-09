@@ -396,7 +396,7 @@ void Level::updateUnitCollision(float deltaTime)
 					if (tileTopBounds.intersects(unitBottom))
 					{
 						currentUnit->setStatus(false);
-						currentUnit->setPosition(currentUnit->getPosition() + m_items[i]->getSpeed());
+						currentUnit->setPosition(currentUnit->getPosition() + m_items[i]->getSpeed() * deltaTime);
 					}
 
 					bool hasCollided = false;

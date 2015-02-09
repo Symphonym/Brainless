@@ -21,7 +21,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new ChestItem(false, { 0, 2, 7 }, 8)));
 	addItem(ItemPtr(new LadderItem("LadderTest", 9)));
 	addItem(ItemPtr(new MagnifyingGlassItem(10)));
-	addItem(ItemPtr(new MovingPlatformItem(sf::Vector2f(0.1f, 0.1f), 1000, 11)));
+	addItem(ItemPtr(new MovingPlatformItem(sf::Vector2f(100, 100), 1000, 11)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)
