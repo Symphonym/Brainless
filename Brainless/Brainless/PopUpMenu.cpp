@@ -5,7 +5,6 @@
 #include "Constants.h"
 #include "Cursor.h"
 #include "Game.h"
-#include <iostream>
 
 PopUpMenu::PopUpMenu()
 :
