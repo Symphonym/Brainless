@@ -389,6 +389,9 @@ void Level::updateUnitCollision(float deltaTime)
 					sf::Vector2f unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height / 2);
 					sf::FloatRect unitBottom = sf::FloatRect(unitBounds.left + 20, unitBounds.top + unitBounds.height, unitBounds.width - 40, 1);
 
+					
+
+
 					if (currentUnit->getSpeed().y >= 0)
 					if (tileTopBounds.intersects(unitBottom))
 					{
@@ -396,14 +399,16 @@ void Level::updateUnitCollision(float deltaTime)
 						currentUnit->setPosition(currentUnit->getPosition() + m_items[i]->getSpeed());
 					}
 
-
 					bool hasCollided = false;
 					sf::FloatRect originalBounds = unitBounds;
-					unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height / 2);
+					if (m_items[i]->isSolid())
+						unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height / 2);
+					else
+						unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height);
 
-					for (int i = 0; i < 2; i++)
+					for (int c = 0; c < 2; c++)
 					{
-						if (i == 0)
+						if (c == 0)
 						{
 							unitBounds.top = unitBounds.top + unitBounds.height - unitBounds.width;
 							unitBounds.height = unitBounds.width;
@@ -416,6 +421,7 @@ void Level::updateUnitCollision(float deltaTime)
 						// If tile isn't empty and is colliding with the unit
 						if (tileBounds.intersects(unitBounds) && !hasCollided && !collision)
 						{
+
 							collision = true;
 							hasCollided = true;
 

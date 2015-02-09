@@ -24,7 +24,7 @@ void MagnifyingGlassItem::heldUpdate(float deltaTime, Game &game)
 
 	m_magnifyingView = game.getWindow().getView();
 	m_magnifyingView.setViewport(sf::FloatRect(0.75f, 0.75f, 0.25f, 0.25f));
-	m_magnifyingView.zoom(0.1f);
+	m_magnifyingView.zoom(0.05f);
 	sf::Vector2f mousePos = game.getWindow().mapPixelToCoords(sf::Mouse::getPosition(game.getWindow()));
 	m_magnifyingView.setCenter(mousePos);
 

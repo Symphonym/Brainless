@@ -14,6 +14,25 @@ m_maxDistanceMoved(maxDistance)
 	m_collisionOffset = sf::Vector2f(0, 0);
 }
 
+
+void MovingPlatformItem::serialize(std::ofstream &writer) const
+{
+	Item::serialize(writer);
+
+	writer << m_speed.x << std::endl;
+	writer << m_speed.y << std::endl;
+	writer << m_distanceMoved.x << std::endl;
+	writer << m_distanceMoved.x << std::endl;
+}
+void MovingPlatformItem::deserialize(std::ifstream &reader)
+{
+	Item::deserialize(reader);
+
+	reader >> m_speed.x >> m_speed.y;
+	reader >> m_distanceMoved.x >> m_distanceMoved.y;
+}
+
+
 void MovingPlatformItem::update(float deltaTime, Game &game)
 {
 	setPosition(sf::Vector2f(getPosition().x + m_speed.x, getPosition().y + m_speed.y));

@@ -36,6 +36,7 @@ void Item::serialize(std::ofstream &writer) const
 	writer << m_lootable << std::endl;
 	writer << m_usable << std::endl;
 	writer << m_collidable << std::endl;
+	writer << m_solid << std::endl;
 	writer << static_cast<int>(m_renderingMode) << std::endl;
 }
 void Item::deserialize(std::ifstream &reader)
@@ -46,7 +47,7 @@ void Item::deserialize(std::ifstream &reader)
 
 	setPosition(sf::Vector2f(posX, posY));
 
-	reader >> m_lootable >> m_usable >> m_collidable;
+	reader >> m_lootable >> m_usable >> m_collidable >> m_solid;
 
 	int renderMode = 0;
 	reader >> renderMode;
