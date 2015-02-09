@@ -1,0 +1,14 @@
+# BUTTON TEXTURES
++Texture,images/UI/newgame_normal.png,NewGame_Normal
++Texture,images/UI/newgame_pressed.png,NewGame_Pressed
++Texture,images/UI/loadgame_normal.png,LoadGame_Normal
++Texture,images/UI/loadgame_pressed.png,LoadGame_Pressed
+
+# CONFIRM BUTTON TEXTURES
++Texture,images/UI/yes_normal.png,Yes_Normal
++Texture,images/UI/yes_pressed.png,Yes_Pressed
++Texture,images/UI/no_normal.png,No_Normal
++Texture,images/UI/no_pressed.png,No_Pressed
+
+# CONFIRM BACKGROUND
++Texture,images/UI/newGameConfirmTest.png,NewGameConfirmBG
