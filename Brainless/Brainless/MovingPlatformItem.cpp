@@ -22,8 +22,9 @@ void MovingPlatformItem::serialize(std::ofstream &writer) const
 
 	writer << m_speed.x << std::endl;
 	writer << m_speed.y << std::endl;
+	writer << m_distanceMove-+d.x << std::endl;
 	writer << m_distanceMoved.x << std::endl;
-	writer << m_distanceMoved.x << std::endl;
+	writer << m_isActive << std::endl;
 }
 void MovingPlatformItem::deserialize(std::ifstream &reader)
 {
@@ -31,6 +32,7 @@ void MovingPlatformItem::deserialize(std::ifstream &reader)
 
 	reader >> m_speed.x >> m_speed.y;
 	reader >> m_distanceMoved.x >> m_distanceMoved.y;
+	reader >> m_isActive;
 }
 
 bool MovingPlatformItem::onSyncedWith(Item &otherItem)
