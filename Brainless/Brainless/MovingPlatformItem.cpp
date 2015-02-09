@@ -5,7 +5,8 @@ MovingPlatformItem::MovingPlatformItem(sf::Vector2f speed, float maxDistance, in
 :
 Item("MovingPlatform", "MovingPlatform", id),
 m_speed(speed),
-m_maxDistanceMoved(maxDistance)
+m_maxDistanceMoved(maxDistance),
+m_isActive(true)
 {
 	m_collidable = true;
 	m_solid = false;
@@ -32,17 +33,25 @@ void MovingPlatformItem::deserialize(std::ifstream &reader)
 	reader >> m_distanceMoved.x >> m_distanceMoved.y;
 }
 
+bool MovingPlatformItem::onSyncedWith(Item &otherItem)
+{
+	m_isActive = !m_isActive;
+	return false;
+}
 
 void MovingPlatformItem::update(float deltaTime, Game &game)
 {
-	sf::Vector2f speed = m_speed * deltaTime;
-	setPosition(sf::Vector2f(getPosition().x + speed.x, getPosition().y + speed.y));
-	m_distanceMoved += sf::Vector2f(abs(speed.x), abs(speed.y));
-
-	if (m_distanceMoved.x > m_maxDistanceMoved || m_distanceMoved.y > m_maxDistanceMoved)
+	if (m_isActive)
 	{
-		m_distanceMoved = sf::Vector2f(0, 0);
-		m_speed = -m_speed;
+		sf::Vector2f speed = m_speed * deltaTime;
+		setPosition(sf::Vector2f(getPosition().x + speed.x, getPosition().y + speed.y));
+		m_distanceMoved += sf::Vector2f(abs(speed.x), abs(speed.y));
+
+		if (m_distanceMoved.x > m_maxDistanceMoved || m_distanceMoved.y > m_maxDistanceMoved)
+		{
+			m_distanceMoved = sf::Vector2f(0, 0);
+			m_speed = -m_speed;
+		}
 	}
 }
 

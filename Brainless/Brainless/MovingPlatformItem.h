@@ -15,6 +15,9 @@ public:
 	virtual void serialize(std::ofstream &writer) const;
 	virtual void deserialize(std::ifstream &reader);
 
+	virtual bool onSyncedWith(Item &otherItem);
+
+
 	virtual void update(float deltaTime, Game &game);
 	virtual void draw();
 
@@ -25,6 +28,7 @@ public:
 
 private:
 
+	bool m_isActive;
 	sf::Vector2f m_speed;
 	sf::Vector2f m_distanceMoved;
 	float m_maxDistanceMoved;
