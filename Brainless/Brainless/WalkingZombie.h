@@ -17,6 +17,8 @@ public:
 		anim_walking
 	};
 
+	void wallLeft();
+	void wallRight();
 
 protected:
 

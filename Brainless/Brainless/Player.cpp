@@ -399,7 +399,7 @@ void Player::animation_idle()
 	if (m_animState != anim_idle)
 	{
 		m_sprite = &m_spriteSheets[0];
-		m_animation.stillFrame(0, 3);
+		m_animation.loop(0, 2, 3, 4, 5);
 		//m_animation.loop(0, 3, 7, 3);
 		//m_animation.setReverse(true); //ger neråt
 
