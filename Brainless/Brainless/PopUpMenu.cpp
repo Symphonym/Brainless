@@ -48,7 +48,8 @@ void PopUpMenu::events(const sf::Event &event, Game &game)
 		// Show menu if right clicking on item/unit
 		if (event.mouseButton.button == sf::Mouse::Right && !m_isShowing)
 		{
-			for (std::size_t i = 0; i < game.getLevel().getItems().size(); i++)
+			// Do backwards to take the topmost item first
+			for (int i = game.getLevel().getItems().size()-1; i >= 0; i--)
 			{
 				sf::FloatRect itemBounds = game.getLevel().getItems()[i]->getSprite().getGlobalBounds();
 			
