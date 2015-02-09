@@ -29,11 +29,13 @@ public:
 		anim_endWalk,
 		anim_run,
 		anim_turn,
-		anim_startJump,
+		anim_startJumpIdle,
+		anim_startJumpRun,
 		anim_endJump,
 		anim_inAirUp,
 		anim_inAirFall,
-		anim_land,
+		anim_landIdle,
+		anim_landRun,
 		anim_dead,
 		anim_damaged,
 		anim_climbingUp,
@@ -76,6 +78,27 @@ private:
 	float m_cameraMaxOffset = 250;
 
 	bool m_climbing;
+
+	/*
+		animationFuncs
+		will play last used animation Function until a new one is called, calling the same animation multiple times in a row will do nothing.
+	*/
+	void animation_idle();
+	void animation_startWalk();
+	void animation_endWalk();
+	void animation_run();
+	void animation_turn();
+	void animation_startJumpIdle();
+	void animation_startJumpRun();
+	void animation_endJump();
+	void animation_inAirUp();
+	void animation_inAirFall();
+	void animation_landIdle();
+	void animation_landRun();
+	void animation_dead();
+	void animation_damaged();
+	void animation_climbingUp();
+	void animation_climbingDown();
 };
 
 

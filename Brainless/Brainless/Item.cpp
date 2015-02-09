@@ -8,6 +8,7 @@ Item::Item(const std::string &itemName, const std::string &textureName, int id, 
 m_lootable(false),
 m_usable(false),
 m_collidable(false),
+m_solid(true),
 m_renderingMode(RenderingModes::Depth),
 m_interactDistance(Constants::InteractDistance, Constants::InteractDistance),
 m_collisionOffset(0, 0),
@@ -18,7 +19,8 @@ m_examineString("A pretty normal object, nothing out of the ordinary"),
 m_itemName(itemName),
 m_id(id),
 m_syncID(-1),
-m_combineData(combineData)
+m_combineData(combineData),
+m_speed(sf::Vector2f(0,0))
 {
 	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
 }
@@ -109,6 +111,10 @@ bool Item::isCollidable() const
 {
 	return m_collidable;
 }
+bool Item::isSolid() const
+{
+	return m_solid;
+}
 std::string Item::getUseString() const
 {
 	return m_useString;
@@ -128,6 +134,10 @@ sf::FloatRect Item::getCollisionBounds() const
 sf::Vector2f Item::getInteractDistance() const
 {
 	return m_interactDistance;
+}
+sf::Vector2f Item::getSpeed() const
+{
+	return m_speed;
 }
 
 CombineData::CombineData(int targetIDIDParam, int productItemIDParam)

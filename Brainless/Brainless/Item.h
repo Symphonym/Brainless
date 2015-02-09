@@ -57,6 +57,8 @@ public:
 	virtual void heldDraw() {};
 	virtual void draw();
 
+	virtual sf::Vector2f getSpeed() const;
+
 	void setPosition(const sf::Vector2f &pos);
 	sf::Vector2f getPosition() const;
 
@@ -71,6 +73,7 @@ public:
 	bool isLootable() const;
 	bool isUsable() const;
 	bool isCollidable() const;
+	bool isSolid() const;
 	std::string getUseString() const;
 	std::string getPickupString() const;
 	std::string getExamineString() const;
@@ -83,6 +86,7 @@ protected:
 	bool m_lootable; // Saved to file
 	bool m_usable; // Saved to file
 	bool m_collidable; // Saved to file
+	bool m_solid;
 	RenderingModes m_renderingMode; // Saved to file
 	sf::Vector2f m_interactDistance; // Allowed X and Y distance from player to interact with this item
 	sf::Vector2f m_collisionOffset;
@@ -93,6 +97,7 @@ protected:
 
 private:
 
+	sf::Vector2f m_speed;
 	std::string m_itemName;
 	sf::Sprite m_sprite;
 	int m_id; // Unique identifier for the item
