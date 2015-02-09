@@ -19,6 +19,8 @@
 #include "Notification.h"
 #include "ConversationBox.h"
 #include "Cursor.h"
+#include "StateMachine.h"
+#include "PauseMenu.h"
 
 Game::Game(StateMachine &machine)
 :
@@ -27,8 +29,6 @@ m_levelIndex(0)
 {
 	m_camera = m_window.getDefaultView();
 
-	// Hide mouse cursor
-	m_window.setMouseCursorVisible(false);
 	// Load game resources
 	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Game.txt");
 
@@ -144,8 +144,13 @@ Level& Game::getLevel()
 
 void Game::events(const sf::Event &event)
 {
-	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::N)
-		saveGame();
+	if (event.type == sf::Event::KeyReleased)
+	{
+		if (event.key.code == sf::Keyboard::N)
+			saveGame();
+		else if (event.key.code == sf::Keyboard::Escape)
+			m_machine.pushState<PauseMenu>();
+	}
 
 	// Pump events to everything that needs it
 	// Disable game input when conversation is ongoing
@@ -191,9 +196,6 @@ void Game::update(float deltaTime)
 			}
 		}
 	}
-
-	// Update cursor
-	Cursor::instance().update(*this);
 }
 void Game::draw()
 {
@@ -204,7 +206,6 @@ void Game::draw()
 	m_popup->draw();
 	Notification::instance().draw();
 	ConversationBox::instance().draw();
-	Cursor::instance().draw();
 	Renderer::instance().executeDraws();
 
 	// Draw extra cameras

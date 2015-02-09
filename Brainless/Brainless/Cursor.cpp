@@ -13,9 +13,9 @@ void Cursor::changeCursor(const std::string &cursorTextureName)
 	m_cursorSprite.setTexture(ResourceLoader::instance().retrieveTexture(cursorTextureName));
 	m_cursorSprite.setOrigin(0, m_cursorSprite.getGlobalBounds().height);
 }
-void Cursor::update(Game &game)
+void Cursor::update(const sf::RenderWindow &window)
 {
-	sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
+	sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 	m_cursorSprite.setPosition(mousePos.x, mousePos.y);
 }
 void Cursor::draw()

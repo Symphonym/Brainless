@@ -1,12 +1,16 @@
 #include "StateMachine.h"
 #include "Renderer.h"
 #include "State.h"
+#include "Cursor.h"
 
 StateMachine::StateMachine()
 :
 m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 {
 	Renderer::instance().setTarget(m_window);
+
+	// Hide mouse cursor
+	m_window.setMouseCursorVisible(false);
 }
 
 void StateMachine::popState()
@@ -51,6 +55,9 @@ void StateMachine::loop()
 		if (!m_states.empty())
 			m_states.back()->update(deltaTime);
 
+		// Update cursor regardless of state
+		Cursor::instance().update(m_window);
+
 		if (m_window.hasFocus())
 		{
 			m_window.setActive(true);
@@ -60,6 +67,10 @@ void StateMachine::loop()
 			for (int i = m_states.size() - 1; i >= 0; i--)
 				m_states[i]->draw();
 
+			// Draw cursor
+			Cursor::instance().draw();
+
+			Renderer::instance().executeDraws();
 			m_window.display();
 		}
 		else

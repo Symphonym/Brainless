@@ -25,8 +25,6 @@ private:
 	bool zombie_created = false;
 	EditorZombie m_createdZombie;
 	
-
-	const int Zombie_types = 3;
 	std::vector<EditorZombie> m_zombieMasks;
 };
 
