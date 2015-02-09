@@ -19,7 +19,7 @@ m_isActive(true)
 void MovingPlatformItem::serialize(std::ofstream &writer) const
 {
 	Item::serialize(writer);
-
+	//hello skit kommit
 	writer << m_speed.x << std::endl;
 	writer << m_speed.y << std::endl;
 	writer << m_distanceMoved.x << std::endl;
