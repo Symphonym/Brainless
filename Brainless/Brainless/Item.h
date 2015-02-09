@@ -8,16 +8,17 @@
 // Data for combining items
 struct CombineData
 {
-	CombineData(int targetIDParam, int productItemIDParam);
-
 	int targetID; // The ID of the item this can be combined with
 	int productItemID; // ID of the item that is crafted
+	bool consumedOnCraft; // Whether or not this item is consumed when combined with this combination
 };
 
 class Game;
 class Item
 {
 public:
+
+	typedef std::vector<CombineData> Combinations;
 
 	enum RenderingModes
 	{
@@ -27,7 +28,7 @@ public:
 	};
 
 	// TODO Item needs clone functionality, prototype pattern, if we want to be able to inherit from item
-	explicit Item(const std::string &itemName, const std::string &textureName, int id, CombineData combineData = CombineData(-1, -1));
+	explicit Item(const std::string &itemName, const std::string &textureName, int id, const Combinations &combineData = {});
 
 	
 	// Updated when the item is held, when picked up from the inventory
@@ -68,7 +69,7 @@ public:
 	int getID() const;
 	void setSyncID(int id);
 	int getSyncID() const;
-	const CombineData& getCombineData() const;
+	const Combinations& getCombinations() const;
 
 	bool isLootable() const;
 	bool isUsable() const;
@@ -103,7 +104,7 @@ private:
 	int m_id; // Unique identifier for the item
 	int m_syncID; // ID to connect the item to other items
 	std::string m_description;
-	CombineData m_combineData; // Data for combining (crafting) into other items
+	Combinations m_combinations; // Data for combining (crafting) into other items
 };
 
 // Default item class, since the Item class is now abstract
@@ -111,7 +112,7 @@ class DefaultItem : public Item
 {
 public:
 
-	explicit DefaultItem(const std::string &textureName, int id, CombineData combineData = CombineData(-1, -1));
+	explicit DefaultItem(const std::string &textureName, int id, const Item::Combinations &combineData = {});
 
 	virtual Item* clone();
 };

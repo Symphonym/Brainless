@@ -83,7 +83,7 @@ bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &edit
 			m_itemInfo.push_back(text);
 
 			// Add new item to level
-			level.addItem(std::move(std::unique_ptr<Item>(m_currentItem->clone())));
+			level.addItem(std::move(newItem));
 
 			return true;
 		}

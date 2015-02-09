@@ -3,7 +3,7 @@
 #include "Renderer.h"
 #include "Constants.h"
 
-Item::Item(const std::string &itemName, const std::string &textureName, int id, CombineData combineData)
+Item::Item(const std::string &itemName, const std::string &textureName, int id, const Combinations &combineData)
 :
 m_lootable(false),
 m_usable(false),
@@ -19,7 +19,7 @@ m_examineString("A pretty normal object, nothing out of the ordinary"),
 m_itemName(itemName),
 m_id(id),
 m_syncID(-1),
-m_combineData(combineData),
+m_combinations(combineData),
 m_speed(sf::Vector2f(0,0))
 {
 	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
@@ -95,9 +95,9 @@ int Item::getSyncID() const
 {
 	return m_syncID;
 }
-const CombineData& Item::getCombineData() const
+const Item::Combinations& Item::getCombinations() const
 {
-	return m_combineData;
+	return m_combinations;
 }
 
 bool Item::isLootable() const
@@ -141,18 +141,10 @@ sf::Vector2f Item::getSpeed() const
 	return m_speed;
 }
 
-CombineData::CombineData(int targetIDIDParam, int productItemIDParam)
-:
-targetID(targetIDIDParam),
-productItemID(productItemIDParam)
-{
-
-}
 
 
 
-
-DefaultItem::DefaultItem(const std::string &textureName, int id, CombineData combineData)
+DefaultItem::DefaultItem(const std::string &textureName, int id, const Item::Combinations &combineData)
 :
 Item("DefaultItem", textureName, id, combineData)
 {

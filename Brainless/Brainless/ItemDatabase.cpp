@@ -10,11 +10,11 @@
 ItemDatabase::ItemDatabase()
 {
 	// TODO Testing item
-	addItem(ItemPtr(new DefaultItem("TestItem", 0, CombineData(1, 2))));
-	addItem(ItemPtr(new DefaultItem("TestItem2", 1, CombineData(0, 2))));
-	addItem(ItemPtr(new DefaultItem("TestItem3", 2, CombineData(4, 3))));
+	addItem(ItemPtr(new DefaultItem("TestItem", 0, { { 1, 2, true }, { 2, 3, false } })));
+	addItem(ItemPtr(new DefaultItem("TestItem2", 1, { { 0, 2, true} })));
+	addItem(ItemPtr(new DefaultItem("TestItem3", 2, { { 0, 3, true } })));
 	addItem(ItemPtr(new DefaultItem("TestItem4", 3)));
-	addItem(ItemPtr(new DefaultItem("TestItem5", 4, CombineData(2, 3))));
+	addItem(ItemPtr(new DefaultItem("TestItem5", 4)));
 	addItem(ItemPtr(new GhostItem("dialog.txt", 5)));
 	addItem(ItemPtr(new DoorItem(true, 6))); // Locked door
 	addItem(ItemPtr(new KeyItem("KeyTest", 7))); // Key to said door

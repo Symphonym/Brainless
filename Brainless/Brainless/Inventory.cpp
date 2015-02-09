@@ -62,21 +62,46 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 					// There's an item in the slot that the player pressed, initiate a combine action
 					if (invPair->first)
 					{
-						// Matching (and valid) target and product ID, then the action can be done
-						if (m_mouseItem->getCombineData().targetID >= 0 && invPair->first->getCombineData().targetID >= 0 &&
-							m_mouseItem->getCombineData().targetID == invPair->first->getID() && // ID of selected item matches the targetID of inventory item
-							invPair->first->getCombineData().targetID == m_mouseItem->getID() && //ID of inventory item matches the targetID of selected item
-							m_mouseItem->getCombineData().productItemID == invPair->first->getCombineData().productItemID) // Just make sure they have the same product
+
+						bool endCombining = false;
+
+						// Go through combinations of selected item
+						for (std::size_t i = 0; i < m_mouseItem->getCombinations().size(); i++)
 						{
-							int newItemID = m_mouseItem->getCombineData().productItemID;
+							// Go through combinations of inventory item
+							const CombineData &mouseCombine = m_mouseItem->getCombinations()[i];
+							for (std::size_t j = 0; j < invPair->first->getCombinations().size(); j++)
+							{
+								const CombineData &invCombine = invPair->first->getCombinations()[j];
 
-							delete m_mouseItem.release();
-							delete invPair->first.release();
+								// The items have combinations for eachother
+								if (mouseCombine.targetID == invPair->first->getID() &&
+									invCombine.targetID == m_mouseItem->getID() && // They have eachother as required item for crafting
+									mouseCombine.productItemID == invCombine.productItemID) // They have the same product item
+								{
+									int newItemID = mouseCombine.productItemID;
 
-							addItem(std::move(ItemDatabase::instance().extractItem(newItemID)));
+									// Check if the items are consumed when used in this combination
+									if (mouseCombine.consumedOnCraft)
+										delete m_mouseItem.release();
+									if (invCombine.consumedOnCraft)
+										delete invPair->first.release();
+
+									// Add new item to inventory
+									addItem(std::move(ItemDatabase::instance().extractItem(newItemID)));
+
+									endCombining = true;
+									break;
+								}
+
+							}
+
+							if (endCombining)
+								break;
 						}
-						// Otherwise put item back into inventory
-						else
+
+						// If mouse item wasen't consumed by the combination, put it back into inventory
+						if (m_mouseItem)
 							addItem(std::move(m_mouseItem));
 					}
 
