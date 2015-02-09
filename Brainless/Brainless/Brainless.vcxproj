@@ -123,6 +123,8 @@
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="FileSave.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="GhostItem.cpp" />
     <ClCompile Include="GUIElement.cpp" />
     <ClCompile Include="IdleZombie.cpp" />
@@ -142,6 +144,7 @@
     <ClCompile Include="ResourceFile.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="SoundPlayer.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Unit.cpp" />
@@ -171,6 +174,7 @@
     <ClInclude Include="Error.h" />
     <ClInclude Include="FileSave.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="GhostItem.h" />
     <ClInclude Include="GUIElement.h" />
     <ClInclude Include="IdleZombie.h" />
@@ -182,6 +186,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelSprite.h" />
     <ClInclude Include="MagnifyingGlassItem.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MovingPlatformItem.h" />
     <ClInclude Include="Notification.h" />
     <ClInclude Include="Player.h" />
@@ -190,6 +195,7 @@
     <ClInclude Include="ResourceFile.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="SoundPlayer.h" />
+    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="Unit.h" />

@@ -1,6 +1,7 @@
 #include "Editor.h"
-#include "Game.h"
+#include "MainMenu.h"
 #include "ResourceLoader.h"
+#include "StateMachine.h"
 
 int main(int argc, const char *args[])
 {
@@ -20,8 +21,9 @@ int main(int argc, const char *args[])
 	// Otherwise start the game
 	else
 	{
-		Game game;
-		game.run();
+		StateMachine machine;
+		machine.pushState<MainMenu>();
+		machine.run();
 	}
 
 	return 0;
