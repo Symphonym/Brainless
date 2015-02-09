@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Game\Mouse">
       <UniqueIdentifier>{933dcbc6-c668-4149-8b66-f1809ed66464}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\State Machine">
+      <UniqueIdentifier>{a6ee14a4-cc68-47ca-a170-274f946f717a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\State Machine\States">
+      <UniqueIdentifier>{70995264-caa6-4b9e-a025-46a9a2d0e775}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -113,9 +119,6 @@
     </ClCompile>
     <ClCompile Include="WrappedText.cpp">
       <Filter>Source Files\WrappedText</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\GUI</Filter>
@@ -198,6 +201,18 @@
     <ClCompile Include="ChasingZombie.cpp">
       <Filter>Source Files\Unit\Zombies</Filter>
     </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>Source Files\State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files\State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\State Machine\States</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Source Files\State Machine\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -256,9 +271,6 @@
     </ClInclude>
     <ClInclude Include="WrappedText.h">
       <Filter>Source Files\WrappedText</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Source Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Source Files\GUI</Filter>
@@ -337,6 +349,18 @@
     </ClInclude>
     <ClInclude Include="ChasingZombie.h">
       <Filter>Source Files\Unit\Zombies</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>Source Files\State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Source Files\State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Source Files\State Machine\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Source Files\State Machine\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

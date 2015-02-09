@@ -8,27 +8,26 @@
 #include "Level.h"
 #include "Inventory.h"
 #include "PopUpMenu.h"
+#include "State.h"
 
 
 class Level;
 class Unit;
 class Player;
 
-class Game
+class Game : public State
 {
 public:
 	
-	Game();
+	Game(StateMachine &machine);
 	~Game();
 	
-	// starts the game
-	void run();
+	virtual void events(const sf::Event &event);
+	virtual void update(float deltaTime);
+	virtual void draw();
 
 	// Add item to inventory
 	void lootItem(Inventory::ItemPtr item);
-
-	// Pauses game logic
-	void setPaused(bool paused);
 
 	// Loads a new level, resetting player position to starting position, resetting HUD etc
 	void changeLevel(int levelIndex);
@@ -38,20 +37,13 @@ public:
 
 	void saveGame();
 
-
-
 	Player& getPlayer();
 	Level& getLevel();
-	const sf::RenderWindow& getWindow() const;
 
 private:
 
-	sf::RenderWindow m_game;
 	sf::View m_camera;
-
 	std::vector<sf::View> m_extraCameras;
-
-	bool m_isPaused;
 
 	int m_levelIndex;
 	Level m_level;
@@ -61,13 +53,6 @@ private:
 	Inventory* m_inventory;
 	// TESTING CODE, POPUP SHOULD PROBABLY BE IN MENU CLASS (MAYBE?!?!?!?)
 	PopUpMenu* m_popup;
-
-	// Update loop
-	void loop();
-
-	// Rendering function
-	void draw();
-
 };
 
 #endif

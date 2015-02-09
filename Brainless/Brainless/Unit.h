@@ -24,6 +24,9 @@ public:
 	*/
 	void updateMovement(float gravity, float deltaTime);
 	virtual void updateTask(float deltaTime) = 0;
+	virtual void wallLeft();
+	virtual void wallRight();
+
 
 	// Set player status
 	void setStatus(bool inAir);

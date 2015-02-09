@@ -1,11 +1,13 @@
 #include "EditorZombieMode.h"
 #include "Utility.h"
+#include "Constants.h"
 #include "ResourceLoader.h"
 #include "Renderer.h"
 #include "Unit.h"
 #include "Zombie.h"
 #include "IdleZombie.h"
 #include "WalkingZombie.h"
+#include "ChasingZombie.h"
 
 EditorZombieMode::EditorZombieMode()
 {
@@ -19,25 +21,29 @@ EditorZombieMode::EditorZombieMode()
 
 bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &editorWindow, Level &level)
 {
-	//Replace mask & add new masks for all zombies
-	while (m_zombieMasks.size()!=0)
+	//Adding mask that indicate speicall abilities of zombies
+	while (m_zombieMasks.size() != 0)
 	{
 		m_zombieMasks.pop_back();
 	}
 	for (int i = 0; i < level.getUnits().size(); i++)
 	{
-		EditorZombie temp;
-		temp.sprite = level.getUnit(i).getSprite();
-		if (level.getUnit(i).getUnitType() == Unit::ID_WalkingZombie)
+		switch (level.getUnit(i).getUnitType())
+		{
+		case Unit::ID_WalkingZombie:
+			EditorZombie temp;
+			temp.sprite = level.getUnit(i).getSprite();
 			temp.sprite.setPosition(temp.sprite.getPosition() + sf::Vector2f((dynamic_cast<WalkingZombie*>(&level.getUnit(i)))->getWalkLenght(), 0));
-		temp.sprite.setColor(sf::Color(255, 255, 255, 128));
-		m_zombieMasks.push_back(temp);
+			temp.sprite.setColor(sf::Color(255, 255, 255, 128));
+			m_zombieMasks.push_back(temp);
+			break;
+		}
 	}
 	if (event.type == sf::Event::MouseWheelMoved)
 	{
 		// Scroll Zombie types
-		m_highlightSprite.type = event.mouseWheel.delta;
-		m_highlightSprite.type = Utility::clampValue<int>(m_highlightSprite.type, 0, Zombie_types - 1);
+		m_highlightSprite.type += event.mouseWheel.delta;
+		m_highlightSprite.type = Utility::clampValue<int>(m_highlightSprite.type, 0, Constants::ZombieTypeCount-1);
 	}
 	else if (event.type == sf::Event::MouseButtonReleased)
 	{
@@ -61,24 +67,31 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 				sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));
 				Unit* temp;
 				Unit::Direction temp_direction = Unit::dir_right;
-				switch (m_createdZombie.type+1)
+				switch (m_createdZombie.type + 1)
 				{
 				case Unit::ID_IdleZombie: //Idle zombie
 					if (mousePos.x - m_createdZombie.sprite.getPosition().x < 0)
 						temp_direction = Unit::dir_left;
-					temp = new IdleZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50),temp_direction);
+					temp = new IdleZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), temp_direction);
 					temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 					temp->updateAnimation(0);
 					level.addUnit(std::move(Level::UnitPtr(temp)));
 					break;
 				case Unit::ID_WalkingZombie: //Walking zombie
 					m_createdZombie.walk_distance = mousePos.x - m_createdZombie.sprite.getPosition().x;
-					temp = new WalkingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85,50), m_createdZombie.walk_distance);
+					temp = new WalkingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance);
 					temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 					temp->updateAnimation(0);
 					level.addUnit(std::move(Level::UnitPtr(temp)));
 					break;
-				}					
+				case Unit::ID_ChasingZombie: //Chasing Zombie
+					m_createdZombie.walk_distance = mousePos.x - m_createdZombie.sprite.getPosition().x;
+					temp = new ChasingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, NULL);
+					temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+					temp->updateAnimation(0);
+					level.addUnit(std::move(Level::UnitPtr(temp)));
+					break;
+				}
 				return true;
 			}
 		}
@@ -105,16 +118,22 @@ bool EditorZombieMode::update(float deltaTime, const sf::RenderWindow &editorWin
 {
 	sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));
 	m_highlightSprite.sprite.setPosition(mousePos);
-	switch ((Unit::UnitType)(m_highlightSprite.type+1))
+	switch ((Unit::UnitType)(m_highlightSprite.type + 1))
 	{
 	case Unit::ID_IdleZombie:
+		m_infoText.setString("Idle Zombie");
 		m_highlightSprite.sprite.setTextureRect(sf::IntRect(0, 256, 256, 256));
 		break;
 	case Unit::ID_WalkingZombie:
+		m_infoText.setString("Walking Zombie");
 		m_highlightSprite.sprite.setTextureRect(sf::IntRect(0, 0, 256, 256));
 		break;
 	case Unit::ID_ChasingZombie:
-		m_highlightSprite.sprite.setTextureRect(sf::IntRect(0,512, 256, 256));
+		m_infoText.setString("Chasing Zombies");
+		m_highlightSprite.sprite.setTextureRect(sf::IntRect(0, 512, 256, 256));
+		break;
+	default:
+		m_infoText.setString("Unidentified selection");
 		break;
 	}
 
@@ -122,7 +141,7 @@ bool EditorZombieMode::update(float deltaTime, const sf::RenderWindow &editorWin
 }
 void EditorZombieMode::draw()
 {
-	
+
 	Renderer::instance().drawDepth(m_highlightSprite.sprite);
 	if (zombie_created)
 	{

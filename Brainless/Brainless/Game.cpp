@@ -20,18 +20,15 @@
 #include "ConversationBox.h"
 #include "Cursor.h"
 
-Game::Game()
+Game::Game(StateMachine &machine)
 :
-m_game(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close),
-m_isPaused(false),
+State(machine),
 m_levelIndex(0)
 {
-	// Set render target to the game
-	Renderer::instance().setTarget(m_game);
-	m_camera = m_game.getDefaultView();
+	m_camera = m_window.getDefaultView();
 
 	// Hide mouse cursor
-	m_game.setMouseCursorVisible(false);
+	m_window.setMouseCursorVisible(false);
 	// Load game resources
 	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Game.txt");
 
@@ -115,11 +112,6 @@ void Game::lootItem(Inventory::ItemPtr item)
 	m_inventory->addItem(std::move(item));
 }
 
-void Game::setPaused(bool paused)
-{
-	m_isPaused = paused;
-}
-
 void Game::changeLevel(int levelIndex)
 {
 	m_levelIndex = levelIndex;
@@ -148,124 +140,64 @@ Level& Game::getLevel()
 {
 	return m_level;
 }
-const sf::RenderWindow& Game::getWindow() const
-{
-	return m_game;
-}
 
-void Game::run()
+void Game::events(const sf::Event &event)
 {
-	loop();
-}
+	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::N)
+		saveGame();
 
-void Game::loop()
-{
-	sf::Clock tickClock;
-	while (m_game.isOpen())
+	// Pump events to everything that needs it
+	// Disable game input when conversation is ongoing
+	if (!ConversationBox::instance().isShown())
 	{
-
-		// Get delta time for time based movement
-		float deltaTime = tickClock.restart().asSeconds();
-		const float zoomSpeed = deltaTime;
-
-
-		sf::Event event;
-		while (m_game.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				m_game.close();
-			if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::N)
-				saveGame();
-
-			// Pump events to everything that needs it, if not paused
-			if (!m_isPaused)
-			{
-				// Disable game input when conversation is ongoing
-				if (!ConversationBox::instance().isShown())
-				{
-					m_inventory->events(event, m_game, m_level);
-					m_popup->events(event, *this);
-				}
-				else
-					ConversationBox::instance().events(event, *this);
-			}
-
-		}
-
-		//Pause if out of focus
-		if (m_game.hasFocus())
-		{
-
-			m_camera.setCenter(m_player->getCameraPosition());
-
-			// Update game logic and input, if not paused
-			if (!m_isPaused)
-			{
-				// Disable game input when conversation is ongoing
-				if (!ConversationBox::instance().isShown())
-				{
-					m_level.update(deltaTime, *this);
-					m_inventory->update(deltaTime, *this);
-					m_popup->update(*this,
-						sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
-				}
-				Notification::instance().update(deltaTime, m_game);
-				ConversationBox::instance().update(deltaTime, *this);
-			}
-
-			// Update positional sound with player position
-			SoundPlayer::instance().update(
-				deltaTime,
-				sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
-
-
-			//kollision, flytta hjärna
-			for (unsigned int i = 0; i < m_level.getUnits().size(); i++)
-			{
-				Unit* currentUnit = m_level.getUnits()[i].get();
-				if (m_player != currentUnit)
-				{
-					if (currentUnit->getCollisionRect().intersects(m_player->getCollisionRect()))
-					{
-						m_player->takesDamage(currentUnit->getPosition() - m_player->getPosition());
-					}
-				}
-			}
-
-			// Update cursor
-			Cursor::instance().update(*this);
-
-			m_game.clear(sf::Color::Black);
-
-			
-
-			// Draw with normal camera
-			m_game.setView(m_camera);
-			draw();
-
-			// Draw extra cameras
-			for (std::size_t i = 0; i < m_extraCameras.size(); i++)
-			{
-				m_game.setView(m_extraCameras[i]);
-				m_level.draw(m_camera);
-				Renderer::instance().executeDraws();
-			}
-
-			// Reset to normal view
-			m_game.setView(m_camera);
-
-			m_game.display();
-			m_extraCameras.clear();
-		}
-		else
-			m_isPaused = true;
-
-
+		m_inventory->events(event, m_window, m_level);
+		m_popup->events(event, *this);
 	}
+	else
+		ConversationBox::instance().events(event, *this);
 }
+void Game::update(float deltaTime)
+{
+	m_camera.setCenter(m_player->getCameraPosition());
 
+	// Update game logic and input, if not paused
+	// Disable game input when conversation is ongoing
+	if (!ConversationBox::instance().isShown())
+	{
+		m_level.update(deltaTime, *this);
+		m_inventory->update(deltaTime, *this);
+		m_popup->update(*this,
+			sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
+	}
+	Notification::instance().update(deltaTime, m_window);
+	ConversationBox::instance().update(deltaTime, *this);
+
+	// Update positional sound with player position
+	SoundPlayer::instance().update(
+		deltaTime,
+		sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
+
+
+	//kollision, flytta hjärna
+	for (unsigned int i = 0; i < m_level.getUnits().size(); i++)
+	{
+		Unit* currentUnit = m_level.getUnits()[i].get();
+		if (m_player != currentUnit)
+		{
+			if (currentUnit->getCollisionRect().intersects(m_player->getCollisionRect()))
+			{
+				m_player->takesDamage(currentUnit->getPosition() - m_player->getPosition());
+			}
+		}
+	}
+
+	// Update cursor
+	Cursor::instance().update(*this);
+}
 void Game::draw()
 {
+	// Draw with normal camera
+	m_window.setView(m_camera);
 	m_level.draw(m_camera);
 	m_inventory->draw();
 	m_popup->draw();
@@ -273,4 +205,17 @@ void Game::draw()
 	ConversationBox::instance().draw();
 	Cursor::instance().draw();
 	Renderer::instance().executeDraws();
+
+	// Draw extra cameras
+	for (std::size_t i = 0; i < m_extraCameras.size(); i++)
+	{
+		m_window.setView(m_extraCameras[i]);
+		m_level.draw(m_camera); // Draw only level for custom cameras
+		Renderer::instance().executeDraws();
+	}
+
+	// Reset to normal view
+	m_window.setView(m_camera);
+
+	m_extraCameras.clear();
 }

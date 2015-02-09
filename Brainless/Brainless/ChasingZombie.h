@@ -14,12 +14,14 @@ public:
 	enum AnimationState
 	{
 		anim_noAnimation,
+		anim_idle,
 		anim_walking
 	};
 
 	enum ChasingState
 	{
 		chase_idle,
+		chase_farFromHome,
 		chase_returnHome,
 		chase_chase
 	};
@@ -28,6 +30,7 @@ public:
 protected:
 
 private:
+	sf::Vector2f m_homePosition;
 	AnimationState m_animState;
 	Direction m_spriteDirection;
 	int m_maxWalkLenght;

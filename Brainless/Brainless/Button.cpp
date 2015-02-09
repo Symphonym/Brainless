@@ -1,6 +1,17 @@
 #include "Button.h"
 #include "Renderer.h"
 
+Button::Button(sf::Texture &notPressed, sf::Texture &pressed, const sf::Vector2f &position, sf::RenderWindow *window)
+:
+m_textureNotPressed(notPressed),
+m_texturePressed(pressed),
+m_window(window)
+{
+	m_sizeRectangle = sf::IntRect(0, 0, notPressed.getSize().x, notPressed.getSize().y);
+	m_position = position;
+	m_hitBoxRect = sf::IntRect(m_position.x, m_position.y, notPressed.getSize().x, notPressed.getSize().y);
+	m_mouseIsPressed = true;
+}
 Button::Button(sf::Texture &notPressed, sf::Texture &pressed, sf::IntRect placement, sf::RenderWindow *window)
 :
 m_textureNotPressed(notPressed),

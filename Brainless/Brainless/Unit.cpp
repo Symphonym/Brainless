@@ -51,6 +51,16 @@ void Unit::updateMovement(float gravity, float deltaTime)
 	m_position.y += m_speed.y * deltaTime;
 }
 
+void Unit::wallLeft()
+{
+
+}
+
+void Unit::wallRight()
+{
+
+}
+
 void Unit::setStatus(bool inAir)
 {
 	m_inAir = inAir;
