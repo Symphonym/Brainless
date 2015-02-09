@@ -37,10 +37,10 @@ void LadderItem::onUse(Game &game)
 		if (game.getPlayer().getPosition().y > getPosition().y)
 		{
 			m_startPos = sf::Vector2f(
-				getSprite().getPosition().x + game.getPlayer().getCollisionRect().width / 2.f,
+				getSprite().getPosition().x + getSprite().getGlobalBounds().width / 2.f - game.getPlayer().getCollisionRect().width / 2.f,
 				game.getPlayer().getPosition().y);
 			m_endPos = sf::Vector2f(
-				getSprite().getPosition().x + game.getPlayer().getCollisionRect().width / 2.f,
+				getSprite().getPosition().x + getSprite().getGlobalBounds().width / 2.f - game.getPlayer().getCollisionRect().width / 2.f,
 				getSprite().getPosition().y - game.getPlayer().getCollisionRect().height + 5.f); // Add some margin to ground
 			game.getPlayer().setSpeed(sf::Vector2f(0, -1));
 
@@ -50,10 +50,10 @@ void LadderItem::onUse(Game &game)
 		else
 		{
 			m_startPos = sf::Vector2f(
-				getSprite().getPosition().x + game.getPlayer().getCollisionRect().width / 2.f,
+				getSprite().getPosition().x + getSprite().getGlobalBounds().width / 2.f - game.getPlayer().getCollisionRect().width / 2.f,
 				game.getPlayer().getPosition().y);
 			m_endPos = sf::Vector2f(
-				getSprite().getPosition().x + game.getPlayer().getCollisionRect().width / 2.f,
+				getSprite().getPosition().x + getSprite().getGlobalBounds().width / 2.f - game.getPlayer().getCollisionRect().width / 2.f,
 				getSprite().getPosition().y + getSprite().getGlobalBounds().height - game.getPlayer().getCollisionRect().height - 5.f); // Add some margin to ground
 			game.getPlayer().setSpeed(sf::Vector2f(0, 1));
 

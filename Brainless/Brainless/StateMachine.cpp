@@ -29,6 +29,8 @@ void StateMachine::loop()
 		// Get delta time for time based movement
 		float deltaTime = tickClock.restart().asSeconds();
 
+		if (deltaTime >= 0.01f)
+			deltaTime = 0.01f;
 
 		// Handle pop requests
 		for (std::size_t i = 0; i < m_removeRequests.size(); i++)
