@@ -92,8 +92,9 @@ protected:
 	Animation m_animation;
 	void updateSpriteDirection();
 	Direction m_spriteDirection;
-private:
 
+	static Unit* s_playerPointer;
+private:
 
 	UnitType m_UnitID;
 };

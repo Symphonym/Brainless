@@ -12,14 +12,14 @@
 
 //v0.02
 
-ChasingZombie::ChasingZombie(sf::Vector2f startPosition, int maxLengthX, Unit* target)
+ChasingZombie::ChasingZombie(sf::Vector2f startPosition, int maxLengthX)
 :
 Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_ChasingZombie),
 m_maxWalkLenght(maxLengthX),
 m_direction(dir_noDirection),
 m_currentLength(0),
 m_animState(anim_noAnimation),
-m_target(target),
+m_target(s_playerPointer),
 m_chaseState(chase_idle),
 m_homePosition(startPosition)
 {
