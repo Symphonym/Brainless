@@ -22,8 +22,8 @@ void MovingPlatformItem::serialize(std::ofstream &writer) const
 
 	writer << m_speed.x << std::endl;
 	writer << m_speed.y << std::endl;
-	writer << m_distanceMove-+d.x << std::endl;
 	writer << m_distanceMoved.x << std::endl;
+	writer << m_distanceMoved.y << std::endl;
 	writer << m_isActive << std::endl;
 }
 void MovingPlatformItem::deserialize(std::ifstream &reader)
