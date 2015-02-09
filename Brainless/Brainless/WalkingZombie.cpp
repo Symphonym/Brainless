@@ -91,6 +91,15 @@ void WalkingZombie::updateTask(float deltaTime)
 	}
 }
 
+void WalkingZombie::wallLeft()
+{
+	m_direction = dir_right;
+}
+
+void WalkingZombie::wallRight()
+{
+	m_direction = dir_left;
+}
 void WalkingZombie::updateAnimation(float deltaTime)
 {
 
