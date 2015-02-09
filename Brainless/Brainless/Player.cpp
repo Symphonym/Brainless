@@ -334,7 +334,7 @@ void Player::updateAnimation(float deltaTime)
 	*/
 
 	//IDLE
-	else if ((abs(m_speed.x) < 5 ))
+	else if ((abs(m_speed.x) < 5))
 		animation_idle();
 	
 	//TURN
@@ -398,14 +398,25 @@ void Player::animation_idle()
 {
 	if (m_animState != anim_idle)
 	{
+		m_animLoopsDone = 0;
 		m_sprite = &m_spriteSheets[0];
-		m_animation.stillFrame(0, 3);
-		//m_animation.loop(0, 3, 7, 3);
-		//m_animation.setReverse(true); //ger neråt
+		m_animation.loop(0,7, 3, 8);
 
 		m_animState = anim_idle;
 	}
+
+	if (m_animation.getPlayOnceDone())
+	{
+		m_animLoopsDone++;
+		if (m_animLoopsDone == 8)
+		{
+			m_animation.playOnce(0, 7, 4, 8);
+		}
+		else
+		m_animation.playOnce(0, 7, 3, 8);
+	}
 }
+
 void Player::animation_startWalk()
 {
 	if (m_animState != anim_startWalk)

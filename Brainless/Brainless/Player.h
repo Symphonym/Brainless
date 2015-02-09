@@ -76,6 +76,7 @@ private:
 	float cameraOffset;
 	float m_cameraSpeed = 5;
 	float m_cameraMaxOffset = 250;
+	int m_animLoopsDone = 0;
 
 	bool m_climbing;
 
