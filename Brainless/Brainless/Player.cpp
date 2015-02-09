@@ -461,8 +461,8 @@ void Player::animation_startJumpRun()
 {
 	if (m_animState != anim_startJumpRun)
 	{
-		m_sprite = &m_spriteSheets[1];
-		m_animation.playOnce(0, 2, 0, JUMPANIMFPS);
+		m_sprite = &m_spriteSheets[2];
+		m_animation.playOnce(0, 1, 0, JUMPANIMFPS);
 		m_animState = anim_startJumpRun;
 		std::cout << "JumpRun" << std::endl;
 		std::cout << m_speed.x << std::endl;
@@ -511,8 +511,8 @@ void Player::animation_landRun()
 {
 	if (m_animState != anim_landRun)
 	{
-		m_sprite = &m_spriteSheets[1];
-		m_animation.playOnce(0, 1 + m_jumpFrame, 3, JUMPANIMFPS); //jumpFrame = experimental 3
+		m_sprite = &m_spriteSheets[2];
+		m_animation.playOnce(0, 1, 4, 8); //jumpFrame = experimental 3
 		m_animState = anim_landRun;
 		m_jumpFrame = 2; //experimental 
 		std::cout << "LandRun" << std::endl;
