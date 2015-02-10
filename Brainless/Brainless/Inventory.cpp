@@ -1,13 +1,15 @@
 #include "Inventory.h"
 #include "Renderer.h"
-#include "ItemDatabse.h"
+#include "ItemDatabase.h"
 #include "Level.h"
 #include "ResourceLoader.h"
 #include "Game.h"
+#include "Notification.h"
 
 Inventory::Inventory()
 :
-m_isOpen(false)
+m_isOpen(false),
+m_showHighlighText(false)
 {
 	for (std::size_t x = 0; x < m_slots.size(); x++)
 	{
@@ -18,6 +20,8 @@ m_isOpen(false)
 			slotSprite.setPosition(x*slotSprite.getGlobalBounds().width, y*slotSprite.getGlobalBounds().height);
 		}
 	}
+
+	m_highlightText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 }
 
 void Inventory::addItem(ItemPtr item)
@@ -128,14 +132,19 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 				for (std::size_t i = 0; i < level.getUnits().size(); i++)
 				{
 					Unit& unit = *level.getUnits()[i].get();
-					/*if (m_mouseItem.getSprite().getGlobalBounds().intersects(unit.getCollisionRect()))
+					if (m_mouseItem->getSprite().getGlobalBounds().intersects(unit.getCollisionRect()))
 					{
-						if(m_mouseItem->onInteract(unit))
+						// Invoke interaction handling on item
+						if(m_mouseItem->onInteractUnit(unit))
 							delete m_mouseItem.release();
-						unit.onInteractedWith(*m_mouseItem.get());
+
+						// Invoke interaction on unit
+						if (unit.onInteractedWith(*m_mouseItem.get()))
+							level.removeUnit(i);
 
 						interactedWithUnit = true;
-					}*/
+						break;
+					}
 				}
 
 				// Try item interaction
@@ -167,9 +176,6 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 				// Second time click on world, without the item being destroyed from interaction, will put it back into the inventory
 				else if (m_mouseItem && !m_isOpen)
 					addItem(std::move(m_mouseItem));
-
-				// Loop through level units
-				// if placement failed, put back into inventory
 			}
 		}
 		else if (event.mouseButton.button == sf::Mouse::Right)
@@ -177,9 +183,7 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 			InventoryPair* invPair = getSlotAt(sf::Vector2f(mousePos.x, mousePos.y));
 
 			if (invPair)
-			{
-				// TODO examine action
-			}
+				Notification::instance().write(invPair->first->getExamineString());
 		}
 	}
 }
@@ -189,6 +193,9 @@ void Inventory::update(float deltaTime, Game &game)
 
 	if (m_mouseItem)
 	{
+		// Don't show item name when you're moving items around
+		m_showHighlighText = false;
+
 		// Place selected item in HUD space
 		if (m_isOpen)
 		{
@@ -209,6 +216,21 @@ void Inventory::update(float deltaTime, Game &game)
 
 			m_mouseItem->getSprite().setPosition(worldPos);
 		}
+	}
+	else
+	{
+		InventoryPair* invPair = getSlotAt(sf::Vector2f(mousePos.x, mousePos.y));
+
+		if (invPair && invPair->first)
+		{
+			m_showHighlighText = true;
+			m_highlightText.setString(invPair->first->getName());
+			m_highlightText.setPosition(
+				invPair->first->getPosition().x,
+				invPair->first->getPosition().y + 10.f);
+		}
+		else
+			m_showHighlighText = false;
 	}
 }
 
@@ -251,6 +273,9 @@ void Inventory::draw()
 		else
 			Renderer::instance().drawAbove(m_mouseItem->getSprite());
 	}
+	
+	if (m_showHighlighText)
+		Renderer::instance().drawHUD(m_highlightText);
 }
 
 

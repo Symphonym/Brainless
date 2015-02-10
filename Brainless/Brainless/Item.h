@@ -13,6 +13,7 @@ struct CombineData
 	bool consumedOnCraft; // Whether or not this item is consumed when combined with this combination
 };
 
+class Unit;
 class Game;
 class Item
 {
@@ -40,6 +41,7 @@ public:
 	virtual bool onInteract(Item &otherItem) { return false;  }; // Called when this item iteracts with another item, returning TRUE will destroy THIS item
 	virtual bool onInteractedWith(Item &otherItem) { return false; }; // Called when another item interactors with THIS item, returning TRUE will destroy THIS item
 	virtual bool onSyncedWith(Item &otherItem) { return false; } // Called when another item with the same syncID is triggered, returning TRUE will destroy this item
+	virtual bool onInteractUnit(Unit &unit) { return false; } // Called when this item interacts with a unit, returning TRUE will destroy this item
 
 	virtual void onUse(Game &game) {};
 	virtual void onExamine() {};
@@ -82,6 +84,9 @@ public:
 	sf::Vector2f getInteractDistance() const;
 
 protected:
+
+	// Add an item combination
+	void addCombination(int targetID, int productID, bool consumedOnCombine);
 
 	// Interaction variables that should be set by the deriving class's constructor
 	bool m_lootable; // Saved to file

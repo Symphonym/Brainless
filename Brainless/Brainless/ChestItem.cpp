@@ -1,6 +1,6 @@
 #include "ChestItem.h"
 #include "ResourceLoader.h"
-#include "ItemDatabse.h"
+#include "ItemDatabase.h"
 #include "Game.h"
 
 ChestItem::ChestItem(bool locked, std::vector<int> itemsWithin, int id)
@@ -11,6 +11,7 @@ m_isLocked(locked),
 m_isOpen(false)
 {
 	m_usable = true;
+	m_renderingMode = RenderingModes::Behind;
 	m_pickupString = "It's too heavy for me to carry";
 	m_examineString = "It's a chest, maybe I find something inside it?";
 }

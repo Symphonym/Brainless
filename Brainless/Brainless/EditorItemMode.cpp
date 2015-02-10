@@ -1,7 +1,7 @@
 #include "EditorItemMode.h"
 #include "Item.h"
 #include "ResourceLoader.h"
-#include "ItemDatabse.h"
+#include "ItemDatabase.h"
 #include "Utility.h"
 #include "Renderer.h"
 

@@ -19,12 +19,23 @@
 +Texture,images/tiles/cubePlatform.png,PlatformCube
 
 # ITEM TEXTURE LOADING
++Texture,images/items/ductTape.png,DuctTapeItem
++Texture,images/items/rubberGloves.png,RubberGlovesItem
++Texture,images/items/vendingMachine.png,VendingMachineItem1
++Texture,images/items/coin.png,CoinItem
++Texture,images/items/twine.png,TwineItem
++Texture,images/items/coinTwine.png,CoinTwineItem
++Texture,images/items/keyTwine.png,KeyTwineItem
++Texture,images/items/windowWhole.png,WindowWholeItem
++Texture,images/items/windowSmashed.png,WindowSmashedItem
++Texture,images/items/stone.png,StoneItem
 
 +Texture,images/items/pickup.png,TestItem
 +Texture,images/items/wizard_idle.png,TestItem2
 +Texture,images/items/craftedTomte.png,TestItem3
 +Texture,images/items/craftedTomteTwo.png,TestItem4
 +Texture,images/items/testBarrel.png,TestItem5
+
 
 # GHOST TEST ITEM
 +Texture,images/items/ghostTest.png,GhostTest

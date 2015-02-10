@@ -46,6 +46,9 @@ private:
 	// Item currently selected on the mouse
 	ItemPtr m_mouseItem;
 
+	sf::Text m_highlightText;
+	bool m_showHighlighText;
+
 	std::array<std::array<InventoryPair, Constants::InventoryHeight>, Constants::InventoryWidth> m_slots;
 
 };
