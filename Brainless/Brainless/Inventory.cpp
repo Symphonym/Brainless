@@ -182,7 +182,7 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 		{
 			InventoryPair* invPair = getSlotAt(sf::Vector2f(mousePos.x, mousePos.y));
 
-			if (invPair)
+			if (invPair && invPair->first)
 				Notification::instance().write(invPair->first->getExamineString());
 		}
 	}
