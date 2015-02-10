@@ -1,11 +1,21 @@
 #include "Level.h"
 #include "Renderer.h"
+#include "ResourceLoader.h"
 #include "Constants.h"
 #include "Utility.h"
 #include "MovingPlatformItem.h"
 
 Level::Level()
 {
+	// Load game resources
+	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Level.txt");
+	// Load backgrounds
+	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("ABackground")));
+	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("BBackground")));
+	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("CBackground")));
+	m_backgrounds[2].setColor(sf::Color(255, 255, 255, 255));
+
+
 	// Load a default map with nothing but ground tiles
 	TileMap::TileMapLayout layout;
 	for (int x = 0; x < Constants::MapWidth; x++)
@@ -14,7 +24,6 @@ Level::Level()
 		for (int y = 0; y < Constants::MapHeight; y++)
 			layout[x].push_back(Tile::Ground);
 	}
-
 	m_tileMap = MapPtr(new TileMap(layout, Constants::TileSize));
 }
 
@@ -109,6 +118,15 @@ void Level::draw(const sf::View &cameraView)
 {
 	m_tileMap->draw(cameraView);
 
+	for (std::size_t i = 0; i < m_backgrounds.size(); i++)
+	{
+		//Move background accordingly
+		if (i==0)
+			m_backgrounds[i].setPosition(sf::Vector2f(cameraView.getCenter().x - (cameraView.getSize().x / 2), cameraView.getCenter().y - (cameraView.getSize().y/2)));
+		else if (i != m_backgrounds.size() - 1)
+			m_backgrounds[i].setPosition(sf::Vector2f(cameraView.getCenter().x / (i + 1), cameraView.getCenter().y / (i + 1)));
+		Renderer::instance().drawBackground(m_backgrounds[i]);
+	}
 	for (std::size_t i = 0; i < m_sprites.size(); i++)
 	{
 		if (m_sprites[i].drawToForeground)
@@ -389,7 +407,7 @@ void Level::updateUnitCollision(float deltaTime)
 					sf::Vector2f unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height / 2);
 					sf::FloatRect unitBottom = sf::FloatRect(unitBounds.left + 20, unitBounds.top + unitBounds.height, unitBounds.width - 40, 1);
 
-					
+
 
 
 					if (currentUnit->getSpeed().y >= 0)
