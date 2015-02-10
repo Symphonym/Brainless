@@ -6,6 +6,8 @@ KeyItem::KeyItem(const std::string &textureName, int id)
 Item("Key", textureName, id)
 {
 	m_lootable = true;
+
+	addCombination(4, 13, true);
 }
 
 bool KeyItem::onInteract(Item &otherItem)

@@ -13,7 +13,7 @@
 #include "TileMap.h"
 #include "Tile.h"
 #include "Item.h"
-#include "ItemDatabse.h"
+#include "ItemDatabase.h"
 #include "Inventory.h"
 #include "Unit.h"
 #include "Zombie.h"

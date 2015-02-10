@@ -6,6 +6,7 @@
 #include <vector>
 
 //version 0.2
+class Item;
 class Unit
 {
 public:
@@ -26,6 +27,8 @@ public:
 	virtual void updateTask(float deltaTime) = 0;
 	virtual void wallLeft();
 	virtual void wallRight();
+
+	virtual bool onInteractedWith(Item &otherItem) { return false; } // Called when an item interacts with this unit, returning TRUE will destroy this unit
 
 
 	// Set player status

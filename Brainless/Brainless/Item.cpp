@@ -25,6 +25,11 @@ m_speed(sf::Vector2f(0,0))
 	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
 }
 
+void Item::addCombination(int targetID, int productID, bool consumedOnCombine)
+{
+	m_combinations.push_back({ targetID, productID, consumedOnCombine });
+}
+
 void Item::serialize(std::ofstream &writer) const
 {
 	// This is so the reader can quickly grab the item from the database
