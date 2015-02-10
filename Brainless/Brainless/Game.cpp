@@ -99,7 +99,7 @@ m_levelIndex(0)
 	//temp, texture borde laddas in på annat sätt.
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
-	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJumpRun"));
+	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetRun"));
 }
 Game::~Game()
 {

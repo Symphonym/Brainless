@@ -330,7 +330,7 @@ void Level::updateUnitCollision(float deltaTime)
 										currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x, 0));
 										currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
 										currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top - originalBounds.height));
-										std::cout << "above" << std::endl;
+									//	std::cout << "above" << std::endl;
 									}
 								}
 							}
@@ -339,7 +339,7 @@ void Level::updateUnitCollision(float deltaTime)
 								currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x, 0));
 								currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
 								currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top + tileBounds.height));
-								std::cout << "under" << std::endl;
+							//	std::cout << "under" << std::endl;
 							}
 						}
 						else if (abs(unitCenter.x - tileCenter.x) > abs(unitCenter.y - tileCenter.y))
@@ -350,7 +350,7 @@ void Level::updateUnitCollision(float deltaTime)
 								currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 								currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
 								currentUnit->setPosition(sf::Vector2f(tileBounds.left - originalBounds.width, currentUnit->getPosition().y));
-								std::cout << "left" << std::endl;
+							//	std::cout << "left" << std::endl;
 							}
 
 							//unit höger om tile
@@ -359,7 +359,7 @@ void Level::updateUnitCollision(float deltaTime)
 								currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 								currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
 								currentUnit->setPosition(sf::Vector2f(tileBounds.left + tileBounds.width, currentUnit->getPosition().y));
-								std::cout << "hoger" << std::endl;
+						//		std::cout << "hoger" << std::endl;
 							}
 						}
 					}
@@ -456,7 +456,7 @@ void Level::updateUnitCollision(float deltaTime)
 											currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x, 0));
 											currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
 											currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top - originalBounds.height));
-											std::cout << "above" << std::endl;
+									//		std::cout << "above" << std::endl;
 										}
 									}
 								}
@@ -465,7 +465,7 @@ void Level::updateUnitCollision(float deltaTime)
 									currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x, 0));
 									currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
 									currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top + tileBounds.height + abs(m_items[i]->getSpeed().y * 100)));
-									std::cout << "under" << std::endl;
+								//	std::cout << "under" << std::endl;
 								}
 							}
 							else
@@ -476,7 +476,7 @@ void Level::updateUnitCollision(float deltaTime)
 									currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 									currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
 									currentUnit->setPosition(sf::Vector2f(tileBounds.left - originalBounds.width, currentUnit->getPosition().y));
-									std::cout << "left" << std::endl;
+								//	std::cout << "left" << std::endl;
 								}
 
 								//unit höger om tile
@@ -485,7 +485,7 @@ void Level::updateUnitCollision(float deltaTime)
 									currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 									currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
 									currentUnit->setPosition(sf::Vector2f(tileBounds.left + tileBounds.width, currentUnit->getPosition().y));
-									std::cout << "hoger" << std::endl;
+								//	std::cout << "hoger" << std::endl;
 								}
 							}
 						}

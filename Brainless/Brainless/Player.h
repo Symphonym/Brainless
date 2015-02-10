@@ -26,18 +26,27 @@ public:
 		anim_noAnimation,
 		anim_idle,
 		anim_startWalk,
-		anim_endWalk,
+		anim_walk,
 		anim_run,
+		anim_turnRun,
 		anim_turn,
+
 		anim_startJumpIdle,
 		anim_startJumpRun,
 		anim_endJump,
+
 		anim_inAirUp,
 		anim_inAirFall,
+		anim_inAirUpRun,
+		anim_inAirFallRun,
+		anim_inAirRun,
+
 		anim_landIdle,
 		anim_landRun,
+
 		anim_dead,
 		anim_damaged,
+
 		anim_climbingUp,
 		anim_climbingDown,
 	};
@@ -86,18 +95,27 @@ private:
 	*/
 	void animation_idle();
 	void animation_startWalk();
-	void animation_endWalk();
+	void animation_walk();
 	void animation_run();
 	void animation_turn();
+	void animation_turnRun();
+
 	void animation_startJumpIdle();
 	void animation_startJumpRun();
 	void animation_endJump();
+
 	void animation_inAirUp();
 	void animation_inAirFall();
+	void animation_inAirUpRun();
+	void animation_inAirFallRun();
+	void animation_inAirRun();
+
 	void animation_landIdle();
 	void animation_landRun();
+
 	void animation_dead();
 	void animation_damaged();
+
 	void animation_climbingUp();
 	void animation_climbingDown();
 };
