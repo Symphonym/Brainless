@@ -5,10 +5,6 @@ class Inventory;
 class FileSave
 {
 public:
-	//Saving & loading levels
-	//static void saveMap(Level* stage, int stage_number);
-	//static void loadMap(Level* stage, int stage_number);
-
 	// Text saving
 	static void saveMapText(Level &level, int levelNumber);
 
