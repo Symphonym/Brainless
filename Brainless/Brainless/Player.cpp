@@ -1,8 +1,14 @@
 #include "Player.h"
 #include <iostream>
 
-#define MAX_SPEED_X (float) 400
-#define MAX_WALK_SPEED_X (float) 300
+/*
+	spring hopp 4 rutor /ej klar/
+	gå hopp 3 rutor
+	höjd högt hopp 2 rutor
+	höjd kort hopp 1 ruta
+*/
+#define MAX_SPEED_X (float) 300
+#define MAX_WALK_SPEED_X (float) 200
 #define MAX_SPEED_Y (float) 700
 #define COLLISION_WIDTH (int) 80
 #define COLLISION_HEIGHT (int) 190
