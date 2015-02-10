@@ -75,7 +75,7 @@ void Player::updateTask(float deltaTime)
 		float startAccBreakpoint = 100;
 		float minSpeedBeforeStop = 10;
 		bool run = false;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) //Fortfarande inte riktigt bra, går från maxrun till maxwalk direkt efter man släpper
 		{
 			run = true;
 		}
@@ -94,6 +94,7 @@ void Player::updateTask(float deltaTime)
 			}
 			else if (!run && MAX_WALK_SPEED_X < abs(m_speed.x) + 20) //+20 ful hotfix, ex. if speed = 280, += 22 => 302 speed -> error i animation
 			{
+				//slowDown = true;
 				m_speed.x = -MAX_WALK_SPEED_X;
 				m_acceleration.x = 0;
 			}
@@ -117,6 +118,7 @@ void Player::updateTask(float deltaTime)
 			}
 			else if (!run && MAX_WALK_SPEED_X < abs(m_speed.x) + 20) //+20 ful hotfix, ex. if speed = 280, += 22 => 302 speed -> error i animation
 			{
+				//slowDown = true;
 				m_speed.x = MAX_WALK_SPEED_X;
 				m_acceleration.x = 0;
 			}
@@ -335,10 +337,10 @@ void Player::updateAnimation(float deltaTime)
 		if (abs(m_speed.x) <= runBreakpoint) //runJumpBreakpoint
 		{
 			//UP
-			if (m_speed.y < -30)
+			if (m_speed.y < 30)
 			{
 				//inAir
-				if (m_animState == anim_endJump && m_animation.getPlayOnceDone() || m_animState == anim_inAirUpRun)
+				if ((m_animState == anim_endJump && m_animation.getPlayOnceDone()) || m_animState == anim_inAirUpRun)
 					animation_inAirUp();
 
 				//endJump
@@ -370,7 +372,7 @@ void Player::updateAnimation(float deltaTime)
 
 
 	//IDLE
-	else if ((abs(m_speed.x) < 5))
+	else if ((abs(m_speed.x) < 5) && (m_animState != anim_turn && m_animState != anim_turn)) //kommer inte funka om du stannar samtidigt som du vänder dig, du hamnar i "ingen animation", men annars bli en idle frame direkt efter turn
 		animation_idle();
 	
 	//TURN
@@ -398,23 +400,6 @@ void Player::updateAnimation(float deltaTime)
 	//WALK
 	else if (5 < abs(m_speed.x))
 		animation_walk();
-
-
-	
-	
-	//OLD, also noticed ENDWalk is wrong, doesn't happen if "run" is entered
-	////RUN
-	////else if (runBreakpoint <= m_speed.x || m_speed.x <= -runBreakpoint)
-	//else if (m_animState == anim_run || ((m_animState == anim_startWalk || m_animState == anim_endWalk) && m_animation.getPlayOnceDone()))
-	//	animation_run();
-	//
-	////START WALK
-	//else if ((5 < abs(m_speed.x)) && (m_inputDirection == dir_right || m_inputDirection == dir_left))
-	//	animation_startWalk();
-	//
-	////END WALK
-	//else if (5 < abs(m_speed.x))
-	//	animation_endWalk();
 	
 	else 
 	{
@@ -491,7 +476,7 @@ void Player::animation_startWalk()
 	if (m_animState != anim_startWalk)
 	{
 		m_sprite = &m_spriteSheets[0];
-		m_animation.playOnce(0, 2, 0, 5);
+		m_animation.playOnce(1, 2, 0, 5);
 		m_animState = anim_startWalk;
 	}
 	//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
@@ -594,7 +579,7 @@ void Player::animation_inAirFall()
 	{
 		m_sprite = &m_spriteSheets[2];
 		m_animation.loop(0, 1, 1, 6); //
-		m_animState = anim_inAirUp;
+		m_animState = anim_inAirUpRun;
 	}
 }
 void Player::animation_inAirFallRun()
@@ -603,7 +588,7 @@ void Player::animation_inAirFallRun()
 	{
 		m_sprite = &m_spriteSheets[2];
 		m_animation.loop(0, 1, 3, 6); //
-		m_animState = anim_inAirFall;
+		m_animState = anim_inAirFallRun;
 	}
 }void Player::animation_inAirRun()
 {
