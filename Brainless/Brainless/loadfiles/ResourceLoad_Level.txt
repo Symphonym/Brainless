@@ -1,0 +1,4 @@
+# BACKGROUND TEXTURES
++Texture,images/backgrounds/ABackground.png,ABackground
++Texture,images/backgrounds/BBackground.png,BBackground
++Texture,images/backgrounds/CBackground.png,CBackground
