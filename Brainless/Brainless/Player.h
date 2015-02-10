@@ -25,7 +25,7 @@ public:
 	{
 		anim_noAnimation,
 		anim_idle,
-		anim_startWalk,
+		//anim_startWalk,
 		anim_walk,
 		anim_run,
 		anim_turnRun,
@@ -94,7 +94,7 @@ private:
 		will play last used animation Function until a new one is called, calling the same animation multiple times in a row will do nothing.
 	*/
 	void animation_idle();
-	void animation_startWalk();
+	//void animation_startWalk();
 	void animation_walk();
 	void animation_run();
 	void animation_turn();

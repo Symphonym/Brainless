@@ -385,15 +385,15 @@ void Player::updateAnimation(float deltaTime)
 			animation_turn();
 
 	
-	//START WALK
-	else if ((5 < abs(m_speed.x) && m_animState == anim_idle) || m_animState == anim_startWalk)
-	{
-		if (m_animation.getPlayOnceDone() && m_animState == anim_startWalk) 
-			animation_walk();
-		else 
-			animation_startWalk();
-	
-	}
+	////START WALK
+	//else if ((5 < abs(m_speed.x) && m_animState == anim_idle) || m_animState == anim_startWalk)
+	//{
+	//	if (m_animation.getPlayOnceDone() && m_animState == anim_startWalk) 
+	//		animation_walk();
+	//	else 
+	//		animation_startWalk();
+	//
+	//}
 	//RUN
 	else if (runBreakpoint < abs(m_speed.x))
 		animation_run();
@@ -471,16 +471,16 @@ void Player::animation_idle()
 	}*/
 }
 
-void Player::animation_startWalk()
-{
-	if (m_animState != anim_startWalk)
-	{
-		m_sprite = &m_spriteSheets[0];
-		m_animation.playOnce(1, 2, 0, 5);
-		m_animState = anim_startWalk;
-	}
-	//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
-}
+//void Player::animation_startWalk()
+//{
+//	if (m_animState != anim_startWalk)
+//	{
+//		m_sprite = &m_spriteSheets[0];
+//		m_animation.playOnce(1, 2, 0, 5);
+//		m_animState = anim_startWalk;
+//	}
+//	//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
+//}
 void Player::animation_walk()
 {
 	//std::cout << "hej2" << std::endl;
