@@ -15,7 +15,6 @@ Level::Level()
 	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("CBackground")));
 	ResourceLoader::instance().retrieveMusic("LevelMusic").setLoop(true);
 	ResourceLoader::instance().retrieveMusic("LevelMusic").play();
-	ResourceLoader::instance().retrieveMusic("MenuMusic").stop();
 
 
 	// Load a default map with nothing but ground tiles

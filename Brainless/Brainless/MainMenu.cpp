@@ -61,6 +61,7 @@ void MainMenu::update(float deltaTime)
 		{
 			m_machine.popState();
 			m_machine.pushState<Game>();
+			ResourceLoader::instance().retrieveMusic("MenuMusic").stop();
 		}
 	}
 	else
@@ -71,6 +72,7 @@ void MainMenu::update(float deltaTime)
 			FileSave::wipeProgress();
 			m_machine.popState();
 			m_machine.pushState<Game>();
+			ResourceLoader::instance().retrieveMusic("MenuMusic").stop();
 		}
 
 		// No
