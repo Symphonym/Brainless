@@ -127,6 +127,7 @@
     <ClCompile Include="FileSave.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="KeyTwineItem.cpp" />
+    <ClCompile Include="LevelTransition.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="RubberGlovesItem.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="FileSave.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="KeyTwineItem.h" />
+    <ClInclude Include="LevelTransition.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="RubberGlovesItem.h" />
     <ClInclude Include="State.h" />

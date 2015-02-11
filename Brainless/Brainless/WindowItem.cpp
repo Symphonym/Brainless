@@ -31,7 +31,7 @@ void WindowItem::deserialize(std::ifstream &reader)
 void WindowItem::onUse(Game &game)
 {
 	if (m_smashed)
-		game.changeLevel(m_levelIndex);
+		game.changeLevelTransition(m_levelIndex);
 }
 bool WindowItem::onInteractedWith(Item &otherItem)
 {

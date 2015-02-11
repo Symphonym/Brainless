@@ -34,6 +34,8 @@ m_levelIndex(0)
 	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Game.txt");
 
 
+	m_levelTransition = std::unique_ptr<LevelTransition>(new LevelTransition(*this));
+
 	// TODO TEMPORARY, SHOULD NOT BE IN FINAL GAME, prolly put inventory in player class
 	m_inventory = new Inventory();
 	m_popup = new PopUpMenu();
@@ -90,16 +92,13 @@ m_levelIndex(0)
 	sf::Image markerImg;
 	markerImg.create(60, 90, sf::Color::Yellow);
 
-	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(sf::Vector2f(Constants::TileSize * 10, Constants::TileSize * 8)))));
+	
 
 	// TEST CODE FOR LOADING DEFAULT LEVEL
 	changeLevel(0);
 
 
-	//temp, texture borde laddas in på annat sätt.
-	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
-	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
-	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetRun"));
+
 }
 Game::~Game()
 {
@@ -115,12 +114,26 @@ void Game::lootItem(Inventory::ItemPtr item)
 
 void Game::changeLevel(int levelIndex)
 {
+	// Reset level
+	m_level.reset();
+
 	m_levelIndex = levelIndex;
 	FileSave::loadMapText(m_level, m_levelIndex);
-	m_player->setPosition(m_level.getSpawnPos());
 	FileSave::loadLevelProgress(m_level, m_levelIndex);
 	FileSave::loadInventory(*m_inventory);
+
+	// Add player to level
+	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(m_level.getSpawnPos()))));
+	//temp, texture borde laddas in på annat sätt.
+	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
+	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
+	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetRun"));
 }
+void Game::changeLevelTransition(int levelIndex)
+{
+	m_levelTransition->startTransition(levelIndex);
+}
+
 void Game::addCamera(const sf::View &camera)
 {
 	m_extraCameras.push_back(camera);
@@ -164,11 +177,14 @@ void Game::events(const sf::Event &event)
 }
 void Game::update(float deltaTime)
 {
-	if (m_player->getCameraPosition().x < Constants().MapWidth * Constants().TileSize - (m_camera.getSize().x / 2) && m_player->getCameraPosition().x > 0 + (m_camera.getSize().x / 2))
-	m_camera.setCenter(m_player->getCameraPosition().x, m_camera.getCenter().y);
+	// TODO Whoever did these if statements needs to fix them, they don't work when changing maps
+	//if (m_player->getCameraPosition().x < Constants().MapWidth * Constants().TileSize - (m_camera.getSize().x / 2) && m_player->getCameraPosition().x > 0 + (m_camera.getSize().x / 2))
+	//m_camera.setCenter(m_player->getCameraPosition().x, m_camera.getCenter().y);
 
-	if (m_player->getCameraPosition().y < Constants().MapHeight * Constants().TileSize - (m_camera.getSize().y / 2) && m_player->getCameraPosition().y > 0 + (m_camera.getSize().y / 2))
-		m_camera.setCenter(m_camera.getCenter().x, m_player->getCameraPosition().y);
+	//if (m_player->getCameraPosition().y < Constants().MapHeight * Constants().TileSize - (m_camera.getSize().y / 2) && m_player->getCameraPosition().y > 0 + (m_camera.getSize().y / 2))
+	//	m_camera.setCenter(m_camera.getCenter().x, m_player->getCameraPosition().y);
+
+	m_camera.setCenter(m_player->getCameraPosition().x, m_player->getCameraPosition().y);
 
 	// Update game logic and input, if not paused
 	// Disable game input when conversation is ongoing
@@ -179,8 +195,10 @@ void Game::update(float deltaTime)
 		m_popup->update(*this,
 			sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
 	}
+	m_levelTransition->update(deltaTime);
 	Notification::instance().update(deltaTime, m_window);
 	ConversationBox::instance().update(deltaTime, *this);
+
 
 	// Update positional sound with player position
 	SoundPlayer::instance().update(
@@ -210,6 +228,7 @@ void Game::draw()
 	m_popup->draw();
 	Notification::instance().draw();
 	ConversationBox::instance().draw();
+	m_levelTransition->draw();
 	Renderer::instance().executeDraws();
 
 	// Draw extra cameras

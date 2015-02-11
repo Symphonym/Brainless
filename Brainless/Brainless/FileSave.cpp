@@ -87,6 +87,8 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 			break;
 		}
 	}
+
+	writer.close();
 }
 
 bool FileSave::loadMapText(Level &level, int levelNumber)
@@ -214,9 +216,11 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 
 		}
 
+		reader.close();
 		return true;
 	}
 
+	reader.close();
 	return false;
 }
 
