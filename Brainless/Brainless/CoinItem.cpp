@@ -12,7 +12,10 @@ Item("Coin", "CoinItem", id)
 bool CoinItem::onInteract(Item &otherItem)
 {
 	if (otherItem.getName() == "Vending Machine")
+	{
+		SoundPlayer::instance().playSound("item_coin", getPosition());
 		return true;
+	}
 	else
 		return false;
 }
