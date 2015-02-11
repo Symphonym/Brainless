@@ -24,7 +24,7 @@
 
 # SOUND EFFECTS
 +Sound,sounds/inventory_open.wav,inventory_open
-#+Sound,sounds/item_coin.wav,item_coin
++Sound,sounds/item_coin.wav,item_coin
 +Sound,sounds/item_door.wav,item_door
 #+Sound,sounds/item_glassBottle.wav,item_glassBottle
 #+Sound,sounds/item_gumPaper.wav,item_gumPaper

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <SFML\Graphics.hpp>
+#include "SoundPlayer.h"
 #include <fstream>
 
 // Data for combining items
