@@ -76,5 +76,8 @@ Item* MovingPlatformItem::clone()
 
 sf::Vector2f MovingPlatformItem::getSpeed() const
 {
-	return m_speed;
+	if (m_isActive)
+		return m_speed;
+	else
+		return sf::Vector2f(0, 0);
 }
