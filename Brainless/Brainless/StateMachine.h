@@ -17,6 +17,7 @@ public:
 
 	template<typename TType> void pushState()
 	{
+		m_loadingText.clear();
 		m_window.setView(m_window.getDefaultView());
 		m_states.push_back(std::move(StatePtr(new TType(*this))));
 	};
@@ -27,6 +28,8 @@ public:
 	sf::RenderWindow &getWindow();
 
 private:
+
+	std::vector<sf::Text> m_loadingText;
 
 	void loop();
 

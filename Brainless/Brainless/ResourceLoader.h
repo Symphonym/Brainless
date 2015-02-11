@@ -6,10 +6,16 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+#include <functional>
+
 
 class ResourceLoader
 {
 public:
+
+	typedef std::function<void(const std::string &info)> LoadingHandler;
+
+	void setLoadingHandler(LoadingHandler handler);
 
 	// Load a resource and map it to the desired name
 	void loadTexture(const std::string &name, const std::string &filePath);
@@ -45,6 +51,8 @@ public:
 private:
 
 	ResourceLoader();
+
+	LoadingHandler m_handler;
 
 	typedef std::unique_ptr<sf::Texture> TexturePtr;
 	typedef std::unique_ptr<sf::Shader> ShaderPtr;

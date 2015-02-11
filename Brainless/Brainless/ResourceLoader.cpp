@@ -14,6 +14,11 @@ ResourceLoader& ResourceLoader::instance()
 	return theInstance;
 }
 
+void ResourceLoader::setLoadingHandler(LoadingHandler handler)
+{
+	m_handler = handler;
+}
+
 void ResourceLoader::loadTexture(const std::string &name, const std::string &filePath)
 {
 	auto itr = m_textures.find(name);
@@ -21,6 +26,9 @@ void ResourceLoader::loadTexture(const std::string &name, const std::string &fil
 	// A texture by this name does not exist already
 	if (itr == m_textures.end())
 	{
+		if (m_handler)
+			m_handler("Loading texture (" + name + "): " + filePath);
+
 		TexturePtr texPtr = TexturePtr(new sf::Texture());
 		if (texPtr->loadFromFile(filePath))
 			m_textures[name] = std::move(texPtr);
@@ -41,6 +49,9 @@ void ResourceLoader::loadShader(const std::string &name, const std::string &file
 	// A shader by this name does not exist already
 	if (itr == m_shaders.end())
 	{
+		if (m_handler)
+			m_handler("Loading shader (" + name + "): " + filePath);
+
 		// TODO, only supports fragment shaders for now
 		ShaderPtr shadPtr = ShaderPtr(new sf::Shader());
 		if (shadPtr->loadFromFile(filePath, sf::Shader::Fragment))
@@ -56,6 +67,9 @@ void ResourceLoader::loadSound(const std::string &name, const std::string &fileP
 	// A sound by this name does not exist already
 	if (itr == m_sounds.end())
 	{
+		if (m_handler)
+			m_handler("Loading sound (" + name + "): " + filePath);
+
 		SoundPtr soundPtr = SoundPtr(new sf::SoundBuffer());
 		if (soundPtr->loadFromFile(filePath))
 			m_sounds[name] = std::move(soundPtr);
@@ -70,6 +84,9 @@ void ResourceLoader::loadMusic(const std::string &name, const std::string &fileP
 	// A music file by this name does not exist already
 	if (itr == m_music.end())
 	{
+		if (m_handler)
+			m_handler("Opening music file (" + name + "): " + filePath);
+
 		MusicPtr musicPtr = MusicPtr(new sf::Music());
 		if (musicPtr->openFromFile(filePath))
 			m_music[name] = std::move(musicPtr);
@@ -84,6 +101,9 @@ void ResourceLoader::loadFont(const std::string &name, const std::string &filePa
 	// A font by this name does not exist already
 	if (itr == m_fonts.end())
 	{
+		if (m_handler)
+			m_handler("Loading font (" + name + "): " + filePath);
+
 		FontPtr fontPtr = FontPtr(new sf::Font());
 		if (fontPtr->loadFromFile(filePath))
 			m_fonts[name] = std::move(fontPtr);
