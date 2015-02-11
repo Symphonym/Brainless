@@ -9,7 +9,7 @@ PauseMenu::PauseMenu(StateMachine &machine)
 :
 State(machine)
 {
-	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_PauseMenu.txt");
+	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_PauseMenu.txt");
 
 	m_buttons[0] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("Resume_Normal"),

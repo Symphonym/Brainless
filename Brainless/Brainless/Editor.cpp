@@ -27,7 +27,7 @@ m_currentSyncID(0)
 
 
 	// Load editor resources
-	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Editor.txt");
+	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Editor.txt");
 
 	//Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("BlackAndWhiteShader"));
 	//Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("DarknessShader"));

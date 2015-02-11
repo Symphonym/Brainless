@@ -12,7 +12,7 @@ MainMenu::MainMenu(StateMachine &machine)
 State(machine),
 m_newGameConfirmWindow(false)
 {
-	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_MainMenu.txt");
+	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_MainMenu.txt");
 
 	m_buttons[0] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("NewGame_Normal"),

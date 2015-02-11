@@ -3,26 +3,18 @@
 #include "Utility.h"
 #include <fstream>
 
-ResourceFile::ResourceFile(const std::string &fileName)
-:
-m_hasLoaded(false)
+ResourceFile::ResourceFile()
 {
-	loadResourceFile(fileName);
+
 }
 
-bool ResourceFile::hasLoaded() const
-{
-	return m_hasLoaded;
-}
-
-void ResourceFile::loadResourceFile(const std::string &fileName, bool unloadAll)
+bool ResourceFile::loadResourceFile(const std::string &fileName, bool unloadAll)
 {
 	std::ifstream reader(fileName);
 
+	bool hasLoaded = false;
 	if (reader.is_open())
 	{
-		m_hasLoaded = true;
-
 		std::string line;
 		while (std::getline(reader, line))
 		{
@@ -107,6 +99,57 @@ void ResourceFile::loadResourceFile(const std::string &fileName, bool unloadAll)
 					continue;
 			}
 		}
+
+		hasLoaded = true;
 	}
 	reader.close();
+	return hasLoaded;
+}
+
+int ResourceFile::countResourceCalls(const std::string &fileName)
+{
+	std::ifstream reader(fileName);
+
+	int callCount = 0;
+	if (reader.is_open())
+	{
+		std::string line;
+		while (std::getline(reader, line))
+		{
+			// Skip empty lines
+			if (line.empty())
+				continue;
+			else if (line[0] == '#')
+				continue;
+
+			std::vector<std::string> stringData = Utility::splitString(line, ',');
+			std::string resourceType = stringData[0].substr(1, stringData[0].size());
+
+
+			// Count resource calls
+			if (stringData[0][0] == '+' || stringData[0][0] == '-')
+			{
+				if (resourceType == "Texture")
+					++callCount;
+				else if (resourceType == "Font")
+					++callCount;
+				else if (resourceType == "Sound")
+					++callCount;
+				else if (resourceType == "Music")
+					++callCount;
+				else if (resourceType == "Shader")
+					++callCount;
+
+				// Recurse into other files
+				else if (resourceType == "ResourceFile")
+					callCount += countResourceCalls("loadfiles/" + stringData[1]);
+				else
+					continue;
+
+			}
+		}
+	}
+	reader.close();
+
+	return callCount;
 }

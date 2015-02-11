@@ -3,6 +3,7 @@
 #include "State.h"
 #include "Cursor.h"
 #include "ResourceLoader.h"
+#include <iostream>
 
 StateMachine::StateMachine()
 :
@@ -10,8 +11,9 @@ m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 {
 	Renderer::instance().setTarget(m_window);
 
+	
 	// Create a little loading screen
-	ResourceLoader::instance().setLoadingHandler([&](const std::string &info) -> void
+	ResourceLoader::instance().setLoadingHandler([&](const std::string &info, int current, int total) -> void
 	{
 		sf::Text newText;
 		newText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
@@ -20,9 +22,11 @@ m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 		newText.setColor(sf::Color::Green);
 		m_loadingText.push_back(newText);
 
-		m_loadingSprite.rotate(10.f);
-
+		std::cout << current << "/" << total << std::endl;
 		m_window.clear();
+
+		float completeness = static_cast<float>(current) / static_cast<float>(total);
+		m_loadingSprite.setScale(completeness*m_window.getSize().x, 1);
 
 		// Draw states as normal
 		draw();
@@ -42,13 +46,16 @@ m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 		m_window.display();
 	});
 
-	m_loadingSprite.setTexture(ResourceLoader::instance().retrieveTexture("LoadingCross"));
-	m_loadingSprite.setOrigin(
-		m_loadingSprite.getGlobalBounds().width / 2,
-		m_loadingSprite.getGlobalBounds().height / 2);
+	sf::Image loadingBar;
+	loadingBar.create(1, 50, sf::Color::Green);
+
+	m_loadingBar.loadFromImage(loadingBar);
+	m_loadingSprite.setTexture(m_loadingBar);
+
+	//m_loadingSprite.setTexture(ResourceLoader::instance().retrieveTexture("LoadingCross"));
 	m_loadingSprite.setPosition(
-		m_loadingSprite.getGlobalBounds().width / 2,
-		m_window.getSize().y - m_loadingSprite.getGlobalBounds().height / 2);
+		0,
+		m_window.getSize().y - m_loadingSprite.getGlobalBounds().height);
 
 	// Hide mouse cursor
 	m_window.setMouseCursorVisible(false);

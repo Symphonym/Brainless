@@ -9,7 +9,7 @@
 Level::Level()
 {
 	// Load game resources
-	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Level.txt");
+	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Level.txt");
 	// Load backgrounds
 	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("ABackground")));
 	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("BBackground")));

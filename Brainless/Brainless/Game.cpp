@@ -31,7 +31,7 @@ m_levelIndex(0)
 	m_camera = m_window.getDefaultView();
 
 	// Load game resources
-	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Game.txt");
+	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Game.txt");
 
 
 	m_levelTransition = std::unique_ptr<LevelTransition>(new LevelTransition(*this));

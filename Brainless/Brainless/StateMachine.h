@@ -29,6 +29,7 @@ public:
 
 private:
 
+	sf::Texture m_loadingBar;
 	sf::Sprite m_loadingSprite;
 	std::vector<sf::Text> m_loadingText;
 
