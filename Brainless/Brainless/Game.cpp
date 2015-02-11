@@ -75,7 +75,6 @@ m_levelIndex(0)
 			itm->onExamine();
 			Notification::instance().write(itm->getExamineString());
 		}
-
 	});
 
 	// Load a default map with nothing but ground tiles

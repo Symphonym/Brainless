@@ -42,6 +42,10 @@ m_newGameConfirmWindow(false)
 		ResourceLoader::instance().retrieveTexture("No_Pressed"),
 		sf::Vector2f(m_confirmBackground.getPosition().x + 210.f, m_confirmBackground.getPosition().y + 120.f),
 		&m_window));
+
+	//Play music
+	ResourceLoader::instance().retrieveMusic("MenuMusic").setLoop(true);
+	ResourceLoader::instance().retrieveMusic("MenuMusic").play();
 }
 
 void MainMenu::update(float deltaTime)

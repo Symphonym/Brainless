@@ -13,7 +13,9 @@ Level::Level()
 	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("ABackground")));
 	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("BBackground")));
 	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("CBackground")));
-	m_backgrounds[2].setColor(sf::Color(255, 255, 255, 255));
+	ResourceLoader::instance().retrieveMusic("LevelMusic").setLoop(true);
+	ResourceLoader::instance().retrieveMusic("LevelMusic").play();
+	ResourceLoader::instance().retrieveMusic("MenuMusic").stop();
 
 
 	// Load a default map with nothing but ground tiles
