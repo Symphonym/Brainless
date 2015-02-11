@@ -272,7 +272,7 @@ void Player::jump()
 	m_speed.y = -m_jumpPower;
 	m_jumpState = jump_inAir;
 	m_inAir = true;
-	
+	m_inTilt = false;
 }
 
 sf::Vector2f Player::getCameraPosition()
@@ -378,11 +378,11 @@ void Player::updateAnimation(float deltaTime)
 
 
 	//IDLE
-	else if ((abs(m_speed.x) < 5) && (m_animState != anim_turn && m_animState != anim_turn)) //kommer inte funka om du stannar samtidigt som du vänder dig, du hamnar i "ingen animation", men annars bli en idle frame direkt efter turn
+	else if ((abs(m_speed.x) < 5) && m_inputDirection == dir_noDirection)
 		animation_idle();
 	
 	//TURN
-	else if (m_speed.x < 0 && m_inputDirection == dir_right || 0 < m_speed.x && m_inputDirection == dir_left)
+	else if (m_speed.x < 5 && m_inputDirection == dir_right || -5 < m_speed.x && m_inputDirection == dir_left)
 		//FAST
 		if (m_animState == anim_run || m_animState == anim_turnRun)
 			animation_turnRun();
@@ -390,16 +390,6 @@ void Player::updateAnimation(float deltaTime)
 		else 
 			animation_turn();
 
-	
-	////START WALK
-	//else if ((5 < abs(m_speed.x) && m_animState == anim_idle) || m_animState == anim_startWalk)
-	//{
-	//	if (m_animation.getPlayOnceDone() && m_animState == anim_startWalk) 
-	//		animation_walk();
-	//	else 
-	//		animation_startWalk();
-	//
-	//}
 	//RUN
 	else if (runBreakpoint < abs(m_speed.x))
 		animation_run();
@@ -409,11 +399,11 @@ void Player::updateAnimation(float deltaTime)
 	
 	else 
 	{
-		std::cout << "FIXA Får ingen animation" << std::endl; //bör inte uppstå, har hittils inte uppstått
+		std::cout << "FIXA Får ingen animation" << std::endl; //bör inte uppstå
 		std::cout << m_animState << std::endl;
 	}
 
-	std::cout << "speedX: " << m_speed.x << std::endl;
+	//if(m_animState == 8)std::cout << "blah" << std::endl;
 
 	updateSpriteDirection();
 	m_sprite->setTextureRect(m_animation.getRectangle(deltaTime));
@@ -477,16 +467,6 @@ void Player::animation_idle()
 	}*/
 }
 
-//void Player::animation_startWalk()
-//{
-//	if (m_animState != anim_startWalk)
-//	{
-//		m_sprite = &m_spriteSheets[0];
-//		m_animation.playOnce(1, 2, 0, 5);
-//		m_animState = anim_startWalk;
-//	}
-//	//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
-//}
 void Player::animation_walk()
 {
 	//std::cout << "hej2" << std::endl;

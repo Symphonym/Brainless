@@ -17,6 +17,7 @@ m_acceleration(sf::Vector2f(0, 0)),
 m_size(size),
 m_maxSpeed(maxSpeed),
 m_inAir(false),
+m_inTilt(false),
 m_animation(SPRITESIZE, SPRITESIZE),
 m_spriteOffset(spriteOffset),
 m_spriteDirection(dir_right),
@@ -31,7 +32,7 @@ void Unit::updateMovement(float gravity, float deltaTime)
 		return;
 
 	float accelYtrue;
-	if (m_inAir)
+	if (m_inAir && !m_inTilt)
 	{
 
 		accelYtrue = m_acceleration.y + gravity;
@@ -63,9 +64,13 @@ void Unit::wallRight()
 
 }
 
-void Unit::setStatus(bool inAir)
+void Unit::setInAir(bool inAir)
 {
 	m_inAir = inAir;
+}
+void Unit::setTilt(bool inTilt)
+{
+	m_inTilt = inTilt;
 }
 void Unit::setPosition(sf::Vector2f position)
 {
@@ -179,6 +184,10 @@ void Unit::updateSpriteDirection()
 bool Unit::getInAir() const
 {
 	return m_inAir;
+}
+bool Unit::getInTilt() const
+{
+	return m_inTilt;
 }
 sf::Vector2f Unit::getPosition() const
 {
