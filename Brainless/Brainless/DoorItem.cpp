@@ -1,5 +1,6 @@
 #include "DoorItem.h"
 #include "ResourceLoader.h"
+#include "SoundPlayer.h"
 #include "Renderer.h"
 
 DoorItem::DoorItem(bool locked, int id)
@@ -20,7 +21,7 @@ bool DoorItem::onInteractedWith(Item &otherItem)
 	if (m_isLocked && otherItem.getSyncID() == getSyncID() && otherItem.getName() == "Key")
 	{
 		m_isLocked = false;
-		// TODO Play unlock sound?
+		SoundPlayer::instance().playSound("item_door",getSprite().getPosition());
 	}
 
 	// The door will not get destroyed
