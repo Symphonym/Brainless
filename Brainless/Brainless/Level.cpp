@@ -199,11 +199,11 @@ void Level::updateUnitCollision(float deltaTime)
 				sf::Vector2f(currentUnit->getPosition().x + currentUnit->getSize().x, currentUnit->getPosition().y + currentUnit->getSize().y));
 			endIndex += sf::Vector2i(1, 1);
 
-			startIndex.x = Utility::clampValue(startIndex.x, 0, Constants::MapWidth - 1);
-			startIndex.y = Utility::clampValue(startIndex.y, 0, Constants::MapHeight - 1);
+			startIndex.x = Utility::clampValue(startIndex.x, 0, Constants::MapWidth);
+			startIndex.y = Utility::clampValue(startIndex.y, 0, Constants::MapHeight);
 
-			endIndex.x = Utility::clampValue(endIndex.x, 0, Constants::MapWidth - 1);
-			endIndex.y = Utility::clampValue(endIndex.y, 0, Constants::MapHeight - 1);
+			endIndex.x = Utility::clampValue(endIndex.x, 0, Constants::MapWidth);
+			endIndex.y = Utility::clampValue(endIndex.y, 0, Constants::MapHeight);
 
 			//std::cout << "STARTINDEX X " << startIndex.x << " STARTINDEX Y " << startIndex.y << " " << currentUnit->getInAir() << std::endl;
 
