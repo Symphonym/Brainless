@@ -15,12 +15,13 @@
 #include "FileSave.h"
 #include "TileMap.h"
 #include "Tile.h"
+#include "ConversationBox.h"
 #include "SoundPlayer.h"
 #include "Notification.h"
-#include "ConversationBox.h"
 #include "Cursor.h"
 #include "StateMachine.h"
 #include "PauseMenu.h"
+#include "Constants.h"
 
 Game::Game(StateMachine &machine)
 :
@@ -164,7 +165,11 @@ void Game::events(const sf::Event &event)
 }
 void Game::update(float deltaTime)
 {
-	m_camera.setCenter(m_player->getCameraPosition());
+	if (m_player->getCameraPosition().x < Constants().MapWidth * Constants().TileSize - (m_camera.getSize().x / 2) && m_player->getCameraPosition().x > 0 + (m_camera.getSize().x / 2))
+	m_camera.setCenter(m_player->getCameraPosition().x, m_camera.getCenter().y);
+
+	if (m_player->getCameraPosition().y < Constants().MapHeight * Constants().TileSize - (m_camera.getSize().y / 2) && m_player->getCameraPosition().y > 0 + (m_camera.getSize().y / 2))
+		m_camera.setCenter(m_camera.getCenter().x, m_player->getCameraPosition().y);
 
 	// Update game logic and input, if not paused
 	// Disable game input when conversation is ongoing
