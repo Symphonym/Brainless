@@ -1,3 +1,5 @@
+-ResourceFile,ResourceLoad_MainMenu.txt
+
 # SPRITE SHEET TEXTURES
 
 +Texture,images/animations/spritesheet.png,testImage

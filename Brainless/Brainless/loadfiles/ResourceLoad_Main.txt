@@ -1,4 +1,5 @@
-
+# LOADING CROSS
++Texture,images/UI/loadingCross.png,LoadingCross
 
 # TEST CURSOR TEXTURES
 +Texture,images/UI/defaultCursor.png,DefaultCursor

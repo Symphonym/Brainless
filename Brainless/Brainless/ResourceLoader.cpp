@@ -168,6 +168,8 @@ bool ResourceLoader::unloadTexture(const std::string &name)
 	auto itr = m_textures.find(name);
 	if (itr != m_textures.end()) // Resource was found
 	{
+		if (m_handler)
+			m_handler("Unloaded texture: " + name);
 		m_textures.erase(itr);
 		return true;
 	}
@@ -180,6 +182,8 @@ bool ResourceLoader::unloadShader(const std::string &name)
 	auto itr = m_shaders.find(name);
 	if (itr != m_shaders.end()) // Resource was found
 	{
+		if (m_handler)
+			m_handler("Unloaded shader: " + name);
 		m_shaders.erase(itr);
 		return true;
 	}
@@ -191,6 +195,8 @@ bool ResourceLoader::unloadSound(const std::string &name)
 	auto itr = m_sounds.find(name);
 	if (itr != m_sounds.end()) // Resource was found
 	{
+		if (m_handler)
+			m_handler("Unloaded sound: " + name);
 		m_sounds.erase(itr);
 		return true;
 	}
@@ -202,6 +208,9 @@ bool ResourceLoader::unloadMusic(const std::string &name)
 	auto itr = m_music.find(name);
 	if (itr != m_music.end()) // Resource was found
 	{
+		if (m_handler)
+			m_handler("Unloaded music: " + name);
+		itr->second->stop();
 		m_music.erase(itr);
 		return true;
 	}
@@ -213,6 +222,8 @@ bool ResourceLoader::unloadFont(const std::string &name)
 	auto itr = m_fonts.find(name);
 	if (itr != m_fonts.end()) // Resource was found
 	{
+		if (m_handler)
+			m_handler("Unloaded font: " + name);
 		m_fonts.erase(itr);
 		return true;
 	}

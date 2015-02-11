@@ -29,9 +29,12 @@ public:
 
 private:
 
+	sf::Sprite m_loadingSprite;
 	std::vector<sf::Text> m_loadingText;
 
 	void loop();
+
+	void draw();
 
 	std::vector<StatePtr> m_states;
 	std::vector<StatePtr> m_removeRequests;

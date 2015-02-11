@@ -20,8 +20,12 @@ m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 		newText.setColor(sf::Color::Green);
 		m_loadingText.push_back(newText);
 
+		m_loadingSprite.rotate(10.f);
+
 		m_window.clear();
 
+		// Draw states as normal
+		draw();
 
 		if (m_loadingText.size() > 10)
 			m_loadingText.erase(m_loadingText.begin());
@@ -29,12 +33,22 @@ m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 		for (std::size_t i = 0; i < m_loadingText.size(); i++)
 		{
 			m_loadingText[i].setPosition(0, (15.f)*i);
-			m_window.draw(m_loadingText[i]);
+			Renderer::instance().drawHUD(m_loadingText[i]);
 		}
 
+		Renderer::instance().drawHUD(m_loadingSprite);
+		Renderer::instance().executeDraws();
 
 		m_window.display();
 	});
+
+	m_loadingSprite.setTexture(ResourceLoader::instance().retrieveTexture("LoadingCross"));
+	m_loadingSprite.setOrigin(
+		m_loadingSprite.getGlobalBounds().width / 2,
+		m_loadingSprite.getGlobalBounds().height / 2);
+	m_loadingSprite.setPosition(
+		m_loadingSprite.getGlobalBounds().width / 2,
+		m_window.getSize().y - m_loadingSprite.getGlobalBounds().height / 2);
 
 	// Hide mouse cursor
 	m_window.setMouseCursorVisible(false);
@@ -88,16 +102,8 @@ void StateMachine::loop()
 		if (m_window.hasFocus())
 		{
 			m_window.setActive(true);
-			m_window.clear(sf::Color::Black);
-
-			// All states are rendered
-			for (int i = m_states.size() - 1; i >= 0; i--)
-				m_states[i]->draw();
-
-			// Draw cursor
-			Cursor::instance().draw();
-
-			Renderer::instance().executeDraws();
+			m_window.clear();
+			draw();
 			m_window.display();
 		}
 		else
@@ -105,6 +111,18 @@ void StateMachine::loop()
 	}
 }
 
+
+void StateMachine::draw()
+{
+	// All states are rendered
+	for (int i = m_states.size() - 1; i >= 0; i--)
+		m_states[i]->draw();
+
+	// Draw cursor
+	Cursor::instance().draw();
+
+	Renderer::instance().executeDraws();
+}
 
 sf::RenderWindow &StateMachine::getWindow()
 {

@@ -14,7 +14,7 @@ public:
 
 private:
 
-	void loadResourceFile(const std::string &fileName);
+	void loadResourceFile(const std::string &fileName, bool unloadAll = false);
 
 	bool m_hasLoaded;
 

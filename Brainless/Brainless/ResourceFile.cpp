@@ -15,8 +15,7 @@ bool ResourceFile::hasLoaded() const
 	return m_hasLoaded;
 }
 
-#include <iostream>
-void ResourceFile::loadResourceFile(const std::string &fileName)
+void ResourceFile::loadResourceFile(const std::string &fileName, bool unloadAll)
 {
 	std::ifstream reader(fileName);
 
@@ -40,22 +39,49 @@ void ResourceFile::loadResourceFile(const std::string &fileName)
 			// Add a new resource
 			if (stringData[0][0] == '+')
 			{
-				if (stringData.size() != 3)
-				{
-					m_hasLoaded = false;
-					break;
-				}
 
 				if (resourceType == "Texture")
-					ResourceLoader::instance().loadTexture(stringData[2], stringData[1]);
+				{
+					if (unloadAll)
+						ResourceLoader::instance().unloadTexture(stringData[2]);
+					else
+						ResourceLoader::instance().loadTexture(stringData[2], stringData[1]);
+				}
 				else if (resourceType == "Font")
-					ResourceLoader::instance().loadFont(stringData[2], stringData[1]);
+				{
+					if (unloadAll)
+						ResourceLoader::instance().unloadFont(stringData[2]);
+					else
+						ResourceLoader::instance().loadFont(stringData[2], stringData[1]);
+				}
 				else if (resourceType == "Sound")
-					ResourceLoader::instance().loadSound(stringData[2], stringData[1]);
+				{
+					if (unloadAll)
+						ResourceLoader::instance().unloadSound(stringData[2]);
+					else
+						ResourceLoader::instance().loadSound(stringData[2], stringData[1]);
+				}
 				else if (resourceType == "Music")
-					ResourceLoader::instance().loadMusic(stringData[2], stringData[1]);
+				{
+					if (unloadAll)
+						ResourceLoader::instance().unloadMusic(stringData[2]);
+					else
+						ResourceLoader::instance().loadMusic(stringData[2], stringData[1]);
+				}
 				else if (resourceType == "Shader")
-					ResourceLoader::instance().loadShader(stringData[2], stringData[1]);
+				{
+					if (unloadAll)
+						ResourceLoader::instance().unloadShader(stringData[2]);
+					else
+						ResourceLoader::instance().loadShader(stringData[2], stringData[1]);
+				}
+				else if (resourceType == "ResourceFile")
+				{
+					if (unloadAll)
+						loadResourceFile("loadfiles/" + stringData[1], true);
+					else
+						loadResourceFile("loadfiles/" + stringData[1], false);
+				}
 				else
 					continue;
 
@@ -64,11 +90,6 @@ void ResourceFile::loadResourceFile(const std::string &fileName)
 			// Remove existing resource
 			else if (stringData[0][0] == '-')
 			{
-				if (stringData.size() != 2)
-				{
-					m_hasLoaded = false;
-					break;
-				}
 
 				if (resourceType == "Texture")
 					ResourceLoader::instance().unloadTexture(stringData[1]);
@@ -80,6 +101,8 @@ void ResourceFile::loadResourceFile(const std::string &fileName)
 					ResourceLoader::instance().unloadMusic(stringData[1]);
 				else if (resourceType == "Shader")
 					ResourceLoader::instance().unloadShader(stringData[1]);
+				else if (resourceType == "ResourceFile")
+					loadResourceFile("loadfiles/"+stringData[1], true);
 				else
 					continue;
 			}
