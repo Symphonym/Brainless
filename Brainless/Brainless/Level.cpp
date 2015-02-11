@@ -1,6 +1,7 @@
 #include "Level.h"
 #include "Renderer.h"
 #include "ResourceLoader.h"
+#include "SoundPlayer.h"
 #include "Constants.h"
 #include "Utility.h"
 #include "MovingPlatformItem.h"
@@ -13,9 +14,8 @@ Level::Level()
 	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("ABackground")));
 	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("BBackground")));
 	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("CBackground")));
-	ResourceLoader::instance().retrieveMusic("LevelMusic").setLoop(true);
-	ResourceLoader::instance().retrieveMusic("LevelMusic").play();
-
+	
+	//SoundPlayer::instance().playMusic("LevelMusic", true);
 
 	// Load a default map with nothing but ground tiles
 	TileMap::TileMapLayout layout;

@@ -3,6 +3,7 @@
 #include "ItemDatabase.h"
 #include "Level.h"
 #include "ResourceLoader.h"
+#include "SoundPlayer.h"
 #include "Game.h"
 #include "Notification.h"
 
@@ -49,7 +50,10 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 	if (event.type == sf::Event::KeyReleased)
 	{
 		if (event.key.code == sf::Keyboard::I)
+		{
 			m_isOpen = !m_isOpen;
+			SoundPlayer::instance().playSound("inventory_open",gameWindow.getView().getCenter());
+		}
 	}
 
 	else if (event.type == sf::Event::MouseButtonReleased)

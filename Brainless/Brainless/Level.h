@@ -65,7 +65,6 @@ private:
 	std::vector<sf::Sprite> m_backgrounds; //Backgrounds in the level
 	std::vector<UnitPtr> m_units; // Units in the level
 
-
 	// List of units
 	// List of items
 	// List of sprites (for decoration purposes)

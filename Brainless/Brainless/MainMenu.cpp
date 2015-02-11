@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Button.h"
 #include "ResourceLoader.h"
+#include "SoundPlayer.h"
 #include "Renderer.h"
 #include "FileSave.h"
 
@@ -44,8 +45,7 @@ m_newGameConfirmWindow(false)
 		&m_window));
 
 	//Play music
-	ResourceLoader::instance().retrieveMusic("MenuMusic").setLoop(true);
-	ResourceLoader::instance().retrieveMusic("MenuMusic").play();
+	SoundPlayer::instance().playMusic("MenuMusic",true);
 }
 
 void MainMenu::update(float deltaTime)
@@ -61,7 +61,7 @@ void MainMenu::update(float deltaTime)
 		{
 			m_machine.popState();
 			m_machine.pushState<Game>();
-			ResourceLoader::instance().retrieveMusic("MenuMusic").stop();
+			SoundPlayer::instance().stopMusic("MenuMusic");
 		}
 	}
 	else
@@ -72,7 +72,7 @@ void MainMenu::update(float deltaTime)
 			FileSave::wipeProgress();
 			m_machine.popState();
 			m_machine.pushState<Game>();
-			ResourceLoader::instance().retrieveMusic("MenuMusic").stop();
+			SoundPlayer::instance().stopMusic("MenuMusic");
 		}
 
 		// No
