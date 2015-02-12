@@ -132,6 +132,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="RubberGlovesItem.cpp" />
+    <ClCompile Include="ScissorLift.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="GhostItem.cpp" />
     <ClCompile Include="GUIElement.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="LighterItem.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="RubberGlovesItem.h" />
+    <ClInclude Include="ScissorLift.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="GhostItem.h" />
     <ClInclude Include="GUIElement.h" />

@@ -249,6 +249,9 @@
     <ClCompile Include="LighterItem.cpp">
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
+    <ClCompile Include="ScissorLift.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -432,6 +435,9 @@
       <Filter>Source Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="LighterItem.h">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ScissorLift.h">
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
   </ItemGroup>

@@ -62,6 +62,8 @@ public:
 	virtual void draw();
 
 	virtual sf::Vector2f getSpeed() const;
+	virtual void onPositionChanged() {};
+
 
 	void setPosition(const sf::Vector2f &pos);
 	sf::Vector2f getPosition() const;

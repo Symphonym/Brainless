@@ -62,6 +62,7 @@ void Item::deserialize(std::ifstream &reader)
 void Item::setPosition(const sf::Vector2f &pos)
 {
 	m_sprite.setPosition(pos);
+	onPositionChanged();
 }
 sf::Vector2f Item::getPosition() const
 {
