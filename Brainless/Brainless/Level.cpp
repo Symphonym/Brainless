@@ -204,7 +204,6 @@ bool Level::isDark() const
 #include <iostream>
 void Level::updateUnitCollision(float deltaTime)
 {
-	//std::cout << std::endl << "          COLLISIONSTART" << std::endl;
 	for (unsigned int i = 0; i < m_units.size(); i++)
 	{
 		Unit* currentUnit = m_units[i].get();
@@ -218,11 +217,11 @@ void Level::updateUnitCollision(float deltaTime)
 		if (currentUnit->isMovementEnabled())
 		{
 			// 10 = test för att hämta fler tiles att titta på 
-			sf::Vector2i startIndex = m_tileMap->positionToIndex(sf::Vector2f(currentUnit->getPosition().x-0, currentUnit->getPosition().y-0));
+			sf::Vector2i startIndex = m_tileMap->positionToIndex(sf::Vector2f(currentUnit->getPosition().x, currentUnit->getPosition().y));
 			startIndex -= sf::Vector2i(1, 1);
 
 			sf::Vector2i endIndex = m_tileMap->positionToIndex(
-				sf::Vector2f(currentUnit->getPosition().x + currentUnit->getSize().x+0, currentUnit->getPosition().y + currentUnit->getSize().y+0));
+				sf::Vector2f(currentUnit->getPosition().x + currentUnit->getSize().x, currentUnit->getPosition().y + currentUnit->getSize().y));
 			endIndex += sf::Vector2i(1, 1);
 
 			startIndex.x = Utility::clampValue(startIndex.x, 0, Constants::MapWidth);
@@ -296,7 +295,7 @@ void Level::updateUnitCollision(float deltaTime)
 				////inte högre än tiltTile
 				//while (newPos.y + 1 < tileBounds.top - originalBounds.height)
 				//{
-				//	std::cout << "inte högre än tilblock" << std::endl;
+				//	//std::cout << "inte högre än tilblock" << std::endl;
 				//	newPos.y++;
 				//}
 
@@ -309,7 +308,7 @@ void Level::updateUnitCollision(float deltaTime)
 				////inte lägre än tileBlock
 				//if (unitBounds.left + unitBounds.width - unitLedgeOffset < tileBounds.left + tileBounds.width && unitBounds.left + unitBounds.width >= tileBounds.left + tileBounds.width)
 				//{
-				//	std::cout << "inte lägre än tilblock" << std::endl;
+				//	//std::cout << "inte lägre än tilblock" << std::endl;
 				//	newPos.y = tileBounds.top - originalBounds.height + 1;
 				//}
 

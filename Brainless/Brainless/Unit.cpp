@@ -31,17 +31,23 @@ void Unit::updateMovement(float gravity, float deltaTime)
 	if (!m_isMovementEnabled)
 		return;
 
-	float accelYtrue;
+	float accelYtrue = 0;
+	//normal inAir
 	if (m_inAir && !m_inTilt)
 	{
 
 		accelYtrue = m_acceleration.y + gravity;
 	}
+	//hotfix for faulty collision when inAir and tiltwalking
+	else if (m_inAir && m_inTilt)
+	{
+		m_position.y += abs(m_speed.x) * deltaTime ;
+	}
+	//normal onGround
 	else
 	{
 		m_speed.y = 0;
 		m_acceleration.y = 0;
-		accelYtrue = 0;
 	}
 
 	m_speed.x += m_acceleration.x * deltaTime;

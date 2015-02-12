@@ -1,7 +1,7 @@
 #include "ChasingZombie.h"
 #include <iostream>
 
-#define MAX_SPEED_X (float) 30
+#define MAX_SPEED_X (float) 50
 #define MAX_SPEED_Y (float) 200
 #define COLLISION_WIDTH (int) 80
 #define COLLISION_HEIGHT (int) 190
@@ -37,7 +37,7 @@ void ChasingZombie::updateTask(float deltaTime)
 	float startAccBreakpoint = 150;
 	float minSpeedBeforeStop = 10;
 
-	float chaseDistance = 250;
+	float chaseDistance = 300;
 	float lookDistance = 500;
 	bool slowDown = true;
 	
@@ -71,21 +71,24 @@ void ChasingZombie::updateTask(float deltaTime)
 		}
 		do movement
 	*/
-	sf::Vector2f length = m_target->getPosition() - m_position;
-	float distance = sqrt(pow(length.x, 2) + pow(length.y, 2));
+	m_target = s_playerPointer;
+	if (m_target != nullptr)
+	{
+		sf::Vector2f length = m_target->getPosition() - m_position;
+		float distance = sqrt(pow(length.x, 2) + pow(length.y, 2));
 
-	m_specialSpriteDirection = false;
-	m_direction = dir_noDirection;
-	//chasing zombie Ai
-	
-	//target in sight
-	if (distance < lookDistance)
-		//target looks tasty && not far from home
+		m_specialSpriteDirection = false;
+		m_direction = dir_noDirection;
+		//chasing zombie Ai
+
+		//target in sight
+		if (distance < lookDistance)
+			//target looks tasty && not far from home
 		if (distance < chaseDistance && abs(m_position.x - m_homePosition.x) < m_maxWalkLenght)
-			if (m_target->getPosition().x < m_position.x)
-				m_direction = dir_left;
-			else
-				m_direction = dir_right;
+		if (m_target->getPosition().x < m_position.x)
+			m_direction = dir_left;
+		else
+			m_direction = dir_right;
 		//stare
 		else
 		{
@@ -95,11 +98,11 @@ void ChasingZombie::updateTask(float deltaTime)
 			else
 				m_spriteDirection = dir_right;
 		}
-	//return home
-	else
+		//return home
+		else
 		if (m_position.x + 5 < m_homePosition.x)
 			m_direction = dir_right;
-		else if (m_position.x -5 > m_homePosition.x)
+		else if (m_position.x - 5 > m_homePosition.x)
 			m_direction = dir_left;
 		//isHome
 		else
@@ -107,6 +110,7 @@ void ChasingZombie::updateTask(float deltaTime)
 			m_position.x = m_homePosition.x;
 			m_direction = dir_noDirection;
 		}
+	}
 
 	//movement
 	//Note for simplicity: This is practically physics code and could be used for all unit classes instead of copied.
