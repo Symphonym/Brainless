@@ -177,14 +177,19 @@ void Game::events(const sf::Event &event)
 }
 void Game::update(float deltaTime)
 {
-	// TODO Whoever did these if statements needs to fix them, they don't work when changing maps
-	//if (m_player->getCameraPosition().x < Constants().MapWidth * Constants().TileSize - (m_camera.getSize().x / 2) && m_player->getCameraPosition().x > 0 + (m_camera.getSize().x / 2))
-	//m_camera.setCenter(m_player->getCameraPosition().x, m_camera.getCenter().y);
-
-	//if (m_player->getCameraPosition().y < Constants().MapHeight * Constants().TileSize - (m_camera.getSize().y / 2) && m_player->getCameraPosition().y > 0 + (m_camera.getSize().y / 2))
-	//	m_camera.setCenter(m_camera.getCenter().x, m_player->getCameraPosition().y);
-
 	m_camera.setCenter(m_player->getCameraPosition().x, m_player->getCameraPosition().y);
+
+	if (m_camera.getCenter().y > Constants().MapHeight * Constants().TileSize - (m_camera.getSize().y / 2))
+		m_camera.setCenter(m_camera.getCenter().x, Constants().MapHeight * Constants().TileSize - (m_camera.getSize().y / 2));
+
+	if (m_camera.getCenter().y < (m_camera.getSize().y / 2))
+		m_camera.setCenter(m_camera.getCenter().x, (m_camera.getSize().y / 2));
+
+	if (m_camera.getCenter().x > Constants().MapWidth * Constants().TileSize - (m_camera.getSize().x / 2))
+		m_camera.setCenter(Constants().MapWidth * Constants().TileSize - (m_camera.getSize().x / 2), m_camera.getCenter().y);
+
+	if (m_camera.getCenter().x < (m_camera.getSize().x / 2))
+		m_camera.setCenter((m_camera.getSize().x / 2), m_camera.getCenter().y);
 
 	// Update game logic and input, if not paused
 	// Disable game input when conversation is ongoing

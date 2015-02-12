@@ -125,7 +125,7 @@ void Level::draw(const sf::View &cameraView)
 		if (i==0)
 			m_backgrounds[i].setPosition(sf::Vector2f(cameraView.getCenter().x - (cameraView.getSize().x / 2), cameraView.getCenter().y - (cameraView.getSize().y/2)));
 		else if (i != m_backgrounds.size() - 1)
-			m_backgrounds[i].setPosition(sf::Vector2f(cameraView.getCenter().x / (i + 1), cameraView.getCenter().y / (i + 1)));
+			m_backgrounds[i].setPosition(sf::Vector2f(cameraView.getCenter().x / (i + 1) - (cameraView.getSize().x / 2), cameraView.getCenter().y / (i + 1) - (cameraView.getSize().y / 2)));
 		Renderer::instance().drawBackground(m_backgrounds[i]);
 	}
 	for (std::size_t i = 0; i < m_sprites.size(); i++)
