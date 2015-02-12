@@ -27,6 +27,7 @@ m_inputDirection(dir_noDirection),
 m_jumpState(jump_ready),
 m_jumpPower(0),
 m_jumpFrame(2),
+m_wallState(wall_normal),
 m_hp(3),
 m_damageState(dmg_normal)
 {
@@ -89,8 +90,9 @@ void Player::updateTask(float deltaTime)
 
 		bool slowDown = true;
 		m_inputDirection = dir_noDirection;
+		if (m_inAir) m_wallState = wall_normal; //annars större problem med rörelsen i luften, men kan bli "minimala-skärm-studs" problem i luften istället. Dock körs rätt animation
 		//Left
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) /*&& m_wallState != wall_left*/)
 		{
 			slowDown = false;
 			m_inputDirection = dir_left;
@@ -106,15 +108,20 @@ void Player::updateTask(float deltaTime)
 			}
 			else
 			{
+				m_wallState = wall_normal;
 				if (abs(m_speed.x) < startAccBreakpoint)
 					m_acceleration.x = -speedStartAcc;
 				else
+				{
+					m_wallState = wall_normal;
 					m_acceleration.x = -speedNormalAcc;
+				}
+					
 			}
 
 		}
 		//Right
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) /*&& m_wallState != wall_right*/)
 		{
 			slowDown = false;
 			m_inputDirection = dir_right;
@@ -130,10 +137,14 @@ void Player::updateTask(float deltaTime)
 			}
 			else
 			{
+				
 				if (abs(m_speed.x) < startAccBreakpoint)
 					m_acceleration.x = speedStartAcc;
 				else
+				{
+					m_wallState = wall_normal;
 					m_acceleration.x = speedNormalAcc;
+				}
 			}
 
 		}
@@ -280,6 +291,14 @@ void Player::jump()
 	SoundPlayer::instance().playSound("player_jump", getPosition());
 }
 
+void Player::wallLeft()
+{
+	m_wallState = wall_left;
+}
+void Player::wallRight()
+{
+	m_wallState = wall_right;
+}
 sf::Vector2f Player::getCameraPosition()
 {
 	return m_cameraPos;
@@ -383,7 +402,7 @@ void Player::updateAnimation(float deltaTime)
 
 
 	//IDLE
-	else if ((abs(m_speed.x) < 5) && m_inputDirection == dir_noDirection)
+	else if ((abs(m_speed.x) < 5) && m_inputDirection == dir_noDirection) 
 		animation_idle();
 	
 	//TURN

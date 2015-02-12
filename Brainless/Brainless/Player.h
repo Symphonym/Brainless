@@ -67,10 +67,19 @@ public:
 		dmg_damaged
 	};
 
+	void wallLeft();
+	void wallRight();
 
 protected:
 
 private:
+	enum WallState
+	{
+		wall_normal,
+		wall_left,
+		wall_right
+	};
+	WallState m_wallState;
 	AnimationState m_animState;
 	Direction m_inputDirection;
 	JumpState m_jumpState;

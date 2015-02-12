@@ -254,8 +254,6 @@ void Level::updateUnitCollision(float deltaTime)
 			bool inAir = true; 
 			bool tiltWalking = false;
 			bool wasTiltWalking = currentUnit->getInTilt();
-		//	currentUnit->setInAir(true);
-			//currentUnit->setTilt(false);
 
 			bool collision = false;
 			
@@ -361,17 +359,15 @@ void Level::updateUnitCollision(float deltaTime)
 				sf::Vector2f tileCenter = sf::Vector2f(tileBounds.left + tileBounds.width / 2, tileBounds.top + tileBounds.height / 2);
 				sf::Vector2f unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height / 2);
 				sf::FloatRect unitBottom = sf::FloatRect(unitBounds.left + unitLedgeOffset, unitBounds.top + unitBounds.height, unitBounds.width - unitLedgeOffset * 2, 1);
-
+		
 				//notinAir
 				if (currentUnit->getSpeed().y >= 0)
 					if (tileTopBounds.intersects(unitBottom))
 					{
-				//		std::cout << "SLUTA TILTA?" << std::endl;
 						inAir = false;
 						currentUnit->setTilt(false);
 					}
-
-
+	
 				bool hasCollided = false;
 				sf::FloatRect originalBounds = unitBounds;
 
@@ -428,17 +424,20 @@ void Level::updateUnitCollision(float deltaTime)
 										currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x, 0));
 										currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
 										currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top - originalBounds.height));
-									//	std::cout << "above" << std::endl;
+									/*	std::cout << "above" << std::endl;
+										std::cout << c << std::endl;*/
 									}
 								}
 							}
+							//kolla om under tile
 							else if (unitCenter.y > tileCenter.y)
 							{
 							//	std::cout << "        TTCollision 2" << std::endl;
 								currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x, 0));
 								currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
 								currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top + tileBounds.height));
-							//	std::cout << "under" << std::endl;
+						/*		std::cout << "under" << std::endl;
+								std::cout << c << std::endl;*/
 							}
 						}
 						else if (abs(unitCenter.x - tileCenter.x) > abs(unitCenter.y - tileCenter.y))
@@ -446,10 +445,13 @@ void Level::updateUnitCollision(float deltaTime)
 							//unit vänster om tile
 							if (unitCenter.x < tileCenter.x)
 							{
+								//varför funkar denna bättre än unit till höger om tile
 								currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 								currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
 								currentUnit->setPosition(sf::Vector2f(tileBounds.left - originalBounds.width, currentUnit->getPosition().y));
-							//	std::cout << "left" << std::endl;
+								currentUnit->wallRight();
+					/*			std::cout << "left" << std::endl;
+								std::cout << c << std::endl;*/
 							}
 
 							//unit höger om tile
@@ -457,8 +459,10 @@ void Level::updateUnitCollision(float deltaTime)
 							{
 								currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 								currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
-								currentUnit->setPosition(sf::Vector2f(tileBounds.left + tileBounds.width, currentUnit->getPosition().y));
-						//		std::cout << "hoger" << std::endl;
+								currentUnit->setPosition(sf::Vector2f(tileBounds.left + tileBounds.width, currentUnit->getPosition().y)); //ballar ur totalt om -1 vid x position, varför?
+								currentUnit->wallLeft();
+				/*				std::cout << "hoger" << std::endl;
+								std::cout << c << std::endl;*/
 							}
 						}
 					}
