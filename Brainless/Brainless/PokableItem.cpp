@@ -49,4 +49,6 @@ bool PokableItem::onInteract(Item &otherItem, Game &game)
 		else
 			Notification::instance().write("It's too far away, I need to get closer if I want to poke it");
 	}
+
+	return false;
 }
