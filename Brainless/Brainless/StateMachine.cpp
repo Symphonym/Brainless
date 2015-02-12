@@ -81,7 +81,7 @@ void StateMachine::loop()
 	sf::Clock tickClock;
 	while (m_window.isOpen())
 	{
-
+		//m_window.setFramerateLimit(100); //för kollision test vid låg fps
 		// Get delta time for time based movement
 		float deltaTime = tickClock.restart().asSeconds();
 

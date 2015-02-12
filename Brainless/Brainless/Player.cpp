@@ -6,7 +6,7 @@
 	gå hopp 3 rutor
 	höjd högt hopp 2 rutor
 	höjd kort hopp 1 ruta
-	*/
+*/
 #define MAX_SPEED_X (float) 300
 #define MAX_WALK_SPEED_X (float) 200
 #define MAX_SPEED_Y (float) 700
@@ -42,7 +42,7 @@ void Player::setClimbing(bool climbing)
 
 /*
 	Updates/executes all input and calculates new states
-	*/
+*/
 void Player::updateTask(float deltaTime)
 {
 	m_cameraPos.x = m_position.x;
@@ -69,10 +69,10 @@ void Player::updateTask(float deltaTime)
 
 	if (m_damageState == dmg_normal)
 	{
-
+	
 		/*
 			Walk/Run states
-			*/
+		*/
 		float speedTurnAround = 8;
 		float speedStartAcc = 500;
 		float speedNormalAcc = 200;
@@ -152,10 +152,10 @@ void Player::updateTask(float deltaTime)
 			//slow
 			else m_acceleration.x = -m_speed.x * speedSlowDown;
 		}
-
-		/*
-			Jump states and conditions
-			*/
+		
+		/* 
+			Jump states and conditions 
+		*/
 		//in Air
 		if (m_inAir)
 		{
@@ -276,6 +276,7 @@ void Player::jump()
 	m_speed.y = -m_jumpPower;
 	m_jumpState = jump_inAir;
 	m_inAir = true;
+	m_inTilt = false;
 	SoundPlayer::instance().playSound("player_jump", getPosition());
 }
 
@@ -284,12 +285,12 @@ sf::Vector2f Player::getCameraPosition()
 	return m_cameraPos;
 }
 
-/*
+/* 
 	Determines which animations should be called
-	*/
+*/
 void Player::updateAnimation(float deltaTime)
 {
-
+		
 	//breakpoint between idleJump/runJump animation
 	float runJumpBreakpoint = MAX_WALK_SPEED_X;
 	//breakpoint between walk/run animation
@@ -299,7 +300,7 @@ void Player::updateAnimation(float deltaTime)
 
 	/*
 		Special State Conditions
-		*/
+	*/
 
 	//Ladder Climbing
 	if (m_climbing)
@@ -307,7 +308,7 @@ void Player::updateAnimation(float deltaTime)
 		if (m_speed.y == -1)
 			animation_climbingUp();
 
-		else if (m_speed.y == 1)
+		else if (m_speed.y == 1) 
 			animation_climbingDown();
 	}
 	//Dead
@@ -317,7 +318,7 @@ void Player::updateAnimation(float deltaTime)
 	//TakingDamage
 	else if (m_damageState == dmg_damaged)
 		animation_damaged();
-
+	
 	//startJump
 	else if (m_jumpState == jump_buttonPressed)
 	{
@@ -333,15 +334,15 @@ void Player::updateAnimation(float deltaTime)
 	else if (m_jumpState == jump_land)
 	{
 		if (m_animState == anim_landIdle || m_animState == anim_landRun);
-
+		
 		else if (abs(m_speed.x) <= runBreakpoint) //runJumpBreakpoint
 			animation_landIdle();
-
+		
 		else
 			animation_landRun();
-
+		
 	}
-	else if (m_inAir)
+	else if (m_inAir && !m_inTilt)
 	{
 		//"IDLE"JUMP
 		if (abs(m_speed.x) <= runBreakpoint) //runJumpBreakpoint
@@ -382,42 +383,32 @@ void Player::updateAnimation(float deltaTime)
 
 
 	//IDLE
-	else if ((abs(m_speed.x) < 5) && (m_animState != anim_turn && m_animState != anim_turn)) //kommer inte funka om du stannar samtidigt som du vänder dig, du hamnar i "ingen animation", men annars bli en idle frame direkt efter turn
+	else if ((abs(m_speed.x) < 5) && m_inputDirection == dir_noDirection)
 		animation_idle();
-
+	
 	//TURN
-	else if (m_speed.x < 0 && m_inputDirection == dir_right || 0 < m_speed.x && m_inputDirection == dir_left)
+	else if (m_speed.x < 5 && m_inputDirection == dir_right || -5 < m_speed.x && m_inputDirection == dir_left)
 		//FAST
-	if (m_animState == anim_run || m_animState == anim_turnRun)
-		animation_turnRun();
-	//SLOW
-	else
-		animation_turn();
+		if (m_animState == anim_run || m_animState == anim_turnRun)
+			animation_turnRun();
+		//SLOW
+		else 
+			animation_turn();
 
-
-	////START WALK
-	//else if ((5 < abs(m_speed.x) && m_animState == anim_idle) || m_animState == anim_startWalk)
-	//{
-	//	if (m_animation.getPlayOnceDone() && m_animState == anim_startWalk) 
-	//		animation_walk();
-	//	else 
-	//		animation_startWalk();
-	//
-	//}
 	//RUN
 	else if (runBreakpoint < abs(m_speed.x))
 		animation_run();
 	//WALK
 	else if (5 < abs(m_speed.x))
 		animation_walk();
-
-	else
+	
+	else 
 	{
-		std::cout << "FIXA Får ingen animation" << std::endl; //bör inte uppstå, har hittils inte uppstått
+		std::cout << "FIXA Får ingen animation" << std::endl; //bör inte uppstå
 		std::cout << m_animState << std::endl;
 	}
 
-	std::cout << "speedX: " << m_speed.x << std::endl;
+	//if(m_animState == 8)std::cout << "blah" << std::endl;
 
 	updateSpriteDirection();
 	m_sprite->setTextureRect(m_animation.getRectangle(deltaTime));
@@ -456,14 +447,14 @@ float Player::calcAcceleration(float minAcceleration, float maxAcceleration, flo
 	"PlayerSheet" == 0
 	"PlayerSheetJump" == 1
 	"PlayerSheetRun" == 2
-	*/
+*/
 void Player::animation_idle()
 {
 	if (m_animState != anim_idle)
 	{
-		//	m_animLoopsDone = 0;
+	//	m_animLoopsDone = 0;
 		m_sprite = &m_spriteSheets[0];
-
+	
 		m_animation.loop(0, 2, 3, 4, 8);
 
 		m_animState = anim_idle;
@@ -471,26 +462,16 @@ void Player::animation_idle()
 
 	/*if (m_animation.getPlayOnceDone()) //rip kevins glada smiley, death by grafikernas nya textur
 	{
-	m_animLoopsDone++;
-	if (m_animLoopsDone == 8)
-	{
-	m_animation.playOnce(0, 7, 4, 8);
-	}
-	else
-	m_animation.playOnce(0, 7, 3, 8);
+		m_animLoopsDone++;
+		if (m_animLoopsDone == 8)
+		{
+			m_animation.playOnce(0, 7, 4, 8);
+		}
+		else
+		m_animation.playOnce(0, 7, 3, 8);
 	}*/
 }
 
-//void Player::animation_startWalk()
-//{
-//	if (m_animState != anim_startWalk)
-//	{
-//		m_sprite = &m_spriteSheets[0];
-//		m_animation.playOnce(1, 2, 0, 5);
-//		m_animState = anim_startWalk;
-//	}
-//	//	m_animation.setSpeed(Animation::calcFrameSpeed(5, 20, 0, runBreakpoint, abs(m_speed.x)));
-//}
 void Player::animation_walk()
 {
 	//std::cout << "hej2" << std::endl;
@@ -581,7 +562,7 @@ void Player::animation_inAirFall()
 	if (m_animState != anim_inAirFall)
 	{
 		m_sprite = &m_spriteSheets[1];
-		m_animation.loop(0, 1, 2, 6);
+		m_animation.loop(0, 1, 2, 6); 
 		m_animState = anim_inAirFall;
 	}
 }void Player::animation_inAirUpRun()
@@ -630,8 +611,8 @@ void Player::animation_landRun()
 		m_animation.playOnce(0, 1, 4, 8); //jumpFrame = experimental 3
 		m_animState = anim_landRun;
 		m_jumpFrame = 2; //experimental 
-		/*	std::cout << "LandRun" << std::endl;
-			std::cout << m_speed.x << std::endl;*/
+	/*	std::cout << "LandRun" << std::endl;
+		std::cout << m_speed.x << std::endl;*/
 	}
 }
 void Player::animation_dead()

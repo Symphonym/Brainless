@@ -17,6 +17,7 @@ m_acceleration(sf::Vector2f(0, 0)),
 m_size(size),
 m_maxSpeed(maxSpeed),
 m_inAir(false),
+m_inTilt(false),
 m_animation(SPRITESIZE, SPRITESIZE),
 m_spriteOffset(spriteOffset),
 m_spriteDirection(dir_right),
@@ -30,17 +31,23 @@ void Unit::updateMovement(float gravity, float deltaTime)
 	if (!m_isMovementEnabled)
 		return;
 
-	float accelYtrue;
-	if (m_inAir)
+	float accelYtrue = 0;
+	//normal inAir
+	if (m_inAir && !m_inTilt)
 	{
 
 		accelYtrue = m_acceleration.y + gravity;
 	}
+	//hotfix for faulty collision when inAir and tiltwalking
+	else if (m_inAir && m_inTilt)
+	{
+		m_position.y += abs(m_speed.x) * deltaTime ;
+	}
+	//normal onGround
 	else
 	{
 		m_speed.y = 0;
 		m_acceleration.y = 0;
-		accelYtrue = 0;
 	}
 
 	m_speed.x += m_acceleration.x * deltaTime;
@@ -63,9 +70,13 @@ void Unit::wallRight()
 
 }
 
-void Unit::setStatus(bool inAir)
+void Unit::setInAir(bool inAir)
 {
 	m_inAir = inAir;
+}
+void Unit::setTilt(bool inTilt)
+{
+	m_inTilt = inTilt;
 }
 void Unit::setPosition(sf::Vector2f position)
 {
@@ -179,6 +190,10 @@ void Unit::updateSpriteDirection()
 bool Unit::getInAir() const
 {
 	return m_inAir;
+}
+bool Unit::getInTilt() const
+{
+	return m_inTilt;
 }
 sf::Vector2f Unit::getPosition() const
 {

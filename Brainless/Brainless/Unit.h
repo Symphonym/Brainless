@@ -33,7 +33,8 @@ public:
 
 
 	// Set player status
-	void setStatus(bool inAir);
+	void setInAir(bool inAir);
+	void setTilt(bool inTilt);
 	void setPosition(sf::Vector2f position);
 	void setSpeed(sf::Vector2f speed);
 	void setAcceleration(sf::Vector2f acceleration);
@@ -73,6 +74,7 @@ public:
 	sf::Vector2f getAcceleration() const;
 	sf::Vector2f getSize() const;
 	bool getInAir() const;
+	bool getInTilt() const;
 	sf::FloatRect getCollisionRect();
 	UnitType getUnitType();
 	Direction getDirection();
@@ -93,6 +95,7 @@ protected:
 
 	bool m_specialSpriteDirection; //if true, don't calculate a direction, use the current set direction
 	bool m_inAir;
+	bool m_inTilt;
 	Animation m_animation;
 	void updateSpriteDirection();
 	Direction m_spriteDirection;

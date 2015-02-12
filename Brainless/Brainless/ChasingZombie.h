@@ -32,7 +32,6 @@ protected:
 private:
 	sf::Vector2f m_homePosition;
 	AnimationState m_animState;
-	Direction m_spriteDirection;
 	int m_maxWalkLenght;
 	int m_currentLength;
 	Direction m_direction;
