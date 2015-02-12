@@ -23,6 +23,7 @@ public:
 	static const int InventoryHeight = 4;
 
 	static const int InteractDistance = 300;
+	static const int StickInteractAddition = 100;
 
 	static const std::string CantPickUpString;
 	static const std::string CantUseString;

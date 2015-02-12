@@ -162,6 +162,7 @@
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TwineItem.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="PokableItem.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="VendingMachineItem.cpp" />
     <ClCompile Include="WalkingZombie.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="TwineItem.h" />
     <ClInclude Include="Unit.h" />
+    <ClInclude Include="PokableItem.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="VendingMachineItem.h" />
     <ClInclude Include="WalkingZombie.h" />
