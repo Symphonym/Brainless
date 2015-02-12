@@ -1,4 +1,5 @@
 #include "ChasingZombie.h"
+#include <iostream>
 
 #define MAX_SPEED_X (float) 30
 #define MAX_SPEED_Y (float) 200
@@ -15,7 +16,7 @@
 ChasingZombie::ChasingZombie(sf::Vector2f startPosition, int maxLengthX)
 :
 Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_ChasingZombie),
-m_maxWalkLenght(maxLengthX),
+m_maxWalkLenght(abs(maxLengthX)),
 m_direction(dir_noDirection),
 m_currentLength(0),
 m_animState(anim_noAnimation),
@@ -36,49 +37,76 @@ void ChasingZombie::updateTask(float deltaTime)
 	float startAccBreakpoint = 150;
 	float minSpeedBeforeStop = 10;
 
-	float chaseDistance = 500;
+	float chaseDistance = 250;
+	float lookDistance = 500;
 	bool slowDown = true;
 	
 	//Chasing Zombie's AI
-
-	//not done
-	//not far away from home
-	//if (abs(m_homePosition.x - m_position.x) < m_maxWalkLenght)
-	//{
-
-		sf::Vector2f length = m_target->getPosition() - getPosition();
-		if (length.x < 0 && -chaseDistance < length.x)
+	/*
+		special spriteDirection = false;
+		if(target in sight)
 		{
-			m_chaseState = chase_chase;
-			m_direction = dir_left;
+			if(target looks tasty && NOT far from Home)
+			{
+				chasemode
+				chase direction
+			}
+			else
+			{
+				special spriteDirection = true;
+				look at player
+				stand still
+			}
 		}
-		else if (0 < length.x && length.x < chaseDistance)
+		else
 		{
-			m_chaseState = chase_chase;
+			if(home)
+			{
+				stand still;
+			}
+			else
+			{
+				calculate direction
+			}
+		}
+		do movement
+	*/
+	sf::Vector2f length = m_target->getPosition() - m_position;
+	float distance = sqrt(pow(length.x, 2) + pow(length.y, 2));
+
+	m_specialSpriteDirection = false;
+	m_direction = dir_noDirection;
+	//chasing zombie Ai
+	
+	//target in sight
+	if (distance < lookDistance)
+		//target looks tasty && not far from home
+		if (distance < chaseDistance && abs(m_position.x - m_homePosition.x) < m_maxWalkLenght)
+			if (m_target->getPosition().x < m_position.x)
+				m_direction = dir_left;
+			else
+				m_direction = dir_right;
+		//stare
+		else
+		{
+			m_specialSpriteDirection = true;
+			if (m_target->getPosition().x < m_position.x)
+				m_spriteDirection = dir_left;
+			else
+				m_spriteDirection = dir_right;
+		}
+	//return home
+	else
+		if (m_position.x + 5 < m_homePosition.x)
 			m_direction = dir_right;
-		}
-		else if (m_chaseState == chase_chase)
+		else if (m_position.x -5 > m_homePosition.x)
+			m_direction = dir_left;
+		//isHome
+		else
 		{
-			m_chaseState = chase_returnHome;
-		}
-
-	//}
-	//else
-	//{
-	//	m_chaseState == chase_farFromHome;
-	//	m_direction = dir_noDirection;
-	//}
-
-	if (m_chaseState == chase_returnHome)
-	{
-		if (/*home*/ true)
-		{
-			m_chaseState = chase_idle;
+			m_position.x = m_homePosition.x;
 			m_direction = dir_noDirection;
 		}
-		//else return home ai
-		
-	}
 
 	//movement
 	//Note for simplicity: This is practically physics code and could be used for all unit classes instead of copied.
