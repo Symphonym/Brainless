@@ -39,8 +39,8 @@ public:
 	virtual void update(float deltaTime, Game &game) {};
 
 
-	virtual bool onInteract(Item &otherItem) { return false;  }; // Called when this item iteracts with another item, returning TRUE will destroy THIS item
-	virtual bool onInteractedWith(Item &otherItem) { return false; }; // Called when another item interactors with THIS item, returning TRUE will destroy THIS item
+	virtual bool onInteract(Item &otherItem, Game &game) { return false;  }; // Called when this item iteracts with another item, returning TRUE will destroy THIS item
+	virtual bool onInteractedWith(Item &otherItem, Game &game) { return false; }; // Called when another item interactors with THIS item, returning TRUE will destroy THIS item
 	virtual bool onSyncedWith(Item &otherItem) { return false; } // Called when another item with the same syncID is triggered, returning TRUE will destroy this item
 	virtual bool onInteractUnit(Unit &unit) { return false; } // Called when this item interacts with a unit, returning TRUE will destroy this item
 

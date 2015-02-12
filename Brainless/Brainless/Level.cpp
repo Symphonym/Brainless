@@ -9,13 +9,6 @@
 Level::Level()
 {
 	// Load game resources
-	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Level.txt");
-	// Load backgrounds
-	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("ABackground")));
-	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("BBackground")));
-	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("CBackground")));
-	
-	//SoundPlayer::instance().playMusic("LevelMusic", true);
 
 	// Load a default map with nothing but ground tiles
 	TileMap::TileMapLayout layout;
@@ -31,6 +24,17 @@ Level::Level()
 void Level::setSpawnPosition(const sf::Vector2f &spawnPos)
 {
 	m_spawnPos = spawnPos;
+}
+void Level::loadLevelResources()
+{
+	m_backgrounds.clear();
+
+	// Load backgrounds
+	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("ABackground")));
+	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("BBackground")));
+	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("CBackground")));
+
+	//SoundPlayer::instance().playMusic("LevelMusic", true);
 }
 
 Unit* Level::addUnit(UnitPtr unit)

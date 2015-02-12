@@ -116,11 +116,14 @@ void Game::changeLevel(int levelIndex)
 {
 	// Reset level
 	m_level.reset();
-
 	m_levelIndex = levelIndex;
+
+	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Level" + std::to_string(m_levelIndex) + ".txt");
+
 	FileSave::loadMapText(m_level, m_levelIndex);
 	FileSave::loadLevelProgress(m_level, m_levelIndex);
 	FileSave::loadInventory(*m_inventory);
+	m_level.loadLevelResources();
 
 	// Add player to level
 	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(m_level.getSpawnPos()))));
@@ -169,7 +172,7 @@ void Game::events(const sf::Event &event)
 	// Disable game input when conversation is ongoing
 	if (!ConversationBox::instance().isShown())
 	{
-		m_inventory->events(event, m_window, m_level);
+		m_inventory->events(event, *this);
 		m_popup->events(event, *this);
 	}
 	else

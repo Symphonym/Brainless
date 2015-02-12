@@ -11,8 +11,7 @@ public:
 
 	VendingMachineItem(const std::string &textureName, const IdVector &itemsWithin, int id);
 
-	virtual void onUse(Game &game);
-	virtual bool onInteractedWith(Item &otherItem);
+	virtual bool onInteractedWith(Item &otherItem, Game &game);
 
 	virtual void serialize(std::ofstream &writer) const;
 	virtual void deserialize(std::ifstream &reader);
@@ -21,9 +20,6 @@ public:
 
 private:
 
-	// A list of pending payments, TRUE = paid with coin, FALSE = cheated the system
-	// There can only be 1 FALSE payment in the vector
-	std::vector<bool> m_payments;
 	IdVector m_itemsWithin;
 };
 

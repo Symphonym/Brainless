@@ -42,9 +42,9 @@ void Inventory::addItem(ItemPtr item)
 	}
 }
 
-void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindow, Level &level)
+void Inventory::events(const sf::Event &event, Game &game)
 {
-	sf::Vector2i mousePos = sf::Mouse::getPosition(gameWindow);
+	sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
 
 	// Toggle inventory
 	if (event.type == sf::Event::KeyReleased)
@@ -52,7 +52,7 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 		if (event.key.code == sf::Keyboard::I)
 		{
 			m_isOpen = !m_isOpen;
-			SoundPlayer::instance().playSound("inventory_open",gameWindow.getView().getCenter());
+			SoundPlayer::instance().playSound("inventory_open",game.getWindow().getView().getCenter());
 		}
 	}
 
@@ -133,9 +133,9 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 				bool interactedWithUnit = false;
 
 				// Try unit interaction
-				for (std::size_t i = 0; i < level.getUnits().size(); i++)
+				for (std::size_t i = 0; i < game.getLevel().getUnits().size(); i++)
 				{
-					Unit& unit = *level.getUnits()[i].get();
+					Unit& unit = *game.getLevel().getUnits()[i].get();
 					if (m_mouseItem->getSprite().getGlobalBounds().intersects(unit.getCollisionRect()))
 					{
 						// Invoke interaction handling on item
@@ -144,7 +144,7 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 
 						// Invoke interaction on unit
 						if (unit.onInteractedWith(*m_mouseItem.get()))
-							level.removeUnit(i);
+							game.getLevel().removeUnit(i);
 
 						interactedWithUnit = true;
 						break;
@@ -152,20 +152,20 @@ void Inventory::events(const sf::Event &event, const sf::RenderWindow &gameWindo
 				}
 
 				// Try item interaction
-				for (std::size_t i = 0; i < level.getItems().size(); i++)
+				for (std::size_t i = 0; i < game.getLevel().getItems().size(); i++)
 				{
 					if (!m_mouseItem || interactedWithUnit)
 						break;
 
-					Item& item = *level.getItems()[i].get();
+					Item& item = *game.getLevel().getItems()[i].get();
 					if (m_mouseItem->getSprite().getGlobalBounds().intersects(item.getSprite().getGlobalBounds()))
 					{
 						// Invoke interaction on world item
-						if (item.onInteractedWith(*m_mouseItem.get()))
-							level.removeItem(i);
+						if (item.onInteractedWith(*m_mouseItem.get(), game))
+							game.getLevel().removeItem(i);
 
 						// Invoke interaction handling on mouse item
-						if (m_mouseItem->onInteract(item))
+						if (m_mouseItem->onInteract(item, game))
 							delete m_mouseItem.release();
 
 						break;

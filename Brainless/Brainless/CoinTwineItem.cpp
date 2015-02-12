@@ -8,7 +8,7 @@ Item("String & Coin", "CoinTwineItem", id)
 	m_lootable = true;
 }
 
-bool CoinTwineItem::onInteract(Item &otherItem)
+bool CoinTwineItem::onInteract(Item &otherItem, Game &game)
 {
 	if (otherItem.getName() == "Vending Machine")
 		return false;

@@ -23,7 +23,7 @@ public:
 	// Set which level the inventory will interact with
 	void setCurrentLevel(Level* level);
 
-	void events(const sf::Event &event, const sf::RenderWindow &gameWindow, Level &level);
+	void events(const sf::Event &event, Game &game);
 	void update(float deltaTime, Game &game);
 
 	void draw();

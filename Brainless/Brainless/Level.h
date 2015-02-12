@@ -19,6 +19,7 @@ public:
 	Level();
 
 	void setSpawnPosition(const sf::Vector2f &spawnPos);
+	void loadLevelResources();
 
 	// Adds a unit to the level and returns a pointer to it
 	Unit* addUnit(UnitPtr unit);

@@ -1,4 +1,5 @@
 -ResourceFile,ResourceLoad_MainMenu.txt
++ResourceFile,ResourceLoad_PauseMenu.txt
 
 # SPRITE SHEET TEXTURES
 

@@ -13,7 +13,7 @@ public:
 	virtual void deserialize(std::ifstream &reader);
 
 	virtual void onUse(Game &game);
-	virtual bool onInteractedWith(Item &otherItem);
+	virtual bool onInteractedWith(Item &otherItem, Game &game);
 
 	virtual Item* clone();
 

@@ -3,7 +3,6 @@
 #include "State.h"
 #include "Cursor.h"
 #include "ResourceLoader.h"
-#include <iostream>
 
 StateMachine::StateMachine()
 :
@@ -22,11 +21,17 @@ m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 		newText.setColor(sf::Color::Green);
 		m_loadingText.push_back(newText);
 
-		std::cout << current << "/" << total << std::endl;
 		m_window.clear();
 
 		float completeness = static_cast<float>(current) / static_cast<float>(total);
 		m_loadingSprite.setScale(completeness*m_window.getSize().x, 1);
+		
+		int r = 255 + (0 - 255) * completeness;
+		int g = 0 + (255 - 0) * completeness;
+		m_loadingSprite.setColor(sf::Color::Color(
+			r,
+			g,
+			0));
 
 		// Draw states as normal
 		draw();
@@ -47,12 +52,11 @@ m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 	});
 
 	sf::Image loadingBar;
-	loadingBar.create(1, 50, sf::Color::Green);
+	loadingBar.create(1, 50, sf::Color::White);
 
 	m_loadingBar.loadFromImage(loadingBar);
 	m_loadingSprite.setTexture(m_loadingBar);
 
-	//m_loadingSprite.setTexture(ResourceLoader::instance().retrieveTexture("LoadingCross"));
 	m_loadingSprite.setPosition(
 		0,
 		m_window.getSize().y - m_loadingSprite.getGlobalBounds().height);

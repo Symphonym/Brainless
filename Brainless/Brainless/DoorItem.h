@@ -10,7 +10,7 @@ public:
 	DoorItem(bool locked, int id);
 
 	// To handle unlocking of the door, if it is locked
-	virtual bool onInteractedWith(Item &otherItem);
+	virtual bool onInteractedWith(Item &otherItem, Game &game);
 
 	// To handle opening of door, if it is unlocked
 	virtual void onUse(Game &game);

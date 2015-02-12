@@ -9,7 +9,7 @@ public:
 
 	CoinItem(int id);
 
-	virtual bool onInteract(Item &otherItem);
+	virtual bool onInteract(Item &otherItem, Game &game);
 
 	virtual Item* clone();
 };

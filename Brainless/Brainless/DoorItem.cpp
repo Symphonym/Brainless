@@ -15,7 +15,7 @@ m_isLocked(locked)
 	m_collisionOffset = sf::Vector2f(40, 0);
 }
 
-bool DoorItem::onInteractedWith(Item &otherItem)
+bool DoorItem::onInteractedWith(Item &otherItem, Game &game)
 {
 	if (m_isLocked && otherItem.getSyncID() == getSyncID() && otherItem.getName() == "Key")
 	{

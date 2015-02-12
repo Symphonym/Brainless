@@ -33,7 +33,7 @@ void WindowItem::onUse(Game &game)
 	if (m_smashed)
 		game.changeLevelTransition(m_levelIndex);
 }
-bool WindowItem::onInteractedWith(Item &otherItem)
+bool WindowItem::onInteractedWith(Item &otherItem, Game &game)
 {
 	if (otherItem.getName() == "Stone" && !m_smashed)
 	{
