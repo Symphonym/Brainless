@@ -117,6 +117,7 @@
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DialogTree.cpp" />
     <ClCompile Include="DoorItem.cpp" />
+    <ClCompile Include="DoubleStickItem.cpp" />
     <ClCompile Include="DuctTapeItem.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorGridMode.cpp" />
@@ -129,6 +130,7 @@
     <ClCompile Include="KeyTwineItem.cpp" />
     <ClCompile Include="LevelTransition.cpp" />
     <ClCompile Include="LighterItem.cpp" />
+    <ClCompile Include="LongStickItem.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="RubberGlovesItem.cpp" />
@@ -154,11 +156,13 @@
     <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="StickItem.cpp" />
     <ClCompile Include="StoneItem.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TwineItem.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="PokableItem.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="VendingMachineItem.cpp" />
     <ClCompile Include="WalkingZombie.cpp" />
@@ -180,6 +184,7 @@
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="DialogTree.h" />
     <ClInclude Include="DoorItem.h" />
+    <ClInclude Include="DoubleStickItem.h" />
     <ClInclude Include="DuctTapeItem.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EditorGridMode.h" />
@@ -193,6 +198,7 @@
     <ClInclude Include="KeyTwineItem.h" />
     <ClInclude Include="LevelTransition.h" />
     <ClInclude Include="LighterItem.h" />
+    <ClInclude Include="LongStickItem.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="RubberGlovesItem.h" />
     <ClInclude Include="ScissorLift.h" />
@@ -218,11 +224,13 @@
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="StickItem.h" />
     <ClInclude Include="StoneItem.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="TwineItem.h" />
     <ClInclude Include="Unit.h" />
+    <ClInclude Include="PokableItem.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="VendingMachineItem.h" />
     <ClInclude Include="WalkingZombie.h" />
