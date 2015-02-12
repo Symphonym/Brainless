@@ -11,7 +11,7 @@ class Renderer
 public:
 
 	// Allows a shader to be used when rendering
-	void plugShader(const sf::Shader &shader);
+	void plugShader(sf::Shader &shader);
 	void unplugShader();
 
 	// Set the render target of the renderer
@@ -36,6 +36,9 @@ public:
 	// Executes all draw calls for this frame
 	void executeDraws();
 
+	// Gets the current shader, returns nullptr if no shader is set at the moment
+	sf::Shader* getCurrentShader();
+
 	static Renderer& instance();
 
 private:
@@ -56,7 +59,7 @@ private:
 
 	std::vector<std::pair<const sf::Drawable*, std::vector<sf::IntRect> > > m_testTasks;
 
-	const sf::Shader *m_shader;
+	sf::Shader *m_shader;
 	sf::RenderTarget *m_renderTarget;
 	TileMap *m_tileMap;
 };

@@ -15,6 +15,7 @@
 #include "KeyTwineItem.h"
 #include "WindowItem.h"
 #include "StoneItem.h"
+#include "LighterItem.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -40,6 +41,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new KeyTwineItem(13)));
 	addItem(ItemPtr(new WindowItem(false, 1, 14)));
 	addItem(ItemPtr(new StoneItem(15)));
+	addItem(ItemPtr(new LighterItem(16)));
 
 }
 

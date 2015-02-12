@@ -6,17 +6,18 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+#include <functional>
+
 
 class ResourceLoader
 {
 public:
 
-	// Load a resource and map it to the desired name
-	void loadTexture(const std::string &name, const std::string &filePath);
-	void loadShader(const std::string &name, const std::string &filePath);
-	void loadSound(const std::string &name, const std::string &filePath);
-	void loadMusic(const std::string &name, const std::string &filePath);
-	void loadFont(const std::string &name, const std::string &filePath);
+	typedef std::function<void(const std::string &info, int currentlyLoaded, int totalResources)> LoadingHandler;
+
+	void setLoadingHandler(LoadingHandler handler);
+
+
 
 	// Retrieve a resource by name
 	sf::Texture& retrieveTexture(const std::string &name);
@@ -25,15 +26,10 @@ public:
 	sf::Music& retrieveMusic(const std::string &name);
 	sf::Font& retrieveFont(const std::string &name);
 
-	// Attempt to unload a resource, returns true if the unloading was successfull
-	bool unloadTexture(const std::string &name);
-	bool unloadShader(const std::string &name);
-	bool unloadSound(const std::string &name);
-	bool unloadMusic(const std::string &name);
-	bool unloadFont(const std::string &name);
 
 	// Load multiple resources from a resource file
-	bool loadFromFile(const std::string &fileName);
+	bool loadResourceFile(const std::string &fileName);
+
 
 	// Returns the names of all textures currently loaded in memory
 	// TODO std::vector<std::string> getTexturesInMemory() const;
@@ -44,7 +40,13 @@ public:
 
 private:
 
+	friend class ResourceFile;
+
 	ResourceLoader();
+
+	int m_totalResources; // Total amount of resources to load
+	int m_currentResources; // Resources loaded
+	LoadingHandler m_handler;
 
 	typedef std::unique_ptr<sf::Texture> TexturePtr;
 	typedef std::unique_ptr<sf::Shader> ShaderPtr;
@@ -57,6 +59,26 @@ private:
 	std::unordered_map<std::string, SoundPtr> m_sounds;
 	std::unordered_map<std::string, MusicPtr> m_music;
 	std::unordered_map<std::string, FontPtr> m_fonts;
+
+
+	void callHandler(const std::string &info);
+
+	// Loads from resource file, can execute recursively to load other resource files
+	bool loadFromFile(const std::string &fileName);
+
+	// Load a resource and map it to the desired name
+	void loadTexture(const std::string &name, const std::string &filePath);
+	void loadShader(const std::string &name, const std::string &filePath);
+	void loadSound(const std::string &name, const std::string &filePath);
+	void loadMusic(const std::string &name, const std::string &filePath);
+	void loadFont(const std::string &name, const std::string &filePath);
+
+	// Attempt to unload a resource, returns true if the unloading was successfull
+	bool unloadTexture(const std::string &name);
+	bool unloadShader(const std::string &name);
+	bool unloadSound(const std::string &name);
+	bool unloadMusic(const std::string &name);
+	bool unloadFont(const std::string &name);
 };
 
 #endif

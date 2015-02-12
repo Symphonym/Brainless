@@ -19,6 +19,8 @@ public:
 	Level();
 
 	void setSpawnPosition(const sf::Vector2f &spawnPos);
+	void setDarkness(bool enabled);
+	void loadLevelResources();
 
 	// Adds a unit to the level and returns a pointer to it
 	Unit* addUnit(UnitPtr unit);
@@ -52,11 +54,13 @@ public:
 	Unit& getUnit(std::size_t index);
 
 	const sf::Vector2f& getSpawnPos() const;
+	bool isDark() const;
 
 private:
 
 	void updateUnitCollision(float deltaTime);
 
+	bool m_enableDarkness;
 	sf::Vector2f m_spawnPos;
 
 	MapPtr m_tileMap; // Tilemap of all the tiles in the level
@@ -64,7 +68,6 @@ private:
 	std::vector<LevelSprite> m_sprites; // Decoration sprites in the level
 	std::vector<sf::Sprite> m_backgrounds; //Backgrounds in the level
 	std::vector<UnitPtr> m_units; // Units in the level
-
 
 	// List of units
 	// List of items

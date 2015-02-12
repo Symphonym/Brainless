@@ -1,20 +1,16 @@
 #include "Level.h"
 #include "Renderer.h"
 #include "ResourceLoader.h"
+#include "SoundPlayer.h"
 #include "Constants.h"
 #include "Utility.h"
 #include "MovingPlatformItem.h"
 
 Level::Level()
+:
+m_enableDarkness(false)
 {
 	// Load game resources
-	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_Level.txt");
-	// Load backgrounds
-	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("ABackground")));
-	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("BBackground")));
-	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("CBackground")));
-	m_backgrounds[2].setColor(sf::Color(255, 255, 255, 255));
-
 
 	// Load a default map with nothing but ground tiles
 	TileMap::TileMapLayout layout;
@@ -30,6 +26,25 @@ Level::Level()
 void Level::setSpawnPosition(const sf::Vector2f &spawnPos)
 {
 	m_spawnPos = spawnPos;
+}
+void Level::setDarkness(bool enabled)
+{
+	m_enableDarkness = enabled;
+}
+void Level::loadLevelResources()
+{
+	m_backgrounds.clear();
+
+	// Load backgrounds
+	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("ABackground")));
+	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("BBackground")));
+	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("CBackground")));
+
+	//SoundPlayer::instance().playMusic("LevelMusic", true);
+	if (m_enableDarkness)
+		Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("DarknessShader"));
+	else
+		Renderer::instance().unplugShader();
 }
 
 Unit* Level::addUnit(UnitPtr unit)
@@ -102,6 +117,12 @@ void Level::reset()
 
 void Level::update(float deltaTime, Game &game)
 {
+	if (m_enableDarkness)
+	{
+		sf::Shader *shader = Renderer::instance().getCurrentShader();
+		shader->setParameter("enableDarkness", 0);
+	}
+
 	const int unitSpeed = 600;
 	for (std::size_t i = 0; i < m_units.size(); i++)
 	{
@@ -124,7 +145,7 @@ void Level::draw(const sf::View &cameraView)
 		if (i==0)
 			m_backgrounds[i].setPosition(sf::Vector2f(cameraView.getCenter().x - (cameraView.getSize().x / 2), cameraView.getCenter().y - (cameraView.getSize().y/2)));
 		else if (i != m_backgrounds.size() - 1)
-			m_backgrounds[i].setPosition(sf::Vector2f(cameraView.getCenter().x / (i + 1), cameraView.getCenter().y / (i + 1)));
+			m_backgrounds[i].setPosition(sf::Vector2f(cameraView.getCenter().x / (i + 1) - (cameraView.getSize().x / 2), cameraView.getCenter().y / (i + 1) - (cameraView.getSize().y / 2)));
 		Renderer::instance().drawBackground(m_backgrounds[i]);
 	}
 	for (std::size_t i = 0; i < m_sprites.size(); i++)
@@ -173,6 +194,11 @@ const sf::Vector2f& Level::getSpawnPos() const
 	return m_spawnPos;
 }
 
+bool Level::isDark() const
+{
+	return m_enableDarkness;
+}
+
 
 
 #include <iostream>
@@ -199,11 +225,11 @@ void Level::updateUnitCollision(float deltaTime)
 				sf::Vector2f(currentUnit->getPosition().x + currentUnit->getSize().x+0, currentUnit->getPosition().y + currentUnit->getSize().y+0));
 			endIndex += sf::Vector2i(1, 1);
 
-			startIndex.x = Utility::clampValue(startIndex.x, 0, Constants::MapWidth - 1);
-			startIndex.y = Utility::clampValue(startIndex.y, 0, Constants::MapHeight - 1);
+			startIndex.x = Utility::clampValue(startIndex.x, 0, Constants::MapWidth);
+			startIndex.y = Utility::clampValue(startIndex.y, 0, Constants::MapHeight);
 
-			endIndex.x = Utility::clampValue(endIndex.x, 0, Constants::MapWidth - 1);
-			endIndex.y = Utility::clampValue(endIndex.y, 0, Constants::MapHeight - 1);
+			endIndex.x = Utility::clampValue(endIndex.x, 0, Constants::MapWidth);
+			endIndex.y = Utility::clampValue(endIndex.y, 0, Constants::MapHeight);
 
 			//std::cout << "STARTINDEX X " << startIndex.x << " STARTINDEX Y " << startIndex.y << " " << currentUnit->getInAir() << std::endl;
 

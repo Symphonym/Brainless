@@ -7,16 +7,12 @@ class ResourceFile
 {
 public:
 
-	ResourceFile(const std::string &fileName);
+	ResourceFile();
 
-	// Returns true if the file loaded successfully
-	bool hasLoaded() const;
+	bool loadResourceFile(const std::string &fileName, bool unloadAll = false);
 
-private:
-
-	void loadResourceFile(const std::string &fileName);
-
-	bool m_hasLoaded;
+	// Counts the amount of load/unloads in a resource file, excluding ResourceFile load/unload calls
+	int countResourceCalls(const std::string &fileName);
 
 };
 

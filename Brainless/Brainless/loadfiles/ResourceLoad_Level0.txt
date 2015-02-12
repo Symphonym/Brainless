@@ -1,0 +1,10 @@
+# BACKGROUND TEXTURES
++Texture,images/backgrounds/ABackground.png,ABackground
++Texture,images/backgrounds/BBackground.png,BBackground
++Texture,images/backgrounds/CBackground.png,CBackground
+
+# BACKGROUND MUSIC
++Music,music/LevelMusic.wav,LevelMusic
+
+# SHADER TEST
++Shader,shaders/DarknessShader.txt,DarknessShader

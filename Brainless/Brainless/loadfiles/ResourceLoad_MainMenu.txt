@@ -12,3 +12,6 @@
 
 # CONFIRM BACKGROUND
 +Texture,images/UI/newGameConfirmTest.png,NewGameConfirmBG
+
+# MUSIC
++Music,music/MenuMusic.wav,MenuMusic

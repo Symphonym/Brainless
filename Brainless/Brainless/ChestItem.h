@@ -10,7 +10,7 @@ public:
 	ChestItem(bool locked, std::vector<int> itemsWithin, int id);
 
 	virtual void onUse(Game &game);
-	virtual bool onInteractedWith(Item &otherItem);
+	virtual bool onInteractedWith(Item &otherItem, Game &game);
 
 	virtual void serialize(std::ofstream &writer) const;
 	virtual void deserialize(std::ifstream &reader);

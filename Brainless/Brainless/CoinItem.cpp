@@ -9,10 +9,13 @@ Item("Coin", "CoinItem", id)
 	addCombination(4, 11, true);
 }
 
-bool CoinItem::onInteract(Item &otherItem)
+bool CoinItem::onInteract(Item &otherItem, Game &game)
 {
 	if (otherItem.getName() == "Vending Machine")
+	{
+		SoundPlayer::instance().playSound("item_coin", getPosition());
 		return true;
+	}
 	else
 		return false;
 }

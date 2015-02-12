@@ -9,7 +9,7 @@ public:
 
 	KeyItem(const std::string &textureName, int id);
 
-	virtual bool onInteract(Item &otherItem);
+	virtual bool onInteract(Item &otherItem, Game &game);
 
 	virtual Item* clone();
 };

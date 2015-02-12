@@ -3,6 +3,7 @@
 
 #include <SFML\Graphics.hpp>
 #include "Animation.h"
+#include "SoundPlayer.h"
 #include <vector>
 
 //version 0.2

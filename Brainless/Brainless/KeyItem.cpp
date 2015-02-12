@@ -10,7 +10,7 @@ Item("Key", textureName, id)
 	addCombination(4, 13, true);
 }
 
-bool KeyItem::onInteract(Item &otherItem)
+bool KeyItem::onInteract(Item &otherItem, Game &game)
 {
 	// A key is consumed if it can be used
 	if (otherItem.getSyncID() == getSyncID())

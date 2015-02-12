@@ -55,7 +55,7 @@ void ChestItem::onUse(Game &game)
 			getSprite().setTexture(ResourceLoader::instance().retrieveTexture("ChestClosed"));
 	}
 }
-bool ChestItem::onInteractedWith(Item &otherItem)
+bool ChestItem::onInteractedWith(Item &otherItem, Game &game)
 {
 	if (m_isLocked && otherItem.getSyncID() == getSyncID() && otherItem.getName() == "Key")
 	{

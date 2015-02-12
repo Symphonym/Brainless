@@ -1,4 +1,5 @@
-
+# LOADING CROSS
++Texture,images/UI/loadingCross.png,LoadingCross
 
 # TEST CURSOR TEXTURES
 +Texture,images/UI/defaultCursor.png,DefaultCursor
@@ -29,6 +30,7 @@
 +Texture,images/items/windowWhole.png,WindowWholeItem
 +Texture,images/items/windowSmashed.png,WindowSmashedItem
 +Texture,images/items/stone.png,StoneItem
++Texture,images/items/lighter.png,LighterItem
 
 +Texture,images/items/pickup.png,TestItem
 +Texture,images/items/wizard_idle.png,TestItem2

@@ -17,6 +17,7 @@ public:
 
 	template<typename TType> void pushState()
 	{
+		m_loadingText.clear();
 		m_window.setView(m_window.getDefaultView());
 		m_states.push_back(std::move(StatePtr(new TType(*this))));
 	};
@@ -28,7 +29,13 @@ public:
 
 private:
 
+	sf::Texture m_loadingBar;
+	sf::Sprite m_loadingSprite;
+	std::vector<sf::Text> m_loadingText;
+
 	void loop();
+
+	void draw();
 
 	std::vector<StatePtr> m_states;
 	std::vector<StatePtr> m_removeRequests;

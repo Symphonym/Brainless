@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "Level.h"
+#include "LevelTransition.h"
 #include "Inventory.h"
 #include "PopUpMenu.h"
 #include "State.h"
@@ -31,6 +32,8 @@ public:
 
 	// Loads a new level, resetting player position to starting position, resetting HUD etc
 	void changeLevel(int levelIndex);
+	// Does the same as 'changeLevel' except the screen will fade out and fade in
+	void changeLevelTransition(int levelIndex);
 
 	// Add a rendering camera, the list of extra cameras is cleared each frame
 	void addCamera(const sf::View &camera);
@@ -44,6 +47,8 @@ private:
 
 	sf::View m_camera;
 	std::vector<sf::View> m_extraCameras;
+
+	std::unique_ptr<LevelTransition> m_levelTransition;
 
 	int m_levelIndex;
 	Level m_level;

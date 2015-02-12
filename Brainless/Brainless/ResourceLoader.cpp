@@ -14,6 +14,11 @@ ResourceLoader& ResourceLoader::instance()
 	return theInstance;
 }
 
+void ResourceLoader::setLoadingHandler(LoadingHandler handler)
+{
+	m_handler = handler;
+}
+
 void ResourceLoader::loadTexture(const std::string &name, const std::string &filePath)
 {
 	auto itr = m_textures.find(name);
@@ -21,6 +26,8 @@ void ResourceLoader::loadTexture(const std::string &name, const std::string &fil
 	// A texture by this name does not exist already
 	if (itr == m_textures.end())
 	{
+		callHandler("Loading texture (" + name + "): " + filePath);
+
 		TexturePtr texPtr = TexturePtr(new sf::Texture());
 		if (texPtr->loadFromFile(filePath))
 			m_textures[name] = std::move(texPtr);
@@ -41,6 +48,8 @@ void ResourceLoader::loadShader(const std::string &name, const std::string &file
 	// A shader by this name does not exist already
 	if (itr == m_shaders.end())
 	{
+		callHandler("Loading shader (" + name + "): " + filePath);
+
 		// TODO, only supports fragment shaders for now
 		ShaderPtr shadPtr = ShaderPtr(new sf::Shader());
 		if (shadPtr->loadFromFile(filePath, sf::Shader::Fragment))
@@ -56,6 +65,8 @@ void ResourceLoader::loadSound(const std::string &name, const std::string &fileP
 	// A sound by this name does not exist already
 	if (itr == m_sounds.end())
 	{
+		callHandler("Loading sound (" + name + "): " + filePath);
+
 		SoundPtr soundPtr = SoundPtr(new sf::SoundBuffer());
 		if (soundPtr->loadFromFile(filePath))
 			m_sounds[name] = std::move(soundPtr);
@@ -70,6 +81,8 @@ void ResourceLoader::loadMusic(const std::string &name, const std::string &fileP
 	// A music file by this name does not exist already
 	if (itr == m_music.end())
 	{
+		callHandler("Opening music file (" + name + "): " + filePath);
+
 		MusicPtr musicPtr = MusicPtr(new sf::Music());
 		if (musicPtr->openFromFile(filePath))
 			m_music[name] = std::move(musicPtr);
@@ -84,6 +97,8 @@ void ResourceLoader::loadFont(const std::string &name, const std::string &filePa
 	// A font by this name does not exist already
 	if (itr == m_fonts.end())
 	{
+		callHandler("Loading font (" + name + "): " + filePath);
+
 		FontPtr fontPtr = FontPtr(new sf::Font());
 		if (fontPtr->loadFromFile(filePath))
 			m_fonts[name] = std::move(fontPtr);
@@ -148,6 +163,7 @@ bool ResourceLoader::unloadTexture(const std::string &name)
 	auto itr = m_textures.find(name);
 	if (itr != m_textures.end()) // Resource was found
 	{
+		callHandler("Unloaded texture: " + name);
 		m_textures.erase(itr);
 		return true;
 	}
@@ -160,6 +176,7 @@ bool ResourceLoader::unloadShader(const std::string &name)
 	auto itr = m_shaders.find(name);
 	if (itr != m_shaders.end()) // Resource was found
 	{
+		callHandler("Unloaded shader: " + name);
 		m_shaders.erase(itr);
 		return true;
 	}
@@ -171,6 +188,7 @@ bool ResourceLoader::unloadSound(const std::string &name)
 	auto itr = m_sounds.find(name);
 	if (itr != m_sounds.end()) // Resource was found
 	{
+		callHandler("Unloaded sound: " + name);
 		m_sounds.erase(itr);
 		return true;
 	}
@@ -182,6 +200,8 @@ bool ResourceLoader::unloadMusic(const std::string &name)
 	auto itr = m_music.find(name);
 	if (itr != m_music.end()) // Resource was found
 	{
+		callHandler("Unloaded music: " + name);
+		itr->second->stop();
 		m_music.erase(itr);
 		return true;
 	}
@@ -193,6 +213,7 @@ bool ResourceLoader::unloadFont(const std::string &name)
 	auto itr = m_fonts.find(name);
 	if (itr != m_fonts.end()) // Resource was found
 	{
+		callHandler("Unloaded font: " + name);
 		m_fonts.erase(itr);
 		return true;
 	}
@@ -200,9 +221,27 @@ bool ResourceLoader::unloadFont(const std::string &name)
 		return false;
 }
 
+bool ResourceLoader::loadResourceFile(const std::string &fileName)
+{
+	ResourceFile file;
+
+	m_currentResources = 0;
+	m_totalResources = file.countResourceCalls(fileName);
+	return file.loadResourceFile(fileName);
+}
 
 bool ResourceLoader::loadFromFile(const std::string &fileName)
 {
-	ResourceFile file(fileName);
-	return file.hasLoaded();
+	ResourceFile file;
+	return file.loadResourceFile(fileName);
+}
+
+
+void ResourceLoader::callHandler(const std::string &info)
+{
+	if (m_handler)
+	{
+		++m_currentResources;
+		m_handler(info, m_currentResources, m_totalResources);
+	}
 }

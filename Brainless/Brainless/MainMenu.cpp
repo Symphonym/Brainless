@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Button.h"
 #include "ResourceLoader.h"
+#include "SoundPlayer.h"
 #include "Renderer.h"
 #include "FileSave.h"
 
@@ -11,7 +12,7 @@ MainMenu::MainMenu(StateMachine &machine)
 State(machine),
 m_newGameConfirmWindow(false)
 {
-	ResourceLoader::instance().loadFromFile("loadfiles/ResourceLoad_MainMenu.txt");
+	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_MainMenu.txt");
 
 	m_buttons[0] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("NewGame_Normal"),
@@ -42,6 +43,9 @@ m_newGameConfirmWindow(false)
 		ResourceLoader::instance().retrieveTexture("No_Pressed"),
 		sf::Vector2f(m_confirmBackground.getPosition().x + 210.f, m_confirmBackground.getPosition().y + 120.f),
 		&m_window));
+
+	//Play music
+	SoundPlayer::instance().playMusic("MenuMusic",true);
 }
 
 void MainMenu::update(float deltaTime)

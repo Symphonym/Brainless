@@ -167,7 +167,11 @@ void Player::updateTask(float deltaTime)
 			if (30 < m_speed.y)m_jumpState = jump_inAir; //spelaren är förmodligen inAir "på riktigt", gör ett fake hopp för att få landanimation.
 		}
 		//Start to Land
-		else if (!m_inAir && m_jumpState == jump_inAir) m_jumpState = jump_land;
+		else if (!m_inAir && m_jumpState == jump_inAir)
+		{
+			m_jumpState = jump_land;
+			SoundPlayer::instance().playSound("player_landing", getPosition());
+		}
 		//If landed, can jump.
 		else if (m_jumpState == jump_land)
 		{
@@ -240,7 +244,7 @@ void Player::takesDamage(sf::Vector2f collisionDifference)
 	if (m_damageState == dmg_normal)
 	{
 		m_hp--;
-		
+		SoundPlayer::instance().playSound("player_hurt", getPosition());
 		m_acceleration = sf::Vector2f(0, 0);
 		if (0 < collisionDifference.x) m_speed.x = -200;
 		else m_speed.x = 200;
@@ -273,6 +277,7 @@ void Player::jump()
 	m_jumpState = jump_inAir;
 	m_inAir = true;
 	m_inTilt = false;
+	SoundPlayer::instance().playSound("player_jump", getPosition());
 }
 
 sf::Vector2f Player::getCameraPosition()
@@ -508,6 +513,7 @@ void Player::animation_turnRun()
 		m_sprite = &m_spriteSheets[2];
 		m_animation.playOnce(0, 1, 6, 8);
 		m_animState = anim_turnRun;
+		SoundPlayer::instance().playSound("player_turn", getPosition());
 	}
 }
 
