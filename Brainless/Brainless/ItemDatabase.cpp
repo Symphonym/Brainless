@@ -15,6 +15,7 @@
 #include "KeyTwineItem.h"
 #include "WindowItem.h"
 #include "StoneItem.h"
+#include "LighterItem.h"
 #include "ScissorLift.h"
 
 ItemDatabase::ItemDatabase()
@@ -41,7 +42,9 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new KeyTwineItem(13)));
 	addItem(ItemPtr(new WindowItem(false, 1, 14)));
 	addItem(ItemPtr(new StoneItem(15)));
-	addItem(ItemPtr(new ScissorLiftItem(sf::Vector2f(0, 100), 400, 16)));
+	addItem(ItemPtr(new LighterItem(16)));
+
+	addItem(ItemPtr(new ScissorLiftItem(sf::Vector2f(0, 100), 400, 17)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)
