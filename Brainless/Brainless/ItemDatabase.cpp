@@ -17,6 +17,9 @@
 #include "StoneItem.h"
 #include "LighterItem.h"
 #include "ScissorLift.h"
+#include "StickItem.h"
+#include "DoubleStickItem.h"
+#include "LongStickItem.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -43,8 +46,11 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new WindowItem(false, 1, 14)));
 	addItem(ItemPtr(new StoneItem(15)));
 	addItem(ItemPtr(new LighterItem(16)));
+	addItem(ItemPtr(new StickItem(17)));
+	addItem(ItemPtr(new DoubleStickItem(18)));
+	addItem(ItemPtr(new LongStickItem(19)));
 
-	addItem(ItemPtr(new ScissorLiftItem(sf::Vector2f(0, 100), 400, 17)));
+	//addItem(ItemPtr(new ScissorLiftItem(sf::Vector2f(0, 100), 400, 17)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)

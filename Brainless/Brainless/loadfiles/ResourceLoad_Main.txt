@@ -31,6 +31,9 @@
 +Texture,images/items/windowSmashed.png,WindowSmashedItem
 +Texture,images/items/stone.png,StoneItem
 +Texture,images/items/lighter.png,LighterItem
++Texture,images/items/stickItem.png,StickItem
++Texture,images/items/doubleStickItem.png,DoubleStickItem
++Texture,images/items/longStickItem.png,LongStickItem
 
 +Texture,images/items/pickup.png,TestItem
 +Texture,images/items/wizard_idle.png,TestItem2
@@ -62,6 +65,6 @@
 
 # MOVING PLATFORM ITEM
 +Texture,images/items/movingPlatform.png,MovingPlatform
-+Texture,images/items/liftbottom.png,liftBottom
-+Texture,images/items/liftx.png,liftX
-+Texture,images/items/lifttop.png,liftTop
+#+Texture,images/items/liftbottom.png,liftBottom
+#+Texture,images/items/liftx.png,liftX
+#+Texture,images/items/lifttop.png,liftTop
