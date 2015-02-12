@@ -31,7 +31,10 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 	writer << level.getSpawnPos().x << std::endl;
 	writer << level.getSpawnPos().y << std::endl;
 
-	// Second write the number of rows the map has
+	// Then write whether or not it's a dark map
+	writer << level.isDark() << std::endl;
+
+	// Write the number of rows the map has
 	// This is how many lines the loader should read before moving onto items
 	writer << Constants::MapHeight << std::endl;
 
@@ -101,6 +104,10 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 		float spawnX = 0, spawnY = 0;
 		reader >> spawnX >> spawnY;
 		level.setSpawnPosition(sf::Vector2f(spawnX, spawnY));
+
+		bool darkness = false;
+		reader >> darkness;
+		level.setDarkness(darkness);
 
 		// Read row count
 		int rowCount = 0;

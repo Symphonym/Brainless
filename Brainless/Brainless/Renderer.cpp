@@ -13,7 +13,7 @@ m_renderTarget(nullptr)
 
 }
 
-void Renderer::plugShader(const sf::Shader &shader)
+void Renderer::plugShader(sf::Shader &shader)
 {
 	m_shader = &shader;
 }
@@ -27,6 +27,10 @@ void Renderer::setTarget(sf::RenderTarget &target)
 	m_renderTarget = &target;
 }
 
+sf::Shader* Renderer::getCurrentShader()
+{
+	return m_shader;
+}
 
 void Renderer::drawDepth(const sf::Drawable &drawable, const sf::FloatRect &bounds)
 {
@@ -123,10 +127,7 @@ void Renderer::executeDraws()
 	// Draw hud with default camera
 	for (std::size_t i = 0; i < m_hudRenderTasks.size(); i++)
 	{
-		if (m_shader != nullptr)
-			m_renderTarget->draw(*m_hudRenderTasks[i], m_shader);
-		else
-			m_renderTarget->draw(*m_hudRenderTasks[i]);
+		m_renderTarget->draw(*m_hudRenderTasks[i]);
 	}
 
 	m_renderTarget->setView(tempView);

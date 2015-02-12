@@ -246,6 +246,9 @@
     <ClCompile Include="LevelTransition.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="LighterItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -427,6 +430,9 @@
     </ClInclude>
     <ClInclude Include="LevelTransition.h">
       <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="LighterItem.h">
+      <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
