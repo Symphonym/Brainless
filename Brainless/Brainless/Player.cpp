@@ -337,7 +337,7 @@ void Player::updateAnimation(float deltaTime)
 			animation_landRun();
 		
 	}
-	else if (m_inAir)
+	else if (m_inAir && !m_inTilt)
 	{
 		//"IDLE"JUMP
 		if (abs(m_speed.x) <= runBreakpoint) //runJumpBreakpoint
