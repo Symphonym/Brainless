@@ -44,7 +44,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new StoneItem(15)));
 	addItem(ItemPtr(new LighterItem(16)));
 
-	addItem(ItemPtr(new ScissorLiftItem(sf::Vector2f(0, 100), 400, 17)));
+	//addItem(ItemPtr(new ScissorLiftItem(sf::Vector2f(0, 100), 400, 17)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)
