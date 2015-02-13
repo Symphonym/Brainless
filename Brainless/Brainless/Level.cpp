@@ -445,7 +445,7 @@ void Level::updateUnitCollision(float deltaTime)
 							//unit vänster om tile
 							if (unitCenter.x < tileCenter.x)
 							{
-								//varför funkar denna bättre än unit till höger om tile
+								//det gör det inte, jag är noob dörren var problemet
 								currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 								currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
 								currentUnit->setPosition(sf::Vector2f(tileBounds.left - originalBounds.width, currentUnit->getPosition().y));

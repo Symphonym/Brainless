@@ -7,6 +7,8 @@ class Zombie : public Unit
 public:
 	Zombie(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID);
 
+	virtual bool onInteractedWith(Item &otherItem);
+
 	bool collide(Unit *unit);
 protected:
 
