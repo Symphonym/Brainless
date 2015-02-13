@@ -9,9 +9,9 @@ public:
 
 	PokableItem(const std::string &itemName, const std::string &textureName, int id);
 
-	virtual bool onInteract(Item &otherItem, Game &game);
+	virtual bool onInteractedWith(Item &otherItem, Game &game);
 
-	// When an item is poked with a long stick
+	// When an item is poked with stick
 	virtual void onPoked(Game &game) {};
 
 };

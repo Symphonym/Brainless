@@ -20,15 +20,11 @@
 #include "StickItem.h"
 #include "DoubleStickItem.h"
 #include "LongStickItem.h"
+#include "CableItem.h"
+#include "BrainItem.h"
 
 ItemDatabase::ItemDatabase()
 {
-	// TODO Testing item
-	//addItem(ItemPtr(new DefaultItem("TestItem", 0, { { 1, 2, true }, { 2, 3, false } })));
-	//addItem(ItemPtr(new DefaultItem("TestItem2", 1, { { 0, 2, true} })));
-	//addItem(ItemPtr(new DefaultItem("TestItem3", 2, { { 0, 3, true } })));
-	//addItem(ItemPtr(new DefaultItem("TestItem4", 3)));
-	//addItem(ItemPtr(new DefaultItem("TestItem5", 4)));
 	addItem(ItemPtr(new DuctTapeItem(0)));
 	addItem(ItemPtr(new RubberGlovesItem(1)));
 	addItem(ItemPtr(new VendingMachineItem("VendingMachineItem1", { 0 }, 2)));
@@ -49,6 +45,8 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new StickItem(17)));
 	addItem(ItemPtr(new DoubleStickItem(18)));
 	addItem(ItemPtr(new LongStickItem(19)));
+	addItem(ItemPtr(new CableItem(20)));
+	addItem(ItemPtr(new BrainItem(21)));
 
 	//addItem(ItemPtr(new ScissorLiftItem(sf::Vector2f(0, 100), 400, 17)));
 }

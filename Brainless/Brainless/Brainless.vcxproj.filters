@@ -267,6 +267,18 @@
     <ClCompile Include="PokableItem.cpp">
       <Filter>Source Files\Game\Items\Meta</Filter>
     </ClCompile>
+    <ClCompile Include="ConductingItem.cpp">
+      <Filter>Source Files\Game\Items\Meta</Filter>
+    </ClCompile>
+    <ClCompile Include="ElectricalItem.cpp">
+      <Filter>Source Files\Game\Items\Meta</Filter>
+    </ClCompile>
+    <ClCompile Include="CableItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BrainItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -469,6 +481,15 @@
     </ClInclude>
     <ClInclude Include="ConductingItem.h">
       <Filter>Source Files\Game\Items\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="ElectricalItem.h">
+      <Filter>Source Files\Game\Items\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="CableItem.h">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BrainItem.h">
+      <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

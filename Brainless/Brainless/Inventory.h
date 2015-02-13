@@ -47,6 +47,8 @@ private:
 	ItemPtr m_mouseItem;
 
 	sf::Text m_highlightText;
+	sf::Texture m_highlightBackground;
+	sf::Sprite m_highlightBGSprite;
 	bool m_showHighlighText;
 
 	std::array<std::array<InventoryPair, Constants::InventoryHeight>, Constants::InventoryWidth> m_slots;

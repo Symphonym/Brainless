@@ -9,7 +9,14 @@ public:
 
 	ConductingItem(const std::string &itemName, const std::string &textureName, int id);
 
+	virtual void onUse(Game &game) final;
 
+	// If the item is used with the proper safety gear
+	virtual void onSafeUsage(Game &game) {};
+
+protected:
+
+	bool m_conducting;
 
 };
 

@@ -23,6 +23,13 @@ m_showHighlighText(false)
 	}
 
 	m_highlightText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+
+	sf::Image bgImg;
+	bgImg.create(1, 1, sf::Color::White);
+
+	m_highlightBackground.loadFromImage(bgImg);
+	m_highlightBGSprite.setTexture(m_highlightBackground);
+	m_highlightBGSprite.setColor(sf::Color::Color(0, 0, 0, 128));
 }
 
 void Inventory::addItem(ItemPtr item)
@@ -230,8 +237,14 @@ void Inventory::update(float deltaTime, Game &game)
 			m_showHighlighText = true;
 			m_highlightText.setString(invPair->first->getName());
 			m_highlightText.setPosition(
-				invPair->first->getPosition().x,
+				invPair->first->getPosition().x + invPair->first->getSprite().getGlobalBounds().width/2.f - m_highlightText.getGlobalBounds().width/2.f,
 				invPair->first->getPosition().y + 10.f);
+
+			if (m_highlightText.getPosition().x < 0)
+					m_highlightText.setPosition(0, m_highlightText.getPosition().y);
+
+			m_highlightBGSprite.setScale(m_highlightText.getGlobalBounds().width + 6.f, m_highlightText.getGlobalBounds().height + 6.f);
+			m_highlightBGSprite.setPosition(m_highlightText.getPosition().x - 3.f, m_highlightText.getPosition().y + 3.f);
 		}
 		else
 			m_showHighlighText = false;
@@ -279,7 +292,10 @@ void Inventory::draw()
 	}
 	
 	if (m_showHighlighText)
+	{
+		Renderer::instance().drawHUD(m_highlightBGSprite);
 		Renderer::instance().drawHUD(m_highlightText);
+	}
 }
 
 

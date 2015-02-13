@@ -9,7 +9,7 @@ Item(itemName, textureName, id)
 
 }
 
-bool PokableItem::onInteract(Item &otherItem, Game &game)
+bool PokableItem::onInteractedWith(Item &otherItem, Game &game)
 {
 	sf::Vector2f distanceToItem =
 		sf::Vector2f(
@@ -21,8 +21,7 @@ bool PokableItem::onInteract(Item &otherItem, Game &game)
 
 	if (otherItem.getName() == "Long Stick")
 	{
-
-
+		// Within reach of long stick
 		if (distanceToItem.x < otherItem.getInteractDistance().x + Constants::StickInteractAddition &&
 			distanceToItem.y < otherItem.getInteractDistance().y + Constants::StickInteractAddition)
 		{

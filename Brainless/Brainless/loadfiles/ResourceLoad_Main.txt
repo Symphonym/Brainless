@@ -34,13 +34,14 @@
 +Texture,images/items/stickItem.png,StickItem
 +Texture,images/items/doubleStickItem.png,DoubleStickItem
 +Texture,images/items/longStickItem.png,LongStickItem
++Texture,images/items/cableItem.png,CableItem
++Texture,images/items/brainItem.png,BrainItem
 
 +Texture,images/items/pickup.png,TestItem
 +Texture,images/items/wizard_idle.png,TestItem2
 +Texture,images/items/craftedTomte.png,TestItem3
 +Texture,images/items/craftedTomteTwo.png,TestItem4
 +Texture,images/items/testBarrel.png,TestItem5
-
 
 # GHOST TEST ITEM
 +Texture,images/items/ghostTest.png,GhostTest

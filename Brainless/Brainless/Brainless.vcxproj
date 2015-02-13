@@ -106,12 +106,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BrainItem.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="CableItem.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="ChasingZombie.cpp" />
     <ClCompile Include="ChestItem.cpp" />
     <ClCompile Include="CoinItem.cpp" />
     <ClCompile Include="CoinTwineItem.cpp" />
+    <ClCompile Include="ConductingItem.cpp" />
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="ConversationBox.cpp" />
     <ClCompile Include="Cursor.cpp" />
@@ -124,6 +127,7 @@
     <ClCompile Include="EditorItemMode.cpp" />
     <ClCompile Include="EditorSpriteMode.cpp" />
     <ClCompile Include="EditorZombieMode.cpp" />
+    <ClCompile Include="ElectricalItem.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="FileSave.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -173,7 +177,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="BrainItem.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="CableItem.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="ChasingZombie.h" />
     <ClInclude Include="ChestItem.h" />
@@ -193,6 +199,7 @@
     <ClInclude Include="EditorSpriteMode.h" />
     <ClInclude Include="EditorZombie.h" />
     <ClInclude Include="EditorZombieMode.h" />
+    <ClInclude Include="ElectricalItem.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="FileSave.h" />
     <ClInclude Include="Game.h" />
