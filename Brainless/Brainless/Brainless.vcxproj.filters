@@ -279,6 +279,21 @@
     <ClCompile Include="BrainItem.cpp">
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
+    <ClCompile Include="AABatteryItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="CarBatteryItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="DuctTapedBatteryItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="HammerItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ThorsHammerItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -489,6 +504,21 @@
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
     <ClInclude Include="BrainItem.h">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="AABatteryItem.h">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="CarBatteryItem.h">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="DuctTapedBatteryItem.h">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="HammerItem.h">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ThorsHammerItem.h">
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
   </ItemGroup>

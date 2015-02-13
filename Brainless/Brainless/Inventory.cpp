@@ -6,6 +6,7 @@
 #include "SoundPlayer.h"
 #include "Game.h"
 #include "Notification.h"
+#include "Player.h"
 
 Inventory::Inventory()
 :
@@ -133,7 +134,10 @@ void Inventory::events(const sf::Event &event, Game &game)
 			// The user did not click on the inventory, try with world interaction
 			else if (m_mouseItem)
 			{
-				
+				sf::Vector2f playerCenter = sf::Vector2f(
+					game.getPlayer().getCollisionRect().left + game.getPlayer().getCollisionRect().width / 2.f,
+					game.getPlayer().getCollisionRect().top + game.getPlayer().getCollisionRect().height / 2.f);
+
 
 				// If the item interacted with a unit this frame, don't let it interact with any items as well
 				// Since this could mean that an item is used twice in a single frame
@@ -143,6 +147,18 @@ void Inventory::events(const sf::Event &event, Game &game)
 				for (std::size_t i = 0; i < game.getLevel().getUnits().size(); i++)
 				{
 					Unit& unit = *game.getLevel().getUnits()[i].get();
+
+					sf::Vector2f unitCenter = sf::Vector2f(
+						unit.getCollisionRect().left + unit.getCollisionRect().width / 2.f,
+						unit.getCollisionRect().top + unit.getCollisionRect().height / 2.f);
+
+					sf::Vector2f distVec = unitCenter - playerCenter;
+					distVec.x = std::abs(distVec.x);
+					distVec.y = std::abs(distVec.y);
+
+					if (distVec.x > m_mouseItem->getInteractDistance().x || distVec.y > m_mouseItem->getInteractDistance().y)
+						continue;
+
 					if (m_mouseItem->getSprite().getGlobalBounds().intersects(unit.getCollisionRect()))
 					{
 						// Invoke interaction handling on item
@@ -165,6 +181,18 @@ void Inventory::events(const sf::Event &event, Game &game)
 						break;
 
 					Item& item = *game.getLevel().getItems()[i].get();
+
+					sf::Vector2f itemCenter = sf::Vector2f(
+						item.getSprite().getGlobalBounds().left + item.getSprite().getGlobalBounds().width / 2.f,
+						item.getSprite().getGlobalBounds().top + item.getSprite().getGlobalBounds().height / 2.f);
+
+					sf::Vector2f distVec = itemCenter - playerCenter;
+					distVec.x = std::abs(distVec.x);
+					distVec.y = std::abs(distVec.y);
+
+					if (distVec.x > item.getInteractDistance().x || distVec.y > item.getInteractDistance().y)
+						continue;
+
 					if (m_mouseItem->getSprite().getGlobalBounds().intersects(item.getSprite().getGlobalBounds()))
 					{
 						// Invoke interaction on world item

@@ -21,3 +21,17 @@ void ConductingItem::onUse(Game &game)
 	else
 		onSafeUsage(game);
 }
+
+
+void ConductingItem::serialize(std::ofstream &writer) const
+{
+	Item::serialize(writer);
+
+	writer << m_conducting << std::endl;
+}
+void ConductingItem::deserialize(std::ifstream &reader)
+{
+	Item::deserialize(reader);
+
+	reader >> m_conducting;
+}

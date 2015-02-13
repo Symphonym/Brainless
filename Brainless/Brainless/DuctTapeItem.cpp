@@ -12,6 +12,7 @@ Item("Duct Tape", "DuctTapeItem", id)
 	// TODO ADD COMBINATIONS
 
 	addCombination(18, 19, true);
+	addCombination(22, 24, true);
 }
 
 

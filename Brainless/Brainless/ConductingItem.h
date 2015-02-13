@@ -11,6 +11,9 @@ public:
 
 	virtual void onUse(Game &game) final;
 
+	virtual void serialize(std::ofstream &writer) const;
+	virtual void deserialize(std::ifstream &reader);
+
 	// If the item is used with the proper safety gear
 	virtual void onSafeUsage(Game &game) {};
 

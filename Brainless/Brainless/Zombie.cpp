@@ -13,7 +13,7 @@ bool Zombie::onInteractedWith(Item &otherItem)
 	if (otherItem.getName() == "Brain")
 	{
 		// TODO add brain giving logic
-		return false;
+		return true;
 	}
 }
 

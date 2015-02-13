@@ -22,6 +22,11 @@
 #include "LongStickItem.h"
 #include "CableItem.h"
 #include "BrainItem.h"
+#include "AABatteryItem.h"
+#include "CarBatteryItem.h"
+#include "DuctTapedBatteryItem.h"
+#include "HammerItem.h"
+#include "ThorsHammerItem.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -47,6 +52,11 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new LongStickItem(19)));
 	addItem(ItemPtr(new CableItem(20)));
 	addItem(ItemPtr(new BrainItem(21)));
+	addItem(ItemPtr(new AABatteryItem(22)));
+	addItem(ItemPtr(new CarBatteryItem(23)));
+	addItem(ItemPtr(new DuctTapedBatteryItem(24)));
+	addItem(ItemPtr(new HammerItem(25)));
+	addItem(ItemPtr(new ThorsHammerItem(26)));
 
 	//addItem(ItemPtr(new ScissorLiftItem(sf::Vector2f(0, 100), 400, 17)));
 }

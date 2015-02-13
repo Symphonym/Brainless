@@ -36,6 +36,11 @@
 +Texture,images/items/longStickItem.png,LongStickItem
 +Texture,images/items/cableItem.png,CableItem
 +Texture,images/items/brainItem.png,BrainItem
++Texture,images/items/aaBattery.png,AABatteryItem
++Texture,images/items/carBattery.png,CarBatteryItem
++Texture,images/items/ductTapedBattery.png,DuctTapeBatteryItem
++Texture,images/items/hammerItem.png,HammerItem
++Texture,images/items/thorsHammerItem.png,ThorsHammerItem
 
 +Texture,images/items/pickup.png,TestItem
 +Texture,images/items/wizard_idle.png,TestItem2
