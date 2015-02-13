@@ -114,6 +114,16 @@ void Game::lootItem(Inventory::ItemPtr item)
 
 void Game::changeLevel(int levelIndex)
 {
+	
+	sf::Vector2f player_location(-60,-60);
+	// Remeber old player location
+	if (m_player != nullptr)
+	{
+		player_location = m_player->getPosition();
+		// TODO check if player want to keep current position or if they want a preset position instead of swapping map side
+		//Swap sides
+		player_location.x = Utility::clampValue<float>((Constants::MapWidth)*Constants::TileSize - (player_location.x),Constants::TileSize, (Constants::MapWidth - 1)*Constants::TileSize);
+	}
 	// Reset level
 	m_level.reset();
 	m_levelIndex = levelIndex;
@@ -125,8 +135,14 @@ void Game::changeLevel(int levelIndex)
 	FileSave::loadInventory(*m_inventory);
 	m_level.loadLevelResources();
 
+	//Set player to start position
+	if (player_location == sf::Vector2f(-60,-60))
+	{
+		player_location = m_level.getSpawnPos();
+	}
 	// Add player to level
-	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(m_level.getSpawnPos()))));
+	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(player_location))));
+	
 	//temp, texture borde laddas in på annat sätt.
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
@@ -244,6 +260,8 @@ void Game::update(float deltaTime)
 		changeLevelTransition(m_levelIndex+1);
 	if (m_player->getPosition().x<Constants::TileSize && !m_levelTransition->getActive())
 		changeLevelTransition(m_levelIndex - 1);
+	//Player bound whitin room sides
+	m_player->setPosition(sf::Vector2f(Utility::clampValue<float>(m_player->getPosition().x, Constants::TileSize*0.5 ,(Constants::MapWidth - 0.5)*Constants::TileSize), m_player->getPosition().y));
 }
 void Game::draw()
 {
