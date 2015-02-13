@@ -179,6 +179,7 @@
     <ClInclude Include="ChestItem.h" />
     <ClInclude Include="CoinItem.h" />
     <ClInclude Include="CoinTwineItem.h" />
+    <ClInclude Include="ConductingItem.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ConversationBox.h" />
     <ClInclude Include="Cursor.h" />
