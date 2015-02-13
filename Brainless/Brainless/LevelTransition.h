@@ -18,6 +18,7 @@ public:
 	// Refresh screen covering textures, this only needs to be run
 	// at startup or when the screen size changes
 	void refreshTexture();
+	bool getActive() const;
 
 private:
 

@@ -76,3 +76,8 @@ void LevelTransition::refreshTexture()
 	m_coveringTexture.loadFromImage(img);
 	m_coveringSprite.setTexture(m_coveringTexture);
 }
+
+bool LevelTransition::getActive() const
+{
+	return m_isActive;
+};

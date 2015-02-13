@@ -226,6 +226,11 @@ void Game::update(float deltaTime)
 			}
 		}
 	}
+	//Player outside room
+	if (m_player->getPosition().x>(Constants::MapWidth-1)*Constants::TileSize && !m_levelTransition->getActive())
+		changeLevelTransition(m_levelIndex+1);
+	if (m_player->getPosition().x<Constants::TileSize && !m_levelTransition->getActive())
+		changeLevelTransition(m_levelIndex - 1);
 }
 void Game::draw()
 {
