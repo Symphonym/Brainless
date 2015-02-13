@@ -4,7 +4,7 @@
 
 # SPRITE SHEET TEXTURES
 
-+Texture,images/animations/Spritesheet_Test_Zombie_v3.png,Zombie
++Texture,images/animations/spritesheet_zombie_merged_v0.5.png,Zombie
 
 # EDITOR BUTTON TEXTURES
 +Texture,images/UI/levelsize.png,EditorLevelSize

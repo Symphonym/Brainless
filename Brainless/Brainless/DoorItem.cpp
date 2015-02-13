@@ -11,7 +11,7 @@ m_isLocked(locked)
 	m_usable = true;
 	m_collidable = true;
 
-	m_collisionSize = sf::Vector2f(50, 128);
+	m_collisionSize = sf::Vector2f(25, 192);
 	m_collisionOffset = sf::Vector2f(40, 0);
 }
 

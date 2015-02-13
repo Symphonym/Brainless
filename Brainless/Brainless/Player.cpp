@@ -261,6 +261,7 @@ void Player::takesDamage(sf::Vector2f collisionDifference)
 		else m_speed.x = 200;
 		m_speed.y = -400;
 		m_inAir = true;
+		m_inTilt = false;
 		//deny jump
 		m_jumpPower = 0;
 		m_jumpState = jump_ready;
@@ -401,18 +402,19 @@ void Player::updateAnimation(float deltaTime)
 	}
 
 
-	//IDLE
-	else if ((abs(m_speed.x) < 5) && m_inputDirection == dir_noDirection) 
-		animation_idle();
-	
 	//TURN
-	else if (m_speed.x < 5 && m_inputDirection == dir_right || -5 < m_speed.x && m_inputDirection == dir_left)
+	else if (m_speed.x < 0 && m_inputDirection == dir_right || 0 < m_speed.x && m_inputDirection == dir_left)
 		//FAST
-		if (m_animState == anim_run || m_animState == anim_turnRun)
-			animation_turnRun();
-		//SLOW
-		else 
-			animation_turn();
+	if (m_animState == anim_run || m_animState == anim_turnRun)
+		animation_turnRun();
+	//SLOW
+	else
+		animation_turn();
+
+	//IDLE
+	else if ((abs(m_speed.x) < 5))
+		animation_idle();
+
 
 	//RUN
 	else if (runBreakpoint < abs(m_speed.x))
@@ -494,7 +496,7 @@ void Player::animation_idle()
 	//	m_animLoopsDone = 0;
 		m_sprite = &m_spriteSheets[0];
 	
-		m_animation.loop(0, 2, 3, 4, 8);
+		m_animation.loop(0, 1, 3, 4, 8);
 
 		m_animState = anim_idle;
 	}

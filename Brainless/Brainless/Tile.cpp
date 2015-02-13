@@ -6,7 +6,9 @@ Tile::Tile(const sf::FloatRect &bounds, TileTypes tileType, const sf::Vector2f &
 :
 m_type(tileType),
 m_tileSprite(),
-m_bounds(bounds)
+m_bounds(bounds),
+m_tilt(false),
+m_platform(false)
 {
 	updateType();
 
@@ -46,12 +48,12 @@ sf::Sprite& Tile::getSprite()
 
 bool Tile::getTilt() const
 {
-	return m_type == Tilt;
+	return m_tilt;
 }
 
 bool Tile::getPlatform() const
 {
-	return m_type == Platform;
+	return m_platform;
 }
 
 void Tile::updateType()
@@ -72,9 +74,18 @@ void Tile::updateType()
 		break;
 	case Tilt:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("TiltCube"));
+		m_tilt = true;
 		break;
 	case Platform:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("PlatformCube"));
+		m_platform = true;
+		break;
+
+	case Road_Top_Right:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R_Top_Right"));
+		m_platform = true;
+		break;
+	default:
 		break;
 		// TODO Load texture based on type
 	}

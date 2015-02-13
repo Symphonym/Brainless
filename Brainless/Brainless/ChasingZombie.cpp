@@ -43,6 +43,12 @@ void ChasingZombie::updateTask(float deltaTime)
 	
 	//Chasing Zombie's AI
 	/*
+		todo
+		jaga spelare om står vid endpunkt och spelare kommer från andra hållet
+		om är påväg hem och ser spelare, fortsätt hem istället för att stanna och stirra
+
+	*/
+	/*
 		special spriteDirection = false;
 		if(target in sight)
 		{
@@ -168,7 +174,7 @@ void ChasingZombie::updateAnimation(float deltaTime)
 		if (m_animState != anim_idle)
 		{
 			m_sprite = &m_spriteSheets[0];
-			m_animation.stillFrame(0, 2);
+			m_animation.loop(0, 7, 3, 3);
 			m_animState = anim_idle;
 		}
 	}

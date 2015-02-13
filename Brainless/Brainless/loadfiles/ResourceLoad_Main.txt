@@ -18,6 +18,7 @@
 +Texture,images/tiles/cubeSmooth.png,SmoothCube
 +Texture,images/tiles/cubeTilted.png,TiltCube
 +Texture,images/tiles/cubePlatform.png,PlatformCube
++Texture,images/tiles/Road/TopRight/R-Top-Right.png,R_Top_Right
 
 # ITEM TEXTURE LOADING
 +Texture,images/items/ductTape.png,DuctTapeItem
