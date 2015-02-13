@@ -95,7 +95,7 @@ m_levelIndex(0)
 	
 
 	// TEST CODE FOR LOADING DEFAULT LEVEL
-	changeLevel(0);
+	changeLevel(0,false);
 
 
 
@@ -112,12 +112,12 @@ void Game::lootItem(Inventory::ItemPtr item)
 	m_inventory->addItem(std::move(item));
 }
 
-void Game::changeLevel(int levelIndex)
+void Game::changeLevel(int levelIndex,bool swapPosition)
 {
 	
 	sf::Vector2f player_location(-60,-60);
 	// Remeber old player location
-	if (m_player != nullptr)
+	if (swapPosition && m_player != nullptr)
 	{
 		player_location = m_player->getPosition();
 		// TODO check if player want to keep current position or if they want a preset position instead of swapping map side
@@ -148,9 +148,9 @@ void Game::changeLevel(int levelIndex)
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetRun"));
 }
-void Game::changeLevelTransition(int levelIndex)
+void Game::changeLevelTransition(int levelIndex, bool swapPosition)
 {
-	m_levelTransition->startTransition(levelIndex);
+	m_levelTransition->startTransition(levelIndex,swapPosition);
 }
 
 void Game::addCamera(const sf::View &camera)
@@ -257,9 +257,9 @@ void Game::update(float deltaTime)
 	}
 	//Player outside room
 	if (m_player->getPosition().x>(Constants::MapWidth-1)*Constants::TileSize && !m_levelTransition->getActive())
-		changeLevelTransition(m_levelIndex+1);
-	if (m_player->getPosition().x<Constants::TileSize && !m_levelTransition->getActive())
-		changeLevelTransition(m_levelIndex - 1);
+		changeLevelTransition(m_levelIndex+1, true);
+	if (m_player->getPosition().x < Constants::TileSize && !m_levelTransition->getActive())
+		changeLevelTransition(m_levelIndex - 1, true);
 	//Player bound whitin room sides
 	m_player->setPosition(sf::Vector2f(Utility::clampValue<float>(m_player->getPosition().x, Constants::TileSize*0.5 ,(Constants::MapWidth - 0.5)*Constants::TileSize), m_player->getPosition().y));
 }

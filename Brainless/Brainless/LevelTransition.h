@@ -10,7 +10,7 @@ public:
 
 	LevelTransition(Game &game);
 
-	void startTransition(int targetLevel, float fadeOutTime = 1.f);
+	void startTransition(int targetLevel,bool swapPosition, float fadeOutTime = 1.f);
 
 	void update(float deltaTime);
 	void draw();
@@ -32,6 +32,9 @@ private:
 
 	// If we're fading out, otherwise we're fading in
 	bool m_fadingOut;
+
+	// If the player is supposed to swap position after level change
+	bool m_swapPosition;
 
 	float m_curDelay;
 	float m_maxDelay;
