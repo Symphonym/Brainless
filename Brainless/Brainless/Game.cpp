@@ -158,6 +158,19 @@ Level& Game::getLevel()
 	return m_level;
 }
 
+bool Game::inventoryContains(const std::string &itemName)
+{
+	for (std::size_t i = 0; i < m_inventory->getInventoryItems().size(); i++)
+	{
+		const Item &item = *m_inventory->getInventoryItems()[i];
+
+		if (item.getName() == itemName)
+			return true;
+	}
+
+	return false;
+}
+
 void Game::events(const sf::Event &event)
 {
 	if (event.type == sf::Event::KeyReleased)

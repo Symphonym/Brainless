@@ -43,6 +43,9 @@ public:
 	Player& getPlayer();
 	Level& getLevel();
 
+	// Check if the inventory contains a specific item
+	bool inventoryContains(const std::string &itemName);
+
 private:
 
 	sf::View m_camera;
