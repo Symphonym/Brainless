@@ -18,9 +18,30 @@
 +Texture,images/tiles/cubeSmooth.png,SmoothCube
 +Texture,images/tiles/cubeTilted.png,TiltCube
 +Texture,images/tiles/cubePlatform.png,PlatformCube
-+Texture,images/tiles/Road/TopRight/R-Top-Right.png,R_Top_Right
+#Roads
++Texture,images/tiles/Road/TopRight/R-Top-Right.png,R-Top-Right
++Texture,images/tiles/Road/Special/R-Tilt.png,R-Tilt
++Texture,images/tiles/Road/TopLeft/R-Top-Left.png,R-Top-Left
++Texture,images/tiles/Road/TopLeft/R-Top-Left-Short.png,R-Top-Left-Short
++Texture,images/tiles/Road/Top/R-Top.png,R-Top
++Texture,images/tiles/Road/Top/R-Top-Alone.png,R-Top-Alone
++Texture,images/tiles/Road/Top/R-Top-Short.png,R-Top-Short
++Texture,images/tiles/Road/Right/R-Right.png,R-Right
++Texture,images/tiles/Road/Right/R-Right-Alone.png,R-Right-Alone
++Texture,images/tiles/Road/Middle/R-Middle-Alone.png,R-Middle-Alone
++Texture,images/tiles/Road/Middle/R-Middle-Alone-Horizontal.png,R-Middle-Alone-Horizontal
+#+Texture,images/tiles/Road/Middle/R-Middle-Alone-Vertical.png,R-Middle-Alone-Vertical
++Texture,images/tiles/Road/Middle/R-Middle.png,R-Middle
++Texture,images/tiles/Road/Left/R-Left.png,R-Left
++Texture,images/tiles/Road/Left/R-Left-Alone.png,R-Left-Alone
++Texture,images/tiles/Road/Left/R-Left-Short.png,R-Left-Short
++Texture,images/tiles/Road/DownRight/R-Down-Right.png,R-Down-Right
++Texture,images/tiles/Road/DownLeft/R-Down-Left.png,R-Down-Left
++Texture,images/tiles/Road/Down/R-Down.png,R-Down
++Texture,images/tiles/Road/Corner/R-Corner-Left.png,R-Corner-Left
++Texture,images/tiles/Road/Corner/R-Corner-Right.png,R-Corner-Right
 
-# ITEM TEXTURE LOADING
+### ITEM TEXTURE LOADING
 +Texture,images/items/ductTape.png,DuctTapeItem
 +Texture,images/items/rubberGloves.png,RubberGlovesItem
 +Texture,images/items/vendingMachine.png,VendingMachineItem1

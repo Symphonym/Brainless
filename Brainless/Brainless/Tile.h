@@ -20,7 +20,7 @@ public:
 		Road_Top_Right = 6,
 		Road_Top_Left = 7,
 		Road_Top_Left_Short = 8,
-		Road_Slide = 9,
+		Road_Tilt = 9,
 		Road_Top = 10,
 		Road_Top_Alone = 11,
 		Road_Top_Short = 12,
@@ -34,7 +34,7 @@ public:
 		Road_Left_Short = 20,
 		Road_Left_Alone = 21,
 		Road_Down_Right = 22,
-		Road_Down_Left = 23,  //konstigt streck?
+		Road_Down_Left = 23, 
 		Road_Down = 24,
 		Road_Corner_Left = 25,
 		Road_Corner_Right = 26
