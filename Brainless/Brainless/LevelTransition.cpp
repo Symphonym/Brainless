@@ -15,13 +15,14 @@ m_targetLevel(0)
 	refreshTexture();
 }
 
-void LevelTransition::startTransition(int targetLevel, float fadeOutTime)
+void LevelTransition::startTransition(int targetLevel,bool swapPosition, float fadeOutTime)
 {
 	m_isActive = true;
 	m_fadingOut = true;
 	m_curDelay = 0;
 	m_maxDelay = fadeOutTime;
 	m_targetLevel = targetLevel;
+	m_swapPosition = swapPosition;
 }
 
 void LevelTransition::update(float deltaTime)
@@ -48,7 +49,7 @@ void LevelTransition::update(float deltaTime)
 			// Change level and start fading in after we've faded out
 			else
 			{
-				m_game.changeLevel(m_targetLevel);
+				m_game.changeLevel(m_targetLevel,m_swapPosition);
 				m_fadingOut = false;
 			}
 		}

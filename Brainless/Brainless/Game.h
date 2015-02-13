@@ -31,9 +31,9 @@ public:
 	void lootItem(Inventory::ItemPtr item);
 
 	// Loads a new level, resetting player position to starting position, resetting HUD etc
-	void changeLevel(int levelIndex);
+	void changeLevel(int levelIndex,bool swapPosition);
 	// Does the same as 'changeLevel' except the screen will fade out and fade in
-	void changeLevelTransition(int levelIndex);
+	void changeLevelTransition(int levelIndex,bool swapPosition);
 
 	// Add a rendering camera, the list of extra cameras is cleared each frame
 	void addCamera(const sf::View &camera);
