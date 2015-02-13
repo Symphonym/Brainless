@@ -420,7 +420,27 @@ void Player::updateAnimation(float deltaTime)
 	//WALK
 	else if (5 < abs(m_speed.x))
 		animation_walk();
-	
+	//
+	////TURN
+	//else if (m_speed.x < -5 && m_inputDirection == dir_right || 5 < m_speed.x && m_inputDirection == dir_left)
+	//	//FAST
+	//if (m_animState == anim_run || m_animState == anim_turnRun)
+	//	animation_turnRun();
+	////SLOW
+	//else
+	//	animation_turn();
+
+	////IDLE
+	//else if ((abs(m_speed.x) < 5) && (m_inputDirection == dir_noDirection || m_animState == anim_turn || m_animState == anim_turnRun))
+	//	animation_idle();
+
+	////RUN
+	//else if (runBreakpoint < abs(m_speed.x))
+	//	animation_run();
+	////WALK
+	//else if (5 < abs(m_speed.x))
+	//	animation_walk();
+
 	else 
 	{
 		std::cout << "FIXA Får ingen animation" << std::endl; //bör inte uppstå
