@@ -285,7 +285,8 @@ void Player::jump()
 {
 	if (m_maxSpeed.y < m_jumpPower) m_jumpPower = m_maxSpeed.y;
 	m_jumpFrame = m_animation.getCurrentFrame(); //experimental
-	m_speed.y = -m_jumpPower;
+	m_acceleration.y = -m_jumpPower*20.f;
+	//m_speed.y = -m_jumpPower;
 	m_jumpState = jump_inAir;
 	m_inAir = true;
 	m_inTilt = false;

@@ -24,7 +24,8 @@ public:
 	/*
 	Updates the collisionbox's position, speed, acceleration
 	*/
-	void updateMovement(float gravity, float deltaTime);
+	void updateMovementX(float gravity, float deltaTime);
+	void updateMovementY(float gravity, float deltaTime);
 	virtual void updateTask(float deltaTime) = 0;
 	virtual void wallLeft();
 	virtual void wallRight();
@@ -78,6 +79,9 @@ public:
 	sf::FloatRect getCollisionRect();
 	UnitType getUnitType();
 	Direction getDirection();
+
+
+	sf::Vector2f getNextPos(float gravity, float deltaTime) const;
 protected:
 	RenderingModes m_renderingMode;
 	bool m_isMovementEnabled;

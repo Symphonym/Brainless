@@ -26,12 +26,30 @@ m_UnitID(ID)
 {
 
 }
-void Unit::updateMovement(float gravity, float deltaTime)
+
+void Unit::updateMovementX(float gravity, float deltaTime)
 {
 	if (!m_isMovementEnabled)
 		return;
 
-	float accelYtrue = 0;
+	m_speed.x += m_acceleration.x * deltaTime;
+	if (m_speed.x > m_maxSpeed.x) m_speed.x = m_maxSpeed.x;
+	if (m_speed.x < -m_maxSpeed.x) m_speed.x = -m_maxSpeed.x;
+	m_position.x += m_speed.x * deltaTime;
+}
+void Unit::updateMovementY(float gravity, float deltaTime)
+{
+	if (!m_isMovementEnabled)
+		return;
+
+	m_acceleration.y += gravity;
+
+	m_speed.y += m_acceleration.y * deltaTime;
+	if (m_speed.y > m_maxSpeed.y) m_speed.y = m_maxSpeed.y;
+	if (m_speed.y < -m_maxSpeed.y) m_speed.y = -m_maxSpeed.y;
+	m_position.y += m_speed.y * deltaTime;
+
+	/*float accelYtrue = 0;
 	//normal inAir
 	if (m_inAir && !m_inTilt)
 	{
@@ -50,14 +68,16 @@ void Unit::updateMovement(float gravity, float deltaTime)
 		m_acceleration.y = 0;
 	}
 
+	m_acceleration.y += gravity;
+
 	m_speed.x += m_acceleration.x * deltaTime;
-	m_speed.y += accelYtrue * deltaTime;
+	m_speed.y += m_acceleration.y * deltaTime;
 	if (m_speed.x > m_maxSpeed.x) m_speed.x = m_maxSpeed.x;
 	if (m_speed.y > m_maxSpeed.y) m_speed.y = m_maxSpeed.y;
 	if (m_speed.x < -m_maxSpeed.x) m_speed.x = -m_maxSpeed.x;
 	if (m_speed.y < -m_maxSpeed.y) m_speed.y = -m_maxSpeed.y;
 	m_position.x += m_speed.x * deltaTime;
-	m_position.y += m_speed.y * deltaTime;
+	m_position.y += m_speed.y * deltaTime;*/
 }
 
 void Unit::wallLeft()
@@ -224,4 +244,18 @@ Unit::UnitType Unit::getUnitType()
 Unit::Direction Unit::getDirection()
 {
 	return m_spriteDirection;
+}
+
+sf::Vector2f Unit::getNextPos(float gravity, float deltaTime) const
+{
+	float speedX = m_speed.x;
+	float speedY = m_speed.y;
+
+	speedX += m_acceleration.x * deltaTime;
+	speedY += (m_acceleration.y+gravity) * deltaTime;
+	if (speedX > m_maxSpeed.x) speedX = m_maxSpeed.x;
+	if (m_speed.y > m_maxSpeed.y) speedY = m_maxSpeed.y;
+	if (speedX < -m_maxSpeed.x) speedX = -m_maxSpeed.x;
+	if (m_speed.y < -m_maxSpeed.y)speedY = -m_maxSpeed.y;
+	return sf::Vector2f(m_position.x + speedX * deltaTime, m_position.y + speedY * deltaTime);
 }

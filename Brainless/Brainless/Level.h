@@ -8,6 +8,21 @@
 #include <memory>
 #include <vector>
 
+struct LevelCollidable
+{
+	// Bounds of the collidable
+	sf::FloatRect bounds;
+
+	// If it's a tilted block
+	bool tilt;
+
+	// Which sides are solid for this collidable
+	bool collideTop;
+	bool collideBottom;
+	bool collideRight;
+	bool collideLeft;
+};
+
 class Level
 {
 public:
