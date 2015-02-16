@@ -99,6 +99,7 @@ void Tile::updateType()
 		break;
 	case Road_Top_Right_Corner:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top-Right-Corner")); m_autotilingRange = "RoadAutotiling";
+		break;
 
 	case Road_Top_Left:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top-Left")); m_autotilingRange = "RoadAutotiling";
@@ -108,7 +109,7 @@ void Tile::updateType()
 		break;
 	case Road_Top_Left_Corner:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top-Left-Corner")); m_autotilingRange = "RoadAutotiling";
-
+		break;
 
 	case Road_Top:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top")); m_autotilingRange = "RoadAutotiling";

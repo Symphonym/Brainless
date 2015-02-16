@@ -21,12 +21,12 @@ public:
 		Road_Top_Right_Corner = 56,
 
 		Road_Top_Left = 7,
-		Road_Top_Left_Short = 8,
+		Road_Top_Left_Short = 8, //
 		Road_Top_Left_Corner = 55,
 
 		Road_Top = 10,
-		Road_Top_Alone = 11,
-		Road_Top_Short = 12,
+		Road_Top_Alone = 11, //fel bild, använder en "Road_Top_Alone_Short som vi inte har
+		Road_Top_Short = 12, //
 		Road_Top_Corner_Left = 52,
 		Road_Top_Corner_Right = 53,
 		Road_Top_Corner_Full = 54,
@@ -43,7 +43,7 @@ public:
 		Road_Middle_Alone_Vertical = 18,
 
 		Road_Left = 19,
-		Road_Left_Short = 20,
+		Road_Left_Short = 20, //
 		Road_Left_Alone = 21,
 		Road_Left_Corner_Down = 46,
 		Road_Left_Corner_Top = 47,

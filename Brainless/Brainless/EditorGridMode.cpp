@@ -130,7 +130,8 @@ bool EditorGridMode::update(float deltaTime, const sf::RenderWindow &editorWindo
 			if (itr != m_autotiling.end())
 			{
 				int autotilingValue = calculateAutotilingValue(mouseIndex.x, mouseIndex.y, m_currentTile.getAutotilingRangeName());
-				std::cout << "TILING: " << autotilingValue << std::endl;
+				//std::cout << "TILING: " << autotilingValue << std::endl;
+				//std::cout << "TYPE: " << itr->second[autotilingValue] << std::endl;
 				m_tilemap.getTile(mouseIndex.x, mouseIndex.y).setType(itr->second[autotilingValue]);
 			}
 			else // Just place tile without autotiling

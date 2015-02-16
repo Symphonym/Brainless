@@ -171,7 +171,6 @@ void ChasingZombie::updateAnimation(float deltaTime)
 
 	if (m_direction == dir_noDirection)
 	{
-		std::cout << "hejkneckt" << std::endl;
 		if (m_animState != anim_idle)
 		{
 			m_sprite = &m_spriteSheets[0];
