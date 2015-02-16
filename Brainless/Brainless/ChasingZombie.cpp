@@ -90,20 +90,20 @@ void ChasingZombie::updateTask(float deltaTime)
 		//target in sight
 		if (distance < lookDistance)
 			//target looks tasty && not far from home
-		if (distance < chaseDistance && abs(m_position.x - m_homePosition.x) < m_maxWalkLenght)
-		if (m_target->getPosition().x < m_position.x)
-			m_direction = dir_left;
-		else
-			m_direction = dir_right;
-		//stare
-		else
-		{
-			m_specialSpriteDirection = true;
-			if (m_target->getPosition().x < m_position.x)
-				m_spriteDirection = dir_left;
+			if (distance < chaseDistance && abs(m_position.x - m_homePosition.x) < m_maxWalkLenght)
+				if (m_target->getPosition().x < m_position.x)
+					m_direction = dir_left;
+				else
+				m_direction = dir_right;
+			//stare
 			else
-				m_spriteDirection = dir_right;
-		}
+			{
+				m_specialSpriteDirection = true;
+				if (m_target->getPosition().x < m_position.x)
+					m_spriteDirection = dir_left;
+				else
+					m_spriteDirection = dir_right;
+			}
 		//return home
 		else
 		if (m_position.x + 5 < m_homePosition.x)
@@ -171,6 +171,7 @@ void ChasingZombie::updateAnimation(float deltaTime)
 
 	if (m_direction == dir_noDirection)
 	{
+		std::cout << "hejkneckt" << std::endl;
 		if (m_animState != anim_idle)
 		{
 			m_sprite = &m_spriteSheets[0];
@@ -178,7 +179,7 @@ void ChasingZombie::updateAnimation(float deltaTime)
 			m_animState = anim_idle;
 		}
 	}
-	if (m_animState != anim_walking)
+	else if (m_animState != anim_walking)
 	{
 		m_sprite = &m_spriteSheets[0];
 		m_animation.loop(0, 7, 2, 3);
