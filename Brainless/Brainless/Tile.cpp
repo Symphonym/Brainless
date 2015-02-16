@@ -64,6 +64,8 @@ std::string Tile::getAutotilingRangeName() const
 void Tile::updateType()
 {
 	m_autotilingRange = "";
+	m_tilt = false;
+	m_platform = false;
 
 	switch (m_type)
 	{
