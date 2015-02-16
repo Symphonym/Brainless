@@ -20,7 +20,8 @@ m_currentLevelFileIndex(0),
 m_editorMode(EditorModes::Grid),
 m_gridMode(nullptr),
 m_spriteMode(nullptr),
-m_currentSyncID(0)
+m_currentSyncID(0),
+m_isMenu(false)
 {
 	m_camera = m_editor.getDefaultView();
 	Renderer::instance().setTarget(m_editor);
@@ -75,8 +76,6 @@ m_currentSyncID(0)
 	m_levelFileText.setPosition(200, 0);
 	m_levelFileText.setColor(sf::Color::Green);
 	m_levelFileText.setString("Editing level: level" + std::to_string(m_currentLevelFileIndex) + ".txt");
-
-
 }
 Editor::~Editor()
 {
