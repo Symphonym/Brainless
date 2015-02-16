@@ -4,6 +4,8 @@
 #include "TileMap.h"
 #include "Tile.h"
 #include <SFML\Graphics.hpp>
+#include <array>
+#include <unordered_map>
 
 class EditorGridMode
 {
@@ -20,8 +22,21 @@ public:
 
 private:
 
+	typedef std::array<Tile::TileTypes, 256> AutotilingData;
+	typedef std::pair<int, Tile::TileTypes> AutotilingValue;
+
 	// The tilemap to edit
 	TileMap &m_tilemap;
+
+	// Autotiling ranges mapped to strings
+	std::unordered_map<std::string, AutotilingData> m_autotiling;
+	bool m_autotilingEnabled;
+	sf::Text m_autotilingText;
+
+	void addAutotilingRange(const std::string &name, Tile::TileTypes defaultValue, const std::vector<AutotilingValue> &autotilingRange);
+	int calculateAutotilingValue(int x, int y, const std::string &autotilingRangeName);
+	void parseAutotilingFile(const std::string &fileName, const std::string &rangeName);
+	std::vector<sf::Vector2i> getAdjacentTileIndices(int centerX, int centerY);
 
 	Tile m_currentTile; // Selected tile for grid placement
 
