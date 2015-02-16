@@ -47,7 +47,7 @@ public:
 		Road_Left_Alone = 21,
 		Road_Left_Corner_Down = 46,
 		Road_Left_Corner_Top = 47,
-		Road_left_Corner_Full = 48,
+		Road_Left_Corner_Full = 48,
 
 		Road_Down_Right = 22,
 		Road_Down_Right_Corner = 45,
