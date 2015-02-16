@@ -261,22 +261,20 @@ void EditorGridMode::parseAutotilingFile(const std::string &fileName, const std:
 			{
 				int val = Utility::stringToNumber<std::size_t>(value);
 				
-				auto dupItr = duplicateDebug.find(val);
-				if (dupItr != duplicateDebug.end())
-				{
-					std::cout << std::endl;
-					std::cout << "Duplicate autotiling value: " << val << std::endl;
-					std::cout << "Encountered first at: " << std::endl;
-					for (auto &dupVal : dupItr->second)
-					{
-						std::cout << dupVal << std::endl;
-					}
-					std::cout << "Encountered again at: " << line << std::endl;
-					std::cout << std::endl;
-				}
-				
 				duplicateDebug[val].push_back(line);
 				data[val] = tileTypeReal;
+			}
+		}
+
+		for (auto &debugVal : duplicateDebug)
+		{
+			if (debugVal.second.size() != 1)
+			{
+				std::cout << "Duplicates of: " << debugVal.first << std::endl;
+				for (auto &debugLine : debugVal.second)
+				{
+					std::cout << debugLine << std::endl;
+				}
 			}
 		}
 
