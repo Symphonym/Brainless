@@ -58,7 +58,6 @@ void DialogTree::loadDialogFile(const std::string &fileName)
 		reader.close();
 	}
 	std::cout << "Portrait Texture Name: " << m_portraitTextureName << std::endl;
-	printBranch(m_rootBranch, 0);
 }
 
 void DialogTree::printBranch(DialogBranch &branch, std::size_t indent)

@@ -71,12 +71,17 @@ public:
 	bool getTilt() const;
 	bool getPlatform() const;
 
+	// Get name of autotiling range
+	std::string getAutotilingRangeName() const;
+
 	// Raw acceess to sprite, do not modify if using tile with tilemap
 	sf::Sprite& getSprite();
 
 private:
 	bool m_tilt;
 	bool m_platform;
+	std::string m_autotilingRange; // Name of autotiling range
+
 	void updateType();
 
 	TileTypes m_type;

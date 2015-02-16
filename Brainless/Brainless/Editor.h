@@ -34,6 +34,7 @@ private:
 	// TODO TEST CODE, DONT REMOVE UNLESS YOU MADE THIS
 	float shaderTest;
 
+
 	typedef std::unique_ptr<TileMap> MapPtr;
 
 	sf::RenderWindow m_editor;
@@ -45,6 +46,8 @@ private:
 	// Spawn position sprite
 	sf::Sprite m_spawnSprite;
 
+	// Display info
+	sf::Text m_saveText;
 	sf::Text m_levelFileText;
 	int m_currentLevelFileIndex;
 
@@ -53,9 +56,6 @@ private:
 	EditorSpriteMode *m_spriteMode;
 	EditorZombieMode *m_zombieMode;
 	EditorItemMode *m_itemMode;
-
-	// Whether or not you have saved
-	sf::Text m_saveText;
 
 	// Which sync ID you are using when placing an item, used to connect items
 	// to eachother. A key and the door it goes to would have a matching syncID
