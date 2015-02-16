@@ -22,6 +22,21 @@ m_platform(speed,maxDistance,id)
 		sf::IntRect(0, 0, m_platform.getSprite().getGlobalBounds().width, m_platform.getSprite().getGlobalBounds().height));
 }
 
+void ScissorLiftItem::serialize(std::ofstream &writer) const
+{
+	m_platform.serialize(writer);
+}
+
+void ScissorLiftItem::deserialize(std::ifstream &reader)
+{
+	m_platform.deserialize(reader);
+}
+
+bool ScissorLiftItem::onSyncedWith(Item &otherItem)
+{
+	return m_platform.onSyncedWith(otherItem);
+}
+
 void ScissorLiftItem::update(float deltaTime, Game &game)
 {
 	m_collisionSize.x = m_platform.getCollisionBounds().width;

@@ -58,7 +58,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new HammerItem(25)));
 	addItem(ItemPtr(new ThorsHammerItem(26)));
 
-	//addItem(ItemPtr(new ScissorLiftItem(sf::Vector2f(0, 100), 400, 17)));
+	addItem(ItemPtr(new ScissorLiftItem(sf::Vector2f(0, 100), 200, 27)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)
