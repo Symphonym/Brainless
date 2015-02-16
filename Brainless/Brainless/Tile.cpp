@@ -119,7 +119,7 @@ void Tile::updateType()
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Middle-Alone-Horizontal"));
 		break;
 	case Road_Middle_Alone_Vertical:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Middle-Alone")); //SAKNAS R-Middle-Alone-Vertical
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Middle-Alone-Vertical"));
 		break;
 	case Road_Left:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Left"));
@@ -139,13 +139,55 @@ void Tile::updateType()
 	case Road_Down:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Down"));
 		break;
-	case Road_Corner_Left:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-Left"));
+	case Road_Down_Alone:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Down-Alone"));
 		break;
-	case Road_Corner_Right:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-Right"));
+	case Road_Corner_TopLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-TopLeft"));
 		break;
-
+	case Road_Corner_TopRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-TopRight"));
+		break;
+	case Road_Corner_TopLeft_TopRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-TopLeft-TopRight"));
+		break;
+	case Road_Corner_DownLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-DownLeft"));
+		break;
+	case Road_Corner_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-DownRight"));
+		break;
+	case Road_Corner_DownLeft_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-DownLeft-DownRight"));
+		break;
+	case Road_Corner_TopLeft_DownLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-TopLeft-DownLeft"));
+		break;
+	case Road_Corner_TopRight_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-TopRight-DownRight"));
+		break;
+	case Road_Corner_TopLeft_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-TopLeft-DownRight"));
+		break;
+	case Road_Corner_TopRight_DownLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-TopRight-DownLeft"));
+		break;
+	case Road_Corner_Not_TopLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-Not-TopLeft"));
+		break;
+	case Road_Corner_Not_TopRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-Not-TopRight"));
+		break;
+	case Road_Corner_Not_DownLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-Not-DownLeft"));
+		break;
+	case Road_Corner_Not_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-Not-DownRight"));
+		break;
+	case Road_Corner_Full:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-Full"));
+		break;
+	
 	default:
 		break;
 	}

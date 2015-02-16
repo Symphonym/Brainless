@@ -29,16 +29,29 @@ public:
 		Road_Middle = 15,
 		Road_Middle_Alone = 16,
 		Road_Middle_Alone_Horizontal = 17,
-		Road_Middle_Alone_Vertical = 18, //missing in action?
+		Road_Middle_Alone_Vertical = 18,
 		Road_Left = 19,
 		Road_Left_Short = 20,
 		Road_Left_Alone = 21,
 		Road_Down_Right = 22,
 		Road_Down_Left = 23, 
 		Road_Down = 24,
-		Road_Corner_Left = 25,
-		Road_Corner_Right = 26
-
+		Road_Down_Alone = 28,
+		Road_Corner_TopLeft = 25,
+		Road_Corner_TopRight = 26,
+		Road_Corner_TopLeft_TopRight = 27,
+		Road_Corner_DownLeft = 29,
+		Road_Corner_DownRight = 30,
+		Road_Corner_DownLeft_DownRight = 31,
+		Road_Corner_TopLeft_DownLeft = 32,
+		Road_Corner_TopRight_DownRight = 33, //MIA
+		Road_Corner_TopLeft_DownRight = 34,
+		Road_Corner_TopRight_DownLeft = 35,
+		Road_Corner_Not_TopLeft = 36,
+		Road_Corner_Not_TopRight = 37,
+		Road_Corner_Not_DownLeft = 38,
+		Road_Corner_Not_DownRight = 39,
+		Road_Corner_Full = 40
 		// Etc
 	};
 
