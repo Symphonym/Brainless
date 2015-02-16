@@ -17,9 +17,24 @@ m_platform(speed,maxDistance,id)
 
 	m_collisionOffset = sf::Vector2f(0, 0);
 	m_xTexture = sf::Sprite(ResourceLoader::instance().retrieveTexture("liftX"),
-		sf::IntRect(0, 0, m_xSize, m_xSize));
+		sf::IntRect(0, 0, 0, 0));
 	m_topTexture = sf::Sprite(ResourceLoader::instance().retrieveTexture("liftTop"),
-		sf::IntRect(0, 0, m_platform.getSprite().getGlobalBounds().width, m_platform.getSprite().getGlobalBounds().height));
+		sf::IntRect(0,0,0,0));
+}
+
+void ScissorLiftItem::serialize(std::ofstream &writer) const
+{
+	m_platform.serialize(writer);
+}
+
+void ScissorLiftItem::deserialize(std::ifstream &reader)
+{
+	m_platform.deserialize(reader);
+}
+
+bool ScissorLiftItem::onSyncedWith(Item &otherItem)
+{
+	return m_platform.onSyncedWith(otherItem);
 }
 
 void ScissorLiftItem::update(float deltaTime, Game &game)
@@ -30,7 +45,9 @@ void ScissorLiftItem::update(float deltaTime, Game &game)
 	m_distanceFromPlatform = 200;
 	m_platform.update(deltaTime, game);
 	m_xTexture.setPosition(getPosition().x, m_platform.getPosition().y + m_platform.getSprite().getGlobalBounds().height);
+	m_xTexture.setTextureRect(sf::IntRect(0, 0, m_xSize, m_xSize));
 	m_topTexture.setPosition(m_platform.getPosition().x, m_platform.getPosition().y - m_platform.getSprite().getGlobalBounds().height);
+	m_topTexture.setTextureRect(sf::IntRect(0, 0, m_platform.getSprite().getGlobalBounds().width, m_platform.getSprite().getGlobalBounds().height));
 	m_xTexture.setScale(1, abs(m_platform.getPosition().y + m_platform.getSprite().getGlobalBounds().height - getPosition().y) / m_xSize);
 }
 

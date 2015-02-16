@@ -146,6 +146,6 @@
 
 # MOVING PLATFORM ITEM
 +Texture,images/items/movingPlatform.png,MovingPlatform
-#+Texture,images/items/liftbottom.png,liftBottom
-#+Texture,images/items/liftx.png,liftX
-#+Texture,images/items/lifttop.png,liftTop
++Texture,images/items/liftbottom.png,liftBottom
++Texture,images/items/liftx.png,liftX
++Texture,images/items/lifttop.png,liftTop

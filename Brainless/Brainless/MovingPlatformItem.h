@@ -25,7 +25,6 @@ public:
 
 	virtual sf::Vector2f getSpeed() const;
 
-
 private:
 
 	bool m_isActive;

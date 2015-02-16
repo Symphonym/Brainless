@@ -13,6 +13,11 @@ public:
 
 	virtual void onExamine();
 
+	virtual void serialize(std::ofstream &writer) const;
+	virtual void deserialize(std::ifstream &reader);
+
+	virtual bool onSyncedWith(Item &otherItem);
+
 	virtual void update(float deltaTime, Game &game);
 	virtual void draw();
 
