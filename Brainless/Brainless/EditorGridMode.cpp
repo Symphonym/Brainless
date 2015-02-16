@@ -189,7 +189,7 @@ int EditorGridMode::calculateAutotilingValue(int x, int y, const std::string &au
 	/*
 	Autotiling bitmap
 	1   2   4
-	126 +   8
+	128 +   8
 	64  32 16
 	*/
 
@@ -219,7 +219,7 @@ int EditorGridMode::calculateAutotilingValue(int x, int y, const std::string &au
 
 	// Tile to the left exists
 	if (x - 1 >= 0 && m_tilemap.getTile(x - 1, y).getAutotilingRangeName() == autotilingRangeName)
-		autotilingValue += 126;
+		autotilingValue += 128;
 
 	// Tile to the right exists
 	if (x + 1 < Constants::MapWidth && m_tilemap.getTile(x + 1, y).getAutotilingRangeName() == autotilingRangeName)
@@ -234,7 +234,7 @@ void EditorGridMode::parseAutotilingFile(const std::string &fileName, const std:
 	if (reader.is_open())
 	{
 		// Stores the lines of the file to debug for duplicate autotiling values
-		std::unordered_map<int, std::string> duplicateDebug;
+		std::unordered_map<int, std::vector<std::string> > duplicateDebug;
 
 		AutotilingData data;
 
@@ -264,12 +264,18 @@ void EditorGridMode::parseAutotilingFile(const std::string &fileName, const std:
 				auto dupItr = duplicateDebug.find(val);
 				if (dupItr != duplicateDebug.end())
 				{
+					std::cout << std::endl;
 					std::cout << "Duplicate autotiling value: " << val << std::endl;
-					std::cout << "Encountered first at: " << dupItr->second << std::endl;
+					std::cout << "Encountered first at: " << std::endl;
+					for (auto &dupVal : dupItr->second)
+					{
+						std::cout << dupVal << std::endl;
+					}
 					std::cout << "Encountered again at: " << line << std::endl;
+					std::cout << std::endl;
 				}
 				
-				duplicateDebug[val] = line;
+				duplicateDebug[val].push_back(line);
 				data[val] = tileTypeReal;
 			}
 		}
