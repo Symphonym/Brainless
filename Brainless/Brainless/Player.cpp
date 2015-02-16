@@ -92,7 +92,7 @@ void Player::updateTask(float deltaTime)
 		m_inputDirection = dir_noDirection;
 		if (m_inAir) m_wallState = wall_normal; //annars större problem med rörelsen i luften, men kan bli "minimala-skärm-studs" problem i luften istället. Dock körs rätt animation
 		//Left
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) /*&& m_wallState != wall_left*/)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D)/*&& m_wallState != wall_left*/)
 		{
 			slowDown = false;
 			m_inputDirection = dir_left;
@@ -121,7 +121,7 @@ void Player::updateTask(float deltaTime)
 
 		}
 		//Right
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) /*&& m_wallState != wall_right*/)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::A)/*&& m_wallState != wall_right*/)
 		{
 			slowDown = false;
 			m_inputDirection = dir_right;
