@@ -5,6 +5,7 @@
 #include "ResourceLoader.h"
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 
 EditorGridMode::EditorGridMode(TileMap &tilemap)
@@ -37,7 +38,7 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 
 
 	// Add autotiling ranges
-	parseAutotilingFile("autotiling/test.txt", "RoadAutotiling");
+	parseAutotilingFile("autotiling/numbersforblocks.txt", "RoadAutotiling");
 	//addAutotilingRange("RoadAutotiling", Tile::Road_Middle,
 	//{
 	//	AutotilingValue(0, Tile::Road_Down)
@@ -98,7 +99,6 @@ bool EditorGridMode::events(const sf::Event &event, const sf::RenderWindow &edit
 
 	return false;
 }
-#include <iostream> // TODO REMOVE
 bool EditorGridMode::update(float deltaTime, const sf::RenderWindow &editorWindow)
 {
 
@@ -233,11 +233,14 @@ void EditorGridMode::parseAutotilingFile(const std::string &fileName, const std:
 
 	if (reader.is_open())
 	{
+		// Stores the lines of the file to debug for duplicate autotiling values
+		std::unordered_map<int, std::string> duplicateDebug;
+
 		AutotilingData data;
 
-		// Default initialize with air
+		// Default initialize with something obvious, as all values should be set
 		for (std::size_t i = 0; i < data.size(); i++)
-			data[i] = Tile::Nothing;
+			data[i] = Tile::Red;
 
 		std::string line;
 		while (std::getline(reader, line))
@@ -255,7 +258,20 @@ void EditorGridMode::parseAutotilingFile(const std::string &fileName, const std:
 
 			std::vector<std::string> autotilingValues = Utility::splitString(autotilingValueStr, ',');
 			for (auto &value : autotilingValues)
-				data[Utility::stringToNumber<std::size_t>(value)] = tileTypeReal;
+			{
+				int val = Utility::stringToNumber<std::size_t>(value);
+				
+				auto dupItr = duplicateDebug.find(val);
+				if (dupItr != duplicateDebug.end())
+				{
+					std::cout << "Duplicate autotiling value: " << val << std::endl;
+					std::cout << "Encountered first at: " << dupItr->second << std::endl;
+					std::cout << "Encountered again at: " << line << std::endl;
+				}
+				
+				duplicateDebug[val] = line;
+				data[val] = tileTypeReal;
+			}
 		}
 
 		m_autotiling[rangeName] = data;
