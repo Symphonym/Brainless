@@ -80,7 +80,6 @@ m_levelIndex(0)
 	m_spiritBar->setPosition(sf::Vector2f(
 		5,
 		m_window.getSize().y - m_spiritBar->getSize().y - 5.f));
-	m_spiritBar->setSecondsPerPoint(0.2f);
 
 	// Load a default map with nothing but ground tiles
 	TileMap::TileMapLayout layout;
@@ -230,16 +229,6 @@ void Game::update(float deltaTime)
 		m_inventory->update(deltaTime, *this);
 		m_popup->update(*this,
 			sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
-	}
-	else
-	{
-		m_spiritBar->update(deltaTime);
-
-		if (m_spiritBar->isEmpty())
-		{
-			ConversationBox::instance().setShown(false);
-			Notification::instance().write("I don't have enough spirit to continue talking with the ghost");
-		}
 	}
 
 	m_levelTransition->update(deltaTime);

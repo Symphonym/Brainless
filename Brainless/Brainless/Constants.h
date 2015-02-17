@@ -26,6 +26,7 @@ public:
 	static const int StickInteractAddition = 100;
 
 	static const int SpiritFeatherWorth = 20;
+	static const int SpiritGhostCost = 50;
 
 	static const std::string CantPickUpString;
 	static const std::string CantUseString;

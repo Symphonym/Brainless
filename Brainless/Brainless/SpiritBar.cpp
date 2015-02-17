@@ -6,9 +6,7 @@
 SpiritBar::SpiritBar()
 :
 m_value(0),
-m_maxValue(0),
-m_curDelay(0),
-m_maxDelay(0.2f)
+m_maxValue(0)
 {
 	sf::Image barImg;
 	barImg.create(1, 30, sf::Color::Cyan);
@@ -24,26 +22,11 @@ m_maxDelay(0.2f)
 	setPosition(sf::Vector2f(0, 0));
 }
 
-void SpiritBar::update(float deltaTime)
-{
-	m_curDelay += deltaTime;
-
-	if (m_curDelay >= m_maxDelay)
-	{
-		m_curDelay = m_curDelay - m_maxDelay;
-		removeValue(1);
-	}
-}
 void SpiritBar::setPosition(const sf::Vector2f &position)
 {
 	m_background.setPosition(position);
 	m_barSprite.setPosition(position.x + 35.f, position.y + 5.f);
 	m_barBg.setPosition(position.x + 35.f, position.y + 5.f);
-}
-void SpiritBar::setSecondsPerPoint(float secondsPerPoint)
-{
-	m_curDelay = 0;
-	m_maxDelay = secondsPerPoint;
 }
 void SpiritBar::setValue(int value)
 {
