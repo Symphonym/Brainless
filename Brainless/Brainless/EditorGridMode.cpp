@@ -130,9 +130,18 @@ bool EditorGridMode::update(float deltaTime, const sf::RenderWindow &editorWindo
 			if (itr != m_autotiling.end())
 			{
 				int autotilingValue = calculateAutotilingValue(mouseIndex.x, mouseIndex.y, m_currentTile.getAutotilingRangeName());
-				//std::cout << "TILING: " << autotilingValue << std::endl;
-				//std::cout << "TYPE: " << itr->second[autotilingValue] << std::endl;
 				m_tilemap.getTile(mouseIndex.x, mouseIndex.y).setType(itr->second[autotilingValue]);
+
+				std::vector<sf::Vector2i> adjacentIndices = getAdjacentTileIndices(mouseIndex.x, mouseIndex.y);
+				for (auto &indice : adjacentIndices)
+				{
+					Tile& adjacentTile = m_tilemap.getTile(indice.x, indice.y);
+					if (adjacentTile.getAutotilingRangeName() == m_currentTile.getAutotilingRangeName())
+					{
+						int tilingValue = calculateAutotilingValue(indice.x, indice.y, adjacentTile.getAutotilingRangeName());
+						adjacentTile.setType(itr->second[tilingValue]);
+					}
+				}
 			}
 			else // Just place tile without autotiling
 				m_tilemap.getTile(mouseIndex.x, mouseIndex.y).setType(m_currentTile.getType());
@@ -145,6 +154,26 @@ bool EditorGridMode::update(float deltaTime, const sf::RenderWindow &editorWindo
 	{
 		m_highlightSprite.setColor(sf::Color::Color(255, 0, 0, 128));
 		m_tilemap.getTile(mouseIndex.x, mouseIndex.y).setType(Tile::Nothing);
+
+		// Autotile nearby tiles if autotiling is enabled
+		if (m_autotilingEnabled)
+		{
+			std::vector<sf::Vector2i> adjacentIndices = getAdjacentTileIndices(mouseIndex.x, mouseIndex.y);
+			for (auto &indice : adjacentIndices)
+			{
+				Tile& adjacentTile = m_tilemap.getTile(indice.x, indice.y);
+				auto itr = m_autotiling.find(adjacentTile.getAutotilingRangeName());
+
+				// Autotiling range exists
+				if (itr != m_autotiling.end())
+				{
+					int autotilingValue = calculateAutotilingValue(indice.x, indice.y, adjacentTile.getAutotilingRangeName());
+					m_tilemap.getTile(indice.x, indice.y).setType(itr->second[autotilingValue]);
+				}
+			}
+			
+		}
+		
 		return true;
 	}
 	else
