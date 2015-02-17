@@ -22,6 +22,7 @@
 #include "StateMachine.h"
 #include "PauseMenu.h"
 #include "Constants.h"
+#include "ParticleSystem.h"
 
 Game::Game(StateMachine &machine)
 :
@@ -193,6 +194,8 @@ void Game::events(const sf::Event &event)
 			saveGame();
 		else if (event.key.code == sf::Keyboard::Escape)
 			m_machine.pushState<PauseMenu>();
+
+		ParticleSystem::instance().addParticles(100, m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window)), sf::Color::Red);
 	}
 
 	// Pump events to everything that needs it
@@ -234,6 +237,7 @@ void Game::update(float deltaTime)
 	m_levelTransition->update(deltaTime);
 	Notification::instance().update(deltaTime, m_window);
 	ConversationBox::instance().update(deltaTime, *this);
+	ParticleSystem::instance().update(deltaTime);
 
 
 	// Update positional sound with player position
@@ -273,6 +277,7 @@ void Game::draw()
 	Notification::instance().draw();
 	ConversationBox::instance().draw();
 	m_levelTransition->draw();
+	Renderer::instance().drawAbove(ParticleSystem::instance());
 	Renderer::instance().executeDraws();
 
 	// Draw extra cameras
