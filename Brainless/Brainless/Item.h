@@ -38,6 +38,7 @@ public:
 	// If the item needs custom interaction functionality
 	virtual void update(float deltaTime, Game &game) {};
 
+	virtual bool onCollisionWithUnit(Unit &unit, Game &game) { return false; }; // Called when a unit collides with the item, returning TRUE will destroy THIS item
 
 	virtual bool onInteract(Item &otherItem, Game &game) { return false;  }; // Called when this item iteracts with another item, returning TRUE will destroy THIS item
 	virtual bool onInteractedWith(Item &otherItem, Game &game) { return false; }; // Called when another item interactors with THIS item, returning TRUE will destroy THIS item

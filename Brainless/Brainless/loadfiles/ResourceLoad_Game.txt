@@ -1,6 +1,9 @@
 -ResourceFile,ResourceLoad_MainMenu.txt
 +ResourceFile,ResourceLoad_PauseMenu.txt
 
+# UI TEXTURES
++Texture,images/UI/spiritBarBG.png,SpiritBarBG
+
 # SPRITE SHEET TEXTURES
 
 +Texture,images/animations/spritesheet.png,testImage

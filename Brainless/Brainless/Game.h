@@ -9,6 +9,7 @@
 #include "LevelTransition.h"
 #include "Inventory.h"
 #include "PopUpMenu.h"
+#include "SpiritBar.h"
 #include "State.h"
 
 
@@ -57,10 +58,9 @@ private:
 	Level m_level;
 	Player* m_player;
 
-	// TESTING CODE, INVENTORY SHOULD PROBABLY BE IN PLAYER CLASS
 	Inventory* m_inventory;
-	// TESTING CODE, POPUP SHOULD PROBABLY BE IN MENU CLASS (MAYBE?!?!?!?)
 	PopUpMenu* m_popup;
+	SpiritBar* m_spiritBar;
 };
 
 #endif

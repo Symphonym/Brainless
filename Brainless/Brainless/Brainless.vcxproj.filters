@@ -294,6 +294,9 @@
     <ClCompile Include="ThorsHammerItem.cpp">
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
+    <ClCompile Include="SpiritBar.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -520,6 +523,9 @@
     </ClInclude>
     <ClInclude Include="ThorsHammerItem.h">
       <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="SpiritBar.h">
+      <Filter>Source Files\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

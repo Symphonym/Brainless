@@ -33,10 +33,7 @@ m_levelIndex(0)
 	// Load game resources
 	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Game.txt");
 
-
 	m_levelTransition = std::unique_ptr<LevelTransition>(new LevelTransition(*this));
-
-	// TODO TEMPORARY, SHOULD NOT BE IN FINAL GAME, prolly put inventory in player class
 	m_inventory = new Inventory();
 	m_popup = new PopUpMenu();
 	m_popup->setItemCallback([&](Item* itm, PopUpMenu::InteractTypes type) -> void
@@ -78,6 +75,12 @@ m_levelIndex(0)
 			Notification::instance().write(itm->getExamineString());
 		}
 	});
+	m_spiritBar = new SpiritBar();
+	m_spiritBar->setMaxValue(160);
+	m_spiritBar->setValue(50);
+	m_spiritBar->setPosition(sf::Vector2f(
+		5,
+		m_window.getSize().y - m_spiritBar->getSize().y - 5.f));
 
 	// Load a default map with nothing but ground tiles
 	TileMap::TileMapLayout layout;
@@ -88,22 +91,14 @@ m_levelIndex(0)
 			layout[x].push_back(Tile::Ground);
 	}
 
-	//Temporary placment marker
-	sf::Image markerImg;
-	markerImg.create(60, 90, sf::Color::Yellow);
-
-	
-
 	// TEST CODE FOR LOADING DEFAULT LEVEL
 	changeLevel(0,false);
-
-
-
 }
 Game::~Game()
 {
 	delete m_inventory;
 	delete m_popup;
+	delete m_spiritBar;
 	//Clear units
 }
 
@@ -270,6 +265,7 @@ void Game::draw()
 	m_level.draw(m_camera);
 	m_inventory->draw();
 	m_popup->draw();
+	m_spiritBar->draw();
 	Notification::instance().draw();
 	ConversationBox::instance().draw();
 	m_levelTransition->draw();
