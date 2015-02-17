@@ -81,12 +81,12 @@ void StateMachine::loop()
 	sf::Clock tickClock;
 	while (m_window.isOpen())
 	{
-		m_window.setFramerateLimit(100); //för kollision test vid låg fps
+		m_window.setFramerateLimit(60); //för kollision test vid låg fps
 		// Get delta time for time based movement
 		float deltaTime = tickClock.restart().asSeconds();
 
-		if (deltaTime >= 0.01f)
-			deltaTime = 0.01f;
+		if (deltaTime >= 0.0167f)
+			deltaTime = 0.0167f;
 
 		// Handle pop requests
 		for (std::size_t i = 0; i < m_removeRequests.size(); i++)
