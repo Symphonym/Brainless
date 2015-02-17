@@ -297,6 +297,9 @@
     <ClCompile Include="SpiritBar.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="SpiritFeatherItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -526,6 +529,9 @@
     </ClInclude>
     <ClInclude Include="SpiritBar.h">
       <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SpiritFeatherItem.h">
+      <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
