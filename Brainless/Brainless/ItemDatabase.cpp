@@ -27,6 +27,7 @@
 #include "DuctTapedBatteryItem.h"
 #include "HammerItem.h"
 #include "ThorsHammerItem.h"
+#include "SpiritFeatherItem.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -57,8 +58,8 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new DuctTapedBatteryItem(24)));
 	addItem(ItemPtr(new HammerItem(25)));
 	addItem(ItemPtr(new ThorsHammerItem(26)));
-
 	addItem(ItemPtr(new ScissorLiftItem(sf::Vector2f(0, 100), 200, 27)));
+	addItem(ItemPtr(new SpiritFeatherItem(28)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)
