@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Constants.h"
 #include <iostream>
 
 /*
@@ -29,6 +30,7 @@ m_jumpPower(0),
 m_jumpFrame(2),
 m_wallState(wall_normal),
 m_hp(3),
+m_fallPos(startPosition.x),
 m_damageState(dmg_normal)
 {
 	m_cameraPos = m_position;
@@ -246,6 +248,17 @@ void Player::updateTask(float deltaTime)
 		m_damageState = dmg_normal;
 		m_hp = 3;
 	}
+	if (m_inAir)
+	{
+		if (getPosition().y<m_fallPos)
+			m_fallPos = getPosition().y;
+	}
+	else
+	{
+		if (getPosition().y-m_fallPos > Constants::TileSize*4)
+			takesDamage(sf::Vector2f(0,10));
+		m_fallPos = getPosition().y;
+	}
 }
 
 void Player::takesDamage(sf::Vector2f collisionDifference)
@@ -258,7 +271,7 @@ void Player::takesDamage(sf::Vector2f collisionDifference)
 		SoundPlayer::instance().playSound("player_hurt", getPosition());
 		m_acceleration = sf::Vector2f(0, 0);
 		if (0 < collisionDifference.x) m_speed.x = -200;
-		else m_speed.x = 200;
+		else if (collisionDifference.x != 0) m_speed.x = 200;
 		m_speed.y = -400;
 		m_inAir = true;
 		m_inTilt = false;

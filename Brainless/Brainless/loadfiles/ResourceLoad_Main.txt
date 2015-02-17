@@ -149,3 +149,6 @@
 +Texture,images/items/liftbottom.png,liftBottom
 +Texture,images/items/liftx.png,liftX
 +Texture,images/items/lifttop.png,liftTop
+
+# FEATHER ITEM
++Texture,images/items/feather.png,SpiritFeather

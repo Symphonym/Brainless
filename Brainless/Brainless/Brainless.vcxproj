@@ -140,10 +140,12 @@
     <ClCompile Include="LighterItem.cpp" />
     <ClCompile Include="LongStickItem.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="RubberGlovesItem.cpp" />
     <ClCompile Include="ScissorLift.cpp" />
     <ClCompile Include="SpiritBar.cpp" />
+    <ClCompile Include="SpiritFeatherItem.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="GhostItem.cpp" />
     <ClCompile Include="GUIElement.cpp" />
@@ -217,10 +219,12 @@
     <ClInclude Include="LevelTransition.h" />
     <ClInclude Include="LighterItem.h" />
     <ClInclude Include="LongStickItem.h" />
+    <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="RubberGlovesItem.h" />
     <ClInclude Include="ScissorLift.h" />
     <ClInclude Include="SpiritBar.h" />
+    <ClInclude Include="SpiritFeatherItem.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="GhostItem.h" />
     <ClInclude Include="GUIElement.h" />

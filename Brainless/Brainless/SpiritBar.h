@@ -9,9 +9,7 @@ public:
 
 	SpiritBar();
 
-
 	void setPosition(const sf::Vector2f &position);
-
 
 	void setValue(int value);
 	void setMaxValue(int maxValue);
@@ -36,7 +34,7 @@ private:
 	sf::Sprite m_barBg;
 
 	sf::Texture m_barTexture;
-
+	
 	int m_value, m_maxValue;
 };
 

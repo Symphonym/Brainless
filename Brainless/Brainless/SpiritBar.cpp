@@ -22,14 +22,12 @@ m_maxValue(0)
 	setPosition(sf::Vector2f(0, 0));
 }
 
-
 void SpiritBar::setPosition(const sf::Vector2f &position)
 {
 	m_background.setPosition(position);
 	m_barSprite.setPosition(position.x + 35.f, position.y + 5.f);
 	m_barBg.setPosition(position.x + 35.f, position.y + 5.f);
 }
-
 void SpiritBar::setValue(int value)
 {
 	m_value = value;
