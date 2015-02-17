@@ -2,6 +2,7 @@
 #include "ConversationBox.h"
 #include "Renderer.h"
 #include "Game.h"
+#include "Notification.h"
 
 GhostItem::GhostItem(const std::string &dialogFile, int id)
 :
@@ -27,6 +28,13 @@ void GhostItem::draw()
 
 void GhostItem::onUse(Game &game)
 {
+	// You can't talk to the ghost if you don't have spirit power
+	if (game.getSpiritBar().isEmpty())
+	{
+		Notification::instance().write("I don't have enough spirit within me to communicate with the ghost");
+		return;
+	}
+
 	sf::Vector2i onScreenPos = game.getWindow().mapCoordsToPixel(getPosition());
 
 	m_dialog.resetDialog();
