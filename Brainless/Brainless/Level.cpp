@@ -5,6 +5,7 @@
 #include "Constants.h"
 #include "Utility.h"
 #include "MovingPlatformItem.h"
+#include <iostream>
 
 Level::Level()
 :
@@ -132,7 +133,7 @@ void Level::update(float deltaTime, Game &game)
 	for (std::size_t i = 0; i < m_items.size(); i++)
 		m_items[i]->update(deltaTime, game);
 
-	updateUnitCollision(deltaTime);
+	updateUnitCollision(deltaTime, game);
 }
 
 void Level::draw(const sf::View &cameraView)
@@ -198,7 +199,7 @@ bool Level::isDark() const
 	return m_enableDarkness;
 }
 
-void Level::updateUnitCollision(float deltaTime)
+void Level::updateUnitCollision(float deltaTime, Game &game)
 {
 	for (unsigned int i = 0; i < m_units.size(); i++)
 	{
@@ -497,11 +498,22 @@ void Level::updateUnitCollision(float deltaTime)
 #pragma endregion platformCollision
 
 #pragma region itemCollision
+
+			std::vector<std::size_t> itemsToRemove;
 			for (int i = 0; i < m_items.size(); i++)
 			{
+				sf::FloatRect tileBounds = m_items[i]->getCollisionBounds();
+
+				// Trigger collision events for items
+				if (tileBounds.intersects(currentUnit->getCollisionRect()))
+				{
+					if (m_items[i]->onCollisionWithUnit(*currentUnit, game))
+						itemsToRemove.push_back(i);
+				}
+
 				if (m_items[i]->isCollidable())
 				{
-					sf::FloatRect tileBounds = m_items[i]->getCollisionBounds();
+					
 					sf::FloatRect tileTopBounds = sf::FloatRect(tileBounds.left, tileBounds.top, tileBounds.width, 1);
 					sf::Vector2f tileCenter = sf::Vector2f(tileBounds.left + tileBounds.width / 2, tileBounds.top + tileBounds.height / 2);
 					sf::Vector2f unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height / 2);
@@ -515,11 +527,12 @@ void Level::updateUnitCollision(float deltaTime)
 					{
 						inAir = false;
 						currentUnit->setPosition(currentUnit->getPosition() + m_items[i]->getSpeed() * deltaTime);
+						std::cout << "bottom intersect" << std::endl;
 					}
 
 					bool hasCollided = false;
 					sf::FloatRect originalBounds = unitBounds;
-					if (m_items[i]->isSolid())
+					if (m_items[i]->isSolid()) //notes Door är solid, platform är inte solid
 						unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height / 2);
 					else
 						unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height);
@@ -530,6 +543,7 @@ void Level::updateUnitCollision(float deltaTime)
 						{
 							unitBounds.top = unitBounds.top + unitBounds.height - unitBounds.width;
 							unitBounds.height = unitBounds.width;
+
 						}
 						else
 						{
@@ -556,7 +570,7 @@ void Level::updateUnitCollision(float deltaTime)
 											currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x, 0));
 											currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
 											currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top - originalBounds.height));
-											//		std::cout << "above" << std::endl;
+													std::cout << "above" << std::endl;
 										}
 									}
 								}
@@ -565,7 +579,7 @@ void Level::updateUnitCollision(float deltaTime)
 									currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x, 0));
 									currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
 									currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top + tileBounds.height + abs(m_items[i]->getSpeed().y * 100)));
-									//	std::cout << "under" << std::endl;
+										std::cout << "under" << std::endl;
 								}
 							}
 							else
@@ -576,7 +590,7 @@ void Level::updateUnitCollision(float deltaTime)
 									currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 									currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
 									currentUnit->setPosition(sf::Vector2f(tileBounds.left - originalBounds.width, currentUnit->getPosition().y));
-									//	std::cout << "left" << std::endl;
+										std::cout << "left" << std::endl;
 								}
 
 								//unit höger om tile
@@ -585,7 +599,7 @@ void Level::updateUnitCollision(float deltaTime)
 									currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 									currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
 									currentUnit->setPosition(sf::Vector2f(tileBounds.left + tileBounds.width, currentUnit->getPosition().y));
-									//	std::cout << "hoger" << std::endl;
+										std::cout << "hoger" << std::endl;
 								}
 							}
 						}
@@ -594,6 +608,12 @@ void Level::updateUnitCollision(float deltaTime)
 					unitBounds = originalBounds;
 				}
 			}
+
+			for (auto &itemIndex : itemsToRemove)
+				m_items.erase(m_items.begin() + itemIndex);
+
+			itemsToRemove.clear();
+
 #pragma endregion itemCollision
 
 			currentUnit->setInAir(inAir);
