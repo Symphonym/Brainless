@@ -77,7 +77,6 @@ m_levelIndex(0)
 	});
 	m_spiritBar = new SpiritBar();
 	m_spiritBar->setMaxValue(160);
-	m_spiritBar->setValue(50);
 	m_spiritBar->setPosition(sf::Vector2f(
 		5,
 		m_window.getSize().y - m_spiritBar->getSize().y - 5.f));
@@ -167,6 +166,10 @@ Player& Game::getPlayer()
 Level& Game::getLevel()
 {
 	return m_level;
+}
+SpiritBar& Game::getSpiritBar()
+{
+	return *m_spiritBar;
 }
 
 bool Game::inventoryContains(const std::string &itemName)

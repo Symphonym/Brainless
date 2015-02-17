@@ -1,5 +1,6 @@
 #include "SpiritFeatherItem.h"
 #include "Unit.h"
+#include "Game.h"
 
 SpiritFeatherItem::SpiritFeatherItem(int id)
 :
@@ -12,9 +13,10 @@ Item("Spirit Feather", "KEVIN_INSERT_SPRITESHIT_HERE", id)
 
 bool SpiritFeatherItem::onCollisionWithUnit(Unit &unit, Game &game)
 {
-	// Delete item on player collision
+	// Delete item on player collision and add spirit power
 	if (unit.getUnitType() == Unit::ID_Player)
 	{
+		game.getSpiritBar().addValue(Constants::SpiritFeatherWorth);
 		return true;
 	}
 	else
