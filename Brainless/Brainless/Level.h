@@ -58,7 +58,7 @@ public:
 
 private:
 
-	void updateUnitCollision(float deltaTime);
+	void updateUnitCollision(float deltaTime, Game &game);
 
 	bool m_enableDarkness;
 	sf::Vector2f m_spawnPos;
