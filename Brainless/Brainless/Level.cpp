@@ -6,6 +6,7 @@
 #include "Utility.h"
 #include "MovingPlatformItem.h"
 #include <iostream>
+
 Level::Level()
 :
 m_enableDarkness(false)
@@ -497,13 +498,18 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 #pragma endregion platformCollision
 
 #pragma region itemCollision
+
+			std::vector<std::size_t> itemsToRemove;
 			for (int i = 0; i < m_items.size(); i++)
 			{
 				sf::FloatRect tileBounds = m_items[i]->getCollisionBounds();
 
 				// Trigger collision events for items
 				if (tileBounds.intersects(currentUnit->getCollisionRect()))
-					m_items[i]->onCollisionWithUnit(*currentUnit, game);
+				{
+					if (m_items[i]->onCollisionWithUnit(*currentUnit, game))
+						itemsToRemove.push_back(i);
+				}
 
 				if (m_items[i]->isCollidable())
 				{
@@ -602,6 +608,12 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 					unitBounds = originalBounds;
 				}
 			}
+
+			for (auto &itemIndex : itemsToRemove)
+				m_items.erase(m_items.begin() + itemIndex);
+
+			itemsToRemove.clear();
+
 #pragma endregion itemCollision
 
 			currentUnit->setInAir(inAir);
