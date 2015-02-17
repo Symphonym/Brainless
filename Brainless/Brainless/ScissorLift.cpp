@@ -74,3 +74,13 @@ Item* ScissorLiftItem::clone()
 {
 	return new ScissorLiftItem(*this);
 }
+
+sf::Vector2f ScissorLiftItem::getSpeed() const
+{
+	return m_platform.getSpeed();
+}
+
+sf::FloatRect ScissorLiftItem::getCollisionBounds() const
+{
+	return m_platform.getCollisionBounds();
+}
