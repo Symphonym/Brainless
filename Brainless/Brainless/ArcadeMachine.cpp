@@ -110,10 +110,10 @@ void ArcadeMachine::draw()
 
 		for (auto &button : m_gameSelectionButtons)
 			Renderer::instance().drawHUD(button);
-
-		// Screen is drawn above the game, since it's transparent
-		Renderer::instance().drawHUD(m_arcadeBackground);
 	}
+
+	// Screen is drawn above the game, since it's transparent
+	Renderer::instance().drawHUD(m_arcadeBackground);
 }
 
 sf::Vector2f ArcadeMachine::getScreenPos() const
