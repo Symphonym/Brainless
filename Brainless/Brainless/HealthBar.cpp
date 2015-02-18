@@ -6,7 +6,8 @@
 HealthBar::HealthBar()
 :
 m_value(0),
-m_maxValue(0)
+m_maxValue(0),
+m_width(65)
 {
 	setPosition(sf::Vector2f(0, 600));
 

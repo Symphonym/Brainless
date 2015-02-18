@@ -26,7 +26,7 @@ private:
 
 	sf::Vector2f m_position;
 
-	float m_width = 60;
+	float m_width;
 	int m_value, m_maxValue;
 };
 
