@@ -55,7 +55,7 @@ void ArcadeMachine::events(const sf::Event &event)
 			if (event.key.code == sf::Keyboard::Escape)
 				exitGame();
 
-			//m_games[m_currentGameIndex]->events(event);
+			m_games[m_currentGameIndex]->events(event);
 
 		}
 		else
@@ -83,7 +83,7 @@ void ArcadeMachine::update(float deltaTime)
 	if (m_playingGame)
 	{
 		m_currentGameText.setString("Playing game: " + m_games[m_currentGameIndex]->getName());
-		//m_games[m_currentGameIndex]->update(deltaTime);
+		m_games[m_currentGameIndex]->update(deltaTime);
 	}
 	else
 	{
@@ -103,14 +103,16 @@ void ArcadeMachine::draw()
 {
 	if (m_playingGame)
 	{
-		//m_games[m_currentGameIndex]->draw()
+		m_games[m_currentGameIndex]->draw();
 	}
 	else
 	{
-		Renderer::instance().drawHUD(m_arcadeBackground);
 
 		for (auto &button : m_gameSelectionButtons)
 			Renderer::instance().drawHUD(button);
+
+		// Screen is drawn above the game, since it's transparent
+		Renderer::instance().drawHUD(m_arcadeBackground);
 	}
 }
 
