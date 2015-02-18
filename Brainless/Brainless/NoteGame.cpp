@@ -21,9 +21,12 @@ void NoteGame::update(float deltaTime)
 {
 	m_scoreText.setString("Score: " + std::to_string(m_score));
 
+	// Spawn new notes
 	if (m_aCurDelay >= m_aMaxDelay)
 	{
 		m_aCurDelay = m_aCurDelay - m_aMaxDelay;
+		
+		sf::Sprite aNote;
 	}
 	if (m_wCurDelay >= m_wMaxDelay)
 	{
