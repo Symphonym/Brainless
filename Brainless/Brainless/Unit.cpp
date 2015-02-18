@@ -70,6 +70,46 @@ void Unit::wallRight()
 
 }
 
+void Unit::serialize(std::ofstream &writer) const
+{
+	// This is so the reader can quickly know what unit it is
+	writer << static_cast<int>(m_UnitID) << std::endl;
+
+	writer << m_position.x << std::endl;
+	writer << m_position.y << std::endl;
+	writer << m_speed.x << std::endl;
+	writer << m_speed.y << std::endl;
+	writer << m_acceleration.x << std::endl;
+	writer << m_acceleration.y << std::endl;
+	writer << m_size.x << std::endl;
+	writer << m_size.y << std::endl;
+	writer << m_specialSpriteDirection << std::endl;
+	writer << m_inAir << std::endl;
+	writer << m_inTilt << std::endl;
+	writer << static_cast<int>(m_spriteDirection) << std::endl;
+	writer << static_cast<int>(m_renderingMode) << std::endl;
+}
+void Unit::deserialize(std::ifstream &reader)
+{
+	// ID is read initially outside this function to initially create the unit
+	
+	reader >> m_position.x >> m_position.y;
+	reader >> m_speed.x >> m_speed.y;
+	reader >> m_acceleration.x >> m_acceleration.y;
+	reader >> m_size.x >> m_size.y;
+	reader >> m_specialSpriteDirection;
+	reader >> m_inAir;
+	reader >> m_inTilt;
+
+	int directionType = 0;
+	reader >> directionType;
+	m_spriteDirection = static_cast<Direction>(directionType);
+
+	int renderingType = 0;
+	reader >> renderingType;
+	m_renderingMode = static_cast<RenderingModes>(renderingType);
+}
+
 void Unit::setInAir(bool inAir)
 {
 	m_inAir = inAir;

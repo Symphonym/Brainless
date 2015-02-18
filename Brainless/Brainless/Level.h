@@ -38,6 +38,7 @@ public:
 
 	void removeDecoration(std::size_t index);
 	void removeUnit(std::size_t index);
+	void removeAllUnits();
 	// Reset everything in the level
 	void reset();
 

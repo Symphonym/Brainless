@@ -6,6 +6,9 @@
 +Texture,images/UI/heart.png,heart
 +Texture,images/UI/heartEmpty.png,heartEmpty
 
+# GAME SHADER
++Shader,shaders/DarknessShader.txt,DarknessShader
+
 # SPRITE SHEET TEXTURES
 
 +Texture,images/animations/spritesheet.png,testImage

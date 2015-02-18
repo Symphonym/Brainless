@@ -273,10 +273,23 @@ bool FileSave::loadInventory(Inventory &inventory)
 void FileSave::saveLevelProgress(Level &level, int levelNumber)
 {
 	std::ofstream writer("game_level" + std::to_string(levelNumber) + ".txt");
+
+	// Write amount of items and then serialize all items
+	writer << level.getItems().size() << std::endl;
 	for (std::size_t i = 0; i < level.getItems().size(); i++)
 	{
 		level.getItems()[i]->serialize(writer);
 	}
+
+	// Write amount of units and then serialize all units
+	writer << level.getUnits().size() << std::endl;
+	for (std::size_t i = 0; i < level.getUnits().size(); i++)
+	{
+		// Do not serialize player
+		if (level.getUnits()[i]->getUnitType() != Unit::ID_Player)
+			level.getUnits()[i]->serialize(writer);
+	}
+
 	writer.close();
 
 }
@@ -288,11 +301,18 @@ bool FileSave::loadLevelProgress(Level &level, int levelNumber)
 	if (reader.is_open())
 	{
 		level.removeAllItems();
+		level.removeAllUnits();
 		opened = true;
 
-		std::string line;
-		while (std::getline(reader, line))
+		// Load items
+		int itemCount = 0;
+		reader >> itemCount;
+
+		for (int i = 0; i < itemCount; i++)
 		{
+			std::string line;
+			std::getline(reader, line);
+
 			// Skip empty lines
 			if (line.empty())
 				continue;
@@ -302,6 +322,37 @@ bool FileSave::loadLevelProgress(Level &level, int levelNumber)
 
 			item->deserialize(reader);
 			level.addItem(std::move(item));
+		}
+
+		// Load units
+		int unitCount = 0;
+		reader >> unitCount;
+
+		for (int i = 0; i < unitCount; i++)
+		{
+			std::string line;
+			std::getline(reader, line);
+
+			// Skip empty lines
+			if (line.empty())
+				continue;
+
+			int unitID = Utility::stringToNumber<int>(line);
+			Unit::UnitType unitType = static_cast<Unit::UnitType>(unitID);
+			Level::UnitPtr unit;
+
+			if (unitID == Unit::ID_WalkingZombie)
+				unit = Level::UnitPtr(new WalkingZombie(sf::Vector2f(0, 0), 0));
+			else if (unitID == Unit::ID_IdleZombie)
+				unit = Level::UnitPtr(new IdleZombie(sf::Vector2f(0, 0), Unit::Direction::dir_left));
+			else if (unitID == Unit::ID_ChasingZombie)
+				unit = Level::UnitPtr(new ChasingZombie(sf::Vector2f(0, 0), 0));
+
+			if (unit)
+			{
+				unit->deserialize(reader);
+				level.addUnit(std::move(unit));
+			}
 		}
 	}
 	reader.close();

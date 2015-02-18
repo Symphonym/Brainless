@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include "SoundPlayer.h"
 #include <vector>
+#include <fstream>
 
 //version 0.2
 class Item;
@@ -31,6 +32,8 @@ public:
 
 	virtual bool onInteractedWith(Item &otherItem) { return false; } // Called when an item interacts with this unit, returning TRUE will destroy this unit
 
+	virtual void serialize(std::ofstream &writer) const;
+	virtual void deserialize(std::ifstream &reader);
 
 	// Set player status
 	void setInAir(bool inAir);

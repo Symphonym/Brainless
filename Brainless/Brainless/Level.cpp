@@ -42,10 +42,6 @@ void Level::loadLevelResources()
 	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("CBackground")));
 
 	//SoundPlayer::instance().playMusic("LevelMusic", true);
-	if (m_enableDarkness)
-		Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("DarknessShader"));
-	else
-		Renderer::instance().unplugShader();
 }
 
 Unit* Level::addUnit(UnitPtr unit)
@@ -101,7 +97,10 @@ void Level::removeUnit(std::size_t index)
 	if (index < m_units.size())
 		m_units.erase(m_units.begin() + index);
 }
-
+void Level::removeAllUnits()
+{
+	m_units.clear();
+}
 
 void Level::reset()
 {
@@ -118,12 +117,6 @@ void Level::reset()
 
 void Level::update(float deltaTime, Game &game)
 {
-	if (m_enableDarkness)
-	{
-		sf::Shader *shader = Renderer::instance().getCurrentShader();
-		shader->setParameter("enableDarkness", 0);
-	}
-
 	const int unitSpeed = 600;
 	for (std::size_t i = 0; i < m_units.size(); i++)
 	{

@@ -28,6 +28,9 @@ public:
 	static const int SpiritFeatherWorth = 20;
 	static const int SpiritGhostCost = 50;
 
+	// Must never be zero, and must equal the amount of brains placed in the levels
+	static const int TotalBrainCount = 1;
+
 	static const std::string CantPickUpString;
 	static const std::string CantUseString;
 };

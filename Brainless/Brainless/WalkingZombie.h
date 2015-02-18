@@ -20,6 +20,9 @@ public:
 	void wallLeft();
 	void wallRight();
 
+	virtual void serialize(std::ofstream &writer) const;
+	virtual void deserialize(std::ifstream &reader);
+
 protected:
 
 private:

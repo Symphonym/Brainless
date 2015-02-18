@@ -5,6 +5,3 @@
 
 # BACKGROUND MUSIC
 +Music,music/LevelMusic.wav,LevelMusic
-
-# SHADER TEST
-+Shader,shaders/DarknessShader.txt,DarknessShader

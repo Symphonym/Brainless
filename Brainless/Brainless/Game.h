@@ -29,6 +29,9 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
+	// Increment the saved zombie amount
+	void addSavedZombie(int count);
+
 	// Add item to inventory
 	void lootItem(Inventory::ItemPtr item);
 
@@ -55,6 +58,9 @@ private:
 	std::vector<sf::View> m_extraCameras;
 
 	std::unique_ptr<LevelTransition> m_levelTransition;
+
+	// How many zombies has been given a brain
+	int m_savedZombies;
 
 	int m_levelIndex;
 	Level m_level;

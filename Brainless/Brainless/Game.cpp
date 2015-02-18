@@ -27,12 +27,17 @@
 Game::Game(StateMachine &machine)
 :
 State(machine),
+m_savedZombies(0),
 m_levelIndex(0)
 {
 	m_camera = m_window.getDefaultView();
 
 	// Load game resources
 	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Game.txt");
+
+	// Set game shader
+	Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("DarknessShader"));
+
 
 	m_levelTransition = std::unique_ptr<LevelTransition>(new LevelTransition(*this));
 	m_inventory = new Inventory();
@@ -103,6 +108,11 @@ Game::~Game()
 	delete m_spiritBar;
 	delete m_healthBar;
 	//Clear units
+}
+
+void Game::addSavedZombie(int count)
+{
+	m_savedZombies += count;
 }
 
 void Game::lootItem(Inventory::ItemPtr item)
@@ -212,6 +222,14 @@ void Game::events(const sf::Event &event)
 }
 void Game::update(float deltaTime)
 {
+	sf::Shader *currentShader = Renderer::instance().getCurrentShader();
+	if (currentShader)
+	{
+		currentShader->setParameter("intensityValue", 1.f - static_cast<float>(m_savedZombies) / static_cast<float>(Constants::TotalBrainCount));
+		currentShader->setParameter("enableDarkness", static_cast<int>(m_level.isDark()));
+		currentShader->setParameter("enableLightSource", 0); // False until something else sets it
+	}
+
 	m_camera.setCenter(m_player->getCameraPosition().x, m_player->getCameraPosition().y);
 
 	if (m_camera.getCenter().y > Constants().MapHeight * Constants().TileSize - (m_camera.getSize().y / 2))
