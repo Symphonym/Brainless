@@ -110,6 +110,7 @@
     <ClCompile Include="ArcadeGame.cpp" />
     <ClCompile Include="ArcadeMachine.cpp" />
     <ClCompile Include="ArcadeMachineItem.cpp" />
+    <ClCompile Include="BeachParty.cpp" />
     <ClCompile Include="BrainItem.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CableItem.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="ArcadeGame.h" />
     <ClInclude Include="ArcadeMachine.h" />
     <ClInclude Include="ArcadeMachineItem.h" />
+    <ClInclude Include="BeachParty.h" />
     <ClInclude Include="BrainItem.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CableItem.h" />

@@ -318,6 +318,9 @@
     <ClCompile Include="ArcadeGame.cpp">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClCompile>
+    <ClCompile Include="BeachParty.cpp">
+      <Filter>Source Files\Game\ArcadeGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -564,6 +567,9 @@
       <Filter>Source Files\State Machine\States</Filter>
     </ClInclude>
     <ClInclude Include="ArcadeGame.h">
+      <Filter>Source Files\Game\ArcadeGame</Filter>
+    </ClInclude>
+    <ClInclude Include="BeachParty.h">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClInclude>
   </ItemGroup>
