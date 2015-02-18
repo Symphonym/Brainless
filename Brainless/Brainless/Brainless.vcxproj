@@ -107,6 +107,10 @@
   <ItemGroup>
     <ClCompile Include="AABatteryItem.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="ArcadeGame.cpp" />
+    <ClCompile Include="ArcadeMachine.cpp" />
+    <ClCompile Include="ArcadeMachineItem.cpp" />
+    <ClCompile Include="BeachParty.cpp" />
     <ClCompile Include="BrainItem.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CableItem.cpp" />
@@ -135,11 +139,13 @@
     <ClCompile Include="FileSave.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HammerItem.cpp" />
+    <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="KeyTwineItem.cpp" />
     <ClCompile Include="LevelTransition.cpp" />
     <ClCompile Include="LighterItem.cpp" />
     <ClCompile Include="LongStickItem.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="NoteGame.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="RubberGlovesItem.cpp" />
@@ -186,6 +192,10 @@
   <ItemGroup>
     <ClInclude Include="AABatteryItem.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="ArcadeGame.h" />
+    <ClInclude Include="ArcadeMachine.h" />
+    <ClInclude Include="ArcadeMachineItem.h" />
+    <ClInclude Include="BeachParty.h" />
     <ClInclude Include="BrainItem.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CableItem.h" />
@@ -215,10 +225,12 @@
     <ClInclude Include="FileSave.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="HammerItem.h" />
+    <ClInclude Include="HealthBar.h" />
     <ClInclude Include="KeyTwineItem.h" />
     <ClInclude Include="LevelTransition.h" />
     <ClInclude Include="LighterItem.h" />
     <ClInclude Include="LongStickItem.h" />
+    <ClInclude Include="NoteGame.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="RubberGlovesItem.h" />

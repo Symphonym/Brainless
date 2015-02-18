@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "Player.h"
 #include "ParticleSystem.h"
+#include "SoundPlayer.h"
 
 
 SpiritFeatherItem::SpiritFeatherItem(int id)
@@ -37,7 +38,11 @@ bool SpiritFeatherItem::onCollisionWithUnit(Unit &unit, Game &game)
 			sf::Vector2f(-100, 100));		
 			//sf::Vector2f(-game.getPlayer().getSpeed().x / 100.f, -game.getPlayer().getSpeed().y / 100.f));
 
+		SoundPlayer::instance().playSound("feather_sound", getPosition());
+
 		game.getSpiritBar().addValue(Constants::SpiritFeatherWorth);
+
+
 		return true;
 	}
 	else

@@ -35,6 +35,10 @@ m_levelIndex(0)
 	// Load game resources
 	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Game.txt");
 
+	// Set game shader
+	Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("DarknessShader"));
+
+
 	m_levelTransition = std::unique_ptr<LevelTransition>(new LevelTransition(*this));
 	m_inventory = new Inventory();
 	m_popup = new PopUpMenu();
@@ -83,6 +87,8 @@ m_levelIndex(0)
 		5,
 		m_window.getSize().y - m_spiritBar->getSize().y - 5.f));
 
+	m_healthBar = new HealthBar();
+
 	// Load a default map with nothing but ground tiles
 	TileMap::TileMapLayout layout;
 	for (int x = 0; x < Constants::MapWidth; x++)
@@ -100,6 +106,7 @@ Game::~Game()
 	delete m_inventory;
 	delete m_popup;
 	delete m_spiritBar;
+	delete m_healthBar;
 	//Clear units
 }
 
@@ -215,6 +222,14 @@ void Game::events(const sf::Event &event)
 }
 void Game::update(float deltaTime)
 {
+	sf::Shader *currentShader = Renderer::instance().getCurrentShader();
+	if (currentShader)
+	{
+		currentShader->setParameter("intensityValue", 1.f - static_cast<float>(m_savedZombies) / static_cast<float>(Constants::TotalBrainCount));
+		currentShader->setParameter("enableDarkness", static_cast<int>(m_level.isDark()));
+		currentShader->setParameter("enableLightSource", 0); // False until something else sets it
+	}
+
 
 	// Update game logic and input, if not paused
 	// Disable game input when conversation is ongoing
@@ -241,6 +256,7 @@ void Game::update(float deltaTime)
 
 
 	m_levelTransition->update(deltaTime);
+	m_healthBar->update(*m_player);
 	Notification::instance().update(deltaTime, m_window);
 	ConversationBox::instance().update(deltaTime, *this);
 	ParticleSystem::instance().update(deltaTime);
@@ -271,6 +287,7 @@ void Game::update(float deltaTime)
 		changeLevelTransition(m_levelIndex - 1, true);
 	//Player bound whitin room sides
 	m_player->setPosition(sf::Vector2f(Utility::clampValue<float>(m_player->getPosition().x, Constants::TileSize*0.1, (Constants::MapWidth - 0.5)*Constants::TileSize), m_player->getPosition().y));
+
 }
 void Game::draw()
 {
@@ -280,6 +297,7 @@ void Game::draw()
 	m_inventory->draw();
 	m_popup->draw();
 	m_spiritBar->draw();
+	m_healthBar->draw();
 	Notification::instance().draw();
 	ConversationBox::instance().draw();
 	m_levelTransition->draw();
