@@ -318,6 +318,9 @@
     <ClCompile Include="ArcadeGame.cpp">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClCompile>
+    <ClCompile Include="NoteGame.cpp">
+      <Filter>Source Files\Game\ArcadeGame</Filter>
+    </ClCompile>
     <ClCompile Include="BeachParty.cpp">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClCompile>
@@ -567,6 +570,9 @@
       <Filter>Source Files\State Machine\States</Filter>
     </ClInclude>
     <ClInclude Include="ArcadeGame.h">
+      <Filter>Source Files\Game\ArcadeGame</Filter>
+    </ClInclude>
+    <ClInclude Include="NoteGame.h">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClInclude>
     <ClInclude Include="BeachParty.h">

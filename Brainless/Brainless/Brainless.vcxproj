@@ -145,6 +145,7 @@
     <ClCompile Include="LighterItem.cpp" />
     <ClCompile Include="LongStickItem.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="NoteGame.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="RubberGlovesItem.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="LevelTransition.h" />
     <ClInclude Include="LighterItem.h" />
     <ClInclude Include="LongStickItem.h" />
+    <ClInclude Include="NoteGame.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="RubberGlovesItem.h" />
