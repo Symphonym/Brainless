@@ -61,6 +61,7 @@ public:
 		Road_Down_Corner_Full = 43,
 
 		Road_Tilt = 9,
+		Road_Tilt_Corner = 57,
 
 		Road_Corner_TopLeft = 25,
 		Road_Corner_TopRight = 26,
