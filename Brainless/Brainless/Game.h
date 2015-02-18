@@ -10,6 +10,7 @@
 #include "Inventory.h"
 #include "PopUpMenu.h"
 #include "SpiritBar.h"
+#include "HealthBar.h"
 #include "State.h"
 
 
@@ -68,6 +69,7 @@ private:
 	Inventory* m_inventory;
 	PopUpMenu* m_popup;
 	SpiritBar* m_spiritBar;
+	HealthBar* m_healthBar;
 };
 
 #endif

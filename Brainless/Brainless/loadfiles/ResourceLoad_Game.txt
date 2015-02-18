@@ -3,6 +3,8 @@
 
 # UI TEXTURES
 +Texture,images/UI/spiritBarBG.png,SpiritBarBG
++Texture,images/UI/heart.png,heart
++Texture,images/UI/heartEmpty.png,heartEmpty
 
 # GAME SHADER
 +Shader,shaders/DarknessShader.txt,DarknessShader

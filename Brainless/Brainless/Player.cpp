@@ -261,6 +261,16 @@ void Player::updateTask(float deltaTime)
 	}
 }
 
+int Player::getHealth()
+{
+	return m_hp;
+}
+
+int Player::getMaxHealth()
+{
+	return m_maxHp;
+}
+
 void Player::takesDamage(sf::Vector2f collisionDifference)
 {
 	if (!m_isMovementEnabled)

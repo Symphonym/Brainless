@@ -135,6 +135,7 @@
     <ClCompile Include="FileSave.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HammerItem.cpp" />
+    <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="KeyTwineItem.cpp" />
     <ClCompile Include="LevelTransition.cpp" />
     <ClCompile Include="LighterItem.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="FileSave.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="HammerItem.h" />
+    <ClInclude Include="HealthBar.h" />
     <ClInclude Include="KeyTwineItem.h" />
     <ClInclude Include="LevelTransition.h" />
     <ClInclude Include="LighterItem.h" />
