@@ -1,7 +1,7 @@
 #include "Unit.h"
 #include "Renderer.h"
 #include "ConversationBox.h"
-
+#include <iostream>
 #define SPRITESIZE 256 //storleken på varje bild i texturesheet
 
 Unit* Unit::s_playerPointer = nullptr;
@@ -265,3 +265,103 @@ Unit::Direction Unit::getDirection()
 {
 	return m_spriteDirection;
 }
+
+
+void Unit::collisionLeft(float posX, float speedX, float accX)
+{
+	m_collisionLeft++;
+	m_collisionNewPos.x = posX;
+	m_collisionNewSpeed.x = speedX;
+	m_collisionNewAcc.x = accX;
+}
+
+
+void Unit::collisionRight(float posX, float speedX, float accX)
+{
+	m_collisionRight++;
+	m_collisionNewPos.x = posX;
+	m_collisionNewSpeed.x = speedX;
+	m_collisionNewAcc.x = accX;
+}
+
+void Unit::collisionUp(float posY, float speedY, float accY)
+{
+	m_collisionUp++;
+	m_collisionNewPos.y = posY;
+	m_collisionNewSpeed.y = speedY;
+	m_collisionNewAcc.y = accY;
+}
+void Unit::collisionDown(float posY, float speedY, float accY)
+{
+	m_collisionDown++;
+	m_collisionNewPos.y = posY;
+	m_collisionNewSpeed.y = speedY;
+	m_collisionNewAcc.y = accY;
+}
+
+void Unit::updateCollision()
+{
+	//massa if
+	if (m_collisionDown == 0 &&
+		m_collisionLeft == 0 &&
+		m_collisionRight == 0 &&
+		m_collisionUp == 0) return;
+
+	if (m_collisionUp > m_collisionDown &&
+		m_collisionUp > m_collisionLeft &&
+		m_collisionUp > m_collisionRight)
+	{
+		m_position.y = m_collisionNewPos.y;
+		m_speed.y = m_collisionNewSpeed.y;
+		m_acceleration.y = m_collisionNewAcc.y;
+	}
+	else if (m_collisionDown > m_collisionUp &&
+		m_collisionDown > m_collisionLeft &&
+		m_collisionDown > m_collisionRight)
+	{
+		m_position.y = m_collisionNewPos.y;
+		m_speed.y = m_collisionNewSpeed.y;
+		m_acceleration.y = m_collisionNewAcc.y;
+	}
+	else if (m_collisionLeft > m_collisionDown &&
+		m_collisionLeft > m_collisionUp &&
+		m_collisionLeft > m_collisionRight)
+	{
+		m_position.x = m_collisionNewPos.x;
+		m_speed.x = m_collisionNewSpeed.x;
+		m_acceleration.x = m_collisionNewAcc.x;
+	}
+	else if (m_collisionRight > m_collisionDown &&
+		m_collisionRight > m_collisionLeft &&
+		m_collisionRight > m_collisionUp)
+	{
+		m_position.x = m_collisionNewPos.x;
+		m_speed.x = m_collisionNewSpeed.x;
+		m_acceleration.x = m_collisionNewAcc.x;
+	}
+	else
+	{
+		m_position = m_collisionNewPos;
+		m_speed = m_collisionNewSpeed;
+		m_acceleration = m_collisionNewAcc;
+	}
+
+	std::cout << m_collisionLeft << m_collisionRight << m_collisionUp << m_collisionDown << std::endl;
+
+	m_collisionNewPos = m_position;
+	m_collisionNewSpeed = m_speed;
+	m_collisionNewAcc = m_acceleration;
+	m_collisionLeft = 0;
+	m_collisionRight = 0;
+	m_collisionUp = 0;
+	m_collisionDown = 0;
+}
+/*
+
+
+void Ball::updateCollision()
+{
+
+}
+
+*/
