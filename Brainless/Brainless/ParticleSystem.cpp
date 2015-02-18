@@ -36,6 +36,8 @@ void ParticleSystem::addParticles(std::size_t count, const sf::Vector2f &positio
 		particle.velocity = sf::Vector2f(
 			Utility::randomValueBetween(speedRangeX.x, speedRangeX.y),
 			Utility::randomValueBetween(speedRangeY.x, speedRangeY.y));
+		particle.velocity.x *= std::cos(particle.velocity.x);
+		particle.velocity.y *= std::sin(particle.velocity.y);
 		particle.lifeTime = 0;
 		particle.maxLifeTime = Utility::randomValueBetween(lifetimeRange.x, lifetimeRange.y);
 		particle.rotationSpeed = Utility::randomValueBetween(rotationSpeedRange.x, rotationSpeedRange.y);
