@@ -95,170 +95,170 @@ void Tile::updateType()
 
 		*/
 	case Road_Top_Right:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top-Right")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Top_Right")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Top_Right_Corner:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top-Right-Corner")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Top_Right_Corner")); m_autotilingRange = "RoadAutotiling";
 		break;
 
 	case Road_Top_Left:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top-Left")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Top_Left")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Top_Left_Short:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top-Left-Short")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Top_Left_Short")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Top_Left_Corner:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top-Left-Corner")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Top_Left_Corner")); m_autotilingRange = "RoadAutotiling";
 		break;
 
 	case Road_Top:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Top")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Top_Alone:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top-Alone")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Top_Alone")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Top_Short:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top-Short")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Top_Short")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Top_Corner_Left:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top-Corner-Left")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Top_Corner_Left")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Top_Corner_Right:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top-Corner-Right")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Top_Corner_Right")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Top_Corner_Full:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Top-Corner-Full")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Top_Corner_Full")); m_autotilingRange = "RoadAutotiling";
 		break;
 
 
 	case Road_Right:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Right")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Right")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Right_Alone:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Right-Alone")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Right_Alone")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Right_Corner_Down:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Right-Corner-Down")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Right_Corner_Down")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Right_Corner_Top:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Right-Corner-Top")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Right_Corner_Top")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Right_Corner_Full:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Right-Corner-Full")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Right_Corner_Full")); m_autotilingRange = "RoadAutotiling";
 		break;
 
 	case Road_Middle:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Middle")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Middle")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Middle_Alone:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Middle-Alone")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Middle_Alone")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Middle_Alone_Horizontal:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Middle-Alone-Horizontal")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Middle_Alone_Horizontal")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Middle_Alone_Vertical:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Middle-Alone-Vertical")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Middle_Alone_Vertical")); m_autotilingRange = "RoadAutotiling";
 		break;
 
 
 	case Road_Left:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Left")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Left")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Left_Short:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Left-Short")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Left_Short")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Left_Alone:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Left-Alone")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Left_Alone")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Left_Corner_Down:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Left-Corner-Down")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Left_Corner_Down")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Left_Corner_Top:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Left-Corner-Top")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Left_Corner_Top")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Left_Corner_Full:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Left-Corner-Full")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Left_Corner_Full")); m_autotilingRange = "RoadAutotiling";
 		break;
 
 	case Road_Down_Right:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Down-Right")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Down_Right")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Down_Right_Corner:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Down-Right-Corner")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Down_Right_Corner")); m_autotilingRange = "RoadAutotiling";
 		break;
 
 	case Road_Down_Left:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Down-Left")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Down_Left")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Down_Left_Corner:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Down-Left-Corner")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Down_Left_Corner")); m_autotilingRange = "RoadAutotiling";
 		break;
 
 	case Road_Down:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Down")); m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Down")); m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Down_Alone:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Down-Alone"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Down_Alone"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Down_Corner_Left:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Down-Corner-Left"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Down_Corner_Left"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Down_Corner_Right:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Down-Corner-Right"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Down_Corner_Right"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Down_Corner_Full:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Down-Corner-Full"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Down_Corner_Full"));  m_autotilingRange = "RoadAutotiling";
 		break;
 
 	case Road_Tilt:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Tilt"));
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Tilt"));
 		m_tilt = true;
 		break;
 
 	case Road_Corner_TopLeft:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-TopLeft"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_TopLeft"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Corner_TopRight:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-TopRight"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_TopRight"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Corner_TopLeft_TopRight:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-TopLeft-TopRight"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_TopLeft_TopRight"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Corner_DownLeft:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-DownLeft"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_DownLeft"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Corner_DownRight:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-DownRight"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_DownRight"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Corner_DownLeft_DownRight:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-DownLeft-DownRight"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_DownLeft_DownRight"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Corner_TopLeft_DownLeft:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-TopLeft-DownLeft"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_TopLeft_DownLeft"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Corner_TopRight_DownRight:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-TopRight-DownRight"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_TopRight_DownRight"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Corner_TopLeft_DownRight:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-TopLeft-DownRight"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_TopLeft_DownRight"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Corner_TopRight_DownLeft:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-TopRight-DownLeft"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_TopRight_DownLeft"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Corner_Not_TopLeft:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-Not-TopLeft"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_Not_TopLeft"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Corner_Not_TopRight:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-Not-TopRight"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_Not_TopRight"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Corner_Not_DownLeft:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-Not-DownLeft"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_Not_DownLeft"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Corner_Not_DownRight:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-Not-DownRight"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_Not_DownRight"));  m_autotilingRange = "RoadAutotiling";
 		break;
 	case Road_Corner_Full:
-		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("R-Corner-Full"));  m_autotilingRange = "RoadAutotiling";
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_Full"));  m_autotilingRange = "RoadAutotiling";
 		break;
 
 	default:

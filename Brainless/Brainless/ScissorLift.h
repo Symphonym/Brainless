@@ -25,6 +25,8 @@ public:
 
 	virtual Item* clone();
 
+	sf::Vector2f getSpeed() const;
+	sf::FloatRect getCollisionBounds() const;
 
 private:
 

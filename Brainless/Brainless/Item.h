@@ -79,12 +79,12 @@ public:
 
 	bool isLootable() const;
 	bool isUsable() const;
-	bool isCollidable() const;
+	/*virtual*/ bool isCollidable() const;
 	bool isSolid() const;
 	std::string getUseString() const;
 	std::string getPickupString() const;
 	std::string getExamineString() const;
-	sf::FloatRect getCollisionBounds() const; // Will be zero if collidable is false
+	/*virtual*/ sf::FloatRect getCollisionBounds() const; // Will be zero if collidable is false
 	sf::Vector2f getInteractDistance() const;
 
 protected:
