@@ -7,3 +7,8 @@
 +Texture,images/arcade/curlyfrie.png,friesheet
 +Texture,images/arcade/crabspritesheet.png,crabsheet
 +Texture,images/arcade/beach.png,beach
+
+# ÅKES MELODISAK
++Texture,images/arcade/blueNote.png,BlueArcadeNote
++Texture,images/arcade/redNote.png,RedArcadeNote
++Texture,images/arcade/greenNote.png,GreenArcadeNote
