@@ -44,6 +44,7 @@
 +Sound,sounds/player_jump.wav,player_jump
 +Sound,sounds/player_landing.wav,player_landing
 +Sound,sounds/player_turn.wav,player_turn
++Sound,sounds/Collect_v2.wav,feather_sound
 
 # TEST SOUND
 +Sound,sounds/COINV3.wav,CoinTestSound
