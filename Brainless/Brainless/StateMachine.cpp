@@ -10,7 +10,7 @@ m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 {
 	Renderer::instance().setTarget(m_window);
 
-	
+
 	// Create a little loading screen
 	ResourceLoader::instance().setLoadingHandler([&](const std::string &info, int current, int total) -> void
 	{
@@ -25,7 +25,7 @@ m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 
 		float completeness = static_cast<float>(current) / static_cast<float>(total);
 		m_loadingSprite.setScale(completeness*m_window.getSize().x, 1);
-		
+
 		int r = 255 + (0 - 255) * completeness;
 		int g = 0 + (255 - 0) * completeness;
 		m_loadingSprite.setColor(sf::Color::Color(
@@ -79,15 +79,28 @@ void StateMachine::run()
 void StateMachine::loop()
 {
 	sf::Clock tickClock;
+
+	int frameLimit = 0; // 0 om avstängd
+
 	while (m_window.isOpen())
 	{
-		m_window.setFramerateLimit(60); //för kollision test vid låg fps
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
+		{
+			frameLimit = 0;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num9))
+		{
+			frameLimit = 60;
+		}
+
+		m_window.setFramerateLimit(frameLimit); //för kollision test vid låg fps
 		// Get delta time for time based movement
 		float deltaTime = tickClock.restart().asSeconds();
-
+	
 		if (deltaTime >= 0.0167f)
 			deltaTime = 0.0167f;
-
+	
 		// Handle pop requests
 		for (std::size_t i = 0; i < m_removeRequests.size(); i++)
 			m_removeRequests.pop_back();
