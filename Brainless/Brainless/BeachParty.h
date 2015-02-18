@@ -13,7 +13,7 @@ public:
 	BeachParty(ArcadeMachine &machine);
 
 	virtual void events(const sf::Event &event) {};
-	virtual void update(float deltaTime) {};
+	virtual void update(float deltaTime);
 	virtual void draw() {};
 
 private:
