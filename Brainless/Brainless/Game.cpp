@@ -195,7 +195,6 @@ void Game::events(const sf::Event &event)
 		else if (event.key.code == sf::Keyboard::Escape)
 			m_machine.pushState<PauseMenu>();
 
-		ParticleSystem::instance().addParticles(100, m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window)), sf::Color::Red);
 	}
 
 	// Pump events to everything that needs it
@@ -277,7 +276,7 @@ void Game::draw()
 	Notification::instance().draw();
 	ConversationBox::instance().draw();
 	m_levelTransition->draw();
-	Renderer::instance().drawAbove(ParticleSystem::instance());
+	ParticleSystem::instance().draw();
 	Renderer::instance().executeDraws();
 
 	// Draw extra cameras

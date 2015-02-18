@@ -12,3 +12,8 @@ std::vector<std::string> Utility::splitString(const std::string &stringValue, ch
 
 	return result;
 }
+
+float Utility::randomValueBetween(float min, float max)
+{
+	return min + (static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) * (max - min);
+}

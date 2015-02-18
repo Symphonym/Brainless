@@ -30,6 +30,8 @@ public:
 		ss >> number;
 		return number;
 	};
+
+	static float randomValueBetween(float min, float max);
 };
 
 #endif

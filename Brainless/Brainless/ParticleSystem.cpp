@@ -1,11 +1,14 @@
 #include "ParticleSystem.h"
+#include "Utility.h"
+#include "Renderer.h"
 
 ParticleSystem::ParticleSystem()
-:
-m_lifetime(sf::seconds(3)),
-m_emitter(0, 0)
 {
-	m_vertices.setPrimitiveType(sf::Points);
+	sf::Image parImg;
+	parImg.create(5, 5, sf::Color::White);
+
+	m_particleTexture.loadFromImage(parImg);
+
 }
 
 ParticleSystem& ParticleSystem::instance()
@@ -14,65 +17,70 @@ ParticleSystem& ParticleSystem::instance()
 	return inst;
 }
 
-void ParticleSystem::addParticles(std::size_t count, const sf::Vector2f &position, const sf::Color &color)
+void ParticleSystem::addParticles(std::size_t count, const sf::Vector2f &position, const sf::Color &color,
+	const sf::Vector2f &lifetimeRange,
+	const sf::Vector2f &angleRange,
+	const sf::Vector2f &rotationSpeedRange,
+	const sf::Vector2f &speedRangeX,
+	const sf::Vector2f &speedRangeY,
+	const sf::Vector2f &gravity)
 {
-	m_emitter = position;
-	m_vertices = sf::VertexArray(sf::Points, count);
-	m_particles = std::vector<Particle>(count);
 
-	for (std::size_t i = 0; i < m_particles.size(); i++)
+	for (std::size_t i = 0; i < count; i++)
 	{
-		resetParticle(i);
-		m_vertices[i].color = color;
+		Particle particle;
+		particle.sprite.setTexture(m_particleTexture);
+		particle.sprite.setPosition(position);
+		particle.sprite.setColor(color);
+		particle.sprite.setRotation(Utility::randomValueBetween(angleRange.x, angleRange.y));
+		particle.velocity = sf::Vector2f(
+			Utility::randomValueBetween(speedRangeX.x, speedRangeX.y),
+			Utility::randomValueBetween(speedRangeY.x, speedRangeY.y));
+		particle.velocity.x *= std::cos(particle.velocity.x);
+		particle.velocity.y *= std::sin(particle.velocity.y);
+		particle.lifeTime = 0;
+		particle.maxLifeTime = Utility::randomValueBetween(lifetimeRange.x, lifetimeRange.y);
+		particle.rotationSpeed = Utility::randomValueBetween(rotationSpeedRange.x, rotationSpeedRange.y);
+		particle.gravity = gravity;
+
+		m_particles.push_back(particle);
 	}
 }
 
 void ParticleSystem::update(float deltaTime)
 {
-	sf::Time deltaTimeInSeconds = sf::seconds(deltaTime);
-	for (std::size_t i = 0; i < m_particles.size(); ++i)
+	for (auto itr = m_particles.begin(); itr != m_particles.end();)
 	{
-		// update the particle lifetime
-		Particle& p = m_particles[i];
-		p.lifetime -= deltaTimeInSeconds;
 
-		// if the particle is dead, remove it
-		//if (p.lifetime <= sf::Time::Zero)
-		//	resetParticle(i);
+		// Update lifetime
+		Particle& particle = *itr;
+		particle.lifeTime += deltaTime;
 
-		// update the position of the corresponding vertex
-		m_vertices[i].position += p.velocity * deltaTimeInSeconds.asSeconds();
+		// If the particle is dead, remove it
+		if (particle.lifeTime >= particle.maxLifeTime)
+		{
+			itr = m_particles.erase(itr);
+		}
+		else
+		{
+			float ratio = particle.lifeTime / particle.maxLifeTime;
 
-		// update the alpha (transparency) of the particle according to its lifetime
-		float ratio = p.lifetime.asSeconds() / m_lifetime.asSeconds();
-		m_vertices[i].color.a = static_cast<sf::Uint8>(ratio * 255);
+			particle.velocity += particle.gravity;
+			particle.sprite.move(particle.velocity * deltaTime);
+			particle.sprite.rotate(particle.rotationSpeed * deltaTime);
+
+			sf::Color currentColor = particle.sprite.getColor();
+			currentColor.a = 255 - static_cast<sf::Uint8>(ratio * 255);
+			particle.sprite.setColor(currentColor);
+
+			itr++;
+		}
+
 	}
 }
 
-void ParticleSystem::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void ParticleSystem::draw()
 {
-	// apply the transform
-	states.transform *= getTransform();
-
-	// our particles don't use a texture
-	states.texture = NULL;
-
-	// draw the vertex array
-	target.draw(m_vertices, states);
-}
-
-void ParticleSystem::addParticle(const sf::Color &color)
-{
-
-}
-void ParticleSystem::resetParticle(std::size_t index)
-{
-	// give a random velocity and lifetime to the particle
-	float angle = (std::rand() % 360) * 3.14f / 180.f;
-	float speed = (std::rand() % 50) + 50.f;
-	m_particles[index].velocity = sf::Vector2f(std::cos(angle) * speed, std::sin(angle) * speed);
-	m_particles[index].lifetime = sf::milliseconds((std::rand() % 2000) + 1000);
-
-	// reset the position of the corresponding vertex
-	m_vertices[index].position = m_emitter;
+	for (auto &particle : m_particles)
+		Renderer::instance().drawAbove(particle.sprite);
 }
