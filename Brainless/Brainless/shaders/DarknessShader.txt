@@ -17,7 +17,7 @@ void main() {
 	tmpSepia.g = dot(texel, vec3(.349, .686, .168));
 	tmpSepia.b = dot(texel, vec3(.272, .534, .131));  
 
-	tmpSepia.rgb = tmpSepia.rgb / 3.f;
+	tmpSepia.rgb = tmpSepia.rgb / 2.f;
 	
 	gl_FragColor.r = mix(gl_FragColor.r, tmpSepia.r, intensityValue);
 	gl_FragColor.g = mix(gl_FragColor.g, tmpSepia.g, intensityValue);
