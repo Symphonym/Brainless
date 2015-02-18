@@ -26,6 +26,8 @@ public:
 		chase_chase
 	};
 
+	virtual void serialize(std::ofstream &writer) const;
+	virtual void deserialize(std::ifstream &reader);
 
 protected:
 

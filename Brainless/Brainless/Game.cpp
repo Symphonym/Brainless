@@ -27,6 +27,7 @@
 Game::Game(StateMachine &machine)
 :
 State(machine),
+m_savedZombies(0),
 m_levelIndex(0)
 {
 	m_camera = m_window.getDefaultView();
@@ -100,6 +101,11 @@ Game::~Game()
 	delete m_popup;
 	delete m_spiritBar;
 	//Clear units
+}
+
+void Game::addSavedZombie(int count)
+{
+	m_savedZombies += count;
 }
 
 void Game::lootItem(Inventory::ItemPtr item)

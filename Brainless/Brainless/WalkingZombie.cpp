@@ -29,6 +29,39 @@ m_animState(anim_noAnimation)
 	}
 }
 
+void WalkingZombie::serialize(std::ofstream &writer) const
+{
+	Unit::serialize(writer);
+
+	writer << static_cast<int>(m_animState) << std::endl;
+	writer << static_cast<int>(m_spriteDirection) << std::endl;
+	writer << m_maxPositionX << std::endl;
+	writer << m_minPositionX << std::endl;
+	writer << m_walkLenght << std::endl;
+	writer << m_currentDisparity << std::endl;
+	writer << static_cast<int>(m_direction) << std::endl;
+}
+void WalkingZombie::deserialize(std::ifstream &reader)
+{
+	Unit::deserialize(reader);
+
+	int animType = 0;
+	reader >> animType;
+	m_animState = static_cast<AnimationState>(animType);
+
+	int spriteDirType = 0;
+	reader >> spriteDirType;
+	m_spriteDirection = static_cast<Direction>(spriteDirType);
+
+	reader >> m_maxPositionX >> m_minPositionX;
+	reader >> m_walkLenght;
+	reader >> m_currentDisparity;
+
+	int dirType = 0;
+	reader >> dirType;
+	m_direction = static_cast<Direction>(dirType);
+}
+
 void WalkingZombie::updateTask(float deltaTime)
 {
 	float speedTurnAround = 10;

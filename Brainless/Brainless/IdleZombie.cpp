@@ -20,6 +20,23 @@ m_animState(anim_noAnimation)
 	m_spriteDirection = startDirection;
 }
 
+
+void IdleZombie::serialize(std::ofstream &writer) const
+{
+	Unit::serialize(writer);
+
+	writer << static_cast<int>(m_animState) << std::endl;
+}
+void IdleZombie::deserialize(std::ifstream &reader)
+{
+	Unit::deserialize(reader);
+
+	int animType = 0;
+	reader >> animType;
+	m_animState = static_cast<AnimationState>(animType);
+}
+
+
 void IdleZombie::updateTask(float deltaTime)
 {
 

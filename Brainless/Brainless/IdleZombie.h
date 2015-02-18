@@ -16,6 +16,9 @@ public:
 		anim_idle
 	};
 
+	virtual void serialize(std::ofstream &writer) const;
+	virtual void deserialize(std::ifstream &reader);
+
 protected:
 
 private:

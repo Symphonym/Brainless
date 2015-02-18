@@ -27,6 +27,42 @@ m_homePosition(startPosition)
 
 }
 
+
+void ChasingZombie::serialize(std::ofstream &writer) const
+{
+	Unit::serialize(writer);
+
+	writer << m_homePosition.x << std::endl;
+	writer << m_homePosition.y << std::endl;
+	writer << static_cast<int>(m_animState) << std::endl;
+	writer << m_maxWalkLenght << std::endl;
+	writer << m_currentLength << std::endl;
+	writer << static_cast<int>(m_direction) << std::endl;
+	writer << static_cast<int>(m_chaseState) << std::endl;
+}
+void ChasingZombie::deserialize(std::ifstream &reader)
+{
+	Unit::deserialize(reader);
+
+	reader >> m_homePosition.x >> m_homePosition.y;
+
+	int animType = 0;
+	reader >> animType;
+	m_animState = static_cast<AnimationState>(animType);
+
+	reader >> m_maxWalkLenght;
+	reader >> m_currentLength;
+
+	int dirType = 0;
+	reader >> dirType;
+	m_direction = static_cast<Direction>(dirType);
+
+	int chaseType = 0;
+	reader >> chaseType;
+	m_chaseState = static_cast<ChasingState>(chaseType);
+}
+
+
 void ChasingZombie::updateTask(float deltaTime)
 {
 	float speedTurnAround = 10;

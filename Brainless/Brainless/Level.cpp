@@ -101,7 +101,10 @@ void Level::removeUnit(std::size_t index)
 	if (index < m_units.size())
 		m_units.erase(m_units.begin() + index);
 }
-
+void Level::removeAllUnits()
+{
+	m_units.clear();
+}
 
 void Level::reset()
 {
