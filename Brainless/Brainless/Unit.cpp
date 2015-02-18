@@ -299,13 +299,13 @@ void Unit::collisionDown(float posY, float speedY, float accY)
 	m_collisionNewAcc.y = accY;
 }
 
-void Unit::updateCollision()
+bool Unit::updateCollision()
 {
 	//massa if
 	if (m_collisionDown == 0 &&
 		m_collisionLeft == 0 &&
 		m_collisionRight == 0 &&
-		m_collisionUp == 0) return;
+		m_collisionUp == 0) return false;
 	//debug typ
 	if (m_collisionLeft > 0 && m_collisionRight > 0)
 		std::cout << "OM DETTA KAN HÄNDA, UTÖKA TILL VÄNSTER/HÖGER VECTOR" << std::endl;
@@ -329,7 +329,7 @@ void Unit::updateCollision()
 		m_position.y = m_collisionNewPos.y;
 		m_speed.y = m_collisionNewSpeed.y;
 		m_acceleration.y = m_collisionNewAcc.y;
-		m_inAir = true;
+		m_inAir = false;
 		m_inTilt = false;
 	}
 	//left
@@ -340,6 +340,7 @@ void Unit::updateCollision()
 		m_position.x = m_collisionNewPos.x;
 		m_speed.x = m_collisionNewSpeed.x;
 		m_acceleration.x = m_collisionNewAcc.x;
+		wallLeft();
 	}
 	//right
 	else if (m_collisionRight > m_collisionDown &&
@@ -349,8 +350,9 @@ void Unit::updateCollision()
 		m_position.x = m_collisionNewPos.x;
 		m_speed.x = m_collisionNewSpeed.x;
 		m_acceleration.x = m_collisionNewAcc.x;
+		wallRight();
 	}
-	//legit multihit
+	//multihit
 	else
 	{
 		m_position = m_collisionNewPos;
@@ -367,13 +369,5 @@ void Unit::updateCollision()
 	m_collisionRight = 0;
 	m_collisionUp = 0;
 	m_collisionDown = 0;
+	return true;
 }
-/*
-
-
-void Ball::updateCollision()
-{
-
-}
-
-*/

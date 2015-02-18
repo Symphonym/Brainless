@@ -87,7 +87,7 @@ public:
 	void collisionRight(float posX, float speedX, float accX);
 	void collisionUp(float posY, float speedY, float accY);
 	void collisionDown(float posY, float speedY, float accY);
-	void updateCollision();
+	bool updateCollision();
 
 protected:
 	RenderingModes m_renderingMode;
