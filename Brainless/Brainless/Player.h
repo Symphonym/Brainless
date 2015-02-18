@@ -21,6 +21,9 @@ public:
 
 	void takesDamage(sf::Vector2f collisionPos);
 
+	int getHealth();
+	int getMaxHealth();
+
 	enum AnimationState
 	{
 		anim_noAnimation,
@@ -90,6 +93,7 @@ private:
 	static float calcAcceleration(float minAcceleration, float maxAcceleration, float useMinValue, float useMaxValue, float value);
 	void jump();
 	int m_hp;
+	const int m_maxHp = 3;
 	float m_fallPos; //Indicating how long the Unit has been in the air
 
 	sf::Vector2f m_cameraPos;

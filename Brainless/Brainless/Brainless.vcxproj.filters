@@ -303,6 +303,9 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="HealthBar.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -538,6 +541,9 @@
     </ClInclude>
     <ClInclude Include="ParticleSystem.h">
       <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthBar.h">
+      <Filter>Source Files\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
