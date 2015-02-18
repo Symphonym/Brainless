@@ -17,9 +17,12 @@ public:
 	// Get the name of the game
 	std::string getName() const;
 
-private:
+protected:
 
 	ArcadeMachine &m_machine;
+
+private:
+
 	std::string m_gameName;
 };
 
