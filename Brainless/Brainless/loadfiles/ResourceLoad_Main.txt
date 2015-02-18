@@ -116,6 +116,7 @@
 +Texture,images/items/ductTapedBattery.png,DuctTapeBatteryItem
 +Texture,images/items/hammerItem.png,HammerItem
 +Texture,images/items/thorsHammerItem.png,ThorsHammerItem
++Texture,images/items/arcadeMachine.png,ArcadeMachineItem
 
 +Texture,images/items/pickup.png,TestItem
 +Texture,images/items/wizard_idle.png,TestItem2

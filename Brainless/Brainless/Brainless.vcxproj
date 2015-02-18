@@ -107,6 +107,9 @@
   <ItemGroup>
     <ClCompile Include="AABatteryItem.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="ArcadeGame.cpp" />
+    <ClCompile Include="ArcadeMachine.cpp" />
+    <ClCompile Include="ArcadeMachineItem.cpp" />
     <ClCompile Include="BrainItem.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CableItem.cpp" />
@@ -187,6 +190,9 @@
   <ItemGroup>
     <ClInclude Include="AABatteryItem.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="ArcadeGame.h" />
+    <ClInclude Include="ArcadeMachine.h" />
+    <ClInclude Include="ArcadeMachineItem.h" />
     <ClInclude Include="BrainItem.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CableItem.h" />
