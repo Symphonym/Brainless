@@ -8,6 +8,20 @@ void main() {
 	gl_FragColor = gl_Color * texel; // Get normal pixel color
 	//gl_FragColor.rgb *= 0.4f;
 
+
+	// SEPIA CODE
+	vec3 tmpSepia = vec3(0,0,0);
+	tmpSepia.r = dot(texel, vec3(.393, .769, .189));
+	tmpSepia.g = dot(texel, vec3(.349, .686, .168));
+	tmpSepia.b = dot(texel, vec3(.272, .534, .131));  
+
+	tmpSepia.rgb = tmpSepia.rgb / 3.f;
+
+	gl_FragColor.r = mix(gl_FragColor.r, tmpSepia.r, intensityValue);
+	gl_FragColor.g = mix(gl_FragColor.g, tmpSepia.g, intensityValue);
+	gl_FragColor.b = mix(gl_FragColor.b, tmpSepia.b, intensityValue);
+
+	// Darkness code
 	vec3 baseDarkness = gl_FragColor.rgb * 0.09;
 	if(enableDarkness > 0.5)
 	{
