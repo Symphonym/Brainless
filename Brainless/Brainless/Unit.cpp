@@ -360,7 +360,7 @@ bool Unit::updateCollision()
 		m_acceleration = m_collisionNewAcc;
 	}
 
-	std::cout << m_collisionLeft << m_collisionRight << m_collisionUp << m_collisionDown << std::endl;
+	//std::cout << m_collisionLeft << m_collisionRight << m_collisionUp << m_collisionDown << std::endl;
 
 	m_collisionNewPos = m_position;
 	m_collisionNewSpeed = m_speed;

@@ -326,10 +326,8 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 			if (!tiltWalking)
 			{
 #pragma region solidCollision
-				std::cout << "\n";
 				for (int i = 0; i < solidRects.size(); i++)
 				{
-					std::cout << "A" << std::endl;
 					sf::FloatRect tileBounds = solidRects[i];
 					sf::FloatRect tileTopBounds = sf::FloatRect(tileBounds.left, tileBounds.top, tileBounds.width, 1);
 					sf::Vector2f tileCenter = sf::Vector2f(tileBounds.left + tileBounds.width / 2, tileBounds.top + tileBounds.height / 2);
