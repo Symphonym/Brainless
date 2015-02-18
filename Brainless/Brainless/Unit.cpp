@@ -306,7 +306,13 @@ void Unit::updateCollision()
 		m_collisionLeft == 0 &&
 		m_collisionRight == 0 &&
 		m_collisionUp == 0) return;
+	//debug typ
+	if (m_collisionLeft > 0 && m_collisionRight > 0)
+		std::cout << "OM DETTA KAN HÄNDA, UTÖKA TILL VÄNSTER/HÖGER VECTOR" << std::endl;
+	if (m_collisionUp > 0 && m_collisionDown > 0)
+		std::cout << "OM DETTA KAN HÄNDA, UTÖKA TILL UP/NER VECTOR" << std::endl;
 
+	//up
 	if (m_collisionUp > m_collisionDown &&
 		m_collisionUp > m_collisionLeft &&
 		m_collisionUp > m_collisionRight)
@@ -315,6 +321,7 @@ void Unit::updateCollision()
 		m_speed.y = m_collisionNewSpeed.y;
 		m_acceleration.y = m_collisionNewAcc.y;
 	}
+	//down
 	else if (m_collisionDown > m_collisionUp &&
 		m_collisionDown > m_collisionLeft &&
 		m_collisionDown > m_collisionRight)
@@ -322,7 +329,10 @@ void Unit::updateCollision()
 		m_position.y = m_collisionNewPos.y;
 		m_speed.y = m_collisionNewSpeed.y;
 		m_acceleration.y = m_collisionNewAcc.y;
+		m_inAir = true;
+		m_inTilt = false;
 	}
+	//left
 	else if (m_collisionLeft > m_collisionDown &&
 		m_collisionLeft > m_collisionUp &&
 		m_collisionLeft > m_collisionRight)
@@ -331,6 +341,7 @@ void Unit::updateCollision()
 		m_speed.x = m_collisionNewSpeed.x;
 		m_acceleration.x = m_collisionNewAcc.x;
 	}
+	//right
 	else if (m_collisionRight > m_collisionDown &&
 		m_collisionRight > m_collisionLeft &&
 		m_collisionRight > m_collisionUp)
@@ -339,6 +350,7 @@ void Unit::updateCollision()
 		m_speed.x = m_collisionNewSpeed.x;
 		m_acceleration.x = m_collisionNewAcc.x;
 	}
+	//legit multihit
 	else
 	{
 		m_position = m_collisionNewPos;

@@ -323,7 +323,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 						currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x, 0));
 						currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
 						//test/
-						collision = true;
+						//collision = true;
 						tiltWalking = true;
 						currentUnit->setTilt(true);
 						inAir = false;
@@ -406,9 +406,9 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 						}
 
 						// If tile isn't empty and is colliding with the unit
-						if (tileBounds.intersects(unitBounds) && !hasCollided && !collision)
+						if (tileBounds.intersects(unitBounds) && !hasCollided/* && !collision*/)
 						{
-							collision = true;
+						//	collision = true;
 							hasCollided = true;
 
 							unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height / 2);
@@ -554,10 +554,10 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 						}
 
 						// If tile isn't empty and is colliding with the unit
-						if (tileBounds.intersects(unitBounds) && !hasCollided && !collision)
+						if (tileBounds.intersects(unitBounds) && !hasCollided /*&& !collision*/)
 						{
 
-							collision = true;
+							//collision = true;
 							hasCollided = true;
 
 							//Kolla om kollisionen är vertikal
