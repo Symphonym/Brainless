@@ -25,6 +25,8 @@ private:
 
 	sf::Sprite m_crabSprite;
 	Animation m_crabAnimation;
+
+	sf::Sprite m_background;
 };
 
 #endif

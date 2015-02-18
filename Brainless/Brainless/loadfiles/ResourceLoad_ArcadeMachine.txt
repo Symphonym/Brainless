@@ -1,3 +1,9 @@
 # BUTTON TEXTURES
 +Texture,images/UI/arcademachine.png,ArcadeMachineScreen
 +Texture,images/UI/arcadeMenuButton.png,ArcadeMenuButton
+
+# ÅKES BEACH PARTY
++Texture,images/arcade/akespritesheet.png,turtlesheet
++Texture,images/arcade/curlyfrie.png,friesheet
++Texture,images/arcade/crabspritesheet.png,crabsheet
++Texture,images/arcade/beach.png,beach
