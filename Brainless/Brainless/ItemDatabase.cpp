@@ -28,6 +28,7 @@
 #include "HammerItem.h"
 #include "ThorsHammerItem.h"
 #include "SpiritFeatherItem.h"
+#include "ArcadeMachineItem.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -60,6 +61,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new ThorsHammerItem(26)));
 	addItem(ItemPtr(new ScissorLiftItem(sf::Vector2f(0, 100), 200, 27)));
 	addItem(ItemPtr(new SpiritFeatherItem(28)));
+	addItem(ItemPtr(new ArcadeMachineItem(29)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)

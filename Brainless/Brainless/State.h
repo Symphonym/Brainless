@@ -14,7 +14,8 @@ public:
 	virtual void update(float deltaTime) {};
 	virtual void draw() {};
 
-	const sf::RenderWindow &getWindow() const;
+	const sf::RenderWindow& getWindow() const;
+	StateMachine& getMachine();
 
 protected:
 
