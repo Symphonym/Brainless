@@ -4,6 +4,7 @@
 #include "Utility.h"
 #include "ArcadeGame.h"
 #include "ResourceLoader.h"
+#include "BeachParty.h"
 
 ArcadeMachine::ArcadeMachine(StateMachine &machine)
 :
@@ -20,7 +21,7 @@ m_playingGame(false)
 	//	0);
 
 	// ADD YOUR GAMES HERE
-	//m_games[0] = GamePtr(new ...);
+	m_games[0] = GamePtr(new BeachParty(*this));
 	//m_games[1] = GamePtr(new ...);
 	//m_games[2] = GamePtr(new ...);
 	//m_games[3] = GamePtr(new ...);
