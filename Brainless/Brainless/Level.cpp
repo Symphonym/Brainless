@@ -499,22 +499,13 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 
 #pragma region itemCollision
 
-			std::vector<std::size_t> itemsToRemove;
 			for (int i = 0; i < m_items.size(); i++)
 			{
-				sf::FloatRect tileBounds = m_items[i]->getCollisionBounds();
-
-				// Trigger collision events for items
-				if (tileBounds.intersects(currentUnit->getCollisionRect()))
-				{
-					if (m_items[i]->onCollisionWithUnit(*currentUnit, game))
-						itemsToRemove.push_back(i);
-				}
 
 				if (m_items[i]->isCollidable())
 				{
 				
-
+					sf::FloatRect tileBounds = m_items[i]->getCollisionBounds();
 					sf::FloatRect tileTopBounds = sf::FloatRect(tileBounds.left, tileBounds.top, tileBounds.width, 1);
 					sf::Vector2f tileCenter = sf::Vector2f(tileBounds.left + tileBounds.width / 2, tileBounds.top + tileBounds.height / 2);
 					sf::Vector2f unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height / 2);
@@ -615,10 +606,14 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 				}
 			}
 
-			for (auto &itemIndex : itemsToRemove)
-				m_items.erase(m_items.begin() + itemIndex);
-
-			itemsToRemove.clear();
+			m_items.erase(std::remove_if(m_items.begin(), m_items.end(), [&](const ItemPtr &item) -> bool
+			{
+				// Trigger collision events for items
+				if (item->getCollisionBounds().intersects(currentUnit->getCollisionRect()))
+				{
+					return item->onCollisionWithUnit(*currentUnit, game);
+				}
+			}), m_items.end());
 
 #pragma endregion itemCollision
 

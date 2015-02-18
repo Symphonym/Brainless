@@ -3,39 +3,41 @@
 
 #include <SFML\Graphics.hpp>
 
-class ParticleSystem : public sf::Drawable, public sf::Transformable
+class ParticleSystem
 {
 public:
 
 
-	void addParticles(std::size_t count, const sf::Vector2f &position, const sf::Color &color);
-	void setEmitter(sf::Vector2f position);
+	void addParticles(std::size_t count, const sf::Vector2f &position, const sf::Color &color,
+		const sf::Vector2f &lifetimeRange = sf::Vector2f(1, 1),
+		const sf::Vector2f &angleRange = sf::Vector2f(0, 360),
+		const sf::Vector2f &rotationSpeedRange = sf::Vector2f(0, 0),
+		const sf::Vector2f &speedRangeX = sf::Vector2f(-100, 100),
+		const sf::Vector2f &speedRangeY = sf::Vector2f(-100, 100),
+		const sf::Vector2f &gravity = sf::Vector2f(0, 0));
 
 	void update(float deltaTime);
+	void draw();
 
 	static ParticleSystem& instance();
 
 private:
 
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
-private:
 
 	ParticleSystem();
 
+	sf::Texture m_particleTexture;
+
 	struct Particle
 	{
+		sf::Sprite sprite;
 		sf::Vector2f velocity;
-		sf::Time lifetime;
+		sf::Vector2f gravity;
+		float rotationSpeed;
+		float lifeTime, maxLifeTime;
 	};
 
-	void addParticle(const sf::Color &color);
-	void resetParticle(std::size_t index);
-
 	std::vector<Particle> m_particles;
-	sf::VertexArray m_vertices;
-	sf::Time m_lifetime;
-	sf::Vector2f m_emitter;
 };
 
 #endif
