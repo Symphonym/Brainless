@@ -29,6 +29,8 @@ public:
 
 	// Load multiple resources from a resource file
 	bool loadResourceFile(const std::string &fileName);
+	// Unload everything in a resource file
+	bool unloadResourceFile(const std::string &fileName);
 
 
 	// Returns the names of all textures currently loaded in memory
