@@ -166,7 +166,7 @@ void Inventory::events(const sf::Event &event, Game &game)
 							delete m_mouseItem.release();
 
 						// Invoke interaction on unit
-						if (unit.onInteractedWith(*m_mouseItem.get()))
+						if (unit.onInteractedWith(*m_mouseItem.get(), game))
 							game.getLevel().removeUnit(i);
 
 						interactedWithUnit = true;
