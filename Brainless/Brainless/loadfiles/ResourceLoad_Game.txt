@@ -4,6 +4,9 @@
 # UI TEXTURES
 +Texture,images/UI/spiritBarBG.png,SpiritBarBG
 
+# GAME SHADER
++Shader,shaders/DarknessShader.txt,DarknessShader
+
 # SPRITE SHEET TEXTURES
 
 +Texture,images/animations/spritesheet.png,testImage
