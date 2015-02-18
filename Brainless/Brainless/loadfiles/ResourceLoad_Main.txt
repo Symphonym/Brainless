@@ -75,6 +75,7 @@
 
 # /Special
 +Texture,images/tiles/Road/Special/Road_Tilt.png,Road_Tilt
++Texture,images/tiles/Road/Special/Road_Tilt_Corner.png,Road_Tilt_Corner
 
 # /Corner
 +Texture,images/tiles/Road/Corner/Road_Corner_TopLeft.png,Road_Corner_TopLeft

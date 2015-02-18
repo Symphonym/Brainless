@@ -82,6 +82,14 @@ public:
 	sf::FloatRect getCollisionRect();
 	UnitType getUnitType();
 	Direction getDirection();
+
+
+	void collisionLeft(float posX, float speedX, float accX);
+	void collisionRight(float posX, float speedX, float accX);
+	void collisionUp(float posY, float speedY, float accY);
+	void collisionDown(float posY, float speedY, float accY);
+	bool updateCollision();
+
 protected:
 	RenderingModes m_renderingMode;
 	bool m_isMovementEnabled;
@@ -103,6 +111,14 @@ protected:
 	Animation m_animation;
 	void updateSpriteDirection();
 	Direction m_spriteDirection;
+
+	int m_collisionUp;
+	int m_collisionLeft;
+	int m_collisionRight;
+	int m_collisionDown;
+	sf::Vector2f m_collisionNewPos;
+	sf::Vector2f m_collisionNewSpeed;
+	sf::Vector2f m_collisionNewAcc;
 
 	static Unit* s_playerPointer;
 private:

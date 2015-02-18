@@ -14,7 +14,7 @@ public:
 
 	virtual void events(const sf::Event &event) {};
 	virtual void update(float deltaTime);
-	virtual void draw() {};
+	virtual void draw();
 
 private:
 	sf::Sprite m_turtleSprite;
@@ -23,10 +23,16 @@ private:
 	sf::Sprite m_frieSprite;
 	Animation m_frieAnimation;
 
-	sf::Sprite m_crabSprite;
+	sf::Sprite m_crabTexture;
 	Animation m_crabAnimation;
 
 	sf::Sprite m_background;
+
+	sf::Vector2f m_newPos;
+	sf::Vector2f m_screenPos;
+
+	int m_score;
+	sf::Text m_scoreText;
 };
 
 #endif
