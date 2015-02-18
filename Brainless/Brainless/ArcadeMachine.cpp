@@ -15,9 +15,9 @@ m_playingGame(false)
 	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_ArcadeMachine.txt");
 
 	m_arcadeBackground.setTexture(ResourceLoader::instance().retrieveTexture("ArcadeMachineScreen"));
-	m_arcadeBackground.setPosition(
-		m_window.getSize().x / 2.f - m_arcadeBackground.getGlobalBounds().width / 2.f,
-		0);
+	//m_arcadeBackground.setPosition(
+	//	m_window.getSize().x / 2.f - m_arcadeBackground.getGlobalBounds().width / 2.f,
+	//	0);
 
 	// ADD YOUR GAMES HERE
 	//m_games[0] = GamePtr(new ...);
@@ -118,9 +118,9 @@ void ArcadeMachine::draw()
 
 sf::Vector2f ArcadeMachine::getScreenPos() const
 {
-	return m_arcadeBackground.getPosition();
+	return sf::Vector2f(m_arcadeBackground.getPosition().x + 290.f, m_arcadeBackground.getPosition().y + 10.f);;
 }
 sf::Vector2i ArcadeMachine::getScreenSize() const
 {
-	return sf::Vector2i(m_arcadeBackground.getGlobalBounds().width, m_arcadeBackground.getGlobalBounds().height);
+	return sf::Vector2i(m_arcadeBackground.getGlobalBounds().width - (580.f), m_arcadeBackground.getGlobalBounds().height - 20.f);
 }

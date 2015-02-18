@@ -17,8 +17,19 @@ public:
 
 private:
 
+	// How many seconds the game session is
+	static const int GameSession = 50;
+
 	sf::Text m_scoreText;
 	int m_score;
+
+	// Data to make delays between notes
+	float m_aCurDelay;
+	float m_wCurDelay;
+	float m_dCurDelay;
+	float m_aMaxDelay;
+	float m_wMaxDelay;
+	float m_dMaxDelay;
 
 	// Notes
 	std::vector<sf::Sprite> m_aNotes;
