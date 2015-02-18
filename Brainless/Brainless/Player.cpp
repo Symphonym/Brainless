@@ -30,7 +30,7 @@ m_jumpPower(0),
 m_jumpFrame(2),
 m_wallState(wall_normal),
 m_hp(3),
-m_fallPos(startPosition.x),
+m_fallPos(startPosition.y),
 m_damageState(dmg_normal)
 {
 	m_cameraPos = m_position;
