@@ -1,0 +1,3 @@
+# BUTTON TEXTURES
++Texture,images/UI/arcademachine.png,ArcadeMachineScreen
++Texture,images/UI/arcadeMenuButton.png,ArcadeMenuButton

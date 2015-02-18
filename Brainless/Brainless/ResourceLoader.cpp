@@ -229,6 +229,14 @@ bool ResourceLoader::loadResourceFile(const std::string &fileName)
 	m_totalResources = file.countResourceCalls(fileName);
 	return file.loadResourceFile(fileName);
 }
+bool ResourceLoader::unloadResourceFile(const std::string &fileName)
+{
+	ResourceFile file;
+
+	m_currentResources = 0;
+	m_totalResources = file.countResourceCalls(fileName);
+	return file.loadResourceFile(fileName, true);
+}
 
 bool ResourceLoader::loadFromFile(const std::string &fileName)
 {

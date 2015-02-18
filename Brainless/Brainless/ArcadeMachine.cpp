@@ -11,10 +11,39 @@ State(machine),
 m_currentGameIndex(0),
 m_playingGame(false)
 {
+	// Load game resources
+	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_ArcadeMachine.txt");
+
+	m_arcadeBackground.setTexture(ResourceLoader::instance().retrieveTexture("ArcadeMachineScreen"));
+	m_arcadeBackground.setPosition(
+		m_window.getSize().x / 2.f - m_arcadeBackground.getGlobalBounds().width / 2.f,
+		0);
+
+	// ADD YOUR GAMES HERE
+	//m_games[0] = GamePtr(new ...);
+	//m_games[1] = GamePtr(new ...);
+	//m_games[2] = GamePtr(new ...);
+	//m_games[3] = GamePtr(new ...);
+	//m_games[4] = GamePtr(new ...);
+
 	m_currentGameText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_currentGameText.setPosition(getScreenPos());
+
+	for (std::size_t i = 0; i < m_gameSelectionButtons.size(); i++)
+	{
+		sf::Sprite &button = m_gameSelectionButtons[i];
+		button.setTexture(ResourceLoader::instance().retrieveTexture("ArcadeMenuButton"));
+		button.setPosition(
+			getScreenPos().x + getScreenSize().x / 2.f - button.getGlobalBounds().width / 2.f,
+			getScreenPos().y + 100 + (button.getGlobalBounds().height + 5.f)*i);
+	}
 }
 
+
+void ArcadeMachine::exitGame()
+{
+	m_playingGame = false;
+}
 
 void ArcadeMachine::events(const sf::Event &event)
 {
@@ -22,12 +51,21 @@ void ArcadeMachine::events(const sf::Event &event)
 	{
 		if (m_playingGame)
 		{
-			m_games[m_currentGameIndex]->events(event);
+			// Kill switch for all games
+			if (event.key.code == sf::Keyboard::Escape)
+				exitGame();
+
+			//m_games[m_currentGameIndex]->events(event);
+
 		}
 		else
 		{
+			// Exit machine
 			if (event.key.code == sf::Keyboard::A)
+			{
+				ResourceLoader::instance().unloadResourceFile("loadfiles/ResourceLoad_ArcadeMachine.txt");
 				m_machine.popState();
+			}
 			else if (event.key.code == sf::Keyboard::D)
 				m_playingGame = true;
 			else if (event.key.code == sf::Keyboard::W)
@@ -45,7 +83,7 @@ void ArcadeMachine::update(float deltaTime)
 	if (m_playingGame)
 	{
 		m_currentGameText.setString("Playing game: " + m_games[m_currentGameIndex]->getName());
-		m_games[m_currentGameIndex]->update(deltaTime);
+		//m_games[m_currentGameIndex]->update(deltaTime);
 	}
 	else
 	{
@@ -64,9 +102,13 @@ void ArcadeMachine::update(float deltaTime)
 void ArcadeMachine::draw()
 {
 	if (m_playingGame)
-		m_games[m_currentGameIndex]->draw();
+	{
+		//m_games[m_currentGameIndex]->draw()
+	}
 	else
 	{
+		Renderer::instance().drawHUD(m_arcadeBackground);
+
 		for (auto &button : m_gameSelectionButtons)
 			Renderer::instance().drawHUD(button);
 	}
