@@ -5,6 +5,8 @@
 #include "Utility.h"
 #include "ParticleSystem.h"
 
+const float NoteGame::HitTextDuration = 2.f;
+
 NoteGame::NoteGame(ArcadeMachine &machine)
 :
 ArcadeGame(machine, "Åkes Melodisak"),
@@ -86,25 +88,25 @@ void NoteGame::update(float deltaTime)
 	m_curDelay += deltaTime;
 
 	int textCount = 0;
-	for (auto itr = m_hitTexts.begin(); itr != m_hitTexts.end();)
+	for (int i = m_hitTexts.size()-1; i >= 0; i--)
 	{
-		itr->first -= deltaTime;
+		auto &hitText = m_hitTexts[i];
+		hitText.first -= deltaTime;
 
-		if (itr->first <= 0)
-			itr = m_hitTexts.erase(itr);
-		else
-		{
-			itr->second.setPosition(
-				m_machine.getScreenPos().x + 100.f,
-				m_machine.getScreenPos().y + m_machine.getScreenSize().y / 2.f + 20*textCount);
-			sf::Color col = itr->second.getColor();
-			col.a = itr->first * 255;
-			itr->second.setColor(col);
-			++itr;
-		}
-
+		hitText.second.setPosition(
+			m_machine.getScreenPos().x + 100.f,
+			m_machine.getScreenPos().y + m_machine.getScreenSize().y / 2.f + 20 * textCount);
+		sf::Color col = hitText.second.getColor();
+		col.a = (hitText.first / HitTextDuration) * 255;
+		hitText.second.setColor(col);
 		++textCount;
+
 	}
+
+	m_hitTexts.erase(std::remove_if(m_hitTexts.begin(), m_hitTexts.end(), [](const std::pair<float, sf::Text>& hitText) -> bool
+	{
+		return hitText.first <= 0;
+	}), m_hitTexts.end());
 
 	// Spawn new notes
 	if (m_curDelay >= m_maxDelay)
@@ -214,7 +216,8 @@ void NoteGame::validateNoteInput(std::vector<sf::Sprite> &noteList, const sf::Sp
 		float distance = m_machine.getScreenPos().y + m_machine.getScreenSize().y - 100.f - itr->getPosition().y;
 		if (handleDistanceScore(distance))
 		{
-			ParticleSystem::instance().addParticles(50, baseNote.getPosition(), sf::Color::Green);
+			ParticleSystem::instance().addParticles(50, baseNote.getPosition(), sf::Color::Green,
+				sf::Vector2f(0.2f, 0.6f), sf::Vector2f(0, 360), sf::Vector2f(0, 100));
 			itr = noteList.erase(itr);
 			noScore = false;
 			break;
@@ -232,7 +235,7 @@ void NoteGame::createHitText(const std::string &text, const sf::Color &color)
 	newText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	newText.setColor(color);
 	newText.setString(text);
-	m_hitTexts.push_back(std::make_pair(2, newText));
+	m_hitTexts.push_back(std::make_pair(HitTextDuration, newText));
 }
 
 bool NoteGame::handleDistanceScore(float distance)

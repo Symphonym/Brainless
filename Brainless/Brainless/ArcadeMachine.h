@@ -33,7 +33,7 @@ private:
 	sf::Sprite m_arcadeBackground;
 
 	std::size_t m_currentGameIndex;
-	std::array<sf::Sprite, GameCount> m_gameSelectionButtons;
+	std::array<sf::Text, GameCount> m_gameSelectionButtons;
 	std::array<GamePtr, GameCount> m_games;
 
 	std::array<sf::Text, GameCount> m_gameNames;

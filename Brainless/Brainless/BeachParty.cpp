@@ -34,18 +34,17 @@ m_score(0)
 	m_scoreText = sf::Text("Score: " + m_score, ResourceLoader::instance().retrieveFont("DefaultFont"));
 
 	m_infoText = sf::Text("Collect the Curly Fries", ResourceLoader::instance().retrieveFont("DefaultFont"));
-	m_infoText.setPosition(m_screenPos.x + 100, m_screenPos.y + 335);
+	m_infoText.setPosition(m_screenPos.x + 150, m_screenPos.y + 335);
 	m_infoText.setColor(sf::Color(0, 120, 0, 255));
 
-	/*m_scoreText.setPosition(m_machine.getScreenPos().x + 20, m_machine.getScreenPos().y + 650);
-	m_scoreText.setColor(sf::Color(0,120,0,255));*/
+	m_scoreText.setColor(sf::Color(0,120,0,255));
 }
 
 sf::Vector2f randomPos(sf::Vector2f m_screenPos, sf::Vector2f turtlePos)
 {
 	sf::Vector2f pos = sf::Vector2f(Utility::randomValueBetween(m_screenPos.x + 20, m_screenPos.x + 680), Utility::randomValueBetween(m_screenPos.y + 20, m_screenPos.y + 680));
 
-	while (abs(turtlePos.x - pos.x) + abs(turtlePos.y - pos.y) < 40)
+	while (abs(turtlePos.x - pos.x) + abs(turtlePos.y - pos.y) < 80)
 	{
 		pos = sf::Vector2f(Utility::randomValueBetween(m_screenPos.x + 20, m_screenPos.x + 680), Utility::randomValueBetween(m_screenPos.y + 20, m_screenPos.y + 680));
 	}
@@ -61,6 +60,7 @@ void BeachParty::onGameStart()
 	m_crabs.clear();
 	m_score = 0;
 	m_isDead = false;
+	m_infoShowing = true;
 }
 
 void BeachParty::update(float deltaTime)
@@ -107,6 +107,7 @@ void BeachParty::update(float deltaTime)
 			m_crabs.push_back(sf::Sprite(m_crabTexture));
 			m_crabs.back().setPosition(randomPos(m_screenPos, m_turtleSprite.getPosition()));
 			m_crabDirections.push_back(true);
+			m_infoShowing = false;
 		}
 		sf::IntRect crabby = m_crabAnimation.getRectangle(deltaTime);
 		for (int i = 0; i < m_crabs.size(); i++)
@@ -142,7 +143,7 @@ void BeachParty::update(float deltaTime)
 			else
 				m_crabDirections[i] = !m_crabDirections[i];
 
-			if (abs(m_turtleSprite.getPosition().x - m_crabs[i].getPosition().x) + abs(m_turtleSprite.getPosition().y - m_crabs[i].getPosition().y) < 40)
+			if (abs(m_turtleSprite.getPosition().x - m_crabs[i].getPosition().x) + abs(m_turtleSprite.getPosition().y - m_crabs[i].getPosition().y) < 35)
 			{
 				m_isDead = true;
 			}
@@ -163,6 +164,7 @@ void BeachParty::update(float deltaTime)
 void BeachParty::draw()
 {
 	Renderer::instance().drawHUD(m_background);
+	if (m_infoShowing)
 	Renderer::instance().drawHUD(m_infoText);
 	Renderer::instance().drawHUD(m_turtleSprite);
 	Renderer::instance().drawHUD(m_frieSprite);

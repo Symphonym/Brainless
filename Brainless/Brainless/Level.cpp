@@ -117,7 +117,6 @@ void Level::reset()
 
 void Level::update(float deltaTime, Game &game)
 {
-	const int unitSpeed = 600;
 	for (std::size_t i = 0; i < m_units.size(); i++)
 	{
 		// TODO update units
@@ -197,10 +196,11 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 	for (unsigned int i = 0; i < m_units.size(); i++)
 	{
 		Unit* currentUnit = m_units[i].get();
-		sf::FloatRect unitBounds = currentUnit->getCollisionRect();
 
 		currentUnit->updateTask(deltaTime);
 		currentUnit->updateMovement(Constants::Gravity, deltaTime);
+		
+		sf::FloatRect unitBounds = currentUnit->getCollisionRect();
 
 		if (currentUnit->isMovementEnabled())
 		{
@@ -326,6 +326,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 			if (!tiltWalking)
 			{
 #pragma region solidCollision
+				//std::cout << "solid collision" << std::endl;
 				for (int i = 0; i < solidRects.size(); i++)
 				{
 					sf::FloatRect tileBounds = solidRects[i];
@@ -333,7 +334,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 					sf::Vector2f tileCenter = sf::Vector2f(tileBounds.left + tileBounds.width / 2, tileBounds.top + tileBounds.height / 2);
 					sf::Vector2f unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height / 2);
 					sf::FloatRect unitBottom = sf::FloatRect(unitBounds.left + unitLedgeOffset, unitBounds.top + unitBounds.height, unitBounds.width - unitLedgeOffset * 2, 1);
-
+					
 					//notinAir
 					if (currentUnit->getSpeed().y >= 0)
 					{
@@ -381,6 +382,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 						// If tile isn't empty and is colliding with the unit
 						if (tileBounds.intersects(unitBounds) && !hasCollided/* && !collision*/)
 						{
+					
 							//	collision = true;
 							hasCollided = true;
 
@@ -392,13 +394,13 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 								//Kolla om tile under unit
 								if (unitCenter.y < tileCenter.y)
 								{
-									if (currentUnit->getSpeed().y >= 0)
-									{
+								//	if (currentUnit->getSpeed().y >= 0)
+								//	{
 										if (/*abs(currentUnit->getSpeed().x) > 50 ||*/ unitBottom.intersects(tileBounds))
 										{
 											currentUnit->collisionDown(tileBounds.top - originalBounds.height, 0, 0);
 										}
-									}
+								//	}
 								}
 								//kolla om tile ovanför unit
 								else if (unitCenter.y > tileCenter.y && currentUnit->getSpeed().y < 0)
@@ -409,16 +411,23 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 							if (abs(unitCenter.x - tileCenter.x) > abs(unitCenter.y - tileCenter.y))
 							{
 								//tile höger om unit
-								if (unitCenter.x < tileCenter.x && currentUnit->getSpeed().x > 0)
+								if (unitCenter.x < tileCenter.x /*&& currentUnit->getSpeed().x > 0*/)
 								{
-									currentUnit->collisionLeft(tileBounds.left - originalBounds.width, 0, 0);
-	
+									if (currentUnit->getSpeed().x > 0)
+										currentUnit->collisionLeft(tileBounds.left - originalBounds.width, 0, 0);
+									else 
+										currentUnit->collisionLeft(tileBounds.left - originalBounds.width, 
+										currentUnit->getSpeed().x, 0);
 								}
 
 								//tile vänster om unit
-								else if (unitCenter.x > tileCenter.x && currentUnit->getSpeed().x < 0)
+								else if (unitCenter.x > tileCenter.x /*&& currentUnit->getSpeed().x < 0*/)
 								{
-									currentUnit->collisionRight(tileBounds.left + tileBounds.width, 0, 0);
+									if (currentUnit->getSpeed().x < 0)
+										currentUnit->collisionRight(tileBounds.left + tileBounds.width, 0, 0);
+									else
+										currentUnit->collisionRight(tileBounds.left + tileBounds.width, 
+										currentUnit->getSpeed().x, 0);
 								}
 							}
 						}
@@ -470,7 +479,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 					sf::FloatRect tileTopBounds = sf::FloatRect(tileBounds.left, tileBounds.top, tileBounds.width, 1);
 					sf::Vector2f tileCenter = sf::Vector2f(tileBounds.left + tileBounds.width / 2, tileBounds.top + tileBounds.height / 2);
 					sf::Vector2f unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height / 2);
-					sf::FloatRect unitBottom = sf::FloatRect(unitBounds.left + 20, unitBounds.top + unitBounds.height, unitBounds.width - 40, 1);
+					sf::FloatRect unitBottom = sf::FloatRect(unitBounds.left + unitLedgeOffset, unitBounds.top + unitBounds.height-5, unitBounds.width - unitLedgeOffset*2, 1+5);
 
 
 
@@ -480,7 +489,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 					{
 						inAir = false;
 						currentUnit->setPosition(currentUnit->getPosition() + m_items[i]->getSpeed() * deltaTime);
-						//	std::cout << "bottom intersect" << std::endl;
+					//		std::cout << "bottom intersect" << std::endl;
 						//	std::cout << m_items[i]->getName() << std::endl;
 					}
 
@@ -524,6 +533,8 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 											currentUnit->setSpeed(sf::Vector2f(currentUnit->getSpeed().x, 0));
 											currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
 											currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top - originalBounds.height));
+
+									
 											//			std::cout << "above" << std::endl;
 											//			std::cout << m_items[i]->getName() << std::endl;
 										}
