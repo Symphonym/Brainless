@@ -45,7 +45,7 @@ sf::Vector2f randomPos(sf::Vector2f m_screenPos, sf::Vector2f turtlePos)
 {
 	sf::Vector2f pos = sf::Vector2f(Utility::randomValueBetween(m_screenPos.x + 20, m_screenPos.x + 680), Utility::randomValueBetween(m_screenPos.y + 20, m_screenPos.y + 680));
 
-	while (abs(turtlePos.x - pos.x) + abs(turtlePos.y - pos.y) < 80)
+	while (abs(turtlePos.x - pos.x) + abs(turtlePos.y - pos.y) < 150)
 	{
 		pos = sf::Vector2f(Utility::randomValueBetween(m_screenPos.x + 20, m_screenPos.x + 680), Utility::randomValueBetween(m_screenPos.y + 20, m_screenPos.y + 680));
 	}
@@ -64,7 +64,10 @@ void BeachParty::onGameStart()
 	m_infoShowing = true;
 	m_rects.clear();
 	m_rects.push_back(m_turtleSprite.getGlobalBounds());
-	m_rects[0].width = 40;
+	m_rects[0].width = 32;
+	m_rects[0].height = 32;
+	m_rects[0].left += 4;
+	m_rects[0].top += 4;
 }
 
 void BeachParty::update(float deltaTime)
@@ -161,7 +164,7 @@ void BeachParty::update(float deltaTime)
 			else
 				m_crabDirections[i] = !m_crabDirections[i];
 
-			if (m_rects[0].intersects(m_rects[i + 1]))
+			if (m_rects[0].intersects(m_rects[i + 1]) && abs(m_turtleSprite.getPosition().x - m_crabs[i].getPosition().x) + abs(m_turtleSprite.getPosition().y - m_crabs[i].getPosition().y) < 40)
 			{
 				m_isDead = true;
 				SoundPlayer::instance().playSound("ArcadeFail", m_screenPos, 10);
