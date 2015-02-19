@@ -48,27 +48,9 @@ void Player::setClimbing(bool climbing)
 */
 void Player::updateTask(float deltaTime)
 {
-	m_cameraPos.x = m_position.x;
-	m_cameraPos.y = m_position.y + cameraOffset;
-
 	if (!m_isMovementEnabled)
 		return;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && m_speed.x == 0 && m_speed.y == 0)
-	{
-		cameraOffset = cameraOffset + (m_cameraMaxOffset - cameraOffset) * deltaTime * m_cameraSpeed;
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && m_speed.x == 0 && m_speed.y == 0)
-	{
-		cameraOffset = cameraOffset + (-m_cameraMaxOffset - cameraOffset) * deltaTime * m_cameraSpeed;
-	}
-	else
-	{
-		cameraOffset = cameraOffset + (0 - cameraOffset) * deltaTime * m_cameraSpeed;
-
-		if (abs(m_cameraPos.y - m_position.y) < 2)
-			cameraOffset = 0;
-	}
 
 	if (m_damageState == dmg_normal)
 	{
@@ -178,12 +160,6 @@ void Player::updateTask(float deltaTime)
 				jump();
 			}
 			if (30 < m_speed.y)m_jumpState = jump_inAir; //spelaren är förmodligen inAir "på riktigt", gör ett fake hopp för att få landanimation.
-		}
-		//Start to Land
-		else if (!m_inAir && m_jumpState == jump_inAir)
-		{
-			m_jumpState = jump_land;
-			SoundPlayer::instance().playSound("player_landing", getPosition());
 		}
 		//If landed, can jump.
 		else if (m_jumpState == jump_land)
@@ -333,7 +309,28 @@ sf::Vector2f Player::getCameraPosition()
 */
 void Player::updateAnimation(float deltaTime)
 {
-		
+	m_cameraPos.x = m_position.x;
+	m_cameraPos.y = m_position.y/* + cameraOffset*/;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && m_speed.x == 0 && m_speed.y == 0)
+	{
+		cameraOffset = cameraOffset + (m_cameraMaxOffset - cameraOffset) * deltaTime * m_cameraSpeed;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && m_speed.x == 0 && m_speed.y == 0)
+	{
+		cameraOffset = cameraOffset + (-m_cameraMaxOffset - cameraOffset) * deltaTime * m_cameraSpeed;
+	}
+	else
+	{
+		cameraOffset = cameraOffset + (0 - cameraOffset) * deltaTime * m_cameraSpeed;
+
+		if (abs(m_cameraPos.y - m_position.y) < 2)
+			cameraOffset = 0;
+	}
+
+	//std::cout << m_inAir << std::endl;
+	//std::cout << "speedX" << m_speed.x << std::endl;
+
 	//breakpoint between idleJump/runJump animation
 	float runJumpBreakpoint = MAX_WALK_SPEED_X;
 	//breakpoint between walk/run animation
@@ -344,6 +341,12 @@ void Player::updateAnimation(float deltaTime)
 	/*
 		Special State Conditions
 	*/
+	//Start to Land //TEST
+	if (!m_inAir && m_jumpState == jump_inAir)
+	{
+		m_jumpState = jump_land;
+		SoundPlayer::instance().playSound("player_landing", getPosition());
+	}
 
 	//Ladder Climbing
 	if (m_climbing)
@@ -435,7 +438,7 @@ void Player::updateAnimation(float deltaTime)
 		animation_turn();
 
 	//IDLE
-	else if ((abs(m_speed.x) < 5))
+	else if ((abs(m_speed.x) < 10))
 		animation_idle();
 
 
@@ -443,28 +446,8 @@ void Player::updateAnimation(float deltaTime)
 	else if (runBreakpoint < abs(m_speed.x))
 		animation_run();
 	//WALK
-	else if (5 < abs(m_speed.x))
+	else if (10 < abs(m_speed.x))
 		animation_walk();
-	//
-	////TURN
-	//else if (m_speed.x < -5 && m_inputDirection == dir_right || 5 < m_speed.x && m_inputDirection == dir_left)
-	//	//FAST
-	//if (m_animState == anim_run || m_animState == anim_turnRun)
-	//	animation_turnRun();
-	////SLOW
-	//else
-	//	animation_turn();
-
-	////IDLE
-	//else if ((abs(m_speed.x) < 5) && (m_inputDirection == dir_noDirection || m_animState == anim_turn || m_animState == anim_turnRun))
-	//	animation_idle();
-
-	////RUN
-	//else if (runBreakpoint < abs(m_speed.x))
-	//	animation_run();
-	////WALK
-	//else if (5 < abs(m_speed.x))
-	//	animation_walk();
 
 	else 
 	{
@@ -546,6 +529,7 @@ void Player::animation_walk()
 		m_sprite = &m_spriteSheets[0];
 		m_animation.loop(0, 7, 1, 5);
 		m_animState = anim_walk;
+
 	}
 	m_animation.setSpeed(Animation::calcFrameSpeed(5, 10, 0, MAX_WALK_SPEED_X, abs(m_speed.x)));
 }
@@ -581,7 +565,7 @@ void Player::animation_turnRun()
 	}
 }
 
-void Player::animation_startJumpIdle()
+void Player::animation_startJumpIdle()  ///////////////////
 {
 	if (m_animState != anim_startJumpIdle)
 	{
@@ -646,7 +630,7 @@ void Player::animation_inAirFallRun()
 		m_animation.loop(0, 1, 3, 6); //
 		m_animState = anim_inAirFallRun;
 	}
-}void Player::animation_inAirRun()
+}void Player::animation_inAirRun() /////////////////////////////////////
 {
 	if (m_animState != anim_inAirRun)
 	{

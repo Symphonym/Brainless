@@ -214,6 +214,9 @@ void Tile::updateType()
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Tilt"));
 		m_tilt = true;
 		break;
+	case Road_Tilt_Corner:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Tilt_Corner"));
+		break;
 
 	case Road_Corner_TopLeft:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_TopLeft"));  m_autotilingRange = "RoadAutotiling";

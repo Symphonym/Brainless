@@ -11,17 +11,26 @@ public:
 
 	NoteGame(ArcadeMachine &machine);
 
+	virtual void onGameStart();
+
 	virtual void events(const sf::Event &event);
 	virtual void update(float deltaTime);
 	virtual void draw();
 
 private:
 
+	// Returns true if score, false otherwise
+	bool handleDistanceScore(float distance);
+
+	void penalty();
+
 	// How many seconds the game session is
 	static const int GameSession = 50;
 
 	sf::Text m_scoreText;
 	int m_score;
+
+	float m_speedAddition;
 
 	// Data to make delays between notes
 	float m_aCurDelay;

@@ -230,6 +230,16 @@ void Game::update(float deltaTime)
 		currentShader->setParameter("enableLightSource", 0); // False until something else sets it
 	}
 
+
+	// Update game logic and input, if not paused
+	// Disable game input when conversation is ongoing
+	if (!ConversationBox::instance().isShown())
+	{
+		m_level.update(deltaTime, *this);
+		m_inventory->update(deltaTime, *this);
+		m_popup->update(*this,
+			sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
+	}
 	m_camera.setCenter(m_player->getCameraPosition().x, m_player->getCameraPosition().y);
 
 	if (m_camera.getCenter().y > Constants().MapHeight * Constants().TileSize - (m_camera.getSize().y / 2))
@@ -244,15 +254,6 @@ void Game::update(float deltaTime)
 	if (m_camera.getCenter().x < (m_camera.getSize().x / 2))
 		m_camera.setCenter((m_camera.getSize().x / 2), m_camera.getCenter().y);
 
-	// Update game logic and input, if not paused
-	// Disable game input when conversation is ongoing
-	if (!ConversationBox::instance().isShown())
-	{
-		m_level.update(deltaTime, *this);
-		m_inventory->update(deltaTime, *this);
-		m_popup->update(*this,
-			sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f));
-	}
 
 	m_levelTransition->update(deltaTime);
 	m_healthBar->update(*m_player);

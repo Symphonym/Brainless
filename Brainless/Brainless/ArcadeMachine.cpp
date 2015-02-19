@@ -6,6 +6,8 @@
 #include "ResourceLoader.h"
 #include "BeachParty.h"
 
+#include "NoteGame.h"
+
 ArcadeMachine::ArcadeMachine(StateMachine &machine)
 :
 State(machine),
@@ -23,6 +25,8 @@ m_playingGame(false)
 	// ADD YOUR GAMES HERE
 	m_games[0] = GamePtr(new BeachParty(*this));
 	//m_games[1] = GamePtr(new ...);
+	//m_games[0] = GamePtr(new ...);
+	m_games[1] = GamePtr(new NoteGame(*this));
 	//m_games[2] = GamePtr(new ...);
 	//m_games[3] = GamePtr(new ...);
 	//m_games[4] = GamePtr(new ...);
@@ -55,9 +59,6 @@ void ArcadeMachine::events(const sf::Event &event)
 			// Kill switch for all games
 			if (event.key.code == sf::Keyboard::Escape)
 				exitGame();
-
-			m_games[m_currentGameIndex]->events(event);
-
 		}
 		else
 		{
@@ -68,7 +69,10 @@ void ArcadeMachine::events(const sf::Event &event)
 				m_machine.popState();
 			}
 			else if (event.key.code == sf::Keyboard::D)
+			{
 				m_playingGame = true;
+				m_games[m_currentGameIndex]->onGameStart();
+			}
 			else if (event.key.code == sf::Keyboard::W)
 				--m_currentGameIndex;
 			else if (event.key.code == sf::Keyboard::S)
@@ -78,6 +82,9 @@ void ArcadeMachine::events(const sf::Event &event)
 		}
 
 	}
+
+	if (m_playingGame)
+		m_games[m_currentGameIndex]->events(event);
 }
 void ArcadeMachine::update(float deltaTime)
 {
@@ -115,6 +122,7 @@ void ArcadeMachine::draw()
 
 	// Screen is drawn above the game, since it's transparent
 	Renderer::instance().drawHUD(m_arcadeBackground);
+	Renderer::instance().drawHUD(m_currentGameText);
 }
 
 sf::Vector2f ArcadeMachine::getScreenPos() const
