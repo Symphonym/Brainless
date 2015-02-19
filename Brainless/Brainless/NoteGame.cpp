@@ -42,6 +42,8 @@ m_health(MaxHealth)
 	m_baseWNote.setPosition(machineMidX, m_machine.getScreenPos().y + m_machine.getScreenSize().y - 100.f);
 	m_baseDNote.setPosition(machineMidX + 100.f, m_machine.getScreenPos().y + m_machine.getScreenSize().y - 100.f);
 
+	m_background.setTexture(ResourceLoader::instance().retrieveTexture("MusicArcadeBG"));
+	m_background.setPosition(m_machine.getScreenPos());
 
 	sf::Image failImg;
 	failImg.create(1, 25, sf::Color::White);
@@ -114,7 +116,6 @@ void NoteGame::events(const sf::Event &event)
 void NoteGame::update(float deltaTime)
 {
 	m_scoreText.setString("Score: " + std::to_string(m_score));
-	//m_noteSpeed += deltaTime*10.f;
 	ParticleSystem::instance().update(deltaTime);
 
 	if (m_gameOver)
@@ -135,7 +136,7 @@ void NoteGame::update(float deltaTime)
 		hitText.first -= deltaTime;
 
 		hitText.second.setPosition(
-			m_machine.getScreenPos().x + 100.f,
+			m_machine.getScreenPos().x + 60.f,
 			m_machine.getScreenPos().y + m_machine.getScreenSize().y / 2.f + 20 * textCount);
 		sf::Color col = hitText.second.getColor();
 		col.a = (hitText.first / HitTextDuration) * 255;
@@ -235,6 +236,7 @@ void NoteGame::update(float deltaTime)
 }
 void NoteGame::draw()
 {
+	Renderer::instance().drawHUD(m_background);
 	Renderer::instance().drawHUD(m_scoreText);
 
 	Renderer::instance().drawHUD(m_baseANote);

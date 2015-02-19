@@ -29,6 +29,8 @@ private:
 	bool validateNoteInput(std::vector<sf::Sprite> &noteList, const sf::Sprite &baseNote);
 	void createHitText(const std::string &text, const sf::Color &color);
 
+	sf::Sprite m_background;
+
 	sf::Text m_gameOverText;
 	bool m_gameOver;
 
