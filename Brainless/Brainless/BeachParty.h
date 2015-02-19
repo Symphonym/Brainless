@@ -22,6 +22,8 @@ private:
 	sf::Sprite m_turtleSprite;
 	Animation m_turtleAnimation;
 
+	std::vector<sf::FloatRect> m_rects;
+
 	sf::Sprite m_frieSprite;
 	Animation m_frieAnimation;
 
