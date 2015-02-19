@@ -62,6 +62,9 @@ void BeachParty::onGameStart()
 	m_score = 0;
 	m_isDead = false;
 	m_infoShowing = true;
+	m_rects.clear();
+	m_rects.push_back(m_turtleSprite.getGlobalBounds());
+	m_rects[0].width = 40;
 }
 
 void BeachParty::update(float deltaTime)
@@ -71,6 +74,9 @@ void BeachParty::update(float deltaTime)
 	if (!m_isDead)
 	{
 		m_newPos = sf::Vector2f(0, 0);
+
+		m_rects[0].left = m_turtleSprite.getPosition().x;
+		m_rects[0].top = m_turtleSprite.getPosition().y;
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
@@ -108,6 +114,7 @@ void BeachParty::update(float deltaTime)
 			m_score++;
 
 			m_crabs.push_back(sf::Sprite(m_crabTexture));
+			m_rects.push_back(sf::FloatRect(-100, -100, 40, 40));
 			m_crabs.back().setPosition(randomPos(m_screenPos, m_turtleSprite.getPosition()));
 			m_crabDirections.push_back(true);
 			m_infoShowing = false;
@@ -117,6 +124,12 @@ void BeachParty::update(float deltaTime)
 		sf::IntRect crabby = m_crabAnimation.getRectangle(deltaTime);
 		for (int i = 0; i < m_crabs.size(); i++)
 		{
+			for (int i = 1; i < m_rects.size(); i++)
+			{
+				m_rects[i].left = m_crabs[i - 1].getPosition().x;
+				m_rects[i].top = m_crabs[i - 1].getPosition().y;
+			}
+
 			sf::Vector2f newCrabPos;
 
 			m_crabs[i].setOrigin(20, 20);
@@ -148,7 +161,7 @@ void BeachParty::update(float deltaTime)
 			else
 				m_crabDirections[i] = !m_crabDirections[i];
 
-			if (abs(m_turtleSprite.getPosition().x - m_crabs[i].getPosition().x) + abs(m_turtleSprite.getPosition().y - m_crabs[i].getPosition().y) < 35)
+			if (m_rects[0].intersects(m_rects[i + 1]))
 			{
 				m_isDead = true;
 				SoundPlayer::instance().playSound("ArcadeFail", m_screenPos, 10);

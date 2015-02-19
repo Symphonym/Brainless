@@ -20,6 +20,8 @@ m_animation(100,100)
 	getSprite().setTextureRect(m_animation.getRectangle(0));
 }
 
+
+
 bool SpiritFeatherItem::onCollisionWithUnit(Unit &unit, Game &game)
 {
 	// Delete item on player collision and add spirit power
