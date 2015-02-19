@@ -37,11 +37,18 @@ m_playingGame(false)
 
 	for (std::size_t i = 0; i < m_gameSelectionButtons.size(); i++)
 	{
-		sf::Sprite &button = m_gameSelectionButtons[i];
-		button.setTexture(ResourceLoader::instance().retrieveTexture("ArcadeMenuButton"));
+		sf::Text &button = m_gameSelectionButtons[i];
+		button.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+		button.setCharacterSize(50);
+		if (m_games[i])
+			button.setString(m_games[i]->getName());
+		else
+			button.setString("No game in slot");
 		button.setPosition(
 			getScreenPos().x + getScreenSize().x / 2.f - button.getGlobalBounds().width / 2.f,
 			getScreenPos().y + 100 + (button.getGlobalBounds().height + 5.f)*i);
+
+
 	}
 
 	for (std::size_t i = 0; i < GameCount - 1; i++)
@@ -78,8 +85,11 @@ void ArcadeMachine::events(const sf::Event &event)
 			}
 			else if (event.key.code == sf::Keyboard::D)
 			{
-				m_playingGame = true;
-				m_games[m_currentGameIndex]->onGameStart();
+				if (m_games[m_currentGameIndex])
+				{
+					m_playingGame = true;
+					m_games[m_currentGameIndex]->onGameStart();
+				}
 			}
 			else if (event.key.code == sf::Keyboard::W)
 				--m_currentGameIndex;
@@ -106,12 +116,12 @@ void ArcadeMachine::update(float deltaTime)
 		m_currentGameText.setString("");
 		for (std::size_t i = 0; i < GameCount; i++)
 		{
-			sf::Sprite &gameButton = m_gameSelectionButtons[i];
+			sf::Text &gameButton = m_gameSelectionButtons[i];
 
 			if (i == m_currentGameIndex)
 				gameButton.setColor(sf::Color::Green);
 			else
-				gameButton.setColor(sf::Color::White);
+				gameButton.setColor(sf::Color(0, 120, 0, 255));
 		}
 	}
 }
