@@ -43,6 +43,80 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 	//{
 	//	AutotilingValue(0, Tile::Road_Down)
 	//});
+
+
+	/*m_tileTypes =
+	{
+		Tile::Nothing = 0,
+		Tile::Ground = 1,
+		Tile::Red = 2,
+		Tile::Blue = 3,
+		Tile:: = 4,
+		Tile::Platform = 5,
+		//Short är tales som angränsar en annan tile "snett"
+		//Alone är tiles som inte angränsar till något verticalt/horiontalt
+		Tile::Road_Top_Right = 6,
+		Tile::Road_Top_Right_Corner = 56,
+
+		Tile::Road_Top_Left = 7,
+		Tile::Road_Top_Left_Short = 8, //
+		Tile::Road_Top_Left_Corner = 55,
+
+		Tile::Road_Top = 10,
+		Tile::Road_Top_Alone = 11, //fel bild, använder en "Road_Top_Alone_Short som vi inte har
+		Tile::Road_Top_Short = 12, //
+		Tile::Road_Top_Corner_Left = 52,
+		Tile::Road_Top_Corner_Right = 53,
+		Tile::Road_Top_Corner_Full = 54,
+
+		Tile::Road_Right = 13,
+		Tile::Road_Right_Alone = 14,
+		Tile::Road_Right_Corner_Down = 49,
+		Tile::Road_Right_Corner_Top = 50,
+		Tile::Road_Right_Corner_Full = 51,
+
+		Tile::Road_Middle = 15,
+		Tile::Road_Middle_Alone = 16,
+		Tile::Road_Middle_Alone_Horizontal = 17,
+		Tile::Road_Middle_Alone_Vertical = 18,
+
+		Tile::Road_Left = 19,
+		Tile::Road_Left_Short = 20, //
+		Tile::Road_Left_Alone = 21,
+		Tile::Road_Left_Corner_Down = 46,
+		Tile::Road_Left_Corner_Top = 47,
+		Tile::Road_Left_Corner_Full = 48,
+
+		Tile::Road_Down_Right = 22,
+		Tile::Road_Down_Right_Corner = 45,
+		Tile::Road_Down_Left = 23,
+		Tile::Road_Down_Left_Corner = 44,
+
+		Tile::Road_Down = 24,
+		Tile::Road_Down_Alone = 28,
+		Tile::Road_Down_Corner_Left = 41,
+		Tile::Road_Down_Corner_Right = 42,
+		Tile::Road_Down_Corner_Full = 43,
+
+		Road_Tilt = 9,
+		Road_Tilt_Corner = 57,
+
+		Road_Corner_TopLeft = 25,
+		Road_Corner_TopRight = 26,
+		Road_Corner_TopLeft_TopRight = 27,
+		Road_Corner_DownLeft = 29,
+		Road_Corner_DownRight = 30,
+		Road_Corner_DownLeft_DownRight = 31,
+		Road_Corner_TopLeft_DownLeft = 32,
+		Road_Corner_TopRight_DownRight = 33, //MIA
+		Road_Corner_TopLeft_DownRight = 34,
+		Road_Corner_TopRight_DownLeft = 35,
+		Road_Corner_Not_TopLeft = 36,
+		Road_Corner_Not_TopRight = 37,
+		Road_Corner_Not_DownLeft = 38,
+		Road_Corner_Not_DownRight = 39,
+		Road_Corner_Full = 40
+	};*/
 }
 EditorGridMode::~EditorGridMode()
 {
