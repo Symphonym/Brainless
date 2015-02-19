@@ -25,7 +25,7 @@ public:
 		Road_Top_Left_Corner = 55,
 
 		Road_Top = 10,
-		Road_Top_Alone = 11, //fel bild, använder en "Road_Top_Alone_Short som vi inte har
+		Road_Top_Alone = 11, 
 		Road_Top_Short = 12, //
 		Road_Top_Corner_Left = 52,
 		Road_Top_Corner_Right = 53,
@@ -70,7 +70,7 @@ public:
 		Road_Corner_DownRight = 30,
 		Road_Corner_DownLeft_DownRight = 31,
 		Road_Corner_TopLeft_DownLeft = 32,
-		Road_Corner_TopRight_DownRight = 33, //MIA
+		Road_Corner_TopRight_DownRight = 33,
 		Road_Corner_TopLeft_DownRight = 34,
 		Road_Corner_TopRight_DownLeft = 35,
 		Road_Corner_Not_TopLeft = 36,
@@ -78,8 +78,7 @@ public:
 		Road_Corner_Not_DownLeft = 38,
 		Road_Corner_Not_DownRight = 39,
 		Road_Corner_Full = 40,
-
-		woodoffset = 100,
+		// Etc
 
 		Wood_Top_Right = 106,
 		Wood_Top_Right_Corner = 156,
@@ -89,7 +88,7 @@ public:
 		Wood_Top_Left_Corner = 155,
 
 		Wood_Top = 110,
-		Wood_Top_Alone = 111, //fel bild, använder en "Road_Top_Alone_Short som vi inte har
+		Wood_Top_Alone = 111, 
 		Wood_Top_Short = 112, //
 		Wood_Top_Corner_Left = 152,
 		Wood_Top_Corner_Right = 153,
@@ -124,6 +123,9 @@ public:
 		Wood_Down_Corner_Right = 142,
 		Wood_Down_Corner_Full = 143,
 
+		Wood_Tilt = 109,
+		Wood_Tilt_Corner = 157,
+
 		Wood_Corner_TopLeft = 125,
 		Wood_Corner_TopRight = 126,
 		Wood_Corner_TopLeft_TopRight = 127,
@@ -139,8 +141,6 @@ public:
 		Wood_Corner_Not_DownLeft = 138,
 		Wood_Corner_Not_DownRight = 139,
 		Wood_Corner_Full = 140
-
-		// Etc
 	};
 
 	// Position/size of collision, tile type and offset for sprite

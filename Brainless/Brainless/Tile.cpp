@@ -263,19 +263,12 @@ void Tile::updateType()
 	case Road_Corner_Full:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Road_Corner_Full"));  m_autotilingRange = "RoadAutotiling";
 		break;
+	
+			/*
 
+			WOOD
 
-
-
-
-
-
-
-
-
-
-
-
+		*/
 	case Wood_Top_Right:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Wood_Top_Right")); m_autotilingRange = "WoodAutotiling";
 		break;
@@ -286,9 +279,9 @@ void Tile::updateType()
 	case Wood_Top_Left:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Wood_Top_Left")); m_autotilingRange = "WoodAutotiling";
 		break;
-	case Wood_Top_Left_Short:
+	/*case Wood_Top_Left_Short:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Wood_Top_Left_Short")); m_autotilingRange = "WoodAutotiling";
-		break;
+		break;*/
 	case Wood_Top_Left_Corner:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Wood_Top_Left_Corner")); m_autotilingRange = "WoodAutotiling";
 		break;
@@ -392,6 +385,14 @@ void Tile::updateType()
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Wood_Down_Corner_Full"));  m_autotilingRange = "WoodAutotiling";
 		break;
 
+	case Wood_Tilt:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Wood_Tilt"));
+		m_tilt = true;
+		break;
+	case Wood_Tilt_Corner:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Wood_Tilt_Corner"));
+		break;
+
 	case Wood_Corner_TopLeft:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Wood_Corner_TopLeft"));  m_autotilingRange = "WoodAutotiling";
 		break;
@@ -437,7 +438,7 @@ void Tile::updateType()
 	case Wood_Corner_Full:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Wood_Corner_Full"));  m_autotilingRange = "WoodAutotiling";
 		break;
-
+		
 	default:
 		break;
 	}
