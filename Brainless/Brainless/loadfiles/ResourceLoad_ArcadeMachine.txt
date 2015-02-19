@@ -22,6 +22,6 @@
 +Sound,sounds/Arkad_v5.wav,ArcadeMediumDark
 +Sound,sounds/Arkad_v6.wav,ArcadeDark
 
-# ROBOT ÅKA ATTACK
+# ROBOT ÅKE ATTACK
 +Texture,images/arcade/spr_player.png,spr_player
 +Texture,images/arcade/bc_sky.png,bc_sky
