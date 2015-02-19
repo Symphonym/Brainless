@@ -19,6 +19,8 @@ public:
 
 private:
 
+	static const float HitTextDuration;
+
 	// Returns true if score, false otherwise
 	bool handleDistanceScore(float distance);
 	void penalty();

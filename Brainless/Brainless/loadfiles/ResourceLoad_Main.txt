@@ -175,8 +175,8 @@
 +Texture,images/items/twine.png,TwineItem
 +Texture,images/items/coinTwine.png,CoinTwineItem
 +Texture,images/items/keyTwine.png,KeyTwineItem
-+Texture,images/items/windowWhole.png,WindowWholeItem
-+Texture,images/items/windowSmashed.png,WindowSmashedItem
++Texture,images/items/Window2.png,WindowWholeItem
++Texture,images/items/Window1.png,WindowSmashedItem
 +Texture,images/items/stone.png,StoneItem
 +Texture,images/items/lighter.png,LighterItem
 +Texture,images/items/stickItem.png,StickItem
