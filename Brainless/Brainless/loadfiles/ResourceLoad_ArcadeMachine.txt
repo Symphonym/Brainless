@@ -12,6 +12,7 @@
 +Texture,images/arcade/blueNote.png,BlueArcadeNote
 +Texture,images/arcade/redNote.png,RedArcadeNote
 +Texture,images/arcade/greenNote.png,GreenArcadeNote
++Texture,images/arcade/musicBG.png,MusicArcadeBG
 
 # SOUNDS
 +Sound,sounds/Arkad_v1.wav,ArcadeFail
