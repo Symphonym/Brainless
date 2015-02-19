@@ -66,6 +66,7 @@ void NoteGame::onGameStart()
 	m_gameOver = false;
 	m_health = MaxHealth;
 	m_noteSpeed = 500;
+	m_score = 0;
 	m_aNotes.clear();
 	m_wNotes.clear();
 	m_dNotes.clear();
