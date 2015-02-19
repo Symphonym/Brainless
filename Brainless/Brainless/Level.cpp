@@ -474,12 +474,11 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 
 				if (m_items[i]->isCollidable())
 				{
-
 					sf::FloatRect tileBounds = m_items[i]->getCollisionBounds();
 					sf::FloatRect tileTopBounds = sf::FloatRect(tileBounds.left, tileBounds.top, tileBounds.width, 1);
 					sf::Vector2f tileCenter = sf::Vector2f(tileBounds.left + tileBounds.width / 2, tileBounds.top + tileBounds.height / 2);
 					sf::Vector2f unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height / 2);
-					sf::FloatRect unitBottom = sf::FloatRect(unitBounds.left + unitLedgeOffset, unitBounds.top + unitBounds.height-5, unitBounds.width - unitLedgeOffset*2, 1+5);
+					sf::FloatRect unitBottom = sf::FloatRect(unitBounds.left + unitLedgeOffset, unitBounds.top + unitBounds.height - 5, unitBounds.width - unitLedgeOffset * 2, 1 + 5 + abs(m_items[i]->getSpeed().y * deltaTime));
 
 
 
