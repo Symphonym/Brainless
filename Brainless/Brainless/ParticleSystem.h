@@ -17,7 +17,7 @@ public:
 		const sf::Vector2f &gravity = sf::Vector2f(0, 0));
 
 	void update(float deltaTime);
-	void draw();
+	void draw(bool drawHUD = false);
 
 	static ParticleSystem& instance();
 

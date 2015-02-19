@@ -79,8 +79,14 @@ void ParticleSystem::update(float deltaTime)
 	}
 }
 
-void ParticleSystem::draw()
+void ParticleSystem::draw(bool drawHUD)
 {
 	for (auto &particle : m_particles)
-		Renderer::instance().drawAbove(particle.sprite);
+	{
+		if (drawHUD)
+			Renderer::instance().drawHUD(particle.sprite);
+		else
+			Renderer::instance().drawAbove(particle.sprite);
+
+	}
 }
