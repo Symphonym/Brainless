@@ -17,6 +17,9 @@ public:
 	void pauseMusic(const std::string &musicName);
 	void stopMusic(const std::string &musicName);
 	
+	// Stops all sounds, does not include music
+	void killAllSounds();
+
 	// Set master volume of system
 	void setVolume(float volume); 
 

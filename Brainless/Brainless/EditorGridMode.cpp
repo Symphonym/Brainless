@@ -38,11 +38,150 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 
 
 	// Add autotiling ranges
-	parseAutotilingFile("autotiling/numbersforblocks.txt", "RoadAutotiling");
+	parseAutotilingFile("autotiling/numbersforRoad.txt", "RoadAutotiling");
+	parseAutotilingFile("autotiling/numbersforWood.txt", "WoodAutotiling");
 	//addAutotilingRange("RoadAutotiling", Tile::Road_Middle,
 	//{
 	//	AutotilingValue(0, Tile::Road_Down)
 	//});
+
+	m_tileTypes =
+	{
+		Tile::Nothing,
+		Tile::Ground,
+		Tile::Red,
+		Tile::Blue,
+		Tile::Tilt,
+		Tile::Platform,
+
+		/*
+		Tile::Road_Top_Right,
+		Tile::Road_Top_Right_Corner,
+
+		Tile::Road_Top_Left,
+		Tile::Road_Top_Left_Short,
+		Tile::Road_Top_Left_Corner,
+
+		Tile::Road_Top,*/
+		Tile::Road_Top_Alone,/*
+		Tile::Road_Top_Short,
+		Tile::Road_Top_Corner_Left,
+		Tile::Road_Top_Corner_Right,
+		Tile::Road_Top_Corner_Full,
+
+		Tile::Road_Right,
+		Tile::Road_Right_Alone,
+		Tile::Road_Right_Corner_Down,
+		Tile::Road_Right_Corner_Top,
+		Tile::Road_Right_Corner_Full,
+
+		Tile::Road_Middle,
+		Tile::Road_Middle_Alone,
+		Tile::Road_Middle_Alone_Horizontal,
+		Tile::Road_Middle_Alone_Vertical,
+
+		Tile::Road_Left,
+		Tile::Road_Left_Short, //
+		Tile::Road_Left_Alone,
+		Tile::Road_Left_Corner_Down,
+		Tile::Road_Left_Corner_Top,
+		Tile::Road_Left_Corner_Full,
+
+		Tile::Road_Down_Right,
+		Tile::Road_Down_Right_Corner,
+		Tile::Road_Down_Left,
+		Tile::Road_Down_Left_Corner,
+
+		Tile::Road_Down,
+		Tile::Road_Down_Alone,
+		Tile::Road_Down_Corner_Left,
+		Tile::Road_Down_Corner_Right,
+		Tile::Road_Down_Corner_Full,
+
+		*/Tile::Road_Tilt,
+		Tile::Road_Tilt_Corner,/*
+
+		Tile::Road_Corner_TopLeft,
+		Tile::Road_Corner_TopRight,
+		Tile::Road_Corner_TopLeft_TopRight,
+		Tile::Road_Corner_DownLeft,
+		Tile::Road_Corner_DownRight,
+		Tile::Road_Corner_DownLeft_DownRight,
+		Tile::Road_Corner_TopLeft_DownLeft,
+		Tile::Road_Corner_TopRight_DownRight,
+		Tile::Road_Corner_TopLeft_DownRight,
+		Tile::Road_Corner_TopRight_DownLeft,
+		Tile::Road_Corner_Not_TopLeft,
+		Tile::Road_Corner_Not_TopRight,
+		Tile::Road_Corner_Not_DownLeft,
+		Tile::Road_Corner_Not_DownRight,
+		Tile::Road_Corner_Full,
+
+
+		Tile::Wood_Top_Right,
+		Tile::Wood_Top_Right_Corner,
+
+		Tile::Wood_Top_Left,
+		Tile::Wood_Top_Left_Short,
+		Tile::Wood_Top_Left_Corner,
+
+		Tile::Wood_Top,*/
+		Tile::Wood_Top_Alone,/*,
+		Tile::Wood_Top_Short,
+		Tile::Wood_Top_Corner_Left,
+		Tile::Wood_Top_Corner_Right,
+		Tile::Wood_Top_Corner_Full,
+
+		Tile::Wood_Right,
+		Tile::Wood_Right_Alone,
+		Tile::Wood_Right_Corner_Down,
+		Tile::Wood_Right_Corner_Top,
+		Tile::Wood_Right_Corner_Full,
+
+		Tile::Wood_Middle,
+		Tile::Wood_Middle_Alone,
+		Tile::Wood_Middle_Alone_Horizontal,
+		Tile::Wood_Middle_Alone_Vertical,
+
+		Tile::Wood_Left,
+		Tile::Wood_Left_Short,
+		Tile::Wood_Left_Alone,
+		Tile::Wood_Left_Corner_Down,
+		Tile::Wood_Left_Corner_Top,
+		Tile::Wood_Left_Corner_Full,
+
+		Tile::Wood_Down_Right,
+		Tile::Wood_Down_Right_Corner,
+		Tile::Wood_Down_Left,
+		Tile::Wood_Down_Left_Corner,
+
+		Tile::Wood_Down,
+		Tile::Wood_Down_Alone,
+		Tile::Wood_Down_Corner_Left,
+		Tile::Wood_Down_Corner_Right,
+		Tile::Wood_Down_Corner_Full,
+
+		*/Tile::Wood_Tilt,
+		Tile::Wood_Tilt_Corner/*
+
+		Tile::Wood_Corner_TopLeft,
+		Tile::Wood_Corner_TopRight,
+		Tile::Wood_Corner_TopLeft_TopRight,
+		Tile::Wood_Corner_DownLeft,
+		Tile::Wood_Corner_DownRight,
+		Tile::Wood_Corner_DownLeft_DownRight,
+		Tile::Wood_Corner_TopLeft_DownLeft,
+		Tile::Wood_Corner_TopRight_DownRight,
+		Tile::Wood_Corner_TopLeft_DownRight,
+		Tile::Wood_Corner_TopRight_DownLeft,
+		Tile::Wood_Corner_Not_TopLeft,
+		Tile::Wood_Corner_Not_TopRight,
+		Tile::Wood_Corner_Not_DownLeft,
+		Tile::Wood_Corner_Not_DownRight,
+		Tile::Wood_Corner_Full*/
+
+		
+	};
 }
 EditorGridMode::~EditorGridMode()
 {
@@ -54,11 +193,11 @@ bool EditorGridMode::events(const sf::Event &event, const sf::RenderWindow &edit
 	if (event.type == sf::Event::MouseWheelMoved)
 	{
 		// Scroll between block types
-		int curIndex = static_cast<int>(m_currentTile.getType());
-		curIndex += event.mouseWheel.delta;
-		curIndex = Utility::clampValue(curIndex, 0, Constants::BlockTypeCount - 1);
+		//int curIndex = static_cast<int>(m_currentTile.getType());
+		m_currentTileIndex += event.mouseWheel.delta;
+		m_currentTileIndex = Utility::clampValue<int>(m_currentTileIndex, 0, m_tileTypes.size() - 1);//Constants::BlockTypeCount - 1);
 
-		m_currentTile.setType(static_cast<Tile::TileTypes>(curIndex));
+		m_currentTile.setType(m_tileTypes[m_currentTileIndex]);
 	}
 
 	else if (event.type == sf::Event::KeyReleased)

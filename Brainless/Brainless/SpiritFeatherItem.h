@@ -16,11 +16,14 @@ public:
 
 	virtual Item* clone();
 
+	void flash();
+
 private:
 	int m_currentFrame = 0;
 	int m_maxFrame = 8;
 	Animation m_animation;
-
+	
+	float m_flashAlpha = 0;
 };
 
 #endif

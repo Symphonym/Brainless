@@ -9,10 +9,13 @@ public:
 
 	virtual bool onInteractedWith(Item &otherItem, Game &game);
 
+	void flash(sf::Vector2f cameraPos);
+
 	bool collide(Unit *unit);
 protected:
 
 private:
+	float m_flashAlpha;
 };
 
 #endif
