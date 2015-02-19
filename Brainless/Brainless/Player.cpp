@@ -310,7 +310,7 @@ sf::Vector2f Player::getCameraPosition()
 void Player::updateAnimation(float deltaTime)
 {
 	m_cameraPos.x = m_position.x;
-	m_cameraPos.y = m_position.y/* + cameraOffset*/;
+	m_cameraPos.y = m_position.y + cameraOffset;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && m_speed.x == 0 && m_speed.y == 0)
 	{
