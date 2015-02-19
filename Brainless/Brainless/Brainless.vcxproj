@@ -148,6 +148,7 @@
     <ClCompile Include="NoteGame.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
+    <ClCompile Include="RobotAkeAttack.cpp" />
     <ClCompile Include="RubberGlovesItem.cpp" />
     <ClCompile Include="ScissorLift.cpp" />
     <ClCompile Include="SpiritBar.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="NoteGame.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PauseMenu.h" />
+    <ClInclude Include="RobotAkeAttack.h" />
     <ClInclude Include="RubberGlovesItem.h" />
     <ClInclude Include="ScissorLift.h" />
     <ClInclude Include="SpiritBar.h" />
