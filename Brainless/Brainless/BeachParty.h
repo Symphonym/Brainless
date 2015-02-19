@@ -12,6 +12,8 @@ public:
 
 	BeachParty(ArcadeMachine &machine);
 
+	virtual void onGameStart();
+
 	virtual void events(const sf::Event &event) {};
 	virtual void update(float deltaTime);
 	virtual void draw();
@@ -36,6 +38,8 @@ private:
 
 	int m_score;
 	sf::Text m_scoreText;
+
+	sf::Text m_infoText;
 
 	float m_speed = 100;
 

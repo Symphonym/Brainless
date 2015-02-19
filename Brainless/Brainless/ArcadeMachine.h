@@ -36,6 +36,8 @@ private:
 	std::array<sf::Sprite, GameCount> m_gameSelectionButtons;
 	std::array<GamePtr, GameCount> m_games;
 
+	std::array<sf::Text, GameCount> m_gameNames;
+
 	bool m_playingGame;
 };
 

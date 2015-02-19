@@ -32,8 +32,13 @@ m_score(0)
 	m_frieSprite.setPosition(sf::Vector2f(Utility::randomValueBetween(m_screenPos.x + 20, m_screenPos.x + 680), Utility::randomValueBetween(m_screenPos.y + 20, m_screenPos.y + 680)));
 
 	m_scoreText = sf::Text("Score: " + m_score, ResourceLoader::instance().retrieveFont("DefaultFont"));
-	m_scoreText.setPosition(m_machine.getScreenPos().x + 20, m_machine.getScreenPos().y + 650);
-	m_scoreText.setColor(sf::Color::Black);
+
+	m_infoText = sf::Text("Collect the Curly Fries", ResourceLoader::instance().retrieveFont("DefaultFont"));
+	m_infoText.setPosition(m_screenPos.x + 100, m_screenPos.y + 335);
+	m_infoText.setColor(sf::Color(0, 120, 0, 255));
+
+	/*m_scoreText.setPosition(m_machine.getScreenPos().x + 20, m_machine.getScreenPos().y + 650);
+	m_scoreText.setColor(sf::Color(0,120,0,255));*/
 }
 
 sf::Vector2f randomPos(sf::Vector2f m_screenPos, sf::Vector2f turtlePos)
@@ -46,6 +51,16 @@ sf::Vector2f randomPos(sf::Vector2f m_screenPos, sf::Vector2f turtlePos)
 	}
 
 	return pos;
+}
+
+void BeachParty::onGameStart()
+{
+	m_turtleSprite.setPosition(m_machine.getScreenPos().x + 325, m_machine.getScreenPos().y + 325);
+	m_frieSprite.setPosition(sf::Vector2f(Utility::randomValueBetween(m_screenPos.x + 20, m_screenPos.x + 680), Utility::randomValueBetween(m_screenPos.y + 20, m_screenPos.y + 680)));
+	m_scoreText.setPosition(m_machine.getScreenPos().x + 20, m_machine.getScreenPos().y + 650);
+	m_crabs.clear();
+	m_score = 0;
+	m_isDead = false;
 }
 
 void BeachParty::update(float deltaTime)
@@ -148,6 +163,7 @@ void BeachParty::update(float deltaTime)
 void BeachParty::draw()
 {
 	Renderer::instance().drawHUD(m_background);
+	Renderer::instance().drawHUD(m_infoText);
 	Renderer::instance().drawHUD(m_turtleSprite);
 	Renderer::instance().drawHUD(m_frieSprite);
 
