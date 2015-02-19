@@ -43,6 +43,8 @@ void SoundPlayer::killAllSounds()
 {
 	for (auto &sound : m_sounds)
 		sound->stop();
+
+	m_sounds.clear();
 }
 
 void SoundPlayer::setVolume(float volume)
