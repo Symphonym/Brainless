@@ -77,7 +77,69 @@ public:
 		Road_Corner_Not_TopRight = 37,
 		Road_Corner_Not_DownLeft = 38,
 		Road_Corner_Not_DownRight = 39,
-		Road_Corner_Full = 40
+		Road_Corner_Full = 40,
+
+		woodoffset = 100,
+
+		Wood_Top_Right = 106,
+		Wood_Top_Right_Corner = 156,
+
+		Wood_Top_Left = 107,
+		Wood_Top_Left_Short = 108, //
+		Wood_Top_Left_Corner = 155,
+
+		Wood_Top = 110,
+		Wood_Top_Alone = 111, //fel bild, använder en "Road_Top_Alone_Short som vi inte har
+		Wood_Top_Short = 112, //
+		Wood_Top_Corner_Left = 152,
+		Wood_Top_Corner_Right = 153,
+		Wood_Top_Corner_Full = 154,
+
+		Wood_Right = 113,
+		Wood_Right_Alone = 114,
+		Wood_Right_Corner_Down = 149,
+		Wood_Right_Corner_Top = 150,
+		Wood_Right_Corner_Full = 151,
+
+		Wood_Middle = 115,
+		Wood_Middle_Alone = 116,
+		Wood_Middle_Alone_Horizontal = 117,
+		Wood_Middle_Alone_Vertical = 118,
+
+		Wood_Left = 119,
+		Wood_Left_Short = 120, //
+		Wood_Left_Alone = 121,
+		Wood_Left_Corner_Down = 146,
+		Wood_Left_Corner_Top = 147,
+		Wood_Left_Corner_Full = 148,
+
+		Wood_Down_Right = 122,
+		Wood_Down_Right_Corner = 145,
+		Wood_Down_Left = 123,
+		Wood_Down_Left_Corner = 144,
+
+		Wood_Down = 124,
+		Wood_Down_Alone = 128,
+		Wood_Down_Corner_Left = 141,
+		Wood_Down_Corner_Right = 142,
+		Wood_Down_Corner_Full = 143,
+
+		Wood_Corner_TopLeft = 125,
+		Wood_Corner_TopRight = 126,
+		Wood_Corner_TopLeft_TopRight = 127,
+		Wood_Corner_DownLeft = 129,
+		Wood_Corner_DownRight = 130,
+		Wood_Corner_DownLeft_DownRight = 131,
+		Wood_Corner_TopLeft_DownLeft = 132,
+		Wood_Corner_TopRight_DownRight = 133,
+		Wood_Corner_TopLeft_DownRight = 134,
+		Wood_Corner_TopRight_DownLeft = 135,
+		Wood_Corner_Not_TopLeft = 136,
+		Wood_Corner_Not_TopRight = 137,
+		Wood_Corner_Not_DownLeft = 138,
+		Wood_Corner_Not_DownRight = 139,
+		Wood_Corner_Full = 140
+
 		// Etc
 	};
 

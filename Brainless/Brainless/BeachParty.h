@@ -40,6 +40,7 @@ private:
 	sf::Text m_scoreText;
 
 	sf::Text m_infoText;
+	bool m_infoShowing = true;
 
 	float m_speed = 100;
 
