@@ -98,8 +98,8 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 		Tile::Road_Down_Corner_Right,
 		Tile::Road_Down_Corner_Full,
 
-		Tile::Road_Tilt,
-		Tile::Road_Tilt_Corner,
+		*/Tile::Road_Tilt,
+		Tile::Road_Tilt_Corner,/*
 
 		Tile::Road_Corner_TopLeft,
 		Tile::Road_Corner_TopRight,
@@ -126,7 +126,7 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 		Tile::Wood_Top_Left_Corner,
 
 		Tile::Wood_Top,*/
-		Tile::Wood_Top_Alone/*,
+		Tile::Wood_Top_Alone,/*,
 		Tile::Wood_Top_Short,
 		Tile::Wood_Top_Corner_Left,
 		Tile::Wood_Top_Corner_Right,
@@ -161,6 +161,9 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 		Tile::Wood_Down_Corner_Right,
 		Tile::Wood_Down_Corner_Full,
 
+		*/Tile::Wood_Tilt,
+		Tile::Wood_Tilt_Corner/*
+
 		Tile::Wood_Corner_TopLeft,
 		Tile::Wood_Corner_TopRight,
 		Tile::Wood_Corner_TopLeft_TopRight,
@@ -176,6 +179,8 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 		Tile::Wood_Corner_Not_DownLeft,
 		Tile::Wood_Corner_Not_DownRight,
 		Tile::Wood_Corner_Full*/
+
+		
 	};
 }
 EditorGridMode::~EditorGridMode()
