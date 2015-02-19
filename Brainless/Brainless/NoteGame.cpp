@@ -292,6 +292,9 @@ void NoteGame::createHitText(const std::string &text, const sf::Color &color)
 	newText.setColor(color);
 	newText.setString(text);
 	m_hitTexts.push_back(std::make_pair(HitTextDuration, newText));
+
+	if (m_hitTexts.size() >= 12)
+		m_hitTexts.erase(m_hitTexts.begin());
 }
 
 bool NoteGame::handleDistanceScore(float distance)
