@@ -21,8 +21,10 @@ private:
 
 	// Returns true if score, false otherwise
 	bool handleDistanceScore(float distance);
-
 	void penalty();
+
+	void validateNoteInput(std::vector<sf::Sprite> &noteList, const sf::Sprite &baseNote);
+	void createHitText(const std::string &text, const sf::Color &color);
 
 	// How many seconds the game session is
 	static const int GameSession = 50;
@@ -30,15 +32,14 @@ private:
 	sf::Text m_scoreText;
 	int m_score;
 
-	float m_speedAddition;
+	float m_noteSpeed;
 
 	// Data to make delays between notes
-	float m_aCurDelay;
-	float m_wCurDelay;
-	float m_dCurDelay;
-	float m_aMaxDelay;
-	float m_wMaxDelay;
-	float m_dMaxDelay;
+	float m_curDelay, m_maxDelay;
+	std::string m_spawnString;
+
+	// Text for good note hits
+	std::vector<std::pair<float, sf::Text> > m_hitTexts;
 
 	// Notes
 	std::vector<sf::Sprite> m_aNotes;

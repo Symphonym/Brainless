@@ -33,6 +33,7 @@ m_playingGame(false)
 
 	m_currentGameText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_currentGameText.setPosition(getScreenPos());
+	m_currentGameText.setColor(sf::Color(0, 120, 0, 255));
 
 	for (std::size_t i = 0; i < m_gameSelectionButtons.size(); i++)
 	{
@@ -41,6 +42,13 @@ m_playingGame(false)
 		button.setPosition(
 			getScreenPos().x + getScreenSize().x / 2.f - button.getGlobalBounds().width / 2.f,
 			getScreenPos().y + 100 + (button.getGlobalBounds().height + 5.f)*i);
+	}
+
+	for (std::size_t i = 0; i < GameCount - 1; i++)
+	{
+		//m_gameNames[i] = sf::Text(m_games[i]->getName(), ResourceLoader::instance().retrieveFont("DefaultFont"));
+		/*m_gameNames[i].setColor(sf::Color(0, 120, 0, 255));
+		m_gameNames[i].setPosition(getScreenSize().x + 100, getScreenSize().y + 100 + 50 * i);*/
 	}
 }
 
@@ -96,7 +104,7 @@ void ArcadeMachine::update(float deltaTime)
 	else
 	{
 		m_currentGameText.setString("");
-		for (std::size_t i = 0; i < m_gameSelectionButtons.size(); i++)
+		for (std::size_t i = 0; i < GameCount; i++)
 		{
 			sf::Sprite &gameButton = m_gameSelectionButtons[i];
 
@@ -118,6 +126,9 @@ void ArcadeMachine::draw()
 
 		for (auto &button : m_gameSelectionButtons)
 			Renderer::instance().drawHUD(button);
+
+		/*for (auto &name : m_gameNames)
+			Renderer::instance().drawHUD(name);*/
 	}
 
 	// Screen is drawn above the game, since it's transparent
