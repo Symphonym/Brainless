@@ -93,20 +93,20 @@ void NoteGame::events(const sf::Event &event)
 		{
 			m_baseANote.setScale(1, 1);
 			if(validateNoteInput(m_aNotes, m_baseANote))
-				SoundPlayer::instance().playSound("ArcadeLight", m_machine.getScreenPos(), 50.f);
+				SoundPlayer::instance().playSound("ArcadeLight", m_machine.getScreenPos(), 30.f);
 
 		}
 		else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S)
 		{
 			m_baseWNote.setScale(1, 1);
 			if(validateNoteInput(m_wNotes, m_baseWNote))
-				SoundPlayer::instance().playSound("ArcadeMedium", m_machine.getScreenPos(), 50.f);
+				SoundPlayer::instance().playSound("ArcadeMedium", m_machine.getScreenPos(), 30.f);
 		}
 		else if (event.key.code == sf::Keyboard::D)
 		{
 			m_baseDNote.setScale(1, 1);
 			if(validateNoteInput(m_dNotes, m_baseDNote))
-				SoundPlayer::instance().playSound("ArcadeDark", m_machine.getScreenPos(), 50.f);
+				SoundPlayer::instance().playSound("ArcadeDark", m_machine.getScreenPos(), 30.f);
 		}
 	}
 }
