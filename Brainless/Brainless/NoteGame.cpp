@@ -13,7 +13,8 @@ NoteGame::NoteGame(ArcadeMachine &machine)
 ArcadeGame(machine, "Åkes Melodisak"),
 m_gameOver(false),
 m_score(0),
-m_noteSpeed(350),
+m_noteCombo(0),
+m_noteSpeed(400),
 m_curDelay(0),
 m_maxDelay(0),
 m_spawnString("000"),
@@ -61,14 +62,22 @@ m_health(MaxHealth)
 	m_gameOverText.setPosition(
 		m_machine.getScreenPos().x + m_machine.getScreenSize().x / 2 - m_gameOverText.getGlobalBounds().width / 2.f,
 		m_machine.getScreenPos().y + m_machine.getScreenSize().y / 2 - m_gameOverText.getGlobalBounds().height / 2.f);
+
+
+	m_comboText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+	m_comboText.setCharacterSize(85);
+	m_comboText.setPosition(
+		m_machine.getScreenPos().x + m_machine.getScreenSize().x - 220.f,
+		m_machine.getScreenPos().y + m_machine.getScreenSize().y - 250.f);
 }
 
 void NoteGame::onGameStart()
 {
 	m_gameOver = false;
 	m_health = MaxHealth;
-	m_noteSpeed = 350;
+	m_noteSpeed = 400;
 	m_score = 0;
+	m_noteCombo = 0;
 	m_aNotes.clear();
 	m_wNotes.clear();
 	m_dNotes.clear();
@@ -201,7 +210,7 @@ void NoteGame::update(float deltaTime)
 			m_spawnString[std::rand() % 3] = '1';
 			
 			//randomBinaryStr() + randomBinaryStr() + randomBinaryStr();
-		m_maxDelay = Utility::randomValueBetween(0.25f, 0.5f);
+		m_maxDelay = Utility::randomValueBetween(0.2f, 0.45f);
 	}
 
 	// Check for out of bounds and update
@@ -245,6 +254,8 @@ void NoteGame::update(float deltaTime)
 			++itr;
 	}
 
+	m_comboText.setString(std::to_string(calculateCombo()) + "x");
+
 	m_health = Utility::clampValue<int>(m_health, 0, MaxHealth);
 	m_failBar.setScale(
 		(static_cast<float>(m_health) / static_cast<float>(MaxHealth)) * m_machine.getScreenSize().x,
@@ -254,6 +265,7 @@ void NoteGame::draw()
 {
 	Renderer::instance().drawHUD(m_background);
 	Renderer::instance().drawHUD(m_scoreText);
+	Renderer::instance().drawHUD(m_comboText);
 
 	Renderer::instance().drawHUD(m_baseANote);
 	Renderer::instance().drawHUD(m_baseWNote);
@@ -322,25 +334,28 @@ bool NoteGame::handleDistanceScore(float distance)
 	// Perfect
 	if (distance <= 5)
 	{
+		++m_noteCombo;
 		m_health += 5;
 		createHitText("PERFECT", sf::Color::Green);
-		m_score += 50;
+		m_score += 50 * calculateCombo();
 		return true;
 	}
 	// Good
 	else if (distance <= 15)
 	{
+		++m_noteCombo;
 		m_health += 3;
 		createHitText("GOOD", sf::Color::Cyan);
-		m_score += 20;
+		m_score += 20 * calculateCombo();
 		return true;
 	}
 	// Decent
 	else if (distance <= 50)
 	{
+		++m_noteCombo;
 		m_health += 1;
 		createHitText("DECENT", sf::Color::Yellow);
-		m_score += 5;
+		m_score += 5 * calculateCombo();
 		return true;
 	}
 	else
@@ -349,11 +364,20 @@ bool NoteGame::handleDistanceScore(float distance)
 	}
 }
 
+int NoteGame::calculateCombo()
+{
+	int combo = m_noteCombo / 10;
+	combo = Utility::clampValue(combo, 1, INT_MAX);
+	return combo;
+}
+
 void NoteGame::penalty()
 {
 	createHitText("FAIL", sf::Color::Red);
 	SoundPlayer::instance().playSound("ArcadeFail", m_machine.getScreenPos(), 50.f);
-	m_health -= 10;
+	m_health -= 15;
+
+	m_noteCombo = 0;
 
 	if (m_score < 0)
 		m_score = 0;

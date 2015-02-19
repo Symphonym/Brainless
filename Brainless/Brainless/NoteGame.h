@@ -29,6 +29,8 @@ private:
 	bool validateNoteInput(std::vector<sf::Sprite> &noteList, const sf::Sprite &baseNote);
 	void createHitText(const std::string &text, const sf::Color &color);
 
+	int calculateCombo();
+
 	sf::Sprite m_background;
 
 	sf::Text m_gameOverText;
@@ -36,6 +38,9 @@ private:
 
 	sf::Text m_scoreText;
 	int m_score;
+
+	int m_noteCombo;
+	sf::Text m_comboText;
 
 	float m_noteSpeed;
 

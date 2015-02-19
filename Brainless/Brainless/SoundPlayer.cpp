@@ -39,6 +39,12 @@ void SoundPlayer::stopMusic(const std::string &musicName)
 	ResourceLoader::instance().retrieveMusic(musicName).stop();
 }
 
+void SoundPlayer::killAllSounds()
+{
+	for (auto &sound : m_sounds)
+		sound->stop();
+}
+
 void SoundPlayer::setVolume(float volume)
 {
 	sf::Listener::setGlobalVolume(volume);
