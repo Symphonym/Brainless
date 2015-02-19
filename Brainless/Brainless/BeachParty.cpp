@@ -3,6 +3,7 @@
 #include "ArcadeMachine.h"
 #include "Renderer.h"
 #include "Utility.h"
+#include "SoundPlayer.h"
 
 BeachParty::BeachParty(ArcadeMachine &machine)
 :
@@ -65,6 +66,8 @@ void BeachParty::onGameStart()
 
 void BeachParty::update(float deltaTime)
 {
+	SoundPlayer::instance().update(deltaTime, m_screenPos);
+
 	if (!m_isDead)
 	{
 		m_newPos = sf::Vector2f(0, 0);
@@ -108,6 +111,8 @@ void BeachParty::update(float deltaTime)
 			m_crabs.back().setPosition(randomPos(m_screenPos, m_turtleSprite.getPosition()));
 			m_crabDirections.push_back(true);
 			m_infoShowing = false;
+
+			SoundPlayer::instance().playSound("ArcadeLight2", m_screenPos, 10);
 		}
 		sf::IntRect crabby = m_crabAnimation.getRectangle(deltaTime);
 		for (int i = 0; i < m_crabs.size(); i++)
@@ -146,6 +151,7 @@ void BeachParty::update(float deltaTime)
 			if (abs(m_turtleSprite.getPosition().x - m_crabs[i].getPosition().x) + abs(m_turtleSprite.getPosition().y - m_crabs[i].getPosition().y) < 35)
 			{
 				m_isDead = true;
+				SoundPlayer::instance().playSound("ArcadeFail", m_screenPos, 10);
 			}
 		}
 		m_scoreText.setString("Score: " + std::to_string(m_score));

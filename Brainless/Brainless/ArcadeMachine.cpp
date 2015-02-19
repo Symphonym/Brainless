@@ -9,6 +9,8 @@
 #include "NoteGame.h"
 #include "RobotAkeAttack.h"
 
+#include "SoundPlayer.h"
+
 ArcadeMachine::ArcadeMachine(StateMachine &machine)
 :
 State(machine),
@@ -75,7 +77,10 @@ void ArcadeMachine::events(const sf::Event &event)
 		{
 			// Kill switch for all games
 			if (event.key.code == sf::Keyboard::Escape)
+			{
 				exitGame();
+				SoundPlayer::instance().playSound("ArcadeDark", getScreenPos(), 10);
+			}
 		}
 		else
 		{
@@ -91,12 +96,19 @@ void ArcadeMachine::events(const sf::Event &event)
 				{
 					m_playingGame = true;
 					m_games[m_currentGameIndex]->onGameStart();
+					SoundPlayer::instance().playSound("ArcadeLight", getScreenPos(), 10);
 				}
 			}
 			else if (event.key.code == sf::Keyboard::W)
+			{
 				--m_currentGameIndex;
+				SoundPlayer::instance().playSound("ArcadeMedium", getScreenPos(), 10);
+			}
 			else if (event.key.code == sf::Keyboard::S)
+			{
 				++m_currentGameIndex;
+				SoundPlayer::instance().playSound("ArcadeMedium", getScreenPos(), 10);
+			}
 
 			m_currentGameIndex = Utility::clampValue<std::size_t>(m_currentGameIndex, 0, GameCount - 1);
 		}
@@ -108,6 +120,8 @@ void ArcadeMachine::events(const sf::Event &event)
 }
 void ArcadeMachine::update(float deltaTime)
 {
+	SoundPlayer::instance().update(deltaTime, getScreenPos());
+
 	if (m_playingGame)
 	{
 		m_currentGameText.setString("Playing game: " + m_games[m_currentGameIndex]->getName());
