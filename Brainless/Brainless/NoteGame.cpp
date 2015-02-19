@@ -81,7 +81,7 @@ void NoteGame::events(const sf::Event &event)
 	{
 		if (event.key.code == sf::Keyboard::A)
 			m_baseANote.setScale(1.5f, 1.5f);
-		else if (event.key.code == sf::Keyboard::W)
+		else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S)
 			m_baseWNote.setScale(1.5f, 1.5f);
 		else if (event.key.code == sf::Keyboard::D)
 			m_baseDNote.setScale(1.5f, 1.5f);
@@ -96,7 +96,7 @@ void NoteGame::events(const sf::Event &event)
 				SoundPlayer::instance().playSound("ArcadeLight", m_machine.getScreenPos(), 50.f);
 
 		}
-		else if (event.key.code == sf::Keyboard::W)
+		else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S)
 		{
 			m_baseWNote.setScale(1, 1);
 			if(validateNoteInput(m_wNotes, m_baseWNote))
@@ -331,7 +331,6 @@ void NoteGame::penalty()
 {
 	createHitText("FAIL", sf::Color::Red);
 	SoundPlayer::instance().playSound("ArcadeFail", m_machine.getScreenPos(), 50.f);
-	m_score -= 150;
 	m_health -= 10;
 
 	if (m_score < 0)
