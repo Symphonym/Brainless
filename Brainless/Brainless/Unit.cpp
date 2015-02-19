@@ -312,19 +312,10 @@ bool Unit::updateCollision()
 	if (m_collisionUp > 0 && m_collisionDown > 0)
 		std::cout << "OM DETTA KAN HÄNDA, UTÖKA TILL UP/NER VECTOR" << std::endl;
 
-	//up
-	if (m_collisionUp > m_collisionDown &&
-		m_collisionUp > m_collisionLeft &&
-		m_collisionUp > m_collisionRight)
-	{
-		m_position.y = m_collisionNewPos.y;
-		m_speed.y = m_collisionNewSpeed.y;
-		m_acceleration.y = m_collisionNewAcc.y;
-	}
-	//down
-	else if (m_collisionDown > m_collisionUp &&
+		//down
+	if (m_collisionDown > 0/*m_collisionDown > m_collisionUp &&
 		m_collisionDown > m_collisionLeft &&
-		m_collisionDown > m_collisionRight)
+		m_collisionDown > m_collisionRight*/) //VÄLDIGT EXPERIMENTAL!!!
 	{
 		m_position.y = m_collisionNewPos.y;
 		m_speed.y = m_collisionNewSpeed.y;
@@ -332,6 +323,16 @@ bool Unit::updateCollision()
 		m_inAir = false;
 		m_inTilt = false;
 	}
+	//up
+	else if (m_collisionUp > m_collisionDown &&
+		m_collisionUp > m_collisionLeft &&
+		m_collisionUp > m_collisionRight)
+	{
+		m_position.y = m_collisionNewPos.y;
+		m_speed.y = m_collisionNewSpeed.y;
+		m_acceleration.y = m_collisionNewAcc.y;
+	}
+
 	//left
 	else if (m_collisionLeft > m_collisionDown &&
 		m_collisionLeft > m_collisionUp &&
