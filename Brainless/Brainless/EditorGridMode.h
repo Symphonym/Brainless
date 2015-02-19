@@ -38,6 +38,7 @@ private:
 	void parseAutotilingFile(const std::string &fileName, const std::string &rangeName);
 	std::vector<sf::Vector2i> getAdjacentTileIndices(int centerX, int centerY);
 
+	int m_currentTileIndex;
 	std::vector<Tile::TileTypes> m_tileTypes;
 	Tile m_currentTile; // Selected tile for grid placement
 
