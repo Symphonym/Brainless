@@ -13,7 +13,7 @@ NoteGame::NoteGame(ArcadeMachine &machine)
 ArcadeGame(machine, "Åkes Melodisak"),
 m_gameOver(false),
 m_score(0),
-m_noteSpeed(500),
+m_noteSpeed(350),
 m_curDelay(0),
 m_maxDelay(0),
 m_spawnString("000"),
@@ -67,11 +67,14 @@ void NoteGame::onGameStart()
 {
 	m_gameOver = false;
 	m_health = MaxHealth;
-	m_noteSpeed = 500;
+	m_noteSpeed = 350;
 	m_score = 0;
 	m_aNotes.clear();
 	m_wNotes.clear();
 	m_dNotes.clear();
+	m_baseANote.setScale(1, 1);
+	m_baseWNote.setScale(1, 1);
+	m_baseDNote.setScale(1, 1);
 	m_hitTexts.clear();
 }
 
@@ -184,8 +187,21 @@ void NoteGame::update(float deltaTime)
 		{
 			return std::to_string(std::rand() % 2);
 		};
-		m_spawnString = randomBinaryStr() + randomBinaryStr() + randomBinaryStr();
-		m_maxDelay = Utility::randomValueBetween(0.15f, 0.4f);
+		//m_spawnString =
+			//std::to_string(std::rand() % 2 == 0) +
+			//std::to_string(std::rand() % 5 == 0) +
+			//std::to_string(std::rand() % 3 == 0);
+		m_spawnString = "000";
+		m_spawnString[std::rand() % 3] = '1';
+
+		if (std::rand() % 2 == 0)
+			m_spawnString[std::rand() % 3] = '1';
+
+		if (std::rand() % 5 == 0)
+			m_spawnString[std::rand() % 3] = '1';
+			
+			//randomBinaryStr() + randomBinaryStr() + randomBinaryStr();
+		m_maxDelay = Utility::randomValueBetween(0.25f, 0.5f);
 	}
 
 	// Check for out of bounds and update
