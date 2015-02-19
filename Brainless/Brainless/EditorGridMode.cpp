@@ -38,7 +38,8 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 
 
 	// Add autotiling ranges
-	parseAutotilingFile("autotiling/numbersforblocks.txt", "RoadAutotiling");
+	parseAutotilingFile("autotiling/numbersforRoad.txt", "RoadAutotiling");
+	parseAutotilingFile("autotiling/numbersforWood.txt", "WoodAutotiling");
 	//addAutotilingRange("RoadAutotiling", Tile::Road_Middle,
 	//{
 	//	AutotilingValue(0, Tile::Road_Down)

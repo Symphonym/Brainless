@@ -19,8 +19,7 @@
 +Texture,images/tiles/cubeTilted.png,TiltCube
 +Texture,images/tiles/cubePlatform.png,PlatformCube
 
-#Roads
-
+#---Road---
 # /TopRight
 +Texture,images/tiles/Road/TopRight/Road_Top_Right.png,Road_Top_Right
 +Texture,images/tiles/Road/TopRight/Road_Top_Right_Corner.png,Road_Top_Right_Corner
@@ -94,6 +93,79 @@
 +Texture,images/tiles/Road/Corner/Road_Corner_Not_DownRight.png,Road_Corner_Not_DownRight
 +Texture,images/tiles/Road/Corner/Road_Corner_Full.png,Road_Corner_Full
 
+#---Wood---
+# /TopRight
++Texture,images/tiles/Wood/TopRight/Wood_Top_Right.png,Wood_Top_Right
++Texture,images/tiles/Wood/TopRight/Wood_Top_Right_Corner.png,Wood_Top_Right_Corner
+# /TopLeft
++Texture,images/tiles/Wood/TopLeft/Wood_Top_Left.png,Wood_Top_Left
+#+Texture,images/tiles/Wood/TopLeft/Wood_Top_Left_Short.png,Wood_Top_Left_Short
++Texture,images/tiles/Wood/TopLeft/Wood_Top_Left_Corner.png,Wood_Top_Left_Corner
+
+# /Top
++Texture,images/tiles/Wood/Top/Wood_Top.png,Wood_Top
++Texture,images/tiles/Wood/Top/Wood_Top_Alone.png,Wood_Top_Alone
++Texture,images/tiles/Wood/Top/Wood_Top_Short.png,Wood_Top_Short
++Texture,images/tiles/Wood/Top/Wood_Top_Corner_Left.png,Wood_Top_Corner_Left
++Texture,images/tiles/Wood/Top/Wood_Top_Corner_Right.png,Wood_Top_Corner_Right
++Texture,images/tiles/Wood/Top/Wood_Top_Corner_Full.png,Wood_Top_Corner_Full
+
+# /Right
++Texture,images/tiles/Wood/Right/Wood_Right.png,Wood_Right
++Texture,images/tiles/Wood/Right/Wood_Right_Alone.png,Wood_Right_Alone
++Texture,images/tiles/Wood/Right/Wood_Right_Corner_Down.png,Wood_Right_Corner_Down
++Texture,images/tiles/Wood/Right/Wood_Right_Corner_Top.png,Wood_Right_Corner_Top
++Texture,images/tiles/Wood/Right/Wood_Right_Corner_Full.png,Wood_Right_Corner_Full
+
+# /Middle
++Texture,images/tiles/Wood/Middle/Wood_Middle_Alone.png,Wood_Middle_Alone
++Texture,images/tiles/Wood/Middle/Wood_Middle_Alone_Horizontal.png,Wood_Middle_Alone_Horizontal
++Texture,images/tiles/Wood/Middle/Wood_Middle_Alone_Vertical.png,Wood_Middle_Alone_Vertical
++Texture,images/tiles/Wood/Middle/Wood_Middle.png,Wood_Middle
+
+# /Left
++Texture,images/tiles/Wood/Left/Wood_Left.png,Wood_Left
++Texture,images/tiles/Wood/Left/Wood_Left_Alone.png,Wood_Left_Alone
++Texture,images/tiles/Wood/Left/Wood_Left_Short.png,Wood_Left_Short
++Texture,images/tiles/Wood/Left/Wood_Left_Corner_Down.png,Wood_Left_Corner_Down
++Texture,images/tiles/Wood/Left/Wood_Left_Corner_Top.png,Wood_Left_Corner_Top
++Texture,images/tiles/Wood/Left/Wood_Left_Corner_Full.png,Wood_Left_Corner_Full
+
+# /DownRight
++Texture,images/tiles/Wood/DownRight/Wood_Down_Right.png,Wood_Down_Right
++Texture,images/tiles/Wood/DownRight/Wood_Down_Right_Corner.png,Wood_Down_Right_Corner
+
+# /DownLeft
++Texture,images/tiles/Wood/DownLeft/Wood_Down_Left.png,Wood_Down_Left
++Texture,images/tiles/Wood/DownLeft/Wood_Down_Left_Corner.png,Wood_Down_Left_Corner
+
+# /Down
++Texture,images/tiles/Wood/Down/Wood_Down.png,Wood_Down
++Texture,images/tiles/Wood/Down/Wood_Down_Alone.png,Wood_Down_Alone
++Texture,images/tiles/Wood/Down/Wood_Down_Corner_Left.png,Wood_Down_Corner_Left
++Texture,images/tiles/Wood/Down/Wood_Down_Corner_Right.png,Wood_Down_Corner_Right
++Texture,images/tiles/Wood/Down/Wood_Down_Corner_Full.png,Wood_Down_Corner_Full
+
+# /Special
++Texture,images/tiles/Wood/Special/Wood_Tilt.png,Wood_Tilt
++Texture,images/tiles/Wood/Special/Wood_Tilt_Corner.png,Wood_Tilt_Corner
+
+# /Corner
++Texture,images/tiles/Wood/Corner/Wood_Corner_TopLeft.png,Wood_Corner_TopLeft
++Texture,images/tiles/Wood/Corner/Wood_Corner_TopRight.png,Wood_Corner_TopRight
++Texture,images/tiles/Wood/Corner/Wood_Corner_TopLeft_TopRight.png,Wood_Corner_TopLeft_TopRight
++Texture,images/tiles/Wood/Corner/Wood_Corner_DownLeft.png,Wood_Corner_DownLeft
++Texture,images/tiles/Wood/Corner/Wood_Corner_DownRight.png,Wood_Corner_DownRight
++Texture,images/tiles/Wood/Corner/Wood_Corner_DownLeft_DownRight.png,Wood_Corner_DownLeft_DownRight
++Texture,images/tiles/Wood/Corner/Wood_Corner_TopLeft_DownLeft.png,Wood_Corner_TopLeft_DownLeft
++Texture,images/tiles/Wood/Corner/Wood_Corner_TopRight_DownRight.png,Wood_Corner_TopRight_DownRight
++Texture,images/tiles/Wood/Corner/Wood_Corner_TopLeft_DownRight.png,Wood_Corner_TopLeft_DownRight
++Texture,images/tiles/Wood/Corner/Wood_Corner_TopRight_DownLeft.png,Wood_Corner_TopRight_DownLeft
++Texture,images/tiles/Wood/Corner/Wood_Corner_Not_TopLeft.png,Wood_Corner_Not_TopLeft
++Texture,images/tiles/Wood/Corner/Wood_Corner_Not_TopRight.png,Wood_Corner_Not_TopRight
++Texture,images/tiles/Wood/Corner/Wood_Corner_Not_DownLeft.png,Wood_Corner_Not_DownLeft
++Texture,images/tiles/Wood/Corner/Wood_Corner_Not_DownRight.png,Wood_Corner_Not_DownRight
++Texture,images/tiles/Wood/Corner/Wood_Corner_Full.png,Wood_Corner_Full
 
 ### ITEM TEXTURE LOADING
 +Texture,images/items/ductTape.png,DuctTapeItem
