@@ -28,7 +28,8 @@ Game::Game(StateMachine &machine)
 :
 State(machine),
 m_savedZombies(0),
-m_levelIndex(0)
+m_levelIndex(0),
+m_player(nullptr)
 {
 	m_camera = m_window.getDefaultView();
 
@@ -132,16 +133,24 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 		//Swap sides
 		player_location.x = Utility::clampValue<float>((Constants::MapWidth)*Constants::TileSize - (player_location.x), Constants::TileSize, (Constants::MapWidth - 1)*Constants::TileSize);
 	}
+
+
+	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Level" + std::to_string(m_levelIndex) + ".txt");
+
+	// Save core game data before changing a level, mainly to maintain player data between levels
+	if (m_player != nullptr) // If this is a level change from a menu, the player won't already exist
+		FileSave::saveGameData(*this);
+
+
 	// Reset level
 	m_level.reset();
 	m_levelIndex = levelIndex;
 
-	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Level" + std::to_string(m_levelIndex) + ".txt");
-
-	FileSave::loadMapText(m_level, m_levelIndex);
-	FileSave::loadLevelProgress(m_level, m_levelIndex);
+	// Reload level
+	FileSave::loadMapText(m_level, m_levelIndex); // All tiles are cleared in here
+	FileSave::loadLevelProgress(m_level, m_levelIndex); // All units are cleared from level here
 	FileSave::loadInventory(*m_inventory);
-	m_level.loadLevelResources();
+	m_level.loadLevelResources(); // Load extra stuff such as parallaxing backgrounds
 
 	//Set player to start position
 	if (player_location == sf::Vector2f(-60, -60))
@@ -150,11 +159,14 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 	}
 	// Add player to level
 	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(player_location))));
+	FileSave::loadGameData(*this); // Load core game data for player
 
 	//temp, texture borde laddas in på annat sätt.
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetRun"));
+
+	
 }
 void Game::changeLevelTransition(int levelIndex, bool swapPosition)
 {
@@ -170,6 +182,7 @@ void Game::saveGame()
 {
 	FileSave::saveInventory(*m_inventory);
 	FileSave::saveLevelProgress(m_level, m_levelIndex);
+	FileSave::saveGameData(*this);
 	Notification::instance().write("Game saved successfully!");
 }
 
@@ -184,6 +197,11 @@ Level& Game::getLevel()
 SpiritBar& Game::getSpiritBar()
 {
 	return *m_spiritBar;
+}
+
+int Game::getSavedZombieCount() const
+{
+	return m_savedZombies;
 }
 
 bool Game::inventoryContains(const std::string &itemName)

@@ -20,12 +20,12 @@
 #include "ChasingZombie.h"
 #include "WalkingZombie.h"
 #include "IdleZombie.h"
-
+#include "Game.h"
 #include "Utility.h"
 
 void FileSave::saveMapText(Level &level, int levelNumber)
 {
-	std::ofstream writer("level" + std::to_string(levelNumber) + ".txt");
+	std::ofstream writer("save/level" + std::to_string(levelNumber) + ".txt");
 
 	// First write the player spawn point
 	writer << level.getSpawnPos().x << std::endl;
@@ -96,7 +96,7 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 
 bool FileSave::loadMapText(Level &level, int levelNumber)
 {
-	std::ifstream reader("level" + std::to_string(levelNumber) + ".txt");
+	std::ifstream reader("save/level" + std::to_string(levelNumber) + ".txt");
 
 	if (reader.is_open())
 	{
@@ -233,7 +233,7 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 
 void FileSave::saveInventory(Inventory &inventory)
 {
-	std::ofstream writer("inventory.txt");
+	std::ofstream writer("save/inventory.txt");
 
 	std::vector<const Item*> items = inventory.getInventoryItems();
 	for (std::size_t i = 0; i < items.size(); i++)
@@ -245,12 +245,13 @@ void FileSave::saveInventory(Inventory &inventory)
 }
 bool FileSave::loadInventory(Inventory &inventory)
 {
-	std::ifstream reader("inventory.txt");
+	std::ifstream reader("save/inventory.txt");
 
 	bool opened = false;
 	if (reader.is_open())
 	{
 		opened = true;
+		inventory.emptyInventory();
 
 		std::string line;
 		while (std::getline(reader, line))
@@ -272,7 +273,7 @@ bool FileSave::loadInventory(Inventory &inventory)
 
 void FileSave::saveLevelProgress(Level &level, int levelNumber)
 {
-	std::ofstream writer("game_level" + std::to_string(levelNumber) + ".txt");
+	std::ofstream writer("save/game_level" + std::to_string(levelNumber) + ".txt");
 
 	// Write amount of items and then serialize all items
 	writer << level.getItems().size() << std::endl;
@@ -295,7 +296,7 @@ void FileSave::saveLevelProgress(Level &level, int levelNumber)
 }
 bool FileSave::loadLevelProgress(Level &level, int levelNumber)
 {
-	std::ifstream reader("game_level" + std::to_string(levelNumber) + ".txt");
+	std::ifstream reader("save/game_level" + std::to_string(levelNumber) + ".txt");
 
 	bool opened = false;
 	if (reader.is_open())
@@ -359,17 +360,53 @@ bool FileSave::loadLevelProgress(Level &level, int levelNumber)
 	return opened;
 }
 
+
+void FileSave::saveGameData(Game &game)
+{
+	std::ofstream writer("save/game.txt");
+
+	writer << game.getSavedZombieCount() << std::endl;
+	writer << game.getSpiritBar().getValue() << std::endl;
+	writer << game.getSpiritBar().getMaxValue() << std::endl;
+	writer << game.getPlayer().getHealth() << std::endl;
+
+	writer.close();
+}
+void FileSave::loadGameData(Game &game)
+{
+	std::ifstream reader("save/game.txt");
+	
+	if (reader.is_open())
+	{
+		int savedZombieCount = 0;
+		reader >> savedZombieCount;
+		game.addSavedZombie(savedZombieCount);
+
+		int spiritValue = 0, spiritMax = 0;
+		reader >> spiritValue >> spiritMax;
+		game.getSpiritBar().setMaxValue(spiritMax);
+		game.getSpiritBar().setValue(spiritValue);
+
+		int playerHealth = 0;
+		reader >> playerHealth;
+		game.getPlayer().setHealth(playerHealth);
+	}
+
+	
+	reader.close();
+}
+
 void FileSave::wipeProgress()
 {
 	// Rename the file first so that the game won't misstakenly interact with a non-existing file
-	std::rename("inventory.txt", "inventory_old.txt");
-	std::remove("inventory_old.txt");
+	std::rename("save/inventory.txt", "save/inventory_old.txt");
+	std::remove("save/inventory_old.txt");
 	
 	for (int i = 0; i < 10; i++)
 	{
 
-		std::string levelFile = "game_level" + std::to_string(i) + ".txt";
-		std::string levelFileNew = "game_level" + std::to_string(i) + "_old.txt";
+		std::string levelFile = "save/game_level" + std::to_string(i) + ".txt";
+		std::string levelFileNew = "save/game_level" + std::to_string(i) + "_old.txt";
 		std::rename(levelFile.c_str(), levelFileNew.c_str());
 		std::remove(levelFileNew.c_str());
 	}

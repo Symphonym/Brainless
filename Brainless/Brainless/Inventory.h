@@ -30,6 +30,9 @@ public:
 
 	bool holdingItem() const;
 
+	// Empties the inventory
+	void emptyInventory();
+
 	// Returns a read-only list of all items in the inventory
 	std::vector<const Item*> getInventoryItems() const;
 
