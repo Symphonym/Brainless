@@ -59,7 +59,6 @@ private:
 	void craft();
 	void setCraftingMode(bool enabled);
 	bool m_craftingModeEnabled;
-	sf::Text m_craftText;
 	GuiPtr m_craftButton;
 
 	std::array<std::array<InventoryPair, Constants::InventoryHeight>, Constants::InventoryWidth> m_slots;

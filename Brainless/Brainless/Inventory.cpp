@@ -38,10 +38,6 @@ m_craftingModeEnabled(false)
 		ResourceLoader::instance().retrieveTexture("Crafting_Normal"),
 		ResourceLoader::instance().retrieveTexture("Crafting_Pressed"),
 		sf::Vector2f(10, m_slots[0][0].second.getGlobalBounds().height * Constants::InventoryHeight + 10.f)));
-
-	m_craftText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
-	m_craftText.setString("Crafting Mode");
-	m_craftText.setPosition(250.f - m_craftText.getGlobalBounds().width / 2.f, m_slots[0][0].second.getGlobalBounds().height * Constants::InventoryHeight + 25.f);
 }
 
 void Inventory::addItem(ItemPtr item)
@@ -340,7 +336,6 @@ void Inventory::draw()
 		}
 
 		m_craftButton->draw();
-		Renderer::instance().drawHUD(m_craftText);
 	}
 
 	// Draw selected item on hud or in-game depending on if inventory is open or not
@@ -392,15 +387,11 @@ void Inventory::setCraftingMode(bool enabled)
 
 	if (m_craftingModeEnabled)
 	{
-		m_craftText.setString("Craft");
-		m_craftText.setPosition(250.f - m_craftText.getGlobalBounds().width / 2.f, m_slots[0][0].second.getGlobalBounds().height * Constants::InventoryHeight + 25.f);
 		invRecolor(sf::Color::Green);
 	}
 
 	else
 	{
-		m_craftText.setString("Crafting Mode");
-		m_craftText.setPosition(250.f - m_craftText.getGlobalBounds().width / 2.f, m_slots[0][0].second.getGlobalBounds().height * Constants::InventoryHeight + 25.f);
 		invRecolor(sf::Color::White);
 	}
 }

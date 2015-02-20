@@ -115,6 +115,10 @@ void Game::addSavedZombie(int count)
 {
 	m_savedZombies += count;
 }
+void Game::clearSavedZombies()
+{
+	m_savedZombies = 0;
+}
 
 void Game::lootItem(Inventory::ItemPtr item)
 {

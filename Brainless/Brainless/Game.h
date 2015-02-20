@@ -31,6 +31,7 @@ public:
 
 	// Increment the saved zombie amount
 	void addSavedZombie(int count);
+	void clearSavedZombies();
 
 	// Add item to inventory
 	void lootItem(Inventory::ItemPtr item);
