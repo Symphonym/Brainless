@@ -88,7 +88,7 @@ void ArcadeMachine::events(const sf::Event &event)
 			if (event.key.code == sf::Keyboard::A)
 			{
 				SoundPlayer::instance().killAllSounds();
-				ResourceLoader::instance().unloadResourceFile("loadfiles/ResourceLoad_ArcadeMachine.txt");
+				ResourceLoader::instance().unloadResourceFile("loadfiles/ResourceLoad_ArcadeMachine.txt", false);
 				m_machine.popState();
 			}
 			else if (event.key.code == sf::Keyboard::D)
