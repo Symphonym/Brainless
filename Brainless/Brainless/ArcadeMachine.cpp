@@ -153,8 +153,8 @@ void ArcadeMachine::draw()
 		for (auto &button : m_gameSelectionButtons)
 			Renderer::instance().drawHUD(button);
 
-		/*for (auto &name : m_gameNames)
-			Renderer::instance().drawHUD(name);*/
+		for (auto &name : m_gameNames)
+			Renderer::instance().drawHUD(name);
 	}
 
 	// Screen is drawn above the game, since it's transparent
@@ -169,4 +169,4 @@ sf::Vector2f ArcadeMachine::getScreenPos() const
 sf::Vector2i ArcadeMachine::getScreenSize() const
 {
 	return sf::Vector2i(m_arcadeBackground.getGlobalBounds().width - (580.f), m_arcadeBackground.getGlobalBounds().height - 20.f);
-}
+}o
