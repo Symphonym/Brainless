@@ -71,9 +71,12 @@ sf::Vector2f Item::getPosition() const
 	return m_sprite.getPosition();
 }
 
-void Item::inventoryDraw()
+void Item::inventoryDraw(bool drawInWorldSpace)
 {
-	Renderer::instance().drawHUD(m_inventorySprite);
+	if (drawInWorldSpace)
+		Renderer::instance().drawAbove(m_inventorySprite);
+	else
+		Renderer::instance().drawHUD(m_inventorySprite);
 }
 void Item::draw()
 {

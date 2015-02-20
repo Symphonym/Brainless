@@ -8,11 +8,11 @@
 class Button : public GUIElement
 {
 public:
-	Button(sf::Texture &notPressed, sf::Texture &pressed, const sf::Vector2f &position, sf::RenderWindow *window);
-	Button(sf::Texture &notPressed, sf::Texture &pressed, sf::IntRect placement, sf::RenderWindow *window);
+	Button(sf::Texture &notPressed, sf::Texture &pressed, const sf::Vector2f &position);
+	Button(sf::Texture &notPressed, sf::Texture &pressed, sf::IntRect placement);
 
 	//Checks if the button is pressed and released
-	virtual bool getReleased();
+	virtual bool getReleased(const sf::Vector2i &mousePos);
 	virtual std::string getType();
 
 	virtual void draw();
@@ -24,7 +24,6 @@ private:
 	sf::Texture m_textureNotPressed;
 	sf::Texture m_texturePressed;
 	sf::Sprite m_sprite;
-	sf::RenderWindow *m_window;
 	bool m_buttonIsPressed;
 	bool m_mouseIsPressed;
 };

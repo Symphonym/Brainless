@@ -12,14 +12,12 @@ State(machine)
 	m_buttons[0] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("Resume_Normal"),
 		ResourceLoader::instance().retrieveTexture("Resume_Pressed"),
-		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2),
-		&m_window));
+		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2)));
 
 	m_buttons[1] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("MainMenuBack_Normal"),
 		ResourceLoader::instance().retrieveTexture("MainMenuBack_Pressed"),
-		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2 + 100.f),
-		&m_window));
+		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2 + 100.f)));
 
 	sf::Image bgImage;
 	bgImage.create(m_window.getSize().x, m_window.getSize().y, sf::Color::Color(0,0,0,100));
@@ -30,12 +28,14 @@ State(machine)
 
 void PauseMenu::update(float deltaTime)
 {
+	sf::Vector2i mousePos = sf::Mouse::getPosition(m_machine.getWindow());
+
 	// Resume
-	if (m_buttons[0]->getReleased())
+	if (m_buttons[0]->getReleased(mousePos))
 		m_machine.popState();
 
 	// Back to mainmenu
-	else if (m_buttons[1]->getReleased())
+	else if (m_buttons[1]->getReleased(mousePos))
 	{
 		m_machine.popState(); // Pop pause
 		m_machine.popState(); // Pop game

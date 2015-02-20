@@ -112,11 +112,11 @@ void Editor::saveFile()
 void Editor::loop()
 {
 	// Buttons
-	Button tileButton(ResourceLoader::instance().retrieveTexture("TileButton"), ResourceLoader::instance().retrieveTexture("TileButtonPressed"), sf::IntRect(20, 610, 80, 80), &m_editor);
-	Button spriteButton(ResourceLoader::instance().retrieveTexture("SpriteButton"), ResourceLoader::instance().retrieveTexture("SpriteButtonPressed"), sf::IntRect(120, 610, 80, 80), &m_editor);
-	Button itemButton(ResourceLoader::instance().retrieveTexture("ItemButton"), ResourceLoader::instance().retrieveTexture("ItemButtonPressed"), sf::IntRect(220, 610, 80, 80), &m_editor);
-	Button cameraButton(ResourceLoader::instance().retrieveTexture("CameraButton"), ResourceLoader::instance().retrieveTexture("CameraButtonPressed"), sf::IntRect(320, 610, 80, 80), &m_editor);
-	Button saveButton(ResourceLoader::instance().retrieveTexture("SaveButton"), ResourceLoader::instance().retrieveTexture("SaveButtonPressed"), sf::IntRect(420, 610, 80, 80), &m_editor);
+	Button tileButton(ResourceLoader::instance().retrieveTexture("TileButton"), ResourceLoader::instance().retrieveTexture("TileButtonPressed"), sf::IntRect(20, 610, 80, 80));
+	Button spriteButton(ResourceLoader::instance().retrieveTexture("SpriteButton"), ResourceLoader::instance().retrieveTexture("SpriteButtonPressed"), sf::IntRect(120, 610, 80, 80));
+	Button itemButton(ResourceLoader::instance().retrieveTexture("ItemButton"), ResourceLoader::instance().retrieveTexture("ItemButtonPressed"), sf::IntRect(220, 610, 80, 80));
+	Button cameraButton(ResourceLoader::instance().retrieveTexture("CameraButton"), ResourceLoader::instance().retrieveTexture("CameraButtonPressed"), sf::IntRect(320, 610, 80, 80));
+	Button saveButton(ResourceLoader::instance().retrieveTexture("SaveButton"), ResourceLoader::instance().retrieveTexture("SaveButtonPressed"), sf::IntRect(420, 610, 80, 80));
 	m_isMenu = false;
 
 	sf::Clock tickClock;
@@ -211,26 +211,28 @@ void Editor::loop()
 
 		if (m_isMenu)
 		{
+			sf::Vector2i mousePos = sf::Mouse::getPosition(m_editor);
+
 			// Switch between modes
-			if (tileButton.getReleased() || sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+			if (tileButton.getReleased(mousePos) || sf::Keyboard::isKeyPressed(sf::Keyboard::J))
 			{
 				m_editorMode = EditorModes::Grid;
 			}
-			else if (spriteButton.getReleased() || sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+			else if (spriteButton.getReleased(mousePos) || sf::Keyboard::isKeyPressed(sf::Keyboard::K))
 			{
 				m_editorMode = EditorModes::Sprite;
 			}
-			else if (itemButton.getReleased() || sf::Keyboard::isKeyPressed(sf::Keyboard::L))
+			else if (itemButton.getReleased(mousePos) || sf::Keyboard::isKeyPressed(sf::Keyboard::L))
 			{
 				m_editorMode = EditorModes::Item;
 			}
-			else if (cameraButton.getReleased())
+			else if (cameraButton.getReleased(mousePos))
 			{
 				sf::Vector2f curCenter = m_camera.getCenter();
 				m_camera = m_editor.getDefaultView();
 				m_camera.setCenter(curCenter);
 			}
-			else if (saveButton.getReleased())
+			else if (saveButton.getReleased(mousePos))
 			{
 				saveFile();
 				m_saveText.setString("File is saved!");

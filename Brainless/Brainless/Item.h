@@ -60,7 +60,7 @@ public:
 
 	// Extra draw function that is only called when item is held in inventory
 	virtual void heldDraw() {};
-	virtual void inventoryDraw(); // Draws the inventory sprite instead
+	virtual void inventoryDraw(bool drawInWorldSpace = false); // Draws the inventory sprite instead
 	virtual void draw();
 
 	virtual sf::Vector2f getSpeed() const;
