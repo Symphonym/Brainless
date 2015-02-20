@@ -48,6 +48,7 @@ public:
 	Player& getPlayer();
 	Level& getLevel();
 	SpiritBar& getSpiritBar();
+	int getSavedZombieCount() const;
 
 	// Check if the inventory contains a specific item
 	bool inventoryContains(const std::string &itemName);

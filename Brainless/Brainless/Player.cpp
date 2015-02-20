@@ -43,6 +43,14 @@ void Player::setClimbing(bool climbing)
 	m_isMovementEnabled = !climbing;
 }
 
+void Player::setHealth(int health)
+{
+	m_hp = health;
+
+	if (m_hp >= m_maxHp)
+		m_hp = m_maxHp;
+}
+
 /*
 	Updates/executes all input and calculates new states
 */

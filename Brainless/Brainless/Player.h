@@ -21,6 +21,8 @@ public:
 
 	void takesDamage(sf::Vector2f collisionPos);
 
+	void setHealth(int health);
+
 	int getHealth();
 	int getMaxHealth();
 
