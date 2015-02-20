@@ -72,7 +72,6 @@ void BeachParty::onGameStart()
 
 void BeachParty::update(float deltaTime)
 {
-	SoundPlayer::instance().update(deltaTime, m_screenPos);
 
 	if (!m_isDead)
 	{
