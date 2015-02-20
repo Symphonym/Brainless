@@ -25,6 +25,12 @@
 +Texture,images/arcade/hand1.png,hand1
 +Texture,images/arcade/hand2.png,hand2
 
+# ÅKES RPG SAK
++Texture,images/arcade/grassTile.png,ArcadeGrassTile
++Texture,images/arcade/rpgEnemy.png,ArcadeRpgEnemy
++Texture,images/arcade/rpgPlayer.png,ArcadeRpgPlayer
++Texture,images/arcade/rpgShield.png,ArcadeRpgShield
+
 # SOUNDS
 +Sound,sounds/Arkad_v1.wav,ArcadeFail
 +Sound,sounds/Arkad_v2.wav,ArcadeLight

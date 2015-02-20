@@ -9,6 +9,7 @@
 
 #include "NoteGame.h"
 #include "RobotAkeAttack.h"
+#include "RpgGame.h"
 
 #include "SoundPlayer.h"
 
@@ -30,6 +31,9 @@ m_playingGame(false)
 	m_games[0] = GamePtr(new BeachParty(*this));
 	m_games[1] = GamePtr(new NoteGame(*this));
 	m_games[2] = GamePtr(new RobotAkeAttack(*this));
+	m_games[3] = GamePtr(new RpgGame(*this));
+	//m_games[2] = GamePtr(new ...);
+	//m_games[3] = GamePtr(new ...);
 
 	m_games[4] = GamePtr(new Boop(*this));
 	//m_games[4] = GamePtr(new ...);
