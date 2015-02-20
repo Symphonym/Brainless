@@ -15,8 +15,8 @@ ArcadeGame(machine, "World of Åkecraft")
 			Tile &tile = m_tiles[x][y];
 			tile.sprite.setTexture(ResourceLoader::instance().retrieveTexture("ArcadeGrassTile"));
 			tile.sprite.setPosition(
-				m_machine.getScreenPos().x + 10.f + x*tile.sprite.getGlobalBounds().width,
-				m_machine.getScreenPos().y + 10.f + y*tile.sprite.getGlobalBounds().height);
+				m_machine.getScreenPos().x + x*tile.sprite.getGlobalBounds().width,
+				m_machine.getScreenPos().y + y*tile.sprite.getGlobalBounds().height);
 			tile.unit = nullptr;
 		}
 	}
@@ -144,13 +144,16 @@ void RpgGame::placeUnitOnTile(RpgGame::TileUnit *unit, int x, int y)
 	unit->x = x;
 	unit->y = y;
 	unit->sprite.setPosition(
-		m_machine.getScreenPos().x + 10.f + x*tile.sprite.getGlobalBounds().width + tile.sprite.getGlobalBounds().width / 2.f - unit->sprite.getGlobalBounds().width / 2.f,
-		m_machine.getScreenPos().y + 10.f + y*tile.sprite.getGlobalBounds().height + +tile.sprite.getGlobalBounds().height / 2.f - unit->sprite.getGlobalBounds().height / 2.f);
+		m_machine.getScreenPos().x + 10.f + x*tile.sprite.getGlobalBounds().width + tile.sprite.getGlobalBounds().width / 2.f,
+		m_machine.getScreenPos().y + 10.f + y*tile.sprite.getGlobalBounds().height + +tile.sprite.getGlobalBounds().height / 2.f);
 }
 RpgGame::TileUnit& RpgGame::spawnUnit(const std::string &textureName)
 {
 	UnitPtr unit = UnitPtr(new TileUnit());
 	unit->sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
+	unit->sprite.setOrigin(
+		unit->sprite.getGlobalBounds().width / 2.f,
+		unit->sprite.getGlobalBounds().height / 2.f);
 	unit->x = -1;
 	unit->y = -1;
 
@@ -198,8 +201,9 @@ void RpgGame::removeUnit(TileUnit *unit)
 {
 	ParticleSystem::instance().addParticles(50,
 		sf::Vector2f(
-		unit->sprite.getPosition().x + unit->sprite.getGlobalBounds().width / 2.f,
-		unit->sprite.getPosition().y + unit->sprite.getGlobalBounds().height / 2.f), sf::Color::Red);
+			unit->sprite.getPosition().x,
+			unit->sprite.getPosition().y), 
+		sf::Color::Red);
 
 	m_tiles[unit->x][unit->y].unit = nullptr;
 	for (std::size_t i = 0; i < m_units.size(); i++)
