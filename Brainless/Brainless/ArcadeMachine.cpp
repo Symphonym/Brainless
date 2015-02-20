@@ -157,8 +157,8 @@ void ArcadeMachine::draw()
 		for (auto &button : m_gameSelectionButtons)
 			Renderer::instance().drawHUD(button);
 
-		/*for (auto &name : m_gameNames)
-			Renderer::instance().drawHUD(name);*/
+		for (auto &name : m_gameNames)
+			Renderer::instance().drawHUD(name);
 	}
 
 	// Screen is drawn above the game, since it's transparent
