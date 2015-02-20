@@ -2,7 +2,7 @@
 
 HammerItem::HammerItem(int id)
 :
-Item("Hammer", "HammerItem", id)
+Item("Hammer","HammerItem", "HammerItem", id)
 {
 	m_lootable = true;
 	m_examineString = "It's a hammer, the best tool of them all";

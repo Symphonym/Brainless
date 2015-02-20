@@ -3,7 +3,7 @@
 #include "Renderer.h"
 #include "Constants.h"
 
-Item::Item(const std::string &itemName, const std::string &textureName, int id, const Combinations &combineData)
+Item::Item(const std::string &itemName, const std::string &inventoryTextureName, const std::string &textureName, int id, const Combinations &combineData)
 :
 m_lootable(false),
 m_usable(false),
@@ -23,6 +23,7 @@ m_combinations(combineData),
 m_speed(sf::Vector2f(0,0))
 {
 	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
+	m_inventorySprite.setTexture(ResourceLoader::instance().retrieveTexture(inventoryTextureName));
 }
 
 void Item::addCombination(int targetID, int productID, bool consumedOnCombine)
@@ -62,6 +63,7 @@ void Item::deserialize(std::ifstream &reader)
 void Item::setPosition(const sf::Vector2f &pos)
 {
 	m_sprite.setPosition(pos);
+	m_inventorySprite.setPosition(pos);
 	onPositionChanged();
 }
 sf::Vector2f Item::getPosition() const
@@ -69,6 +71,10 @@ sf::Vector2f Item::getPosition() const
 	return m_sprite.getPosition();
 }
 
+void Item::inventoryDraw()
+{
+	Renderer::instance().drawHUD(m_inventorySprite);
+}
 void Item::draw()
 {
 	if (m_renderingMode == RenderingModes::Above)
@@ -82,6 +88,10 @@ void Item::draw()
 sf::Sprite& Item::getSprite()
 {
 	return m_sprite;
+}
+sf::Sprite& Item::getInventorySprite()
+{
+	return m_inventorySprite;
 }
 std::string Item::getName() const
 {
@@ -152,7 +162,7 @@ sf::Vector2f Item::getSpeed() const
 
 DefaultItem::DefaultItem(const std::string &textureName, int id, const Item::Combinations &combineData)
 :
-Item("DefaultItem", textureName, id, combineData)
+Item("DefaultItem", textureName, "DEFAULT_INVENTORY_NAME", id, combineData)
 {
 	m_lootable = true;
 };

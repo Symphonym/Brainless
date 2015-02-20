@@ -3,7 +3,7 @@
 
 CarBatteryItem::CarBatteryItem(int id)
 :
-Item("Car Battery", "CarBatteryItem", id)
+Item("Car Battery","CarBatteryInv", "CarBatteryItem", id)
 {
 	m_lootable = true;
 	m_examineString = "It's a working car battery";

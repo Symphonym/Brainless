@@ -2,9 +2,9 @@
 #include "Notification.h"
 #include "Constants.h"
 
-PokableItem::PokableItem(const std::string &itemName, const std::string &textureName, int id)
+PokableItem::PokableItem(const std::string &itemName, const std::string &inventoryTextureName, const std::string &textureName, int id)
 :
-Item(itemName, textureName, id)
+Item(itemName,inventoryTextureName, textureName, id)
 {
 
 }

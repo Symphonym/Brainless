@@ -3,7 +3,7 @@
 
 CoinTwineItem::CoinTwineItem(int id)
 :
-Item("String & Coin", "CoinTwineItem", id)
+Item("String & Coin","CoinTwineInv", "CoinTwineItem", id)
 {
 	m_lootable = true;
 }

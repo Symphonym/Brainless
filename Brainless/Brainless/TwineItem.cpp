@@ -2,7 +2,7 @@
 
 TwineItem::TwineItem(int id)
 :
-Item("Twine", "TwineItem", id)
+Item("Twine","TwineInv", "TwineItem", id)
 {
 	m_lootable = true;
 	addCombination(3, 11, true);

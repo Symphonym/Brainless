@@ -3,7 +3,7 @@
 
 MovingPlatformItem::MovingPlatformItem(sf::Vector2f speed, float maxDistance, int id)
 :
-Item("MovingPlatform", "MovingPlatform", id),
+Item("MovingPlatform","MovingPlatform", "MovingPlatform", id),
 m_speed(speed),
 m_maxDistanceMoved(maxDistance),
 m_isActive(true)

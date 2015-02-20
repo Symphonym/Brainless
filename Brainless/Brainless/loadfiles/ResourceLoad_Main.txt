@@ -168,26 +168,26 @@
 +Texture,images/tiles/Wood/Corner/Wood_Corner_Full.png,Wood_Corner_Full
 
 ### ITEM TEXTURE LOADING
-+Texture,images/items/ductTape.png,DuctTapeItem
-+Texture,images/items/rubberGloves.png,RubberGlovesItem
++Texture,images/items/Small-Duct tape.png,DuctTapeItem
++Texture,images/items/Small-Rubber Glove.png,RubberGlovesItem
 +Texture,images/items/vendingMachine.png,VendingMachineItem1
-+Texture,images/items/coin.png,CoinItem
-+Texture,images/items/twine.png,TwineItem
++Texture,images/items/Small-Coins.png,CoinItem
++Texture,images/items/Small-Twine.png,TwineItem
 +Texture,images/items/coinTwine.png,CoinTwineItem
 +Texture,images/items/keyTwine.png,KeyTwineItem
 +Texture,images/items/Window2.png,WindowWholeItem
 +Texture,images/items/Window1.png,WindowSmashedItem
-+Texture,images/items/stone.png,StoneItem
-+Texture,images/items/lighter.png,LighterItem
-+Texture,images/items/stickItem.png,StickItem
++Texture,images/items/Small-Stone.png,StoneItem
++Texture,images/items/Small-Lighter.png,LighterItem
++Texture,images/items/Small-Stick.png,StickItem
 +Texture,images/items/doubleStickItem.png,DoubleStickItem
 +Texture,images/items/longStickItem.png,LongStickItem
-+Texture,images/items/cableItem.png,CableItem
++Texture,images/items/Small-Cables.png,CableItem
 +Texture,images/items/brainItem.png,BrainItem
-+Texture,images/items/aaBattery.png,AABatteryItem
-+Texture,images/items/carBattery.png,CarBatteryItem
++Texture,images/items/Small-AA Battery.png,AABatteryItem
++Texture,images/items/Small-Car battery.png,CarBatteryItem
 +Texture,images/items/ductTapedBattery.png,DuctTapeBatteryItem
-+Texture,images/items/hammerItem.png,HammerItem
++Texture,images/items/Small-Hammer.png,HammerItem
 +Texture,images/items/thorsHammerItem.png,ThorsHammerItem
 +Texture,images/items/arcadeMachine.png,ArcadeMachineItem
 
@@ -197,13 +197,38 @@
 +Texture,images/items/craftedTomteTwo.png,TestItem4
 +Texture,images/items/testBarrel.png,TestItem5
 
+# INVENTORY ITEM
++Texture,images/items/AA Batteries.png,AABatteriesInv
++Texture,images/items/Bottle.png,BottleInv
++Texture,images/items/Bottle-Water.png,BottleWaterInv
++Texture,images/items/Can.png,CanInv
++Texture,images/items/Car Battery.png,CarBatteryInv
++Texture,images/items/Coins.png,CoinsInv
++Texture,images/items/Gum.png,GumInv
++Texture,images/items/Gum-sh.png,GumChewedInv
++Texture,images/items/Key.png,KeyInv
++Texture,images/items/Lighter.png,LighterInv
++Texture,images/items/Magnifying glass.png,MagnifyingGlassInv
++Texture,images/items/Nails.png,NailsInv
++Texture,images/items/Newspapper.png,NewspapperInv
++Texture,images/items/Plastic Bag.png,PlasticBagInv
++Texture,images/items/Rubber Glove.png,RubberGloveInv
++Texture,images/items/Snack.png,SnackInv
++Texture,images/items/Stone.png,StoneInv
++Texture,images/items/Twine.png,TwineInv
++Texture,images/items/Coint-hook.png,CoinTwineInv
++Texture,images/items/Hook.png,HookInv
++Texture,images/items/Long-Stick.png,LongStickInv
++Texture,images/items/Stuffed Bag.png,StuffedBagInv
++Texture,images/items/Thor's-Hammer.png,MjolnirInv
+
 # GHOST TEST ITEM
 +Texture,images/items/ghostTest.png,GhostTest
 
 # DOOR TEST ITEM
 +Texture,images/items/doorOpen.png,DoorOpen
 +Texture,images/items/doorClosed.png,DoorClosed
-+Texture,images/items/keyTest.png,KeyTest
++Texture,images/items/Small-Key.png,KeyTest
 
 # CHEST TEST ITEM
 +Texture,images/items/chestOpen.png,ChestOpen
@@ -213,7 +238,7 @@
 +Texture,images/items/ladderTest.png,LadderTest
 
 # MAGNIFYING GLASS TEST ITEM
-+Texture,images/items/magnifyingGlassTest.png,MagnifyingGlass
++Texture,images/items/Small-Magnifying glass.png,MagnifyingGlass
 
 # TEST MAGNIFYING GLASS BG
 +Texture,images/UI/magnifyingBGTest.png,MagnifyingGlassBG

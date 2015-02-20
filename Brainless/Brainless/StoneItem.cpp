@@ -2,7 +2,7 @@
 
 StoneItem::StoneItem(int id)
 :
-Item("Stone", "StoneItem", id)
+Item("Stone","StoneInv", "StoneItem", id)
 {
 	m_lootable = true;
 	m_examineString = "It's a stone, usable for smashing things";

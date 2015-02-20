@@ -2,7 +2,7 @@
 
 BrainItem::BrainItem(int id)
 :
-Item("Brain", "BrainItem", id)
+Item("Brain","BrainItem", "BrainItem", id)
 {
 	m_lootable = true;
 	m_examineString = "It's a brain, most likely belonging to one of the zombies";

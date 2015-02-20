@@ -5,7 +5,7 @@
 
 ArcadeMachineItem::ArcadeMachineItem(int id)
 :
-Item("Arcade Machine", "ArcadeMachineItem", id)
+Item("Arcade Machine","ArcadeMachineItem", "ArcadeMachineItem", id)
 {
 	m_examineString = "It's an arcade machine, it appears to be in working condition";
 	m_pickupString = "It's too heavy for me to carry";

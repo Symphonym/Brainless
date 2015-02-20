@@ -4,7 +4,7 @@
 
 VendingMachineItem::VendingMachineItem(const std::string &textureName, const IdVector &itemsWithin, int id)
 :
-Item("Vending Machine", textureName, id),
+Item("Vending Machine",textureName, textureName, id),
 m_itemsWithin(itemsWithin)
 {
 	m_usable = true;

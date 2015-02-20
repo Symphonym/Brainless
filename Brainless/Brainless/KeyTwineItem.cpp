@@ -2,7 +2,7 @@
 
 KeyTwineItem::KeyTwineItem(int id)
 :
-Item("Key & String", "KeyTwineItem", id)
+Item("Key & String","HookInv", "KeyTwineItem", id)
 {
 	m_lootable = true;
 	m_examineString = "It's a key attached to a string";

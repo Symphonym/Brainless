@@ -7,7 +7,7 @@ class KeyItem : public Item
 {
 public:
 
-	KeyItem(const std::string &textureName, int id);
+	KeyItem(int id);
 
 	virtual bool onInteract(Item &otherItem, Game &game);
 

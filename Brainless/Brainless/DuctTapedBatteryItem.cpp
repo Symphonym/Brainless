@@ -2,7 +2,7 @@
 
 DuctTapedBatteryItem::DuctTapedBatteryItem(int id)
 :
-Item("AA Battery & Duct Tape", "DuctTapeBatteryItem", id)
+Item("AA Battery & Duct Tape","DuctTapeBatteryItem", "DuctTapeBatteryItem", id)
 {
 	m_lootable = true;
 	m_examineString = "It's an AA battery with duct tape. It's ready to be attached to things.";

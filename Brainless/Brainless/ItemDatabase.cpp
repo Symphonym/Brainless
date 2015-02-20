@@ -39,7 +39,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new TwineItem(4)));
 	addItem(ItemPtr(new GhostItem("dialog.txt", 5)));
 	addItem(ItemPtr(new DoorItem(true, 6))); // Locked door
-	addItem(ItemPtr(new KeyItem("KeyTest", 7))); // Key to said door
+	addItem(ItemPtr(new KeyItem(7))); // Key to said door
 	addItem(ItemPtr(new ChestItem(false, { 0, 2, 7 }, 8)));
 	addItem(ItemPtr(new LadderItem("LadderTest", 9)));
 	addItem(ItemPtr(new MagnifyingGlassItem(10)));

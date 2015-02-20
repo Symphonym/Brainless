@@ -7,7 +7,7 @@ class ConductingItem : public Item
 {
 public:
 
-	ConductingItem(const std::string &itemName, const std::string &textureName, int id);
+	ConductingItem(const std::string &itemName, const std::string &inventoryTextureName, const std::string &textureName, int id);
 
 	virtual void onUse(Game &game) final;
 

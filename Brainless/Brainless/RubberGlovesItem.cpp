@@ -2,7 +2,7 @@
 
 RubberGlovesItem::RubberGlovesItem(int id)
 :
-Item("Rubber Gloves", "RubberGlovesItem", id)
+Item("Rubber Gloves","RubberGloveInv", "RubberGlovesItem", id)
 {
 	m_lootable = true;
 
