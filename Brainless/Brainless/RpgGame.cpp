@@ -227,7 +227,7 @@ void RpgGame::tickEnemies()
 
 		std::vector<sf::Vector2i> adjacents = getAdjacentIndices(unit->x, unit->y);
 
-		bool hasAttacked = false;
+		/*bool hasAttacked = false;
 		for (auto &adjacentIndex : adjacents)
 		{
 			Tile &tile = m_tiles[adjacentIndex.x][adjacentIndex.y];
@@ -238,10 +238,10 @@ void RpgGame::tickEnemies()
 				hasAttacked = true;
 				break;
 			}
-		}
+		}*/
 
-		if (!hasAttacked)
-		{
+		//if (!hasAttacked)
+		//{
 			int moveDirection = std::rand() % 4;
 
 			// Move to the left
@@ -259,12 +259,12 @@ void RpgGame::tickEnemies()
 			// Move down
 			if (moveDirection == 3 && canMove(unit->x, unit->y + 1))
 				placeUnitOnTile(unit.get(), unit->x, unit->y + 1);
-		}
+		//}
 	}
 
-	if (killPlayer)
-	{
-		removeUnit(m_player);
-		m_player = nullptr;
-	}
+	//if (killPlayer)
+	//{
+	//	removeUnit(m_player);
+	//	m_player = nullptr;
+	//}
 }
