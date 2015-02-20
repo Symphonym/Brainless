@@ -506,9 +506,6 @@
     <ClInclude Include="KeyTwineItem.h">
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
-    <ClInclude Include="WindowItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
     <ClInclude Include="StoneItem.h">
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
@@ -595,6 +592,9 @@
     </ClInclude>
     <ClInclude Include="Boop.h">
       <Filter>Source Files\Game\ArcadeGame</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowItem.h">
+      <Filter>Source Files\State Machine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

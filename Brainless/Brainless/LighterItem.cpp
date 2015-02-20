@@ -4,7 +4,7 @@
 
 LighterItem::LighterItem(int id)
 :
-Item("Lighter", "LighterItem", id)
+Item("Lighter","LighterInv", "LighterItem", id)
 {
 	m_lootable = true;
 	m_examineString = "It's a lighter, greate for illuminating dark places.";

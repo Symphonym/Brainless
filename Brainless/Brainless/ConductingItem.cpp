@@ -2,9 +2,9 @@
 #include "Notification.h"
 #include "Game.h"
 
-ConductingItem::ConductingItem(const std::string &itemName, const std::string &textureName, int id)
+ConductingItem::ConductingItem(const std::string &itemName, const std::string &inventoryTextureName, const std::string &textureName, int id)
 :
-Item(itemName, textureName, id),
+Item(itemName,inventoryTextureName, textureName, id),
 m_conducting(true)
 {
 

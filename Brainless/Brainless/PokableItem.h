@@ -7,7 +7,7 @@ class PokableItem : public Item
 {
 public:
 
-	PokableItem(const std::string &itemName, const std::string &textureName, int id);
+	PokableItem(const std::string &itemName, const std::string &inventoryTextureName, const std::string &textureName, int id);
 
 	virtual bool onInteractedWith(Item &otherItem, Game &game);
 

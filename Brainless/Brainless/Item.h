@@ -30,7 +30,7 @@ public:
 	};
 
 	// TODO Item needs clone functionality, prototype pattern, if we want to be able to inherit from item
-	explicit Item(const std::string &itemName, const std::string &textureName, int id, const Combinations &combineData = {});
+	explicit Item(const std::string &itemName, const std::string &inventoryTextureName, const std::string &textureName, int id, const Combinations &combineData = {});
 
 	
 	// Updated when the item is held, when picked up from the inventory
@@ -60,6 +60,7 @@ public:
 
 	// Extra draw function that is only called when item is held in inventory
 	virtual void heldDraw() {};
+	virtual void inventoryDraw(); // Draws the inventory sprite instead
 	virtual void draw();
 
 	virtual sf::Vector2f getSpeed() const;
@@ -70,6 +71,7 @@ public:
 	sf::Vector2f getPosition() const;
 
 	sf::Sprite& getSprite();
+	sf::Sprite& getInventorySprite();
 	
 	std::string getName() const;
 	int getID() const;
@@ -110,6 +112,7 @@ private:
 	sf::Vector2f m_speed;
 	std::string m_itemName;
 	sf::Sprite m_sprite;
+	sf::Sprite m_inventorySprite;
 	int m_id; // Unique identifier for the item
 	int m_syncID; // ID to connect the item to other items
 	std::string m_description;

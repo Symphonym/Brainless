@@ -295,10 +295,10 @@ void Inventory::draw()
 
 				if (m_slots[x][y].first)
 				{
-					sf::Sprite &itemSprite = m_slots[x][y].first->getSprite();
-					itemSprite.setPosition(
+					sf::Sprite &itemSprite = m_slots[x][y].first->getInventorySprite();
+					m_slots[x][y].first->setPosition(sf::Vector2f(
 						slotSprite.getPosition().x + slotSprite.getGlobalBounds().width / 2.f - itemSprite.getGlobalBounds().width / 2.f,
-						slotSprite.getPosition().y + slotSprite.getGlobalBounds().height / 2.f - itemSprite.getGlobalBounds().height / 2.f);
+						slotSprite.getPosition().y + slotSprite.getGlobalBounds().height / 2.f - itemSprite.getGlobalBounds().height / 2.f));
 
 					// Draw item
 					Renderer::instance().drawHUD(itemSprite);

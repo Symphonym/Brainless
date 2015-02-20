@@ -3,7 +3,7 @@
 
 AABatteryItem::AABatteryItem(int id)
 :
-Item("AA Battery", "AABatteryItem", id)
+Item("AA Battery","AABatteriesInv", "AABatteryItem", id)
 {
 	m_lootable = true;
 	m_examineString = "It's an AA battery. It appears to have some power left";

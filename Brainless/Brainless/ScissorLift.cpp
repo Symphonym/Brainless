@@ -4,7 +4,7 @@
 
 ScissorLiftItem::ScissorLiftItem(sf::Vector2f speed, float maxDistance, int id)
 :
-Item("ScissorLift", "liftBottom", id),
+Item("ScissorLift","liftBottom", "liftBottom", id),
 m_speed(speed),
 m_maxDistanceMoved(maxDistance),
 m_isActive(true),

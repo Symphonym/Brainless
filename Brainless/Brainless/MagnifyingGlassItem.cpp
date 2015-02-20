@@ -5,7 +5,7 @@
 
 MagnifyingGlassItem::MagnifyingGlassItem(int id)
 :
-Item("Magnifying Glass", "MagnifyingGlass", id)
+Item("Magnifying Glass","MagnifyingGlassInv", "MagnifyingGlass", id)
 {
 	m_lootable = true;
 	m_usable = false;

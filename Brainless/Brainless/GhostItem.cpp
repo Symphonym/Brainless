@@ -6,7 +6,7 @@
 
 GhostItem::GhostItem(const std::string &dialogFile, int id)
 :
-Item("Ghost", "GhostTest", id)
+Item("Ghost","GhostTest", "GhostTest", id)
 {
 	m_dialog.loadDialogFile(dialogFile);
 

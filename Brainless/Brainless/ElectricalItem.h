@@ -13,7 +13,7 @@ public:
 		Car = 1
 	};
 
-	EletricalItem(const std::string &itemName, const std::string &textureName, int id);
+	EletricalItem(const std::string &itemName, const std::string &inventoryTextureName, const std::string &textureName, int id);
 
 	virtual void onUse(Game &game) final;
 	virtual void onUseOn(Game &game) {};
