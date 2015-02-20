@@ -9,7 +9,6 @@
 
 struct tort;
 struct pillar;
-struct star;
 
 class RobotAkeAttack : public ArcadeGame
 {
@@ -26,25 +25,31 @@ public:
 private:
 	
 	//Variables
-	int m_score;
-	float m_timer = 0;
-	float m_gameOver_timer = 0;
-	float m_speed;
-	const float c_gravity = 900;
 	sf::Vector2f m_gamePos;
-	sf::Sprite hitbox;
+	sf::Text m_scoreText;
+	float m_score;
 
+	float m_timer = 0;
+	bool m_gameOver = false;
+	float m_speed;
+
+	const float c_gravity = 900;
+	
 	//player
 	tort* m_player;
+	sf::Sprite hitbox;
 
 	//Objects
 	std::vector<pillar*> m_pillars;
 	std::vector<sf::Sprite*> m_stars;
+	std::vector<sf::Text> m_texts;
+	const int c_starSize = 64;
 
 	//Visuall
 	sf::Sprite m_backgrounds[1];
 	//Functions
-	pillar* createPillar(int type, sf::Vector2f position);
+	pillar* createPillar(int type, sf::Vector2f position,bool star);
+	void createStar(sf::Vector2f position);
 };
 
 #endif
