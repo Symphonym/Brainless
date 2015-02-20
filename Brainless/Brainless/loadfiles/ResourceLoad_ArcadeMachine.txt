@@ -19,6 +19,9 @@
 +Texture,images/arcade/spr_star.png,spr_star
 +Texture,images/arcade/bc_sky.png,bc_sky
 +Texture,images/arcade/pillar_1.png,pillar1
++Texture,images/arcade/pillar_2.png,pillar2
++Texture,images/arcade/pillar_3.png,pillar3
+
 
 
 # BOOP
