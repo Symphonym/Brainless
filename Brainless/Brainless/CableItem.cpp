@@ -2,7 +2,7 @@
 
 CableItem::CableItem(int id)
 :
-Item("Cable","CableItem", "CableItem", id)
+Item("Cable","CablesInv", "CableItem", id)
 {
 	m_lootable = true;
 	m_examineString = "It's an electrical cable, it appears to be in working condition";

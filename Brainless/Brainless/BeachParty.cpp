@@ -121,7 +121,7 @@ void BeachParty::update(float deltaTime)
 			m_crabDirections.push_back(true);
 			m_infoShowing = false;
 
-			SoundPlayer::instance().playSound("ArcadeLight2", m_screenPos, 10);
+			SoundPlayer::instance().playSound("ArcadeLight", m_screenPos, 20);
 		}
 		sf::IntRect crabby = m_crabAnimation.getRectangle(deltaTime);
 		for (int i = 0; i < m_crabs.size(); i++)
@@ -166,7 +166,7 @@ void BeachParty::update(float deltaTime)
 			if (m_rects[0].intersects(m_rects[i + 1]) && abs(m_turtleSprite.getPosition().x - m_crabs[i].getPosition().x) + abs(m_turtleSprite.getPosition().y - m_crabs[i].getPosition().y) < 40)
 			{
 				m_isDead = true;
-				SoundPlayer::instance().playSound("ArcadeFail", m_screenPos, 10);
+				SoundPlayer::instance().playSound("ArcadeFail", m_screenPos, 20);
 			}
 		}
 		m_scoreText.setString("Score: " + std::to_string(m_score));

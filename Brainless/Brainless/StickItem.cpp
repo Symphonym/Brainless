@@ -2,7 +2,7 @@
 
 StickItem::StickItem(int id)
 :
-Item("Stick","StickItem", "StickItem", id)
+Item("Stick","StickInv", "StickItem", id)
 {
 	m_lootable = true;
 	m_examineString = "It's a pretty short stick";

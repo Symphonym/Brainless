@@ -45,7 +45,7 @@ m_newGameConfirmWindow(false)
 		&m_window));
 
 	//Play music
-	SoundPlayer::instance().playMusic("MenuMusic",true);
+	SoundPlayer::instance().playMusic("MenuMusic",true,20);
 }
 
 void MainMenu::update(float deltaTime)
