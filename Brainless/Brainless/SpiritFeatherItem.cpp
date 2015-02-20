@@ -9,7 +9,7 @@
 
 SpiritFeatherItem::SpiritFeatherItem(int id)
 :
-Item("Spirit Feather", "SpiritFeather", id),
+Item("Spirit Feather","SpiritFeather", "SpiritFeather", id),
 m_animation(100,100)
 {
 	m_collisionSize = sf::Vector2f(40, 100);

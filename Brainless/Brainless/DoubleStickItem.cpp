@@ -4,7 +4,7 @@
 
 DoubleStickItem::DoubleStickItem(int id)
 :
-Item("Two Sticks", "DoubleStickItem", id)
+Item("Two Sticks","DoubleStickItem", "DoubleStickItem", id)
 {
 	m_lootable = true;
 	m_examineString = "It's two sticks";

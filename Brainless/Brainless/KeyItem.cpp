@@ -1,9 +1,9 @@
 #include "KeyItem.h"
 
 
-KeyItem::KeyItem(const std::string &textureName, int id)
+KeyItem::KeyItem(int id)
 :
-Item("Key", textureName, id)
+Item("Key","KeyInv", "KeyTest", id)
 {
 	m_lootable = true;
 

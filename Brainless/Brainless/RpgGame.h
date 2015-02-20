@@ -41,7 +41,6 @@ private:
 	};
 
 	// Destination tile and the unit
-	typedef std::pair<sf::Vector2f, std::unique_ptr<TileUnit> > UnitPair;
 	typedef std::unique_ptr<TileUnit> UnitPtr;
 
 	void playerInputToTile(int x, int y);
@@ -52,8 +51,6 @@ private:
 	TileUnit& spawnUnit(const std::string &textureName);
 	std::vector<sf::Vector2i> getAdjacentIndices(int x, int y) const;
 	void removeUnit(TileUnit *unit);
-
-
 
 	std::vector<UnitPtr> m_units;
 	TileUnit *m_player;

@@ -3,7 +3,7 @@
 
 DuctTapeItem::DuctTapeItem(int id)
 :
-Item("Duct Tape", "DuctTapeItem", id)
+Item("Duct Tape","DuctTapeItem", "DuctTapeItem", id)
 {
 	m_lootable = true;
 

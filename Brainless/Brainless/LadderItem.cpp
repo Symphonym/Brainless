@@ -4,7 +4,7 @@
 
 LadderItem::LadderItem(const std::string &ladderTexture, int id)
 :
-Item("Ladder", ladderTexture, id),
+Item("Ladder",ladderTexture, ladderTexture, id),
 m_inUse(false),
 m_reachedStartPos(false),
 m_startStartPos(0, 0),

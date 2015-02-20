@@ -2,7 +2,7 @@
 
 CoinItem::CoinItem(int id)
 :
-Item("Coin", "CoinItem", id)
+Item("Coin","CoinsInv", "CoinItem", id)
 {
 	m_lootable = true;
 

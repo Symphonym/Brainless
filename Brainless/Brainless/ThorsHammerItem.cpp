@@ -3,7 +3,7 @@
 
 ThorsHammerItem::ThorsHammerItem(int id)
 :
-Item("Mjölner", "ThorsHammerItem", id)
+Item("Mjölner","MjolnirInv", "ThorsHammerItem", id)
 {
 	m_lootable = true;
 	m_examineString = "The hammer of the god Thor, and now it's in my hands. The world better prepare.";

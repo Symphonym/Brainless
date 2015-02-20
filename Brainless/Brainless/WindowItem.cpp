@@ -4,7 +4,7 @@
 
 WindowItem::WindowItem(bool smashed, int levelIndex, int id)
 :
-Item("Window", "WindowWholeItem", id),
+Item("Window","WindowWholeItem", "WindowWholeItem", id),
 m_levelIndex(levelIndex),
 m_smashed(smashed)
 {

@@ -1,8 +1,8 @@
 #include "ElectricalItem.h"
 
-EletricalItem::EletricalItem(const std::string &itemName, const std::string &textureName, int id)
+EletricalItem::EletricalItem(const std::string &itemName, const std::string &inventoryTextureName, const std::string &textureName, int id)
 :
-Item(itemName, textureName, id),
+Item(itemName,inventoryTextureName, textureName, id),
 m_batteryType(BatteryTypes::AA),
 m_missingBatteries(0),
 m_hasEletricity(false)
