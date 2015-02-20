@@ -40,6 +40,8 @@ private:
 		TileUnit *unit;
 	};
 
+	// Destination tile and the unit
+	typedef std::pair<sf::Vector2f, std::unique_ptr<TileUnit> > UnitPair;
 	typedef std::unique_ptr<TileUnit> UnitPtr;
 
 	void playerInputToTile(int x, int y);

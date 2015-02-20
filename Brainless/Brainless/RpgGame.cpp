@@ -15,8 +15,8 @@ ArcadeGame(machine, "World of Åkecraft")
 			Tile &tile = m_tiles[x][y];
 			tile.sprite.setTexture(ResourceLoader::instance().retrieveTexture("ArcadeGrassTile"));
 			tile.sprite.setPosition(
-				m_machine.getScreenPos().x + x*tile.sprite.getGlobalBounds().width,
-				m_machine.getScreenPos().y + y*tile.sprite.getGlobalBounds().height);
+				m_machine.getScreenPos().x + 5.f + x*tile.sprite.getGlobalBounds().width,
+				m_machine.getScreenPos().y + 5.f + y*tile.sprite.getGlobalBounds().height);
 			tile.unit = nullptr;
 		}
 	}
@@ -144,8 +144,8 @@ void RpgGame::placeUnitOnTile(RpgGame::TileUnit *unit, int x, int y)
 	unit->x = x;
 	unit->y = y;
 	unit->sprite.setPosition(
-		m_machine.getScreenPos().x + 10.f + x*tile.sprite.getGlobalBounds().width + tile.sprite.getGlobalBounds().width / 2.f,
-		m_machine.getScreenPos().y + 10.f + y*tile.sprite.getGlobalBounds().height + +tile.sprite.getGlobalBounds().height / 2.f);
+		m_machine.getScreenPos().x + 5.f + x*tile.sprite.getGlobalBounds().width + tile.sprite.getGlobalBounds().width / 2.f,
+		m_machine.getScreenPos().y + 5.f + y*tile.sprite.getGlobalBounds().height + +tile.sprite.getGlobalBounds().height / 2.f);
 }
 RpgGame::TileUnit& RpgGame::spawnUnit(const std::string &textureName)
 {
