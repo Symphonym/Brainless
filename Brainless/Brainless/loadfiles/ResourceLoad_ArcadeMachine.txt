@@ -19,6 +19,12 @@
 +Texture,images/arcade/bc_sky.png,bc_sky
 +Texture,images/arcade/pillar_1.png,pillar1
 
+# BOOP
++Texture,images/arcade/akebg.png,boopbg
++Texture,images/arcade/cloud.png,cloud
++Texture,images/arcade/hand1.png,hand1
++Texture,images/arcade/hand2.png,hand2
+
 # ÅKES RPG SAK
 +Texture,images/arcade/grassTile.png,ArcadeGrassTile
 +Texture,images/arcade/rpgEnemy.png,ArcadeRpgEnemy
@@ -32,4 +38,5 @@
 +Sound,sounds/Arkad_v3.wav,ArcadeMedium
 +Sound,sounds/Arkad_v5.wav,ArcadeMediumDark
 +Sound,sounds/Arkad_v6.wav,ArcadeDark
++Sound,sounds/boop.wav,Boop
 
