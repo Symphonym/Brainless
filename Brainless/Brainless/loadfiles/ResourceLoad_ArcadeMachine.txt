@@ -45,3 +45,6 @@
 +Sound,sounds/Arkad_v6.wav,ArcadeDark
 +Sound,sounds/boop.wav,Boop
 
+# MUSIC
++Music,music/ArcadeMusic.wav,ArcadeMusic
+

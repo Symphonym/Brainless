@@ -41,7 +41,7 @@ m_newGameConfirmWindow(false)
 		sf::Vector2f(m_confirmBackground.getPosition().x + 210.f, m_confirmBackground.getPosition().y + 120.f)));
 
 	//Play music
-	SoundPlayer::instance().playMusic("MenuMusic",true);
+	SoundPlayer::instance().playMusic("MenuMusic",true,20);
 }
 
 void MainMenu::update(float deltaTime)

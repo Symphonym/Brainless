@@ -64,12 +64,17 @@ m_playingGame(false)
 		/*m_gameNames[i].setColor(sf::Color(0, 120, 0, 255));
 		m_gameNames[i].setPosition(getScreenSize().x + 100, getScreenSize().y + 100 + 50 * i);*/
 	}
+
+	SoundPlayer::instance().playMusic("ArcadeMusic", true, 20);
 }
 
 
 void ArcadeMachine::exitGame()
 {
 	m_playingGame = false;
+
+	if (ResourceLoader::instance().retrieveMusic("ArcadeMusic").getStatus() != sf::Music::Playing)
+		SoundPlayer::instance().playMusic("ArcadeMusic", true, 20);
 }
 
 void ArcadeMachine::events(const sf::Event &event)

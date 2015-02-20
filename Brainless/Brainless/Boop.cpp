@@ -42,6 +42,8 @@ void Boop::onGameStart()
 	m_hand2.setPosition(m_originalHandPos);
 
 	m_isSoundPlaying = false;
+
+	SoundPlayer::instance().stopMusic("ArcadeMusic");
 }
 
 void Boop::update(float deltaTime)

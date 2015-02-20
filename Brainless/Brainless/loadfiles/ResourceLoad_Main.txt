@@ -201,20 +201,25 @@
 +Texture,images/items/AA Batteries.png,AABatteriesInv
 +Texture,images/items/Bottle.png,BottleInv
 +Texture,images/items/Bottle-Water.png,BottleWaterInv
++Texture,images/items/Cables.png,CablesInv
 +Texture,images/items/Can.png,CanInv
 +Texture,images/items/Car Battery.png,CarBatteryInv
 +Texture,images/items/Coins.png,CoinsInv
++Texture,images/items/Duct Tape.png,DuctTapeInv
 +Texture,images/items/Gum.png,GumInv
 +Texture,images/items/Gum-sh.png,GumChewedInv
++Texture,images/items/Hammer.png,HammerInv
 +Texture,images/items/Key.png,KeyInv
-+Texture,images/items/Lighter.png,LighterInv
++Texture,images/items/LighterFire.png,LighterInv
 +Texture,images/items/Magnifying glass.png,MagnifyingGlassInv
++Texture,images/items/Magnet.png,MagnetInv
 +Texture,images/items/Nails.png,NailsInv
 +Texture,images/items/Newspapper.png,NewspapperInv
 +Texture,images/items/Plastic Bag.png,PlasticBagInv
 +Texture,images/items/Rubber Glove.png,RubberGloveInv
 +Texture,images/items/Snack.png,SnackInv
 +Texture,images/items/Stone.png,StoneInv
++Texture,images/items/Stick.png,StickInv
 +Texture,images/items/Twine.png,TwineInv
 +Texture,images/items/Coint-hook.png,CoinTwineInv
 +Texture,images/items/Hook.png,HookInv
