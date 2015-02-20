@@ -330,6 +330,9 @@
     <ClCompile Include="RpgGame.cpp">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClCompile>
+    <ClCompile Include="Boop.cpp">
+      <Filter>Source Files\Game\ArcadeGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -588,6 +591,9 @@
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClInclude>
     <ClInclude Include="RpgGame.h">
+      <Filter>Source Files\Game\ArcadeGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Boop.h">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClInclude>
   </ItemGroup>
