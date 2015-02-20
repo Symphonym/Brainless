@@ -1,22 +1,20 @@
 #include "Button.h"
 #include "Renderer.h"
 
-Button::Button(sf::Texture &notPressed, sf::Texture &pressed, const sf::Vector2f &position, sf::RenderWindow *window)
+Button::Button(sf::Texture &notPressed, sf::Texture &pressed, const sf::Vector2f &position)
 :
 m_textureNotPressed(notPressed),
-m_texturePressed(pressed),
-m_window(window)
+m_texturePressed(pressed)
 {
 	m_sizeRectangle = sf::IntRect(0, 0, notPressed.getSize().x, notPressed.getSize().y);
 	m_position = position;
 	m_hitBoxRect = sf::IntRect(m_position.x, m_position.y, notPressed.getSize().x, notPressed.getSize().y);
 	m_mouseIsPressed = true;
 }
-Button::Button(sf::Texture &notPressed, sf::Texture &pressed, sf::IntRect placement, sf::RenderWindow *window)
+Button::Button(sf::Texture &notPressed, sf::Texture &pressed, sf::IntRect placement)
 :
 m_textureNotPressed(notPressed),
-m_texturePressed(pressed),
-m_window(window)
+m_texturePressed(pressed)
 {
 	m_sizeRectangle = sf::IntRect(0, 0, placement.width, placement.height);
 	m_position = sf::Vector2f(placement.left, placement.top);
@@ -25,11 +23,10 @@ m_window(window)
 }
 
 
-bool Button::getReleased()
+bool Button::getReleased(const sf::Vector2i &mousePos)
 {
 	//The button must be pressed and released without the mouse leaving the button for the click to be registred.
 
-	sf::Vector2i mousePos = sf::Mouse::getPosition(*m_window);
 	bool wasPressed = m_buttonIsPressed;
 	m_buttonIsPressed = false;
 

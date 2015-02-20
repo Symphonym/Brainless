@@ -6,6 +6,10 @@
 +Texture,images/UI/heart.png,heart
 +Texture,images/UI/heartEmpty.png,heartEmpty
 
+# CRAFTING UI
++Texture,images/UI/crafting_normal.png,Crafting_Normal
++Texture,images/UI/crafting_pressed.png,Crafting_Pressed
+
 # GAME SHADER
 +Shader,shaders/DarknessShader.txt,DarknessShader
 

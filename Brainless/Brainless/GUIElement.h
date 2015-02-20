@@ -7,7 +7,7 @@ class GUIElement
 {
 public:
 
-	virtual bool getReleased() = 0;
+	virtual bool getReleased(const sf::Vector2i &mousePos) = 0;
 	virtual std::string getType() = 0;
 
 	virtual void draw() = 0;

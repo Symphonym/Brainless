@@ -7,11 +7,13 @@
 #include "Game.h"
 #include "Notification.h"
 #include "Player.h"
+#include "Button.h"
 
 Inventory::Inventory()
 :
 m_isOpen(false),
-m_showHighlighText(false)
+m_showHighlighText(false),
+m_craftingModeEnabled(false)
 {
 	for (std::size_t x = 0; x < m_slots.size(); x++)
 	{
@@ -31,6 +33,15 @@ m_showHighlighText(false)
 	m_highlightBackground.loadFromImage(bgImg);
 	m_highlightBGSprite.setTexture(m_highlightBackground);
 	m_highlightBGSprite.setColor(sf::Color::Color(0, 0, 0, 128));
+
+	m_craftButton = GuiPtr(new Button(
+		ResourceLoader::instance().retrieveTexture("Crafting_Normal"),
+		ResourceLoader::instance().retrieveTexture("Crafting_Pressed"),
+		sf::Vector2f(10, m_slots[0][0].second.getGlobalBounds().height * Constants::InventoryHeight + 10.f)));
+
+	m_craftText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+	m_craftText.setString("Crafting Mode");
+	m_craftText.setPosition(250.f - m_craftText.getGlobalBounds().width / 2.f, m_slots[0][0].second.getGlobalBounds().height * Constants::InventoryHeight + 25.f);
 }
 
 void Inventory::addItem(ItemPtr item)
@@ -61,12 +72,15 @@ void Inventory::events(const sf::Event &event, Game &game)
 		{
 			m_isOpen = !m_isOpen;
 			SoundPlayer::instance().playSound("inventory_open",game.getWindow().getView().getCenter());
+
+			if (!m_isOpen)
+				setCraftingMode(false);
 		}
 	}
 
 	else if (event.type == sf::Event::MouseButtonReleased)
 	{
-		if (event.mouseButton.button == sf::Mouse::Left)
+		if (event.mouseButton.button == sf::Mouse::Left && !m_craftingModeEnabled)
 		{
 			InventoryPair* invPair = getSlotAt(sf::Vector2f(mousePos.x, mousePos.y));
 
@@ -217,6 +231,10 @@ void Inventory::events(const sf::Event &event, Game &game)
 					addItem(std::move(m_mouseItem));
 			}
 		}
+		else if (event.mouseButton.button == sf::Mouse::Left && m_craftingModeEnabled)
+		{
+
+		}
 		else if (event.mouseButton.button == sf::Mouse::Right)
 		{
 			InventoryPair* invPair = getSlotAt(sf::Vector2f(mousePos.x, mousePos.y));
@@ -241,7 +259,7 @@ void Inventory::update(float deltaTime, Game &game)
 			// Held item gets special update calls in HUD space
 			m_mouseItem->heldUpdate(deltaTime, game);
 
-			m_mouseItem->getSprite().setPosition(
+			m_mouseItem->setPosition(
 				sf::Vector2f(mousePos.x - m_mouseItem->getSprite().getGlobalBounds().width / 2.f, mousePos.y - m_mouseItem->getSprite().getGlobalBounds().height / 2.f));
 		}
 			
@@ -253,13 +271,14 @@ void Inventory::update(float deltaTime, Game &game)
 			worldPos.x -= m_mouseItem->getSprite().getGlobalBounds().width / 2.f;
 			worldPos.y -= m_mouseItem->getSprite().getGlobalBounds().height / 2.f;
 
-			m_mouseItem->getSprite().setPosition(worldPos);
+			m_mouseItem->setPosition(worldPos);
 		}
 	}
 	else
 	{
 		InventoryPair* invPair = getSlotAt(sf::Vector2f(mousePos.x, mousePos.y));
 
+		// Show highlight text for slots you hover over
 		if (invPair && invPair->first)
 		{
 			m_showHighlighText = true;
@@ -276,6 +295,14 @@ void Inventory::update(float deltaTime, Game &game)
 		}
 		else
 			m_showHighlighText = false;
+
+		// Check for crafting mode button input
+		sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
+		if (m_craftButton->getReleased(mousePos))
+		{
+			setCraftingMode(!m_craftingModeEnabled);
+			craft();
+		}
 	}
 }
 
@@ -305,6 +332,15 @@ void Inventory::draw()
 				}
 			}
 		}
+
+		if (m_showHighlighText)
+		{
+			Renderer::instance().drawHUD(m_highlightBGSprite);
+			Renderer::instance().drawHUD(m_highlightText);
+		}
+
+		m_craftButton->draw();
+		Renderer::instance().drawHUD(m_craftText);
 	}
 
 	// Draw selected item on hud or in-game depending on if inventory is open or not
@@ -312,18 +348,14 @@ void Inventory::draw()
 	{
 		if (m_isOpen)
 		{
-			Renderer::instance().drawHUD(m_mouseItem->getSprite());
+			m_mouseItem->inventoryDraw();
 			m_mouseItem->heldDraw();
 		}
 		else
-			Renderer::instance().drawAbove(m_mouseItem->getSprite());
+			m_mouseItem->inventoryDraw(true);
 	}
 	
-	if (m_showHighlighText)
-	{
-		Renderer::instance().drawHUD(m_highlightBGSprite);
-		Renderer::instance().drawHUD(m_highlightText);
-	}
+
 }
 
 void Inventory::emptyInventory()
@@ -341,6 +373,40 @@ bool Inventory::holdingItem() const
 		return true;
 	else
 		return false;
+}
+
+void Inventory::setCraftingMode(bool enabled)
+{
+	m_craftingModeEnabled = enabled;
+	auto invRecolor = [&](const sf::Color &color) -> void
+	{
+		for (std::size_t x = 0; x < m_slots.size(); x++)
+		{
+			for (std::size_t y = 0; y < m_slots[x].size(); y++)
+			{
+				InventoryPair& invPair = m_slots[x][y];
+				invPair.second.setColor(color);
+			}
+		}
+	};
+
+	if (m_craftingModeEnabled)
+	{
+		m_craftText.setString("Craft");
+		m_craftText.setPosition(250.f - m_craftText.getGlobalBounds().width / 2.f, m_slots[0][0].second.getGlobalBounds().height * Constants::InventoryHeight + 25.f);
+		invRecolor(sf::Color::Green);
+	}
+
+	else
+	{
+		m_craftText.setString("Crafting Mode");
+		m_craftText.setPosition(250.f - m_craftText.getGlobalBounds().width / 2.f, m_slots[0][0].second.getGlobalBounds().height * Constants::InventoryHeight + 25.f);
+		invRecolor(sf::Color::White);
+	}
+}
+void Inventory::craft()
+{
+
 }
 
 std::vector<const Item*> Inventory::getInventoryItems() const

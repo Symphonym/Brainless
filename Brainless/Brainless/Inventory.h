@@ -4,6 +4,7 @@
 #include <SFML\Graphics.hpp>
 #include "Constants.h"
 #include "Item.h"
+#include "GUIElement.h"
 #include <memory>
 #include <array>
 
@@ -38,6 +39,7 @@ public:
 
 private:
 
+	typedef std::unique_ptr<GUIElement> GuiPtr;
 	typedef std::pair<ItemPtr, sf::Sprite> InventoryPair;
 
 	// Gets the inventory slot at the specified location, null if there's none
@@ -53,6 +55,12 @@ private:
 	sf::Texture m_highlightBackground;
 	sf::Sprite m_highlightBGSprite;
 	bool m_showHighlighText;
+
+	void craft();
+	void setCraftingMode(bool enabled);
+	bool m_craftingModeEnabled;
+	sf::Text m_craftText;
+	GuiPtr m_craftButton;
 
 	std::array<std::array<InventoryPair, Constants::InventoryHeight>, Constants::InventoryWidth> m_slots;
 
