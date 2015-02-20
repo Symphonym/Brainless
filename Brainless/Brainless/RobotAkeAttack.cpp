@@ -11,12 +11,9 @@ struct tort
 {
 	sf::Sprite sprite;
 	sf::FloatRect box;
-	//events
-	bool event_jump = false;
-	bool event_dash = false;
 	//Stats
 	int jumps = 2;
-	bool dash = true;
+	float dash_cd = 0;
 	//variables
 	float y_speed = 0;
 };
@@ -24,6 +21,7 @@ struct tort
 //Objects
 struct pillar
 {
+	sf::Vector2f position;
 	sf::Sprite sprite;
 	int m_width;
 	std::vector <sf::FloatRect> m_boxes;
@@ -31,7 +29,7 @@ struct pillar
 
 RobotAkeAttack::RobotAkeAttack(ArcadeMachine &machine)
 :
-ArcadeGame(machine, "Robot Åke Attack"),
+ArcadeGame(machine,"Robot Åke Attack"),
 m_gamePos(m_machine.getScreenPos()),
 m_score(0)
 {
@@ -46,14 +44,14 @@ m_score(0)
 void RobotAkeAttack::onGameStart()
 {
 	//Clean old
-	while (m_pillars.size()>0)
+	while (m_pillars.size() > 0)
 	{
 		delete m_pillars[0];
 		m_pillars.erase(m_pillars.begin());
 	}
 	delete m_player;
 
-	m_speed = 300;
+	m_timer = 0;
 	//Player
 	m_player = new tort();
 	m_player->box = sf::FloatRect(0, 0, 64, 64);
@@ -64,79 +62,109 @@ void RobotAkeAttack::onGameStart()
 	//m_player->jumps = 2;
 	pillar* temp = new pillar();
 	//Pillars
-	m_pillars.push_back(createPillar(1, m_gamePos + sf::Vector2f(700, 400)));
-	m_pillars.push_back(createPillar(1, m_gamePos + sf::Vector2f(300, 500)));
+	m_pillars.push_back(createPillar(1, m_gamePos + sf::Vector2f(300, 400)));
+	//m_pillars.push_back(createPillar(1, m_gamePos + sf::Vector2f(700, 500)));
 }
 
 void RobotAkeAttack::events(const sf::Event &event)
 {
 	if (event.type == sf::Event::KeyPressed)
 	{
-		
+		if (event.key.code == sf::Keyboard::D && m_player->dash_cd<=0)
+		{
+			m_player->dash_cd = 0.8;
+			m_player->y_speed = 0;
+			if (m_player->jumps == 0)
+				m_player->jumps++;
+		}
 	}
 	else if (event.type == sf::Event::KeyReleased)
 	{
-		if (event.key.code == sf::Keyboard::A)
-			m_player->event_jump = true;
-		else if (event.key.code == sf::Keyboard::S)
-			m_player->event_dash = true;
+		if (event.key.code == sf::Keyboard::S && m_player->jumps > 0)
+		{
+			m_player->jumps--;
+			m_player->y_speed = -600;
+			
+		}
 	}
 }
 
 void RobotAkeAttack::update(float deltaTime)
 {
-	m_speed += deltaTime*20;
-	//Player
-	//Commands
-	if (m_player->event_jump)
-	{
-		m_player->event_jump = false;
-		if (m_player->jumps > 0)
-		{
-			m_player->jumps--;
-			m_player->y_speed = -600;
-		}
-	}
-	//Check collision below - if move to contact
-	//Physics
-	m_player->y_speed = Utility::clampValue<float>(m_player->y_speed + (c_gravity* deltaTime), -2000, 2000);
-	
+	m_timer += deltaTime;
+	m_speed = 400 +(m_timer*40);
+	//Dash boost
+	if (m_player->dash_cd > 0.3)
+		m_speed += 200;
+	//Player speed
+	else
+		m_player->y_speed = m_player->y_speed + (c_gravity* deltaTime);//Utility::clampValue<float>(m_player->y_speed + (c_gravity* deltaTime), -20000, 20000);
 	//Update pillars
-	for (int i = m_pillars.size()-1; i >=0; i--)
+	for (int i = m_pillars.size() - 1; i >= 0; i--)
 	{
-		m_pillars[i]->sprite.setPosition(m_pillars[i]->sprite.getPosition() - sf::Vector2f(m_speed*deltaTime, 0));
+		m_pillars[i]->position -= sf::Vector2f(m_speed*deltaTime, 0);
 		for (int j = 0; j < m_pillars[i]->m_boxes.size(); j++)
 		{
 			if (m_pillars[i]->m_boxes[j].intersects(m_player->box))
 			{
-				if (m_player->y_speed>0)
+				int hight_diffrence = (m_player->box.top + m_player->box.height) - m_pillars[i]->m_boxes[j].top;
+				if (hight_diffrence >= 16)
+				{
+					m_gameOver_timer = 2;
+				}
+				else
 				{
 					m_player->box.top = m_pillars[i]->m_boxes[j].top - m_player->box.height;
-					m_player->y_speed = 0;
-					m_player->jumps = 2;
-				}	
+					if (m_player->y_speed > 0)
+					{
+						m_player->y_speed = 0;
+						m_player->jumps = 2;
+					}
+				}
 			}
-			else if (m_pillars[i]->m_boxes[j].intersects(m_player->box))
-			{
-				//Game over
-			}
-			m_pillars[i]->m_boxes[j].intersects(m_player->box);
+			//m_pillars[i]->m_boxes[j].intersects(m_player->box);
 			m_pillars[i]->m_boxes[j].left -= m_speed*deltaTime;
 		}
 		//Exit map
-		if (m_pillars[i]->sprite.getPosition().x + m_pillars[i]->m_width < m_gamePos.x)
+		if (m_pillars[i]->position.x + m_pillars[i]->m_width < m_gamePos.x)
 		{
 			delete m_pillars[i];
 			m_pillars.erase(m_pillars.begin() + i);
-			m_pillars.push_back(createPillar(1, m_gamePos + sf::Vector2f(700, 200 + std::rand() % 300)));
+			m_pillars.push_back(createPillar(1 + rand()%2, m_gamePos + sf::Vector2f(700, 200 + std::rand() % 300)));
 		}
 	}
-	m_player->box.top += m_player->y_speed*deltaTime;
+	//Update stars
+	for (int i = m_stars.size() - 1; i >= 0; i--)
+	{
+		m_stars[i]->setPosition(m_stars[i]->getPosition() - sf::Vector2f(m_speed*deltaTime, 0));
+		if (m_stars[i]->getPosition().x + 64 < m_gamePos.x)
+		{
+			delete m_stars[i];
+			m_stars.erase(m_stars.begin() + i);
+		}
+	}
+	//Player gravity
+	if (m_player->dash_cd <= 0.3)
+	{
+		if (m_player->y_speed < 0)
+			m_player->y_speed += 300 * deltaTime;
+		m_player->box.top += m_player->y_speed*deltaTime;
+	}
 	//Keep player within bounds
 	m_player->box.top = std::max(m_player->box.top, m_gamePos.y);
 	if (m_player->box.top >= m_gamePos.y + 700 - m_player->box.height)
 	{
+		m_gameOver_timer = 2;
+	}
+	//Decrement dash cd
+	m_player->dash_cd -= deltaTime;
+	if (m_player->dash_cd < 0)
+		m_player->dash_cd = 0;
+	//End game
+	if (m_gameOver_timer>0)
+	{
 		onGameStart();
+		m_gameOver_timer = 0;
 	}
 }
 
@@ -147,10 +175,14 @@ void RobotAkeAttack::draw()
 	//Draw pillars
 	for (int i = 0; i < m_pillars.size(); i++)
 	{
+		int start_offset = std::max(0, (int)(m_gamePos.x - m_pillars[i]->position.x));
+		int end_offset = std::min(0, (int)((m_gamePos.x+700) - (m_pillars[i]->position.x + m_pillars[i]->m_width)));
+		m_pillars[i]->sprite.setTextureRect(sf::IntRect(start_offset*0.5,0,270-start_offset*0.5+end_offset*0.5,57));
+		m_pillars[i]->sprite.setPosition(m_pillars[i]->position + sf::Vector2f(start_offset,0));
 		Renderer::instance().drawHUD(m_pillars[i]->sprite);
 		for (int j = 0; j < m_pillars[i]->m_boxes.size(); j++)
 		{
-			hitbox.setScale(m_pillars[i]->m_boxes[j].width, m_pillars[j]->m_boxes[j].height);
+			hitbox.setScale(m_pillars[i]->m_boxes[j].width, m_pillars[i]->m_boxes[j].height);
 			hitbox.setPosition(sf::Vector2f(m_pillars[i]->m_boxes[j].left, m_pillars[i]->m_boxes[j].top));
 			Renderer::instance().drawHUD(hitbox);
 		}
@@ -160,16 +192,23 @@ void RobotAkeAttack::draw()
 	Renderer::instance().drawHUD(m_player->sprite);
 }
 
-pillar* RobotAkeAttack::createPillar(int type,sf::Vector2f position)
+pillar* RobotAkeAttack::createPillar(int type, sf::Vector2f position)
 {
 	pillar* temp = new pillar();
-	temp->sprite.setTexture(ResourceLoader::instance().retrieveTexture("pillar" + std::to_string(type)));
+	temp->position = position;
+	temp->sprite.setTexture(ResourceLoader::instance().retrieveTexture("pillar1"));
+	//temp->sprite.setTexture(ResourceLoader::instance().retrieveTexture("pillar" + std::to_string(type)));
+	temp->sprite.setScale(2,2);
+	temp->m_width = temp->sprite.getTexture()->getSize().x*2;
 	temp->sprite.setPosition(position);
 	switch (type)
 	{
 	case 1:
-		temp->m_width = 270;
-		temp->m_boxes.push_back(sf::FloatRect(temp->sprite.getPosition().x, temp->sprite.getPosition().y, 270, 48));
+		temp->m_boxes.push_back(sf::FloatRect(temp->sprite.getPosition().x, temp->sprite.getPosition().y,540, 80));
+		break;
+	case 2:
+		temp->m_boxes.push_back(sf::FloatRect(temp->sprite.getPosition().x, temp->sprite.getPosition().y, 540, 80));
+		temp->m_boxes.push_back(sf::FloatRect(temp->sprite.getPosition().x+260, temp->sprite.getPosition().y-30, 200, 30));
 		break;
 	}
 	return temp;

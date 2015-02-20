@@ -9,6 +9,7 @@
 
 struct tort;
 struct pillar;
+struct star;
 
 class RobotAkeAttack : public ArcadeGame
 {
@@ -26,16 +27,19 @@ private:
 	
 	//Variables
 	int m_score;
+	float m_timer = 0;
+	float m_gameOver_timer = 0;
 	float m_speed;
-	const float c_gravity = 892;
+	const float c_gravity = 900;
 	sf::Vector2f m_gamePos;
 	sf::Sprite hitbox;
 
 	//player
 	tort* m_player;
 
-	//Pillars
+	//Objects
 	std::vector<pillar*> m_pillars;
+	std::vector<sf::Sprite*> m_stars;
 
 	//Visuall
 	sf::Sprite m_backgrounds[1];
