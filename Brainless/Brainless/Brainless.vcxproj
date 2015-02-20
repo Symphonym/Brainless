@@ -124,6 +124,7 @@
     <ClCompile Include="ConductingItem.cpp" />
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="ConversationBox.cpp" />
+    <ClCompile Include="CraftingDatabase.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DialogTree.cpp" />
     <ClCompile Include="DoorItem.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="ConductingItem.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ConversationBox.h" />
+    <ClInclude Include="CraftingDatabase.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="DialogTree.h" />
     <ClInclude Include="DoorItem.h" />

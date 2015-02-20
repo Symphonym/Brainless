@@ -73,6 +73,9 @@
     <Filter Include="Source Files\Game\ArcadeGame">
       <UniqueIdentifier>{726eac03-fb9a-4f6f-a4a5-f6f756f99ccd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Items\Data">
+      <UniqueIdentifier>{677eb0aa-3027-48b2-a67c-c071cd04a15e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -148,9 +151,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemDatabase.cpp">
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
     <ClCompile Include="Zombie.cpp">
@@ -333,6 +333,12 @@
     <ClCompile Include="Boop.cpp">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClCompile>
+    <ClCompile Include="ItemDatabase.cpp">
+      <Filter>Source Files\Game\Items\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingDatabase.cpp">
+      <Filter>Source Files\Game\Items\Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -494,9 +500,6 @@
     <ClInclude Include="CoinItem.h">
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
-    <ClInclude Include="ItemDatabase.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
     <ClInclude Include="TwineItem.h">
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
@@ -595,6 +598,12 @@
     </ClInclude>
     <ClInclude Include="Boop.h">
       <Filter>Source Files\Game\ArcadeGame</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDatabase.h">
+      <Filter>Source Files\Game\Items\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingDatabase.h">
+      <Filter>Source Files\Game\Items\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
