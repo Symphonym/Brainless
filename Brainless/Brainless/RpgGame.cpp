@@ -6,10 +6,7 @@
 
 RpgGame::RpgGame(ArcadeMachine &machine)
 :
-ArcadeGame(machine, "World of Åkecraft"),
-m_shieldPower(0),
-m_shieldPowerMax(4),
-m_shieldDirection(ShieldDirections::Up)
+ArcadeGame(machine, "World of Åkecraft")
 {
 	for (std::size_t x = 0; x < m_tiles.size(); x++)
 	{
@@ -23,8 +20,6 @@ m_shieldDirection(ShieldDirections::Up)
 			tile.unit = nullptr;
 		}
 	}
-
-	m_shieldSprite.setTexture(ResourceLoader::instance().retrieveTexture("ArcadeRpgShield"));
 }
 
 void RpgGame::onGameStart()
@@ -40,8 +35,6 @@ void RpgGame::onGameStart()
 
 	createWave();
 	spawnPlayer();
-	m_shieldPower = 0;
-	m_shieldDirection = ShieldDirections::Up;
 }
 
 void RpgGame::events(const sf::Event &event)
@@ -51,58 +44,27 @@ void RpgGame::events(const sf::Event &event)
 		if (event.key.code == sf::Keyboard::W)
 		{
 			playerInputToTile(m_player->x, m_player->y - 1);
-			m_shieldDirection = ShieldDirections::Up;
 		}
 
 		else if (event.key.code == sf::Keyboard::S)
 		{
 			playerInputToTile(m_player->x, m_player->y + 1);
-			m_shieldDirection = ShieldDirections::Down;
 		}
 
 		else if (event.key.code == sf::Keyboard::D)
 		{
 			playerInputToTile(m_player->x + 1, m_player->y);
-			m_shieldDirection = ShieldDirections::Right;
 		}
 
 		else if (event.key.code == sf::Keyboard::A)
 		{
 			playerInputToTile(m_player->x - 1, m_player->y);
-			m_shieldDirection = ShieldDirections::Left;
 		}
 	}
 }
 void RpgGame::update(float deltaTime)
 {
 	ParticleSystem::instance().update(deltaTime);
-
-	if (m_shieldPower >= m_shieldPowerMax && m_player)
-	{
-		switch (m_shieldDirection)
-		{
-			case ShieldDirections::Up:
-				m_shieldSprite.setPosition(
-					m_player->sprite.getPosition().x + m_player->sprite.getGlobalBounds().width/2.f - m_shieldSprite.getGlobalBounds().width / 2.f,
-					m_player->sprite.getPosition().y - m_shieldSprite.getGlobalBounds().height / 2.f);
-				break;
-			case ShieldDirections::Down:
-				m_shieldSprite.setPosition(
-					m_player->sprite.getPosition().x + m_player->sprite.getGlobalBounds().width/2.f - m_shieldSprite.getGlobalBounds().width / 2.f,
-					m_player->sprite.getPosition().y + m_player->sprite.getGlobalBounds().height - m_shieldSprite.getGlobalBounds().height / 2.f);
-				break;
-			case ShieldDirections::Right:
-				m_shieldSprite.setPosition(
-					m_player->sprite.getPosition().x + m_player->sprite.getGlobalBounds().width - m_shieldSprite.getGlobalBounds().width / 2.f,
-					m_player->sprite.getPosition().y + m_player->sprite.getGlobalBounds().height / 2.f - m_shieldSprite.getGlobalBounds().height / 2.f);
-				break;
-			case ShieldDirections::Left:
-				m_shieldSprite.setPosition(
-					m_player->sprite.getPosition().x - m_shieldSprite.getGlobalBounds().width / 2.f,
-					m_player->sprite.getPosition().y + m_player->sprite.getGlobalBounds().height / 2.f - m_shieldSprite.getGlobalBounds().height / 2.f);
-				break;
-		}
-	}
 }
 void RpgGame::draw()
 {
@@ -116,9 +78,6 @@ void RpgGame::draw()
 
 	for (auto &unit : m_units)
 		Renderer::instance().drawHUD(unit->sprite);
-
-	if (m_shieldPower >= m_shieldPowerMax)
-		Renderer::instance().drawHUD(m_shieldSprite);
 
 	ParticleSystem::instance().draw(true);
 }
@@ -165,6 +124,22 @@ void RpgGame::placeUnitOnTile(RpgGame::TileUnit *unit, int x, int y)
 
 	if (unit->x >= 0 && unit->x < MapWidth && unit->y >= 0 && unit->y < MapHeight)
 		m_tiles[unit->x][unit->y].unit = nullptr; // Clear unit of old tile, if it exists
+
+	// Moved to the left
+	if (unit->x - 1 == x)
+		unit->sprite.setRotation(270);
+
+	// Move to the right
+	else if (unit->x + 1 == x)
+		unit->sprite.setRotation(90);
+
+	// Move up
+	else if (unit->y - 1 == y)
+		unit->sprite.setRotation(0);
+
+	// Move down
+	else if (unit->y + 1 == y)
+		unit->sprite.setRotation(180);
 
 	unit->x = x;
 	unit->y = y;
@@ -239,10 +214,6 @@ void RpgGame::removeUnit(TileUnit *unit)
 
 void RpgGame::tickEnemies()
 {
-	++m_shieldPower;
-	if (m_shieldPower > m_shieldPowerMax)
-		m_shieldPower = m_shieldPowerMax;
-
 	bool killPlayer = false;
 	for (auto &unit : m_units)
 	{
@@ -259,23 +230,9 @@ void RpgGame::tickEnemies()
 
 			if (tile.unit != nullptr && tile.unit == m_player)
 			{
-				if ((adjacentIndex.x == unit->x - 1 && m_shieldDirection != ShieldDirections::Right) ||
-					(adjacentIndex.x == unit->x + 1 && m_shieldDirection != ShieldDirections::Left) ||
-					(adjacentIndex.x == unit->y - 1 && m_shieldDirection != ShieldDirections::Down) ||
-					(adjacentIndex.x == unit->y + 1 && m_shieldDirection != ShieldDirections::Up))
-				{
-					killPlayer = true;
-					hasAttacked = true;
-					break;
-				}
-				else
-				{
-					ParticleSystem::instance().addParticles(50,
-						sf::Vector2f(
-						m_player->sprite.getPosition().x + m_player->sprite.getGlobalBounds().width / 2.f,
-						m_player->sprite.getPosition().y + m_player->sprite.getGlobalBounds().height / 2.f), sf::Color::Cyan);
-					m_shieldPower = 0;
-				}
+				killPlayer = true;
+				hasAttacked = true;
+				break;
 			}
 		}
 

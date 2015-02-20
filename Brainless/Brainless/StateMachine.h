@@ -4,6 +4,8 @@
 #include <SFML\Graphics.hpp>
 #include <vector>
 #include <memory>
+#include "Notification.h"
+#include "ConversationBox.h"
 
 class Game;
 class State;
@@ -20,6 +22,7 @@ public:
 		m_loadingText.clear();
 		m_window.setView(m_window.getDefaultView());
 		m_states.push_back(std::move(StatePtr(new TType(*this))));
+		// TODO DISABLE NOTIFICATION AND CONVO BOX Notification::instance().s
 	};
 	void popState();
 

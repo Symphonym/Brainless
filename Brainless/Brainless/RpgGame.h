@@ -39,18 +39,6 @@ private:
 		sf::Sprite sprite;
 		TileUnit *unit;
 	};
-	enum class ShieldDirections
-	{
-		Up,
-		Down,
-		Right,
-		Left,
-	};
-
-	ShieldDirections m_shieldDirection;
-	int m_shieldPower;
-	const int m_shieldPowerMax;
-	sf::Sprite m_shieldSprite;
 
 	typedef std::unique_ptr<TileUnit> UnitPtr;
 
