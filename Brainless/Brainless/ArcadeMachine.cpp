@@ -5,9 +5,11 @@
 #include "ArcadeGame.h"
 #include "ResourceLoader.h"
 #include "BeachParty.h"
+#include "Boop.h"
 
 #include "NoteGame.h"
 #include "RobotAkeAttack.h"
+#include "RpgGame.h"
 
 #include "SoundPlayer.h"
 
@@ -27,12 +29,13 @@ m_playingGame(false)
 
 	// ADD YOUR GAMES HERE
 	m_games[0] = GamePtr(new BeachParty(*this));
-	//m_games[1] = GamePtr(new ...);
-	//m_games[0] = GamePtr(new ...);
 	m_games[1] = GamePtr(new NoteGame(*this));
 	m_games[2] = GamePtr(new RobotAkeAttack(*this));
+	m_games[3] = GamePtr(new RpgGame(*this));
 	//m_games[2] = GamePtr(new ...);
 	//m_games[3] = GamePtr(new ...);
+
+	m_games[4] = GamePtr(new Boop(*this));
 	//m_games[4] = GamePtr(new ...);
 
 	m_currentGameText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
@@ -154,8 +157,8 @@ void ArcadeMachine::draw()
 		for (auto &button : m_gameSelectionButtons)
 			Renderer::instance().drawHUD(button);
 
-		/*for (auto &name : m_gameNames)
-			Renderer::instance().drawHUD(name);*/
+		for (auto &name : m_gameNames)
+			Renderer::instance().drawHUD(name);
 	}
 
 	// Screen is drawn above the game, since it's transparent

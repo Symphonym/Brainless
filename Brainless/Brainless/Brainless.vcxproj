@@ -111,6 +111,7 @@
     <ClCompile Include="ArcadeMachine.cpp" />
     <ClCompile Include="ArcadeMachineItem.cpp" />
     <ClCompile Include="BeachParty.cpp" />
+    <ClCompile Include="Boop.cpp" />
     <ClCompile Include="BrainItem.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CableItem.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="RobotAkeAttack.cpp" />
+    <ClCompile Include="RpgGame.cpp" />
     <ClCompile Include="RubberGlovesItem.cpp" />
     <ClCompile Include="ScissorLift.cpp" />
     <ClCompile Include="SpiritBar.cpp" />
@@ -197,6 +199,7 @@
     <ClInclude Include="ArcadeMachine.h" />
     <ClInclude Include="ArcadeMachineItem.h" />
     <ClInclude Include="BeachParty.h" />
+    <ClInclude Include="Boop.h" />
     <ClInclude Include="BrainItem.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CableItem.h" />
@@ -235,6 +238,7 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="RobotAkeAttack.h" />
+    <ClInclude Include="RpgGame.h" />
     <ClInclude Include="RubberGlovesItem.h" />
     <ClInclude Include="ScissorLift.h" />
     <ClInclude Include="SpiritBar.h" />
