@@ -173,4 +173,4 @@ sf::Vector2f ArcadeMachine::getScreenPos() const
 sf::Vector2i ArcadeMachine::getScreenSize() const
 {
 	return sf::Vector2i(m_arcadeBackground.getGlobalBounds().width - (580.f), m_arcadeBackground.getGlobalBounds().height - 20.f);
-}o
+}
