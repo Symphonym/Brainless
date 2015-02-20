@@ -28,9 +28,9 @@ public:
 
 
 	// Load multiple resources from a resource file
-	bool loadResourceFile(const std::string &fileName);
+	bool loadResourceFile(const std::string &fileName, bool loadingScreen = true);
 	// Unload everything in a resource file
-	bool unloadResourceFile(const std::string &fileName);
+	bool unloadResourceFile(const std::string &fileName, bool loadingScreen = true);
 
 
 	// Returns the names of all textures currently loaded in memory
@@ -48,6 +48,7 @@ private:
 
 	int m_totalResources; // Total amount of resources to load
 	int m_currentResources; // Resources loaded
+	bool m_enableLoadingScreen;
 	LoadingHandler m_handler;
 
 	typedef std::unique_ptr<sf::Texture> TexturePtr;

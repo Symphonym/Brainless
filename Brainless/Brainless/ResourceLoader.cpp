@@ -4,6 +4,10 @@
 #include "ResourceFile.h"
 
 ResourceLoader::ResourceLoader()
+:
+m_totalResources(1),
+m_currentResources(0),
+m_enableLoadingScreen(true)
 {
 
 }
@@ -221,20 +225,22 @@ bool ResourceLoader::unloadFont(const std::string &name)
 		return false;
 }
 
-bool ResourceLoader::loadResourceFile(const std::string &fileName)
+bool ResourceLoader::loadResourceFile(const std::string &fileName, bool loadingScreen)
 {
 	ResourceFile file;
 
 	m_currentResources = 0;
 	m_totalResources = file.countResourceCalls(fileName);
+	m_enableLoadingScreen = loadingScreen;
 	return file.loadResourceFile(fileName);
 }
-bool ResourceLoader::unloadResourceFile(const std::string &fileName)
+bool ResourceLoader::unloadResourceFile(const std::string &fileName, bool loadingScreen)
 {
 	ResourceFile file;
 
 	m_currentResources = 0;
 	m_totalResources = file.countResourceCalls(fileName);
+	m_enableLoadingScreen = loadingScreen;
 	return file.loadResourceFile(fileName, true);
 }
 
@@ -247,7 +253,7 @@ bool ResourceLoader::loadFromFile(const std::string &fileName)
 
 void ResourceLoader::callHandler(const std::string &info)
 {
-	if (m_handler)
+	if (m_handler && m_enableLoadingScreen)
 	{
 		++m_currentResources;
 		m_handler(info, m_currentResources, m_totalResources);

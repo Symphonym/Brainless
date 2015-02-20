@@ -17,6 +17,9 @@ public:
 	static void saveLevelProgress(Level &level, int levelNumber);
 	static bool loadLevelProgress(Level &level, int levelNumber);
 
+	static void saveGameData(Game &game);
+	static void loadGameData(Game &game);
+
 	static void wipeProgress();
 
 	//Saving & loading player progress and misc info

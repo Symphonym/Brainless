@@ -14,6 +14,11 @@
 +Texture,images/arcade/greenNote.png,GreenArcadeNote
 +Texture,images/arcade/musicBG.png,MusicArcadeBG
 
+# ROBOT ÅKE ATTACK
++Texture,images/arcade/spr_player.png,spr_player
++Texture,images/arcade/bc_sky.png,bc_sky
++Texture,images/arcade/pillar_1.png,pillar1
+
 # BOOP
 +Texture,images/arcade/akebg.png,boopbg
 +Texture,images/arcade/cloud.png,cloud
@@ -29,6 +34,3 @@
 +Sound,sounds/Arkad_v6.wav,ArcadeDark
 +Sound,sounds/boop.wav,Boop
 
-# ROBOT ÅKE ATTACK
-+Texture,images/arcade/spr_player.png,spr_player
-+Texture,images/arcade/bc_sky.png,bc_sky

@@ -326,6 +326,14 @@ void Inventory::draw()
 	}
 }
 
+void Inventory::emptyInventory()
+{
+	for (auto &rows : m_slots)
+	{
+		for (auto &slot : rows)
+			delete slot.first.release();
+	}
+}
 
 bool Inventory::holdingItem() const
 {
