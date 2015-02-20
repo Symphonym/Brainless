@@ -221,7 +221,7 @@ void RobotAkeAttack::draw()
 	{
 		int start_offset = std::max(0, (int)(m_gamePos.x - m_pillars[i]->position.x));
 		int end_offset = std::min(0, (int)((m_gamePos.x + 700) - (m_pillars[i]->position.x + m_pillars[i]->m_width)));
-		m_pillars[i]->sprite.setTextureRect(sf::IntRect(start_offset*0.5, 0, 270 - start_offset*0.5 + end_offset*0.5, 57));
+		m_pillars[i]->sprite.setTextureRect(sf::IntRect(start_offset*0.5, 0, m_pillars[i]->m_width*0.5 - start_offset*0.5 + end_offset*0.5, 57));
 		m_pillars[i]->sprite.setPosition(m_pillars[i]->position + sf::Vector2f(start_offset, 0));
 		Renderer::instance().drawHUD(m_pillars[i]->sprite);
 		for (int j = 0; j < m_pillars[i]->m_boxes.size(); j++)
@@ -255,8 +255,8 @@ pillar* RobotAkeAttack::createPillar(int type, sf::Vector2f position, bool star)
 {
 	pillar* temp = new pillar();
 	temp->position = position;
-	temp->sprite.setTexture(ResourceLoader::instance().retrieveTexture("pillar1"));
-	//temp->sprite.setTexture(ResourceLoader::instance().retrieveTexture("pillar" + std::to_string(type)));
+	//temp->sprite.setTexture(ResourceLoader::instance().retrieveTexture("pillar1"));
+	temp->sprite.setTexture(ResourceLoader::instance().retrieveTexture("pillar" + std::to_string(type)));
 	temp->sprite.setScale(2, 2);
 	temp->m_width = temp->sprite.getTexture()->getSize().x * 2;
 	temp->sprite.setPosition(position);
