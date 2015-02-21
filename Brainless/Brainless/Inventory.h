@@ -50,6 +50,7 @@ private:
 
 	// Item currently selected on the mouse
 	ItemPtr m_mouseItem;
+	InventoryPair* m_mouseItemSlot;
 
 	sf::Text m_highlightText;
 	sf::Texture m_highlightBackground;

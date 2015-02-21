@@ -13,6 +13,7 @@
 Inventory::Inventory()
 :
 m_isOpen(false),
+m_mouseItemSlot(nullptr),
 m_showHighlighText(false),
 m_craftingModeEnabled(false)
 {
@@ -87,50 +88,11 @@ void Inventory::events(const sf::Event &event, Game &game)
 				// A place action was done with an item already selected
 				if (m_mouseItem)
 				{
-					// There's an item in the slot that the player pressed, initiate a combine action
+					// There's an item in the slot that the player pressed, switch slots
 					if (invPair->first)
 					{
-
-						bool endCombining = false;
-
-						// Go through combinations of selected item
-						for (std::size_t i = 0; i < m_mouseItem->getCombinations().size(); i++)
-						{
-							// Go through combinations of inventory item
-							const CombineData &mouseCombine = m_mouseItem->getCombinations()[i];
-							for (std::size_t j = 0; j < invPair->first->getCombinations().size(); j++)
-							{
-								const CombineData &invCombine = invPair->first->getCombinations()[j];
-
-								// The items have combinations for eachother
-								if (mouseCombine.targetID == invPair->first->getID() &&
-									invCombine.targetID == m_mouseItem->getID() && // They have eachother as required item for crafting
-									mouseCombine.productItemID == invCombine.productItemID) // They have the same product item
-								{
-									int newItemID = mouseCombine.productItemID;
-
-									// Check if the items are consumed when used in this combination
-									if (mouseCombine.consumedOnCraft)
-										delete m_mouseItem.release();
-									if (invCombine.consumedOnCraft)
-										delete invPair->first.release();
-
-									// Add new item to inventory
-									addItem(std::move(ItemDatabase::instance().extractItem(newItemID)));
-
-									endCombining = true;
-									break;
-								}
-
-							}
-
-							if (endCombining)
-								break;
-						}
-
-						// If mouse item wasen't consumed by the combination, put it back into inventory
-						if (m_mouseItem)
-							addItem(std::move(m_mouseItem));
+						m_mouseItemSlot->first = std::move(invPair->first);
+						invPair->first = std::move(m_mouseItem);
 					}
 
 					// No item in the slot, then just place the item in that slot
@@ -140,7 +102,10 @@ void Inventory::events(const sf::Event &event, Game &game)
 
 				// Select new item, the item might be null (empty slot) but doesn't matter since we use null to determine if an item is selected
 				else
+				{
+					m_mouseItemSlot = invPair;
 					m_mouseItem = std::move(invPair->first);
+				}
 			}
 
 			// The user did not click on the inventory, try with world interaction
