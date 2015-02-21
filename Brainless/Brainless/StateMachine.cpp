@@ -139,12 +139,15 @@ void StateMachine::loop()
 void StateMachine::draw()
 {
 	// All states are rendered
-	for (int i = m_states.size() - 1; i >= 0; i--)
+	for (std::size_t i = 0; i < m_states.size(); i++)
+	{
+		// Draw each state individually
 		m_states[i]->draw();
+		Renderer::instance().executeDraws();
+	}
 
 	// Draw cursor
 	Cursor::instance().draw();
-
 	Renderer::instance().executeDraws();
 }
 

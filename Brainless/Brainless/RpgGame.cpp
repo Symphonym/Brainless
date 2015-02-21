@@ -6,7 +6,10 @@
 
 RpgGame::RpgGame(ArcadeMachine &machine)
 :
-ArcadeGame(machine, "World of Åkecraft")
+ArcadeGame(machine, "Turtlerain Survival"),
+m_score(0),
+m_hunger(m_hungerMax),
+m_spawnDelayCur(0)
 {
 	for (std::size_t x = 0; x < m_tiles.size(); x++)
 	{
@@ -20,6 +23,21 @@ ArcadeGame(machine, "World of Åkecraft")
 			tile.unit = nullptr;
 		}
 	}
+
+	// Initialize hunger bar
+	sf::Image barImg;
+	barImg.create(1, 30, sf::Color::White);
+	m_hungerBarTexture.loadFromImage(barImg);
+
+	m_hungerBar.setTexture(m_hungerBarTexture);
+	m_hungerBar.setPosition(
+		m_machine.getScreenPos().x + 200.f,
+		m_machine.getScreenPos().y + m_machine.getScreenSize().y - 35.f);
+
+	// Initialize score text
+	m_scoreText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+	m_scoreText.setString("Score: 0");
+	m_scoreText.setPosition(m_machine.getScreenPos().x + 10.f, m_machine.getScreenPos().y + m_machine.getScreenSize().y - 35.f);
 }
 
 void RpgGame::onGameStart()
@@ -33,7 +51,8 @@ void RpgGame::onGameStart()
 		}
 	}
 
-	createWave();
+	m_hunger = m_hungerMax;
+	m_spawnDelayCur = 0;
 	spawnPlayer();
 }
 
@@ -64,6 +83,15 @@ void RpgGame::events(const sf::Event &event)
 }
 void RpgGame::update(float deltaTime)
 {
+	m_hungerBar.setScale(m_hunger, 1);
+
+	float hungerPercent = static_cast<float>(m_hunger) / static_cast<float>(m_hungerMax);
+	sf::Color hungerColor = sf::Color(
+		255 + (0 - 255) * hungerPercent,
+		0 + (255 - 0) * hungerPercent,
+		0);
+	m_hungerBar.setColor(hungerColor);
+
 	ParticleSystem::instance().update(deltaTime);
 }
 void RpgGame::draw()
@@ -79,21 +107,42 @@ void RpgGame::draw()
 	for (auto &unit : m_units)
 		Renderer::instance().drawHUD(unit->sprite);
 
+	Renderer::instance().drawHUD(m_scoreText);
+	Renderer::instance().drawHUD(m_hungerBar);
+
 	ParticleSystem::instance().draw(true);
 }
 
 
 void RpgGame::spawnPlayer()
 {
-	TileUnit &player = spawnUnit("ArcadeRpgPlayer");
-	m_player = &player;
+	UnitPtr unit = UnitPtr(new TileUnit());
+	unit->sprite.setTexture(ResourceLoader::instance().retrieveTexture("ArcadeRpgPlayer"));
+	unit->sprite.setOrigin(
+		unit->sprite.getGlobalBounds().width / 2.f,
+		unit->sprite.getGlobalBounds().height / 2.f);
+	unit->x = MapWidth/2;
+	unit->y = MapHeight-1;
+
+	placeUnitOnTile(unit.get(), unit->x, unit->y);
+	m_player = unit.get();
+
+	m_units.push_back(std::move(unit));
+
 }
-void RpgGame::createWave()
+void RpgGame::spawnEnemy(const std::string &textureName)
 {
-	for (int i = 0; i < 10; i++)
-	{
-		spawnUnit("ArcadeRpgEnemy");
-	}
+	UnitPtr unit = UnitPtr(new TileUnit());
+	unit->sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
+	unit->sprite.setOrigin(
+		unit->sprite.getGlobalBounds().width / 2.f,
+		unit->sprite.getGlobalBounds().height / 2.f);
+	unit->x = m_player->x;
+	unit->y = 0;
+	unit->sprite.setRotation(180); // Looking down by default
+	placeUnitOnTile(unit.get(), unit->x, unit->y);
+
+	m_units.push_back(std::move(unit));
 }
 
 bool RpgGame::canMove(int x, int y)
@@ -109,12 +158,20 @@ void RpgGame::playerInputToTile(int x, int y)
 	if (canMove(x, y))
 	{
 		placeUnitOnTile(m_player, x, y);
-		tickEnemies();
+		m_hunger -= 10;
+		tickGame();
 	}
 	else if (canAttack(x, y))
 	{
-		removeUnit(m_tiles[x][y].unit);
-		tickEnemies();
+		removeUnit(m_tiles[x][y].unit, sf::Color::Red);
+		placeUnitOnTile(m_player, x, y);
+
+		// Killing enemies feeds your hunger bar
+		m_hunger += 50;
+		if (m_hunger >= m_hungerMax)
+			m_hunger = m_hungerMax;
+
+		tickGame();
 	}
 }
 void RpgGame::placeUnitOnTile(RpgGame::TileUnit *unit, int x, int y)
@@ -147,63 +204,15 @@ void RpgGame::placeUnitOnTile(RpgGame::TileUnit *unit, int x, int y)
 		m_machine.getScreenPos().x + 5.f + x*tile.sprite.getGlobalBounds().width + tile.sprite.getGlobalBounds().width / 2.f,
 		m_machine.getScreenPos().y + 5.f + y*tile.sprite.getGlobalBounds().height + +tile.sprite.getGlobalBounds().height / 2.f);
 }
-RpgGame::TileUnit& RpgGame::spawnUnit(const std::string &textureName)
-{
-	UnitPtr unit = UnitPtr(new TileUnit());
-	unit->sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
-	unit->sprite.setOrigin(
-		unit->sprite.getGlobalBounds().width / 2.f,
-		unit->sprite.getGlobalBounds().height / 2.f);
-	unit->x = -1;
-	unit->y = -1;
 
-	while (true)
-	{
-		int x = std::rand() % MapWidth;
-		int y = std::rand() % MapHeight;
 
-		Tile &tile = m_tiles[x][y];
-		if (tile.unit == nullptr)
-		{
-			tile.unit = unit.get();
-			placeUnitOnTile(unit.get(), x, y);
-			break;
-		}
-	}
-
-	TileUnit &tmpUnit = *unit.get();
-	m_units.push_back(std::move(unit));
-	return tmpUnit;
-}
-std::vector<sf::Vector2i> RpgGame::getAdjacentIndices(int x, int y) const
-{
-	std::vector<sf::Vector2i> result;
-
-	// Tile to the left
-	if (x - 1 >= 0)
-		result.push_back(sf::Vector2i(x - 1, y));
-
-	// Tile to the right
-	if (x + 1 < MapWidth)
-		result.push_back(sf::Vector2i(x + 1, y));
-
-	// Tile above
-	if (y - 1 >= 0)
-		result.push_back(sf::Vector2i(x, y - 1));
-
-	// Tile below
-	if (y + 1 < MapHeight)
-		result.push_back(sf::Vector2i(x, y + 1));
-
-	return result;
-}
-void RpgGame::removeUnit(TileUnit *unit)
+void RpgGame::removeUnit(TileUnit *unit, const sf::Color &particleColor)
 {
 	ParticleSystem::instance().addParticles(50,
 		sf::Vector2f(
 			unit->sprite.getPosition().x,
 			unit->sprite.getPosition().y), 
-		sf::Color::Red);
+			particleColor);
 
 	m_tiles[unit->x][unit->y].unit = nullptr;
 	for (std::size_t i = 0; i < m_units.size(); i++)
@@ -216,55 +225,71 @@ void RpgGame::removeUnit(TileUnit *unit)
 	}
 }
 
-void RpgGame::tickEnemies()
+void RpgGame::tickGame()
 {
-	bool killPlayer = false;
-	for (auto &unit : m_units)
+	// Update units
+	for (std::size_t i = 0; i < m_units.size(); i++)
 	{
+		TileUnit *unit = m_units[i].get();
+
 		// Do not control the player
-		if (unit.get() == m_player)
+		if (unit == m_player)
 			continue;
 
-		std::vector<sf::Vector2i> adjacents = getAdjacentIndices(unit->x, unit->y);
-
-		/*bool hasAttacked = false;
-		for (auto &adjacentIndex : adjacents)
+		if (canMove(unit->x, unit->y+1))
+			placeUnitOnTile(unit, unit->x, unit->y + 1);
+		else if (m_player->x == unit->x && m_player->y == unit->y + 1)
 		{
-			Tile &tile = m_tiles[adjacentIndex.x][adjacentIndex.y];
-
-			if (tile.unit != nullptr && tile.unit == m_player)
-			{
-				killPlayer = true;
-				hasAttacked = true;
-				break;
-			}
-		}*/
-
-		//if (!hasAttacked)
-		//{
-			int moveDirection = std::rand() % 4;
-
-			// Move to the left
-			if (moveDirection == 0 && canMove(unit->x - 1, unit->y))
-				placeUnitOnTile(unit.get(), unit->x - 1, unit->y);
-
-			// Move to the right
-			if (moveDirection == 1 && canMove(unit->x + 1, unit->y))
-				placeUnitOnTile(unit.get(), unit->x + 1, unit->y);
-
-			// Move up
-			if (moveDirection == 2 && canMove(unit->x, unit->y - 1))
-				placeUnitOnTile(unit.get(), unit->x, unit->y - 1);
-
-			// Move down
-			if (moveDirection == 3 && canMove(unit->x, unit->y + 1))
-				placeUnitOnTile(unit.get(), unit->x, unit->y + 1);
-		//}
+			removeUnit(m_player, sf::Color::Red);
+			placeUnitOnTile(unit, unit->x, unit->y + 1);
+			m_player = nullptr;
+			break; // Killing player ends game, and thus enemy input
+		}
 	}
 
-	//if (killPlayer)
-	//{
-	//	removeUnit(m_player);
-	//	m_player = nullptr;
-	//}
+	
+
+	if (m_player != nullptr)
+	{
+		++m_spawnDelayCur;
+
+		if (m_spawnDelayCur >= m_spawnDelayMax)
+		{
+			spawnEnemy("ArcadeRpgEnemy");
+			m_spawnDelayCur = 0;
+		}
+
+		// Check a row consists entirely of enemies
+		for (std::size_t y = 0; y < m_tiles[0].size(); y++)
+		{
+			bool isUnit = true;
+			for (std::size_t x = 0; x < m_tiles.size(); x++)
+			{
+				Tile &tile = m_tiles[x][y];
+
+				// Check if an enemy isn't in a tile on the row
+				if (tile.unit == nullptr || tile.unit == m_player)
+				{
+					isUnit = false;
+					break;
+				}
+			}
+
+			if (isUnit)
+			{
+				for (std::size_t x = 0; x < m_tiles.size(); x++)
+					removeUnit(m_tiles[x][y].unit, sf::Color::Cyan);
+
+				++m_score;
+				m_scoreText.setString("Score: " + std::to_string(m_score));
+			}
+		}
+
+		// Check if player died from hunger
+		if (m_hunger <= 0)
+		{
+			m_hunger = 0;
+			removeUnit(m_player, sf::Color::Yellow);
+		}
+	}
 }

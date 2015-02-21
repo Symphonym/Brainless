@@ -25,9 +25,6 @@ private:
 	static const int MapWidth = 15;
 	static const int MapHeight = 15;
 
-	void spawnPlayer();
-	void createWave();
-	void tickEnemies();
 
 	struct TileUnit
 	{
@@ -43,14 +40,27 @@ private:
 	// Destination tile and the unit
 	typedef std::unique_ptr<TileUnit> UnitPtr;
 
+	int m_score;
+	sf::Text m_scoreText;
+
+	int m_hunger;
+	const int m_hungerMax = 300;
+	sf::Texture m_hungerBarTexture;
+	sf::Sprite m_hungerBar;
+
+	int m_spawnDelayCur;
+	const int m_spawnDelayMax = 3;
+
+	void spawnPlayer();
+	void spawnEnemy(const std::string &textureName);
+	void tickGame();
+
 	void playerInputToTile(int x, int y);
 	bool canMove(int x, int y);
 	bool canAttack(int x, int y); // Only usable by player unit
 
 	void placeUnitOnTile(TileUnit *unit, int x, int y);
-	TileUnit& spawnUnit(const std::string &textureName);
-	std::vector<sf::Vector2i> getAdjacentIndices(int x, int y) const;
-	void removeUnit(TileUnit *unit);
+	void removeUnit(TileUnit *unit, const sf::Color &particleColor);
 
 	std::vector<UnitPtr> m_units;
 	TileUnit *m_player;
