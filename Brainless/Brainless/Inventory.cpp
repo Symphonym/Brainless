@@ -8,6 +8,7 @@
 #include "Notification.h"
 #include "Player.h"
 #include "Button.h"
+#include "CraftingDatabase.h"
 
 Inventory::Inventory()
 :
@@ -76,6 +77,7 @@ void Inventory::events(const sf::Event &event, Game &game)
 
 	else if (event.type == sf::Event::MouseButtonReleased)
 	{
+		// Items can not be moved around in crafting mode
 		if (event.mouseButton.button == sf::Mouse::Left && !m_craftingModeEnabled)
 		{
 			InventoryPair* invPair = getSlotAt(sf::Vector2f(mousePos.x, mousePos.y));
@@ -227,9 +229,22 @@ void Inventory::events(const sf::Event &event, Game &game)
 					addItem(std::move(m_mouseItem));
 			}
 		}
+		// Selecting crafting components
 		else if (event.mouseButton.button == sf::Mouse::Left && m_craftingModeEnabled)
 		{
+			for (std::size_t x = 0; x < m_slots.size(); x++)
+			{
+				for (std::size_t y = 0; y < m_slots[x].size(); y++)
+				{
+					InventoryPair& invPair = m_slots[x][y];
 
+					// If mouse is on top of an occupied inventory slot
+					if (invPair.first && invPair.second.getGlobalBounds().contains(mousePos.x, mousePos.y))
+						m_selectedSlots.push_back(sf::Vector2i(x, y));
+				}
+			}
+
+			highlightSelected();
 		}
 		else if (event.mouseButton.button == sf::Mouse::Right)
 		{
@@ -296,8 +311,12 @@ void Inventory::update(float deltaTime, Game &game)
 		sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
 		if (m_craftButton->getReleased(mousePos))
 		{
+			if (m_craftingModeEnabled && !m_selectedSlots.empty())
+				craft();
+
+			// Doesn't work atm if (m_selectedSlots.empty() || !m_craftingModeEnabled)
 			setCraftingMode(!m_craftingModeEnabled);
-			craft();
+
 		}
 	}
 }
@@ -370,34 +389,70 @@ bool Inventory::holdingItem() const
 		return false;
 }
 
+void Inventory::recolorSlots(const sf::Color &color)
+{
+	for (std::size_t x = 0; x < m_slots.size(); x++)
+	{
+		for (std::size_t y = 0; y < m_slots[x].size(); y++)
+		{
+			InventoryPair& invPair = m_slots[x][y];
+			invPair.second.setColor(color);
+		}
+	}
+}
+void Inventory::highlightSelected()
+{
+	for (auto &index : m_selectedSlots)
+		m_slots[index.x][index.y].second.setColor(sf::Color::Yellow);
+}
+
 void Inventory::setCraftingMode(bool enabled)
 {
 	m_craftingModeEnabled = enabled;
-	auto invRecolor = [&](const sf::Color &color) -> void
-	{
-		for (std::size_t x = 0; x < m_slots.size(); x++)
-		{
-			for (std::size_t y = 0; y < m_slots[x].size(); y++)
-			{
-				InventoryPair& invPair = m_slots[x][y];
-				invPair.second.setColor(color);
-			}
-		}
-	};
 
 	if (m_craftingModeEnabled)
 	{
-		invRecolor(sf::Color::Green);
+		m_selectedSlots.clear();
+		recolorSlots(sf::Color::Green);
 	}
 
 	else
 	{
-		invRecolor(sf::Color::White);
+		recolorSlots(sf::Color::White);
 	}
 }
 void Inventory::craft()
 {
+	std::vector<int> idVector;
 
+	for (auto &index : m_selectedSlots)
+	{
+		if (m_slots[index.x][index.y].first)
+			idVector.push_back(m_slots[index.x][index.y].first->getID());
+	}
+
+	CraftingDatabase::ItemPtr item = CraftingDatabase::instance().craftItem(idVector);
+
+	// An item was crafted
+	if (item)
+	{
+		// Remove all ingredients from inventory
+		for (auto &index : m_selectedSlots)
+			delete m_slots[index.x][index.y].first.release();
+
+		Notification::instance().write("\"" + item->getName() + "\" was crafted successfully!");
+
+		// Add item to inventory
+		addItem(std::move(item));
+	}
+	else
+	{
+		Notification::instance().write("That doesn't seem to work");
+	}
+
+
+	m_selectedSlots.clear();
+	recolorSlots(sf::Color::Green);
 }
 
 std::vector<const Item*> Inventory::getInventoryItems() const

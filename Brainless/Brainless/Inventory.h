@@ -56,10 +56,14 @@ private:
 	sf::Sprite m_highlightBGSprite;
 	bool m_showHighlighText;
 
+	void recolorSlots(const sf::Color &color);
+	void highlightSelected();
+
 	void craft();
 	void setCraftingMode(bool enabled);
 	bool m_craftingModeEnabled;
 	GuiPtr m_craftButton;
+	std::vector<sf::Vector2i> m_selectedSlots;
 
 	std::array<std::array<InventoryPair, Constants::InventoryHeight>, Constants::InventoryWidth> m_slots;
 
