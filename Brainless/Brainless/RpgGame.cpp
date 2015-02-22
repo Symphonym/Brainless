@@ -3,13 +3,15 @@
 #include "ArcadeMachine.h"
 #include "Renderer.h"
 #include "ParticleSystem.h"
+#include "SoundPlayer.h"
 
 RpgGame::RpgGame(ArcadeMachine &machine)
 :
 ArcadeGame(machine, "Turtlerain Survival"),
 m_score(0),
 m_hunger(m_hungerMax),
-m_spawnDelayCur(0)
+m_spawnDelayCur(0),
+m_hungerDelay(0)
 {
 	for (std::size_t x = 0; x < m_tiles.size(); x++)
 	{
@@ -33,6 +35,13 @@ m_spawnDelayCur(0)
 	m_hungerBar.setPosition(
 		m_machine.getScreenPos().x + 200.f,
 		m_machine.getScreenPos().y + m_machine.getScreenSize().y - 35.f);
+
+	// Initialize game over text
+	m_gameOverText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+	m_gameOverText.setString("             Game over\npress ESC to return to the main menu");
+	m_gameOverText.setPosition(
+		m_machine.getScreenPos().x + m_machine.getScreenSize().x / 2 - m_gameOverText.getGlobalBounds().width / 2.f,
+		m_machine.getScreenPos().y + m_machine.getScreenSize().y / 2 - m_gameOverText.getGlobalBounds().height / 2.f);
 
 	// Initialize score text
 	m_scoreText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
@@ -83,6 +92,23 @@ void RpgGame::events(const sf::Event &event)
 }
 void RpgGame::update(float deltaTime)
 {
+	m_hungerDelay -= deltaTime;
+
+	if (m_hungerDelay <= 0)
+	{
+		if (m_player)
+			--m_hunger;
+		m_hungerDelay = 0.03f;
+
+		// Check if player died from hunger
+		if (m_hunger <= 0)
+		{
+			m_hunger = 0;
+			removeUnit(m_player, sf::Color::Yellow);
+			SoundPlayer::instance().playSound("ArcadeFail", m_machine.getScreenPos(), 20.f);
+		}
+	}
+
 	m_hungerBar.setScale(m_hunger, 1);
 
 	float hungerPercent = static_cast<float>(m_hunger) / static_cast<float>(m_hungerMax);
@@ -109,6 +135,9 @@ void RpgGame::draw()
 
 	Renderer::instance().drawHUD(m_scoreText);
 	Renderer::instance().drawHUD(m_hungerBar);
+
+	if (!m_player)
+		Renderer::instance().drawHUD(m_gameOverText);
 
 	ParticleSystem::instance().draw(true);
 }
@@ -158,8 +187,11 @@ void RpgGame::playerInputToTile(int x, int y)
 	if (canMove(x, y))
 	{
 		placeUnitOnTile(m_player, x, y);
-		m_hunger -= 10;
+		//m_hunger -= 10;
 		tickGame();
+
+		if (m_player)
+			SoundPlayer::instance().playSound("ArcadeDark", m_machine.getScreenPos(), 20.f);
 	}
 	else if (canAttack(x, y))
 	{
@@ -172,6 +204,9 @@ void RpgGame::playerInputToTile(int x, int y)
 			m_hunger = m_hungerMax;
 
 		tickGame();
+
+		if (m_player)
+			SoundPlayer::instance().playSound("ArcadeLight", m_machine.getScreenPos(), 20.f);
 	}
 }
 void RpgGame::placeUnitOnTile(RpgGame::TileUnit *unit, int x, int y)
@@ -243,6 +278,7 @@ void RpgGame::tickGame()
 			removeUnit(m_player, sf::Color::Red);
 			placeUnitOnTile(unit, unit->x, unit->y + 1);
 			m_player = nullptr;
+			SoundPlayer::instance().playSound("ArcadeFail", m_machine.getScreenPos(), 20.f);
 			break; // Killing player ends game, and thus enemy input
 		}
 	}
@@ -282,14 +318,8 @@ void RpgGame::tickGame()
 
 				++m_score;
 				m_scoreText.setString("Score: " + std::to_string(m_score));
+				SoundPlayer::instance().playSound("ArcadeLight2", m_machine.getScreenPos(), 20.f);
 			}
-		}
-
-		// Check if player died from hunger
-		if (m_hunger <= 0)
-		{
-			m_hunger = 0;
-			removeUnit(m_player, sf::Color::Yellow);
 		}
 	}
 }

@@ -40,11 +40,14 @@ private:
 	// Destination tile and the unit
 	typedef std::unique_ptr<TileUnit> UnitPtr;
 
+	sf::Text m_gameOverText;
+
 	int m_score;
 	sf::Text m_scoreText;
 
 	int m_hunger;
 	const int m_hungerMax = 300;
+	float m_hungerDelay;
 	sf::Texture m_hungerBarTexture;
 	sf::Sprite m_hungerBar;
 
