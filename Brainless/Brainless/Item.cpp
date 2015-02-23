@@ -3,7 +3,7 @@
 #include "Renderer.h"
 #include "Constants.h"
 
-Item::Item(const std::string &itemName, const std::string &inventoryTextureName, const std::string &textureName, int id, const Combinations &combineData)
+Item::Item(const std::string &itemName, const std::string &inventoryTextureName, const std::string &textureName, int id)
 :
 m_lootable(false),
 m_usable(false),
@@ -19,7 +19,6 @@ m_examineString("A pretty normal object, nothing out of the ordinary"),
 m_itemName(itemName),
 m_id(id),
 m_syncID(-1),
-m_combinations(combineData),
 m_speed(sf::Vector2f(0,0))
 {
 	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
@@ -27,11 +26,6 @@ m_speed(sf::Vector2f(0,0))
 
 	// Default collision box is size of sprite
 	m_collisionSize = sf::Vector2f(m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height);
-}
-
-void Item::addCombination(int targetID, int productID, bool consumedOnCombine)
-{
-	m_combinations.push_back({ targetID, productID, consumedOnCombine });
 }
 
 void Item::serialize(std::ofstream &writer) const
@@ -117,10 +111,6 @@ int Item::getSyncID() const
 {
 	return m_syncID;
 }
-const Item::Combinations& Item::getCombinations() const
-{
-	return m_combinations;
-}
 
 bool Item::isLootable() const
 {
@@ -166,9 +156,9 @@ sf::Vector2f Item::getSpeed() const
 
 
 
-DefaultItem::DefaultItem(const std::string &textureName, int id, const Item::Combinations &combineData)
+DefaultItem::DefaultItem(const std::string &textureName, int id)
 :
-Item("DefaultItem", textureName, "DEFAULT_INVENTORY_NAME", id, combineData)
+Item("DefaultItem", textureName, "DEFAULT_INVENTORY_NAME", id)
 {
 	m_lootable = true;
 };
