@@ -127,6 +127,7 @@ void RpgGame::update(float deltaTime)
 }
 void RpgGame::draw()
 {
+
 	for (std::size_t x = 0; x < m_tiles.size(); x++)
 	{
 		for (std::size_t y = 0; y < m_tiles[x].size(); y++)
@@ -134,6 +135,9 @@ void RpgGame::draw()
 			Renderer::instance().drawHUD(m_tiles[x][y].sprite);
 		}
 	}
+
+	if (m_player)
+		Renderer::instance().drawHUD(m_infoText);
 
 	for (auto &unit : m_units)
 		Renderer::instance().drawHUD(unit->sprite);
@@ -143,8 +147,6 @@ void RpgGame::draw()
 
 	if (!m_player)
 		Renderer::instance().drawHUD(m_gameOverText);
-	else
-		Renderer::instance().drawHUD(m_infoText);
 
 	ParticleSystem::instance().draw(true);
 }
