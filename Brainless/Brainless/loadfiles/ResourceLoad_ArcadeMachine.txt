@@ -2,6 +2,9 @@
 +Texture,images/UI/arcademachine.png,ArcadeMachineScreen
 +Texture,images/UI/arcadeMenuButton.png,ArcadeMenuButton
 
+# MENU TEXTURES
++Texture,images/arcade/arcadebg.png,ArcadeBG
+
 # ÅKES BEACH PARTY
 +Texture,images/arcade/akespritesheet.png,turtlesheet
 +Texture,images/arcade/curlyfrie.png,friesheet
