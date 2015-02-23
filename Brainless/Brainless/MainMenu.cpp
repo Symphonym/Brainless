@@ -17,12 +17,12 @@ m_newGameConfirmWindow(false)
 	m_buttons[0] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("NewGame_Normal"),
 		ResourceLoader::instance().retrieveTexture("NewGame_Pressed"),
-		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2)));
+		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2 - 200)));
 
 	m_buttons[1] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("LoadGame_Normal"),
 		ResourceLoader::instance().retrieveTexture("LoadGame_Pressed"),
-		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2 + 100.f)));
+		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2 - 100.f)));
 
 
 	// New game confirm data

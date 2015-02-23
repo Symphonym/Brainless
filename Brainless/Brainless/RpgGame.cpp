@@ -204,7 +204,7 @@ void RpgGame::playerInputToTile(int x, int y)
 		placeUnitOnTile(m_player, x, y);
 
 		// Killing enemies feeds your hunger bar
-		m_hunger += 30;
+		m_hunger += 40;
 		if (m_hunger >= m_hungerMax)
 			m_hunger = m_hungerMax;
 
