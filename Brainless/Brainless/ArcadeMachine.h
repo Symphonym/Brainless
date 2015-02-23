@@ -30,6 +30,9 @@ private:
 	typedef std::unique_ptr<ArcadeGame> GamePtr;
 
 	sf::Text m_currentGameText;
+	sf::Text m_infoText;
+	sf::Text m_escText;
+	sf::Sprite m_arcadeForeground;
 	sf::Sprite m_arcadeBackground;
 
 	std::size_t m_currentGameIndex;

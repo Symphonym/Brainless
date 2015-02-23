@@ -37,7 +37,6 @@ RobotAkeAttack::RobotAkeAttack(ArcadeMachine &machine)
 {
 	//Load font
 	m_scoreText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
-	m_scoreText.setPosition(m_gamePos.x, m_gamePos.y + 40);
 	m_scoreText.setString("");
 
 	m_dash.setTexture(ResourceLoader::instance().retrieveTexture("spr_dash"));
@@ -46,8 +45,8 @@ RobotAkeAttack::RobotAkeAttack(ArcadeMachine &machine)
 	m_backgrounds[0].setPosition(m_gamePos);
 	m_backgrounds[0].setScale(2, 2);
 	m_backgrounds[7].setTexture(ResourceLoader::instance().retrieveTexture("bc_frontClouds"));
-	m_backgrounds[7].setPosition(m_gamePos + sf::Vector2f(0,290));
 	m_backgrounds[7].setScale(2, 2);
+	m_backgrounds[7].setPosition(m_gamePos + sf::Vector2f(0,286));
 }
 
 void RobotAkeAttack::onGameStart()
@@ -105,7 +104,7 @@ void RobotAkeAttack::events(const sf::Event &event)
 			else if (m_player->jumps > 0)
 			{
 				m_player->jumps--;
-				m_player->y_speed = -500; //1100
+				m_player->y_speed = -850; //500
 			}
 		}
 	}
@@ -125,8 +124,8 @@ void RobotAkeAttack::update(float deltaTime)
 		else
 		{
 			m_player->y_speed = m_player->y_speed + (c_gravity* deltaTime);//Utility::clampValue<float>(m_player->y_speed + (c_gravity* deltaTime), -20000, 20000);
-			/*if (m_player->y_speed < 0)
-				m_player->y_speed *= 9*deltaTime;*/
+			if (m_player->y_speed < 0)
+				m_player->y_speed -= (m_player->y_speed*3*deltaTime);
 		}
 		//Update pillars
 		for (int i = m_pillars.size() - 1; i >= 0; i--)
@@ -214,6 +213,15 @@ void RobotAkeAttack::update(float deltaTime)
 			//Adjust for game speed dialtion
 			m_pillarTimer = (m_pillarTimer / sqrt(sqrt(sqrt(sqrt(m_timer)))));
 		}
+		m_scoreText.setPosition(m_gamePos.x, m_gamePos.y + 40);
+		m_scoreText.setCharacterSize(32);
+		m_scoreText.setString("Score: " + std::to_string((int)floor(m_score)) + "\nHigh score:" + std::to_string((int)floor(m_hscore)));
+	}
+	else
+	{
+		m_scoreText.setPosition(m_gamePos.x + 150, m_gamePos.y + 150);
+		m_scoreText.setCharacterSize(48);
+		m_scoreText.setString("Game over\nScore: " + std::to_string((int)floor(m_score)) + "\nHigh score:" + std::to_string((int)floor(m_hscore)));
 	}
 	if (m_score>m_hscore)
 	{
@@ -228,7 +236,7 @@ void RobotAkeAttack::update(float deltaTime)
 			m_texts.erase(m_texts.begin() + i);
 		}
 	}
-	m_scoreText.setString("Score: " + std::to_string((int)floor(m_score)) + "\nHigh score:" + std::to_string((int)floor(m_hscore)));
+	
 }
 
 void RobotAkeAttack::draw()
