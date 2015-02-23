@@ -12,6 +12,7 @@ m_score(0),
 m_hunger(m_hungerMax),
 m_spawnDelayCur(0),
 m_spawnDelayMax(3),
+m_hungerAddition(40),
 m_hungerDelay(0)
 {
 	for (std::size_t x = 0; x < m_tiles.size(); x++)
@@ -72,6 +73,7 @@ void RpgGame::onGameStart()
 
 	m_hunger = m_hungerMax;
 	m_spawnDelayCur = 0;
+	m_hungerAddition = 40;
 	m_score = 0;
 	m_scoreText.setString("Score: 0");
 	spawnPlayer();
@@ -207,7 +209,7 @@ void RpgGame::playerInputToTile(int x, int y)
 		placeUnitOnTile(m_player, x, y);
 
 		// Killing enemies feeds your hunger bar
-		m_hunger += 40;
+		m_hunger += m_hungerAddition;
 		if (m_hunger >= m_hungerMax)
 			m_hunger = m_hungerMax;
 
@@ -327,6 +329,14 @@ void RpgGame::tickGame()
 			{
 				for (std::size_t x = 0; x < m_tiles.size(); x++)
 					removeUnit(m_tiles[x][y].unit, sf::Color::Cyan);
+
+				// Reduce the amount of hunger you get per turtle
+				m_hungerAddition -= 2;
+
+
+				// Cap hunger addition
+				if (m_hungerAddition <= 10)
+					m_hungerAddition = 10;
 
 				++m_score;
 				m_scoreText.setString("Score: " + std::to_string(m_score));

@@ -26,6 +26,7 @@ private:
 	static const int MapHeight = 8;
 
 
+
 	struct TileUnit
 	{
 		sf::Sprite sprite;
@@ -47,6 +48,7 @@ private:
 	int m_score;
 	sf::Text m_scoreText;
 
+	int m_hungerAddition;
 	int m_hunger;
 	const int m_hungerMax = 300;
 	float m_hungerDelay;
