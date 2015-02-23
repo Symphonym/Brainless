@@ -10,6 +10,9 @@
 +Texture,images/UI/no_normal.png,No_Normal
 +Texture,images/UI/no_pressed.png,No_Pressed
 
+# BACKGROUND
++Texture,images/backgrounds/Menu_background.png,Menu_Background
+
 # CONFIRM BACKGROUND
 +Texture,images/UI/newGameConfirmTest.png,NewGameConfirmBG
 

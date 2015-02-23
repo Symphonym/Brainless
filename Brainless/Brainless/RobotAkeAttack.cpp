@@ -105,7 +105,7 @@ void RobotAkeAttack::events(const sf::Event &event)
 			else if (m_player->jumps > 0)
 			{
 				m_player->jumps--;
-				m_player->y_speed = -1100;
+				m_player->y_speed = -500; //1100
 			}
 		}
 	}
@@ -125,8 +125,8 @@ void RobotAkeAttack::update(float deltaTime)
 		else
 		{
 			m_player->y_speed = m_player->y_speed + (c_gravity* deltaTime);//Utility::clampValue<float>(m_player->y_speed + (c_gravity* deltaTime), -20000, 20000);
-			if (m_player->y_speed < 0)
-				m_player->y_speed *= 0.9;
+			/*if (m_player->y_speed < 0)
+				m_player->y_speed *= 9*deltaTime;*/
 		}
 		//Update pillars
 		for (int i = m_pillars.size() - 1; i >= 0; i--)
