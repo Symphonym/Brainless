@@ -11,6 +11,7 @@ ArcadeGame(machine, "Turtlerain Survival"),
 m_score(0),
 m_hunger(m_hungerMax),
 m_spawnDelayCur(0),
+m_spawnDelayMax(3),
 m_hungerDelay(0)
 {
 	for (std::size_t x = 0; x < m_tiles.size(); x++)
@@ -295,6 +296,7 @@ void RpgGame::tickGame()
 		{
 			spawnEnemy("ArcadeRpgEnemy");
 			m_spawnDelayCur = 0;
+			m_spawnDelayMax = std::rand() % 4 + 2;
 		}
 
 		// Check a row consists entirely of enemies
