@@ -16,6 +16,8 @@ struct tort
 	int dashs = 2;
 	float dash_cd = 0;
 	int star_mult = 0;
+
+	bool jump_key = false;
 	//variables
 	float y_speed = 0;
 };
@@ -30,10 +32,10 @@ struct pillar
 };
 
 RobotAkeAttack::RobotAkeAttack(ArcadeMachine &machine)
-	:
-	ArcadeGame(machine, "Robot Åke Attack"),
-	m_gamePos(m_machine.getScreenPos()),
-	m_score(0)
+:
+ArcadeGame(machine, "Robot Åke Attack"),
+m_gamePos(m_machine.getScreenPos()),
+m_score(0)
 {
 	//Load font
 	m_scoreText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
@@ -46,7 +48,7 @@ RobotAkeAttack::RobotAkeAttack(ArcadeMachine &machine)
 	m_backgrounds[0].setScale(2, 2);
 	m_backgrounds[7].setTexture(ResourceLoader::instance().retrieveTexture("bc_frontClouds"));
 	m_backgrounds[7].setScale(2, 2);
-	m_backgrounds[7].setPosition(m_gamePos + sf::Vector2f(0,286));
+	m_backgrounds[7].setPosition(m_gamePos + sf::Vector2f(0, 286));
 }
 
 void RobotAkeAttack::onGameStart()
@@ -92,20 +94,22 @@ void RobotAkeAttack::events(const sf::Event &event)
 			if (m_player->jumps == 0)
 				m_player->jumps++;
 		}
+		else if (event.key.code == sf::Keyboard::S && m_player->jumps > 0 && !m_player->jump_key)
+		{
+			m_player->jump_key = true;
+			m_player->jumps--;
+			m_player->y_speed = -850; //500
+		}
+		else if (event.key.code == sf::Keyboard::W && m_gameOver)
+		{
+			onGameStart();
+		}
 	}
 	else if (event.type == sf::Event::KeyReleased)
 	{
 		if (event.key.code == sf::Keyboard::S)
 		{
-			if (m_gameOver)
-			{
-				onGameStart();
-			}
-			else if (m_player->jumps > 0)
-			{
-				m_player->jumps--;
-				m_player->y_speed = -850; //500
-			}
+			m_player->jump_key = false;
 		}
 	}
 }
@@ -125,7 +129,7 @@ void RobotAkeAttack::update(float deltaTime)
 		{
 			m_player->y_speed = m_player->y_speed + (c_gravity* deltaTime);//Utility::clampValue<float>(m_player->y_speed + (c_gravity* deltaTime), -20000, 20000);
 			if (m_player->y_speed < 0)
-				m_player->y_speed -= (m_player->y_speed*3*deltaTime);
+				m_player->y_speed -= (m_player->y_speed * 3 * deltaTime);
 		}
 		//Update pillars
 		for (int i = m_pillars.size() - 1; i >= 0; i--)
@@ -219,11 +223,11 @@ void RobotAkeAttack::update(float deltaTime)
 	}
 	else
 	{
-		m_scoreText.setPosition(m_gamePos.x + 150, m_gamePos.y + 150);
+		m_scoreText.setPosition(m_gamePos.x + 100, m_gamePos.y + 20);
 		m_scoreText.setCharacterSize(48);
-		m_scoreText.setString("Game over\nScore: " + std::to_string((int)floor(m_score)) + "\nHigh score:" + std::to_string((int)floor(m_hscore)));
+		m_scoreText.setString("     Game over\n    Score: " + std::to_string((int)floor(m_score)) + "\n   High score:" + std::to_string((int)floor(m_hscore)) + "\n\nPress (W) to restart");
 	}
-	if (m_score>m_hscore)
+	if (m_score > m_hscore)
 	{
 		m_hscore = m_score;
 	}
@@ -236,14 +240,14 @@ void RobotAkeAttack::update(float deltaTime)
 			m_texts.erase(m_texts.begin() + i);
 		}
 	}
-	
+
 }
 
 void RobotAkeAttack::draw()
 {
 	//Draw backgrounds
 	Renderer::instance().drawHUD(m_backgrounds[0]);
-	m_backgrounds[7].setTextureRect(sf::IntRect((int)(pow(m_timer,1.3))%350, 0, 350, 137));
+	m_backgrounds[7].setTextureRect(sf::IntRect((int)(pow(m_timer, 1.3)) % 350, 0, 350, 137));
 	Renderer::instance().drawHUD(m_backgrounds[7]);
 
 	//Draw pillars
