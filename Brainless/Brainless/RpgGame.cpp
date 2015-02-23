@@ -73,6 +73,7 @@ void RpgGame::onGameStart()
 	m_hunger = m_hungerMax;
 	m_spawnDelayCur = 0;
 	m_score = 0;
+	m_scoreText.setString("Score: 0");
 	spawnPlayer();
 }
 
