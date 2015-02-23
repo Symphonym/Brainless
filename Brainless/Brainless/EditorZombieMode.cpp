@@ -135,7 +135,7 @@ bool EditorZombieMode::update(float deltaTime, const sf::RenderWindow &editorWin
 		break;
 	case Unit::ID_WalkingZombie:
 		m_infoText.setString("Walking Zombie");
-		m_highlightSprite.sprite.setTextureRect(sf::IntRect(0, 0, 256, 256));
+		m_highlightSprite.sprite.setTextureRect(sf::IntRect(0, 1024, 256, 256));
 		break;
 	case Unit::ID_ChasingZombie:
 		m_infoText.setString("Chasing Zombie");

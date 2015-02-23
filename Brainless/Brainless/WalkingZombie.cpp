@@ -139,7 +139,7 @@ void WalkingZombie::updateAnimation(float deltaTime)
 	if (m_animState != anim_walking)
 	{
 		m_sprite = &m_spriteSheets[0];
-		m_animation.loop(0, 7, 0, 5);
+		m_animation.loop(0, 7, 4, 5);
 		m_animState = anim_walking;
 	}
 
