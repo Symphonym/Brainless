@@ -8,8 +8,6 @@ Item("AA Battery","AABatteriesInv", "AABatteryItem", id)
 	m_lootable = true;
 	m_examineString = "It's an AA battery. It appears to have some power left";
 	m_useString = "Just using a battery on it's own isn't going to do much";
-
-	addCombination(0, 24, true);
 }
 
 bool AABatteryItem::onInteract(Item &otherItem, Game &game)

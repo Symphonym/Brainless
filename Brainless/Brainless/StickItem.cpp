@@ -7,8 +7,6 @@ Item("Stick","StickInv", "StickItem", id)
 	m_lootable = true;
 	m_examineString = "It's a pretty short stick";
 	m_useString = "That's not going to work";
-
-	addCombination(17, 18, true);
 }
 
 Item* StickItem::clone()

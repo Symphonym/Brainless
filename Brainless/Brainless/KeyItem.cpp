@@ -6,8 +6,6 @@ KeyItem::KeyItem(int id)
 Item("Key","KeyInv", "KeyTest", id)
 {
 	m_lootable = true;
-
-	addCombination(4, 13, true);
 }
 
 bool KeyItem::onInteract(Item &otherItem, Game &game)

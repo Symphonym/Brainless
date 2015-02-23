@@ -129,8 +129,6 @@
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DialogTree.cpp" />
     <ClCompile Include="DoorItem.cpp" />
-    <ClCompile Include="DoubleStickItem.cpp" />
-    <ClCompile Include="DuctTapedBatteryItem.cpp" />
     <ClCompile Include="DuctTapeItem.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorGridMode.cpp" />
@@ -219,8 +217,6 @@
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="DialogTree.h" />
     <ClInclude Include="DoorItem.h" />
-    <ClInclude Include="DoubleStickItem.h" />
-    <ClInclude Include="DuctTapedBatteryItem.h" />
     <ClInclude Include="DuctTapeItem.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EditorGridMode.h" />

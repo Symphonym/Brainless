@@ -261,9 +261,6 @@
     <ClCompile Include="StickItem.cpp">
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
-    <ClCompile Include="DoubleStickItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
     <ClCompile Include="LongStickItem.cpp">
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
@@ -286,9 +283,6 @@
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
     <ClCompile Include="CarBatteryItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="DuctTapedBatteryItem.cpp">
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
     <ClCompile Include="HammerItem.cpp">
@@ -530,9 +524,6 @@
     <ClInclude Include="StickItem.h">
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
-    <ClInclude Include="DoubleStickItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
     <ClInclude Include="LongStickItem.h">
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
@@ -555,9 +546,6 @@
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
     <ClInclude Include="CarBatteryItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="DuctTapedBatteryItem.h">
       <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
     <ClInclude Include="HammerItem.h">

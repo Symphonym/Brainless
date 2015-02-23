@@ -5,8 +5,6 @@ CoinItem::CoinItem(int id)
 Item("Coin","CoinsInv", "CoinItem", id)
 {
 	m_lootable = true;
-
-	addCombination(4, 11, true);
 }
 
 bool CoinItem::onInteract(Item &otherItem, Game &game)
