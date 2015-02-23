@@ -226,9 +226,7 @@
 +Texture,images/items/Long-Stick.png,LongStickInv
 +Texture,images/items/Stuffed Bag.png,StuffedBagInv
 +Texture,images/items/Thor's-Hammer.png,MjolnirInv
-
-# GHOST TEST ITEM
-+Texture,images/items/ghostTest.png,GhostTest
++Texture,images/animations/Spritesheet_Ghost.png,GhostItem
 
 # DOOR TEST ITEM
 +Texture,images/items/doorOpen.png,DoorOpen

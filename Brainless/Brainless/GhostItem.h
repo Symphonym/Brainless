@@ -3,6 +3,7 @@
 
 #include "Item.h"
 #include "DialogTree.h"
+#include "Animation.h"
 
 #include <string>
 
@@ -20,6 +21,8 @@ public:
 	virtual Item* clone();
 
 private:
+	float m_currentFrame = 0;
+	int m_frameCount = 13;
 
 	// Dialog of the ghost
 	DialogTree m_dialog;
