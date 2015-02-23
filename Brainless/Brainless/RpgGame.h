@@ -22,8 +22,8 @@ public:
 
 private:
 
-	static const int MapWidth = 15;
-	static const int MapHeight = 15;
+	static const int MapWidth = 8;
+	static const int MapHeight = 8;
 
 
 	struct TileUnit
@@ -52,7 +52,7 @@ private:
 	sf::Sprite m_hungerBar;
 
 	int m_spawnDelayCur;
-	const int m_spawnDelayMax = 3;
+	int m_spawnDelayMax;
 
 	void spawnPlayer();
 	void spawnEnemy(const std::string &textureName);
