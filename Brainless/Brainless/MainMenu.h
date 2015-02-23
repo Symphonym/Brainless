@@ -25,6 +25,7 @@ private:
 	bool m_newGameConfirmWindow;
 	std::array<GuiPtr, 2> m_newGameButtons;
 	sf::Sprite m_confirmBackground;
+	sf::Sprite m_background;
 };
 
 #endif

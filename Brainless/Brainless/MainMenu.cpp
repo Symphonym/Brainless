@@ -40,6 +40,9 @@ m_newGameConfirmWindow(false)
 		ResourceLoader::instance().retrieveTexture("No_Pressed"),
 		sf::Vector2f(m_confirmBackground.getPosition().x + 210.f, m_confirmBackground.getPosition().y + 120.f)));
 
+	//Background
+	m_background.setTexture(ResourceLoader::instance().retrieveTexture("Menu_Background"));
+
 	//Play music
 	SoundPlayer::instance().playMusic("MenuMusic",true,20);
 }
@@ -79,6 +82,7 @@ void MainMenu::update(float deltaTime)
 }
 void MainMenu::draw()
 {
+	Renderer::instance().drawHUD(m_background);
 	for (auto &button : m_buttons)
 		button->draw();
 
@@ -89,6 +93,6 @@ void MainMenu::draw()
 		for (auto &button : m_newGameButtons)
 			button->draw();
 	}
-
+	
 	Renderer::instance().executeDraws();
 }

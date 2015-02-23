@@ -8,10 +8,12 @@
 #include "Notification.h"
 #include "Player.h"
 #include "Button.h"
+#include "CraftingDatabase.h"
 
 Inventory::Inventory()
 :
 m_isOpen(false),
+m_mouseItemSlot(nullptr),
 m_showHighlighText(false),
 m_craftingModeEnabled(false)
 {
@@ -38,10 +40,6 @@ m_craftingModeEnabled(false)
 		ResourceLoader::instance().retrieveTexture("Crafting_Normal"),
 		ResourceLoader::instance().retrieveTexture("Crafting_Pressed"),
 		sf::Vector2f(10, m_slots[0][0].second.getGlobalBounds().height * Constants::InventoryHeight + 10.f)));
-
-	m_craftText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
-	m_craftText.setString("Crafting Mode");
-	m_craftText.setPosition(250.f - m_craftText.getGlobalBounds().width / 2.f, m_slots[0][0].second.getGlobalBounds().height * Constants::InventoryHeight + 25.f);
 }
 
 void Inventory::addItem(ItemPtr item)
@@ -80,6 +78,7 @@ void Inventory::events(const sf::Event &event, Game &game)
 
 	else if (event.type == sf::Event::MouseButtonReleased)
 	{
+		// Items can not be moved around in crafting mode
 		if (event.mouseButton.button == sf::Mouse::Left && !m_craftingModeEnabled)
 		{
 			InventoryPair* invPair = getSlotAt(sf::Vector2f(mousePos.x, mousePos.y));
@@ -89,50 +88,11 @@ void Inventory::events(const sf::Event &event, Game &game)
 				// A place action was done with an item already selected
 				if (m_mouseItem)
 				{
-					// There's an item in the slot that the player pressed, initiate a combine action
+					// There's an item in the slot that the player pressed, switch slots
 					if (invPair->first)
 					{
-
-						bool endCombining = false;
-
-						// Go through combinations of selected item
-						for (std::size_t i = 0; i < m_mouseItem->getCombinations().size(); i++)
-						{
-							// Go through combinations of inventory item
-							const CombineData &mouseCombine = m_mouseItem->getCombinations()[i];
-							for (std::size_t j = 0; j < invPair->first->getCombinations().size(); j++)
-							{
-								const CombineData &invCombine = invPair->first->getCombinations()[j];
-
-								// The items have combinations for eachother
-								if (mouseCombine.targetID == invPair->first->getID() &&
-									invCombine.targetID == m_mouseItem->getID() && // They have eachother as required item for crafting
-									mouseCombine.productItemID == invCombine.productItemID) // They have the same product item
-								{
-									int newItemID = mouseCombine.productItemID;
-
-									// Check if the items are consumed when used in this combination
-									if (mouseCombine.consumedOnCraft)
-										delete m_mouseItem.release();
-									if (invCombine.consumedOnCraft)
-										delete invPair->first.release();
-
-									// Add new item to inventory
-									addItem(std::move(ItemDatabase::instance().extractItem(newItemID)));
-
-									endCombining = true;
-									break;
-								}
-
-							}
-
-							if (endCombining)
-								break;
-						}
-
-						// If mouse item wasen't consumed by the combination, put it back into inventory
-						if (m_mouseItem)
-							addItem(std::move(m_mouseItem));
+						m_mouseItemSlot->first = std::move(invPair->first);
+						invPair->first = std::move(m_mouseItem);
 					}
 
 					// No item in the slot, then just place the item in that slot
@@ -142,7 +102,10 @@ void Inventory::events(const sf::Event &event, Game &game)
 
 				// Select new item, the item might be null (empty slot) but doesn't matter since we use null to determine if an item is selected
 				else
+				{
+					m_mouseItemSlot = invPair;
 					m_mouseItem = std::move(invPair->first);
+				}
 			}
 
 			// The user did not click on the inventory, try with world interaction
@@ -231,9 +194,22 @@ void Inventory::events(const sf::Event &event, Game &game)
 					addItem(std::move(m_mouseItem));
 			}
 		}
+		// Selecting crafting components
 		else if (event.mouseButton.button == sf::Mouse::Left && m_craftingModeEnabled)
 		{
+			for (std::size_t x = 0; x < m_slots.size(); x++)
+			{
+				for (std::size_t y = 0; y < m_slots[x].size(); y++)
+				{
+					InventoryPair& invPair = m_slots[x][y];
 
+					// If mouse is on top of an occupied inventory slot
+					if (invPair.first && invPair.second.getGlobalBounds().contains(mousePos.x, mousePos.y))
+						m_selectedSlots.push_back(sf::Vector2i(x, y));
+				}
+			}
+
+			highlightSelected();
 		}
 		else if (event.mouseButton.button == sf::Mouse::Right)
 		{
@@ -300,8 +276,12 @@ void Inventory::update(float deltaTime, Game &game)
 		sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
 		if (m_craftButton->getReleased(mousePos))
 		{
+			if (m_craftingModeEnabled && !m_selectedSlots.empty())
+				craft();
+
+			// Doesn't work atm if (m_selectedSlots.empty() || !m_craftingModeEnabled)
 			setCraftingMode(!m_craftingModeEnabled);
-			craft();
+
 		}
 	}
 }
@@ -340,7 +320,6 @@ void Inventory::draw()
 		}
 
 		m_craftButton->draw();
-		Renderer::instance().drawHUD(m_craftText);
 	}
 
 	// Draw selected item on hud or in-game depending on if inventory is open or not
@@ -375,38 +354,70 @@ bool Inventory::holdingItem() const
 		return false;
 }
 
+void Inventory::recolorSlots(const sf::Color &color)
+{
+	for (std::size_t x = 0; x < m_slots.size(); x++)
+	{
+		for (std::size_t y = 0; y < m_slots[x].size(); y++)
+		{
+			InventoryPair& invPair = m_slots[x][y];
+			invPair.second.setColor(color);
+		}
+	}
+}
+void Inventory::highlightSelected()
+{
+	for (auto &index : m_selectedSlots)
+		m_slots[index.x][index.y].second.setColor(sf::Color::Yellow);
+}
+
 void Inventory::setCraftingMode(bool enabled)
 {
 	m_craftingModeEnabled = enabled;
-	auto invRecolor = [&](const sf::Color &color) -> void
-	{
-		for (std::size_t x = 0; x < m_slots.size(); x++)
-		{
-			for (std::size_t y = 0; y < m_slots[x].size(); y++)
-			{
-				InventoryPair& invPair = m_slots[x][y];
-				invPair.second.setColor(color);
-			}
-		}
-	};
 
 	if (m_craftingModeEnabled)
 	{
-		m_craftText.setString("Craft");
-		m_craftText.setPosition(250.f - m_craftText.getGlobalBounds().width / 2.f, m_slots[0][0].second.getGlobalBounds().height * Constants::InventoryHeight + 25.f);
-		invRecolor(sf::Color::Green);
+		m_selectedSlots.clear();
+		recolorSlots(sf::Color::Green);
 	}
 
 	else
 	{
-		m_craftText.setString("Crafting Mode");
-		m_craftText.setPosition(250.f - m_craftText.getGlobalBounds().width / 2.f, m_slots[0][0].second.getGlobalBounds().height * Constants::InventoryHeight + 25.f);
-		invRecolor(sf::Color::White);
+		recolorSlots(sf::Color::White);
 	}
 }
 void Inventory::craft()
 {
+	std::vector<int> idVector;
 
+	for (auto &index : m_selectedSlots)
+	{
+		if (m_slots[index.x][index.y].first)
+			idVector.push_back(m_slots[index.x][index.y].first->getID());
+	}
+
+	CraftingDatabase::ItemPtr item = CraftingDatabase::instance().craftItem(idVector);
+
+	// An item was crafted
+	if (item)
+	{
+		// Remove all ingredients from inventory
+		for (auto &index : m_selectedSlots)
+			delete m_slots[index.x][index.y].first.release();
+
+		Notification::instance().write("\"" + item->getName() + "\" was crafted successfully!");
+
+		// Add item to inventory
+		addItem(std::move(item));
+	}
+	else
+	{
+		Notification::instance().write("That doesn't seem to work");
+	}
+
+
+	m_selectedSlots.clear();
+	recolorSlots(sf::Color::Green);
 }
 
 std::vector<const Item*> Inventory::getInventoryItems() const

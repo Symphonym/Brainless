@@ -30,21 +30,23 @@ struct pillar
 };
 
 RobotAkeAttack::RobotAkeAttack(ArcadeMachine &machine)
-:
-ArcadeGame(machine, "Robot Åke Attack"),
-m_gamePos(m_machine.getScreenPos()),
-m_score(0)
+	:
+	ArcadeGame(machine, "Robot Åke Attack"),
+	m_gamePos(m_machine.getScreenPos()),
+	m_score(0)
 {
-	hitbox.setTexture(ResourceLoader::instance().retrieveTexture("spr_player"));
-	hitbox.setColor(sf::Color(0, 0, 0, 128));
 	//Load font
 	m_scoreText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
-	m_scoreText.setPosition(m_gamePos.x, m_gamePos.y + 40);
 	m_scoreText.setString("");
+
+	m_dash.setTexture(ResourceLoader::instance().retrieveTexture("spr_dash"));
 	//Load backgrounds
 	m_backgrounds[0].setTexture(ResourceLoader::instance().retrieveTexture("bc_sky"));
 	m_backgrounds[0].setPosition(m_gamePos);
 	m_backgrounds[0].setScale(2, 2);
+	m_backgrounds[7].setTexture(ResourceLoader::instance().retrieveTexture("bc_frontClouds"));
+	m_backgrounds[7].setScale(2, 2);
+	m_backgrounds[7].setPosition(m_gamePos + sf::Vector2f(0,286));
 }
 
 void RobotAkeAttack::onGameStart()
@@ -63,17 +65,19 @@ void RobotAkeAttack::onGameStart()
 	delete m_player;
 	m_score = 0;
 	m_timer = 0;
+	m_pillarTimer = 3;
 	m_gameOver = false;
 	//Player
 	m_player = new tort();
-	m_player->box = sf::FloatRect(0, 0, 48, 48);
-	m_player->box.left = m_gamePos.x + 40;
-	m_player->box.top = m_gamePos.y + 300;
-	m_player->sprite.setScale(48, 48);
-	m_player->sprite.setTexture(ResourceLoader::instance().retrieveTexture("spr_player"));
+	m_player->box = sf::FloatRect(8, 4, 56, 32);
+	m_player->box.left = m_gamePos.x + 60;
+	m_player->box.top = m_gamePos.y + 100;
+	m_player->sprite.setScale(2, 2);
+	m_player->sprite.setTexture(ResourceLoader::instance().retrieveTexture("spr_tort"));
 	pillar* temp = new pillar();
 	//Pillars
-	m_pillars.push_back(createPillar(1, m_gamePos + sf::Vector2f(200, 400), false));
+	m_pillars.push_back(createPillar(1, m_gamePos + sf::Vector2f(100, 250), false));
+	m_pillars.push_back(createPillar(3, m_gamePos + sf::Vector2f(600, 400), false));
 }
 
 void RobotAkeAttack::events(const sf::Event &event)
@@ -97,10 +101,10 @@ void RobotAkeAttack::events(const sf::Event &event)
 			{
 				onGameStart();
 			}
-			else if(m_player->jumps > 0)
+			else if (m_player->jumps > 0)
 			{
 				m_player->jumps--;
-				m_player->y_speed = -600;
+				m_player->y_speed = -850; //500
 			}
 		}
 	}
@@ -112,13 +116,17 @@ void RobotAkeAttack::update(float deltaTime)
 	{
 		m_timer += deltaTime;
 		m_score += 100 * deltaTime;
-		m_speed = 400 + (m_timer * 40);
+		m_speed = 300 + (m_timer * 10);
 		//Dash boost
 		if (m_player->dash_cd > 0.3)
 			m_speed += 200;
 		//Player speed
 		else
+		{
 			m_player->y_speed = m_player->y_speed + (c_gravity* deltaTime);//Utility::clampValue<float>(m_player->y_speed + (c_gravity* deltaTime), -20000, 20000);
+			if (m_player->y_speed < 0)
+				m_player->y_speed -= (m_player->y_speed*3*deltaTime);
+		}
 		//Update pillars
 		for (int i = m_pillars.size() - 1; i >= 0; i--)
 		{
@@ -151,7 +159,6 @@ void RobotAkeAttack::update(float deltaTime)
 
 				delete m_pillars[i];
 				m_pillars.erase(m_pillars.begin() + i);
-				m_pillars.push_back(createPillar(1 + rand() % 3, m_gamePos + sf::Vector2f(700, Utility::clampValue<float>(m_player->sprite.getPosition().x - 50 + rand() % 100, 200, 500)), rand() % 2));
 			}
 		}
 		//Update stars
@@ -165,7 +172,7 @@ void RobotAkeAttack::update(float deltaTime)
 					m_player->star_mult++;
 					m_score += m_player->star_mult * 100;
 					m_texts.push_back(sf::Text(std::to_string(m_player->star_mult) + "x100", ResourceLoader::instance().retrieveFont("DefaultFont")));
-					m_texts[m_texts.size()-1].setPosition(m_stars[i]->getPosition());
+					m_texts[m_texts.size() - 1].setPosition(m_stars[i]->getPosition());
 					delete m_stars[i];
 					m_stars.erase(m_stars.begin() + i);
 				}
@@ -185,8 +192,6 @@ void RobotAkeAttack::update(float deltaTime)
 		//Player gravity
 		if (m_player->dash_cd <= 0.3)
 		{
-			if (m_player->y_speed < 0)
-				m_player->y_speed += 300 * deltaTime;
 			m_player->box.top += m_player->y_speed*deltaTime;
 		}
 		//Keep player within bounds
@@ -199,37 +204,65 @@ void RobotAkeAttack::update(float deltaTime)
 		m_player->dash_cd -= deltaTime;
 		if (m_player->dash_cd < 0)
 			m_player->dash_cd = 0;
+		//Decrement Pillar timer
+		m_pillarTimer -= deltaTime;
+		if (m_pillarTimer <= 0)
+		{
+			m_pillars.push_back(createPillar(1 + rand() % 3, m_gamePos + sf::Vector2f(700, Utility::clampValue<float>(m_player->sprite.getPosition().x - 70 + rand() % 140, 200, 500)), rand() % 2));
+			m_pillarTimer += 2.5;
+			//Adjust for game speed dialtion
+			m_pillarTimer = (m_pillarTimer / sqrt(sqrt(sqrt(sqrt(m_timer)))));
+		}
+		m_scoreText.setPosition(m_gamePos.x, m_gamePos.y + 40);
+		m_scoreText.setCharacterSize(32);
+		m_scoreText.setString("Score: " + std::to_string((int)floor(m_score)) + "\nHigh score:" + std::to_string((int)floor(m_hscore)));
+	}
+	else
+	{
+		m_scoreText.setPosition(m_gamePos.x + 150, m_gamePos.y + 150);
+		m_scoreText.setCharacterSize(48);
+		m_scoreText.setString("Game over\nScore: " + std::to_string((int)floor(m_score)) + "\nHigh score:" + std::to_string((int)floor(m_hscore)));
+	}
+	if (m_score>m_hscore)
+	{
+		m_hscore = m_score;
 	}
 	//Update texts
 	for (int i = m_texts.size() - 1; i >= 0; i--)
 	{
-		m_texts[i].setPosition(m_texts[i].getPosition() - sf::Vector2f(0,100*deltaTime));
+		m_texts[i].setPosition(m_texts[i].getPosition() - sf::Vector2f(0, 100 * deltaTime));
 		if (m_texts[i].getPosition().y + 30 < m_gamePos.y)
 		{
 			m_texts.erase(m_texts.begin() + i);
 		}
 	}
-	m_scoreText.setString("Score: " + std::to_string((int)floor(m_score)));
+	
 }
 
 void RobotAkeAttack::draw()
 {
 	//Draw backgrounds
 	Renderer::instance().drawHUD(m_backgrounds[0]);
+	m_backgrounds[7].setTextureRect(sf::IntRect((int)(pow(m_timer,1.3))%350, 0, 350, 137));
+	Renderer::instance().drawHUD(m_backgrounds[7]);
+
 	//Draw pillars
 	for (int i = 0; i < m_pillars.size(); i++)
 	{
 		int start_offset = std::max(0, (int)(m_gamePos.x - m_pillars[i]->position.x));
 		int end_offset = std::min(0, (int)((m_gamePos.x + 700) - (m_pillars[i]->position.x + m_pillars[i]->m_width)));
-		m_pillars[i]->sprite.setTextureRect(sf::IntRect(start_offset*0.5, 0, m_pillars[i]->m_width*0.5 - start_offset*0.5 + end_offset*0.5, 57));
+		m_pillars[i]->sprite.setTextureRect(sf::IntRect(start_offset*0.5, 0, m_pillars[i]->m_width*0.5 - start_offset*0.5 + end_offset*0.5, m_pillars[i]->sprite.getTexture()->getSize().y));
 		m_pillars[i]->sprite.setPosition(m_pillars[i]->position + sf::Vector2f(start_offset, 0));
 		Renderer::instance().drawHUD(m_pillars[i]->sprite);
-		for (int j = 0; j < m_pillars[i]->m_boxes.size(); j++)
+		/*for (int j = 0; j < m_pillars[i]->m_boxes.size(); j++)
 		{
-			hitbox.setScale(m_pillars[i]->m_boxes[j].width, m_pillars[i]->m_boxes[j].height);
-			hitbox.setPosition(sf::Vector2f(m_pillars[i]->m_boxes[j].left, m_pillars[i]->m_boxes[j].top));
-			Renderer::instance().drawHUD(hitbox);
-		}
+		sf::Sprite* temp = new sf::Sprite;
+		temp->setScale(m_pillars[i]->m_boxes[j].width, m_pillars[i]->m_boxes[j].height);
+		temp->setPosition(sf::Vector2f(m_pillars[i]->m_boxes[j].left, m_pillars[i]->m_boxes[j].top));
+		temp->setTexture(ResourceLoader::instance().retrieveTexture("spr_player"));
+		temp->setColor(sf::Color(0, 0, 0, 128));
+		Renderer::instance().drawHUD(*temp);
+		}*/
 	}
 	//Draw stars
 	for (int i = 0; i < m_stars.size(); i++)
@@ -241,21 +274,36 @@ void RobotAkeAttack::draw()
 	if (!m_gameOver)
 	{
 		m_player->sprite.setPosition(sf::Vector2f(m_player->box.left, m_player->box.top));
+		if (m_player->dash_cd > 0)
+		{
+			m_player->sprite.setTextureRect(sf::IntRect(64, 20, 32, 20));
+		}
+		else if (abs(m_player->y_speed) < 60)
+			m_player->sprite.setTextureRect(sf::IntRect(((int)floor(m_timer*sqrt(m_speed)) % 4) * 32, 0, 32, 20));
+		else if (m_player->y_speed > 0)
+			m_player->sprite.setTextureRect(sf::IntRect(0, 20, 32, 20));
+		else
+			m_player->sprite.setTextureRect(sf::IntRect(32, 20, 32, 20));
 		Renderer::instance().drawHUD(m_player->sprite);
+		if (m_player->dash_cd > 0)
+		{
+			m_dash.setPosition(m_player->sprite.getPosition() + sf::Vector2f(-65, -40));
+			m_dash.setTextureRect(sf::IntRect(round(8 - m_player->dash_cd * 10) * 103, 0, 103, 106));
+			Renderer::instance().drawHUD(m_dash);
+		}
 	}
+	Renderer::instance().drawHUD(m_scoreText);
 	//Draw Gui
-	for (int i = 0; i < m_texts.size();i++)
+	for (int i = 0; i < m_texts.size(); i++)
 	{
 		Renderer::instance().drawHUD(m_texts[i]);
 	}
-	Renderer::instance().drawHUD(m_scoreText);
 }
 
 pillar* RobotAkeAttack::createPillar(int type, sf::Vector2f position, bool star)
 {
 	pillar* temp = new pillar();
 	temp->position = position;
-	//temp->sprite.setTexture(ResourceLoader::instance().retrieveTexture("pillar1"));
 	temp->sprite.setTexture(ResourceLoader::instance().retrieveTexture("pillar" + std::to_string(type)));
 	temp->sprite.setScale(2, 2);
 	temp->m_width = temp->sprite.getTexture()->getSize().x * 2;
@@ -266,20 +314,21 @@ pillar* RobotAkeAttack::createPillar(int type, sf::Vector2f position, bool star)
 		temp->m_boxes.push_back(sf::FloatRect(temp->sprite.getPosition().x, temp->sprite.getPosition().y + 4, 540, 80));
 		break;
 	case 2:
-		temp->m_boxes.push_back(sf::FloatRect(temp->sprite.getPosition().x, temp->sprite.getPosition().y + 4, 540, 80));
-		temp->m_boxes.push_back(sf::FloatRect(temp->sprite.getPosition().x + 260, temp->sprite.getPosition().y - 26, 280, 30));
+		temp->m_boxes.push_back(sf::FloatRect(temp->sprite.getPosition().x + 2, temp->sprite.getPosition().y + 75, 863, 80));
+		temp->m_boxes.push_back(sf::FloatRect(temp->sprite.getPosition().x + 472, temp->sprite.getPosition().y + 10, 393, 65));
 		if (star)
 		{
-			createStar(position + sf::Vector2f(280, -30 - c_starSize));
+			createStar(position + sf::Vector2f(472, 10 - c_starSize));
 		}
+		m_pillarTimer += 0.5;
 		break;
 	case 3:
-		temp->m_boxes.push_back(sf::FloatRect(temp->sprite.getPosition().x, temp->sprite.getPosition().y + 4, 540, 80));
-		temp->m_boxes.push_back(sf::FloatRect(temp->sprite.getPosition().x, temp->sprite.getPosition().y - 26, 280, 30));
+		temp->m_boxes.push_back(sf::FloatRect(temp->sprite.getPosition().x + 4, temp->sprite.getPosition().y + 12, 1040, 80));
 		if (star)
 		{
-			createStar(position + sf::Vector2f(540 - c_starSize, -c_starSize));
+			createStar(position + sf::Vector2f(60 + rand() % 980 - c_starSize, 12 - c_starSize));
 		}
+		m_pillarTimer += 1;
 		break;
 	}
 	return temp;

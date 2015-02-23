@@ -378,6 +378,8 @@ void FileSave::loadGameData(Game &game)
 	
 	if (reader.is_open())
 	{
+		game.clearSavedZombies();
+
 		int savedZombieCount = 0;
 		reader >> savedZombieCount;
 		game.addSavedZombie(savedZombieCount);

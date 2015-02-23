@@ -5,6 +5,8 @@
 CraftingDatabase::CraftingDatabase()
 {
 	// TODO add crafting recipes
+	// TEST RECIPE
+	addRecipe(15, { 10, 16 });
 }
 
 CraftingDatabase::ItemPtr CraftingDatabase::craftItem(const std::vector<int> &idVector)

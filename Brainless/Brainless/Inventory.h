@@ -50,17 +50,21 @@ private:
 
 	// Item currently selected on the mouse
 	ItemPtr m_mouseItem;
+	InventoryPair* m_mouseItemSlot;
 
 	sf::Text m_highlightText;
 	sf::Texture m_highlightBackground;
 	sf::Sprite m_highlightBGSprite;
 	bool m_showHighlighText;
 
+	void recolorSlots(const sf::Color &color);
+	void highlightSelected();
+
 	void craft();
 	void setCraftingMode(bool enabled);
 	bool m_craftingModeEnabled;
-	sf::Text m_craftText;
 	GuiPtr m_craftButton;
+	std::vector<sf::Vector2i> m_selectedSlots;
 
 	std::array<std::array<InventoryPair, Constants::InventoryHeight>, Constants::InventoryWidth> m_slots;
 

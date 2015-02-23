@@ -7,8 +7,8 @@
 +Texture,images/UI/heartEmpty.png,heartEmpty
 
 # CRAFTING UI
-+Texture,images/UI/crafting_normal.png,Crafting_Normal
-+Texture,images/UI/crafting_pressed.png,Crafting_Pressed
++Texture,images/UI/CombineButtonUnactived.png,Crafting_Normal
++Texture,images/UI/CombineButton.png,Crafting_Pressed
 
 # GAME SHADER
 +Shader,shaders/DarknessShader.txt,DarknessShader

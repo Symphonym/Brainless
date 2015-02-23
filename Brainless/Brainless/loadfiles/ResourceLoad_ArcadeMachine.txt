@@ -19,8 +19,12 @@
 
 # ROBOT ÅKE ATTACK
 +Texture,images/arcade/spr_player.png,spr_player
++Texture,images/arcade/spr_tort.png,spr_tort
++Texture,images/arcade/spr_dash.png,spr_dash
 +Texture,images/arcade/spr_star.png,spr_star
 +Texture,images/arcade/bc_sky.png,bc_sky
++Texture,images/arcade/bc_backClouds.png,bc_backClouds
++Texture,images/arcade/bc_frontClouds.png,bc_frontClouds
 +Texture,images/arcade/pillar_1.png,pillar1
 +Texture,images/arcade/pillar_2.png,pillar2
 +Texture,images/arcade/pillar_3.png,pillar3
