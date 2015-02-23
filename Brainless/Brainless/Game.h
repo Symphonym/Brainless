@@ -52,7 +52,10 @@ public:
 	int getSavedZombieCount() const;
 
 	// Check if the inventory contains a specific item
-	bool inventoryContains(const std::string &itemName);
+	bool inventoryContains(const std::string &itemName) const;
+
+	// If the player is holding an item from the inventory, about to interact with the world
+	bool holdingItem() const;
 
 private:
 

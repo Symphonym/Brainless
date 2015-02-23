@@ -31,6 +31,7 @@ public:
 
 	// TODO Item needs clone functionality, prototype pattern, if we want to be able to inherit from item
 	explicit Item(const std::string &itemName, const std::string &inventoryTextureName, const std::string &textureName, int id, const Combinations &combineData = {});
+	virtual ~Item() {};
 
 	
 	// Updated when the item is held, when picked up from the inventory

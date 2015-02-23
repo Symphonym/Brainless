@@ -29,6 +29,12 @@
 #include "ThorsHammerItem.h"
 #include "SpiritFeatherItem.h"
 #include "ArcadeMachineItem.h"
+#include "ArcadeDiscItem.h"
+#include "RpgGame.h"
+#include "BeachParty.h"
+#include "Boop.h"
+#include "RobotAkeAttack.h"
+#include "NoteGame.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -62,6 +68,29 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new ScissorLiftItem(sf::Vector2f(0, 100), 200, 27)));
 	addItem(ItemPtr(new SpiritFeatherItem(28)));
 	addItem(ItemPtr(new ArcadeMachineItem(29)));
+
+
+	// Add arcade game discs
+	addItem(ItemPtr(new ArcadeDiscItem(30, [](ArcadeMachine &machine) -> ArcadeGame*
+	{
+		return new RpgGame(machine);
+	})));
+	addItem(ItemPtr(new ArcadeDiscItem(31, [](ArcadeMachine &machine) -> ArcadeGame*
+	{
+		return new BeachParty(machine);
+	})));
+	addItem(ItemPtr(new ArcadeDiscItem(32, [](ArcadeMachine &machine) -> ArcadeGame*
+	{
+		return new Boop(machine);
+	})));
+	addItem(ItemPtr(new ArcadeDiscItem(33, [](ArcadeMachine &machine) -> ArcadeGame*
+	{
+		return new RobotAkeAttack(machine);
+	})));
+	addItem(ItemPtr(new ArcadeDiscItem(34, [](ArcadeMachine &machine) -> ArcadeGame*
+	{
+		return new NoteGame(machine);
+	})));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)

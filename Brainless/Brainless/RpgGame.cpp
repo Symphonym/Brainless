@@ -20,6 +20,7 @@ m_hungerDelay(0)
 		{
 			Tile &tile = m_tiles[x][y];
 			tile.sprite.setTexture(ResourceLoader::instance().retrieveTexture("ArcadeGrassTile"));
+			tile.sprite.setScale(1.88, 1.88);
 			tile.sprite.setPosition(
 				m_machine.getScreenPos().x + 5.f + x*tile.sprite.getGlobalBounds().width,
 				m_machine.getScreenPos().y + 5.f + y*tile.sprite.getGlobalBounds().height);
@@ -29,13 +30,13 @@ m_hungerDelay(0)
 
 	// Initialize hunger bar
 	sf::Image barImg;
-	barImg.create(1, 30, sf::Color::White);
+	barImg.create(1, 50, sf::Color::White);
 	m_hungerBarTexture.loadFromImage(barImg);
 
 	m_hungerBar.setTexture(m_hungerBarTexture);
 	m_hungerBar.setPosition(
 		m_machine.getScreenPos().x + 200.f,
-		m_machine.getScreenPos().y + m_machine.getScreenSize().y - 35.f);
+		m_machine.getScreenPos().y + m_machine.getScreenSize().y - 60.f);
 
 	// Initialize game over text
 	m_gameOverText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
@@ -44,10 +45,18 @@ m_hungerDelay(0)
 		m_machine.getScreenPos().x + m_machine.getScreenSize().x / 2 - m_gameOverText.getGlobalBounds().width / 2.f,
 		m_machine.getScreenPos().y + m_machine.getScreenSize().y / 2 - m_gameOverText.getGlobalBounds().height / 2.f);
 
+	// Initialize info text
+	m_infoText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+	m_infoText.setString("Create rows of turtles to gain score\nDo not get crushed, do not get hungry");
+	m_infoText.setColor(sf::Color(0, 0, 0, 128));
+	m_infoText.setPosition(
+		m_machine.getScreenPos().x + m_machine.getScreenSize().x / 2 - m_infoText.getGlobalBounds().width / 2.f,
+		m_machine.getScreenPos().y + m_machine.getScreenSize().y / 2 - m_infoText.getGlobalBounds().height / 2.f - 10);
+
 	// Initialize score text
 	m_scoreText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_scoreText.setString("Score: 0");
-	m_scoreText.setPosition(m_machine.getScreenPos().x + 10.f, m_machine.getScreenPos().y + m_machine.getScreenSize().y - 35.f);
+	m_scoreText.setPosition(m_machine.getScreenPos().x + 10.f, m_machine.getScreenPos().y + m_machine.getScreenSize().y - 55.f);
 }
 
 void RpgGame::onGameStart()
@@ -72,24 +81,16 @@ void RpgGame::events(const sf::Event &event)
 	if (event.type == sf::Event::KeyReleased && m_player)
 	{
 		if (event.key.code == sf::Keyboard::W)
-		{
 			playerInputToTile(m_player->x, m_player->y - 1);
-		}
 
 		else if (event.key.code == sf::Keyboard::S)
-		{
 			playerInputToTile(m_player->x, m_player->y + 1);
-		}
 
 		else if (event.key.code == sf::Keyboard::D)
-		{
 			playerInputToTile(m_player->x + 1, m_player->y);
-		}
 
 		else if (event.key.code == sf::Keyboard::A)
-		{
 			playerInputToTile(m_player->x - 1, m_player->y);
-		}
 	}
 }
 void RpgGame::update(float deltaTime)
@@ -141,6 +142,8 @@ void RpgGame::draw()
 
 	if (!m_player)
 		Renderer::instance().drawHUD(m_gameOverText);
+	else
+		Renderer::instance().drawHUD(m_infoText);
 
 	ParticleSystem::instance().draw(true);
 }
@@ -190,7 +193,6 @@ void RpgGame::playerInputToTile(int x, int y)
 	if (canMove(x, y))
 	{
 		placeUnitOnTile(m_player, x, y);
-		//m_hunger -= 10;
 		tickGame();
 
 		if (m_player)
@@ -202,7 +204,7 @@ void RpgGame::playerInputToTile(int x, int y)
 		placeUnitOnTile(m_player, x, y);
 
 		// Killing enemies feeds your hunger bar
-		m_hunger += 50;
+		m_hunger += 30;
 		if (m_hunger >= m_hungerMax)
 			m_hunger = m_hungerMax;
 
@@ -284,6 +286,9 @@ void RpgGame::tickGame()
 			SoundPlayer::instance().playSound("ArcadeFail", m_machine.getScreenPos(), 20.f);
 			break; // Killing player ends game, and thus enemy input
 		}
+
+		if (unit->y == MapHeight - 1)
+			unit->sprite.setColor(sf::Color::Cyan);
 	}
 
 	

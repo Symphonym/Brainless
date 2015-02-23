@@ -190,6 +190,7 @@
 +Texture,images/items/Small-Hammer.png,HammerItem
 +Texture,images/items/thorsHammerItem.png,ThorsHammerItem
 +Texture,images/items/arcadeMachine.png,ArcadeMachineItem
++Texture,images/items/arcadeDisc.png,ArcadeDiscItem
 
 +Texture,images/items/pickup.png,TestItem
 +Texture,images/items/wizard_idle.png,TestItem2

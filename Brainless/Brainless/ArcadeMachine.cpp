@@ -27,14 +27,14 @@ m_playingGame(false)
 	m_arcadeBackground.setPosition(sf::Vector2f(m_arcadeForeground.getPosition().x + 290.f, m_arcadeForeground.getPosition().y + 10.f));
 
 	// ADD YOUR GAMES HERE
-	m_games[0] = GamePtr(new BeachParty(*this));
-	m_games[1] = GamePtr(new NoteGame(*this));
-	m_games[2] = GamePtr(new RobotAkeAttack(*this));
-	m_games[3] = GamePtr(new RpgGame(*this));
+	//m_games[0] = GamePtr(new BeachParty(*this));
+	//m_games[1] = GamePtr(new NoteGame(*this));
+	//m_games[2] = GamePtr(new RobotAkeAttack(*this));
+	//m_games[3] = GamePtr(new RpgGame(*this));
 	//m_games[2] = GamePtr(new ...);
 	//m_games[3] = GamePtr(new ...);
 
-	m_games[4] = GamePtr(new Boop(*this));
+	//m_games[4] = GamePtr(new Boop(*this));
 	//m_games[4] = GamePtr(new ...);
 
 	m_currentGameText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
@@ -51,7 +51,15 @@ m_playingGame(false)
 	m_escText.setPosition(getScreenPos());
 	m_escText.setString("ESC = EXIT");
 
-	for (std::size_t i = 0; i < m_gameSelectionButtons.size(); i++)
+
+	m_noGameText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+	m_noGameText.setString("No games are loaded");
+	m_noGameText.setPosition(
+		getScreenPos().x + getScreenSize().x / 2.f - m_noGameText.getGlobalBounds().width / 2.f,
+		getScreenPos().y + getScreenSize().y / 2.f - m_noGameText.getGlobalBounds().height / 2.f);
+	m_noGameText.setColor(sf::Color(0, 120, 0, 255));
+
+	/*for (std::size_t i = 0; i < m_gameSelectionButtons.size(); i++)
 	{
 		sf::Text &button = m_gameSelectionButtons[i];
 		button.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
@@ -62,21 +70,37 @@ m_playingGame(false)
 			button.setString("No game in slot");
 		button.setPosition(
 			getScreenPos().x + getScreenSize().x / 2.f - button.getGlobalBounds().width / 2.f,
-			getScreenPos().y + 100 + (button.getGlobalBounds().height + 5.f)*i);
+			getScreenPos().y + 100 + (50.f)*i);
 
 
-	}
-
-	for (std::size_t i = 0; i < GameCount - 1; i++)
-	{
-		//m_gameNames[i] = sf::Text(m_games[i]->getName(), ResourceLoader::instance().retrieveFont("DefaultFont"));
-		/*m_gameNames[i].setColor(sf::Color(0, 120, 0, 255));
-		m_gameNames[i].setPosition(getScreenSize().x + 100, getScreenSize().y + 100 + 50 * i);*/
-	}
+	}*/
 
 	SoundPlayer::instance().playMusic("ArcadeMusic", true, 20);
 }
 
+void ArcadeMachine::loadArcadeGame(ArcadeGame *game)
+{
+	sf::Text button;
+	button.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+	button.setCharacterSize(50);
+	button.setString(game->getName());
+
+	m_gameSelectionButtons.push_back(button);
+	m_games.push_back(std::move(GamePtr(game)));
+
+	refreshMenu();
+}
+
+void ArcadeMachine::refreshMenu()
+{
+	for (std::size_t i = 0; i < m_gameSelectionButtons.size(); i++)
+	{
+		sf::Text &button = m_gameSelectionButtons[i];
+		button.setPosition(
+			getScreenPos().x + getScreenSize().x / 2.f - button.getGlobalBounds().width / 2.f,
+			getScreenPos().y + 100 + (50.f)*i);
+	}
+}
 
 void ArcadeMachine::exitGame()
 {
@@ -108,27 +132,32 @@ void ArcadeMachine::events(const sf::Event &event)
 				ResourceLoader::instance().unloadResourceFile("loadfiles/ResourceLoad_ArcadeMachine.txt", false);
 				m_machine.popState();
 			}
-			else if (event.key.code == sf::Keyboard::D)
+			if (!m_games.empty())
 			{
-				if (m_games[m_currentGameIndex])
+				if (event.key.code == sf::Keyboard::D)
 				{
-					m_playingGame = true;
-					m_games[m_currentGameIndex]->onGameStart();
-					SoundPlayer::instance().playSound("ArcadeLight", getScreenPos(), 10);
+					if (m_games[m_currentGameIndex])
+					{
+						m_playingGame = true;
+						m_games[m_currentGameIndex]->onGameStart();
+						SoundPlayer::instance().playSound("ArcadeLight", getScreenPos(), 10);
+					}
 				}
-			}
-			else if (event.key.code == sf::Keyboard::W)
-			{
-				--m_currentGameIndex;
-				SoundPlayer::instance().playSound("ArcadeMedium", getScreenPos(), 10);
-			}
-			else if (event.key.code == sf::Keyboard::S)
-			{
-				++m_currentGameIndex;
-				SoundPlayer::instance().playSound("ArcadeMedium", getScreenPos(), 10);
+				else if (event.key.code == sf::Keyboard::W)
+				{
+					--m_currentGameIndex;
+					SoundPlayer::instance().playSound("ArcadeMedium", getScreenPos(), 10);
+				}
+				else if (event.key.code == sf::Keyboard::S)
+				{
+					++m_currentGameIndex;
+					SoundPlayer::instance().playSound("ArcadeMedium", getScreenPos(), 10);
+				}
+
+				m_currentGameIndex = Utility::clampValue<std::size_t>(m_currentGameIndex, 0, m_games.size() - 1);
 			}
 
-			m_currentGameIndex = Utility::clampValue<std::size_t>(m_currentGameIndex, 0, GameCount - 1);
+			
 		}
 
 	}
@@ -140,6 +169,9 @@ void ArcadeMachine::update(float deltaTime)
 {
 	SoundPlayer::instance().update(deltaTime, getScreenPos());
 
+	if (m_games.empty())
+		return;
+
 	if (m_playingGame)
 	{
 		m_currentGameText.setString("Playing game: " + m_games[m_currentGameIndex]->getName());
@@ -148,7 +180,7 @@ void ArcadeMachine::update(float deltaTime)
 	else
 	{
 		m_currentGameText.setString("");
-		for (std::size_t i = 0; i < GameCount; i++)
+		for (std::size_t i = 0; i < m_games.size(); i++)
 		{
 			sf::Text &gameButton = m_gameSelectionButtons[i];
 
@@ -163,7 +195,10 @@ void ArcadeMachine::draw()
 {
 	Renderer::instance().drawHUD(m_arcadeBackground);
 
-	if (m_playingGame)
+	if (m_games.empty())
+		Renderer::instance().drawHUD(m_noGameText);
+
+	if (m_playingGame && !m_games.empty())
 	{
 		m_games[m_currentGameIndex]->draw();
 		Renderer::instance().drawHUD(m_escText);
@@ -173,9 +208,6 @@ void ArcadeMachine::draw()
 
 		for (auto &button : m_gameSelectionButtons)
 			Renderer::instance().drawHUD(button);
-
-		for (auto &name : m_gameNames)
-			Renderer::instance().drawHUD(name);
 
 		Renderer::instance().drawHUD(m_infoText);
 	}

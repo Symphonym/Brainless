@@ -40,6 +40,8 @@ private:
 	// Destination tile and the unit
 	typedef std::unique_ptr<TileUnit> UnitPtr;
 
+	sf::Text m_infoText;
+
 	sf::Text m_gameOverText;
 
 	int m_score;

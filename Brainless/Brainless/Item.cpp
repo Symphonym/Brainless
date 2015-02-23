@@ -24,6 +24,9 @@ m_speed(sf::Vector2f(0,0))
 {
 	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
 	m_inventorySprite.setTexture(ResourceLoader::instance().retrieveTexture(inventoryTextureName));
+
+	// Default collision box is size of sprite
+	m_collisionSize = sf::Vector2f(m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height);
 }
 
 void Item::addCombination(int targetID, int productID, bool consumedOnCombine)

@@ -209,7 +209,7 @@ int Game::getSavedZombieCount() const
 	return m_savedZombies;
 }
 
-bool Game::inventoryContains(const std::string &itemName)
+bool Game::inventoryContains(const std::string &itemName) const
 {
 	for (std::size_t i = 0; i < m_inventory->getInventoryItems().size(); i++)
 	{
@@ -220,6 +220,11 @@ bool Game::inventoryContains(const std::string &itemName)
 	}
 
 	return false;
+}
+
+bool Game::holdingItem() const
+{
+	return m_inventory->holdingItem();
 }
 
 void Game::events(const sf::Event &event)
