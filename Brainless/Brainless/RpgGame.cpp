@@ -309,39 +309,36 @@ void RpgGame::tickGame()
 			m_spawnDelayMax = std::rand() % 4 + 2;
 		}
 
-		// Check a row consists entirely of enemies
-		for (std::size_t y = 0; y < m_tiles[0].size(); y++)
+		// Check if bottom row consists entirely on enemies
+		bool isUnit = true;
+		for (std::size_t x = 0; x < m_tiles.size(); x++)
 		{
-			bool isUnit = true;
+			Tile &tile = m_tiles[x][MapHeight-1];
+
+			// Check if an enemy isn't in a tile on the row
+			if (tile.unit == nullptr || tile.unit == m_player)
+			{
+				isUnit = false;
+				break;
+			}
+		}
+
+		if (isUnit)
+		{
 			for (std::size_t x = 0; x < m_tiles.size(); x++)
-			{
-				Tile &tile = m_tiles[x][y];
+				removeUnit(m_tiles[x][MapHeight-1].unit, sf::Color::Cyan);
 
-				// Check if an enemy isn't in a tile on the row
-				if (tile.unit == nullptr || tile.unit == m_player)
-				{
-					isUnit = false;
-					break;
-				}
-			}
-
-			if (isUnit)
-			{
-				for (std::size_t x = 0; x < m_tiles.size(); x++)
-					removeUnit(m_tiles[x][y].unit, sf::Color::Cyan);
-
-				// Reduce the amount of hunger you get per turtle
-				m_hungerAddition -= 2;
+			// Reduce the amount of hunger you get per turtle
+			m_hungerAddition -= 2;
 
 
-				// Cap hunger addition
-				if (m_hungerAddition <= 10)
-					m_hungerAddition = 10;
+			// Cap hunger addition
+			if (m_hungerAddition <= 10)
+				m_hungerAddition = 10;
 
-				++m_score;
-				m_scoreText.setString("Score: " + std::to_string(m_score));
-				SoundPlayer::instance().playSound("ArcadeLight2", m_machine.getScreenPos(), 20.f);
-			}
+			++m_score;
+			m_scoreText.setString("Score: " + std::to_string(m_score));
+			SoundPlayer::instance().playSound("ArcadeLight2", m_machine.getScreenPos(), 20.f);
 		}
 	}
 }
