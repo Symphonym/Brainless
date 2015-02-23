@@ -22,10 +22,9 @@ m_playingGame(false)
 	// Load game resources
 	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_ArcadeMachine.txt");
 
-	m_arcadeBackground.setTexture(ResourceLoader::instance().retrieveTexture("ArcadeMachineScreen"));
-	//m_arcadeBackground.setPosition(
-	//	m_window.getSize().x / 2.f - m_arcadeBackground.getGlobalBounds().width / 2.f,
-	//	0);
+	m_arcadeForeground.setTexture(ResourceLoader::instance().retrieveTexture("ArcadeMachineScreen"));
+	m_arcadeBackground.setTexture(ResourceLoader::instance().retrieveTexture("ArcadeBG"));
+	m_arcadeBackground.setPosition(sf::Vector2f(m_arcadeForeground.getPosition().x + 290.f, m_arcadeForeground.getPosition().y + 10.f));
 
 	// ADD YOUR GAMES HERE
 	m_games[0] = GamePtr(new BeachParty(*this));
@@ -41,6 +40,16 @@ m_playingGame(false)
 	m_currentGameText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_currentGameText.setPosition(getScreenPos());
 	m_currentGameText.setColor(sf::Color(0, 120, 0, 255));
+	m_infoText = m_currentGameText;
+	m_infoText.setPosition(300, 550);
+	m_infoText.setString("");
+	m_infoText.setString(m_infoText.getString() + "W = UP" + '\n');
+	m_infoText.setString(m_infoText.getString() + "S = DOWN" + '\n');
+	m_infoText.setString(m_infoText.getString() + "D = PLAY" + '\n');
+	m_infoText.setString(m_infoText.getString() + "A = EXIT");
+	m_escText = m_infoText;
+	m_escText.setPosition(getScreenPos());
+	m_escText.setString("ESC = EXIT");
 
 	for (std::size_t i = 0; i < m_gameSelectionButtons.size(); i++)
 	{
@@ -152,9 +161,12 @@ void ArcadeMachine::update(float deltaTime)
 }
 void ArcadeMachine::draw()
 {
+	Renderer::instance().drawHUD(m_arcadeBackground);
+
 	if (m_playingGame)
 	{
 		m_games[m_currentGameIndex]->draw();
+		Renderer::instance().drawHUD(m_escText);
 	}
 	else
 	{
@@ -164,18 +176,20 @@ void ArcadeMachine::draw()
 
 		for (auto &name : m_gameNames)
 			Renderer::instance().drawHUD(name);
+
+		Renderer::instance().drawHUD(m_infoText);
 	}
 
 	// Screen is drawn above the game, since it's transparent
-	Renderer::instance().drawHUD(m_arcadeBackground);
-	Renderer::instance().drawHUD(m_currentGameText);
+	Renderer::instance().drawHUD(m_arcadeForeground);
+	//Renderer::instance().drawHUD(m_currentGameText);
 }
 
 sf::Vector2f ArcadeMachine::getScreenPos() const
 {
-	return sf::Vector2f(m_arcadeBackground.getPosition().x + 290.f, m_arcadeBackground.getPosition().y + 10.f);;
+	return sf::Vector2f(m_arcadeForeground.getPosition().x + 290.f, m_arcadeForeground.getPosition().y + 10.f);;
 }
 sf::Vector2i ArcadeMachine::getScreenSize() const
 {
-	return sf::Vector2i(m_arcadeBackground.getGlobalBounds().width - (580.f), m_arcadeBackground.getGlobalBounds().height - 20.f);
+	return sf::Vector2i(m_arcadeForeground.getGlobalBounds().width - (580.f), m_arcadeForeground.getGlobalBounds().height - 20.f);
 }
