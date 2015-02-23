@@ -127,7 +127,6 @@ void Game::lootItem(Inventory::ItemPtr item)
 
 void Game::changeLevel(int levelIndex, bool swapPosition)
 {
-
 	sf::Vector2f player_location(-60, -60);
 	// Remeber old player location
 	if (swapPosition && m_player != nullptr)
@@ -141,9 +140,9 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 
 	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Level" + std::to_string(m_levelIndex) + ".txt");
 
-	// Save core game data before changing a level, mainly to maintain player data between levels
+	// Auto save level before changing level
 	if (m_player != nullptr) // If this is a level change from a menu, the player won't already exist
-		FileSave::saveGameData(*this);
+		saveGame();
 
 
 	// Reset level
@@ -164,6 +163,9 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 	// Add player to level
 	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(player_location))));
 	FileSave::loadGameData(*this); // Load core game data for player
+
+	// Auto save when loading a new level
+	saveGame();
 
 	//temp, texture borde laddas in på annat sätt.
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
@@ -187,7 +189,6 @@ void Game::saveGame()
 	FileSave::saveInventory(*m_inventory);
 	FileSave::saveLevelProgress(m_level, m_levelIndex);
 	FileSave::saveGameData(*this);
-	Notification::instance().write("Game saved successfully!");
 }
 
 Player& Game::getPlayer()
@@ -226,7 +227,10 @@ void Game::events(const sf::Event &event)
 	if (event.type == sf::Event::KeyReleased)
 	{
 		if (event.key.code == sf::Keyboard::N)
+		{
+			Notification::instance().write("Game saved successfully!");
 			saveGame();
+		}
 		else if (event.key.code == sf::Keyboard::Escape)
 			m_machine.pushState<PauseMenu>();
 

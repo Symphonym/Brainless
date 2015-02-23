@@ -49,17 +49,15 @@ m_newGameConfirmWindow(false)
 
 void MainMenu::update(float deltaTime)
 {
-	sf::Vector2i mousePos = sf::Mouse::getPosition(m_machine.getWindow());
-
 	if (!m_newGameConfirmWindow)
 	{
 
 		// New game
-		if (m_buttons[0]->getReleased(mousePos))
+		if (m_buttons[0]->getReleased(m_machine.getWindow()))
 			m_newGameConfirmWindow = true;
 
 		// Load game
-		else if (m_buttons[1]->getReleased(mousePos))
+		else if (m_buttons[1]->getReleased(m_machine.getWindow()))
 		{
 			m_machine.popState();
 			m_machine.pushState<Game>();
@@ -68,7 +66,7 @@ void MainMenu::update(float deltaTime)
 	else
 	{
 		// Yes
-		if (m_newGameButtons[0]->getReleased(mousePos))
+		if (m_newGameButtons[0]->getReleased(m_machine.getWindow()))
 		{
 			FileSave::wipeProgress();
 			m_machine.popState();
@@ -76,7 +74,7 @@ void MainMenu::update(float deltaTime)
 		}
 
 		// No
-		else if (m_newGameButtons[1]->getReleased(mousePos))
+		else if (m_newGameButtons[1]->getReleased(m_machine.getWindow()))
 			m_newGameConfirmWindow = false;
 	}
 }

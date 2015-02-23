@@ -12,7 +12,7 @@ public:
 	Button(sf::Texture &notPressed, sf::Texture &pressed, sf::IntRect placement);
 
 	//Checks if the button is pressed and released
-	virtual bool getReleased(const sf::Vector2i &mousePos);
+	virtual bool getReleased(const sf::RenderWindow &window);
 	virtual std::string getType();
 
 	virtual void draw();

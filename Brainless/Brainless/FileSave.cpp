@@ -311,14 +311,8 @@ bool FileSave::loadLevelProgress(Level &level, int levelNumber)
 
 		for (int i = 0; i < itemCount; i++)
 		{
-			std::string line;
-			std::getline(reader, line);
-
-			// Skip empty lines
-			if (line.empty())
-				continue;
-
-			int itemID = Utility::stringToNumber<int>(line);
+			int itemID = 0;
+			reader >> itemID;
 			ItemDatabase::ItemPtr item = std::move(ItemDatabase::instance().extractItem(itemID));
 
 			item->deserialize(reader);
@@ -331,24 +325,30 @@ bool FileSave::loadLevelProgress(Level &level, int levelNumber)
 
 		for (int i = 0; i < unitCount; i++)
 		{
-			std::string line;
-			std::getline(reader, line);
+			int unitID = 0;
+			reader >> unitID;
 
-			// Skip empty lines
-			if (line.empty())
-				continue;
-
-			int unitID = Utility::stringToNumber<int>(line);
 			Unit::UnitType unitType = static_cast<Unit::UnitType>(unitID);
 			Level::UnitPtr unit;
-
-			if (unitID == Unit::ID_WalkingZombie)
-				unit = Level::UnitPtr(new WalkingZombie(sf::Vector2f(0, 0), 0));
-			else if (unitID == Unit::ID_IdleZombie)
-				unit = Level::UnitPtr(new IdleZombie(sf::Vector2f(0, 0), Unit::Direction::dir_left));
-			else if (unitID == Unit::ID_ChasingZombie)
-				unit = Level::UnitPtr(new ChasingZombie(sf::Vector2f(0, 0), 0));
-
+			
+			switch (unitType)
+			{
+				case Unit::ID_IdleZombie:
+					unit = Level::UnitPtr(new IdleZombie(sf::Vector2f(0, 0), Unit::dir_left));
+					unit->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+					unit->updateAnimation(0);
+					break;
+				case Unit::ID_WalkingZombie:
+					unit = Level::UnitPtr(new WalkingZombie(sf::Vector2f(0, 0), 0));
+					unit->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+					unit->updateAnimation(0);
+					break;
+				case Unit::ID_ChasingZombie:
+					unit = Level::UnitPtr(new ChasingZombie(sf::Vector2f(0, 0), 0));
+					unit->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+					unit->updateAnimation(0);
+					break;
+			}
 			if (unit)
 			{
 				unit->deserialize(reader);
