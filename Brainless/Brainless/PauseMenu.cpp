@@ -28,14 +28,12 @@ State(machine)
 
 void PauseMenu::update(float deltaTime)
 {
-	sf::Vector2i mousePos = sf::Mouse::getPosition(m_machine.getWindow());
-
 	// Resume
-	if (m_buttons[0]->getReleased(mousePos))
+	if (m_buttons[0]->getReleased(m_machine.getWindow()))
 		m_machine.popState();
 
 	// Back to mainmenu
-	else if (m_buttons[1]->getReleased(mousePos))
+	else if (m_buttons[1]->getReleased(m_machine.getWindow()))
 	{
 		m_machine.popState(); // Pop pause
 		m_machine.popState(); // Pop game

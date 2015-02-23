@@ -105,6 +105,8 @@ void StateMachine::loop()
 		for (std::size_t i = 0; i < m_removeRequests.size(); i++)
 			m_removeRequests.pop_back();
 
+		State* thisState = m_states.empty() ? nullptr : m_states.back().get();
+
 		sf::Event event;
 		while (m_window.pollEvent(event))
 		{
@@ -113,12 +115,12 @@ void StateMachine::loop()
 
 			// Only top state gets events
 			if (!m_states.empty())
-				m_states.back()->events(event);
+				thisState->events(event);
 		}
 
 		// Only top state gets updates
 		if (!m_states.empty())
-			m_states.back()->update(deltaTime);
+			thisState->update(deltaTime);
 
 		// Update cursor regardless of state
 		Cursor::instance().update(m_window);
@@ -139,10 +141,14 @@ void StateMachine::loop()
 void StateMachine::draw()
 {
 	// All states are rendered
+	//for (int i = m_states.size() - 1; i >= 0; i--)
+	//	m_states[i]->draw();
 	for (std::size_t i = 0; i < m_states.size(); i++)
 	{
 		// Draw each state individually
 		m_states[i]->draw();
+	//if (m_state)
+	//m_states.back()->draw();
 		Renderer::instance().executeDraws();
 	}
 

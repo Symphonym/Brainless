@@ -211,28 +211,26 @@ void Editor::loop()
 
 		if (m_isMenu)
 		{
-			sf::Vector2i mousePos = sf::Mouse::getPosition(m_editor);
-
 			// Switch between modes
-			if (tileButton.getReleased(mousePos) || sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+			if (tileButton.getReleased(m_editor) || sf::Keyboard::isKeyPressed(sf::Keyboard::J))
 			{
 				m_editorMode = EditorModes::Grid;
 			}
-			else if (spriteButton.getReleased(mousePos) || sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+			else if (spriteButton.getReleased(m_editor) || sf::Keyboard::isKeyPressed(sf::Keyboard::K))
 			{
 				m_editorMode = EditorModes::Sprite;
 			}
-			else if (itemButton.getReleased(mousePos) || sf::Keyboard::isKeyPressed(sf::Keyboard::L))
+			else if (itemButton.getReleased(m_editor) || sf::Keyboard::isKeyPressed(sf::Keyboard::L))
 			{
 				m_editorMode = EditorModes::Item;
 			}
-			else if (cameraButton.getReleased(mousePos))
+			else if (cameraButton.getReleased(m_editor))
 			{
 				sf::Vector2f curCenter = m_camera.getCenter();
 				m_camera = m_editor.getDefaultView();
 				m_camera.setCenter(curCenter);
 			}
-			else if (saveButton.getReleased(mousePos))
+			else if (saveButton.getReleased(m_editor))
 			{
 				saveFile();
 				m_saveText.setString("File is saved!");

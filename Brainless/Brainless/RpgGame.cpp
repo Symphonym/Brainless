@@ -62,6 +62,7 @@ void RpgGame::onGameStart()
 
 	m_hunger = m_hungerMax;
 	m_spawnDelayCur = 0;
+	m_score = 0;
 	spawnPlayer();
 }
 
@@ -94,7 +95,7 @@ void RpgGame::update(float deltaTime)
 {
 	m_hungerDelay -= deltaTime;
 
-	if (m_hungerDelay <= 0)
+	if (m_hungerDelay <= 0 && m_player)
 	{
 		if (m_player)
 			--m_hunger;
@@ -106,6 +107,7 @@ void RpgGame::update(float deltaTime)
 			m_hunger = 0;
 			removeUnit(m_player, sf::Color::Yellow);
 			SoundPlayer::instance().playSound("ArcadeFail", m_machine.getScreenPos(), 20.f);
+			m_player = nullptr;
 		}
 	}
 
