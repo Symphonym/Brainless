@@ -328,7 +328,7 @@ void Editor::loop()
 void Editor::draw()
 {
 	Renderer::instance().drawBackground(m_editorBackground);
-	m_level.draw(m_camera);
+	m_level.draw(m_camera, true);
 
 	switch (m_editorMode)
 	{

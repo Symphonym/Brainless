@@ -7,6 +7,7 @@ Tile::Tile(const sf::FloatRect &bounds, TileTypes tileType, const sf::Vector2f &
 m_type(tileType),
 m_tileSprite(),
 m_bounds(bounds),
+m_editorVisibleOnly(false),
 m_tilt(false),
 m_platform(false),
 m_autotilingRange("")
@@ -56,6 +57,11 @@ bool Tile::getPlatform() const
 {
 	return m_platform;
 }
+bool Tile::getEditorVisibleOnly() const
+{
+	return m_editorVisibleOnly;
+}
+
 std::string Tile::getAutotilingRangeName() const
 {
 	return m_autotilingRange;
@@ -66,6 +72,7 @@ void Tile::updateType()
 	m_autotilingRange = "";
 	m_tilt = false;
 	m_platform = false;
+	m_editorVisibleOnly = false;
 
 	switch (m_type)
 	{
@@ -437,6 +444,11 @@ void Tile::updateType()
 		break;
 	case Wood_Corner_Full:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Wood_Corner_Full"));  m_autotilingRange = "WoodAutotiling";
+		break;
+
+	case Solid_Invisible:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("SolidInvisibleCube"));
+		m_editorVisibleOnly = true;
 		break;
 		
 	default:

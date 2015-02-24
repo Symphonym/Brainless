@@ -130,9 +130,9 @@ void Level::update(float deltaTime, Game &game)
 	updateUnitCollision(deltaTime, game);
 }
 
-void Level::draw(const sf::View &cameraView)
+void Level::draw(const sf::View &cameraView, bool editorMode)
 {
-	m_tileMap->draw(cameraView);
+	m_tileMap->draw(cameraView, editorMode);
 	//Find the screens percentual position on the screen
 	float screen_x = (cameraView.getCenter().x - (cameraView.getSize().x* 0.5)) / (3840 - cameraView.getSize().x),
 		screen_y = (cameraView.getCenter().y - (cameraView.getSize().y* 0.5)) / (1440 - cameraView.getSize().y);
