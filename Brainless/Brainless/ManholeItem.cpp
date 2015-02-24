@@ -18,12 +18,27 @@ m_ladder(ladderTexture, id)
 		0, 0,
 		getSprite().getGlobalBounds().width,
 		getSprite().getGlobalBounds().height);
+	m_interactDistance = sf::Vector2f(100, 100);
 	m_interactBounds = sf::FloatRect(0, 0,
 		getSprite().getGlobalBounds().width,
 		getSprite().getGlobalBounds().height + m_ladder.getSprite().getGlobalBounds().height);
 
 	// Refresh ladder position
 	setPosition(getPosition());
+}
+
+void ManholeItem::serialize(std::ofstream &writer) const
+{
+	Item::serialize(writer);
+
+	writer << m_open << std::endl;
+}
+void ManholeItem::deserialize(std::ifstream &reader)
+{
+	Item::deserialize(reader);
+
+	reader >> m_open;
+	refreshTexture();
 }
 
 void ManholeItem::onUse(Game &game)

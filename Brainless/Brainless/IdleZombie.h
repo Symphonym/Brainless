@@ -5,7 +5,7 @@
 class IdleZombie : public Zombie
 {
 public:
-	IdleZombie(sf::Vector2f startPosition,Direction startDirection);
+	IdleZombie(sf::Vector2f startPosition, Direction startDirection, int Texture);
 
 	void updateTask(float deltaTime);
 	void updateAnimation(float deltaTime);

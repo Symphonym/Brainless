@@ -90,6 +90,7 @@ void PopUpMenu::events(const sf::Event &event, Game &game)
 		}
 	}
 }
+#include <iostream>
 void PopUpMenu::update(Game &game, const sf::Vector2f &playerOrigo)
 {
 	sf::Vector2f mousePos = game.getWindow().mapPixelToCoords(sf::Mouse::getPosition(game.getWindow()));
@@ -106,14 +107,44 @@ void PopUpMenu::update(Game &game, const sf::Vector2f &playerOrigo)
 			// Calculate distance from player to item
 			if (m_interactItem)
 			{
-				sf::Vector2f itemCenter(
-					m_interactItem->getPosition().x + m_interactItem->getSprite().getGlobalBounds().width / 2.f,
-					m_interactItem->getPosition().y + m_interactItem->getSprite().getGlobalBounds().height / 2.f);
+				//sf::Vector2f itemCenter(
+				//	m_interactItem->getPosition().x + m_interactItem->getSprite().getGlobalBounds().width / 2.f,
+				//	m_interactItem->getPosition().y + m_interactItem->getSprite().getGlobalBounds().height / 2.f);
 
-				sf::Vector2f distanceVec = itemCenter - playerOrigo;
-				distanceVec.x = std::abs(distanceVec.x);
-				distanceVec.y = std::abs(distanceVec.y);
-				isWithinRange = distanceVec.x <= m_interactItem->getInteractDistance().x && distanceVec.y <= m_interactItem->getInteractDistance().y;
+				//sf::Vector2f distanceVec = itemCenter - playerOrigo;
+				//distanceVec.x = std::abs(distanceVec.x);
+				//distanceVec.y = std::abs(distanceVec.y);
+				sf::Vector2f topOrigo = sf::Vector2f(
+					m_interactItem->getInteractBounds().left + m_interactItem->getInteractBounds().width / 2.f,
+					m_interactItem->getInteractBounds().top);
+				sf::Vector2f botOrigo = sf::Vector2f(
+					m_interactItem->getInteractBounds().left + m_interactItem->getInteractBounds().width / 2.f,
+					m_interactItem->getInteractBounds().top + m_interactItem->getInteractBounds().height);
+
+				sf::Vector2f distanceVecTop = topOrigo - playerOrigo;
+				distanceVecTop.x = std::abs(distanceVecTop.x);
+				distanceVecTop.y = std::abs(distanceVecTop.y);
+
+				sf::Vector2f distanceVecBot = botOrigo - playerOrigo;
+				distanceVecBot.x = std::abs(distanceVecBot.x);
+				distanceVecBot.y = std::abs(distanceVecBot.y);
+
+				float distanceTop = std::abs(m_interactItem->getInteractBounds().top - playerOrigo.y);
+				float distanceBottom = std::abs((m_interactItem->getInteractBounds().top + m_interactItem->getInteractBounds().height) - playerOrigo.y);
+				float distanceLeft = std::abs(m_interactItem->getInteractBounds().left - playerOrigo.x);
+				float distanceRight = std::abs((m_interactItem->getInteractBounds().left + m_interactItem->getInteractBounds().width) - playerOrigo.x);
+
+				std::cout << "TOPx: " << distanceVecTop.x << std::endl;
+				std::cout << "TOPy: " << distanceVecTop.y << std::endl;
+				std::cout << "BOTx: " << distanceVecBot.x << std::endl;
+				std::cout << "BOTy: " << distanceVecBot.y << std::endl;
+
+				isWithinRange =
+					((distanceVecTop.x <= m_interactItem->getInteractDistance().x) && (distanceVecTop.y <= m_interactItem->getInteractDistance().y)) ||
+					((distanceVecBot.x <= m_interactItem->getInteractDistance().x) && (distanceVecBot.y <= m_interactItem->getInteractDistance().y));
+
+
+				//isWithinRange = distanceVec.x <= m_interactItem->getInteractDistance().x && distanceVec.y <= m_interactItem->getInteractDistance().y;
 
 				//distanceToPlayer = std::sqrt(distanceVec.x*distanceVec.x) + std::sqrt(distanceVec.y*distanceVec.y);
 			}

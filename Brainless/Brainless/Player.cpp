@@ -227,6 +227,8 @@ void Player::updateTask(float deltaTime)
 			m_speed.x = 0;
 		}
 	}
+
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
 		m_damageState = dmg_normal;
@@ -234,6 +236,7 @@ void Player::updateTask(float deltaTime)
 	}
 	if (m_inAir)
 	{
+
 		if (getPosition().y<m_fallPos)
 			m_fallPos = getPosition().y;
 	}
@@ -359,6 +362,8 @@ void Player::updateAnimation(float deltaTime)
 	//Ladder Climbing
 	if (m_climbing)
 	{
+		m_fallPos = getPosition().y;
+
 		if (m_speed.y == -1)
 			animation_climbingUp();
 
