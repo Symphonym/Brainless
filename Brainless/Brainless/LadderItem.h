@@ -9,7 +9,6 @@ public:
 
 	LadderItem(const std::string &ladderTexture, int id);
 
-
 	virtual void onUse(Game &game);
 	virtual void update(float deltaTime, Game &game);
 

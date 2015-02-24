@@ -12,8 +12,7 @@ SpiritFeatherItem::SpiritFeatherItem(int id)
 Item("Spirit Feather","SpiritFeather", "SpiritFeather", id),
 m_animation(100,100)
 {
-	m_collisionSize = sf::Vector2f(40, 100);
-	m_collisionOffset = sf::Vector2f(30, 0);
+	m_collisionBounds = sf::FloatRect(30, 0, 40, 100);
 	m_examineString = "It's a feather that's mystically hovering around";
 	m_useString = "You try to eat the feather. It's not tasty. You spit it out and put it back into its hovering position.";
 	m_animation.loop(0, 7, 0, 10);

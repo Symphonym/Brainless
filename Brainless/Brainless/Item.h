@@ -77,6 +77,7 @@ public:
 	std::string getPickupString() const;
 	std::string getExamineString() const;
 	/*virtual*/ sf::FloatRect getCollisionBounds() const; // Will be zero if collidable is false
+	sf::FloatRect getInteractBounds() const;
 	sf::Vector2f getInteractDistance() const;
 
 protected:
@@ -88,8 +89,8 @@ protected:
 	bool m_solid;
 	RenderingModes m_renderingMode; // Saved to file
 	sf::Vector2f m_interactDistance; // Allowed X and Y distance from player to interact with this item
-	sf::Vector2f m_collisionOffset;
-	sf::Vector2f m_collisionSize;
+	sf::FloatRect m_interactBounds;
+	sf::FloatRect m_collisionBounds;
 	std::string m_useString;
 	std::string m_pickupString;
 	std::string m_examineString;
