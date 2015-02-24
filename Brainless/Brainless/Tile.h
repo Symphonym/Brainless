@@ -140,7 +140,9 @@ public:
 		Wood_Corner_Not_TopRight = 137,
 		Wood_Corner_Not_DownLeft = 138,
 		Wood_Corner_Not_DownRight = 139,
-		Wood_Corner_Full = 140
+		Wood_Corner_Full = 140,
+
+		Solid_Invisible = 500
 	};
 
 	// Position/size of collision, tile type and offset for sprite
@@ -158,6 +160,7 @@ public:
 	TileTypes getType() const;
 	bool getTilt() const;
 	bool getPlatform() const;
+	bool getEditorVisibleOnly() const;
 
 	// Get name of autotiling range
 	std::string getAutotilingRangeName() const;
@@ -166,6 +169,8 @@ public:
 	sf::Sprite& getSprite();
 
 private:
+
+	bool m_editorVisibleOnly;
 	bool m_tilt;
 	bool m_platform;
 	std::string m_autotilingRange; // Name of autotiling range

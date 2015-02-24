@@ -361,7 +361,7 @@ bool Unit::updateCollision()
 
 	*/
 
-	std::cout << m_collisionLeft << m_collisionRight << m_collisionUp << m_collisionDown << std::endl;
+	//std::cout << m_collisionLeft << m_collisionRight << m_collisionUp << m_collisionDown << std::endl;
 
 	//NY VERSION TILL OVAN SIFFROR, EJ MYCKET TESTAT.
 	//Collision nere

@@ -14,7 +14,7 @@ public:
 	explicit TileMap(TileMapLayout layout, const unsigned int tileSize);
 
 	// Draws the tile grid and crops it against the specified camera
-	void draw(const sf::View &view);
+	void draw(const sf::View &view, bool editorMode);
 
 	// Converts a position to an index in the grid
 	sf::Vector2i positionToIndex(const sf::Vector2f &position) const;
