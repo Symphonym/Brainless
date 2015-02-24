@@ -153,6 +153,7 @@
     <ClCompile Include="RpgGame.cpp" />
     <ClCompile Include="RubberGlovesItem.cpp" />
     <ClCompile Include="ScissorLift.cpp" />
+    <ClCompile Include="SettingsMenu.cpp" />
     <ClCompile Include="SpiritBar.cpp" />
     <ClCompile Include="SpiritFeatherItem.cpp" />
     <ClCompile Include="State.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="RpgGame.h" />
     <ClInclude Include="RubberGlovesItem.h" />
     <ClInclude Include="ScissorLift.h" />
+    <ClInclude Include="SettingsMenu.h" />
     <ClInclude Include="SpiritBar.h" />
     <ClInclude Include="SpiritFeatherItem.h" />
     <ClInclude Include="State.h" />

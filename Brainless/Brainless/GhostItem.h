@@ -23,6 +23,7 @@ public:
 private:
 	float m_currentFrame = 0;
 	int m_frameCount = 13;
+	Animation m_animation;
 
 	// Dialog of the ghost
 	DialogTree m_dialog;
