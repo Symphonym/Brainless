@@ -13,6 +13,9 @@ public:
 	virtual void onUse(Game &game);
 	virtual void onPositionChanged();
 
+	virtual void serialize(std::ofstream &writer) const;
+	virtual void deserialize(std::ifstream &reader);
+
 	virtual void update(float deltaTime, Game &game);
 	virtual void draw();
 
