@@ -5,6 +5,8 @@
 +Texture,images/UI/spiritBarBG.png,SpiritBarBG
 +Texture,images/UI/heart.png,heart
 +Texture,images/UI/heartEmpty.png,heartEmpty
++Texture,images/UI/ghostavatar.png,GhostAvatar
++Texture,images/UI/playeravatar.png,PlayerAvatar
 
 # CRAFTING UI
 +Texture,images/UI/CombineButtonUnactived.png,Crafting_Normal
