@@ -2,7 +2,7 @@
 
 ArcadeDiscItem::ArcadeDiscItem(int id, ArcadeDiscItem::GameCreatorFunc gameCreator)
 :
-Item("Arcade Game", "ArcadeDiscItem", "ArcadeDiscItem", id),
+Item("Arcade Game","ArcadeDiscItemBlueBig", "ArcadeDiscItemBlueSmall", id),
 m_gameCreatorFunc(gameCreator)
 {
 	m_lootable = true;

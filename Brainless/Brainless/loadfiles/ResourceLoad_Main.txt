@@ -194,6 +194,9 @@
 +Texture,images/items/manholeclosed.png,ManholeClosed
 +Texture,images/items/manholeopen.png,ManholeOpen
 
++Texture,images/items/Discs/Big-Disk-Blue.png,ArcadeDiscItemBlueBig
++Texture,images/items/Discs/Small-Disk-Blue.png,ArcadeDiscItemBlueSmall
+
 +Texture,images/items/pickup.png,TestItem
 +Texture,images/items/wizard_idle.png,TestItem2
 +Texture,images/items/craftedTomte.png,TestItem3
