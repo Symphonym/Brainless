@@ -312,10 +312,61 @@ bool Unit::updateCollision()
 	if (m_collisionUp > 0 && m_collisionDown > 0)
 		std::cout << "OM DETTA KAN HÄNDA, UTÖKA TILL UP/NER VECTOR" << std::endl;
 
-		//down
-	if (m_collisionDown > 0/*m_collisionDown > m_collisionUp &&
-		m_collisionDown > m_collisionLeft &&
-		m_collisionDown > m_collisionRight*/) //VÄLDIGT EXPERIMENTAL!!!
+	/*
+	med följande värden och nuvarande tile kollision i level 2015-02-24
+	COLLISION_WIDTH 80
+	COLLISION_HEIGHT 190
+
+	kollision nere och höger
+	2001
+	3001
+
+	kollision nere och vänster
+	0301
+	0201
+
+	kollision uppe och höger
+	3010
+	2010
+
+	kollision uppe och vänster
+	0310
+	0210
+
+	kollision nere kan hända 
+	0002
+	0001
+	0101
+
+	uppe kan hända
+	1010
+	0020
+	0010
+
+	höger kan hända
+	3000
+	2000
+	1000
+
+	vänster kan hända
+	0300
+	0200
+	0100
+	
+	//EJ "LÄNKADE" FUNNA KOMBINATIONER
+	0202 , har uppstått, inget fel syntes. Om det hände vid nere, inget fel. Dock vet ej exakt när det inträffade.
+
+	Kommentera bort cout för att se kombinationer som uppstår
+
+	*/
+
+	std::cout << m_collisionLeft << m_collisionRight << m_collisionUp << m_collisionDown << std::endl;
+
+
+	//NY VERSION TILL OVAN SIFFROR, EJ MYCKET TESTAT.
+
+	//Collision nere
+	if (m_collisionDown > 0 && m_collisionLeft <= m_collisionDown && m_collisionRight <= m_collisionDown)
 	{
 		m_position.y = m_collisionNewPos.y;
 		m_speed.y = m_collisionNewSpeed.y;
@@ -323,45 +374,119 @@ bool Unit::updateCollision()
 		m_inAir = false;
 		m_inTilt = false;
 	}
-	//up
-	else if (m_collisionUp > 0/*m_collisionUp > m_collisionDown &&
-		m_collisionUp > m_collisionLeft &&
-		m_collisionUp > m_collisionRight*/) //VÄLDIGT EXPERIMENTAL OCKSÅ
+	//Collision ovan
+	else if (m_collisionUp > 0 && m_collisionLeft <= m_collisionUp && m_collisionRight <= m_collisionUp)
 	{
 		m_position.y = m_collisionNewPos.y;
 		m_speed.y = m_collisionNewSpeed.y;
 		m_acceleration.y = m_collisionNewAcc.y;
 	}
+	//Collision vänster
+	else if (m_collisionLeft > 0)
+	{
+		//vänster och nere
+		if (m_collisionDown > 0)
+		{
+			m_position = m_collisionNewPos;
+			m_speed = m_collisionNewSpeed;
+			m_acceleration = m_collisionNewAcc;
+			m_inAir = false;
+			m_inTilt = false;
+			wallLeft();
+		}
+		//vänster och uppe
+		else if (m_collisionUp > 0)
+		{
+			m_position = m_collisionNewPos;
+			m_speed = m_collisionNewSpeed;
+			m_acceleration = m_collisionNewAcc;
+			wallLeft();
+		}
+		else
+		{
+			m_position.x = m_collisionNewPos.x;
+			m_speed.x = m_collisionNewSpeed.x;
+			m_acceleration.x = m_collisionNewAcc.x;
+			wallLeft();
+		}
+	}
+	//Collision höger
+	else if (m_collisionRight > 0)
+	{
+		//höger och nere
+		if (m_collisionDown > 0)
+		{
+			m_position = m_collisionNewPos;
+			m_speed = m_collisionNewSpeed;
+			m_acceleration = m_collisionNewAcc;
+			m_inAir = false;
+			m_inTilt = false;
+			wallRight();
+		}
+		//höger och uppe
+		else if (m_collisionUp > 0)
+		{
+			m_position = m_collisionNewPos;
+			m_speed = m_collisionNewSpeed;
+			m_acceleration = m_collisionNewAcc;
+			wallRight();
+		}
+		else
+		{
+			m_position.x = m_collisionNewPos.x;
+			m_speed.x = m_collisionNewSpeed.x;
+			m_acceleration.x = m_collisionNewAcc.x;
+			wallRight();
+		}
+	}
+		//down
+	//if (/*m_collisionDown > 0*/m_collisionDown > m_collisionUp &&
+	//	m_collisionDown > m_collisionLeft &&
+	//	m_collisionDown > m_collisionRight) //VÄLDIGT EXPERIMENTAL!!!
+	//{
+	//	m_position.y = m_collisionNewPos.y;
+	//	m_speed.y = m_collisionNewSpeed.y;
+	//	m_acceleration.y = m_collisionNewAcc.y;
+	//	m_inAir = false;
+	//	m_inTilt = false;
+	//}
+	////up
+	//else if (/*m_collisionUp > 0*/m_collisionUp > m_collisionDown &&
+	//	m_collisionUp > m_collisionLeft &&
+	//	m_collisionUp > m_collisionRight) //VÄLDIGT EXPERIMENTAL OCKSÅ
+	//{
+	//	m_position.y = m_collisionNewPos.y;
+	//	m_speed.y = m_collisionNewSpeed.y;
+	//	m_acceleration.y = m_collisionNewAcc.y;
+	//}
 
-	//left
-	else if (m_collisionLeft > m_collisionDown &&
-		m_collisionLeft > m_collisionUp &&
-		m_collisionLeft > m_collisionRight)
-	{
-		m_position.x = m_collisionNewPos.x;
-		m_speed.x = m_collisionNewSpeed.x;
-		m_acceleration.x = m_collisionNewAcc.x;
-		wallLeft();
-	}
-	//right
-	else if (m_collisionRight > m_collisionDown &&
-		m_collisionRight > m_collisionLeft &&
-		m_collisionRight > m_collisionUp)
-	{
-		m_position.x = m_collisionNewPos.x;
-		m_speed.x = m_collisionNewSpeed.x;
-		m_acceleration.x = m_collisionNewAcc.x;
-		wallRight();
-	}
-	//multihit
-	else
-	{
-		m_position = m_collisionNewPos;
-		m_speed = m_collisionNewSpeed;
-		m_acceleration = m_collisionNewAcc;
-	}
-
-	std::cout << m_collisionLeft << m_collisionRight << m_collisionUp << m_collisionDown << std::endl;
+	////left
+	//else if (m_collisionLeft > m_collisionDown &&
+	//	m_collisionLeft > m_collisionUp &&
+	//	m_collisionLeft > m_collisionRight)
+	//{
+	//	m_position.x = m_collisionNewPos.x;
+	//	m_speed.x = m_collisionNewSpeed.x;
+	//	m_acceleration.x = m_collisionNewAcc.x;
+	//	wallLeft();
+	//}
+	////right
+	//else if (m_collisionRight > m_collisionDown &&
+	//	m_collisionRight > m_collisionLeft &&
+	//	m_collisionRight > m_collisionUp)
+	//{
+	//	m_position.x = m_collisionNewPos.x;
+	//	m_speed.x = m_collisionNewSpeed.x;
+	//	m_acceleration.x = m_collisionNewAcc.x;
+	//	wallRight();
+	//}
+	////multihit
+	//else
+	//{
+	//	m_position = m_collisionNewPos;
+	//	m_speed = m_collisionNewSpeed;
+	//	m_acceleration = m_collisionNewAcc;
+	//}
 
 	m_collisionNewPos = m_position;
 	m_collisionNewSpeed = m_speed;
