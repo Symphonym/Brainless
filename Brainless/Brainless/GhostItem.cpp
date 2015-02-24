@@ -13,7 +13,7 @@ m_animation(SPRITESIZE, SPRITESIZE),
 Item("Ghost","GhostItem", "GhostItem", id)
 {
 	m_dialog.loadDialogFile(dialogFile);
-
+	m_interactBounds = sf::FloatRect(65, 75, 150, 150);
 	m_lootable = false;
 	m_usable = true;
 	m_pickupString = "It would be unwise to try to pick up a ghost";

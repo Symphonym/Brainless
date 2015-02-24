@@ -156,18 +156,18 @@ void ConversationBox::draw()
 {
 	if (m_isShown)
 	{
-		Renderer::instance().drawHUD(m_background);
+		//Renderer::instance().drawHUD(m_background);
 		Renderer::instance().drawHUD(m_portraitSprite);
 
 		// Draw answers only if it's the player's turn to speak
 		if (m_conversationState == ConversationStates::Player)
 		{
-			for (std::size_t i = 0; i < m_answers.size(); i++)
-				Renderer::instance().drawHUD(m_answers[i]);
+			//for (std::size_t i = 0; i < m_answers.size(); i++)
+			//	Renderer::instance().drawHUD(m_answers[i]);
 		}
 		// Draw the dialog only if it's the NPC speaking
-		else if (m_conversationState == ConversationStates::NPC)
-			m_dialogBox.Draw();
+		//else if (m_conversationState == ConversationStates::NPC)
+			//m_dialogBox.Draw();
 	}
 
 }
