@@ -17,6 +17,7 @@ m_animation(100,100)
 	m_examineString = "It's a feather that's mystically hovering around";
 	m_useString = "You try to eat the feather. It's not tasty. You spit it out and put it back into its hovering position.";
 	m_animation.loop(0, 7, 0, 10);
+	getSprite().setScale(0.7,0.7);
 	getSprite().setTextureRect(m_animation.getRectangle(0));
 }
 

@@ -12,7 +12,7 @@ m_isLocked(locked)
 	m_collidable = true;
 
 	m_collisionSize = sf::Vector2f(25, 192);
-	m_collisionOffset = sf::Vector2f(40, 0);
+	m_collisionOffset = sf::Vector2f(20, 0);
 }
 
 bool DoorItem::onInteractedWith(Item &otherItem, Game &game)
@@ -36,9 +36,15 @@ void DoorItem::onUse(Game &game)
 		m_collidable = !m_collidable;
 
 		if (m_isOpen)
+		{
+			m_collisionSize = sf::Vector2f(90, 192);
 			getSprite().setTexture(ResourceLoader::instance().retrieveTexture("DoorOpen"));
+		}
 		else
+		{
+			m_collisionSize = sf::Vector2f(25, 192);
 			getSprite().setTexture(ResourceLoader::instance().retrieveTexture("DoorClosed"));
+		}
 	}
 
 
