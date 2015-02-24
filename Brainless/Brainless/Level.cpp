@@ -198,6 +198,9 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 		Unit* currentUnit = m_units[i].get();
 
 		currentUnit->updateTask(deltaTime);
+
+
+
 		currentUnit->updateMovement(Constants::Gravity, deltaTime);
 		
 		sf::FloatRect unitBounds = currentUnit->getCollisionRect();
