@@ -11,7 +11,7 @@ class ArcadeDiscItem : public Item
 public:
 	typedef std::function<ArcadeGame*(ArcadeMachine &machine)> GameCreatorFunc;
 
-	ArcadeDiscItem(int id, GameCreatorFunc gameCreator);
+	ArcadeDiscItem(int id, const std::string &colorName, GameCreatorFunc gameCreator);
 
 	ArcadeGame* createArcadeGame(ArcadeMachine &machine);
 

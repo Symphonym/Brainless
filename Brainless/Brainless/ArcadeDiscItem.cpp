@@ -1,8 +1,8 @@
 #include "ArcadeDiscItem.h"
 
-ArcadeDiscItem::ArcadeDiscItem(int id, ArcadeDiscItem::GameCreatorFunc gameCreator)
+ArcadeDiscItem::ArcadeDiscItem(int id, const std::string &colorName, ArcadeDiscItem::GameCreatorFunc gameCreator)
 :
-Item("Arcade Game","ArcadeDiscItemBlueBig", "ArcadeDiscItemBlueSmall", id),
+Item("Arcade Game","ArcadeDiscItem" + colorName + "Big", "ArcadeDiscItem" + colorName + "Small", id),
 m_gameCreatorFunc(gameCreator)
 {
 	m_lootable = true;
