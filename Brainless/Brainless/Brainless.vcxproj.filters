@@ -342,6 +342,9 @@
     <ClCompile Include="ManholeItem.cpp">
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
+    <ClCompile Include="Snake.cpp">
+      <Filter>Source Files\Game\ArcadeGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -610,6 +613,9 @@
     </ClInclude>
     <ClInclude Include="ManholeItem.h">
       <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Snake.h">
+      <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
