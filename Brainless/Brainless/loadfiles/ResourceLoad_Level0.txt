@@ -1,7 +1,8 @@
 # BACKGROUND TEXTURES
-+Texture,images/backgrounds/ABackground.png,ABackground
-+Texture,images/backgrounds/BBackground.png,BBackground
-+Texture,images/backgrounds/CBackground.png,CBackground
+#+Texture,images/backgrounds/ABackground.png,ABackground
+#+Texture,images/backgrounds/BBackground.png,BBackground
+#+Texture,images/backgrounds/CBackground.png,CBackground
++Texture,images/backgrounds/Park.png,Park
 +Texture,images/backgrounds/Room.png,Room
 
 # BACKGROUND MUSIC

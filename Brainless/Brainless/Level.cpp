@@ -37,9 +37,11 @@ void Level::loadLevelResources()
 	m_backgrounds.clear();
 
 	// Load backgrounds
-	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("ABackground")));
+	/*m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("ABackground")));
 	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("BBackground")));
-	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("CBackground")));
+	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("CBackground")));*/
+
+	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("Park")));
 
 	//SoundPlayer::instance().playMusic("LevelMusic", true);
 }
