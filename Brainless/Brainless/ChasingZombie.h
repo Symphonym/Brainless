@@ -5,7 +5,7 @@
 class ChasingZombie : public Zombie
 {
 public:
-	ChasingZombie(sf::Vector2f startPosition, int maxLengthX);
+	ChasingZombie(sf::Vector2f startPosition, int maxLengthX, int Texture);
 
 	void updateTask(float deltaTime);
 	void updateAnimation(float deltaTime);

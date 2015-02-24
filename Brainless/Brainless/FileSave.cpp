@@ -76,17 +76,17 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 	for (std::size_t i = 0; i < level.getUnits().size(); i++)
 	{
 		Unit& curUnit = *level.getUnits()[i].get();
-		writer << (int)curUnit.getUnitType() << ",";
+		writer << (int)curUnit.getUnitType() << "," << curUnit.getPosition().x << "," << curUnit.getPosition().y << "," << ((Zombie&)(curUnit)).getTexture() << ",";
 		switch (curUnit.getUnitType())
 		{
 		case Unit::ID_IdleZombie:
-			writer << curUnit.getPosition().x << "," << curUnit.getPosition().y << "," << (int)curUnit.getDirection() << std::endl;
+			writer << (int)curUnit.getDirection() << std::endl;
 			break;
 		case Unit::ID_WalkingZombie:
-			writer << curUnit.getPosition().x << "," << curUnit.getPosition().y << "," << (((WalkingZombie&) curUnit)).getWalkLenght() << std::endl;
+			writer << (((WalkingZombie&)curUnit)).getWalkLenght() << std::endl;
 			break;
 		case Unit::ID_ChasingZombie:
-			writer << curUnit.getPosition().x << "," << curUnit.getPosition().y << "," << (((ChasingZombie&)curUnit)).getWalkLenght() << std::endl;
+			writer << (((ChasingZombie&)curUnit)).getWalkLenght() << std::endl;
 			break;
 		}
 	}
@@ -202,19 +202,19 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 			switch (unitID)
 			{
 			case Unit::ID_IdleZombie:
-				temp = new IdleZombie(sf::Vector2f(posX, posY),(Unit::Direction)Utility::stringToNumber<int>(unitData[3]));
+				temp = new IdleZombie(sf::Vector2f(posX, posY), (Unit::Direction)Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
 				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				temp->updateAnimation(0);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
 				break;
 			case Unit::ID_WalkingZombie:
-				temp = new WalkingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[3]));
+				temp = new WalkingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
 				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				temp->updateAnimation(0);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
 				break;
 			case Unit::ID_ChasingZombie:
-				temp = new ChasingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[3]));
+				temp = new ChasingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
 				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				temp->updateAnimation(0);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
@@ -330,24 +330,24 @@ bool FileSave::loadLevelProgress(Level &level, int levelNumber)
 
 			Unit::UnitType unitType = static_cast<Unit::UnitType>(unitID);
 			Level::UnitPtr unit;
-			
+
 			switch (unitType)
 			{
-				case Unit::ID_IdleZombie:
-					unit = Level::UnitPtr(new IdleZombie(sf::Vector2f(0, 0), Unit::dir_left));
-					unit->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-					unit->updateAnimation(0);
-					break;
-				case Unit::ID_WalkingZombie:
-					unit = Level::UnitPtr(new WalkingZombie(sf::Vector2f(0, 0), 0));
-					unit->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-					unit->updateAnimation(0);
-					break;
-				case Unit::ID_ChasingZombie:
-					unit = Level::UnitPtr(new ChasingZombie(sf::Vector2f(0, 0), 0));
-					unit->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-					unit->updateAnimation(0);
-					break;
+			case Unit::ID_IdleZombie:
+				unit = Level::UnitPtr(new IdleZombie(sf::Vector2f(0, 0), Unit::dir_left, 0));
+				unit->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+				unit->updateAnimation(0);
+				break;
+			case Unit::ID_WalkingZombie:
+				unit = Level::UnitPtr(new WalkingZombie(sf::Vector2f(0, 0), 0, 0));
+				unit->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+				unit->updateAnimation(0);
+				break;
+			case Unit::ID_ChasingZombie:
+				unit = Level::UnitPtr(new ChasingZombie(sf::Vector2f(0, 0), 0, 0));
+				unit->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+				unit->updateAnimation(0);
+				break;
 			}
 			if (unit)
 			{
@@ -375,7 +375,7 @@ void FileSave::saveGameData(Game &game)
 void FileSave::loadGameData(Game &game)
 {
 	std::ifstream reader("save/game.txt");
-	
+
 	if (reader.is_open())
 	{
 		game.clearSavedZombies();
@@ -394,7 +394,7 @@ void FileSave::loadGameData(Game &game)
 		game.getPlayer().setHealth(playerHealth);
 	}
 
-	
+
 	reader.close();
 }
 
@@ -403,7 +403,7 @@ void FileSave::wipeProgress()
 	// Rename the file first so that the game won't misstakenly interact with a non-existing file
 	std::rename("save/inventory.txt", "save/inventory_old.txt");
 	std::remove("save/inventory_old.txt");
-	
+
 	for (int i = 0; i < 10; i++)
 	{
 
