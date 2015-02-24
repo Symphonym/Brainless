@@ -589,6 +589,8 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 				{
 					return item->onCollisionWithUnit(*currentUnit, game);
 				}
+				else
+					return false;
 			}), m_items.end());
 
 #pragma endregion itemCollision
