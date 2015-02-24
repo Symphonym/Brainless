@@ -404,6 +404,9 @@ void FileSave::wipeProgress()
 	std::rename("save/inventory.txt", "save/inventory_old.txt");
 	std::remove("save/inventory_old.txt");
 
+	std::rename("save/game.txt", "save/game_old.txt");
+	std::remove("save/game_old.txt");
+
 	for (int i = 0; i < 10; i++)
 	{
 
