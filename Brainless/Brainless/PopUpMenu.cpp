@@ -50,7 +50,7 @@ void PopUpMenu::events(const sf::Event &event, Game &game)
 			// Do backwards to take the topmost item first
 			for (int i = game.getLevel().getItems().size()-1; i >= 0; i--)
 			{
-				sf::FloatRect itemBounds = game.getLevel().getItems()[i]->getCollisionBounds();
+				sf::FloatRect itemBounds = game.getLevel().getItems()[i]->getInteractBounds();
 			
 				// left clicked on item
 				if (itemBounds.contains(mousePos))

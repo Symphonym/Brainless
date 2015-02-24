@@ -33,6 +33,7 @@
 #include "Boop.h"
 #include "RobotAkeAttack.h"
 #include "NoteGame.h"
+#include "ManholeItem.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -89,6 +90,10 @@ ItemDatabase::ItemDatabase()
 	{
 		return new NoteGame(machine);
 	})));
+
+
+	addItem(ItemPtr(new ManholeItem(false, "LadderTest", 35)));
+
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)
