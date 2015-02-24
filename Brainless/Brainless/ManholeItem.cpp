@@ -82,13 +82,13 @@ void ManholeItem::refreshTexture()
 		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("ManholeOpen"));
 		m_interactBounds = sf::FloatRect(0, 0,
 			getSprite().getGlobalBounds().width,
-			getSprite().getGlobalBounds().height);
+			getSprite().getGlobalBounds().height + m_ladder.getSprite().getGlobalBounds().height);
 	}
 	else
 	{
 		m_interactBounds = sf::FloatRect(0, 0,
 			getSprite().getGlobalBounds().width,
-			getSprite().getGlobalBounds().height + m_ladder.getSprite().getGlobalBounds().height);
+			getSprite().getGlobalBounds().height);
 		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("ManholeClosed"));
 	}
 }
