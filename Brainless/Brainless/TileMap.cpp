@@ -26,7 +26,7 @@ m_tileSize(tileSize)
 	}
 }
 
-void TileMap::draw(const sf::View &view)
+void TileMap::draw(const sf::View &view, bool editorMode)
 {
 	sf::Vector2f topLeft(
 		view.getCenter().x - view.getSize().x / 2,
@@ -61,8 +61,14 @@ void TileMap::draw(const sf::View &view)
 
 	// Render tiles from bottom right to top left
 	for (int x = startIndex.x; x >= endIndex.x; x--)
+	{
 		for (int y = startIndex.y; y >= endIndex.y; y--)
-			m_tileMap[x][y].draw();
+		{
+			Tile &tile = m_tileMap[x][y];
+			if (editorMode || !tile.getEditorVisibleOnly())
+				tile.draw();
+		}
+	}
 }
 
 // Converts a position to an index in the grid

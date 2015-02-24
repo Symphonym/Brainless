@@ -43,7 +43,7 @@ public:
 	void reset();
 
 	void update(float deltaTime, Game &game);
-	void draw(const sf::View &cameraView);
+	void draw(const sf::View &cameraView, bool editorMode = false);
 
 	TileMap& getTileMap();
 	const std::vector<ItemPtr>& getItems() const;

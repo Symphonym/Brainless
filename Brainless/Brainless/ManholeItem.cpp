@@ -10,14 +10,8 @@ m_ladder(ladderTexture, id)
 {
 	m_lootable = false;
 	m_usable = true;
-	m_solid = true;
-	m_collidable = true;
 	m_examineString = "It reminds Maive of her favorite tv-show. Teenage Mutant Ninja Åke!";
 
-	m_collisionBounds = sf::FloatRect(
-		0, 0,
-		getSprite().getGlobalBounds().width,
-		getSprite().getGlobalBounds().height);
 	m_interactDistance = sf::Vector2f(100, 100);
 	m_interactBounds = sf::FloatRect(0, 0,
 		getSprite().getGlobalBounds().width,
@@ -69,7 +63,7 @@ void ManholeItem::draw()
 {
 	if (m_open)
 	{
-		Renderer::instance().drawBehind(getSprite());
+		Renderer::instance().drawDepth(getSprite());
 		Renderer::instance().drawAbove(m_ladder.getSprite());
 	}
 	else

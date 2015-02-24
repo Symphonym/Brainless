@@ -66,7 +66,7 @@ void LadderItem::update(float deltaTime, Game &game)
 {
 	if (m_inUse)
 	{
-		m_lerpValue += deltaTime;
+		m_lerpValue += (deltaTime / getSprite().getGlobalBounds().height) * 250.f;//*(1.0f - getSprite().getGlobalBounds().height / 1280.f);
 
 		// Just make sure player is relatively near ladder to begin climbing
 		if (!m_reachedStartPos)
@@ -94,16 +94,15 @@ void LadderItem::update(float deltaTime, Game &game)
 		}
 		else
 		{
+			//sf::Vector2f vecToEnd = m_endPos - game.getPlayer().getPosition();
+			//float distanceToEnd = std::sqrt(vecToEnd.x*vecToEnd.x + vecToEnd.y*vecToEnd.y);
+
 
 			sf::Vector2f lerpToEnd = sf::Vector2f(0, 0);
 			lerpToEnd.x = m_startPos.x + (m_endPos.x - m_startPos.x) * m_lerpValue;
 			lerpToEnd.y = m_startPos.y + (m_endPos.y - m_startPos.y) * m_lerpValue;
 
-			// Lerp towards end
 			game.getPlayer().setPosition(lerpToEnd);
-
-			sf::Vector2f vecToEnd = m_endPos - game.getPlayer().getPosition();
-			float distanceToEnd = std::sqrt(vecToEnd.x*vecToEnd.x + vecToEnd.y*vecToEnd.y);
 
 			// Player has reached end of ladder
 			if (m_lerpValue >= 1.f)

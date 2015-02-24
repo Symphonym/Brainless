@@ -19,6 +19,9 @@
 +Texture,images/tiles/cubeTilted.png,TiltCube
 +Texture,images/tiles/cubePlatform.png,PlatformCube
 
+# Solid invisible tile
++Texture,images/tiles/solidInvisible.png,SolidInvisibleCube
+
 #---Road---
 # /TopRight
 +Texture,images/tiles/Road/TopRight/Road_Top_Right.png,Road_Top_Right
