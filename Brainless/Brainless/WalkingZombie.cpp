@@ -11,9 +11,9 @@
 
 //v0.02
 
-WalkingZombie::WalkingZombie(sf::Vector2f startPosition, int maxDisparityX)
+WalkingZombie::WalkingZombie(sf::Vector2f startPosition, int maxDisparityX, int Texture)
 :
-Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_WalkingZombie),
+Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_WalkingZombie,Texture),
 m_maxPositionX(maxDisparityX + startPosition.x),
 m_walkLenght(maxDisparityX),
 m_direction(dir_right),
@@ -139,7 +139,7 @@ void WalkingZombie::updateAnimation(float deltaTime)
 	if (m_animState != anim_walking)
 	{
 		m_sprite = &m_spriteSheets[0];
-		m_animation.loop(0, 7, 4, 5);
+		m_animation.loop(0, 7, m_textureId * 2, 5);
 		m_animState = anim_walking;
 	}
 

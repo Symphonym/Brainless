@@ -5,7 +5,7 @@
 class WalkingZombie : public Zombie
 {
 public:
-	WalkingZombie(sf::Vector2f startPosition, int maxLengthX);
+	WalkingZombie(sf::Vector2f startPosition, int maxLengthX, int Texture);
 
 	void updateTask(float deltaTime);
 	void updateAnimation(float deltaTime);
