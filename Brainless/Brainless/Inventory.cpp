@@ -116,45 +116,14 @@ void Inventory::events(const sf::Event &event, Game &game)
 					game.getPlayer().getCollisionRect().top + game.getPlayer().getCollisionRect().height / 2.f);
 
 
-				// If the item interacted with a unit this frame, don't let it interact with any items as well
+				// If the item interacted with an item this frame, don't let it interact with any units as well
 				// Since this could mean that an item is used twice in a single frame
-				bool interactedWithUnit = false;
-
-				// Try unit interaction
-				for (std::size_t i = 0; i < game.getLevel().getUnits().size(); i++)
-				{
-					Unit& unit = *game.getLevel().getUnits()[i].get();
-
-					sf::Vector2f unitCenter = sf::Vector2f(
-						unit.getCollisionRect().left + unit.getCollisionRect().width / 2.f,
-						unit.getCollisionRect().top + unit.getCollisionRect().height / 2.f);
-
-					sf::Vector2f distVec = unitCenter - playerCenter;
-					distVec.x = std::abs(distVec.x);
-					distVec.y = std::abs(distVec.y);
-
-					if (distVec.x > m_mouseItem->getInteractDistance().x || distVec.y > m_mouseItem->getInteractDistance().y)
-						continue;
-
-					if (m_mouseItem->getSprite().getGlobalBounds().intersects(unit.getCollisionRect()))
-					{
-						// Invoke interaction handling on item
-						if(m_mouseItem->onInteractUnit(unit))
-							delete m_mouseItem.release();
-
-						// Invoke interaction on unit
-						if (unit.onInteractedWith(*m_mouseItem.get(), game))
-							game.getLevel().removeUnit(i);
-
-						interactedWithUnit = true;
-						break;
-					}
-				}
+				bool interactedWithItem = false;
 
 				// Try item interaction
 				for (std::size_t i = 0; i < game.getLevel().getItems().size(); i++)
 				{
-					if (!m_mouseItem || interactedWithUnit)
+					if (!m_mouseItem)
 						break;
 
 					Item& item = *game.getLevel().getItems()[i].get();
@@ -179,6 +148,40 @@ void Inventory::events(const sf::Event &event, Game &game)
 						// Invoke interaction handling on mouse item
 						if (m_mouseItem->onInteract(item, game))
 							delete m_mouseItem.release();
+
+						interactedWithItem = true;
+						break;
+					}
+				}
+
+				// Try unit interaction
+				for (std::size_t i = 0; i < game.getLevel().getUnits().size(); i++)
+				{
+					if (interactedWithItem)
+						break;
+
+					Unit& unit = *game.getLevel().getUnits()[i].get();
+
+					sf::Vector2f unitCenter = sf::Vector2f(
+						unit.getCollisionRect().left + unit.getCollisionRect().width / 2.f,
+						unit.getCollisionRect().top + unit.getCollisionRect().height / 2.f);
+
+					sf::Vector2f distVec = unitCenter - playerCenter;
+					distVec.x = std::abs(distVec.x);
+					distVec.y = std::abs(distVec.y);
+
+					if (distVec.x > m_mouseItem->getInteractDistance().x || distVec.y > m_mouseItem->getInteractDistance().y)
+						continue;
+
+					if (m_mouseItem->getSprite().getGlobalBounds().intersects(unit.getCollisionRect()))
+					{
+						// Invoke interaction handling on item
+						if(m_mouseItem->onInteractUnit(unit))
+							delete m_mouseItem.release();
+
+						// Invoke interaction on unit
+						if (unit.onInteractedWith(*m_mouseItem.get(), game))
+							game.getLevel().removeUnit(i);
 
 						break;
 					}

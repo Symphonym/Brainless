@@ -5,6 +5,7 @@
 #include "Constants.h"
 #include "Cursor.h"
 #include "Game.h"
+#include "Notification.h"
 
 PopUpMenu::PopUpMenu()
 :
@@ -87,6 +88,23 @@ void PopUpMenu::events(const sf::Event &event, Game &game)
 
 			// Left clicking will hide the menu no matter where you click
 			m_isShowing = false;
+		}
+
+		// Right click examines an item
+		else if (event.mouseButton.button == sf::Mouse::Right)
+		{
+			// Do backwards to take the topmost item first
+			for (int i = game.getLevel().getItems().size() - 1; i >= 0; i--)
+			{
+				sf::FloatRect itemBounds = game.getLevel().getItems()[i]->getInteractBounds();
+
+				// Right clicked on an item
+				if (itemBounds.contains(mousePos))
+				{
+					Notification::instance().write(game.getLevel().getItems()[i]->getExamineString());
+					break;
+				}
+			}
 		}
 	}
 }
