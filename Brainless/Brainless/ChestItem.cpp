@@ -11,7 +11,7 @@ m_isLocked(locked),
 m_isOpen(false)
 {
 	m_usable = true;
-	m_renderingMode = RenderingModes::Behind;
+	m_renderingMode = RenderingModes::Depth;
 	m_pickupString = "It's too heavy for me to carry";
 	m_examineString = "It's a chest, maybe I find something inside it?";
 }
