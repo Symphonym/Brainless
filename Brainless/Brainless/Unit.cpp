@@ -316,6 +316,7 @@ bool Unit::updateCollision()
 	med följande värden och nuvarande tile kollision i level 2015-02-24
 	COLLISION_WIDTH 80
 	COLLISION_HEIGHT 190
+	unitLedgeOffset 20
 
 	kollision nere och höger
 	2001
@@ -360,7 +361,7 @@ bool Unit::updateCollision()
 
 	*/
 
-	//std::cout << m_collisionLeft << m_collisionRight << m_collisionUp << m_collisionDown << std::endl;
+	std::cout << m_collisionLeft << m_collisionRight << m_collisionUp << m_collisionDown << std::endl;
 
 	//NY VERSION TILL OVAN SIFFROR, EJ MYCKET TESTAT.
 	//Collision nere
