@@ -12,13 +12,11 @@ m_ladder(ladderTexture, id)
 	m_usable = true;
 	m_examineString = "It reminds Maive of her favorite tv-show. Teenage Mutant Ninja Åke!";
 
-	m_interactDistance = sf::Vector2f(100, 100);
-	m_interactBounds = sf::FloatRect(0, 0,
-		getSprite().getGlobalBounds().width,
-		getSprite().getGlobalBounds().height + m_ladder.getSprite().getGlobalBounds().height);
+	m_interactDistance = sf::Vector2f(100, 200);
 
 	// Refresh ladder position
 	setPosition(getPosition());
+	refreshTexture();
 }
 
 void ManholeItem::serialize(std::ofstream &writer) const
@@ -80,7 +78,17 @@ Item* ManholeItem::clone()
 void ManholeItem::refreshTexture()
 {
 	if (m_open)
+	{
 		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("ManholeOpen"));
+		m_interactBounds = sf::FloatRect(0, 0,
+			getSprite().getGlobalBounds().width,
+			getSprite().getGlobalBounds().height);
+	}
 	else
+	{
+		m_interactBounds = sf::FloatRect(0, 0,
+			getSprite().getGlobalBounds().width,
+			getSprite().getGlobalBounds().height + m_ladder.getSprite().getGlobalBounds().height);
 		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("ManholeClosed"));
+	}
 }

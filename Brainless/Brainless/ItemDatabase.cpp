@@ -93,6 +93,7 @@ ItemDatabase::ItemDatabase()
 
 
 	addItem(ItemPtr(new ManholeItem(false, "SteelLadder5", 35)));
+	addItem(ItemPtr(new ManholeItem(true, "SteelLadder5", 36)));
 
 }
 
