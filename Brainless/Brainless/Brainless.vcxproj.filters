@@ -339,6 +339,9 @@
     <ClCompile Include="SettingsMenu.cpp">
       <Filter>Source Files\State Machine\States</Filter>
     </ClCompile>
+    <ClCompile Include="ManholeItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -604,6 +607,9 @@
     </ClInclude>
     <ClInclude Include="SettingsMenu.h">
       <Filter>Source Files\State Machine\States</Filter>
+    </ClInclude>
+    <ClInclude Include="ManholeItem.h">
+      <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

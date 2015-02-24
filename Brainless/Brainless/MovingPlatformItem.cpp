@@ -11,8 +11,7 @@ m_isActive(true)
 	m_collidable = true;
 	m_solid = false;
 
-	m_collisionSize = sf::Vector2f(250, 50);
-	m_collisionOffset = sf::Vector2f(0, 0);
+	m_collisionBounds = sf::FloatRect(0, 0, 250, 50);
 }
 
 

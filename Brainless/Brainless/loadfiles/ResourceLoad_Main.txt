@@ -191,6 +191,12 @@
 +Texture,images/items/thorsHammerItem.png,ThorsHammerItem
 +Texture,images/items/arcadeMachine.png,ArcadeMachineItem
 +Texture,images/items/arcadeDisc.png,ArcadeDiscItem
++Texture,images/items/manholeclosed.png,ManholeClosed
++Texture,images/items/manholeopen.png,ManholeOpen
++Texture,images/items/steelladder5.png,SteelLadder5
+
++Texture,images/items/Discs/Big-Disk-Blue.png,ArcadeDiscItemBlueBig
++Texture,images/items/Discs/Small-Disk-Blue.png,ArcadeDiscItemBlueSmall
 
 +Texture,images/items/pickup.png,TestItem
 +Texture,images/items/wizard_idle.png,TestItem2

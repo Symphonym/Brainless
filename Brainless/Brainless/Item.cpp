@@ -11,8 +11,8 @@ m_collidable(false),
 m_solid(true),
 m_renderingMode(RenderingModes::Depth),
 m_interactDistance(Constants::InteractDistance, Constants::InteractDistance),
-m_collisionOffset(0, 0),
-m_collisionSize(0, 0),
+m_interactBounds(0, 0, 0, 0),
+m_collisionBounds(0, 0, 0, 0),
 m_useString(Constants::CantUseString),
 m_pickupString(Constants::CantPickUpString),
 m_examineString("A pretty normal object, nothing out of the ordinary"),
@@ -25,7 +25,7 @@ m_speed(sf::Vector2f(0,0))
 	m_inventorySprite.setTexture(ResourceLoader::instance().retrieveTexture(inventoryTextureName));
 
 	// Default collision box is size of sprite
-	m_collisionSize = sf::Vector2f(m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height);
+	m_interactBounds = sf::FloatRect(0, 0, m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height);
 }
 
 void Item::serialize(std::ofstream &writer) const
@@ -36,6 +36,14 @@ void Item::serialize(std::ofstream &writer) const
 	writer << m_syncID << std::endl;
 	writer << getPosition().x << std::endl;
 	writer << getPosition().y << std::endl;
+	writer << m_interactBounds.left << std::endl;
+	writer << m_interactBounds.top << std::endl;
+	writer << m_interactBounds.width << std::endl;
+	writer << m_interactBounds.height << std::endl;
+	writer << m_collisionBounds.left << std::endl;
+	writer << m_collisionBounds.top << std::endl;
+	writer << m_collisionBounds.width << std::endl;
+	writer << m_collisionBounds.height << std::endl;
 	writer << m_lootable << std::endl;
 	writer << m_usable << std::endl;
 	writer << m_collidable << std::endl;
@@ -50,6 +58,8 @@ void Item::deserialize(std::ifstream &reader)
 
 	setPosition(sf::Vector2f(posX, posY));
 
+	reader >> m_interactBounds.left >> m_interactBounds.top >> m_interactBounds.width >> m_interactBounds.height;
+	reader >> m_collisionBounds.left >> m_collisionBounds.top >> m_collisionBounds.width >> m_collisionBounds.height;
 	reader >> m_lootable >> m_usable >> m_collidable >> m_solid;
 
 	int renderMode = 0;
@@ -142,7 +152,11 @@ std::string Item::getExamineString() const
 }
 sf::FloatRect Item::getCollisionBounds() const
 {
-	return sf::FloatRect(getPosition().x + m_collisionOffset.x, getPosition().y + m_collisionOffset.y, m_collisionSize.x, m_collisionSize.y);
+	return sf::FloatRect(getPosition().x + m_collisionBounds.left, getPosition().y + m_collisionBounds.top, m_collisionBounds.width, m_collisionBounds.height);
+}
+sf::FloatRect Item::getInteractBounds() const
+{
+	return sf::FloatRect(getPosition().x + m_interactBounds.left, getPosition().y + m_interactBounds.top, m_interactBounds.width, m_interactBounds.height);
 }
 sf::Vector2f Item::getInteractDistance() const
 {
