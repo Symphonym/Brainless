@@ -5,8 +5,10 @@
 CraftingDatabase::CraftingDatabase()
 {
 	// TODO add crafting recipes
-	// TEST RECIPE
-	addRecipe(15, { 10, 16 });
+	addRecipe(13, { 4, 7 }); // Key + Twine = KeyTwine
+	addRecipe(11, { 4, 3 }); // Key + Coin = CoinTwine
+	addRecipe(19, { 17, 17, 0}); // Stick + Stick + DuctTape = LongStick
+	addRecipe(26, { 22, 25, 0 }); // AABattery + Hammer + DuctTape = Thors Hammer
 }
 
 CraftingDatabase::ItemPtr CraftingDatabase::craftItem(const std::vector<int> &idVector)

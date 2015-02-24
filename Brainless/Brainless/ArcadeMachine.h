@@ -13,6 +13,9 @@ public:
 
 	ArcadeMachine(StateMachine &machine);
 
+	// Stores a new game in the machine
+	void loadArcadeGame(ArcadeGame *game);
+
 	void exitGame();
 
 	virtual void events(const sf::Event &event);
@@ -25,9 +28,13 @@ public:
 
 private:
 
+	void refreshMenu();
+
 	static const int GameCount = 5;
 
 	typedef std::unique_ptr<ArcadeGame> GamePtr;
+
+	sf::Text m_noGameText;
 
 	sf::Text m_currentGameText;
 	sf::Text m_infoText;
@@ -36,10 +43,8 @@ private:
 	sf::Sprite m_arcadeBackground;
 
 	std::size_t m_currentGameIndex;
-	std::array<sf::Text, GameCount> m_gameSelectionButtons;
-	std::array<GamePtr, GameCount> m_games;
-
-	std::array<sf::Text, GameCount> m_gameNames;
+	std::vector<sf::Text> m_gameSelectionButtons;
+	std::vector<GamePtr> m_games;
 
 	bool m_playingGame;
 };

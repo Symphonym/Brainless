@@ -107,6 +107,7 @@
   <ItemGroup>
     <ClCompile Include="AABatteryItem.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="ArcadeDiscItem.cpp" />
     <ClCompile Include="ArcadeGame.cpp" />
     <ClCompile Include="ArcadeMachine.cpp" />
     <ClCompile Include="ArcadeMachineItem.cpp" />
@@ -128,8 +129,6 @@
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DialogTree.cpp" />
     <ClCompile Include="DoorItem.cpp" />
-    <ClCompile Include="DoubleStickItem.cpp" />
-    <ClCompile Include="DuctTapedBatteryItem.cpp" />
     <ClCompile Include="DuctTapeItem.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorGridMode.cpp" />
@@ -154,6 +153,7 @@
     <ClCompile Include="RpgGame.cpp" />
     <ClCompile Include="RubberGlovesItem.cpp" />
     <ClCompile Include="ScissorLift.cpp" />
+    <ClCompile Include="SettingsMenu.cpp" />
     <ClCompile Include="SpiritBar.cpp" />
     <ClCompile Include="SpiritFeatherItem.cpp" />
     <ClCompile Include="State.cpp" />
@@ -196,6 +196,7 @@
   <ItemGroup>
     <ClInclude Include="AABatteryItem.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="ArcadeDiscItem.h" />
     <ClInclude Include="ArcadeGame.h" />
     <ClInclude Include="ArcadeMachine.h" />
     <ClInclude Include="ArcadeMachineItem.h" />
@@ -217,8 +218,6 @@
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="DialogTree.h" />
     <ClInclude Include="DoorItem.h" />
-    <ClInclude Include="DoubleStickItem.h" />
-    <ClInclude Include="DuctTapedBatteryItem.h" />
     <ClInclude Include="DuctTapeItem.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EditorGridMode.h" />
@@ -243,6 +242,7 @@
     <ClInclude Include="RpgGame.h" />
     <ClInclude Include="RubberGlovesItem.h" />
     <ClInclude Include="ScissorLift.h" />
+    <ClInclude Include="SettingsMenu.h" />
     <ClInclude Include="SpiritBar.h" />
     <ClInclude Include="SpiritFeatherItem.h" />
     <ClInclude Include="State.h" />

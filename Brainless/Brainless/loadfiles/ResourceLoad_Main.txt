@@ -190,6 +190,7 @@
 +Texture,images/items/Small-Hammer.png,HammerItem
 +Texture,images/items/thorsHammerItem.png,ThorsHammerItem
 +Texture,images/items/arcadeMachine.png,ArcadeMachineItem
++Texture,images/items/arcadeDisc.png,ArcadeDiscItem
 
 +Texture,images/items/pickup.png,TestItem
 +Texture,images/items/wizard_idle.png,TestItem2
@@ -226,9 +227,7 @@
 +Texture,images/items/Long-Stick.png,LongStickInv
 +Texture,images/items/Stuffed Bag.png,StuffedBagInv
 +Texture,images/items/Thor's-Hammer.png,MjolnirInv
-
-# GHOST TEST ITEM
-+Texture,images/items/ghostTest.png,GhostTest
++Texture,images/animations/Spritesheet_Ghost.png,GhostItem
 
 # DOOR TEST ITEM
 +Texture,images/items/doorOpen.png,DoorOpen

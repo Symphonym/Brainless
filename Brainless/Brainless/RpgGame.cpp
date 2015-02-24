@@ -11,6 +11,8 @@ ArcadeGame(machine, "Turtlerain Survival"),
 m_score(0),
 m_hunger(m_hungerMax),
 m_spawnDelayCur(0),
+m_spawnDelayMax(3),
+m_hungerAddition(40),
 m_hungerDelay(0)
 {
 	for (std::size_t x = 0; x < m_tiles.size(); x++)
@@ -19,6 +21,7 @@ m_hungerDelay(0)
 		{
 			Tile &tile = m_tiles[x][y];
 			tile.sprite.setTexture(ResourceLoader::instance().retrieveTexture("ArcadeGrassTile"));
+			tile.sprite.setScale(1.88, 1.88);
 			tile.sprite.setPosition(
 				m_machine.getScreenPos().x + 5.f + x*tile.sprite.getGlobalBounds().width,
 				m_machine.getScreenPos().y + 5.f + y*tile.sprite.getGlobalBounds().height);
@@ -28,13 +31,13 @@ m_hungerDelay(0)
 
 	// Initialize hunger bar
 	sf::Image barImg;
-	barImg.create(1, 30, sf::Color::White);
+	barImg.create(1, 50, sf::Color::White);
 	m_hungerBarTexture.loadFromImage(barImg);
 
 	m_hungerBar.setTexture(m_hungerBarTexture);
 	m_hungerBar.setPosition(
 		m_machine.getScreenPos().x + 200.f,
-		m_machine.getScreenPos().y + m_machine.getScreenSize().y - 35.f);
+		m_machine.getScreenPos().y + m_machine.getScreenSize().y - 60.f);
 
 	// Initialize game over text
 	m_gameOverText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
@@ -43,10 +46,18 @@ m_hungerDelay(0)
 		m_machine.getScreenPos().x + m_machine.getScreenSize().x / 2 - m_gameOverText.getGlobalBounds().width / 2.f,
 		m_machine.getScreenPos().y + m_machine.getScreenSize().y / 2 - m_gameOverText.getGlobalBounds().height / 2.f);
 
+	// Initialize info text
+	m_infoText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+	m_infoText.setString("Create rows of turtles to gain score\nDo not get crushed, do not get hungry");
+	m_infoText.setColor(sf::Color(0, 0, 0, 128));
+	m_infoText.setPosition(
+		m_machine.getScreenPos().x + m_machine.getScreenSize().x / 2 - m_infoText.getGlobalBounds().width / 2.f,
+		m_machine.getScreenPos().y + m_machine.getScreenSize().y / 2 - m_infoText.getGlobalBounds().height / 2.f - 10);
+
 	// Initialize score text
 	m_scoreText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_scoreText.setString("Score: 0");
-	m_scoreText.setPosition(m_machine.getScreenPos().x + 10.f, m_machine.getScreenPos().y + m_machine.getScreenSize().y - 35.f);
+	m_scoreText.setPosition(m_machine.getScreenPos().x + 10.f, m_machine.getScreenPos().y + m_machine.getScreenSize().y - 55.f);
 }
 
 void RpgGame::onGameStart()
@@ -62,6 +73,9 @@ void RpgGame::onGameStart()
 
 	m_hunger = m_hungerMax;
 	m_spawnDelayCur = 0;
+	m_hungerAddition = 40;
+	m_score = 0;
+	m_scoreText.setString("Score: 0");
 	spawnPlayer();
 }
 
@@ -70,31 +84,23 @@ void RpgGame::events(const sf::Event &event)
 	if (event.type == sf::Event::KeyReleased && m_player)
 	{
 		if (event.key.code == sf::Keyboard::W)
-		{
 			playerInputToTile(m_player->x, m_player->y - 1);
-		}
 
 		else if (event.key.code == sf::Keyboard::S)
-		{
 			playerInputToTile(m_player->x, m_player->y + 1);
-		}
 
 		else if (event.key.code == sf::Keyboard::D)
-		{
 			playerInputToTile(m_player->x + 1, m_player->y);
-		}
 
 		else if (event.key.code == sf::Keyboard::A)
-		{
 			playerInputToTile(m_player->x - 1, m_player->y);
-		}
 	}
 }
 void RpgGame::update(float deltaTime)
 {
 	m_hungerDelay -= deltaTime;
 
-	if (m_hungerDelay <= 0)
+	if (m_hungerDelay <= 0 && m_player)
 	{
 		if (m_player)
 			--m_hunger;
@@ -106,6 +112,7 @@ void RpgGame::update(float deltaTime)
 			m_hunger = 0;
 			removeUnit(m_player, sf::Color::Yellow);
 			SoundPlayer::instance().playSound("ArcadeFail", m_machine.getScreenPos(), 20.f);
+			m_player = nullptr;
 		}
 	}
 
@@ -122,6 +129,7 @@ void RpgGame::update(float deltaTime)
 }
 void RpgGame::draw()
 {
+
 	for (std::size_t x = 0; x < m_tiles.size(); x++)
 	{
 		for (std::size_t y = 0; y < m_tiles[x].size(); y++)
@@ -129,6 +137,9 @@ void RpgGame::draw()
 			Renderer::instance().drawHUD(m_tiles[x][y].sprite);
 		}
 	}
+
+	if (m_player)
+		Renderer::instance().drawHUD(m_infoText);
 
 	for (auto &unit : m_units)
 		Renderer::instance().drawHUD(unit->sprite);
@@ -187,7 +198,6 @@ void RpgGame::playerInputToTile(int x, int y)
 	if (canMove(x, y))
 	{
 		placeUnitOnTile(m_player, x, y);
-		//m_hunger -= 10;
 		tickGame();
 
 		if (m_player)
@@ -199,7 +209,7 @@ void RpgGame::playerInputToTile(int x, int y)
 		placeUnitOnTile(m_player, x, y);
 
 		// Killing enemies feeds your hunger bar
-		m_hunger += 50;
+		m_hunger += m_hungerAddition;
 		if (m_hunger >= m_hungerMax)
 			m_hunger = m_hungerMax;
 
@@ -281,6 +291,9 @@ void RpgGame::tickGame()
 			SoundPlayer::instance().playSound("ArcadeFail", m_machine.getScreenPos(), 20.f);
 			break; // Killing player ends game, and thus enemy input
 		}
+
+		if (unit->y == MapHeight - 1)
+			unit->sprite.setColor(sf::Color::Cyan);
 	}
 
 	
@@ -293,33 +306,39 @@ void RpgGame::tickGame()
 		{
 			spawnEnemy("ArcadeRpgEnemy");
 			m_spawnDelayCur = 0;
+			m_spawnDelayMax = std::rand() % 4 + 2;
 		}
 
-		// Check a row consists entirely of enemies
-		for (std::size_t y = 0; y < m_tiles[0].size(); y++)
+		// Check if bottom row consists entirely on enemies
+		bool isUnit = true;
+		for (std::size_t x = 0; x < m_tiles.size(); x++)
 		{
-			bool isUnit = true;
+			Tile &tile = m_tiles[x][MapHeight-1];
+
+			// Check if an enemy isn't in a tile on the row
+			if (tile.unit == nullptr || tile.unit == m_player)
+			{
+				isUnit = false;
+				break;
+			}
+		}
+
+		if (isUnit)
+		{
 			for (std::size_t x = 0; x < m_tiles.size(); x++)
-			{
-				Tile &tile = m_tiles[x][y];
+				removeUnit(m_tiles[x][MapHeight-1].unit, sf::Color::Cyan);
 
-				// Check if an enemy isn't in a tile on the row
-				if (tile.unit == nullptr || tile.unit == m_player)
-				{
-					isUnit = false;
-					break;
-				}
-			}
+			// Reduce the amount of hunger you get per turtle
+			m_hungerAddition -= 2;
 
-			if (isUnit)
-			{
-				for (std::size_t x = 0; x < m_tiles.size(); x++)
-					removeUnit(m_tiles[x][y].unit, sf::Color::Cyan);
 
-				++m_score;
-				m_scoreText.setString("Score: " + std::to_string(m_score));
-				SoundPlayer::instance().playSound("ArcadeLight2", m_machine.getScreenPos(), 20.f);
-			}
+			// Cap hunger addition
+			if (m_hungerAddition <= 10)
+				m_hungerAddition = 10;
+
+			++m_score;
+			m_scoreText.setString("Score: " + std::to_string(m_score));
+			SoundPlayer::instance().playSound("ArcadeLight2", m_machine.getScreenPos(), 20.f);
 		}
 	}
 }

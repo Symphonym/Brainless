@@ -17,12 +17,12 @@ public:
 
 	StateMachine();
 
-	template<typename TType> void pushState()
+	template<typename TType> State* pushState()
 	{
 		m_loadingText.clear();
 		m_window.setView(m_window.getDefaultView());
 		m_states.push_back(std::move(StatePtr(new TType(*this))));
-		// TODO DISABLE NOTIFICATION AND CONVO BOX Notification::instance().s
+		return m_states.back().get();
 	};
 	void popState();
 

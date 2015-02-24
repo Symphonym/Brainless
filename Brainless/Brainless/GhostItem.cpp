@@ -1,12 +1,16 @@
 #include "GhostItem.h"
 #include "ConversationBox.h"
 #include "Renderer.h"
+#include <math.h>
 #include "Game.h"
 #include "Notification.h"
 
+#define SPRITESIZE 256
+
 GhostItem::GhostItem(const std::string &dialogFile, int id)
 :
-Item("Ghost","GhostTest", "GhostTest", id)
+m_animation(SPRITESIZE, SPRITESIZE),
+Item("Ghost","GhostItem", "GhostItem", id)
 {
 	m_dialog.loadDialogFile(dialogFile);
 
@@ -14,15 +18,20 @@ Item("Ghost","GhostTest", "GhostTest", id)
 	m_usable = true;
 	m_pickupString = "It would be unwise to try to pick up a ghost";
 	m_examineString = "It's a ghost alright, maybe I should talk to it";
+	getSprite().setTextureRect(sf::IntRect(0,0,256,256));
+
+	m_animation.loop(0, 5, 0, 1, 5);
+	getSprite().setTextureRect(m_animation.getRectangle(0));
 }
 
 void GhostItem::update(float deltaTime, Game &game)
 {
 
+	getSprite().setTextureRect(m_animation.getRectangle(deltaTime));
 }
 void GhostItem::draw()
 {
-	// TODO ANIMATIONS?
+
 	Renderer::instance().drawDepth(getSprite());
 }
 

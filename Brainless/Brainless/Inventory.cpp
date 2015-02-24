@@ -273,8 +273,7 @@ void Inventory::update(float deltaTime, Game &game)
 			m_showHighlighText = false;
 
 		// Check for crafting mode button input
-		sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
-		if (m_craftButton->getReleased(mousePos))
+		if (m_craftButton->getReleased(game.getWindow()))
 		{
 			if (m_craftingModeEnabled && !m_selectedSlots.empty())
 				craft();

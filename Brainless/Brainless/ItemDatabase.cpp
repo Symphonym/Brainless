@@ -18,17 +18,21 @@
 #include "LighterItem.h"
 #include "ScissorLift.h"
 #include "StickItem.h"
-#include "DoubleStickItem.h"
 #include "LongStickItem.h"
 #include "CableItem.h"
 #include "BrainItem.h"
 #include "AABatteryItem.h"
 #include "CarBatteryItem.h"
-#include "DuctTapedBatteryItem.h"
 #include "HammerItem.h"
 #include "ThorsHammerItem.h"
 #include "SpiritFeatherItem.h"
 #include "ArcadeMachineItem.h"
+#include "ArcadeDiscItem.h"
+#include "RpgGame.h"
+#include "BeachParty.h"
+#include "Boop.h"
+#include "RobotAkeAttack.h"
+#include "NoteGame.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -50,18 +54,41 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new StoneItem(15)));
 	addItem(ItemPtr(new LighterItem(16)));
 	addItem(ItemPtr(new StickItem(17)));
-	addItem(ItemPtr(new DoubleStickItem(18)));
+	//addItem(ItemPtr(new DoubleStickItem(18)));
 	addItem(ItemPtr(new LongStickItem(19)));
 	addItem(ItemPtr(new CableItem(20)));
 	addItem(ItemPtr(new BrainItem(21)));
 	addItem(ItemPtr(new AABatteryItem(22)));
 	addItem(ItemPtr(new CarBatteryItem(23)));
-	addItem(ItemPtr(new DuctTapedBatteryItem(24)));
+	//addItem(ItemPtr(new DuctTapedBatteryItem(24)));
 	addItem(ItemPtr(new HammerItem(25)));
 	addItem(ItemPtr(new ThorsHammerItem(26)));
 	addItem(ItemPtr(new ScissorLiftItem(sf::Vector2f(0, 100), 200, 27)));
 	addItem(ItemPtr(new SpiritFeatherItem(28)));
 	addItem(ItemPtr(new ArcadeMachineItem(29)));
+
+
+	// Add arcade game discs
+	addItem(ItemPtr(new ArcadeDiscItem(30, [](ArcadeMachine &machine) -> ArcadeGame*
+	{
+		return new RpgGame(machine);
+	})));
+	addItem(ItemPtr(new ArcadeDiscItem(31, [](ArcadeMachine &machine) -> ArcadeGame*
+	{
+		return new BeachParty(machine);
+	})));
+	addItem(ItemPtr(new ArcadeDiscItem(32, [](ArcadeMachine &machine) -> ArcadeGame*
+	{
+		return new Boop(machine);
+	})));
+	addItem(ItemPtr(new ArcadeDiscItem(33, [](ArcadeMachine &machine) -> ArcadeGame*
+	{
+		return new RobotAkeAttack(machine);
+	})));
+	addItem(ItemPtr(new ArcadeDiscItem(34, [](ArcadeMachine &machine) -> ArcadeGame*
+	{
+		return new NoteGame(machine);
+	})));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)

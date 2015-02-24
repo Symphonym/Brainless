@@ -17,12 +17,12 @@ m_newGameConfirmWindow(false)
 	m_buttons[0] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("NewGame_Normal"),
 		ResourceLoader::instance().retrieveTexture("NewGame_Pressed"),
-		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2)));
+		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2 - 200)));
 
 	m_buttons[1] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("LoadGame_Normal"),
 		ResourceLoader::instance().retrieveTexture("LoadGame_Pressed"),
-		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2 + 100.f)));
+		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2 - 100.f)));
 
 
 	// New game confirm data
@@ -49,17 +49,15 @@ m_newGameConfirmWindow(false)
 
 void MainMenu::update(float deltaTime)
 {
-	sf::Vector2i mousePos = sf::Mouse::getPosition(m_machine.getWindow());
-
 	if (!m_newGameConfirmWindow)
 	{
 
 		// New game
-		if (m_buttons[0]->getReleased(mousePos))
+		if (m_buttons[0]->getReleased(m_machine.getWindow()))
 			m_newGameConfirmWindow = true;
 
 		// Load game
-		else if (m_buttons[1]->getReleased(mousePos))
+		else if (m_buttons[1]->getReleased(m_machine.getWindow()))
 		{
 			m_machine.popState();
 			m_machine.pushState<Game>();
@@ -68,7 +66,7 @@ void MainMenu::update(float deltaTime)
 	else
 	{
 		// Yes
-		if (m_newGameButtons[0]->getReleased(mousePos))
+		if (m_newGameButtons[0]->getReleased(m_machine.getWindow()))
 		{
 			FileSave::wipeProgress();
 			m_machine.popState();
@@ -76,7 +74,7 @@ void MainMenu::update(float deltaTime)
 		}
 
 		// No
-		else if (m_newGameButtons[1]->getReleased(mousePos))
+		else if (m_newGameButtons[1]->getReleased(m_machine.getWindow()))
 			m_newGameConfirmWindow = false;
 	}
 }
