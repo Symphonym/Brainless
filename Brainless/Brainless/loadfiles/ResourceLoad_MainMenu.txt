@@ -11,7 +11,8 @@
 +Texture,images/UI/no_pressed.png,No_Pressed
 
 # BACKGROUND
-+Texture,images/backgrounds/Menu_background.png,Menu_Background
++Texture,images/backgrounds/menu_bakgrund_complete_nosheet.png,Menu_Background
++Texture,images/backgrounds/Spritesheet_Maeve_StarScreen_V1.png,Menu_Background_Elements
 
 # CONFIRM BACKGROUND
 +Texture,images/UI/newGameConfirmTest.png,NewGameConfirmBG
