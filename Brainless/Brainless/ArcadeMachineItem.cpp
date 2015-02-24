@@ -13,6 +13,7 @@ Item("Arcade Machine","ArcadeMachineItem", "ArcadeMachineItem", id)
 	m_pickupString = "It's too heavy for me to carry";
 	m_usable = true;
 	m_renderingMode = RenderingModes::Behind;
+	m_interactBounds = sf::FloatRect(82, 24, 94, 207);
 }
 
 

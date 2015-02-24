@@ -70,23 +70,23 @@ ItemDatabase::ItemDatabase()
 
 
 	// Add arcade game discs
-	addItem(ItemPtr(new ArcadeDiscItem(30, [](ArcadeMachine &machine) -> ArcadeGame*
+	addItem(ItemPtr(new ArcadeDiscItem(30, "Green", [](ArcadeMachine &machine) -> ArcadeGame*
 	{
 		return new RpgGame(machine);
 	})));
-	addItem(ItemPtr(new ArcadeDiscItem(31, [](ArcadeMachine &machine) -> ArcadeGame*
+	addItem(ItemPtr(new ArcadeDiscItem(31, "Violet", [](ArcadeMachine &machine) -> ArcadeGame*
 	{
 		return new BeachParty(machine);
 	})));
-	addItem(ItemPtr(new ArcadeDiscItem(32, [](ArcadeMachine &machine) -> ArcadeGame*
+	addItem(ItemPtr(new ArcadeDiscItem(32, "Violet", [](ArcadeMachine &machine) -> ArcadeGame*
 	{
 		return new Boop(machine);
 	})));
-	addItem(ItemPtr(new ArcadeDiscItem(33, [](ArcadeMachine &machine) -> ArcadeGame*
+	addItem(ItemPtr(new ArcadeDiscItem(33, "Red", [](ArcadeMachine &machine) -> ArcadeGame*
 	{
 		return new RobotAkeAttack(machine);
 	})));
-	addItem(ItemPtr(new ArcadeDiscItem(34, [](ArcadeMachine &machine) -> ArcadeGame*
+	addItem(ItemPtr(new ArcadeDiscItem(34, "Green", [](ArcadeMachine &machine) -> ArcadeGame*
 	{
 		return new NoteGame(machine);
 	})));
