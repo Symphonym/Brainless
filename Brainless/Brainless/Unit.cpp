@@ -324,9 +324,9 @@ bool Unit::updateCollision()
 		m_inTilt = false;
 	}
 	//up
-	else if (m_collisionUp > m_collisionDown &&
+	else if (m_collisionUp > 0/*m_collisionUp > m_collisionDown &&
 		m_collisionUp > m_collisionLeft &&
-		m_collisionUp > m_collisionRight)
+		m_collisionUp > m_collisionRight*/) //VÄLDIGT EXPERIMENTAL OCKSÅ
 	{
 		m_position.y = m_collisionNewPos.y;
 		m_speed.y = m_collisionNewSpeed.y;
@@ -361,7 +361,7 @@ bool Unit::updateCollision()
 		m_acceleration = m_collisionNewAcc;
 	}
 
-	//std::cout << m_collisionLeft << m_collisionRight << m_collisionUp << m_collisionDown << std::endl;
+	std::cout << m_collisionLeft << m_collisionRight << m_collisionUp << m_collisionDown << std::endl;
 
 	m_collisionNewPos = m_position;
 	m_collisionNewSpeed = m_speed;
