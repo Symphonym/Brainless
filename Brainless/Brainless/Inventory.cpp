@@ -141,12 +141,21 @@ void Inventory::events(const sf::Event &event, Game &game)
 
 					if (m_mouseItem->getSprite().getGlobalBounds().intersects(item.getSprite().getGlobalBounds()))
 					{
+						bool deleteOtherItem = false;
+						bool deleteMouseItem = false;
+
 						// Invoke interaction on world item
 						if (item.onInteractedWith(*m_mouseItem.get(), game))
-							game.getLevel().removeItem(i);
+							deleteOtherItem = true;
 
 						// Invoke interaction handling on mouse item
 						if (m_mouseItem->onInteract(item, game))
+							deleteMouseItem = true;
+
+						if (deleteOtherItem)
+							game.getLevel().removeItem(i);
+
+						if (deleteMouseItem)
 							delete m_mouseItem.release();
 
 						interactedWithItem = true;
@@ -175,14 +184,21 @@ void Inventory::events(const sf::Event &event, Game &game)
 
 					if (m_mouseItem->getSprite().getGlobalBounds().intersects(unit.getCollisionRect()))
 					{
+						bool deleteMouseItem = false;
+						bool deleteUnit = false;
+
 						// Invoke interaction handling on item
-						if(m_mouseItem->onInteractUnit(unit))
-							delete m_mouseItem.release();
+						if (m_mouseItem->onInteractUnit(unit))
+							deleteMouseItem = true;
 
 						// Invoke interaction on unit
 						if (unit.onInteractedWith(*m_mouseItem.get(), game))
-							game.getLevel().removeUnit(i);
+							deleteUnit = true;
 
+						if (deleteMouseItem)
+							delete m_mouseItem.release();
+						if (deleteUnit)
+							game.getLevel().removeUnit(i);
 						break;
 					}
 				}
