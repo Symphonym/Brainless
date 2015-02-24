@@ -92,7 +92,7 @@ ItemDatabase::ItemDatabase()
 	})));
 
 
-	addItem(ItemPtr(new ManholeItem(false, "LadderTest", 35)));
+	addItem(ItemPtr(new ManholeItem(false, "SteelLadder5", 35)));
 
 }
 
