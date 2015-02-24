@@ -1,4 +1,4 @@
-ArcadeMachineItem
+GhostAvatar
 Would you like this item?
 #Yes
 	Why do you want it? Actually I'm going to say something really long to see if this box is sized properly. LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOONG text is very long because long text is nice

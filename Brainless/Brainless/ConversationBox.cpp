@@ -5,7 +5,7 @@
 
 ConversationBox::ConversationBox()
 :
-m_playerPortraitTextureName("TestItem5"),
+m_playerPortraitTextureName("PlayerAvatar"),
 m_isShown(false),
 m_conversationState(ConversationStates::NPC),
 m_basePosition(0, 0),
@@ -81,7 +81,7 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 						if (textBounds.contains(sf::Vector2f(mousePos.x, mousePos.y)))
 						{
 							m_conversationState = ConversationStates::NPC;
-							m_portraitSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_dialog.getPortraitTextureName()));
+							m_portraitSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_dialog.getPortraitTextureName()), true);
 
 							// If the next branch has a description then we change into that branch, otherwise exit conversation
 							const DialogBranch &nextBranch = m_dialog.getCurrentOptions()[i].second;
@@ -102,7 +102,7 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 					if (m_dialogBox.isFinished())
 					{
 						m_conversationState = ConversationStates::Player;
-						m_portraitSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_playerPortraitTextureName));
+						m_portraitSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_playerPortraitTextureName), true);
 
 						// If there's no more dialog options, close the dialog
 						if (m_dialog.getCurrentOptions().size() == 0)
@@ -156,18 +156,18 @@ void ConversationBox::draw()
 {
 	if (m_isShown)
 	{
-		//Renderer::instance().drawHUD(m_background);
+		Renderer::instance().drawHUD(m_background);
 		Renderer::instance().drawHUD(m_portraitSprite);
 
-		// Draw answers only if it's the player's turn to speak
+		 //Draw answers only if it's the player's turn to speak
 		if (m_conversationState == ConversationStates::Player)
 		{
-			//for (std::size_t i = 0; i < m_answers.size(); i++)
-			//	Renderer::instance().drawHUD(m_answers[i]);
+			for (std::size_t i = 0; i < m_answers.size(); i++)
+				Renderer::instance().drawHUD(m_answers[i]);
 		}
-		// Draw the dialog only if it's the NPC speaking
-		//else if (m_conversationState == ConversationStates::NPC)
-			//m_dialogBox.Draw();
+		 //Draw the dialog only if it's the NPC speaking
+		else if (m_conversationState == ConversationStates::NPC)
+			m_dialogBox.Draw();
 	}
 
 }
@@ -185,7 +185,7 @@ void ConversationBox::setDialog(const DialogTree &dialog)
 {
 	// Copy over the dialog and set the sprite to that of the NPC
 	m_dialog = dialog;
-	m_portraitSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_dialog.getPortraitTextureName()));
+	m_portraitSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_dialog.getPortraitTextureName()), true);
 	resetCurrentDialog(); // Reset any existing dialog
 	loadNextOptions(); // Load answers
 }
