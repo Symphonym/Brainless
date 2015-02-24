@@ -170,7 +170,7 @@
 ### ITEM TEXTURE LOADING
 +Texture,images/items/Small-Duct tape.png,DuctTapeItem
 +Texture,images/items/Small-Rubber Glove.png,RubberGlovesItem
-+Texture,images/items/vendingMachine.png,VendingMachineItem1
++Texture,images/items/vendingMachines/vendingMachine1.png,VendingMachineItem1
 +Texture,images/items/Small-Coins.png,CoinItem
 +Texture,images/items/Small-Twine.png,TwineItem
 +Texture,images/items/coinTwine.png,CoinTwineItem
@@ -195,8 +195,8 @@
 +Texture,images/items/manholeopen.png,ManholeOpen
 +Texture,images/items/steelladder5.png,SteelLadder5
 
-+Texture,images/items/Discs/Big-Disk-Blue.png,ArcadeDiscItemBlueBig
-+Texture,images/items/Discs/Small-Disk-Blue.png,ArcadeDiscItemBlueSmall
++Texture,images/items/discs/Big-Disk-Blue.png,ArcadeDiscItemBlueBig
++Texture,images/items/discs/Small-Disk-Blue.png,ArcadeDiscItemBlueSmall
 
 +Texture,images/items/pickup.png,TestItem
 +Texture,images/items/wizard_idle.png,TestItem2
@@ -236,8 +236,8 @@
 +Texture,images/animations/Spritesheet_Ghost.png,GhostItem
 
 # DOOR TEST ITEM
-+Texture,images/items/doorOpen.png,DoorOpen
-+Texture,images/items/doorClosed.png,DoorClosed
++Texture,images/items/doors/wood-doorOpen.png,DoorOpen
++Texture,images/items/doors/wood-doorClosed.png,DoorClosed
 +Texture,images/items/Small-Key.png,KeyTest
 
 # CHEST TEST ITEM
