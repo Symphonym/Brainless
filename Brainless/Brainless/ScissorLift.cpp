@@ -15,7 +15,7 @@ m_platform(speed,maxDistance,id)
 	m_solid = false;
 	m_lootable = false;
 
-	m_collisionOffset = sf::Vector2f(0, 0);
+	m_collisionBounds = sf::FloatRect(0, 0, 0, 0);
 	m_xTexture = sf::Sprite(ResourceLoader::instance().retrieveTexture("liftX"),
 		sf::IntRect(0, 0, 0, 0));
 	m_topTexture = sf::Sprite(ResourceLoader::instance().retrieveTexture("liftTop"),
@@ -39,9 +39,12 @@ bool ScissorLiftItem::onSyncedWith(Item &otherItem)
 
 void ScissorLiftItem::update(float deltaTime, Game &game)
 {
-	m_collisionSize.x = m_platform.getCollisionBounds().width;
-	m_collisionSize.y = m_platform.getCollisionBounds().height;
-	m_collisionOffset = m_platform.getPosition() - getPosition();
+	sf::Vector2f offset = m_platform.getPosition() - getPosition();
+	m_collisionBounds = sf::FloatRect(
+		offset.x,
+		offset.y,
+		m_platform.getCollisionBounds().width,
+		m_platform.getCollisionBounds().height);
 	m_distanceFromPlatform = 200;
 	m_platform.update(deltaTime, game);
 	m_xTexture.setPosition(getPosition().x, m_platform.getPosition().y + m_platform.getSprite().getGlobalBounds().height);
