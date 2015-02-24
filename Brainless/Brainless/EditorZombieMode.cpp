@@ -59,9 +59,23 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 		// Place a Zombie
 		if (event.mouseButton.button == sf::Mouse::Left)
 		{
+
 			//Create zombie mask untill all variables are decided
 			if (!zombie_created)
-			{
+			{			
+				//If zombie is clicked increment it texture value
+				bool changed = false;
+				sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));
+				for (int i = level.getUnits().size() - 1; i >= 0; i--)
+				{
+					if (level.getUnits()[i]->getSprite().getGlobalBounds().contains(mousePos))
+					{
+						static_cast<Zombie*>(level.getUnits()[i].get())->incrementTexture();
+						//((Zombie*)())->incrementTexture();
+						level.getUnits()[i]->updateAnimation(0);
+						return true;
+					}
+				}
 				zombie_created = true;
 				m_createdZombie.sprite = m_highlightSprite.sprite;
 				m_createdZombie.type = m_highlightSprite.type;

@@ -10,6 +10,7 @@ public:
 	virtual bool onInteractedWith(Item &otherItem, Game &game);
 
 	void flash(sf::Vector2f cameraPos);
+	void incrementTexture();
 	int getTexture();
 
 	bool collide(Unit *unit);
