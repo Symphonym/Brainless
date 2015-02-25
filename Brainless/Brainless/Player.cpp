@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Constants.h"
+#include "OptionsMenu.h"
 #include <iostream>
 
 /*
@@ -74,7 +75,7 @@ void Player::updateTask(float deltaTime)
 		float startAccBreakpoint = 100;
 		float minSpeedBeforeStop = 10;
 		bool run = false;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) //Fortfarande inte riktigt bra, går från maxrun till maxwalk direkt efter man släpper
+		if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Run"))) //Fortfarande inte riktigt bra, går från maxrun till maxwalk direkt efter man släpper
 		{
 			run = true;
 		}
@@ -84,7 +85,7 @@ void Player::updateTask(float deltaTime)
 		m_inputDirection = dir_noDirection;
 		if (m_inAir) m_wallState = wall_normal; //annars större problem med rörelsen i luften, men kan bli "minimala-skärm-studs" problem i luften istället. Dock körs rätt animation
 		//Left
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D)/*&& m_wallState != wall_left*/)
+		if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Left")) && !sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Right"))/*&& m_wallState != wall_left*/)
 		{
 			slowDown = false;
 			m_inputDirection = dir_left;
@@ -113,7 +114,7 @@ void Player::updateTask(float deltaTime)
 
 		}
 		//Right
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::A)/*&& m_wallState != wall_right*/)
+		if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Right")) && !sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Left"))/*&& m_wallState != wall_right*/)
 		{
 			slowDown = false;
 			m_inputDirection = dir_right;
@@ -176,7 +177,7 @@ void Player::updateTask(float deltaTime)
 		}
 		//Pressing jump
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Jump")))
 		{
 			//don't jump
 			if (m_inAir)
@@ -323,11 +324,11 @@ void Player::updateAnimation(float deltaTime)
 	m_cameraPos.x = m_position.x;
 	m_cameraPos.y = m_position.y + cameraOffset;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && m_speed.x == 0 && m_speed.y == 0)
+	if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Down")) && m_speed.x == 0 && m_speed.y == 0)
 	{
 		cameraOffset = cameraOffset + (m_cameraMaxOffset - cameraOffset) * deltaTime * m_cameraSpeed;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && m_speed.x == 0 && m_speed.y == 0)
+	else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Up")) && m_speed.x == 0 && m_speed.y == 0)
 	{
 		cameraOffset = cameraOffset + (-m_cameraMaxOffset - cameraOffset) * deltaTime * m_cameraSpeed;
 	}

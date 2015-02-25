@@ -6,6 +6,7 @@
 #include "SoundPlayer.h"
 #include "Renderer.h"
 #include "FileSave.h"
+#include "OptionsMenu.h"
 
 #define SPRITESIZE 256 
 
@@ -32,6 +33,11 @@ m_Animation_scarf(SPRITESIZE, SPRITESIZE)
 		ResourceLoader::instance().retrieveTexture("LoadGame_Normal"),
 		ResourceLoader::instance().retrieveTexture("LoadGame_Pressed"),
 		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2 - 100.f)));
+
+	m_buttons[2] = GuiPtr(new Button(
+		ResourceLoader::instance().retrieveTexture("LoadGame_Normal"),
+		ResourceLoader::instance().retrieveTexture("LoadGame_Pressed"),
+		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2 + 100.f)));
 
 
 	// New game confirm data
@@ -101,6 +107,12 @@ void MainMenu::update(float deltaTime)
 		{
 			m_machine.popState();
 			m_machine.pushState<Game>();
+		}
+		// Options menu
+		else if (m_buttons[2]->getReleased(m_machine.getWindow()))
+		{
+			m_machine.popState();
+			m_machine.pushState<OptionsMenu>();
 		}
 	}
 	else

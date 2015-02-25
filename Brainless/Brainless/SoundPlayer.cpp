@@ -51,6 +51,10 @@ void SoundPlayer::setVolume(float volume)
 {
 	sf::Listener::setGlobalVolume(volume);
 }
+float SoundPlayer::getVolume() const
+{
+	return sf::Listener::getGlobalVolume();
+}
 
 void SoundPlayer::update(float deltaTime, const sf::Vector2f &playerPosition)
 {

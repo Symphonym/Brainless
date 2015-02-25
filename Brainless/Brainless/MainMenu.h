@@ -20,7 +20,7 @@ private:
 
 	typedef std::unique_ptr<GUIElement> GuiPtr;
 
-	std::array<GuiPtr, 2> m_buttons;
+	std::array<GuiPtr, 3> m_buttons;
 
 	// Whether or not the confirm window for a new game is shown
 	bool m_newGameConfirmWindow;
