@@ -42,6 +42,7 @@ public:
 
 		anim_inAirUp,
 		anim_inAirFall,
+		anim_inAir,
 		anim_inAirUpRun,
 		anim_inAirFallRun,
 		anim_inAirRun,
@@ -123,6 +124,7 @@ private:
 
 	void animation_inAirUp();
 	void animation_inAirFall();
+	void animation_inAir();
 	void animation_inAirUpRun();
 	void animation_inAirFallRun();
 	void animation_inAirRun();

@@ -18,7 +18,7 @@
 # SPRITE SHEET TEXTURES
 
 +Texture,images/animations/Spritesheet_Test_Walk_v1_4.png,PlayerSheet
-+Texture,images/animations/spritesheet_Skelett_hopp_v1.png,PlayerSheetJump
++Texture,images/animations/spritesheet_Maeve_jump.png,PlayerSheetJump
 +Texture,images/animations/spritesheet_skeleton_run_v2.png,PlayerSheetRun
 +Texture,images/animations/spritesheet_zombie_merged_v0.5.png,Zombie
 

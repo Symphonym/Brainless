@@ -408,7 +408,7 @@ void Player::updateAnimation(float deltaTime)
 		if (abs(m_speed.x) <= runBreakpoint) //runJumpBreakpoint
 		{
 			//UP
-			if (m_speed.y < 30)
+			if (m_speed.y < -50)
 			{
 				//inAir
 				if ((m_animState == anim_endJump && m_animation.getPlayOnceDone()) || m_animState == anim_inAirUpRun)
@@ -419,19 +419,23 @@ void Player::updateAnimation(float deltaTime)
 					animation_endJump();
 			}
 			//FALL
-			else if (30 < m_speed.y)
+			else if (50 < m_speed.y)
 			{
 				animation_inAirFall();
+			}
+			else
+			{
+				animation_inAir();
 			}
 		}
 		//RUN JUMP
 		else
 		{
 			//UP
-			if (m_speed.y < -100)
+			if (m_speed.y < -50)
 				animation_inAirUpRun();
 			//FALL
-			else if (100 < m_speed.y)
+			else if (50 < m_speed.y)
 				animation_inAirFallRun();
 			//MIDAIR
 			else
@@ -606,7 +610,7 @@ void Player::animation_endJump() //after leaving ground for "idlejump"
 	if (m_animState != anim_endJump)
 	{
 		m_sprite = &m_spriteSheets[1];
-		m_animation.playOnce(3, 5, 0, 10);
+		m_animation.playOnce(3, 5, 0, 12);
 		m_animState = anim_endJump;
 	}
 }
@@ -615,7 +619,7 @@ void Player::animation_inAirUp()
 	if (m_animState != anim_inAirUp)
 	{
 		m_sprite = &m_spriteSheets[1];
-		m_animation.loop(0, 1, 1, 6);
+		m_animation.loop(0, 2, 1, 8);
 		m_animState = anim_inAirUp;
 	}
 }
@@ -624,11 +628,27 @@ void Player::animation_inAirFall()
 	if (m_animState != anim_inAirFall)
 	{
 		m_sprite = &m_spriteSheets[1];
-		m_animation.loop(0, 1, 2, 6); 
+		m_animation.loop(1, 3, 2, 8); 
 		m_animState = anim_inAirFall;
 	}
-}void Player::animation_inAirUpRun()
+}
+void Player::animation_inAir()
 {
+	if (m_animState != anim_inAir)
+	{
+		m_sprite = &m_spriteSheets[1];
+		m_animation.stillFrame(0, 2);
+		m_animState = anim_inAir;
+	}
+}
+void Player::animation_inAirUpRun()
+{
+	/*if (m_animState != anim_inAirUp)
+	{
+		m_sprite = &m_spriteSheets[1];
+		m_animation.loop(0, 2, 1, 6);
+		m_animState = anim_inAirUp;
+	}*/
 	if (m_animState != anim_inAirUpRun)
 	{
 		m_sprite = &m_spriteSheets[2];
@@ -638,14 +658,27 @@ void Player::animation_inAirFall()
 }
 void Player::animation_inAirFallRun()
 {
+	//if (m_animState != anim_inAirFall)
+	//{
+	//	m_sprite = &m_spriteSheets[1];
+	//	m_animation.loop(1, 3, 2, 6);
+	//	m_animState = anim_inAirFall;
+	//}
 	if (m_animState != anim_inAirFallRun)
 	{
 		m_sprite = &m_spriteSheets[2];
 		m_animation.loop(0, 1, 3, 6); //
 		m_animState = anim_inAirFallRun;
 	}
-}void Player::animation_inAirRun() /////////////////////////////////////
+}
+void Player::animation_inAirRun() /////////////////////////////////////
 {
+	/*if (m_animState != anim_inAirFall)
+	{
+		m_sprite = &m_spriteSheets[1];
+		m_animation.stillFrame(0,2);
+		m_animState = anim_inAirFall;
+	}*/
 	if (m_animState != anim_inAirRun)
 	{
 		m_sprite = &m_spriteSheets[2];
