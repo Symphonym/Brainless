@@ -148,6 +148,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="ManholeItem.cpp" />
     <ClCompile Include="NoteGame.cpp" />
+    <ClCompile Include="OptionsMenu.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="RobotAkeAttack.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="LongStickItem.h" />
     <ClInclude Include="ManholeItem.h" />
     <ClInclude Include="NoteGame.h" />
+    <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="RobotAkeAttack.h" />

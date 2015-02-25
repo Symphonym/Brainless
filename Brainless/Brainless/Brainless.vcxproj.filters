@@ -345,6 +345,9 @@
     <ClCompile Include="Snake.cpp">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClCompile>
+    <ClCompile Include="OptionsMenu.cpp">
+      <Filter>Source Files\State Machine\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -616,6 +619,9 @@
     </ClInclude>
     <ClInclude Include="Snake.h">
       <Filter>Source Files\Game\ArcadeGame</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsMenu.h">
+      <Filter>Source Files\State Machine\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

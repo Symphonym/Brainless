@@ -22,6 +22,7 @@ public:
 
 	// Set master volume of system
 	void setVolume(float volume); 
+	float getVolume() const;
 
 	void update(float deltaTime, const sf::Vector2f &playerPosition);
 
