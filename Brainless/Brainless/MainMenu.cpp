@@ -68,13 +68,13 @@ m_Animation_scarf(SPRITESIZE, SPRITESIZE)
 	m_backgroundElement_grass5.setPosition(-100, 565);
 	m_backgroundElement_scarf.setPosition(-15, 166);
 
-	m_Animation_hair.loop(0, 5, 0, 6);
+	m_Animation_hair.loop(0, 5, 0, 4.5f);
 	m_Animation_grass1.loop(0, 5, 1, 4.5f);
 	m_Animation_grass2.loop(0, 5, 2, 4.5f);
 	m_Animation_grass3.loop(0, 5, 3, 4.5f);
 	m_Animation_grass4.loop(0, 5, 4, 4.5f);
 	m_Animation_grass5.loop(0, 5, 5, 4.5f);
-	m_Animation_scarf.loop(0, 5, 6, 5);
+	m_Animation_scarf.loop(0, 5, 6, 4.5f);
 	//Play music
 	SoundPlayer::instance().playMusic("MenuMusic",true,20);
 }
