@@ -419,9 +419,9 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 								if (unitCenter.x < tileCenter.x /*&& currentUnit->getSpeed().x > 0*/)
 								{
 									if (currentUnit->getSpeed().x > 0)
-										currentUnit->collisionLeft(tileBounds.left - originalBounds.width, 0, 0);
+										currentUnit->collisionRight(tileBounds.left - originalBounds.width, 0, 0);
 									else 
-										currentUnit->collisionLeft(tileBounds.left - originalBounds.width, 
+										currentUnit->collisionRight(tileBounds.left - originalBounds.width, 
 										currentUnit->getSpeed().x, 0);
 								}
 
@@ -429,9 +429,9 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 								else if (unitCenter.x > tileCenter.x /*&& currentUnit->getSpeed().x < 0*/)
 								{
 									if (currentUnit->getSpeed().x < 0)
-										currentUnit->collisionRight(tileBounds.left + tileBounds.width, 0, 0);
+										currentUnit->collisionLeft(tileBounds.left + tileBounds.width, 0, 0);
 									else
-										currentUnit->collisionRight(tileBounds.left + tileBounds.width, 
+										currentUnit->collisionLeft(tileBounds.left + tileBounds.width, 
 										currentUnit->getSpeed().x, 0);
 								}
 							}

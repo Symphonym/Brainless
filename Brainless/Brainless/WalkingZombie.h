@@ -17,8 +17,8 @@ public:
 		anim_walking
 	};
 
-	void wallLeft();
-	void wallRight();
+	void wallLeft() override;
+	void wallRight() override;
 
 	virtual void serialize(std::ofstream &writer) const;
 	virtual void deserialize(std::ifstream &reader);

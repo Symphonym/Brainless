@@ -277,3 +277,8 @@
 
 # FEATHER ITEM
 +Texture,images/items/feather.png,SpiritFeather
+
+# Resource Load Background
++Texture,images/backgrounds/LoadingScreen_Brainless.png,LoadingScreen_BG
++Texture,images/backgrounds/Spritesheet_maeve_RunForever_V1.png,LoadingScreen_Run
++Texture,images/backgrounds/Spritesheet_Loading_Dot_V1.png,LoadingScreen_Dot

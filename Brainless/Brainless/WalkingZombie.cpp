@@ -6,6 +6,7 @@
 #define SPRITE_OFFSET_X (int) -85
 #define SPRITE_OFFSET_Y (int) -50
 
+
 //m_size(sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT)),
 //m_maxSpeed(sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y)),
 
