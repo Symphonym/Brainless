@@ -102,14 +102,14 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 					break;
 				case Unit::ID_WalkingZombie: //Walking zombie
 					m_createdZombie.walk_distance = mousePos.x - m_createdZombie.sprite.getPosition().x;
-					temp = new WalkingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, 0);
+					temp = new ChasingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, 0);
 					temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 					temp->updateAnimation(0);
 					level.addUnit(std::move(Level::UnitPtr(temp)));
 					break;
 				case Unit::ID_ChasingZombie: //Chasing Zombie
 					m_createdZombie.walk_distance = mousePos.x - m_createdZombie.sprite.getPosition().x;
-					temp = new ChasingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, 0);
+					temp = new WalkingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, 0);
 					temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 					temp->updateAnimation(0);
 					level.addUnit(std::move(Level::UnitPtr(temp)));
