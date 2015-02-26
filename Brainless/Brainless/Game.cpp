@@ -137,23 +137,24 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 		player_location.x = Utility::clampValue<float>((Constants::MapWidth)*Constants::TileSize - (player_location.x), Constants::TileSize, (Constants::MapWidth - 1)*Constants::TileSize);
 	}
 
-
-	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Level" + std::to_string(m_levelIndex) + ".txt");
+	
 
 	// Auto save level before changing level
 	if (m_player != nullptr) // If this is a level change from a menu, the player won't already exist
 		saveGame();
 
-
 	// Reset level
 	m_level.reset();
 	m_levelIndex = levelIndex;
+	
+	//Load levle resources 
+	m_level.loadLevelResources("loadfiles/ResourceLoad_Level" + std::to_string(m_levelIndex) + ".txt");
 
 	// Reload level
 	FileSave::loadMapText(m_level, m_levelIndex); // All tiles are cleared in here
 	FileSave::loadLevelProgress(m_level, m_levelIndex); // All units are cleared from level here
 	FileSave::loadInventory(*m_inventory);
-	m_level.loadLevelResources(); // Load extra stuff such as parallaxing backgrounds
+	
 
 	//Set player to start position
 	if (player_location == sf::Vector2f(-60, -60))

@@ -29,8 +29,7 @@ m_isMenu(false)
 
 	// Load editor resources
 	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Editor.txt");
-	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Level0.txt");
-	m_level.loadLevelResources();
+	m_level.loadLevelResources("loadfiles/ResourceLoad_Level0.txt");
 	//Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("BlackAndWhiteShader"));
 	//Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("DarknessShader"));
 	//ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
@@ -160,7 +159,7 @@ void Editor::loop()
 					m_currentLevelFileIndex = Utility::clampValue<int>(m_currentLevelFileIndex, 0, INT_MAX);
 
 					m_levelFileText.setString("Editing level: level" + std::to_string(m_currentLevelFileIndex) + ".txt");
-					ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Level" + std::to_string(m_currentLevelFileIndex) + ".txt");
+					m_level.loadLevelResources("loadfiles/ResourceLoad_Level" + std::to_string(m_currentLevelFileIndex) + ".txt");
 					loadFile();
 				}
 
@@ -172,7 +171,7 @@ void Editor::loop()
 					m_currentLevelFileIndex = Utility::clampValue<int>(m_currentLevelFileIndex, 0, INT_MAX);
 
 					m_levelFileText.setString("Editing level: level" + std::to_string(m_currentLevelFileIndex) + ".txt");
-					ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Level" + std::to_string(m_currentLevelFileIndex) + ".txt");
+					m_level.loadLevelResources("loadfiles/ResourceLoad_Level" + std::to_string(m_currentLevelFileIndex) + ".txt");
 					loadFile();
 				}
 			}
