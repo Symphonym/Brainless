@@ -17,6 +17,8 @@ m_loadingAnimDot(256, 256)
 	ResourceLoader::instance().setLoadingHandler([&](const std::string &info, int current, int total) -> void
 	{
 		float deltaTime = m_loadingClock.restart().asSeconds();
+		if (deltaTime > 1)
+			deltaTime = 0;
 
 		sf::Text newText;
 		newText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));

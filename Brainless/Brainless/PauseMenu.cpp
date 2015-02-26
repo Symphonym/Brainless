@@ -19,11 +19,7 @@ State(machine)
 		ResourceLoader::instance().retrieveTexture("MainMenuBack_Pressed"),
 		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2 + 100.f)));
 
-	sf::Image bgImage;
-	bgImage.create(m_window.getSize().x, m_window.getSize().y, sf::Color::Color(0,0,0,100));
-
-	m_backgroundTexture.loadFromImage(bgImage);
-	m_background.setTexture(m_backgroundTexture);
+	m_background.setTexture(ResourceLoader::instance().retrieveTexture("PauseBackground"));
 }
 
 void PauseMenu::update(float deltaTime)

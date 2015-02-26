@@ -3,3 +3,4 @@
 +Texture,images/UI/resume_pressed.png,Resume_Pressed
 +Texture,images/UI/mainmenu_normal.png,MainMenuBack_Normal
 +Texture,images/UI/mainmenu_pressed.png,MainMenuBack_Pressed
++Texture,images/UI/Book-PauseMeny.png,PauseBackground

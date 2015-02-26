@@ -33,7 +33,7 @@
 #include "Boop.h"
 #include "RobotAkeAttack.h"
 #include "NoteGame.h"
-#include "Snake.h"
+#include "Turtle.h"
 #include "ManholeItem.h"
 #include "PuddleCableItem.h"
 
@@ -94,7 +94,7 @@ ItemDatabase::ItemDatabase()
 	})));
 	addItem(ItemPtr(new ArcadeDiscItem(37, "Blue", [](ArcadeMachine &machine) -> ArcadeGame* //35?
 	{
-		return new Snake(machine);
+		return new Turtle(machine);
 	})));
 
 	addItem(ItemPtr(new ManholeItem(false, "SteelLadder5", 35)));

@@ -157,7 +157,7 @@
     <ClCompile Include="RubberGlovesItem.cpp" />
     <ClCompile Include="ScissorLift.cpp" />
     <ClCompile Include="SettingsMenu.cpp" />
-    <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="Turtle.cpp" />
     <ClCompile Include="SpiritBar.cpp" />
     <ClCompile Include="SpiritFeatherItem.cpp" />
     <ClCompile Include="State.cpp" />
@@ -250,7 +250,7 @@
     <ClInclude Include="RubberGlovesItem.h" />
     <ClInclude Include="ScissorLift.h" />
     <ClInclude Include="SettingsMenu.h" />
-    <ClInclude Include="Snake.h" />
+    <ClInclude Include="Turtle.h" />
     <ClInclude Include="SpiritBar.h" />
     <ClInclude Include="SpiritFeatherItem.h" />
     <ClInclude Include="State.h" />

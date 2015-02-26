@@ -285,9 +285,6 @@
     <ClCompile Include="SettingsMenu.cpp">
       <Filter>Source Files\State Machine\States</Filter>
     </ClCompile>
-    <ClCompile Include="Snake.cpp">
-      <Filter>Source Files\Game\ArcadeGame</Filter>
-    </ClCompile>
     <ClCompile Include="OptionsMenu.cpp">
       <Filter>Source Files\State Machine\States</Filter>
     </ClCompile>
@@ -384,11 +381,11 @@
     <ClCompile Include="KeyItem.cpp">
       <Filter>Source Files\Game\Items\Lockable</Filter>
     </ClCompile>
-    <ClCompile Include="hej.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
     <ClCompile Include="PuddleCableItem.cpp">
       <Filter>Source Files\Game\Items\Dangerous</Filter>
+    </ClCompile>
+    <ClCompile Include="Turtle.cpp">
+      <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -566,9 +563,6 @@
     <ClInclude Include="SettingsMenu.h">
       <Filter>Source Files\State Machine\States</Filter>
     </ClInclude>
-    <ClInclude Include="Snake.h">
-      <Filter>Source Files\Game\ArcadeGame</Filter>
-    </ClInclude>
     <ClInclude Include="OptionsMenu.h">
       <Filter>Source Files\State Machine\States</Filter>
     </ClInclude>
@@ -667,6 +661,9 @@
     </ClInclude>
     <ClInclude Include="PuddleCableItem.h">
       <Filter>Source Files\Game\Items\Dangerous</Filter>
+    </ClInclude>
+    <ClInclude Include="Turtle.h">
+      <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

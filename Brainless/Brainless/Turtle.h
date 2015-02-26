@@ -1,23 +1,36 @@
-#ifndef INCLUDED_SNAKE_H
-#define INCLUDED_SNAKE_H
+#ifndef INCLUDED_TURTLE_H
+#define INCLUDED_TURTLE_H
 
 #include <SFML\Graphics.hpp>
 
 #include "ArcadeGame.h"
 #include "Animation.h"
+enum pointType
+{
+	turtle,
+	frie
+};
+class stuff
+{
+public:
+	stuff(pointType _type):type(_type){};
+	pointType type;
+	int nextX;
+	int nextY;
+};
 
-class Snake : public ArcadeGame
+class Turtle : public ArcadeGame
 {
 public:
 
-	Snake(ArcadeMachine &machine);
-
+	Turtle(ArcadeMachine &machine);
 	virtual void onGameStart();
-
+	~Turtle();
 	virtual void update(float deltaTime);
 	virtual void draw();
 
 private:
+	stuff* head;
 	sf::Sprite m_turtleSprite;
 	Animation m_turtleAnimation;
 
@@ -28,6 +41,7 @@ private:
 
 	sf::Vector2f m_screenPos;
 
+	stuff* map[10][10];
 	int m_score;
 	sf::Text m_scoreText;
 	sf::Text m_infoText;

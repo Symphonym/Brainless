@@ -29,8 +29,8 @@
 +Texture,images/arcade/pillar_2.png,pillar2
 +Texture,images/arcade/pillar_3.png,pillar3
 
-# SNAKE
-+Texture,images/arcade/snakeBackground.png,snakeBackground
+# TURTLE
++Texture,images/arcade/snakeBackground.png,TurtleBackground
 
 # BOOP
 +Texture,images/arcade/akebg.png,boopbg
