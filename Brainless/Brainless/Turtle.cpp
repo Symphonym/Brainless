@@ -6,7 +6,7 @@
 #include "Utility.h"
 #include "SoundPlayer.h"
 #include "OptionsMenu.h"
-
+//plz no hate on uggly code, much lazy, very kappa
 Turtle::Turtle(ArcadeMachine &machine)
 :
 ArcadeGame(machine, "Turtle"),
@@ -57,7 +57,7 @@ void Turtle::onGameStart()
 	m_frieSprite.setPosition(m_screenPos.x+200, m_screenPos.y+200);
 	m_scoreText.setPosition(m_screenPos.x + 20, m_screenPos.y + 650);
 	m_score = 0;
-	m_isDead = false;
+	isDead = false;
 	m_infoShowing = true;
 
 	for (int i = 0; i < 10; i++)
@@ -68,52 +68,108 @@ void Turtle::onGameStart()
 			else
 			{
 				std::cout << "hej" << std::endl;
-				delete(map[i][j]); //kallas inte ifall man stänger av arcademachine helt och startar igen, destructor körs ej?
+				delete(map[i][j]); //kallas inte ifall man stänger av arcademachine helt och startar igen, liten memory leak
 			}
 		}
 	}
 
-	
-	head = new stuff(turtle);
+	direction = up;
+
+	head = new stuff(turtle,5,5);
+	head->before = nullptr;
+	head->next = nullptr;
 	map[5][5] = head;
-	map[5][2] = new stuff(frie);
+	map[5][2] = new stuff(frie,5,2);
 }
 
 void Turtle::update(float deltaTime)
 {
 
-	map[0][0] = new stuff(turtle);
+	time += deltaTime;
 
-	map[9][9] = new stuff(frie);
-
-
-
-	if (!m_isDead)
+	if (!isDead)
 	{
-		
-
-
 		if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Up")))
 		{
-
+			direction = up;
 		}
 		else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Down")))
 		{
-
+			direction = down;
 		}
 
 		else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Left")))
 		{
-
+			direction = left;
 		}
 
 		else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Right")))
 		{
-
+			direction = right;
 		}
 
+		if (time > 1)
+		{
+			time--;
+			int x = 0;
+			int y = 0;
+			if (direction = up)
+			{
+				y = 1;
+			}
+			else if (direction = down)
+			{
+				y = -1;
+			}
+			else if (direction = left)
+			{
+				x = -1;
+			}
+			else if (direction = right)
+			{
+				x = 1;
+			}
+			int newPosX = head->x + x;
+			int newPosY = head->y + y;
+			if (newPosX < 0 || newPosX > 9 || newPosY < 0 || newPosY > 9)
+			{
+				isDead = true;
+			}
+			else if (map[newPosX][newPosY] == nullptr)
+			{
+				stuff* ptr = head;
+				while (ptr->next != nullptr)
+				{
 
-
+					ptr = ptr->next;
+				}
+				if(ptr->before != nullptr)ptr->before->next = nullptr;
+				map[ptr->x][ptr->y] = nullptr;
+				ptr->x = newPosX;
+				ptr->y = newPosY;
+				map[newPosX][newPosY] = ptr;
+				if (ptr != head)
+				{
+					ptr->next = head;
+					head = ptr;
+				}
+			}
+			else if (map[head->x + x][head->y + y]->type == frie)
+			{
+				map[2][2] /* rand != turtle */ = map[newPosX][newPosY];
+				stuff* ptr = new stuff(turtle, newPosX, newPosY);
+				map[newPosX][newPosY] = ptr;
+				ptr->next = head;
+				ptr->before = nullptr;
+				head->before = head;
+				head = ptr;
+			}
+			else if (map[head->x + x][head->y + y]->type == turtle)
+			{
+				isDead = true;
+			}
+		}
+		
 		m_scoreText.setString("Score: " + std::to_string(m_score));
 	}
 	/*	m_scoreText.setPosition(m_screenPos.x + 180, m_screenPos.y + 320);

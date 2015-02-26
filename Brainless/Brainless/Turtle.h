@@ -10,13 +10,25 @@ enum pointType
 	turtle,
 	frie
 };
+
+enum dirr
+{
+	up,
+	down,
+	left,
+	right
+};
 class stuff
 {
 public:
-	stuff(pointType _type):type(_type){};
+	stuff(pointType _type, int _x, int _y):type(_type),x(_x),y(_y),oldX(_x),oldY(_y){};
 	pointType type;
-	int nextX;
-	int nextY;
+	int x;
+	int y;
+	int oldX;
+	int oldY;
+	stuff* next;
+	stuff* before;
 };
 
 class Turtle : public ArcadeGame
@@ -30,6 +42,8 @@ public:
 	virtual void draw();
 
 private:
+	float time;
+	dirr direction;
 	stuff* head;
 	sf::Sprite m_turtleSprite;
 	Animation m_turtleAnimation;
@@ -47,7 +61,7 @@ private:
 	sf::Text m_infoText;
 	bool m_infoShowing = true;
 
-	bool m_isDead = false;
+	bool isDead = false;
 };
 
 #endif

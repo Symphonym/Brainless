@@ -23,6 +23,11 @@ m_Animation_grass5(SPRITESIZE, SPRITESIZE),
 m_Animation_scarf(SPRITESIZE, SPRITESIZE)
 {
 	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_MainMenu.txt");
+	
+	
+	//Renderer::instance().drawHUD(sf::Sprite(ResourceLoader::instance().retrieveTexture("StartScreen")));
+	//Renderer::instance().executeDraws();
+	//sf::sleep(sf::seconds(1)); //ska nog inte vara här, bara testade lite snabbt innan jag skulle med bussen
 
 	m_buttons[0] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("NewGame_Normal"),
