@@ -1,7 +1,7 @@
 # BACKGROUND TEXTURES
-+Texture,images/backgrounds/ABackground.png,ABackground
-+Texture,images/backgrounds/BBackground.png,BBackground
-+Texture,images/backgrounds/CBackground.png,CBackground
++Texture,images/backgrounds/background_A.png,background_A
++Texture,images/backgrounds/background_B.png,background_B
++Texture,images/backgrounds/background_C.png,background_C
 
 # BACKGROUND MUSIC
 +Music,music/LevelMusic.wav,LevelMusic

@@ -6,6 +6,8 @@
 #include "Utility.h"
 #include "MovingPlatformItem.h"
 #include <iostream>
+#include <fstream>
+#include <string>
 
 Level::Level()
 :
@@ -61,7 +63,8 @@ bool Level::loadLevelResources(const std::string &fileName)
 
 				if (resourceType == "Texture")
 				{
-					m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture(stringData[2])));
+					if (stringData[2].find("background") != std::string::npos)
+						m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture(stringData[2])));
 				}
 				else if (resourceType == "Music")
 				{
