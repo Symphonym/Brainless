@@ -130,8 +130,8 @@ void Inventory::events(const sf::Event &event, Game &game)
 					Item& item = *game.getLevel().getItems()[i].get();
 
 					sf::Vector2f itemCenter = sf::Vector2f(
-						item.getSprite().getGlobalBounds().left + item.getSprite().getGlobalBounds().width / 2.f,
-						item.getSprite().getGlobalBounds().top + item.getSprite().getGlobalBounds().height / 2.f);
+						item.getCollisionBounds().left + item.getCollisionBounds().width / 2.f,
+						item.getCollisionBounds().top + item.getCollisionBounds().height / 2.f);
 
 					sf::Vector2f distVec = itemCenter - playerCenter;
 					distVec.x = std::abs(distVec.x);
@@ -140,7 +140,7 @@ void Inventory::events(const sf::Event &event, Game &game)
 					if (distVec.x > item.getInteractDistance().x || distVec.y > item.getInteractDistance().y)
 						continue;
 
-					if (m_mouseItem->getSprite().getGlobalBounds().intersects(item.getSprite().getGlobalBounds()))
+					if (m_mouseItem->getCollisionBounds().intersects(item.getCollisionBounds()))
 					{
 						bool deleteOtherItem = false;
 						bool deleteMouseItem = false;
@@ -183,7 +183,7 @@ void Inventory::events(const sf::Event &event, Game &game)
 					if (distVec.x > m_mouseItem->getInteractDistance().x || distVec.y > m_mouseItem->getInteractDistance().y)
 						continue;
 
-					if (m_mouseItem->getSprite().getGlobalBounds().intersects(unit.getCollisionRect()))
+					if (m_mouseItem->getCollisionBounds().intersects(unit.getCollisionRect()))
 					{
 						bool deleteMouseItem = false;
 						bool deleteUnit = false;
