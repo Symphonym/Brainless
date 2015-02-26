@@ -6,6 +6,7 @@
 #define SPRITE_OFFSET_X (int) -85
 #define SPRITE_OFFSET_Y (int) -50
 
+
 //m_size(sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT)),
 //m_maxSpeed(sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y)),
 
@@ -139,7 +140,7 @@ void WalkingZombie::updateAnimation(float deltaTime)
 	if (m_animState != anim_walking)
 	{
 		m_sprite = &m_spriteSheets[0];
-		m_animation.loop(0, 7, m_textureId * 2, 5);
+		m_animation.loop(0, 7, m_textureId * 2, 10);
 		m_animState = anim_walking;
 	}
 

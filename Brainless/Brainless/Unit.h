@@ -32,6 +32,9 @@ public:
 	virtual void wallRight();
 
 	virtual bool onInteractedWith(Item &otherItem, Game &game) { return false; } // Called when an item interacts with this unit, returning TRUE will destroy this unit
+	virtual void onCollideWidth(Unit *unit){};
+
+	virtual void takesDamage(sf::Vector2f collisionPos){};
 
 	virtual void serialize(std::ofstream &writer) const;
 	virtual void deserialize(std::ifstream &reader);

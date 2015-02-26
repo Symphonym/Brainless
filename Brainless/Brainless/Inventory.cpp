@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Button.h"
 #include "CraftingDatabase.h"
+#include "OptionsMenu.h"
 
 Inventory::Inventory()
 :
@@ -66,7 +67,7 @@ void Inventory::events(const sf::Event &event, Game &game)
 	// Toggle inventory
 	if (event.type == sf::Event::KeyReleased)
 	{
-		if (event.key.code == sf::Keyboard::I)
+		if (event.key.code == OptionsMenu::getKeybind("Inventory"))
 		{
 			m_isOpen = !m_isOpen;
 			SoundPlayer::instance().playSound("inventory_open",game.getWindow().getView().getCenter());
@@ -129,8 +130,8 @@ void Inventory::events(const sf::Event &event, Game &game)
 					Item& item = *game.getLevel().getItems()[i].get();
 
 					sf::Vector2f itemCenter = sf::Vector2f(
-						item.getSprite().getGlobalBounds().left + item.getSprite().getGlobalBounds().width / 2.f,
-						item.getSprite().getGlobalBounds().top + item.getSprite().getGlobalBounds().height / 2.f);
+						item.getInteractBounds().left + item.getInteractBounds().width / 2.f,
+						item.getInteractBounds().top + item.getInteractBounds().height / 2.f);
 
 					sf::Vector2f distVec = itemCenter - playerCenter;
 					distVec.x = std::abs(distVec.x);
@@ -139,14 +140,23 @@ void Inventory::events(const sf::Event &event, Game &game)
 					if (distVec.x > item.getInteractDistance().x || distVec.y > item.getInteractDistance().y)
 						continue;
 
-					if (m_mouseItem->getSprite().getGlobalBounds().intersects(item.getSprite().getGlobalBounds()))
+					if (m_mouseItem->getInteractBounds().intersects(item.getInteractBounds()))
 					{
+						bool deleteOtherItem = false;
+						bool deleteMouseItem = false;
+
 						// Invoke interaction on world item
 						if (item.onInteractedWith(*m_mouseItem.get(), game))
-							game.getLevel().removeItem(i);
+							deleteOtherItem = true;
 
 						// Invoke interaction handling on mouse item
 						if (m_mouseItem->onInteract(item, game))
+							deleteMouseItem = true;
+
+						if (deleteOtherItem)
+							game.getLevel().removeItem(i);
+
+						if (deleteMouseItem)
 							delete m_mouseItem.release();
 
 						interactedWithItem = true;
@@ -173,16 +183,23 @@ void Inventory::events(const sf::Event &event, Game &game)
 					if (distVec.x > m_mouseItem->getInteractDistance().x || distVec.y > m_mouseItem->getInteractDistance().y)
 						continue;
 
-					if (m_mouseItem->getSprite().getGlobalBounds().intersects(unit.getCollisionRect()))
+					if (m_mouseItem->getInteractBounds().intersects(unit.getCollisionRect()))
 					{
+						bool deleteMouseItem = false;
+						bool deleteUnit = false;
+
 						// Invoke interaction handling on item
-						if(m_mouseItem->onInteractUnit(unit))
-							delete m_mouseItem.release();
+						if (m_mouseItem->onInteractUnit(unit))
+							deleteMouseItem = true;
 
 						// Invoke interaction on unit
 						if (unit.onInteractedWith(*m_mouseItem.get(), game))
-							game.getLevel().removeUnit(i);
+							deleteUnit = true;
 
+						if (deleteMouseItem)
+							delete m_mouseItem.release();
+						if (deleteUnit)
+							game.getLevel().removeUnit(i);
 						break;
 					}
 				}

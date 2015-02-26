@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Constants.h"
+#include "OptionsMenu.h"
 #include <iostream>
 
 /*
@@ -74,7 +75,7 @@ void Player::updateTask(float deltaTime)
 		float startAccBreakpoint = 100;
 		float minSpeedBeforeStop = 10;
 		bool run = false;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) //Fortfarande inte riktigt bra, går från maxrun till maxwalk direkt efter man släpper
+		if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Run"))) //Fortfarande inte riktigt bra, går från maxrun till maxwalk direkt efter man släpper
 		{
 			run = true;
 		}
@@ -84,7 +85,7 @@ void Player::updateTask(float deltaTime)
 		m_inputDirection = dir_noDirection;
 		if (m_inAir) m_wallState = wall_normal; //annars större problem med rörelsen i luften, men kan bli "minimala-skärm-studs" problem i luften istället. Dock körs rätt animation
 		//Left
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D)/*&& m_wallState != wall_left*/)
+		if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Left")) && !sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Right"))/*&& m_wallState != wall_left*/)
 		{
 			slowDown = false;
 			m_inputDirection = dir_left;
@@ -113,7 +114,7 @@ void Player::updateTask(float deltaTime)
 
 		}
 		//Right
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::A)/*&& m_wallState != wall_right*/)
+		if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Right")) && !sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Left"))/*&& m_wallState != wall_right*/)
 		{
 			slowDown = false;
 			m_inputDirection = dir_right;
@@ -176,7 +177,7 @@ void Player::updateTask(float deltaTime)
 		}
 		//Pressing jump
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Jump")))
 		{
 			//don't jump
 			if (m_inAir)
@@ -323,11 +324,11 @@ void Player::updateAnimation(float deltaTime)
 	m_cameraPos.x = m_position.x;
 	m_cameraPos.y = m_position.y + cameraOffset;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && m_speed.x == 0 && m_speed.y == 0)
+	if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Down")) && m_speed.x == 0 && m_speed.y == 0)
 	{
 		cameraOffset = cameraOffset + (m_cameraMaxOffset - cameraOffset) * deltaTime * m_cameraSpeed;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && m_speed.x == 0 && m_speed.y == 0)
+	else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Up")) && m_speed.x == 0 && m_speed.y == 0)
 	{
 		cameraOffset = cameraOffset + (-m_cameraMaxOffset - cameraOffset) * deltaTime * m_cameraSpeed;
 	}
@@ -407,7 +408,7 @@ void Player::updateAnimation(float deltaTime)
 		if (abs(m_speed.x) <= runBreakpoint) //runJumpBreakpoint
 		{
 			//UP
-			if (m_speed.y < 30)
+			if (m_speed.y < -50)
 			{
 				//inAir
 				if ((m_animState == anim_endJump && m_animation.getPlayOnceDone()) || m_animState == anim_inAirUpRun)
@@ -418,19 +419,23 @@ void Player::updateAnimation(float deltaTime)
 					animation_endJump();
 			}
 			//FALL
-			else if (30 < m_speed.y)
+			else if (50 < m_speed.y)
 			{
 				animation_inAirFall();
+			}
+			else
+			{
+				animation_inAir();
 			}
 		}
 		//RUN JUMP
 		else
 		{
 			//UP
-			if (m_speed.y < -100)
+			if (m_speed.y < -50)
 				animation_inAirUpRun();
 			//FALL
-			else if (100 < m_speed.y)
+			else if (50 < m_speed.y)
 				animation_inAirFallRun();
 			//MIDAIR
 			else
@@ -506,41 +511,27 @@ float Player::calcAcceleration(float minAcceleration, float maxAcceleration, flo
 	All animation calls
 	"PlayerSheet" == 0
 	"PlayerSheetJump" == 1
-	"PlayerSheetRun" == 2
+	"PlayerSheetRun" == 2 //Kommer senare försvinna, just nu bara jumpRun
 */
 void Player::animation_idle()
 {
 	if (m_animState != anim_idle)
 	{
-	//	m_animLoopsDone = 0;
 		m_sprite = &m_spriteSheets[0];
 	
 		m_animation.loop(0, 1, 3, 4, 8);
 
 		m_animState = anim_idle;
 	}
-
-	/*if (m_animation.getPlayOnceDone()) //rip kevins glada smiley, death by grafikernas nya textur
-	{
-		m_animLoopsDone++;
-		if (m_animLoopsDone == 8)
-		{
-			m_animation.playOnce(0, 7, 4, 8);
-		}
-		else
-		m_animation.playOnce(0, 7, 3, 8);
-	}*/
 }
 
 void Player::animation_walk()
 {
-	//std::cout << "hej2" << std::endl;
-	//std::cout << m_animState << std::endl;
 	if (m_animState != anim_walk)
 	{
 		//std::cout << "hej" << std::endl;
 		m_sprite = &m_spriteSheets[0];
-		m_animation.loop(0, 7, 1, 5);
+		m_animation.loop(0, 7, 0, 5);
 		m_animState = anim_walk;
 
 	}
@@ -550,8 +541,8 @@ void Player::animation_run()
 {
 	if (m_animState != anim_run)
 	{
-		m_sprite = &m_spriteSheets[2];
-		m_animation.loop(0, 7, 5, 6);
+		m_sprite = &m_spriteSheets[0];
+		m_animation.loop(0, 7, 2, 6);
 		m_animState = anim_run;
 	}
 	m_animation.setSpeed(Animation::calcFrameSpeed(4, 10, MAX_WALK_SPEED_X, m_maxSpeed.x, abs(m_speed.x))); //runBreakpoint används inte på samma sätt, vänta tills vet hur run/walk ska funka
@@ -578,15 +569,13 @@ void Player::animation_turnRun()
 	}
 }
 
-void Player::animation_startJumpIdle()  ///////////////////
+void Player::animation_startJumpIdle() 
 {
 	if (m_animState != anim_startJumpIdle)
 	{
 		m_sprite = &m_spriteSheets[1];
 		m_animation.playOnce(0, 2, 0, JUMPANIMFPS);
 		m_animState = anim_startJumpIdle;
-		//std::cout << "JumpIdle" << std::endl;
-		//std::cout << m_speed.x << std::endl;
 	}
 }
 void Player::animation_startJumpRun()
@@ -596,8 +585,6 @@ void Player::animation_startJumpRun()
 		m_sprite = &m_spriteSheets[2];
 		m_animation.playOnce(0, 1, 0, 8);
 		m_animState = anim_startJumpRun;
-		//std::cout << "JumpRun" << std::endl;
-		//std::cout << m_speed.x << std::endl;
 	}
 }
 void Player::animation_endJump() //after leaving ground for "idlejump"
@@ -605,7 +592,7 @@ void Player::animation_endJump() //after leaving ground for "idlejump"
 	if (m_animState != anim_endJump)
 	{
 		m_sprite = &m_spriteSheets[1];
-		m_animation.playOnce(3, 5, 0, 10);
+		m_animation.playOnce(3, 5, 0, 12);
 		m_animState = anim_endJump;
 	}
 }
@@ -614,7 +601,7 @@ void Player::animation_inAirUp()
 	if (m_animState != anim_inAirUp)
 	{
 		m_sprite = &m_spriteSheets[1];
-		m_animation.loop(0, 1, 1, 6);
+		m_animation.loop(0, 2, 1, 8);
 		m_animState = anim_inAirUp;
 	}
 }
@@ -623,11 +610,27 @@ void Player::animation_inAirFall()
 	if (m_animState != anim_inAirFall)
 	{
 		m_sprite = &m_spriteSheets[1];
-		m_animation.loop(0, 1, 2, 6); 
+		m_animation.loop(1, 3, 2, 8); 
 		m_animState = anim_inAirFall;
 	}
-}void Player::animation_inAirUpRun()
+}
+void Player::animation_inAir()
 {
+	if (m_animState != anim_inAir)
+	{
+		m_sprite = &m_spriteSheets[1];
+		m_animation.stillFrame(0, 2);
+		m_animState = anim_inAir;
+	}
+}
+void Player::animation_inAirUpRun()
+{
+	/*if (m_animState != anim_inAirUp)
+	{
+		m_sprite = &m_spriteSheets[1];
+		m_animation.loop(0, 2, 1, 6);
+		m_animState = anim_inAirUp;
+	}*/
 	if (m_animState != anim_inAirUpRun)
 	{
 		m_sprite = &m_spriteSheets[2];
@@ -637,14 +640,27 @@ void Player::animation_inAirFall()
 }
 void Player::animation_inAirFallRun()
 {
+	//if (m_animState != anim_inAirFall)
+	//{
+	//	m_sprite = &m_spriteSheets[1];
+	//	m_animation.loop(1, 3, 2, 6);
+	//	m_animState = anim_inAirFall;
+	//}
 	if (m_animState != anim_inAirFallRun)
 	{
 		m_sprite = &m_spriteSheets[2];
 		m_animation.loop(0, 1, 3, 6); //
 		m_animState = anim_inAirFallRun;
 	}
-}void Player::animation_inAirRun() /////////////////////////////////////
+}
+void Player::animation_inAirRun()
 {
+	/*if (m_animState != anim_inAirFall)
+	{
+		m_sprite = &m_spriteSheets[1];
+		m_animation.stillFrame(0,2);
+		m_animState = anim_inAirFall;
+	}*/
 	if (m_animState != anim_inAirRun)
 	{
 		m_sprite = &m_spriteSheets[2];
@@ -657,11 +673,9 @@ void Player::animation_landIdle()
 	if (m_animState != anim_landIdle)
 	{
 		m_sprite = &m_spriteSheets[1];
-		m_animation.playOnce(0, 1 + m_jumpFrame, 3, JUMPANIMFPS); //jumpFrame = experimental 3
+		m_animation.playOnce(0, 1 + m_jumpFrame, 3, JUMPANIMFPS);
 		m_animState = anim_landIdle;
-		m_jumpFrame = 2; //experimental 
-		//std::cout << "LandIdle" << std::endl;
-		//std::cout << m_speed.x << std::endl;
+		m_jumpFrame = 2;
 	}
 }
 void Player::animation_landRun()
@@ -669,11 +683,9 @@ void Player::animation_landRun()
 	if (m_animState != anim_landRun)
 	{
 		m_sprite = &m_spriteSheets[2];
-		m_animation.playOnce(0, 1, 4, 8); //jumpFrame = experimental 3
+		m_animation.playOnce(0, 1, 4, 8);
 		m_animState = anim_landRun;
-		m_jumpFrame = 2; //experimental 
-	/*	std::cout << "LandRun" << std::endl;
-		std::cout << m_speed.x << std::endl;*/
+		m_jumpFrame = 2;
 	}
 }
 void Player::animation_dead()

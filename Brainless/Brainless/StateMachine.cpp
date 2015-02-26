@@ -6,7 +6,9 @@
 
 StateMachine::StateMachine()
 :
-m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
+m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close),
+m_loadingAnim(256, 256),
+m_loadingAnimDot(256, 256)
 {
 	Renderer::instance().setTarget(m_window);
 
@@ -14,11 +16,13 @@ m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 	// Create a little loading screen
 	ResourceLoader::instance().setLoadingHandler([&](const std::string &info, int current, int total) -> void
 	{
+		float deltaTime = m_loadingClock.restart().asSeconds();
+
 		sf::Text newText;
 		newText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 		newText.setString(info);
 		newText.setCharacterSize(12);
-		newText.setColor(sf::Color::Green);
+		newText.setColor(sf::Color::Color(0,255,0,150));
 		m_loadingText.push_back(newText);
 
 		m_window.clear();
@@ -33,8 +37,13 @@ m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 			g,
 			0));
 
+		//if (std::rand() % 2 == 0)
+		//	sf::sleep(sf::milliseconds(50));
+
 		// Draw states as normal
 		draw();
+
+		Renderer::instance().drawHUD(m_loadingBG);
 
 		if (m_loadingText.size() > 10)
 			m_loadingText.erase(m_loadingText.begin());
@@ -45,14 +54,31 @@ m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 			Renderer::instance().drawHUD(m_loadingText[i]);
 		}
 
+		m_loadingAnimSprite.setTextureRect(m_loadingAnim.getRectangle(deltaTime));
+		m_loadingAnimSpriteDot.setTextureRect(m_loadingAnimDot.getRectangle(deltaTime));
 		Renderer::instance().drawHUD(m_loadingSprite);
+		Renderer::instance().drawHUD(m_loadingAnimSprite);
+		Renderer::instance().drawHUD(m_loadingAnimSpriteDot);
 		Renderer::instance().executeDraws();
 
 		m_window.display();
 	});
 
+	m_loadingBG.setTexture(ResourceLoader::instance().retrieveTexture("LoadingScreen_BG"));
+	m_loadingAnimSprite.setTexture(ResourceLoader::instance().retrieveTexture("LoadingScreen_Run"));
+	m_loadingAnimSpriteDot.setTexture(ResourceLoader::instance().retrieveTexture("LoadingScreen_Dot"));
+	m_loadingAnimSprite.setPosition(
+		m_window.getSize().x / 2 - 150.f,
+		m_window.getSize().y - 400.f);
+	m_loadingAnimSpriteDot.setPosition(
+		m_window.getSize().x / 2 + 155.f,
+		m_window.getSize().y - 170.f);
+
+	m_loadingAnim.loop(0, 7, 0, 5.f);
+	m_loadingAnimDot.loop(0, 2, 0, 2.f);
+
 	sf::Image loadingBar;
-	loadingBar.create(1, 50, sf::Color::White);
+	loadingBar.create(1, 7, sf::Color::White);
 
 	m_loadingBar.loadFromImage(loadingBar);
 	m_loadingSprite.setTexture(m_loadingBar);
@@ -60,6 +86,7 @@ m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 	m_loadingSprite.setPosition(
 		0,
 		m_window.getSize().y - m_loadingSprite.getGlobalBounds().height);
+
 
 	// Hide mouse cursor
 	m_window.setMouseCursorVisible(false);

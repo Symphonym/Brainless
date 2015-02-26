@@ -33,7 +33,9 @@
 #include "Boop.h"
 #include "RobotAkeAttack.h"
 #include "NoteGame.h"
+#include "Snake.h"
 #include "ManholeItem.h"
+#include "PuddleCableItem.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -42,7 +44,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new VendingMachineItem("VendingMachineItem1", { 0 }, 2)));
 	addItem(ItemPtr(new CoinItem(3)));
 	addItem(ItemPtr(new TwineItem(4)));
-	addItem(ItemPtr(new GhostItem("dialog.txt", 5)));
+	addItem(ItemPtr(new GhostItem("dialogues/zombie_mechanical.txt", 5)));
 	addItem(ItemPtr(new DoorItem(true, 6))); // Locked door
 	addItem(ItemPtr(new KeyItem(7))); // Key to said door
 	addItem(ItemPtr(new ChestItem(false, { 0, 2, 7 }, 8)));
@@ -70,30 +72,34 @@ ItemDatabase::ItemDatabase()
 
 
 	// Add arcade game discs
-	addItem(ItemPtr(new ArcadeDiscItem(30, [](ArcadeMachine &machine) -> ArcadeGame*
+	addItem(ItemPtr(new ArcadeDiscItem(30, "Green", [](ArcadeMachine &machine) -> ArcadeGame*
 	{
 		return new RpgGame(machine);
 	})));
-	addItem(ItemPtr(new ArcadeDiscItem(31, [](ArcadeMachine &machine) -> ArcadeGame*
+	addItem(ItemPtr(new ArcadeDiscItem(31, "Violet", [](ArcadeMachine &machine) -> ArcadeGame*
 	{
 		return new BeachParty(machine);
 	})));
-	addItem(ItemPtr(new ArcadeDiscItem(32, [](ArcadeMachine &machine) -> ArcadeGame*
+	addItem(ItemPtr(new ArcadeDiscItem(32, "Violet", [](ArcadeMachine &machine) -> ArcadeGame*
 	{
 		return new Boop(machine);
 	})));
-	addItem(ItemPtr(new ArcadeDiscItem(33, [](ArcadeMachine &machine) -> ArcadeGame*
+	addItem(ItemPtr(new ArcadeDiscItem(33, "Red", [](ArcadeMachine &machine) -> ArcadeGame*
 	{
 		return new RobotAkeAttack(machine);
 	})));
-	addItem(ItemPtr(new ArcadeDiscItem(34, [](ArcadeMachine &machine) -> ArcadeGame*
+	addItem(ItemPtr(new ArcadeDiscItem(34, "Green", [](ArcadeMachine &machine) -> ArcadeGame*
 	{
 		return new NoteGame(machine);
 	})));
-
+	addItem(ItemPtr(new ArcadeDiscItem(37, "Blue", [](ArcadeMachine &machine) -> ArcadeGame* //35?
+	{
+		return new Snake(machine);
+	})));
 
 	addItem(ItemPtr(new ManholeItem(false, "SteelLadder5", 35)));
 	addItem(ItemPtr(new ManholeItem(true, "SteelLadder5", 36)));
+	addItem(ItemPtr(new PuddleCableItem(true, 38)));
 
 }
 

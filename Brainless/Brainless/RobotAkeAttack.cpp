@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include <math.h>
 #include "Utility.h"
+#include "OptionsMenu.h"
 //#include "ParticleSystem.h"
 
 //Player
@@ -86,7 +87,7 @@ void RobotAkeAttack::events(const sf::Event &event)
 {
 	if (event.type == sf::Event::KeyPressed)
 	{
-		if (event.key.code == sf::Keyboard::D && m_player->dash_cd <= 0 && m_player->dashs > 0)
+		if (event.key.code == OptionsMenu::getKeybind("Right") && m_player->dash_cd <= 0 && m_player->dashs > 0)
 		{
 			m_player->dash_cd = 0.8;
 			m_player->dashs--;
@@ -94,20 +95,20 @@ void RobotAkeAttack::events(const sf::Event &event)
 			if (m_player->jumps == 0)
 				m_player->jumps++;
 		}
-		else if (event.key.code == sf::Keyboard::S && m_player->jumps > 0 && !m_player->jump_key)
+		else if (event.key.code == OptionsMenu::getKeybind("Down") && m_player->jumps > 0 && !m_player->jump_key)
 		{
 			m_player->jump_key = true;
 			m_player->jumps--;
 			m_player->y_speed = -850; //500
 		}
-		else if (event.key.code == sf::Keyboard::W && m_gameOver)
+		else if (event.key.code == OptionsMenu::getKeybind("Up") && m_gameOver)
 		{
 			onGameStart();
 		}
 	}
 	else if (event.type == sf::Event::KeyReleased)
 	{
-		if (event.key.code == sf::Keyboard::S)
+		if (event.key.code == OptionsMenu::getKeybind("Down"))
 		{
 			m_player->jump_key = false;
 		}

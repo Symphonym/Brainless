@@ -6,6 +6,7 @@
 #include <memory>
 #include "Notification.h"
 #include "ConversationBox.h"
+#include "Animation.h"
 
 class Game;
 class State;
@@ -32,7 +33,14 @@ public:
 
 private:
 
+	Animation m_loadingAnim;
+	Animation m_loadingAnimDot;
+
 	sf::Texture m_loadingBar;
+	sf::Sprite m_loadingBG;
+	sf::Clock m_loadingClock;
+	sf::Sprite m_loadingAnimSprite;
+	sf::Sprite m_loadingAnimSpriteDot;
 	sf::Sprite m_loadingSprite;
 	std::vector<sf::Text> m_loadingText;
 

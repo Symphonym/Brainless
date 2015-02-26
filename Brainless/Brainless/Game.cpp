@@ -69,7 +69,7 @@ m_player(nullptr)
 				// Sync use functionality for sync
 				for (std::size_t i = 0; i < m_level.getItems().size(); i++)
 				{
-					if (m_level.getItems()[i]->getSyncID() == itm->getSyncID())
+					if (m_level.getItems()[i]->getSyncID() >= 0 && m_level.getItems()[i]->getSyncID() == itm->getSyncID())
 						m_level.getItems()[i]->onSyncedWith(*itm);
 				}
 			}
@@ -137,23 +137,24 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 		player_location.x = Utility::clampValue<float>((Constants::MapWidth)*Constants::TileSize - (player_location.x), Constants::TileSize, (Constants::MapWidth - 1)*Constants::TileSize);
 	}
 
-
-	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_Level" + std::to_string(m_levelIndex) + ".txt");
+	
 
 	// Auto save level before changing level
 	if (m_player != nullptr) // If this is a level change from a menu, the player won't already exist
 		saveGame();
 
-
 	// Reset level
 	m_level.reset();
 	m_levelIndex = levelIndex;
+	
+	//Load levle resources 
+	m_level.loadLevelResources("loadfiles/ResourceLoad_Level" + std::to_string(m_levelIndex) + ".txt");
 
 	// Reload level
 	FileSave::loadMapText(m_level, m_levelIndex); // All tiles are cleared in here
 	FileSave::loadLevelProgress(m_level, m_levelIndex); // All units are cleared from level here
 	FileSave::loadInventory(*m_inventory);
-	m_level.loadLevelResources(); // Load extra stuff such as parallaxing backgrounds
+	
 
 	//Set player to start position
 	if (player_location == sf::Vector2f(-60, -60))
@@ -307,7 +308,7 @@ void Game::update(float deltaTime)
 		{
 			if (currentUnit->getCollisionRect().intersects(m_player->getCollisionRect()))
 			{
-				m_player->takesDamage(currentUnit->getPosition() - m_player->getPosition());
+				currentUnit->onCollideWidth(m_player);
 			}
 		}
 	}

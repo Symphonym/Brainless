@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "ParticleSystem.h"
 #include "SoundPlayer.h"
+#include "OptionsMenu.h"
 
 RpgGame::RpgGame(ArcadeMachine &machine)
 :
@@ -83,16 +84,16 @@ void RpgGame::events(const sf::Event &event)
 {
 	if (event.type == sf::Event::KeyReleased && m_player)
 	{
-		if (event.key.code == sf::Keyboard::W)
+		if (event.key.code == OptionsMenu::getKeybind("Up"))
 			playerInputToTile(m_player->x, m_player->y - 1);
 
-		else if (event.key.code == sf::Keyboard::S)
+		else if (event.key.code == OptionsMenu::getKeybind("Down"))
 			playerInputToTile(m_player->x, m_player->y + 1);
 
-		else if (event.key.code == sf::Keyboard::D)
+		else if (event.key.code == OptionsMenu::getKeybind("Right"))
 			playerInputToTile(m_player->x + 1, m_player->y);
 
-		else if (event.key.code == sf::Keyboard::A)
+		else if (event.key.code == OptionsMenu::getKeybind("Left"))
 			playerInputToTile(m_player->x - 1, m_player->y);
 	}
 }

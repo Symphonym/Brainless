@@ -319,40 +319,40 @@ bool Unit::updateCollision()
 	unitLedgeOffset 20
 
 	kollision nere och höger
-	2001
-	3001
+	0201
+	0301
 
 	kollision nere och vänster
-	0301
-	0201
+	3001
+	2001
 
 	kollision uppe och höger
-	3010
-	2010
-
-	kollision uppe och vänster
 	0310
 	0210
+
+	kollision uppe och vänster
+	3010
+	2010
 
 	kollision nere kan hända 
 	0002
 	0001
-	0101
+	1001
 
 	uppe kan hända
-	1010
+	0110
 	0020
 	0010
 
 	höger kan hända
-	3000
-	2000
-	1000
-
-	vänster kan hända
 	0300
 	0200
 	0100
+
+	vänster kan hända
+	3000
+	2000
+	1000
 	
 	//EJ "LÄNKADE" FUNNA KOMBINATIONER
 	0202 , har uppstått, inget fel syntes. Om det hände vid nere, inget fel. Dock vet ej exakt när det inträffade.

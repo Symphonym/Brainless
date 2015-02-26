@@ -6,6 +6,8 @@
 #include "Utility.h"
 #include "MovingPlatformItem.h"
 #include <iostream>
+#include <fstream>
+#include <string>
 
 Level::Level()
 :
@@ -32,18 +34,62 @@ void Level::setDarkness(bool enabled)
 {
 	m_enableDarkness = enabled;
 }
-void Level::loadLevelResources()
+
+bool Level::loadLevelResources(const std::string &fileName)
 {
+	ResourceLoader::instance().loadResourceFile(fileName);
 	m_backgrounds.clear();
-
+	if (m_musicName != "none")
+	{
+		SoundPlayer::instance().stopMusic(m_musicName);
+		m_musicName = "none";
+	}
 	// Load backgrounds
-	/*m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("ABackground")));
-	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("BBackground")));
-	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("CBackground")));*/
+	std::ifstream reader(fileName);
 
-	m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture("Park")));
+	bool hasLoaded = false;
+	if (reader.is_open())
+	{
+		std::string line;
+		while (std::getline(reader, line))
+		{
+			// Skip empty lines
+			if (line.empty())
+				continue;
+			else if (line[0] == '#')
+				continue;
 
-	//SoundPlayer::instance().playMusic("LevelMusic", true);
+			std::vector<std::string> stringData = Utility::splitString(line, ',');
+			std::string resourceType = stringData[0].substr(1, stringData[0].size());
+
+			// Add a new resource
+			if (stringData[0][0] == '+')
+			{
+
+				if (resourceType == "Texture")
+				{
+					if (stringData[2].find("background") != std::string::npos)
+						m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture(stringData[2])));
+				}
+				else if (resourceType == "Music")
+				{
+					if (m_musicName!="none")
+						SoundPlayer::instance().stopMusic(m_musicName);
+					m_musicName = stringData[2];
+					SoundPlayer::instance().playMusic(m_musicName, true);
+					//TODO keep track of loaded music so it can be stopped
+				}
+				else
+					continue;
+			}
+		}
+		hasLoaded = true;
+	}
+	reader.close();
+
+	
+	return hasLoaded;
+	
 }
 
 Unit* Level::addUnit(UnitPtr unit)
@@ -204,7 +250,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 
 
 		currentUnit->updateMovement(Constants::Gravity, deltaTime);
-		
+
 		sf::FloatRect unitBounds = currentUnit->getCollisionRect();
 
 		if (currentUnit->isMovementEnabled())
@@ -339,7 +385,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 					sf::Vector2f tileCenter = sf::Vector2f(tileBounds.left + tileBounds.width / 2, tileBounds.top + tileBounds.height / 2);
 					sf::Vector2f unitCenter = sf::Vector2f(unitBounds.left + unitBounds.width / 2, unitBounds.top + unitBounds.height / 2);
 					sf::FloatRect unitBottom = sf::FloatRect(unitBounds.left + unitLedgeOffset, unitBounds.top + unitBounds.height, unitBounds.width - unitLedgeOffset * 2, 1);
-					
+
 					//notinAir
 					if (currentUnit->getSpeed().y >= 0)
 					{
@@ -387,7 +433,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 						// If tile isn't empty and is colliding with the unit
 						if (tileBounds.intersects(unitBounds) && !hasCollided/* && !collision*/)
 						{
-					
+
 							//	collision = true;
 							hasCollided = true;
 
@@ -399,13 +445,13 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 								//Kolla om tile under unit
 								if (unitCenter.y < tileCenter.y)
 								{
-								//	if (currentUnit->getSpeed().y >= 0)
-								//	{
-										if (/*abs(currentUnit->getSpeed().x) > 50 ||*/ unitBottom.intersects(tileBounds))
-										{
-											currentUnit->collisionDown(tileBounds.top - originalBounds.height, 0, 0);
-										}
-								//	}
+									//	if (currentUnit->getSpeed().y >= 0)
+									//	{
+									if (/*abs(currentUnit->getSpeed().x) > 50 ||*/ unitBottom.intersects(tileBounds))
+									{
+										currentUnit->collisionDown(tileBounds.top - originalBounds.height, 0, 0);
+									}
+									//	}
 								}
 								//kolla om tile ovanför unit
 								else if (unitCenter.y > tileCenter.y && currentUnit->getSpeed().y < 0)
@@ -419,9 +465,9 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 								if (unitCenter.x < tileCenter.x /*&& currentUnit->getSpeed().x > 0*/)
 								{
 									if (currentUnit->getSpeed().x > 0)
-										currentUnit->collisionLeft(tileBounds.left - originalBounds.width, 0, 0);
-									else 
-										currentUnit->collisionLeft(tileBounds.left - originalBounds.width, 
+										currentUnit->collisionRight(tileBounds.left - originalBounds.width, 0, 0);
+									else
+										currentUnit->collisionRight(tileBounds.left - originalBounds.width,
 										currentUnit->getSpeed().x, 0);
 								}
 
@@ -429,9 +475,9 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 								else if (unitCenter.x > tileCenter.x /*&& currentUnit->getSpeed().x < 0*/)
 								{
 									if (currentUnit->getSpeed().x < 0)
-										currentUnit->collisionRight(tileBounds.left + tileBounds.width, 0, 0);
+										currentUnit->collisionLeft(tileBounds.left + tileBounds.width, 0, 0);
 									else
-										currentUnit->collisionRight(tileBounds.left + tileBounds.width, 
+										currentUnit->collisionLeft(tileBounds.left + tileBounds.width,
 										currentUnit->getSpeed().x, 0);
 								}
 							}
@@ -441,7 +487,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 					unitBounds = originalBounds;
 				}
 				//meh funka plox
-				if(currentUnit->updateCollision() && !currentUnit->getInAir()) inAir = false;
+				if (currentUnit->updateCollision() && !currentUnit->getInAir()) inAir = false;
 #pragma endregion solidCollision
 			}
 
@@ -493,7 +539,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 					{
 						inAir = false;
 						currentUnit->setPosition(currentUnit->getPosition() + m_items[i]->getSpeed() * deltaTime);
-					//		std::cout << "bottom intersect" << std::endl;
+						//		std::cout << "bottom intersect" << std::endl;
 						//	std::cout << m_items[i]->getName() << std::endl;
 					}
 
@@ -538,7 +584,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 											currentUnit->setAcceleration(sf::Vector2f(currentUnit->getAcceleration().x, 0));
 											currentUnit->setPosition(sf::Vector2f(currentUnit->getPosition().x, tileBounds.top - originalBounds.height));
 
-									
+
 											//			std::cout << "above" << std::endl;
 											//			std::cout << m_items[i]->getName() << std::endl;
 										}
@@ -561,6 +607,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 									currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 									currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
 									currentUnit->setPosition(sf::Vector2f(tileBounds.left - originalBounds.width, currentUnit->getPosition().y));
+									currentUnit->wallRight();
 									//		std::cout << "left" << std::endl;
 									//		std::cout << m_items[i]->getName() << std::endl;
 								}
@@ -571,6 +618,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 									currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 									currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
 									currentUnit->setPosition(sf::Vector2f(tileBounds.left + tileBounds.width, currentUnit->getPosition().y));
+									currentUnit->wallLeft();
 									//		std::cout << "hoger" << std::endl;aaaaa
 									//		std::cout << m_items[i]->getName() << std::endl;
 								}
@@ -582,6 +630,11 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 				}
 			}
 
+			
+#pragma endregion itemCollision
+
+			currentUnit->setInAir(inAir);
+
 			m_items.erase(std::remove_if(m_items.begin(), m_items.end(), [&](const ItemPtr &item) -> bool
 			{
 				// Trigger collision events for items
@@ -592,10 +645,6 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 				else
 					return false;
 			}), m_items.end());
-
-#pragma endregion itemCollision
-
-			currentUnit->setInAir(inAir);
 		}
 
 		currentUnit->updateAnimation(deltaTime);

@@ -1,3 +1,8 @@
+# Resource Load Background
++Texture,images/backgrounds/LoadingScreen_Brainless.png,LoadingScreen_BG
++Texture,images/backgrounds/Spritesheet_maeve_RunForever_V1.png,LoadingScreen_Run
++Texture,images/backgrounds/Spritesheet_Loading_Dot_V1.png,LoadingScreen_Dot
+
 # LOADING CROSS
 +Texture,images/UI/loadingCross.png,LoadingCross
 
@@ -197,9 +202,24 @@
 +Texture,images/items/manholeclosed.png,ManholeClosed
 +Texture,images/items/manholeopen.png,ManholeOpen
 +Texture,images/items/steelladder5.png,SteelLadder5
++Texture,images/items/puddle.png,PuddleItem
++Texture,images/items/puddleCable.png,PuddleCableItem
 
+# Arcade disc items
 +Texture,images/items/discs/Big-Disk-Blue.png,ArcadeDiscItemBlueBig
 +Texture,images/items/discs/Small-Disk-Blue.png,ArcadeDiscItemBlueSmall
++Texture,images/items/discs/Big-Disk-Green.png,ArcadeDiscItemGreenBig
++Texture,images/items/discs/Small-Disk-Green.png,ArcadeDiscItemGreenSmall
++Texture,images/items/discs/Big-Disk-Grey.png,ArcadeDiscItemGreyBig
++Texture,images/items/discs/Small-Disk-Grey.png,ArcadeDiscItemGreySmall
++Texture,images/items/discs/Big-Disk-Orange.png,ArcadeDiscItemOrangeBig
++Texture,images/items/discs/Small-Disk-Orange.png,ArcadeDiscItemOrangeSmall
++Texture,images/items/discs/Big-Disk-Violet.png,ArcadeDiscItemVioletBig
++Texture,images/items/discs/Small-Disk-Violet.png,ArcadeDiscItemVioletSmall
++Texture,images/items/discs/Big-Disk-Yellow.png,ArcadeDiscItemYellowBig
++Texture,images/items/discs/Small-Disk-Yellow.png,ArcadeDiscItemYellowSmall
++Texture,images/items/discs/Big-Disk-Red.png,ArcadeDiscItemRedBig
++Texture,images/items/discs/Small-Disk-Red.png,ArcadeDiscItemRedSmall
 
 +Texture,images/items/pickup.png,TestItem
 +Texture,images/items/wizard_idle.png,TestItem2
