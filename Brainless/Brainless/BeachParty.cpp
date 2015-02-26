@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "Utility.h"
 #include "SoundPlayer.h"
+#include "OptionsMenu.h"
 
 BeachParty::BeachParty(ArcadeMachine &machine)
 :
@@ -80,24 +81,24 @@ void BeachParty::update(float deltaTime)
 		m_rects[0].left = m_turtleSprite.getPosition().x;
 		m_rects[0].top = m_turtleSprite.getPosition().y;
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+		if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Up")))
 		{
 			m_newPos = sf::Vector2f(0, -deltaTime * m_speed);
 			m_turtleSprite.setRotation(0);
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Down")))
 		{
 			m_newPos = sf::Vector2f(0, deltaTime * m_speed);
 			m_turtleSprite.setRotation(180);
 		}
 
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Left")))
 		{
 			m_newPos = sf::Vector2f(-deltaTime * m_speed, 0);
 			m_turtleSprite.setRotation(270);
 		}
 
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Right")))
 		{
 			m_newPos = sf::Vector2f(deltaTime * m_speed, 0);
 			m_turtleSprite.setRotation(90);

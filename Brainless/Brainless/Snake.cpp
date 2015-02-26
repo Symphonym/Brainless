@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "Utility.h"
 #include "SoundPlayer.h"
+#include "OptionsMenu.h"
 
 Snake::Snake(ArcadeMachine &machine)
 :
@@ -54,21 +55,21 @@ void Snake::update(float deltaTime)
 		
 
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+		if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Up")))
 		{
 
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		{
-
-		}
-
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Down")))
 		{
 
 		}
 
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Left")))
+		{
+
+		}
+
+		else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Right")))
 		{
 
 		}

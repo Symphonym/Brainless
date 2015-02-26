@@ -12,6 +12,7 @@
 #include "RpgGame.h"
 
 #include "SoundPlayer.h"
+#include "OptionsMenu.h"
 
 ArcadeMachine::ArcadeMachine(StateMachine &machine)
 :
@@ -43,10 +44,10 @@ m_playingGame(false)
 	m_infoText = m_currentGameText;
 	m_infoText.setPosition(300, 550);
 	m_infoText.setString("");
-	m_infoText.setString(m_infoText.getString() + "W = UP" + '\n');
-	m_infoText.setString(m_infoText.getString() + "S = DOWN" + '\n');
-	m_infoText.setString(m_infoText.getString() + "D = PLAY" + '\n');
-	m_infoText.setString(m_infoText.getString() + "A = EXIT");
+	m_infoText.setString(m_infoText.getString() + OptionsMenu::getKeybindKeyName("Up") + " = UP" + '\n');
+	m_infoText.setString(m_infoText.getString() + OptionsMenu::getKeybindKeyName("Down") + " = DOWN" + '\n');
+	m_infoText.setString(m_infoText.getString() + OptionsMenu::getKeybindKeyName("Right") + " = PLAY" + '\n');
+	m_infoText.setString(m_infoText.getString() + OptionsMenu::getKeybindKeyName("Left") + " = EXIT");
 	m_escText = m_infoText;
 	m_escText.setPosition(getScreenPos());
 	m_escText.setString("ESC = EXIT");
@@ -126,7 +127,7 @@ void ArcadeMachine::events(const sf::Event &event)
 		else
 		{
 			// Exit machine
-			if (event.key.code == sf::Keyboard::A)
+			if (event.key.code == OptionsMenu::getKeybind("Left"))
 			{
 				SoundPlayer::instance().killAllSounds();
 				ResourceLoader::instance().unloadResourceFile("loadfiles/ResourceLoad_ArcadeMachine.txt", false);
@@ -134,7 +135,7 @@ void ArcadeMachine::events(const sf::Event &event)
 			}
 			if (!m_games.empty())
 			{
-				if (event.key.code == sf::Keyboard::D)
+				if (event.key.code == OptionsMenu::getKeybind("Right"))
 				{
 					if (m_games[m_currentGameIndex])
 					{
@@ -143,12 +144,12 @@ void ArcadeMachine::events(const sf::Event &event)
 						SoundPlayer::instance().playSound("ArcadeLight", getScreenPos(), 10);
 					}
 				}
-				else if (event.key.code == sf::Keyboard::W)
+				else if (event.key.code == OptionsMenu::getKeybind("Up"))
 				{
 					--m_currentGameIndex;
 					SoundPlayer::instance().playSound("ArcadeMedium", getScreenPos(), 10);
 				}
-				else if (event.key.code == sf::Keyboard::S)
+				else if (event.key.code == OptionsMenu::getKeybind("Down"))
 				{
 					++m_currentGameIndex;
 					SoundPlayer::instance().playSound("ArcadeMedium", getScreenPos(), 10);

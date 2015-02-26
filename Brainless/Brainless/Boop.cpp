@@ -3,6 +3,7 @@
 #include "ArcadeMachine.h"
 #include "Renderer.h"
 #include "SoundPlayer.h"
+#include "OptionsMenu.h"
 
 Boop::Boop(ArcadeMachine &machine)
 :
@@ -48,8 +49,8 @@ void Boop::onGameStart()
 
 void Boop::update(float deltaTime)
 {
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)
-		|| sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) && !m_isBooped)
+	if ((sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Up")) || sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Down"))
+		|| sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Left")) || sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Right"))) && !m_isBooped)
 	{
 		m_hand1.setPosition(m_hand1.getPosition() + sf::Vector2f(-deltaTime * m_speed, 0));
 

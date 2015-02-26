@@ -211,7 +211,7 @@ sf::Keyboard::Key OptionsMenu::getKeybind(const std::string &keybindName)
 	return m_keybinds.at(keybindName);
 }
 
-std::string OptionsMenu::keyToString(sf::Keyboard::Key key) const
+std::string OptionsMenu::keyToString(sf::Keyboard::Key key)
 {
 	std::string keyString = "Unknown";
 	switch (key)
@@ -272,4 +272,9 @@ void OptionsMenu::initializeKeybinds()
 	m_keybinds["Right"] = sf::Keyboard::D;
 	m_keybinds["Jump"] = sf::Keyboard::Space;
 	m_keybinds["Run"] = sf::Keyboard::LShift;
+}
+
+std::string OptionsMenu::getKeybindKeyName(const std::string &keybindName)
+{
+	return keyToString(m_keybinds.at(keybindName));
 }

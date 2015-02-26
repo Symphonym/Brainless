@@ -33,6 +33,8 @@ private:
 
 	ConversationBox();
 
+	std::string parseString(const std::string &str);
+
 	void loadNextOptions();
 
 	enum ConversationStates

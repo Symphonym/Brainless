@@ -21,6 +21,7 @@ public:
 	virtual void draw();
 
 	static sf::Keyboard::Key getKeybind(const std::string &keybindName);
+	static std::string getKeybindKeyName(const std::string &keybindName);
 	static void initializeKeybinds();
 
 private:
@@ -46,7 +47,7 @@ private:
 
 	sf::Text m_keybindInfoText;
 
-	std::string keyToString(sf::Keyboard::Key key) const;
+	static std::string keyToString(sf::Keyboard::Key key);
 	void addKeybindOption(const std::string &keybindName, const sf::Vector2f &position);
 
 	sf::Sprite m_background;

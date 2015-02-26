@@ -2,6 +2,7 @@
 #include "ResourceLoader.h"
 #include "Renderer.h"
 #include "Game.h"
+#include "OptionsMenu.h"
 
 ConversationBox::ConversationBox()
 :
@@ -47,7 +48,7 @@ void ConversationBox::setShown(bool shown)
 
 void ConversationBox::resetCurrentDialog()
 {
-	m_dialogBox.Type(m_dialog.getCurrentDialog(), 5000.f, sf::Color::White);
+	m_dialogBox.Type(parseString(m_dialog.getCurrentDialog()), 5000.f, sf::Color::White);
 }
 
 void ConversationBox::events(const sf::Event &event, Game &game)
@@ -190,6 +191,29 @@ void ConversationBox::setDialog(const DialogTree &dialog)
 	loadNextOptions(); // Load answers
 }
 
+std::string ConversationBox::parseString(const std::string &str)
+{
+	std::string result = str;
+	auto replaceFunc = [](std::string &str, const std::string &targetStr, const std::string &newStr) -> void
+	{
+		while (str.find(targetStr) != str.npos)
+		{
+			std::string::size_type startPos = str.find(targetStr);
+			str.replace(startPos, targetStr.size(), newStr);
+		}
+	};
+
+	replaceFunc(result, "<UP>", OptionsMenu::getKeybindKeyName("Up"));
+	replaceFunc(result, "<DOWN>", OptionsMenu::getKeybindKeyName("Down"));
+	replaceFunc(result, "<LEFT>", OptionsMenu::getKeybindKeyName("Left"));
+	replaceFunc(result, "<RIGHT>", OptionsMenu::getKeybindKeyName("Right"));
+
+	replaceFunc(result, "<JUMP>", OptionsMenu::getKeybindKeyName("Jump"));
+	replaceFunc(result, "<RUN>", OptionsMenu::getKeybindKeyName("Run"));
+
+	return result;
+}
+
 void ConversationBox::loadNextOptions()
 {
 	m_answers.clear();
@@ -197,7 +221,7 @@ void ConversationBox::loadNextOptions()
 	{
 		sf::Text option;
 		option.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
-		option.setString(m_dialog.getCurrentOptions()[i].first);
+		option.setString(parseString(m_dialog.getCurrentOptions()[i].first));
 		option.setCharacterSize(15);
 	
 		// Set text position to match that of the dialog box

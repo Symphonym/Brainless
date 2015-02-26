@@ -5,6 +5,7 @@
 #include "Utility.h"
 #include "ParticleSystem.h"
 #include "SoundPlayer.h"
+#include "OptionsMenu.h"
 
 const float NoteGame::HitTextDuration = 2.f;
 
@@ -94,30 +95,30 @@ void NoteGame::events(const sf::Event &event)
 
 	if (event.type == sf::Event::KeyPressed)
 	{
-		if (event.key.code == sf::Keyboard::A)
+		if (event.key.code == OptionsMenu::getKeybind("Left"))
 			m_baseANote.setScale(1.5f, 1.5f);
-		else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S)
+		else if (event.key.code == OptionsMenu::getKeybind("Up") || event.key.code == OptionsMenu::getKeybind("Down"))
 			m_baseWNote.setScale(1.5f, 1.5f);
-		else if (event.key.code == sf::Keyboard::D)
+		else if (event.key.code == OptionsMenu::getKeybind("Right"))
 			m_baseDNote.setScale(1.5f, 1.5f);
 	}
 	else if (event.type == sf::Event::KeyReleased)
 	{
 
-		if (event.key.code == sf::Keyboard::A)
+		if (event.key.code == OptionsMenu::getKeybind("Left"))
 		{
 			m_baseANote.setScale(1, 1);
 			if(validateNoteInput(m_aNotes, m_baseANote))
 				SoundPlayer::instance().playSound("ArcadeLight", m_machine.getScreenPos(), 20.f);
 
 		}
-		else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S)
+		else if (event.key.code == OptionsMenu::getKeybind("Up") || event.key.code == OptionsMenu::getKeybind("Down"))
 		{
 			m_baseWNote.setScale(1, 1);
 			if(validateNoteInput(m_wNotes, m_baseWNote))
 				SoundPlayer::instance().playSound("ArcadeMedium", m_machine.getScreenPos(), 20.f);
 		}
-		else if (event.key.code == sf::Keyboard::D)
+		else if (event.key.code == OptionsMenu::getKeybind("Right"))
 		{
 			m_baseDNote.setScale(1, 1);
 			if(validateNoteInput(m_dNotes, m_baseDNote))
