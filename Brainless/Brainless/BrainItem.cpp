@@ -1,4 +1,5 @@
 #include "BrainItem.h"
+#include "Unit.h"
 
 BrainItem::BrainItem(int id)
 :
@@ -9,9 +10,9 @@ Item("Brain","BrainItem", "BrainItem", id)
 	m_useString = "I don't think I should do that";
 }
 
-bool BrainItem::onInteractUnit(Item &otherItem, Game &game)
+bool BrainItem::onInteractUnit(Unit &unit)
 {
-	return false;
+	return unit.getUnitType() != unit.ID_Player;
 }
 
 Item* BrainItem::clone()

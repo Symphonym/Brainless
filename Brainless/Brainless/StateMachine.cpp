@@ -74,7 +74,7 @@ m_loadingAnimDot(256, 256)
 		m_window.getSize().x / 2 + 155.f,
 		m_window.getSize().y - 170.f);
 
-	m_loadingAnim.loop(0, 3, 0, 5.f);
+	m_loadingAnim.loop(0, 7, 0, 5.f);
 	m_loadingAnimDot.loop(0, 2, 0, 2.f);
 
 	sf::Image loadingBar;
