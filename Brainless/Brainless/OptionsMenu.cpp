@@ -32,8 +32,9 @@ m_Animation_scarf(SPRITESIZE, SPRITESIZE)
 	addKeybindOption("Down", sf::Vector2f(300, 150));
 	addKeybindOption("Left", sf::Vector2f(300, 200));
 	addKeybindOption("Right", sf::Vector2f(300, 250));
-	addKeybindOption("Jump", sf::Vector2f(300, 300));
-	addKeybindOption("Run", sf::Vector2f(300, 350));
+	addKeybindOption("Inventory", sf::Vector2f(300, 300));
+	addKeybindOption("Jump", sf::Vector2f(300, 350));
+	addKeybindOption("Run", sf::Vector2f(300, 400));
 
 	sf::Image volImg;
 	volImg.create(1, 30, sf::Color::White);
@@ -270,6 +271,7 @@ void OptionsMenu::initializeKeybinds()
 	m_keybinds["Down"] = sf::Keyboard::S;
 	m_keybinds["Left"] = sf::Keyboard::A;
 	m_keybinds["Right"] = sf::Keyboard::D;
+	m_keybinds["Inventory"] = sf::Keyboard::I;
 	m_keybinds["Jump"] = sf::Keyboard::Space;
 	m_keybinds["Run"] = sf::Keyboard::LShift;
 }

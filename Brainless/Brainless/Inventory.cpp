@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Button.h"
 #include "CraftingDatabase.h"
+#include "OptionsMenu.h"
 
 Inventory::Inventory()
 :
@@ -66,7 +67,7 @@ void Inventory::events(const sf::Event &event, Game &game)
 	// Toggle inventory
 	if (event.type == sf::Event::KeyReleased)
 	{
-		if (event.key.code == sf::Keyboard::I)
+		if (event.key.code == OptionsMenu::getKeybind("Inventory"))
 		{
 			m_isOpen = !m_isOpen;
 			SoundPlayer::instance().playSound("inventory_open",game.getWindow().getView().getCenter());
