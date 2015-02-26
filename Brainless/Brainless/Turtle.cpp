@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Turtle.h"
 #include "ResourceLoader.h"
 #include "ArcadeMachine.h"
@@ -7,35 +6,48 @@
 #include "SoundPlayer.h"
 #include "OptionsMenu.h"
 //plz no hate on uggly code, much lazy, very kappa
+
+stuff::stuff(stuffType _type, int _x, int _y)
+:type(_type),x(_x),y(_y),oldX(_x),oldY(_y),sprite(),animation()
+{
+	
+	if (type == turtle)
+	{
+		sprite.setTexture(ResourceLoader::instance().retrieveTexture("turtlesheet"));
+		animation.setWidth(50);
+		animation.setHeight(50);
+		sprite.setOrigin(25, 25);
+		animation.loop(0, 1, 0, 1.5f);
+	}
+	else
+	{
+		sprite.setTexture(ResourceLoader::instance().retrieveTexture("friesheet"));
+		animation.setWidth(40);
+		animation.setHeight(40);
+		sprite.setOrigin(20, 20);
+		animation.loop(0, 1, 0, 1.5f);
+	}
+
+}
+
 Turtle::Turtle(ArcadeMachine &machine)
 :
-ArcadeGame(machine, "Turtle"),
-m_turtleAnimation(50, 50),
-m_frieAnimation(40, 40),
-m_screenPos(m_machine.getScreenPos()),
-m_score(0)
+ArcadeGame(machine, "Turtle Conga"),
+screenPos(m_machine.getScreenPos()),
+score(0)
 {
-	m_screenPos += sf::Vector2f(20, 20);
-	m_turtleSprite.setTexture(ResourceLoader::instance().retrieveTexture("turtlesheet"));
-	m_frieSprite.setTexture(ResourceLoader::instance().retrieveTexture("friesheet"));
-	m_background.setTexture(ResourceLoader::instance().retrieveTexture("TurtleBackground"));
+	screenPos += sf::Vector2f(20, 20);
+	background.setTexture(ResourceLoader::instance().retrieveTexture("TurtleBackground"));
 
-	m_turtleAnimation.loop(0, 1, 0, 1.5f);
-	m_frieAnimation.loop(0, 1, 0, 1.5f);
+	background.setPosition(m_machine.getScreenPos());
 
-	m_turtleSprite.setPosition(m_screenPos);
+	scoreText = sf::Text("Score: " + score, ResourceLoader::instance().retrieveFont("DefaultFont"));
 
-	m_frieSprite.setOrigin(sf::Vector2f(20, 20));
+	infoText = sf::Text("Collect the Curly Fries", ResourceLoader::instance().retrieveFont("DefaultFont"));
+	infoText.setPosition(screenPos.x + 140, screenPos.y + 325);
+	infoText.setColor(sf::Color(0, 120, 0, 255));
 
-	m_background.setPosition(m_machine.getScreenPos());
-
-	m_scoreText = sf::Text("Score: " + m_score, ResourceLoader::instance().retrieveFont("DefaultFont"));
-
-	m_infoText = sf::Text("Collect the Curly Fries", ResourceLoader::instance().retrieveFont("DefaultFont"));
-	m_infoText.setPosition(m_screenPos.x + 150, m_screenPos.y + 335);
-	m_infoText.setColor(sf::Color(0, 120, 0, 255));
-
-	m_scoreText.setColor(sf::Color(0, 120, 0, 255));
+	scoreText.setColor(sf::Color(0, 120, 0, 255));
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -48,17 +60,15 @@ m_score(0)
 
 Turtle::~Turtle()
 {
-	std::cout << "körsinte" << std::endl;
+	//std::cout << "körsinte" << std::endl;
 }
 
 void Turtle::onGameStart()
 {
-	m_turtleSprite.setPosition(m_screenPos.x+300, m_screenPos.y+300);
-	m_frieSprite.setPosition(m_screenPos.x+200, m_screenPos.y+200);
-	m_scoreText.setPosition(m_screenPos.x + 20, m_screenPos.y + 650);
-	m_score = 0;
+	scoreText.setPosition(screenPos.x + 20, screenPos.y + 630);
+	score = 0;
 	isDead = false;
-	m_infoShowing = true;
+	infoShowing = true;
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -67,7 +77,6 @@ void Turtle::onGameStart()
 			if (map[i][j] == nullptr);
 			else
 			{
-				std::cout << "hej" << std::endl;
 				delete(map[i][j]); //kallas inte ifall man stänger av arcademachine helt och startar igen, liten memory leak
 			}
 		}
@@ -75,10 +84,10 @@ void Turtle::onGameStart()
 
 	direction = up;
 
-	head = new stuff(turtle,5,5);
+	head = new stuff(turtle,5,9);
 	head->before = nullptr;
 	head->next = nullptr;
-	map[5][5] = head;
+	map[5][9] = head;
 	map[5][2] = new stuff(frie,5,2);
 }
 
@@ -108,31 +117,36 @@ void Turtle::update(float deltaTime)
 			direction = right;
 		}
 
-		if (time > 1)
+		if (time > 0.1f)
 		{
-			time--;
+			time-=0.1f;
 			int x = 0;
 			int y = 0;
-			if (direction = up)
-			{
-				y = 1;
-			}
-			else if (direction = down)
+			if (direction == up)
 			{
 				y = -1;
+				head->sprite.setRotation(0);
 			}
-			else if (direction = left)
+			else if (direction == down)
+			{
+				y = 1;
+				head->sprite.setRotation(180);
+			}
+			else if (direction == left)
 			{
 				x = -1;
+				head->sprite.setRotation(270);
 			}
-			else if (direction = right)
+			else if (direction == right)
 			{
 				x = 1;
+				head->sprite.setRotation(90);
 			}
 			int newPosX = head->x + x;
 			int newPosY = head->y + y;
 			if (newPosX < 0 || newPosX > 9 || newPosY < 0 || newPosY > 9)
 			{
+				SoundPlayer::instance().playSound("ArcadeFail", screenPos, 20);
 				isDead = true;
 			}
 			else if (map[newPosX][newPosY] == nullptr)
@@ -140,7 +154,6 @@ void Turtle::update(float deltaTime)
 				stuff* ptr = head;
 				while (ptr->next != nullptr)
 				{
-
 					ptr = ptr->next;
 				}
 				if(ptr->before != nullptr)ptr->before->next = nullptr;
@@ -150,41 +163,85 @@ void Turtle::update(float deltaTime)
 				map[newPosX][newPosY] = ptr;
 				if (ptr != head)
 				{
+					ptr->before = nullptr;
 					ptr->next = head;
+					head->before = ptr;
 					head = ptr;
 				}
 			}
 			else if (map[head->x + x][head->y + y]->type == frie)
 			{
-				map[2][2] /* rand != turtle */ = map[newPosX][newPosY];
+				bool movedFrie = false;
+
+				int rndPosX;
+				int rndPosY;
+				while (!movedFrie) //fulaste trial and error search
+				{
+					rndPosX = Utility::randomValueBetween(0, 9);
+					rndPosY = Utility::randomValueBetween(0, 9);
+					if (map[rndPosX][rndPosY] == nullptr) movedFrie = true;
+				}
+				map[rndPosX][rndPosY] = map[newPosX][newPosY];
+
 				stuff* ptr = new stuff(turtle, newPosX, newPosY);
 				map[newPosX][newPosY] = ptr;
 				ptr->next = head;
 				ptr->before = nullptr;
-				head->before = head;
+				head->before = ptr;
 				head = ptr;
+				score++;
+				SoundPlayer::instance().playSound("ArcadeLight", screenPos, 20);
 			}
 			else if (map[head->x + x][head->y + y]->type == turtle)
 			{
 				isDead = true;
+				SoundPlayer::instance().playSound("ArcadeFail", screenPos, 20);
+			}
+
+			if (direction == up)
+			{
+				head->sprite.setRotation(0);
+			}
+			else if (direction == down)
+			{
+				head->sprite.setRotation(180);
+			}
+			else if (direction == left)
+			{
+				head->sprite.setRotation(270);
+			}
+			else if (direction == right)
+			{
+				head->sprite.setRotation(90);
 			}
 		}
 		
-		m_scoreText.setString("Score: " + std::to_string(m_score));
+		scoreText.setString("Score: " + std::to_string(score));
 	}
-	/*	m_scoreText.setPosition(m_screenPos.x + 180, m_screenPos.y + 320);
-		m_scoreText.setString("Score: " + std::to_string(m_score) + '\n' + "Press ESC to quit");
-*/
 	
-	m_turtleSprite.setTextureRect(m_turtleAnimation.getRectangle(deltaTime));
-	m_frieSprite.setTextureRect(m_frieAnimation.getRectangle(deltaTime));
+	else
+	{
+		scoreText.setPosition(screenPos.x + 180, screenPos.y + 320);
+		scoreText.setString("Final Score: " + std::to_string(score) + "\n\nPress ESC to exit");
+		infoShowing = false;
+	}
+	
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			if (map[i][j] == nullptr);
+			else
+				map[i][j]->sprite.setTextureRect(map[i][j]->animation.getRectangle(deltaTime));
+		}
+	}
 }
 
 void Turtle::draw()
 {
-	Renderer::instance().drawHUD(m_background);
-	if (m_infoShowing)
-		Renderer::instance().drawHUD(m_infoText);
+	Renderer::instance().drawHUD(background);
+	if (infoShowing)
+		Renderer::instance().drawHUD(infoText);
 
 	
 
@@ -195,17 +252,16 @@ void Turtle::draw()
 			if (map[i][j] == nullptr);
 			else if (map[i][j]->type == frie)
 			{
-				m_frieSprite.setPosition(m_screenPos + sf::Vector2f(i * 70, j * 70) );
-				Renderer::instance().drawHUD(m_frieSprite);
+				map[i][j]->sprite.setPosition(screenPos + sf::Vector2f(i * 70 + 10, j * 70 + 15) );
+				Renderer::instance().drawHUD(map[i][j]->sprite);
 			}
 			else if (map[i][j]->type == turtle)
 			{
-				m_turtleSprite.setPosition(m_screenPos + sf::Vector2f(i * 70, j * 70));
-				Renderer::instance().drawHUD(m_turtleSprite);
+				map[i][j]->sprite.setPosition(screenPos + sf::Vector2f(i * 70 + 5, j * 70+10));
+				Renderer::instance().drawHUD(map[i][j]->sprite);
 			}
 		}
 	}
 
-
-	Renderer::instance().drawHUD(m_scoreText);
+	Renderer::instance().drawHUD(scoreText);
 }

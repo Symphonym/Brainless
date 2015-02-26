@@ -12,6 +12,16 @@ m_reverse(false)
 {
 }
 
+Animation::Animation()
+:
+m_width(256),
+m_height(256),
+m_rectangle(0, 0, 256, 256),
+m_playOnceDone(false),
+m_reverse(false)
+{
+}
+
 
 void Animation::loop(int startFrame, int endFrame, int frameRow, float speed)
 {
@@ -194,6 +204,18 @@ void Animation::setSpeed(float speed)
 void Animation::setReverse(bool reverse)
 {
 	m_reverse = reverse;
+}
+
+void Animation::setHeight(int height)
+{
+	m_height = height;
+	m_rectangle.height = height;
+}
+
+void Animation::setWidth(int width)
+{
+	m_width = width;
+	m_rectangle.width = width;
 }
 
 float Animation::getWidth(){ return m_width; }

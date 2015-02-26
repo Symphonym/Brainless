@@ -9,6 +9,7 @@ class Animation
 {
 public:
 	Animation(int width, int height);
+	Animation();
 
 	enum AnimationType
 	{
@@ -33,6 +34,10 @@ public:
 
 	//sets if the animation will be reversed order or not
 	void setReverse(bool reverse);
+
+	//sets the size per sprite
+	void setWidth(int width);
+	void setHeight(int height);
 
 	//Updates the rectangles position
 	sf::IntRect getRectangle(float deltaTime);

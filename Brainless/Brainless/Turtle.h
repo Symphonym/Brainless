@@ -5,7 +5,7 @@
 
 #include "ArcadeGame.h"
 #include "Animation.h"
-enum pointType
+enum stuffType
 {
 	turtle,
 	frie
@@ -21,14 +21,17 @@ enum dirr
 class stuff
 {
 public:
-	stuff(pointType _type, int _x, int _y):type(_type),x(_x),y(_y),oldX(_x),oldY(_y){};
-	pointType type;
+	stuff(stuffType _type, int _x, int _y);
+
+	stuffType type;
 	int x;
 	int y;
 	int oldX;
 	int oldY;
 	stuff* next;
 	stuff* before;
+	sf::Sprite sprite;
+	Animation animation;
 };
 
 class Turtle : public ArcadeGame
@@ -45,21 +48,16 @@ private:
 	float time;
 	dirr direction;
 	stuff* head;
-	sf::Sprite m_turtleSprite;
-	Animation m_turtleAnimation;
 
-	sf::Sprite m_frieSprite;
-	Animation m_frieAnimation;
+	sf::Sprite background;
 
-	sf::Sprite m_background;
-
-	sf::Vector2f m_screenPos;
+	sf::Vector2f screenPos;
 
 	stuff* map[10][10];
-	int m_score;
-	sf::Text m_scoreText;
-	sf::Text m_infoText;
-	bool m_infoShowing = true;
+	int score;
+	sf::Text scoreText;
+	sf::Text infoText;
+	bool infoShowing = true;
 
 	bool isDead = false;
 };
