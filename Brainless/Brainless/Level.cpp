@@ -630,6 +630,11 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 				}
 			}
 
+			
+#pragma endregion itemCollision
+
+			currentUnit->setInAir(inAir);
+
 			m_items.erase(std::remove_if(m_items.begin(), m_items.end(), [&](const ItemPtr &item) -> bool
 			{
 				// Trigger collision events for items
@@ -640,10 +645,6 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 				else
 					return false;
 			}), m_items.end());
-
-#pragma endregion itemCollision
-
-			currentUnit->setInAir(inAir);
 		}
 
 		currentUnit->updateAnimation(deltaTime);
