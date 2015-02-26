@@ -69,7 +69,7 @@ m_player(nullptr)
 				// Sync use functionality for sync
 				for (std::size_t i = 0; i < m_level.getItems().size(); i++)
 				{
-					if (m_level.getItems()[i]->getSyncID() == itm->getSyncID())
+					if (m_level.getItems()[i]->getSyncID() >= 0 && m_level.getItems()[i]->getSyncID() == itm->getSyncID())
 						m_level.getItems()[i]->onSyncedWith(*itm);
 				}
 			}
