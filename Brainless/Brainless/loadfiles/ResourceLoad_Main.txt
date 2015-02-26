@@ -202,6 +202,8 @@
 +Texture,images/items/manholeclosed.png,ManholeClosed
 +Texture,images/items/manholeopen.png,ManholeOpen
 +Texture,images/items/steelladder5.png,SteelLadder5
++Texture,images/items/puddle.png,PuddleItem
++Texture,images/items/puddleCable.png,PuddleCableItem
 
 # Arcade disc items
 +Texture,images/items/discs/Big-Disk-Blue.png,ArcadeDiscItemBlueBig

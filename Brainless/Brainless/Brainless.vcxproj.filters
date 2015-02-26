@@ -109,6 +109,9 @@
     <Filter Include="Source Files\Game\Items\Lockable">
       <UniqueIdentifier>{4dd398b0-b16b-44a4-a42d-b0522e066928}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Items\Dangerous">
+      <UniqueIdentifier>{17000e3b-2c39-459c-b731-2128c372919e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -384,6 +387,9 @@
     <ClCompile Include="hej.cpp">
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
+    <ClCompile Include="PuddleCableItem.cpp">
+      <Filter>Source Files\Game\Items\Dangerous</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -658,6 +664,9 @@
     </ClInclude>
     <ClInclude Include="KeyItem.h">
       <Filter>Source Files\Game\Items\Lockable</Filter>
+    </ClInclude>
+    <ClInclude Include="PuddleCableItem.h">
+      <Filter>Source Files\Game\Items\Dangerous</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

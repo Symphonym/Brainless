@@ -152,6 +152,7 @@
     <ClCompile Include="OptionsMenu.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
+    <ClCompile Include="PuddleCableItem.cpp" />
     <ClCompile Include="RobotAkeAttack.cpp" />
     <ClCompile Include="RpgGame.cpp" />
     <ClCompile Include="RubberGlovesItem.cpp" />
@@ -234,6 +235,7 @@
     <ClInclude Include="FileSave.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="HammerItem.h" />
+    <ClInclude Include="PuddleCableItem.h" />
     <ClInclude Include="HealthBar.h" />
     <ClInclude Include="KeyTwineItem.h" />
     <ClInclude Include="LevelTransition.h" />
