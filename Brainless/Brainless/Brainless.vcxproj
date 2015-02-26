@@ -141,7 +141,6 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HammerItem.cpp" />
     <ClCompile Include="HealthBar.cpp" />
-    <ClCompile Include="hej.cpp" />
     <ClCompile Include="KeyTwineItem.cpp" />
     <ClCompile Include="LevelTransition.cpp" />
     <ClCompile Include="LighterItem.cpp" />

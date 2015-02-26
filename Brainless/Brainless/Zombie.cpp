@@ -110,3 +110,8 @@ int Zombie::getTexture()
 {
 	return m_textureId;
 };
+
+void Zombie::onCollideWidth(Unit *unit)
+{
+	unit->takesDamage(m_position - unit->getPosition());
+}

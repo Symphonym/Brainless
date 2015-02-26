@@ -607,6 +607,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 									currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 									currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
 									currentUnit->setPosition(sf::Vector2f(tileBounds.left - originalBounds.width, currentUnit->getPosition().y));
+									currentUnit->wallRight();
 									//		std::cout << "left" << std::endl;
 									//		std::cout << m_items[i]->getName() << std::endl;
 								}
@@ -617,6 +618,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 									currentUnit->setSpeed(sf::Vector2f(0, currentUnit->getSpeed().y));
 									currentUnit->setAcceleration(sf::Vector2f(0, currentUnit->getAcceleration().y));
 									currentUnit->setPosition(sf::Vector2f(tileBounds.left + tileBounds.width, currentUnit->getPosition().y));
+									currentUnit->wallLeft();
 									//		std::cout << "hoger" << std::endl;aaaaa
 									//		std::cout << m_items[i]->getName() << std::endl;
 								}

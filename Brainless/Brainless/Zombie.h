@@ -8,6 +8,7 @@ public:
 	Zombie(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID, int Texture);
 
 	virtual bool onInteractedWith(Item &otherItem, Game &game);
+	virtual void onCollideWidth(Unit *unit);
 
 	void flash(sf::Vector2f cameraPos);
 	void incrementTexture();

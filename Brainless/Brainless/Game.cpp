@@ -308,7 +308,7 @@ void Game::update(float deltaTime)
 		{
 			if (currentUnit->getCollisionRect().intersects(m_player->getCollisionRect()))
 			{
-				m_player->takesDamage(currentUnit->getPosition() - m_player->getPosition());
+				currentUnit->onCollideWidth(m_player);
 			}
 		}
 	}
