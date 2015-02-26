@@ -381,6 +381,9 @@
     <ClCompile Include="KeyItem.cpp">
       <Filter>Source Files\Game\Items\Lockable</Filter>
     </ClCompile>
+    <ClCompile Include="hej.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
