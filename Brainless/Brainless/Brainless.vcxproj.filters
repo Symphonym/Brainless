@@ -76,6 +76,39 @@
     <Filter Include="Source Files\Game\Items\Data">
       <UniqueIdentifier>{677eb0aa-3027-48b2-a67c-c071cd04a15e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Items\Arcade">
+      <UniqueIdentifier>{218f6f22-c5b4-44fe-aa96-6c24c238d38f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Items\Unsorted">
+      <UniqueIdentifier>{99127a2e-e7e3-4eae-8d30-b3504225b42b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Items\Platforms">
+      <UniqueIdentifier>{40f3e45c-07a4-498d-8947-f69a28d0aad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Items\Twines">
+      <UniqueIdentifier>{5a11ea12-a68b-4446-9ddc-039415b7c64a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Items\VendingMachine">
+      <UniqueIdentifier>{71f6ef08-77b5-449b-a37f-e89c842e8486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Items\ZombieInteractive">
+      <UniqueIdentifier>{f21aa717-a618-416d-9e0a-8c3adc0637a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Items\Ghosts">
+      <UniqueIdentifier>{c1fe3a38-0f54-4986-8455-1316cd75382e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Items\Ladders">
+      <UniqueIdentifier>{d16e0874-2527-4a37-9c46-56263b5f1eeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Items\Functionality">
+      <UniqueIdentifier>{663f3756-2e28-4866-87f0-7dc088eb3ac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Items\Feathers">
+      <UniqueIdentifier>{3402a643-4795-4e60-bd8a-6025ac5a4380}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Items\Lockable">
+      <UniqueIdentifier>{4dd398b0-b16b-44a4-a42d-b0522e066928}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -150,9 +183,6 @@
     <ClCompile Include="Utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
     <ClCompile Include="Zombie.cpp">
       <Filter>Source Files\Unit\Zombies</Filter>
     </ClCompile>
@@ -174,35 +204,14 @@
     <ClCompile Include="ResourceFile.cpp">
       <Filter>Source Files\Resource Loading</Filter>
     </ClCompile>
-    <ClCompile Include="GhostItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
     <ClCompile Include="Notification.cpp">
       <Filter>Source Files\Dialog</Filter>
-    </ClCompile>
-    <ClCompile Include="DoorItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
     <ClCompile Include="EditorZombieMode.cpp">
       <Filter>Source Files\Level Editor</Filter>
     </ClCompile>
-    <ClCompile Include="ChestItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="LadderItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
     <ClCompile Include="Cursor.cpp">
       <Filter>Source Files\Game\Mouse</Filter>
-    </ClCompile>
-    <ClCompile Include="MagnifyingGlassItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="MovingPlatformItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
     <ClCompile Include="ChasingZombie.cpp">
       <Filter>Source Files\Unit\Zombies</Filter>
@@ -222,47 +231,8 @@
     <ClCompile Include="PauseMenu.cpp">
       <Filter>Source Files\State Machine\States</Filter>
     </ClCompile>
-    <ClCompile Include="DuctTapeItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="RubberGlovesItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="CoinItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="VendingMachineItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="TwineItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="CoinTwineItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyTwineItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="StoneItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
     <ClCompile Include="LevelTransition.cpp">
       <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="LighterItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="ScissorLift.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="StickItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="LongStickItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
     <ClCompile Include="PokableItem.cpp">
       <Filter>Source Files\Game\Items\Meta</Filter>
@@ -273,38 +243,14 @@
     <ClCompile Include="ElectricalItem.cpp">
       <Filter>Source Files\Game\Items\Meta</Filter>
     </ClCompile>
-    <ClCompile Include="CableItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="BrainItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="AABatteryItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="CarBatteryItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="HammerItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="ThorsHammerItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
     <ClCompile Include="SpiritBar.cpp">
       <Filter>Source Files\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="SpiritFeatherItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="HealthBar.cpp">
       <Filter>Source Files\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="ArcadeMachineItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
     <ClCompile Include="ArcadeMachine.cpp">
       <Filter>Source Files\State Machine\States</Filter>
@@ -333,20 +279,107 @@
     <ClCompile Include="CraftingDatabase.cpp">
       <Filter>Source Files\Game\Items\Data</Filter>
     </ClCompile>
-    <ClCompile Include="ArcadeDiscItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClCompile>
     <ClCompile Include="SettingsMenu.cpp">
       <Filter>Source Files\State Machine\States</Filter>
-    </ClCompile>
-    <ClCompile Include="ManholeItem.cpp">
-      <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
     <ClCompile Include="Snake.cpp">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClCompile>
     <ClCompile Include="OptionsMenu.cpp">
       <Filter>Source Files\State Machine\States</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcadeDiscItem.cpp">
+      <Filter>Source Files\Game\Items\Arcade</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcadeMachineItem.cpp">
+      <Filter>Source Files\Game\Items\Arcade</Filter>
+    </ClCompile>
+    <ClCompile Include="AABatteryItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
+    <ClCompile Include="CableItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
+    <ClCompile Include="CarBatteryItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
+    <ClCompile Include="DuctTapeItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
+    <ClCompile Include="HammerItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
+    <ClCompile Include="LongStickItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
+    <ClCompile Include="RubberGlovesItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
+    <ClCompile Include="StickItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
+    <ClCompile Include="StoneItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
+    <ClCompile Include="ThorsHammerItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingPlatformItem.cpp">
+      <Filter>Source Files\Game\Items\Platforms</Filter>
+    </ClCompile>
+    <ClCompile Include="ScissorLift.cpp">
+      <Filter>Source Files\Game\Items\Platforms</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="CoinTwineItem.cpp">
+      <Filter>Source Files\Game\Items\Twines</Filter>
+    </ClCompile>
+    <ClCompile Include="TwineItem.cpp">
+      <Filter>Source Files\Game\Items\Twines</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyTwineItem.cpp">
+      <Filter>Source Files\Game\Items\Twines</Filter>
+    </ClCompile>
+    <ClCompile Include="CoinItem.cpp">
+      <Filter>Source Files\Game\Items\VendingMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="VendingMachineItem.cpp">
+      <Filter>Source Files\Game\Items\VendingMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="BrainItem.cpp">
+      <Filter>Source Files\Game\Items\ZombieInteractive</Filter>
+    </ClCompile>
+    <ClCompile Include="GhostItem.cpp">
+      <Filter>Source Files\Game\Items\Ghosts</Filter>
+    </ClCompile>
+    <ClCompile Include="LadderItem.cpp">
+      <Filter>Source Files\Game\Items\Ladders</Filter>
+    </ClCompile>
+    <ClCompile Include="ManholeItem.cpp">
+      <Filter>Source Files\Game\Items\Ladders</Filter>
+    </ClCompile>
+    <ClCompile Include="LighterItem.cpp">
+      <Filter>Source Files\Game\Items\Functionality</Filter>
+    </ClCompile>
+    <ClCompile Include="MagnifyingGlassItem.cpp">
+      <Filter>Source Files\Game\Items\Functionality</Filter>
+    </ClCompile>
+    <ClCompile Include="SpiritFeatherItem.cpp">
+      <Filter>Source Files\Game\Items\Feathers</Filter>
+    </ClCompile>
+    <ClCompile Include="ChestItem.cpp">
+      <Filter>Source Files\Game\Items\Lockable</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorItem.cpp">
+      <Filter>Source Files\Game\Items\Lockable</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyItem.cpp">
+      <Filter>Source Files\Game\Items\Lockable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -422,9 +455,6 @@
     <ClInclude Include="WorldButton.h">
       <Filter>Source Files\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
     <ClInclude Include="Zombie.h">
       <Filter>Source Files\Unit\Zombies</Filter>
     </ClInclude>
@@ -433,9 +463,6 @@
     </ClInclude>
     <ClInclude Include="IdleZombie.h">
       <Filter>Source Files\Unit\Zombies</Filter>
-    </ClInclude>
-    <ClInclude Include="GhostItem.h">
-      <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
     <ClInclude Include="ConversationBox.h">
       <Filter>Source Files\Dialog</Filter>
@@ -452,32 +479,14 @@
     <ClInclude Include="Notification.h">
       <Filter>Source Files\Dialog</Filter>
     </ClInclude>
-    <ClInclude Include="DoorItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="ChestItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
     <ClInclude Include="EditorZombieMode.h">
       <Filter>Source Files\Level Editor</Filter>
     </ClInclude>
     <ClInclude Include="EditorZombie.h">
       <Filter>Source Files\Level Editor</Filter>
     </ClInclude>
-    <ClInclude Include="LadderItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
     <ClInclude Include="Cursor.h">
       <Filter>Source Files\Game\Mouse</Filter>
-    </ClInclude>
-    <ClInclude Include="MagnifyingGlassItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="MovingPlatformItem.h">
-      <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
     <ClInclude Include="ChasingZombie.h">
       <Filter>Source Files\Unit\Zombies</Filter>
@@ -497,47 +506,8 @@
     <ClInclude Include="PauseMenu.h">
       <Filter>Source Files\State Machine\States</Filter>
     </ClInclude>
-    <ClInclude Include="DuctTapeItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="RubberGlovesItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="VendingMachineItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="CoinItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="TwineItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="CoinTwineItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyTwineItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="StoneItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
     <ClInclude Include="LevelTransition.h">
       <Filter>Source Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="LighterItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="ScissorLift.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="StickItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="LongStickItem.h">
-      <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
     <ClInclude Include="PokableItem.h">
       <Filter>Source Files\Game\Items\Meta</Filter>
@@ -548,38 +518,14 @@
     <ClInclude Include="ElectricalItem.h">
       <Filter>Source Files\Game\Items\Meta</Filter>
     </ClInclude>
-    <ClInclude Include="CableItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="BrainItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="AABatteryItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="CarBatteryItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="HammerItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="ThorsHammerItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
     <ClInclude Include="SpiritBar.h">
       <Filter>Source Files\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="SpiritFeatherItem.h">
-      <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
     <ClInclude Include="ParticleSystem.h">
       <Filter>Source Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="HealthBar.h">
       <Filter>Source Files\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="ArcadeMachineItem.h">
-      <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
     <ClInclude Include="ArcadeMachine.h">
       <Filter>Source Files\State Machine\States</Filter>
@@ -608,20 +554,107 @@
     <ClInclude Include="CraftingDatabase.h">
       <Filter>Source Files\Game\Items\Data</Filter>
     </ClInclude>
-    <ClInclude Include="ArcadeDiscItem.h">
-      <Filter>Source Files\Game\Items</Filter>
-    </ClInclude>
     <ClInclude Include="SettingsMenu.h">
       <Filter>Source Files\State Machine\States</Filter>
-    </ClInclude>
-    <ClInclude Include="ManholeItem.h">
-      <Filter>Source Files\Game\Items</Filter>
     </ClInclude>
     <ClInclude Include="Snake.h">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClInclude>
     <ClInclude Include="OptionsMenu.h">
       <Filter>Source Files\State Machine\States</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcadeDiscItem.h">
+      <Filter>Source Files\Game\Items\Arcade</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcadeMachineItem.h">
+      <Filter>Source Files\Game\Items\Arcade</Filter>
+    </ClInclude>
+    <ClInclude Include="AABatteryItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="CableItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="CarBatteryItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="DuctTapeItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="HammerItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="LongStickItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="RubberGlovesItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="StickItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="StoneItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="ThorsHammerItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingPlatformItem.h">
+      <Filter>Source Files\Game\Items\Platforms</Filter>
+    </ClInclude>
+    <ClInclude Include="ScissorLift.h">
+      <Filter>Source Files\Game\Items\Platforms</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="CoinTwineItem.h">
+      <Filter>Source Files\Game\Items\Twines</Filter>
+    </ClInclude>
+    <ClInclude Include="TwineItem.h">
+      <Filter>Source Files\Game\Items\Twines</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyTwineItem.h">
+      <Filter>Source Files\Game\Items\Twines</Filter>
+    </ClInclude>
+    <ClInclude Include="CoinItem.h">
+      <Filter>Source Files\Game\Items\VendingMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="VendingMachineItem.h">
+      <Filter>Source Files\Game\Items\VendingMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="BrainItem.h">
+      <Filter>Source Files\Game\Items\ZombieInteractive</Filter>
+    </ClInclude>
+    <ClInclude Include="GhostItem.h">
+      <Filter>Source Files\Game\Items\Ghosts</Filter>
+    </ClInclude>
+    <ClInclude Include="LadderItem.h">
+      <Filter>Source Files\Game\Items\Ladders</Filter>
+    </ClInclude>
+    <ClInclude Include="ManholeItem.h">
+      <Filter>Source Files\Game\Items\Ladders</Filter>
+    </ClInclude>
+    <ClInclude Include="LighterItem.h">
+      <Filter>Source Files\Game\Items\Functionality</Filter>
+    </ClInclude>
+    <ClInclude Include="MagnifyingGlassItem.h">
+      <Filter>Source Files\Game\Items\Functionality</Filter>
+    </ClInclude>
+    <ClInclude Include="SpiritFeatherItem.h">
+      <Filter>Source Files\Game\Items\Feathers</Filter>
+    </ClInclude>
+    <ClInclude Include="ChestItem.h">
+      <Filter>Source Files\Game\Items\Lockable</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorItem.h">
+      <Filter>Source Files\Game\Items\Lockable</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyItem.h">
+      <Filter>Source Files\Game\Items\Lockable</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
