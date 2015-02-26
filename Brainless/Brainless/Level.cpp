@@ -39,6 +39,11 @@ bool Level::loadLevelResources(const std::string &fileName)
 {
 	ResourceLoader::instance().loadResourceFile(fileName);
 	m_backgrounds.clear();
+	if (m_musicName != "none")
+	{
+		SoundPlayer::instance().stopMusic(m_musicName);
+		m_musicName = "none";
+	}
 	// Load backgrounds
 	std::ifstream reader(fileName);
 
@@ -68,7 +73,10 @@ bool Level::loadLevelResources(const std::string &fileName)
 				}
 				else if (resourceType == "Music")
 				{
-					SoundPlayer::instance().playMusic(stringData[2], true);
+					if (m_musicName!="none")
+						SoundPlayer::instance().stopMusic(m_musicName);
+					m_musicName = stringData[2];
+					SoundPlayer::instance().playMusic(m_musicName, true);
 					//TODO keep track of loaded music so it can be stopped
 				}
 				else
