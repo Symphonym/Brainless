@@ -9,7 +9,7 @@ public:
 
 	BrainItem(int id);
 
-	virtual bool onInteractUnit(Item &otherItem, Game &game);
+	virtual bool onInteractUnit(Unit &unit);
 
 	virtual Item* clone();
 };
