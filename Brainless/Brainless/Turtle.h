@@ -2,7 +2,7 @@
 #define INCLUDED_TURTLE_H
 
 #include <SFML\Graphics.hpp>
-
+//#include <memory>
 #include "ArcadeGame.h"
 #include "Animation.h"
 enum stuffType
@@ -45,15 +45,18 @@ public:
 	virtual void draw();
 
 private:
+	//typedef std::unique_ptr<stuff> stuffPtr;
 	float time;
 	dirr direction;
 	stuff* head;
+	//stuffPtr head;
 
 	sf::Sprite background;
 
 	sf::Vector2f screenPos;
 
 	stuff* map[10][10];
+	//stuffPtr map[10][10];
 	int score;
 	sf::Text scoreText;
 	sf::Text infoText;

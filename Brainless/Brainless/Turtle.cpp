@@ -171,25 +171,31 @@ void Turtle::update(float deltaTime)
 			}
 			else if (map[head->x + x][head->y + y]->type == frie)
 			{
-				bool movedFrie = false;
-
-				int rndPosX;
-				int rndPosY;
-				while (!movedFrie) //fulaste trial and error search
-				{
-					rndPosX = Utility::randomValueBetween(0, 9);
-					rndPosY = Utility::randomValueBetween(0, 9);
-					if (map[rndPosX][rndPosY] == nullptr) movedFrie = true;
-				}
-				map[rndPosX][rndPosY] = map[newPosX][newPosY];
-
-				stuff* ptr = new stuff(turtle, newPosX, newPosY);
-				map[newPosX][newPosY] = ptr;
-				ptr->next = head;
-				ptr->before = nullptr;
-				head->before = ptr;
-				head = ptr;
 				score++;
+				if (score != 99)
+				{
+
+
+					bool movedFrie = false;
+
+					int rndPosX;
+					int rndPosY;
+					while (!movedFrie) //fulaste trial and error search
+					{
+						rndPosX = Utility::randomValueBetween(0, 9);
+						rndPosY = Utility::randomValueBetween(0, 9);
+						if (map[rndPosX][rndPosY] == nullptr) movedFrie = true;
+					}
+					map[rndPosX][rndPosY] = map[newPosX][newPosY];
+
+					stuff* ptr = new stuff(turtle, newPosX, newPosY);
+					map[newPosX][newPosY] = ptr;
+					ptr->next = head;
+					ptr->before = nullptr;
+					head->before = ptr;
+					head = ptr;
+				}
+				else isDead = true;
 				SoundPlayer::instance().playSound("ArcadeLight", screenPos, 20);
 			}
 			else if (map[head->x + x][head->y + y]->type == turtle)
