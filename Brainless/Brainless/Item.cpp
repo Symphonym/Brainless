@@ -78,6 +78,8 @@ void Item::serialize(std::ofstream &writer) const
 	writer << m_usable << std::endl;
 	writer << m_collidable << std::endl;
 	writer << m_solid << std::endl;
+	writer << m_flyingOff << std::endl;
+	writer << m_markedForDestruction << std::endl;
 	writer << static_cast<int>(m_renderingMode) << std::endl;
 }
 void Item::deserialize(std::ifstream &reader)
@@ -91,6 +93,10 @@ void Item::deserialize(std::ifstream &reader)
 	reader >> m_interactBounds.left >> m_interactBounds.top >> m_interactBounds.width >> m_interactBounds.height;
 	reader >> m_collisionBounds.left >> m_collisionBounds.top >> m_collisionBounds.width >> m_collisionBounds.height;
 	reader >> m_lootable >> m_usable >> m_collidable >> m_solid;
+	reader >> m_flyingOff >> m_markedForDestruction;
+
+	if (m_flyingOff)
+		markForDestruction();
 
 	int renderMode = 0;
 	reader >> renderMode;
