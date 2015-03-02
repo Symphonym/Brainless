@@ -3,6 +3,8 @@
 +Texture,images/UI/newgame_pressed.png,NewGame_Pressed
 +Texture,images/UI/loadgame_normal.png,LoadGame_Normal
 +Texture,images/UI/loadgame_pressed.png,LoadGame_Pressed
++Texture,images/UI/options_normal.png,Options_Normal
++Texture,images/UI/options_pressed.png,Options_Pressed
 
 # CONFIRM BUTTON TEXTURES
 +Texture,images/UI/yes_normal.png,Yes_Normal
