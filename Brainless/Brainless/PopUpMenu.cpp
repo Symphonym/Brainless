@@ -19,13 +19,14 @@ m_position(sf::Vector2f(0,0))
 	m_buttons[UseIndex].setTexture(ResourceLoader::instance().retrieveTexture("UseButton_Normal"));
 	m_buttons[PickupIndex].setTexture(ResourceLoader::instance().retrieveTexture("PickupButton_Normal"));
 	m_buttons[ExamineIndex].setTexture(ResourceLoader::instance().retrieveTexture("ExamineButton_Normal"));
+	m_background.setTexture(ResourceLoader::instance().retrieveTexture("background_Notepad"));
 }
 
 void PopUpMenu::setPosition(const sf::Vector2f &pos)
 {
 	m_position = pos;
-
 	// Update position of the popup buttons as well
+	m_background.setPosition(pos);
 	for (std::size_t i = 0; i < m_buttons.size(); i++)
 		m_buttons[i].setPosition(m_position.x, m_position.y + m_buttons[i].getGlobalBounds().height*i);
 }
@@ -206,6 +207,7 @@ void PopUpMenu::draw()
 {
 	if (m_isShowing)
 	{
+		Renderer::instance().drawAbove(m_background);
 		for (int i = 0; i < m_buttons.size(); i++)
 			Renderer::instance().drawAbove(m_buttons[i]);
 	}
