@@ -36,6 +36,7 @@
 #include "Turtle.h"
 #include "ManholeItem.h"
 #include "PuddleCableItem.h"
+#include "ElectricalCabinetItem.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -100,6 +101,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new ManholeItem(false, "SteelLadder5", 35)));
 	addItem(ItemPtr(new ManholeItem(true, "SteelLadder5", 36)));
 	addItem(ItemPtr(new PuddleCableItem(true, 38)));
+	addItem(ItemPtr(new ElectricalCabinetItem(39)));
 
 }
 
