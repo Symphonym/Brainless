@@ -9,6 +9,7 @@ class ArcadeGame
 public:
 
 	ArcadeGame(ArcadeMachine &machine, const std::string &gameName);
+	virtual ~ArcadeGame() { };
 
 	virtual void onGameStart() {};
 

@@ -8,6 +8,10 @@ m_window(machine.getWindow())
 {
 
 }
+State::~State()
+{
+
+}
 
 const sf::RenderWindow &State::getWindow() const
 {
