@@ -278,6 +278,7 @@
 +Texture,images/items/steelladder5.png,SteelLadder5
 +Texture,images/items/puddle.png,PuddleItem
 +Texture,images/items/puddleCable.png,PuddleCableItem
++Texture,images/items/electricalCabinet/electricalCabinet.png,electricalCabinet
 
 # Arcade disc items
 +Texture,images/items/discs/Big-Disk-Blue.png,ArcadeDiscItemBlueBig

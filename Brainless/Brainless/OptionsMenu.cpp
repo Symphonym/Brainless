@@ -42,7 +42,7 @@ m_Animation_scarf(SPRITESIZE, SPRITESIZE)
 	m_volumeTexture.loadFromImage(volImg);
 	m_volumeSprite.setTexture(m_volumeTexture);
 
-	m_volumeSprite.setPosition(200, m_window.getSize().y - m_volumeSprite.getGlobalBounds().height*2.f);
+	m_volumeSprite.setPosition(200, m_window.getSize().y - m_volumeSprite.getGlobalBounds().height*2.f - 120);
 	m_volumeSprite.setColor(sf::Color::Green);
 	m_curVolume = SoundPlayer::instance().getVolume();
 	m_volumeSprite.setScale(m_curVolume * 4, 1);
@@ -50,19 +50,19 @@ m_Animation_scarf(SPRITESIZE, SPRITESIZE)
 
 
 	m_backButton = GuiPtr(new Button(
-		ResourceLoader::instance().retrieveTexture("NewGame_Normal"),
-		ResourceLoader::instance().retrieveTexture("NewGame_Pressed"),
+		ResourceLoader::instance().retrieveTexture("Back_Normal"),
+		ResourceLoader::instance().retrieveTexture("Back_Pressed"),
 		sf::Vector2f(m_window.getSize().x / 2 + 100.f, m_window.getSize().y / 2 - 200)));
 
 
 	m_volumeUpButton = GuiPtr(new Button(
-		ResourceLoader::instance().retrieveTexture("NewGame_Normal"),
-		ResourceLoader::instance().retrieveTexture("NewGame_Pressed"),
-		sf::Vector2f(400, m_window.getSize().y - 200)));
+		ResourceLoader::instance().retrieveTexture("PlusButton"),
+		ResourceLoader::instance().retrieveTexture("PlusButton_Pressed"),
+		sf::Vector2f(610, m_window.getSize().y - 250)));
 	m_volumeDownButton = GuiPtr(new Button(
-		ResourceLoader::instance().retrieveTexture("NewGame_Normal"),
-		ResourceLoader::instance().retrieveTexture("NewGame_Pressed"),
-		sf::Vector2f(10, m_window.getSize().y - 200)));
+		ResourceLoader::instance().retrieveTexture("MinusButton"),
+		ResourceLoader::instance().retrieveTexture("MinusButton_Pressed"),
+		sf::Vector2f(110, m_window.getSize().y - 250)));
 
 	m_volumeText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_volumeText.setCharacterSize(50);

@@ -65,6 +65,7 @@ void WalkingZombie::deserialize(std::ifstream &reader)
 
 void WalkingZombie::updateTask(float deltaTime)
 {
+
 	float speedTurnAround = 10;
 	float speedStartAcc = 300;
 	float speedNormalAcc = 100;
