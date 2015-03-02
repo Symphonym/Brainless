@@ -446,6 +446,181 @@ void Tile::updateType()
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Wood_Corner_Full"));  m_autotilingRange = "WoodAutotiling";
 		break;
 
+		/*
+
+		Grass
+
+		*/
+	case Grass_Top_Right:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Top_Right")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Top_Right_Corner:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Top_Right_Corner")); m_autotilingRange = "GrassAutotiling";
+		break;
+
+	case Grass_Top_Left:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Top_Left")); m_autotilingRange = "GrassAutotiling";
+		break;
+		/*case Grass_Top_Left_Short:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Top_Left_Short")); m_autotilingRange = "GrassAutotiling";
+		break;*/
+	case Grass_Top_Left_Corner:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Top_Left_Corner")); m_autotilingRange = "GrassAutotiling";
+		break;
+
+	case Grass_Top:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Top")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Top_Alone:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Top_Alone")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Top_Short:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Top_Short")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Top_Corner_Left:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Top_Corner_Left")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Top_Corner_Right:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Top_Corner_Right")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Top_Corner_Full:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Top_Corner_Full")); m_autotilingRange = "GrassAutotiling";
+		break;
+
+
+	case Grass_Right:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Right")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Right_Alone:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Right_Alone")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Right_Corner_Down:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Right_Corner_Down")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Right_Corner_Top:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Right_Corner_Top")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Right_Corner_Full:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Right_Corner_Full")); m_autotilingRange = "GrassAutotiling";
+		break;
+
+	case Grass_Middle:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Middle")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Middle_Alone:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Middle_Alone")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Middle_Alone_Horizontal:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Middle_Alone_Horizontal")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Middle_Alone_Vertical:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Middle_Alone_Vertical")); m_autotilingRange = "GrassAutotiling";
+		break;
+
+
+	case Grass_Left:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Left")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Left_Short:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Left_Short")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Left_Alone:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Left_Alone")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Left_Corner_Down:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Left_Corner_Down")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Left_Corner_Top:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Left_Corner_Top")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Left_Corner_Full:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Left_Corner_Full")); m_autotilingRange = "GrassAutotiling";
+		break;
+
+	case Grass_Down_Right:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Down_Right")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Down_Right_Corner:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Down_Right_Corner")); m_autotilingRange = "GrassAutotiling";
+		break;
+
+	case Grass_Down_Left:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Down_Left")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Down_Left_Corner:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Down_Left_Corner")); m_autotilingRange = "GrassAutotiling";
+		break;
+
+	case Grass_Down:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Down")); m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Down_Alone:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Down_Alone"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Down_Corner_Left:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Down_Corner_Left"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Down_Corner_Right:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Down_Corner_Right"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Down_Corner_Full:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Down_Corner_Full"));  m_autotilingRange = "GrassAutotiling";
+		break;
+
+	case Grass_Tilt:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Tilt"));
+		m_tilt = true;
+		break;
+	case Grass_Tilt_Corner:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Tilt_Corner"));
+		break;
+
+	case Grass_Corner_TopLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_TopLeft"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Corner_TopRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_TopRight"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Corner_TopLeft_TopRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_TopLeft_TopRight"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Corner_DownLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_DownLeft"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Corner_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_DownRight"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Corner_DownLeft_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_DownLeft_DownRight"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Corner_TopLeft_DownLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_TopLeft_DownLeft"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Corner_TopRight_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_TopRight_DownRight"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Corner_TopLeft_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_TopLeft_DownRight"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Corner_TopRight_DownLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_TopRight_DownLeft"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Corner_Not_TopLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_Not_TopLeft"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Corner_Not_TopRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_Not_TopRight"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Corner_Not_DownLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_Not_DownLeft"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Corner_Not_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_Not_DownRight"));  m_autotilingRange = "GrassAutotiling";
+		break;
+	case Grass_Corner_Full:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_Full"));  m_autotilingRange = "GrassAutotiling";
+		break;
+
 	case Solid_Invisible:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("SolidInvisibleCube"));
 		m_editorVisibleOnly = true;
