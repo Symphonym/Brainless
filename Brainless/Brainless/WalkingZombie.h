@@ -8,14 +8,9 @@ public:
 	WalkingZombie(sf::Vector2f startPosition, int maxLengthX, int Texture);
 
 	void updateTask(float deltaTime);
-	void updateAnimation(float deltaTime);
 	int getWalkLenght();
 
-	enum AnimationState
-	{
-		anim_noAnimation,
-		anim_walking
-	};
+	
 
 	void wallLeft() override;
 	void wallRight() override;
@@ -26,8 +21,6 @@ public:
 protected:
 
 private:
-	AnimationState m_animState;
-	Direction m_spriteDirection;
 	float m_maxPositionX;
 	float m_minPositionX;
 	int m_walkLenght;
