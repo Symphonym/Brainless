@@ -35,7 +35,7 @@ public:
 	virtual void onCollideWith(Unit *unit){};
 	virtual void onCollideWithItem(Item &item) {};
 
-	virtual void takesDamage(sf::Vector2f collisionPos){};
+	virtual void takesDamage(sf::Vector2f collisionPos, int damage = 1){};
 
 	virtual void serialize(std::ofstream &writer) const;
 	virtual void deserialize(std::ifstream &reader);

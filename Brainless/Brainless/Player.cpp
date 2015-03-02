@@ -259,13 +259,13 @@ int Player::getMaxHealth()
 	return m_maxHp;
 }
 
-void Player::takesDamage(sf::Vector2f collisionDifference)
+void Player::takesDamage(sf::Vector2f collisionDifference, int damage)
 {
 	if (!m_isMovementEnabled)
 		return;
 	if (m_damageState == dmg_normal)
 	{
-		m_hp--;
+		m_hp -= damage;
 		SoundPlayer::instance().playSound("player_hurt", getPosition());
 		m_acceleration = sf::Vector2f(0, 0);
 		if (0 < collisionDifference.x) m_speed.x = -200;
@@ -340,9 +340,6 @@ void Player::updateAnimation(float deltaTime)
 			cameraOffset = 0;
 	}
 
-	//std::cout << m_inAir << std::endl;
-	//std::cout << "speedX" << m_speed.x << std::endl;
-
 	//breakpoint between idleJump/runJump animation
 	float runJumpBreakpoint = MAX_WALK_SPEED_X;
 	//breakpoint between walk/run animation
@@ -353,7 +350,7 @@ void Player::updateAnimation(float deltaTime)
 	/*
 		Special State Conditions
 	*/
-	//Start to Land //TEST
+	//Start to Land 
 	if (!m_inAir && m_jumpState == jump_inAir)
 	{
 		m_jumpState = jump_land;
@@ -413,7 +410,6 @@ void Player::updateAnimation(float deltaTime)
 				//inAir
 				if ((m_animState == anim_endJump && m_animation.getPlayOnceDone()) || m_animState == anim_inAirUpRun)
 					animation_inAirUp();
-
 				//endJump
 				else if (m_animState != anim_inAirUp)
 					animation_endJump();
@@ -423,6 +419,7 @@ void Player::updateAnimation(float deltaTime)
 			{
 				animation_inAirFall();
 			}
+			//MIDAIR
 			else
 			{
 				animation_inAir();
@@ -440,11 +437,8 @@ void Player::updateAnimation(float deltaTime)
 			//MIDAIR
 			else
 				animation_inAirRun();
-
-
 		}
 	}
-
 
 	//TURN
 	else if (m_speed.x < 0 && m_inputDirection == dir_right || 0 < m_speed.x && m_inputDirection == dir_left)
@@ -472,8 +466,6 @@ void Player::updateAnimation(float deltaTime)
 		std::cout << "FIXA Får ingen animation" << std::endl; //bör inte uppstå
 		std::cout << m_animState << std::endl;
 	}
-
-	//if(m_animState == 8)std::cout << "blah" << std::endl;
 
 	updateSpriteDirection();
 	m_sprite->setTextureRect(m_animation.getRectangle(deltaTime));
@@ -518,9 +510,7 @@ void Player::animation_idle()
 	if (m_animState != anim_idle)
 	{
 		m_sprite = &m_spriteSheets[0];
-	
 		m_animation.loop(0, 1, 3, 4, 8);
-
 		m_animState = anim_idle;
 	}
 }
@@ -545,7 +535,7 @@ void Player::animation_run()
 		m_animation.loop(0, 7, 2, 6);
 		m_animState = anim_run;
 	}
-	m_animation.setSpeed(Animation::calcFrameSpeed(4, 10, MAX_WALK_SPEED_X, m_maxSpeed.x, abs(m_speed.x))); //runBreakpoint används inte på samma sätt, vänta tills vet hur run/walk ska funka
+	m_animation.setSpeed(Animation::calcFrameSpeed(4, 10, MAX_WALK_SPEED_X, m_maxSpeed.x, abs(m_speed.x)));
 
 }
 void Player::animation_turn()
@@ -625,12 +615,6 @@ void Player::animation_inAir()
 }
 void Player::animation_inAirUpRun()
 {
-	/*if (m_animState != anim_inAirUp)
-	{
-		m_sprite = &m_spriteSheets[1];
-		m_animation.loop(0, 2, 1, 6);
-		m_animState = anim_inAirUp;
-	}*/
 	if (m_animState != anim_inAirUpRun)
 	{
 		m_sprite = &m_spriteSheets[2];
@@ -640,12 +624,7 @@ void Player::animation_inAirUpRun()
 }
 void Player::animation_inAirFallRun()
 {
-	//if (m_animState != anim_inAirFall)
-	//{
-	//	m_sprite = &m_spriteSheets[1];
-	//	m_animation.loop(1, 3, 2, 6);
-	//	m_animState = anim_inAirFall;
-	//}
+	
 	if (m_animState != anim_inAirFallRun)
 	{
 		m_sprite = &m_spriteSheets[2];
@@ -655,12 +634,7 @@ void Player::animation_inAirFallRun()
 }
 void Player::animation_inAirRun()
 {
-	/*if (m_animState != anim_inAirFall)
-	{
-		m_sprite = &m_spriteSheets[1];
-		m_animation.stillFrame(0,2);
-		m_animState = anim_inAirFall;
-	}*/
+
 	if (m_animState != anim_inAirRun)
 	{
 		m_sprite = &m_spriteSheets[2];
