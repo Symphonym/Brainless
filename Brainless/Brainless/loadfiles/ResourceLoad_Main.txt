@@ -1,5 +1,6 @@
 # Resource Load Background
 +Texture,images/backgrounds/LoadingScreen_Brainless.png,LoadingScreen_BG
++Texture,images/backgrounds/LoadingScreen_start.png,LoadingScreen_BG_start
 +Texture,images/backgrounds/Spritesheet_maeve_RunForever_V1.png,LoadingScreen_Run
 +Texture,images/backgrounds/Spritesheet_Loading_Dot_V1.png,LoadingScreen_Dot
 

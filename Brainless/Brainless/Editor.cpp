@@ -34,7 +34,7 @@ m_isMenu(false)
 	//Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("DarknessShader"));
 	//ResourceLoader::instance().loadShader("TestShader", "shaderTest.txt");
 
-	m_editorBackground.setPosition(0, -40);
+	m_editorBackground.setPosition(0,0);
 	m_editorBackground.setTexture(ResourceLoader::instance().retrieveTexture("EditorLevelSize"));
 
 	m_spawnSprite.setTexture(ResourceLoader::instance().retrieveTexture("PlayerSpawnItem"));
