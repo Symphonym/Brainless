@@ -135,6 +135,7 @@
     <ClCompile Include="EditorItemMode.cpp" />
     <ClCompile Include="EditorSpriteMode.cpp" />
     <ClCompile Include="EditorZombieMode.cpp" />
+    <ClCompile Include="ElectricalCabinetItem.cpp" />
     <ClCompile Include="ElectricalItem.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="FileSave.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="EditorSpriteMode.h" />
     <ClInclude Include="EditorZombie.h" />
     <ClInclude Include="EditorZombieMode.h" />
+    <ClInclude Include="ElectricalCabinetItem.h" />
     <ClInclude Include="ElectricalItem.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="FileSave.h" />

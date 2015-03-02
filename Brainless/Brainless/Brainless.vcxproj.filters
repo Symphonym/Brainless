@@ -387,6 +387,9 @@
     <ClCompile Include="Turtle.cpp">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClCompile>
+    <ClCompile Include="ElectricalCabinetItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -664,6 +667,9 @@
     </ClInclude>
     <ClInclude Include="Turtle.h">
       <Filter>Source Files\Game\ArcadeGame</Filter>
+    </ClInclude>
+    <ClInclude Include="ElectricalCabinetItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
