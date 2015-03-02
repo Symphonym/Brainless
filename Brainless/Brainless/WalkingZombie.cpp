@@ -19,8 +19,7 @@ m_maxPositionX(maxDisparityX + startPosition.x),
 m_walkLenght(maxDisparityX),
 m_direction(dir_right),
 m_minPositionX(startPosition.x),
-m_currentDisparity(0),
-m_animState(anim_noAnimation)
+m_currentDisparity(0)
 {
 	if (maxDisparityX < 0)
 	{
@@ -28,6 +27,7 @@ m_animState(anim_noAnimation)
 		m_minPositionX = m_maxPositionX+maxDisparityX;
 		m_currentDisparity = -1 * maxDisparityX;
 	}
+	animation_walking();
 }
 
 void WalkingZombie::serialize(std::ofstream &writer) const
@@ -134,20 +134,7 @@ void WalkingZombie::wallRight()
 {
 	m_direction = dir_left;
 }
-void WalkingZombie::updateAnimation(float deltaTime)
-{
 
-	if (m_animState != anim_walking)
-	{
-		m_sprite = &m_spriteSheets[0];
-		m_animation.loop(0, 7, m_textureId * 2, 10);
-		m_animState = anim_walking;
-	}
-
-	updateSpriteDirection();
-
-	m_sprite->setTextureRect(m_animation.getRectangle(deltaTime));
-}
 
 int WalkingZombie::getWalkLenght()
 {

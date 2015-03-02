@@ -11,6 +11,16 @@ public:
 	virtual bool onInteractedWith(Item &otherItem, Game &game);
 	virtual void onCollideWith(Unit *unit);
 	//virtual void onCollisionWithItem(Item &item) final;
+	void updateAnimation(float deltaTime);
+
+	enum AnimationState
+	{
+		anim_noAnimation,
+		anim_idle,
+		anim_walking,
+		anim_idleSlow,
+		anim_walkingSlow,
+	};
 
 	// If set to false, this zombie will not deal damage
 	void setDamaging(bool damaging);
@@ -22,8 +32,12 @@ public:
 	bool collide(Unit *unit);
 protected:
 	int m_textureId;
+	AnimationState m_animState;
+	void animation_idle();
+	void animation_walking();
+	void animation_idleSlow();
+	void animation_walkingSlow();
 private:
-	
 	bool m_isDamaging;
 	//ZombieScript m_script;
 	float m_flashAlpha;

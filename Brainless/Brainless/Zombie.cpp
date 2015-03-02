@@ -7,7 +7,8 @@ Zombie::Zombie(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSp
 :
 m_textureId(Texture),
 Unit(startPosition, size, maxSpeed, spriteOffset, ID),
-m_isDamaging(true)
+m_isDamaging(true),
+m_animState(anim_noAnimation)
 {
 
 }
@@ -125,4 +126,52 @@ void Zombie::onCollideWith(Unit *unit)
 {
 	if (m_isDamaging)
 		unit->takesDamage(m_position - unit->getPosition());
+}
+
+void Zombie::updateAnimation(float deltaTime)
+{
+	m_sprite = &m_spriteSheets[0];
+
+	updateSpriteDirection();
+
+	m_sprite->setTextureRect(m_animation.getRectangle(deltaTime));
+}
+
+void Zombie::animation_idle()
+{
+	if (m_animState != anim_idle)
+	{
+		m_animation.loop(0, 7, m_textureId * 2 + 1, 5);
+		m_animState = anim_idle;
+	}
+}
+
+void Zombie::animation_walking()
+{
+
+	if (m_animState != anim_walking)
+	{
+		m_animation.loop(0, 7, m_textureId * 2, 10);
+		m_animState = anim_walking;
+	}
+
+}
+
+void Zombie::animation_idleSlow()
+{
+	if (m_animState != anim_idleSlow)
+	{
+		m_animation.loop(0, 7, m_textureId * 2 + 1, 3);
+		m_animState = anim_idleSlow;
+	}
+
+}
+
+void Zombie::animation_walkingSlow()
+{
+	if (m_animState != anim_walkingSlow)
+	{
+		m_animation.loop(0, 7, m_textureId * 2, 3);
+		m_animState = anim_walkingSlow;
+	}
 }

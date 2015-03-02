@@ -19,12 +19,11 @@ Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vecto
 m_maxWalkLenght(abs(maxLengthX)),
 m_direction(dir_noDirection),
 m_currentLength(0),
-m_animState(anim_noAnimation),
 m_target(s_playerPointer),
 m_chaseState(chase_idle),
 m_homePosition(startPosition)
 {
-
+	animation_idleSlow();
 }
 
 
@@ -74,7 +73,7 @@ void ChasingZombie::updateTask(float deltaTime)
 	float minSpeedBeforeStop = 10;
 
 	float chaseDistance = 300;
-	float lookDistance = 500;
+	float lookDistance = 450;
 	bool slowDown = true;
 
 	//Chasing Zombie's AI
@@ -126,31 +125,51 @@ void ChasingZombie::updateTask(float deltaTime)
 		//target in sight
 		if (distance < lookDistance)
 			//target looks tasty && not far from home
-		if (distance < chaseDistance && abs(m_position.x - m_homePosition.x) < m_maxWalkLenght)
-		if (m_target->getPosition().x < m_position.x)
-			m_direction = dir_left;
-		else
-			m_direction = dir_right;
-		//stare
-		else
-		{
-			m_specialSpriteDirection = true;
-			if (m_target->getPosition().x < m_position.x)
-				m_spriteDirection = dir_left;
+			if (distance < chaseDistance && abs(m_position.x - m_homePosition.x) < m_maxWalkLenght)
+			{
+				if (m_target->getPosition().x < m_position.x)
+					m_direction = dir_left;
+				else
+					m_direction = dir_right;
+				animation_walkingSlow();
+			}
+			//stare
 			else
-				m_spriteDirection = dir_right;
-		}
+			{
+				std::cout << "test" << std::endl;
+				m_specialSpriteDirection = true;
+				if (m_target->getPosition().x < m_position.x)
+				{
+					std::cout << "left" << std::endl;
+					m_spriteDirection = dir_left;
+				}
+				else
+				{
+					std::cout << "right" << std::endl;
+					m_spriteDirection = dir_right;
+				}
+				animation_idleSlow();
+			}
 		//return home
 		else
-		if (m_position.x + 5 < m_homePosition.x)
-			m_direction = dir_right;
-		else if (m_position.x - 5 > m_homePosition.x)
-			m_direction = dir_left;
-		//isHome
-		else
 		{
-			m_position.x = m_homePosition.x;
-			m_direction = dir_noDirection;
+			if (m_position.x + 5 < m_homePosition.x)
+			{
+				m_direction = dir_right;
+				animation_walkingSlow();
+			}
+			else if (m_position.x - 5 > m_homePosition.x)
+			{
+				m_direction = dir_left;
+				animation_walkingSlow();
+			}
+			//isHome
+			else
+			{
+				m_position.x = m_homePosition.x;
+				m_direction = dir_noDirection;
+				animation_idleSlow();
+			}
 		}
 	}
 
@@ -200,31 +219,6 @@ void ChasingZombie::updateTask(float deltaTime)
 		else m_acceleration.x = -m_speed.x * speedSlowDown;
 	}
 
-}
-
-void ChasingZombie::updateAnimation(float deltaTime)
-{
-
-	if (m_direction == dir_noDirection)
-	{
-		if (m_animState != anim_idle)
-		{
-			m_sprite = &m_spriteSheets[0];
-			m_animation.loop(0, 7, m_textureId * 2 + 1, 3);
-			m_animState = anim_idle;
-		}
-	}
-	else if (m_animState != anim_walking)
-	{
-		m_sprite = &m_spriteSheets[0];
-		m_animation.loop(0, 7, m_textureId * 2, 3);
-		m_animState = anim_walking;
-	}
-
-
-	updateSpriteDirection();
-
-	m_sprite->setTextureRect(m_animation.getRectangle(deltaTime));
 }
 
 int ChasingZombie::getWalkLenght()

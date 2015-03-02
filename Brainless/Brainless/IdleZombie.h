@@ -8,13 +8,6 @@ public:
 	IdleZombie(sf::Vector2f startPosition, Direction startDirection, int Texture);
 
 	void updateTask(float deltaTime);
-	void updateAnimation(float deltaTime);
-
-	enum AnimationState
-	{
-		anim_noAnimation,
-		anim_idle
-	};
 
 	virtual void serialize(std::ofstream &writer) const;
 	virtual void deserialize(std::ifstream &reader);
@@ -22,7 +15,6 @@ public:
 protected:
 
 private:
-	AnimationState m_animState;
 };
 
 #endif
