@@ -20,10 +20,14 @@ m_cableInPuddle(cableInPuddle)
 
 void PuddleCableItem::serialize(std::ofstream &writer) const
 {
+	Item::serialize(writer);
+
 	writer << m_cableInPuddle << std::endl;
 }
 void PuddleCableItem::deserialize(std::ifstream &reader)
 {
+	Item::deserialize(reader);
+
 	reader >> m_cableInPuddle;
 	refreshTexture();
 }

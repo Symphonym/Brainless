@@ -14,7 +14,7 @@ public:
 
 	/* kollar efter playerinput, ska köras innan Unit::updateMovement */
 	void updateTask(float deltaTime);
-	virtual void onCollideWithItem(Item &item) { item.flyOff(); };
+	//virtual void onCollideWithItem(Item &item) { item.flyOff(); };
 
 	void updateAnimation(float deltaTime);
 
