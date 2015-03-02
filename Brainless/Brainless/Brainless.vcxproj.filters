@@ -665,5 +665,8 @@
     <ClInclude Include="Turtle.h">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClInclude>
+    <ClInclude Include="ZombieScript.h">
+      <Filter>Source Files\Dialog</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

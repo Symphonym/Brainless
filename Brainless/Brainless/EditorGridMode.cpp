@@ -40,6 +40,8 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 	// Add autotiling ranges
 	parseAutotilingFile("autotiling/numbersforRoad.txt", "RoadAutotiling");
 	parseAutotilingFile("autotiling/numbersforWood.txt", "WoodAutotiling");
+	parseAutotilingFile("autotiling/numbersforGrass.txt", "GrassAutotiling");
+
 	//addAutotilingRange("RoadAutotiling", Tile::Road_Middle,
 	//{
 	//	AutotilingValue(0, Tile::Road_Down)
@@ -163,7 +165,7 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 		Tile::Wood_Down_Corner_Full,
 
 		*/Tile::Wood_Tilt,
-		Tile::Wood_Tilt_Corner/*
+		Tile::Wood_Tilt_Corner,/*
 
 		Tile::Wood_Corner_TopLeft,
 		Tile::Wood_Corner_TopRight,
@@ -181,7 +183,9 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 		Tile::Wood_Corner_Not_DownRight,
 		Tile::Wood_Corner_Full*/
 
-		
+		Tile::Grass_Top_Alone,
+		Tile::Grass_Tilt,
+		Tile::Grass_Tilt_Corner
 	};
 }
 EditorGridMode::~EditorGridMode()

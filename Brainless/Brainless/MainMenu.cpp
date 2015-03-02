@@ -40,8 +40,8 @@ m_Animation_scarf(SPRITESIZE, SPRITESIZE)
 		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2 - 100.f)));
 
 	m_buttons[2] = GuiPtr(new Button(
-		ResourceLoader::instance().retrieveTexture("LoadGame_Normal"),
-		ResourceLoader::instance().retrieveTexture("LoadGame_Pressed"),
+		ResourceLoader::instance().retrieveTexture("Options_Normal"),
+		ResourceLoader::instance().retrieveTexture("Options_Pressed"),
 		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2 + 100.f)));
 
 
