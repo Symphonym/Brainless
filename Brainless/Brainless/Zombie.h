@@ -23,6 +23,8 @@ public:
 protected:
 	int m_textureId;
 private:
+
+	bool m_isDoingScript;
 	
 	bool m_isDamaging;
 	//ZombieScript m_script;
