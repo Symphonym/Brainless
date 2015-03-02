@@ -16,6 +16,7 @@ m_collisionBounds(0, 0, 0, 0),
 m_useString(Constants::CantUseString),
 m_pickupString(Constants::CantPickUpString),
 m_examineString("A pretty normal object, nothing out of the ordinary"),
+m_markedForDestruction(false),
 m_itemName(itemName),
 m_id(id),
 m_syncID(-1),
@@ -26,6 +27,35 @@ m_speed(sf::Vector2f(0,0))
 
 	// Default collision box is size of sprite
 	m_interactBounds = sf::FloatRect(0, 0, m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height);
+}
+
+void Item::flyOff()
+{
+	m_flyingOff = true;
+	m_flyingOffLifeTime = 1.f;
+}
+void Item::updateFlyoff(float deltaTime)
+{
+	if (!m_flyingOff)
+		return;
+
+	m_renderingMode = RenderingModes::Above;
+
+	m_flyingOffLifeTime -= deltaTime;
+	sf::Vector2f velocity = sf::Vector2f(500, -500);
+	setPosition(getPosition() + (velocity*deltaTime));
+
+	float scale = getSprite().getScale().x;
+	scale -= deltaTime;
+
+	if (scale <= 0.1f)
+		scale = 0.1f;
+
+	getSprite().setScale(scale, scale);
+	getSprite().rotate(deltaTime*300.f);
+
+	if (m_flyingOffLifeTime <= 0)
+		markForDestruction();
 }
 
 void Item::serialize(std::ofstream &writer) const
@@ -66,6 +96,12 @@ void Item::deserialize(std::ifstream &reader)
 	reader >> renderMode;
 	m_renderingMode = static_cast<RenderingModes>(renderMode);
 }
+
+void Item::markForDestruction()
+{
+	m_markedForDestruction = true;
+}
+
 
 void Item::setPosition(const sf::Vector2f &pos)
 {
@@ -122,6 +158,10 @@ int Item::getSyncID() const
 	return m_syncID;
 }
 
+bool Item::isMarkedForDestruction() const
+{
+	return m_markedForDestruction;
+}
 bool Item::isLootable() const
 {
 	return m_lootable;

@@ -23,7 +23,10 @@ public:
 	explicit Item(const std::string &itemName, const std::string &inventoryTextureName, const std::string &textureName, int id);
 	virtual ~Item() {};
 
-	
+	// Throws in the item into orbit, marking itself for destruction once the moon has been passed
+	void flyOff();
+	void updateFlyoff(float deltaTime);
+
 	// Updated when the item is held, when picked up from the inventory
 	virtual void heldUpdate(float detlaTime, Game &game) {};
 	// If the item needs custom interaction functionality
@@ -57,6 +60,8 @@ public:
 	virtual sf::Vector2f getSpeed() const;
 	virtual void onPositionChanged() {};
 
+	// Marks an item for destruction
+	void markForDestruction();
 
 	void setPosition(const sf::Vector2f &pos);
 	sf::Vector2f getPosition() const;
@@ -69,6 +74,7 @@ public:
 	void setSyncID(int id);
 	int getSyncID() const;
 
+	bool isMarkedForDestruction() const;
 	bool isLootable() const;
 	bool isUsable() const;
 	/*virtual*/ bool isCollidable() const;
@@ -96,6 +102,11 @@ protected:
 	std::string m_examineString;
 
 private:
+
+	bool m_flyingOff;
+	float m_flyingOffLifeTime;
+
+	bool m_markedForDestruction;
 
 	sf::Vector2f m_speed;
 	std::string m_itemName;

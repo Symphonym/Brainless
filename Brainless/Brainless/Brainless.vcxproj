@@ -221,6 +221,7 @@
     <ClInclude Include="ConversationBox.h" />
     <ClInclude Include="CraftingDatabase.h" />
     <ClInclude Include="Cursor.h" />
+    <ClInclude Include="ZombieScript.h" />
     <ClInclude Include="DialogTree.h" />
     <ClInclude Include="DoorItem.h" />
     <ClInclude Include="DuctTapeItem.h" />

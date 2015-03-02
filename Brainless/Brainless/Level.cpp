@@ -76,7 +76,7 @@ bool Level::loadLevelResources(const std::string &fileName)
 					if (m_musicName!="none")
 						SoundPlayer::instance().stopMusic(m_musicName);
 					m_musicName = stringData[2];
-					SoundPlayer::instance().playMusic(m_musicName, true);
+					SoundPlayer::instance().playMusic(m_musicName, true, 3.f);
 					//TODO keep track of loaded music so it can be stopped
 				}
 				else
@@ -171,9 +171,18 @@ void Level::update(float deltaTime, Game &game)
 
 	}
 	for (std::size_t i = 0; i < m_items.size(); i++)
+	{
 		m_items[i]->update(deltaTime, game);
+		m_items[i]->updateFlyoff(deltaTime);
+	}
 
 	updateUnitCollision(deltaTime, game);
+
+	// Destroy items marked for destruction
+	m_items.erase(std::remove_if(m_items.begin(), m_items.end(), [](const ItemPtr &item) -> bool
+	{
+		return item->isMarkedForDestruction();
+	}), m_items.end());
 }
 
 void Level::draw(const sf::View &cameraView, bool editorMode)
@@ -638,8 +647,9 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 			m_items.erase(std::remove_if(m_items.begin(), m_items.end(), [&](const ItemPtr &item) -> bool
 			{
 				// Trigger collision events for items
-				if (item->getCollisionBounds().intersects(currentUnit->getCollisionRect()))
+				if (item->getInteractBounds().intersects(currentUnit->getCollisionRect()))
 				{
+					currentUnit->onCollideWithItem(*item.get());
 					return item->onCollisionWithUnit(*currentUnit, game);
 				}
 				else
