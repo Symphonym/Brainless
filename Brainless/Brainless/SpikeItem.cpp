@@ -44,7 +44,7 @@ bool SpikeItem::onCollisionWithUnit(Unit &unit, Game &game)
 		{
 			unit.takesDamage(sf::Vector2f(
 				getPosition().x + getSprite().getGlobalBounds().width / 2.f,
-				getPosition().y + getSprite().getGlobalBounds().height / 2.f));
+				getPosition().y + getSprite().getGlobalBounds().height / 2.f), 3);
 		}
 	}
 

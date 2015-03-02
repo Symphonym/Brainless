@@ -76,7 +76,7 @@ bool Level::loadLevelResources(const std::string &fileName)
 					if (m_musicName!="none")
 						SoundPlayer::instance().stopMusic(m_musicName);
 					m_musicName = stringData[2];
-					SoundPlayer::instance().playMusic(m_musicName, true, 3.f);
+					SoundPlayer::instance().playMusic(m_musicName, true);
 					//TODO keep track of loaded music so it can be stopped
 				}
 				else
