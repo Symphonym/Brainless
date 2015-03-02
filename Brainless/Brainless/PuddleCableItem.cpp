@@ -3,6 +3,7 @@
 #include "Unit.h"
 #include "ItemDatabase.h"
 #include "Game.h"
+#include "ParticleSystem.h"
 
 PuddleCableItem::PuddleCableItem(bool cableInPuddle, int id)
 :
@@ -55,6 +56,13 @@ bool PuddleCableItem::onInteractedWith(Item &otherItem, Game &game)
 	}
 
 	return false;
+}
+
+void PuddleCableItem::update(float deltaTime, Game &game)
+{
+	if (m_cableInPuddle)
+	ParticleSystem::instance().addParticles(1, getPosition() + sf::Vector2f(85,20), sf::Color().Yellow, sf::Vector2f(0.5f,0.5f), 
+	sf::Vector2f(0,360),sf::Vector2f(0,10), sf::Vector2f(-100,100),sf::Vector2f(-100,100),sf::Vector2f(0,3));
 }
 
 Item* PuddleCableItem::clone()
