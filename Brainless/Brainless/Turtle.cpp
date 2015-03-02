@@ -7,10 +7,9 @@
 #include "OptionsMenu.h"
 //plz no hate on uggly code, much lazy, very kappa
 
-stuff::stuff(stuffType _type, int _x, int _y)
+Object::Object(stuffType _type, int _x, int _y)
 :type(_type),x(_x),y(_y),oldX(_x),oldY(_y),sprite(),animation()
 {
-	
 	if (type == turtle)
 	{
 		sprite.setTexture(ResourceLoader::instance().retrieveTexture("turtlesheet"));
@@ -29,6 +28,8 @@ stuff::stuff(stuffType _type, int _x, int _y)
 	}
 
 }
+
+Directions::Directions(direction _dirr, Directions* _next) : dirr(_dirr), next(_next){}
 
 Turtle::Turtle(ArcadeMachine &machine)
 :
@@ -53,20 +54,41 @@ score(0)
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			map[i][j] = nullptr;
+				map[i][j] = nullptr;
 		}
 	}
+	
+	direction = new Directions(up, nullptr);
+	direction_tail = direction;
 }
 
 Turtle::~Turtle()
 {
-	//std::cout << "körsinte" << std::endl;
+	Directions* del;
+	while (direction != nullptr)
+	{
+		del = direction;
+		direction = direction->next;
+		delete(del);
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			if (map[i][j] == nullptr);
+			else
+			{
+				delete(map[i][j]); 
+			}
+		}
+	}
 }
 
 void Turtle::onGameStart()
 {
 	scoreText.setPosition(screenPos.x + 20, screenPos.y + 630);
 	score = 0;
+	time = 0;
 	isDead = false;
 	infoShowing = true;
 
@@ -77,19 +99,29 @@ void Turtle::onGameStart()
 			if (map[i][j] == nullptr);
 			else
 			{
-				delete(map[i][j]); //kallas inte ifall man stänger av arcademachine helt och startar igen, liten memory leak
+				delete(map[i][j]); 
+				map[i][j] = nullptr;
 			}
 		}
 	}
 
-	direction = up;
+	if (direction->next != nullptr)
+	{
+		Directions* del;
+		del = direction;
+		direction = direction->next;
+		delete(del);
+	}
+	direction->dirr = up;
 
-	head = new stuff(turtle,5,9);
+	head = new Object(turtle, 5, 9);
 	head->before = nullptr;
 	head->next = nullptr;
 	map[5][9] = head;
-	map[5][2] = new stuff(frie,5,2);
+	map[5][2] = new Object(frie, 5, 2);
+
 }
+
 
 void Turtle::update(float deltaTime)
 {
@@ -100,44 +132,63 @@ void Turtle::update(float deltaTime)
 	{
 		if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Up")))
 		{
-			direction = up;
+			if (direction_tail->dirr != down  && direction_tail->dirr != up)
+			{
+				direction_tail->next = new Directions(up, nullptr);
+				direction_tail = direction_tail->next;
+			}
 		}
 		else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Down")))
 		{
-			direction = down;
+			if (direction_tail->dirr != up && direction_tail->dirr != down)
+			{
+				direction_tail->next = new Directions(down, nullptr);
+				direction_tail = direction_tail->next;
+			}
+
 		}
 
 		else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Left")))
 		{
-			direction = left;
+			if (direction_tail->dirr != right  && direction_tail->dirr != left)
+			{
+				direction_tail->next = new Directions(left, nullptr);
+				direction_tail = direction_tail->next;
+			}
+
 		}
 
 		else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Right")))
 		{
-			direction = right;
+			if (direction_tail->dirr != left && direction_tail->dirr != right)
+			{
+				direction_tail->next = new Directions(right, nullptr);
+				direction_tail = direction_tail->next;
+			}
+
 		}
 
 		if (time > 0.1f)
 		{
-			time-=0.1f;
+			time -= 0.1f;
 			int x = 0;
 			int y = 0;
-			if (direction == up)
+			if (direction->dirr == up)
 			{
 				y = -1;
 				head->sprite.setRotation(0);
 			}
-			else if (direction == down)
+			else if (direction->dirr == down)
 			{
 				y = 1;
 				head->sprite.setRotation(180);
 			}
-			else if (direction == left)
+			else if (direction->dirr == left)
 			{
 				x = -1;
 				head->sprite.setRotation(270);
 			}
-			else if (direction == right)
+			else if (direction->dirr == right)
 			{
 				x = 1;
 				head->sprite.setRotation(90);
@@ -151,12 +202,12 @@ void Turtle::update(float deltaTime)
 			}
 			else if (map[newPosX][newPosY] == nullptr)
 			{
-				stuff* ptr = head;
+				Object* ptr = head;
 				while (ptr->next != nullptr)
 				{
 					ptr = ptr->next;
 				}
-				if(ptr->before != nullptr)ptr->before->next = nullptr;
+				if (ptr->before != nullptr)ptr->before->next = nullptr;
 				map[ptr->x][ptr->y] = nullptr;
 				ptr->x = newPosX;
 				ptr->y = newPosY;
@@ -188,7 +239,7 @@ void Turtle::update(float deltaTime)
 					}
 					map[rndPosX][rndPosY] = map[newPosX][newPosY];
 
-					stuff* ptr = new stuff(turtle, newPosX, newPosY);
+					Object* ptr = new Object(turtle, newPosX, newPosY);
 					map[newPosX][newPosY] = ptr;
 					ptr->next = head;
 					ptr->before = nullptr;
@@ -204,22 +255,31 @@ void Turtle::update(float deltaTime)
 				SoundPlayer::instance().playSound("ArcadeFail", screenPos, 20);
 			}
 
-			if (direction == up)
+			if (direction->dirr == up)
 			{
 				head->sprite.setRotation(0);
 			}
-			else if (direction == down)
+			else if (direction->dirr == down)
 			{
 				head->sprite.setRotation(180);
 			}
-			else if (direction == left)
+			else if (direction->dirr == left)
 			{
 				head->sprite.setRotation(270);
 			}
-			else if (direction == right)
+			else if (direction->dirr == right)
 			{
 				head->sprite.setRotation(90);
 			}
+
+			if (direction->next != nullptr)
+			{
+				Directions* del;
+				del = direction;
+				direction = direction->next;
+				delete(del);
+			}
+			
 		}
 		
 		scoreText.setString("Score: " + std::to_string(score));

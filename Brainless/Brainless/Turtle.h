@@ -11,29 +11,36 @@ enum stuffType
 	frie
 };
 
-enum dirr
+enum direction
 {
 	up,
 	down,
 	left,
 	right
 };
-class stuff
+class Object
 {
 public:
-	stuff(stuffType _type, int _x, int _y);
+	Object(stuffType _type, int _x, int _y);
 
 	stuffType type;
 	int x;
 	int y;
 	int oldX;
 	int oldY;
-	stuff* next;
-	stuff* before;
+	Object* next;
+	Object* before;
 	sf::Sprite sprite;
 	Animation animation;
 };
 
+class Directions
+{
+public:
+	Directions(direction _dirr, Directions* _next);
+	direction dirr;
+	Directions* next;
+};
 class Turtle : public ArcadeGame
 {
 public:
@@ -43,19 +50,21 @@ public:
 	~Turtle();
 	virtual void update(float deltaTime);
 	virtual void draw();
-
 private:
 	//typedef std::unique_ptr<stuff> stuffPtr;
 	float time;
-	dirr direction;
-	stuff* head;
+
+
+	Directions* direction;
+	Directions* direction_tail;
+	Object* head;
 	//stuffPtr head;
 
 	sf::Sprite background;
 
 	sf::Vector2f screenPos;
 
-	stuff* map[10][10];
+	Object* map[10][10];
 	//stuffPtr map[10][10];
 	int score;
 	sf::Text scoreText;
