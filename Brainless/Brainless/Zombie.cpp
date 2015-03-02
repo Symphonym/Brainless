@@ -6,7 +6,8 @@
 Zombie::Zombie(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID, int Texture)
 :
 m_textureId(Texture),
-Unit(startPosition, size, maxSpeed, spriteOffset, ID)
+Unit(startPosition, size, maxSpeed, spriteOffset, ID),
+m_isDamaging(true)
 {
 
 }
@@ -82,6 +83,11 @@ void Zombie::flash(sf::Vector2f cameraPos)
 		sf::Vector2f(0, 5));
 }
 
+void Zombie::setDamaging(bool damaging)
+{
+	m_isDamaging = damaging;
+}
+
 bool Zombie::onInteractedWith(Item &otherItem, Game &game)
 {
 	if (otherItem.getName() == "Brain")
@@ -91,7 +97,11 @@ bool Zombie::onInteractedWith(Item &otherItem, Game &game)
 		// TODO add brain giving logic
 		return true;
 	}
-}
+}/*
+void Zombie::onCollisionWithItem(Item &item)
+{
+	m_script.onCollisionWithItem(item, *this);
+}*/
 
 bool Zombie::collide(Unit *unit)
 {
@@ -111,7 +121,8 @@ int Zombie::getTexture()
 	return m_textureId;
 };
 
-void Zombie::onCollideWidth(Unit *unit)
+void Zombie::onCollideWith(Unit *unit)
 {
-	unit->takesDamage(m_position - unit->getPosition());
+	if (m_isDamaging)
+		unit->takesDamage(m_position - unit->getPosition());
 }
