@@ -49,6 +49,7 @@ private:
 	sf::Vector2f m_position;
 
 	std::array<sf::Sprite, 3> m_buttons;
+	sf::Sprite m_background;
 	std::bitset<3> m_buttonsEnabled;
 };
 

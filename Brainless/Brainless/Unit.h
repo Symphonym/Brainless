@@ -32,7 +32,8 @@ public:
 	virtual void wallRight();
 
 	virtual bool onInteractedWith(Item &otherItem, Game &game) { return false; } // Called when an item interacts with this unit, returning TRUE will destroy this unit
-	virtual void onCollideWidth(Unit *unit){};
+	virtual void onCollideWith(Unit *unit){};
+	virtual void onCollideWithItem(Item &item) {};
 
 	virtual void takesDamage(sf::Vector2f collisionPos){};
 
