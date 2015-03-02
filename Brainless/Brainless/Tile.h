@@ -17,6 +17,8 @@ public:
 		Platform = 5,
 		//Short är tales som angränsar en annan tile "snett"
 		//Alone är tiles som inte angränsar till något verticalt/horiontalt
+
+		//ROAD
 		Road_Top_Right = 6,
 		Road_Top_Right_Corner = 56,
 
@@ -78,8 +80,8 @@ public:
 		Road_Corner_Not_DownLeft = 38,
 		Road_Corner_Not_DownRight = 39,
 		Road_Corner_Full = 40,
-		// Etc
-
+		
+		//WOOD
 		Wood_Top_Right = 106,
 		Wood_Top_Right_Corner = 156,
 
@@ -141,6 +143,70 @@ public:
 		Wood_Corner_Not_DownLeft = 138,
 		Wood_Corner_Not_DownRight = 139,
 		Wood_Corner_Full = 140,
+
+		//GRASS
+		Grass_Top_Right = 206,
+		Grass_Top_Right_Corner = 256,
+
+		Grass_Top_Left = 207,
+		Grass_Top_Left_Short = 208, //
+		Grass_Top_Left_Corner = 255,
+
+		Grass_Top = 210,
+		Grass_Top_Alone = 211,
+		Grass_Top_Short = 212, //
+		Grass_Top_Corner_Left = 252,
+		Grass_Top_Corner_Right = 253,
+		Grass_Top_Corner_Full = 254,
+
+		Grass_Right = 213,
+		Grass_Right_Alone = 214,
+		Grass_Right_Corner_Down = 249,
+		Grass_Right_Corner_Top = 250,
+		Grass_Right_Corner_Full = 251,
+
+		Grass_Middle = 215,
+		Grass_Middle_Alone = 216,
+		Grass_Middle_Alone_Horizontal = 217,
+		Grass_Middle_Alone_Vertical = 218,
+
+		Grass_Left = 219,
+		Grass_Left_Short = 220, //
+		Grass_Left_Alone = 221,
+		Grass_Left_Corner_Down = 246,
+		Grass_Left_Corner_Top = 247,
+		Grass_Left_Corner_Full = 248,
+
+		Grass_Down_Right = 222,
+		Grass_Down_Right_Corner = 245,
+		Grass_Down_Left = 223,
+		Grass_Down_Left_Corner = 244,
+
+		Grass_Down = 224,
+		Grass_Down_Alone = 228,
+		Grass_Down_Corner_Left = 241,
+		Grass_Down_Corner_Right = 242,
+		Grass_Down_Corner_Full = 243,
+
+		Grass_Tilt = 209,
+		Grass_Tilt_Corner = 257,
+
+		Grass_Corner_TopLeft = 225,
+		Grass_Corner_TopRight = 226,
+		Grass_Corner_TopLeft_TopRight = 227,
+		Grass_Corner_DownLeft = 229,
+		Grass_Corner_DownRight = 230,
+		Grass_Corner_DownLeft_DownRight = 231,
+		Grass_Corner_TopLeft_DownLeft = 232,
+		Grass_Corner_TopRight_DownRight = 233,
+		Grass_Corner_TopLeft_DownRight = 234,
+		Grass_Corner_TopRight_DownLeft = 235,
+		Grass_Corner_Not_TopLeft = 236,
+		Grass_Corner_Not_TopRight = 237,
+		Grass_Corner_Not_DownLeft = 238,
+		Grass_Corner_Not_DownRight = 239,
+		Grass_Corner_Full = 240,
+
 
 		Solid_Invisible = 500
 	};
