@@ -279,6 +279,13 @@
 +Texture,images/items/puddle.png,PuddleItem
 +Texture,images/items/puddleCable.png,PuddleCableItem
 +Texture,images/items/electricalCabinet/electricalCabinet.png,electricalCabinet
++Texture,images/items/ladders/Ladder-7tiles-Rope.png,RopeLadder7
++Texture,images/items/ladders/Rope-Ladder-Compact.png,RopeLadderCompact
++Texture,images/items/spikesNormal.png,SpikesNormal
++Texture,images/items/spikesDampened.png,SpikesDampened
++Texture,images/items/Stuffed Bag.png,StuffedBagItem
++Texture,images/items/Newspapper.png,NewspaperItem
++Texture,images/items/Plastic Bag.png,EmptyBagItem
 
 # Arcade disc items
 +Texture,images/items/discs/Big-Disk-Blue.png,ArcadeDiscItemBlueBig
