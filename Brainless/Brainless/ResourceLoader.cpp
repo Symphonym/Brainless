@@ -23,6 +23,12 @@ void ResourceLoader::setLoadingHandler(LoadingHandler handler)
 	m_handler = handler;
 }
 
+bool ResourceLoader::musicExists(const std::string &name)
+{
+	auto itr = m_music.find(name);
+	return itr != m_music.end();
+}
+
 void ResourceLoader::loadTexture(const std::string &name, const std::string &filePath)
 {
 	auto itr = m_textures.find(name);

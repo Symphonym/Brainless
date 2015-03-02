@@ -86,8 +86,18 @@ m_Animation_scarf(SPRITESIZE, SPRITESIZE)
 	m_Animation_grass4.loop(0, 5, 4, 4.5f);
 	m_Animation_grass5.loop(0, 5, 5, 4.5f);
 	m_Animation_scarf.loop(0, 5, 6, 4.5f);
+
+}
+
+void MainMenu::onStop()
+{
 	//Play music
-	SoundPlayer::instance().playMusic("MenuMusic",true,20);
+	SoundPlayer::instance().stopMusic("MenuMusic");
+}
+void MainMenu::onPlay()
+{
+	//Play music
+	SoundPlayer::instance().playMusic("MenuMusic", true, 20);
 }
 
 void MainMenu::update(float deltaTime)

@@ -24,6 +24,9 @@ void SoundPlayer::playSound(const std::string &soundName, const sf::Vector2f &po
 }
 void SoundPlayer::playMusic(const std::string &musicName, bool looping, float volume)
 {
+	if (!ResourceLoader::instance().musicExists(musicName))
+		return;
+
 	sf::Music &music = ResourceLoader::instance().retrieveMusic(musicName);
 	music.setRelativeToListener(false);
 	music.setVolume(volume);
@@ -32,11 +35,13 @@ void SoundPlayer::playMusic(const std::string &musicName, bool looping, float vo
 }
 void SoundPlayer::pauseMusic(const std::string &musicName)
 {
-	ResourceLoader::instance().retrieveMusic(musicName).pause();
+	if (ResourceLoader::instance().musicExists(musicName))
+		ResourceLoader::instance().retrieveMusic(musicName).pause();
 }
 void SoundPlayer::stopMusic(const std::string &musicName)
 {
-	ResourceLoader::instance().retrieveMusic(musicName).stop();
+	if (ResourceLoader::instance().musicExists(musicName))
+		ResourceLoader::instance().retrieveMusic(musicName).stop();
 }
 
 void SoundPlayer::killAllSounds()

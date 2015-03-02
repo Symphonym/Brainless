@@ -15,6 +15,11 @@ public:
 	virtual void update(float deltaTime) {};
 	virtual void draw() {};
 
+	// Called when the state is removed or no longer on the top of the stack
+	virtual void onStop() {};
+	// Called when the state reaches the top of the stack
+	virtual void onPlay() {};
+
 	const sf::RenderWindow& getWindow() const;
 	StateMachine& getMachine();
 

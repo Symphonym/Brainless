@@ -103,6 +103,15 @@ void ArcadeMachine::refreshMenu()
 	}
 }
 
+void ArcadeMachine::onPlay()
+{
+	SoundPlayer::instance().playMusic("ArcadeMusic", true, 20);
+}
+void ArcadeMachine::onStop()
+{
+	SoundPlayer::instance().stopMusic("ArcadeMusic");
+}
+
 void ArcadeMachine::exitGame()
 {
 	m_playingGame = false;

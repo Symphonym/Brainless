@@ -16,6 +16,9 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
+	virtual void onStop();
+	virtual void onPlay();
+
 private:
 
 	typedef std::unique_ptr<GUIElement> GuiPtr;
