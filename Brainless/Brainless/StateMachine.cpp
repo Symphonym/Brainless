@@ -97,6 +97,7 @@ m_loadingAnimDot(256, 256)
 void StateMachine::popState()
 {
 	m_removeRequests.push_back(std::move(m_states.back()));
+	m_removeRequests.back()->onStop();
 	m_states.pop_back();
 }
 

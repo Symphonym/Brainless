@@ -16,6 +16,9 @@ public:
 	// Stores a new game in the machine
 	void loadArcadeGame(ArcadeGame *game);
 
+	virtual void onPlay();
+	virtual void onStop();
+
 	void exitGame();
 
 	virtual void events(const sf::Event &event);

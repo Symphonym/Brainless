@@ -38,6 +38,9 @@ protected:
 	void animation_idleSlow();
 	void animation_walkingSlow();
 private:
+
+	bool m_isDoingScript;
+	
 	bool m_isDamaging;
 	//ZombieScript m_script;
 	float m_flashAlpha;

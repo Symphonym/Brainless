@@ -17,6 +17,7 @@ public:
 
 	void setLoadingHandler(LoadingHandler handler);
 
+	bool musicExists(const std::string &name);
 
 
 	// Retrieve a resource by name

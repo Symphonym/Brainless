@@ -23,6 +23,7 @@ public:
 		m_loadingText.clear();
 		m_window.setView(m_window.getDefaultView());
 		m_states.push_back(std::move(StatePtr(new TType(*this))));
+		m_states.back()->onPlay();
 		return m_states.back().get();
 	};
 	void popState();
