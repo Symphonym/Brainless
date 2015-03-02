@@ -133,6 +133,19 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 			}
 		}
 	}
+	else if (event.type == sf::Event::KeyReleased)
+	{
+		if (event.key.code == sf::Keyboard::Z)
+		{
+			m_script_id--;
+			m_script_id = Utility::clampValue<int>(m_script_id, -1,c_script_count-1);
+		}
+		else if (event.key.code == sf::Keyboard::X)
+		{
+			m_script_id++;
+			m_script_id = Utility::clampValue<int>(m_script_id, -1,c_script_count-1);
+		}
+	}
 
 	return false;
 }
@@ -144,22 +157,30 @@ bool EditorZombieMode::update(float deltaTime, const sf::RenderWindow &editorWin
 	switch ((Unit::UnitType)(m_highlightSprite.type + 1))
 	{
 	case Unit::ID_IdleZombie:
-		m_infoText.setString("Idle Zombie");
+		m_infoText.setString("Zombie type: Idle");
 		m_highlightSprite.sprite.setTextureRect(sf::IntRect(0, 256, 256, 256));
 		break;
 	case Unit::ID_WalkingZombie:
-		m_infoText.setString("Walking Zombie");
+		m_infoText.setString("Zombie type: Walking");
 		m_highlightSprite.sprite.setTextureRect(sf::IntRect(0, 1024, 256, 256));
 		break;
 	case Unit::ID_ChasingZombie:
-		m_infoText.setString("Chasing Zombie");
+		m_infoText.setString("Zombie type: Chasing");
 		m_highlightSprite.sprite.setTextureRect(sf::IntRect(0, 512, 256, 256));
 		break;
 	default:
 		m_infoText.setString("Unidentified selection");
 		break;
 	}
-
+	switch (m_script_id)
+	{
+	case 0:
+		m_infoText.setString(m_infoText.getString() + "\nScript id: Find key");
+		break;
+	default:
+		m_infoText.setString(m_infoText.getString() + "\nScript id: none");
+		break;
+	}
 	return false;
 }
 void EditorZombieMode::draw()
