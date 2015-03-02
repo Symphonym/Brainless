@@ -175,6 +175,80 @@
 +Texture,images/tiles/Wood/Corner/Wood_Corner_Not_DownRight.png,Wood_Corner_Not_DownRight
 +Texture,images/tiles/Wood/Corner/Wood_Corner_Full.png,Wood_Corner_Full
 
+#---Grass---
+# /TopRight
++Texture,images/tiles/Grass/TopRight/Grass_Top_Right.png,Grass_Top_Right
++Texture,images/tiles/Grass/TopRight/Grass_Top_Right_Corner.png,Grass_Top_Right_Corner
+# /TopLeft
++Texture,images/tiles/Grass/TopLeft/Grass_Top_Left.png,Grass_Top_Left
++Texture,images/tiles/Grass/TopLeft/Grass_Top_Left_Corner.png,Grass_Top_Left_Corner
+
+# /Top
++Texture,images/tiles/Grass/Top/Grass_Top.png,Grass_Top
++Texture,images/tiles/Grass/Top/Grass_Top_Alone.png,Grass_Top_Alone
++Texture,images/tiles/Grass/Top/Grass_Top_Short.png,Grass_Top_Short
++Texture,images/tiles/Grass/Top/Grass_Top_Corner_Left.png,Grass_Top_Corner_Left
++Texture,images/tiles/Grass/Top/Grass_Top_Corner_Right.png,Grass_Top_Corner_Right
++Texture,images/tiles/Grass/Top/Grass_Top_Corner_Full.png,Grass_Top_Corner_Full
+
+# /Right
++Texture,images/tiles/Grass/Right/Grass_Right.png,Grass_Right
++Texture,images/tiles/Grass/Right/Grass_Right_Alone.png,Grass_Right_Alone
++Texture,images/tiles/Grass/Right/Grass_Right_Corner_Down.png,Grass_Right_Corner_Down
++Texture,images/tiles/Grass/Right/Grass_Right_Corner_Top.png,Grass_Right_Corner_Top
++Texture,images/tiles/Grass/Right/Grass_Right_Corner_Full.png,Grass_Right_Corner_Full
+
+# /Middle
++Texture,images/tiles/Grass/Middle/Grass_Middle_Alone.png,Grass_Middle_Alone
++Texture,images/tiles/Grass/Middle/Grass_Middle_Alone_Horizontal.png,Grass_Middle_Alone_Horizontal
++Texture,images/tiles/Grass/Middle/Grass_Middle_Alone_Vertical.png,Grass_Middle_Alone_Vertical
++Texture,images/tiles/Grass/Middle/Grass_Middle.png,Grass_Middle
+
+# /Left
++Texture,images/tiles/Grass/Left/Grass_Left.png,Grass_Left
++Texture,images/tiles/Grass/Left/Grass_Left_Alone.png,Grass_Left_Alone
++Texture,images/tiles/Grass/Left/Grass_Left_Short.png,Grass_Left_Short
++Texture,images/tiles/Grass/Left/Grass_Left_Corner_Down.png,Grass_Left_Corner_Down
++Texture,images/tiles/Grass/Left/Grass_Left_Corner_Top.png,Grass_Left_Corner_Top
++Texture,images/tiles/Grass/Left/Grass_Left_Corner_Full.png,Grass_Left_Corner_Full
+
+# /DownRight
++Texture,images/tiles/Grass/DownRight/Grass_Down_Right.png,Grass_Down_Right
++Texture,images/tiles/Grass/DownRight/Grass_Down_Right_Corner.png,Grass_Down_Right_Corner
+
+# /DownLeft
++Texture,images/tiles/Grass/DownLeft/Grass_Down_Left.png,Grass_Down_Left
++Texture,images/tiles/Grass/DownLeft/Grass_Down_Left_Corner.png,Grass_Down_Left_Corner
+
+# /Down
++Texture,images/tiles/Grass/Down/Grass_Down.png,Grass_Down
++Texture,images/tiles/Grass/Down/Grass_Down_Alone.png,Grass_Down_Alone
++Texture,images/tiles/Grass/Down/Grass_Down_Corner_Left.png,Grass_Down_Corner_Left
++Texture,images/tiles/Grass/Down/Grass_Down_Corner_Right.png,Grass_Down_Corner_Right
++Texture,images/tiles/Grass/Down/Grass_Down_Corner_Full.png,Grass_Down_Corner_Full
+
+# /Special
++Texture,images/tiles/Grass/Special/Grass_Tilt.png,Grass_Tilt
++Texture,images/tiles/Grass/Special/Grass_Tilt_Corner.png,Grass_Tilt_Corner
+
+# /Corner
++Texture,images/tiles/Grass/Corner/Grass_Corner_TopLeft.png,Grass_Corner_TopLeft
++Texture,images/tiles/Grass/Corner/Grass_Corner_TopRight.png,Grass_Corner_TopRight
++Texture,images/tiles/Grass/Corner/Grass_Corner_TopLeft_TopRight.png,Grass_Corner_TopLeft_TopRight
++Texture,images/tiles/Grass/Corner/Grass_Corner_DownLeft.png,Grass_Corner_DownLeft
++Texture,images/tiles/Grass/Corner/Grass_Corner_DownRight.png,Grass_Corner_DownRight
++Texture,images/tiles/Grass/Corner/Grass_Corner_DownLeft_DownRight.png,Grass_Corner_DownLeft_DownRight
++Texture,images/tiles/Grass/Corner/Grass_Corner_TopLeft_DownLeft.png,Grass_Corner_TopLeft_DownLeft
++Texture,images/tiles/Grass/Corner/Grass_Corner_TopRight_DownRight.png,Grass_Corner_TopRight_DownRight
++Texture,images/tiles/Grass/Corner/Grass_Corner_TopLeft_DownRight.png,Grass_Corner_TopLeft_DownRight
++Texture,images/tiles/Grass/Corner/Grass_Corner_TopRight_DownLeft.png,Grass_Corner_TopRight_DownLeft
++Texture,images/tiles/Grass/Corner/Grass_Corner_Not_TopLeft.png,Grass_Corner_Not_TopLeft
++Texture,images/tiles/Grass/Corner/Grass_Corner_Not_TopRight.png,Grass_Corner_Not_TopRight
++Texture,images/tiles/Grass/Corner/Grass_Corner_Not_DownLeft.png,Grass_Corner_Not_DownLeft
++Texture,images/tiles/Grass/Corner/Grass_Corner_Not_DownRight.png,Grass_Corner_Not_DownRight
++Texture,images/tiles/Grass/Corner/Grass_Corner_Full.png,Grass_Corner_Full
+
+
 ### ITEM TEXTURE LOADING
 +Texture,images/items/Small-Duct tape.png,DuctTapeItem
 +Texture,images/items/Small-Rubber Glove.png,RubberGlovesItem
