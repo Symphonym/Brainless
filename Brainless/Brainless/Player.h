@@ -2,7 +2,7 @@
 #define _PLAYER
 
 #include "Unit.h"
-
+#include "Item.h"
 //version 0.2
 class Player : public Unit
 {
@@ -14,6 +14,7 @@ public:
 
 	/* kollar efter playerinput, ska köras innan Unit::updateMovement */
 	void updateTask(float deltaTime);
+	virtual void onCollideWithItem(Item &item) { item.flyOff(); };
 
 	void updateAnimation(float deltaTime);
 
