@@ -9,6 +9,7 @@ class State
 public:
 
 	State(StateMachine &machine);
+	virtual ~State();
 
 	virtual void events(const sf::Event &event) {};
 	virtual void update(float deltaTime) {};
