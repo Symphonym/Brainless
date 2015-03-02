@@ -23,6 +23,7 @@
 +Texture,images/animations/spritesheet_zombie_merged_v0.5.png,Zombie
 
 # PICKUP MENU TEXTURES
++Texture,images/UI/notepad.png,background_Notepad
 +Texture,images/UI/pickup_normal.png,PickupButton_Normal
 +Texture,images/UI/pickup_pressed.png,PickupButton_Pressed
 +Texture,images/UI/pickup_denied.png,PickupButton_Denied
