@@ -14,7 +14,7 @@ Item("Cabinet", "electricalCabinet", "electricalCabinet", id)
 
 void ElectricalCabinetItem::onExamine()
 {
-	m_examineString = "Oh shiny, maybe I should touch it";
+	m_examineString = "There's a cable loose, but it's still working.";
 }
 
 void ElectricalCabinetItem::draw()

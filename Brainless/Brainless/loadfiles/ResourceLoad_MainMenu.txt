@@ -11,10 +11,10 @@
 +Texture,images/UI/Quit_click.png,Quit_Pressed
 +Texture,images/UI/Rage_quit.png,RageQuit_Normal
 +Texture,images/UI/Rage_quit_click.png,RageQuit_Pressed
-+Texture,images/UI/plusbutton.png,PlusButton
-+Texture,images/UI/plusbuttonPressed.png,PlusButton_Pressed
-+Texture,images/UI/minusbutton.png,MinusButton
-+Texture,images/UI/minusbuttonPressed.png,MinusButton_Pressed
++Texture,images/UI/plus.png,PlusButton
++Texture,images/UI/plus_click.png,PlusButton_Pressed
++Texture,images/UI/minus.png,MinusButton
++Texture,images/UI/minus_click.png,MinusButton_Pressed
 
 # CONFIRM BUTTON TEXTURES
 +Texture,images/UI/yes_normal.png,Yes_Normal
