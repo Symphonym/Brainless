@@ -25,7 +25,7 @@ int main(int argc, const char *args[])
 		OptionsMenu::initializeKeybinds();
 
 		StateMachine machine;
-		machine.pushState<MainMenu>();
+		machine.pushState<OptionsMenu>();
 		machine.run();
 	}
 
