@@ -28,8 +28,14 @@ void ScriptedZombie::onCollideWithItem(Item &item){ m_baseZombie->onCollideWithI
 
 void ScriptedZombie::takesDamage(sf::Vector2f collisionPos, int damage){ m_baseZombie->takesDamage(collisionPos, damage); }
 
-void ScriptedZombie::serialize(std::ofstream &writer) const{ m_baseZombie->serialize(writer); }
-void ScriptedZombie::deserialize(std::ifstream &reader){ m_baseZombie->deserialize(reader); }
+void ScriptedZombie::serialize(std::ofstream &writer) const //INTE KLART,
+{ 
+	m_baseZombie->serialize(writer); 
+}
+void ScriptedZombie::deserialize(std::ifstream &reader) //INTE KLART,
+{ 
+	m_baseZombie->deserialize(reader); 
+}
 
 // Set player status
 void ScriptedZombie::setInAir(bool inAir){ m_baseZombie->setInAir(inAir); }
