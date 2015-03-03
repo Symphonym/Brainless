@@ -111,6 +111,15 @@ Game::~Game()
 	//Clear units
 }
 
+void Game::onPlay()
+{
+	// TODO sound stuff
+}
+void Game::onStop()
+{
+	// TODO sound stuff
+}
+
 void Game::addSavedZombie(int count)
 {
 	m_savedZombies += count;
