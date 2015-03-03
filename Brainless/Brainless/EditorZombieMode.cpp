@@ -8,6 +8,7 @@
 #include "IdleZombie.h"
 #include "WalkingZombie.h"
 #include "ChasingZombie.h"
+#include "ScriptedZombie.h"
 
 EditorZombieMode::EditorZombieMode()
 {
@@ -96,25 +97,22 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 					if (mousePos.x - m_createdZombie.sprite.getPosition().x < 0)
 						temp_direction = Unit::dir_left;
 					temp = new IdleZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), temp_direction, 0);
-					temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-					temp->updateAnimation(0);
-					level.addUnit(std::move(Level::UnitPtr(temp)));
 					break;
 				case Unit::ID_WalkingZombie: //Walking zombie
 					m_createdZombie.walk_distance = mousePos.x - m_createdZombie.sprite.getPosition().x;
 					temp = new WalkingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, 0);
-					temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-					temp->updateAnimation(0);
-					level.addUnit(std::move(Level::UnitPtr(temp)));
 					break;
-				case Unit::ID_ChasingZombie: //Chasing Zombie
+				default://case Unit::ID_ChasingZombie: //Chasing Zombie
 					m_createdZombie.walk_distance = mousePos.x - m_createdZombie.sprite.getPosition().x;
 					temp = new ChasingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, 0);
-					temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-					temp->updateAnimation(0);
-					level.addUnit(std::move(Level::UnitPtr(temp)));
 					break;
 				}
+				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+				temp->updateAnimation(0);
+				if (m_script_id>=0) //Add scripted zombie
+					level.addUnit(std::move(Level::UnitPtr(new ScriptedZombie(dynamic_cast<Zombie*>(temp),m_script_id))));
+				else
+					level.addUnit(std::move(Level::UnitPtr(temp)));
 				return true;
 			}
 		}
@@ -175,7 +173,7 @@ bool EditorZombieMode::update(float deltaTime, const sf::RenderWindow &editorWin
 	switch (m_script_id)
 	{
 	case 0:
-		m_infoText.setString(m_infoText.getString() + "\nScript id: Find key");
+		m_infoText.setString(m_infoText.getString() + "\nScript id: Remove E-Cabinet");
 		break;
 	default:
 		m_infoText.setString(m_infoText.getString() + "\nScript id: none");
