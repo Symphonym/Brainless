@@ -9,7 +9,7 @@ class ScriptedZombie : public Unit
 public:
 	
 	ScriptedZombie(Zombie* baseZombie, int scriptID);
-	ScriptedZombie(){}; //for filesave
+	ScriptedZombie(){};
 	/*
 	Updates the collisionbox's position, speed, acceleration
 	*/

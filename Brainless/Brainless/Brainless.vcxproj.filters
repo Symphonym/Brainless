@@ -411,6 +411,9 @@
     <ClCompile Include="ScriptedZombie.cpp">
       <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
     </ClCompile>
+    <ClCompile Include="RemoveCabinetZombie.cpp">
+      <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -708,6 +711,9 @@
       <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClInclude>
     <ClInclude Include="ScriptedZombie.h">
+      <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoveCabinetZombie.h">
       <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
     </ClInclude>
   </ItemGroup>
