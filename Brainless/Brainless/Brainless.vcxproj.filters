@@ -112,6 +112,9 @@
     <Filter Include="Source Files\Game\Items\Dangerous">
       <UniqueIdentifier>{17000e3b-2c39-459c-b731-2128c372919e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Unit\Zombies\ScriptZombies">
+      <UniqueIdentifier>{bf910876-68b5-4aa9-95bd-271aab7d3216}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -387,9 +390,6 @@
     <ClCompile Include="Turtle.cpp">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClCompile>
-    <ClCompile Include="ElectricalCabinetItem.cpp">
-      <Filter>Source Files\Game\Items\Unsorted</Filter>
-    </ClCompile>
     <ClCompile Include="RopeLadderItem.cpp">
       <Filter>Source Files\Game\Items\Ladders</Filter>
     </ClCompile>
@@ -404,6 +404,12 @@
     </ClCompile>
     <ClCompile Include="EmptyBagItem.cpp">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
+    <ClCompile Include="ElectricalCabinetItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptedZombie.cpp">
+      <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -683,12 +689,6 @@
     <ClInclude Include="Turtle.h">
       <Filter>Source Files\Game\ArcadeGame</Filter>
     </ClInclude>
-    <ClInclude Include="ElectricalCabinetItem.h">
-      <Filter>Source Files\Game\Items\Unsorted</Filter>
-    </ClInclude>
-    <ClInclude Include="ZombieScript.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RopeLadderItem.h">
       <Filter>Source Files\Game\Items\Ladders</Filter>
     </ClInclude>
@@ -703,6 +703,12 @@
     </ClInclude>
     <ClInclude Include="EmptyBagItem.h">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="ElectricalCabinetItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptedZombie.h">
+      <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

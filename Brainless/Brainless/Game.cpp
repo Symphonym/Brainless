@@ -323,9 +323,9 @@ void Game::update(float deltaTime)
 	}
 	//Player outside room
 	if (m_player->getPosition().x > (Constants::MapWidth - 1)*Constants::TileSize && !m_levelTransition->getActive())
-		changeLevelTransition(m_levelIndex + 1, true);
+		changeLevelTransition(m_levelIndex + 1, false);
 	if (m_player->getPosition().x < Constants::TileSize*0.5 && !m_levelTransition->getActive())
-		changeLevelTransition(m_levelIndex - 1, true);
+		changeLevelTransition(m_levelIndex - 1, false);
 	//Player bound whitin room sides
 	m_player->setPosition(sf::Vector2f(Utility::clampValue<float>(m_player->getPosition().x, Constants::TileSize*0.1, (Constants::MapWidth - 0.5)*Constants::TileSize), m_player->getPosition().y));
 

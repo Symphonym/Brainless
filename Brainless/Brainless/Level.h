@@ -26,6 +26,9 @@ public:
 	Unit* addUnit(UnitPtr unit);
 
 	void addItem(ItemPtr item);
+	void addItemToBuffer(ItemPtr item);
+	void addItemBufferToItem();
+
 	void addDecoration(const LevelSprite &decoration);
 
 	// Removes an item (if found) from the level and returns it
@@ -66,6 +69,7 @@ private:
 
 	MapPtr m_tileMap; // Tilemap of all the tiles in the level
 	std::vector<ItemPtr> m_items; // Items in the level
+	std::vector<ItemPtr> m_itemsBuffer; // Items in the level
 	std::vector<LevelSprite> m_sprites; // Decoration sprites in the level
 	std::vector<sf::Sprite> m_backgrounds; //Backgrounds in the level
 	std::vector<UnitPtr> m_units; // Units in the level

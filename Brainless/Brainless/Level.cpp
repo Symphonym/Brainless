@@ -102,6 +102,21 @@ void Level::addItem(ItemPtr item)
 {
 	m_items.push_back(std::move(item));
 }
+void Level::addItemToBuffer(ItemPtr item)
+{
+	m_itemsBuffer.push_back(std::move(item));
+}
+
+void Level::addItemBufferToItem()
+{
+	for (std::size_t i = 0; i < m_itemsBuffer.size(); i++)
+	{
+		//addItem(m_itemsBuffer[i]);
+		m_items.push_back(std::move(m_itemsBuffer[i]));
+	}
+	m_itemsBuffer.clear();
+}
+
 void Level::removeAllItems()
 {
 	m_items.clear();
@@ -654,8 +669,10 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 				}
 				else
 					return false;
-			}), m_items.end());
+			}), m_items.end()); //krasch här ifall man lägger till items under iterationen, kan nog fixas snabbt genom att ha en temp buffer för items som läggs till under itemCOllision
 		}
+
+		addItemBufferToItem();
 
 		currentUnit->updateAnimation(deltaTime);
 	}
