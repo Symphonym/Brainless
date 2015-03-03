@@ -31,6 +31,10 @@ Item* ElectricalCabinetItem::clone()
 {
 	return new ElectricalCabinetItem(*this);
 }
+int ElectricalCabinetItem::getScriptUnitType()
+{
+	return Unit::UnitType::ID_WalkingZombie;
+}
 
 bool ElectricalCabinetItem::onCollisionWithUnit(Unit &unit, Game &game)
 {

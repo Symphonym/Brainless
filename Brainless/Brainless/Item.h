@@ -78,6 +78,8 @@ public:
 	bool isLootable() const;
 	bool isUsable() const;
 	/*virtual*/ bool isCollidable() const;
+	//test
+	virtual int getScriptUnitType(){ return 4; } //unitType = none
 	bool isSolid() const;
 	std::string getUseString() const;
 	std::string getPickupString() const;
