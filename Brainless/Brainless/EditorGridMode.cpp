@@ -3,6 +3,7 @@
 #include "Utility.h"
 #include "Renderer.h"
 #include "ResourceLoader.h"
+#include "Constants.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -14,13 +15,8 @@ m_tilemap(tilemap),
 m_autotilingEnabled(false),
 m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constants::LeftTileOffset, Constants::TopTileOffset))
 {
-	// Create temporary blank image
-	sf::Image highlightImg;
-	highlightImg.create(Constants::TileSize, Constants::TileSize, sf::Color::White);
-
-	// Make a blank texture which we can use for highlighting
-	m_highlightTexture.loadFromImage(highlightImg);
-	m_highlightSprite.setTexture(m_highlightTexture);
+	m_highlightShape = sf::RectangleShape(sf::Vector2f(Constants::TileSize, Constants::TileSize));
+	m_highlightShape.setOutlineThickness(1);
 
 	m_currentTile.getSprite().setScale(0.8f, 0.8f);
 
@@ -256,14 +252,15 @@ bool EditorGridMode::update(float deltaTime, const sf::RenderWindow &editorWindo
 	m_indexText.setString("X: " + std::to_string(mouseIndex.x) + "  Y: " + std::to_string(mouseIndex.y));
 
 	// Set position of highlight relative to mouse
-	m_highlightSprite.setPosition(
+	m_highlightShape.setPosition(
 		m_tilemap.getTile(mouseIndex.x, mouseIndex.y).getBounds().left,
 		m_tilemap.getTile(mouseIndex.x, mouseIndex.y).getBounds().top);
 
 	// Change the properties of a tile with left/right mouseclick
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
-		m_highlightSprite.setColor(sf::Color::Color(0, 255, 0, 128));
+		m_highlightShape.setFillColor(sf::Color::Color(0, 255, 0, 128));
+		m_highlightShape.setOutlineColor(sf::Color::Color(0, 255, 0, 255));
 
 		// Autotiling is enabled and the current tile has an autotiling range
 		if (m_autotilingEnabled && !m_currentTile.getAutotilingRangeName().empty())
@@ -296,7 +293,8 @@ bool EditorGridMode::update(float deltaTime, const sf::RenderWindow &editorWindo
 	}
 	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 	{
-		m_highlightSprite.setColor(sf::Color::Color(255, 0, 0, 128));
+		m_highlightShape.setFillColor(sf::Color::Color(255, 0, 0, 128));
+		m_highlightShape.setOutlineColor(sf::Color::Color(255, 0, 0, 255));
 		m_tilemap.getTile(mouseIndex.x, mouseIndex.y).setType(Tile::Nothing);
 
 		// Autotile nearby tiles if autotiling is enabled
@@ -322,13 +320,14 @@ bool EditorGridMode::update(float deltaTime, const sf::RenderWindow &editorWindo
 	}
 	else
 	{
-		m_highlightSprite.setColor(sf::Color::Color(255, 255, 255, 128));
+		m_highlightShape.setFillColor(sf::Color::Color(255, 255, 255, 128));
+		m_highlightShape.setOutlineColor(sf::Color::Color(255, 255, 255, 255));
 		return false;
 	}
 }
 void EditorGridMode::draw()
 {
-	Renderer::instance().drawAbove(m_highlightSprite);
+	Renderer::instance().drawAbove(m_highlightShape);
 	Renderer::instance().drawHUD(m_currentTile.getSprite());
 	Renderer::instance().drawHUD(m_indexText);
 	Renderer::instance().drawHUD(m_autotilingText);
