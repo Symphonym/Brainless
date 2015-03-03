@@ -32,6 +32,7 @@ m_speed(sf::Vector2f(0,0))
 
 void Item::flyOff()
 {
+	m_collidable = false;
 	m_flyingOff = true;
 	m_flyingOffLifeTime = 1.f;
 }

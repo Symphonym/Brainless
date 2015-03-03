@@ -18,7 +18,9 @@ public:
 		ID_Player,
 		ID_IdleZombie,
 		ID_WalkingZombie,
-		ID_ChasingZombie
+		ID_ChasingZombie,
+		ID_NONE
+	
 	};
 
 	Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID);
@@ -26,7 +28,7 @@ public:
 	/*
 	Updates the collisionbox's position, speed, acceleration
 	*/
-	void updateMovement(float gravity, float deltaTime);
+	virtual void updateMovement(float gravity, float deltaTime);
 	virtual void updateTask(float deltaTime) = 0;
 	virtual void wallLeft();
 	virtual void wallRight();
@@ -41,24 +43,21 @@ public:
 	virtual void deserialize(std::ifstream &reader);
 
 	// Set player status
-	void setInAir(bool inAir);
-	void setTilt(bool inTilt);
-	void setPosition(sf::Vector2f position);
-	void setSpeed(sf::Vector2f speed);
-	void setAcceleration(sf::Vector2f acceleration);
+	virtual void setInAir(bool inAir);
+	virtual void setTilt(bool inTilt);
+	virtual void setPosition(sf::Vector2f position);
+	virtual	void setSpeed(sf::Vector2f speed);
+	virtual	void setAcceleration(sf::Vector2f acceleration);
 
-	//changes the maxSpeed for movement
-	void setMaxSpeed(float maxSpeed);
+	virtual	void setTexture(int index, sf::Texture& texture);
+	virtual	void addTexture(sf::Texture& texture);
+	virtual	void draw();
 
-	void setTexture(int index, sf::Texture& texture);
-	void addTexture(sf::Texture& texture);
-	void draw();
-
-	bool isMovementEnabled() const;
+	virtual	bool isMovementEnabled() const;
 
 	//updates animation
 	virtual void updateAnimation(float deltaTime) = 0;
-	sf::Sprite getSprite();
+	virtual	sf::Sprite getSprite();
 
 	enum Direction
 	{
@@ -74,25 +73,25 @@ public:
 		Behind
 	};
 
-	void setRenderingMode(RenderingModes mode);
+	virtual	void setRenderingMode(RenderingModes mode);
 
 	
-	sf::Vector2f getPosition() const;
-	sf::Vector2f getSpeed() const;
-	sf::Vector2f getAcceleration() const;
-	sf::Vector2f getSize() const;
-	bool getInAir() const;
-	bool getInTilt() const;
-	sf::FloatRect getCollisionRect();
-	UnitType getUnitType();
-	Direction getDirection();
+	virtual	sf::Vector2f getPosition() const;
+	virtual	sf::Vector2f getSpeed() const;
+	virtual	sf::Vector2f getAcceleration() const;
+	virtual	sf::Vector2f getSize() const;
+	virtual	bool getInAir() const;
+	virtual	bool getInTilt() const;
+	virtual	sf::FloatRect getCollisionRect();
+	virtual	UnitType getUnitType();
+	virtual	Direction getDirection();
 
 
-	void collisionLeft(float posX, float speedX, float accX);
-	void collisionRight(float posX, float speedX, float accX);
-	void collisionUp(float posY, float speedY, float accY);
-	void collisionDown(float posY, float speedY, float accY);
-	bool updateCollision();
+	virtual	void collisionLeft(float posX, float speedX, float accX);
+	virtual	void collisionRight(float posX, float speedX, float accX);
+	virtual	void collisionUp(float posY, float speedY, float accY);
+	virtual	void collisionDown(float posY, float speedY, float accY);
+	virtual	bool updateCollision();
 
 protected:
 	RenderingModes m_renderingMode;

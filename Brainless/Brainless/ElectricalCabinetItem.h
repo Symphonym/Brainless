@@ -11,7 +11,9 @@ public:
 	virtual void onExamine();
 
 	bool onCollisionWithUnit(Unit &unit, Game &game);
-	
+
+	virtual int getScriptUnitType();
+
 	virtual void draw();
 
 	virtual Item* clone();
