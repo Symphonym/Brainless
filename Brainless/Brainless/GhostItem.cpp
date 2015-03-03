@@ -17,7 +17,7 @@ Item("Ghost","GhostItem", "GhostItem", id)
 	m_lootable = false;
 	m_usable = true;
 	m_pickupString = "It would be unwise to try to pick up a ghost";
-	m_examineString = "It's a ghost alright, maybe I should talk to it";
+	m_examineString = "It's a spirit! Maybe I should try to talk to it?";
 	getSprite().setTextureRect(sf::IntRect(0,0,256,256));
 
 	m_animation.loop(0, 5, 0, 1, 5);

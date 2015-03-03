@@ -14,7 +14,7 @@ m_cableInPuddle(cableInPuddle)
 	m_lootable = false;
 	m_collisionBounds = sf::FloatRect(5, 0, 123, 30);
 	m_interactBounds = sf::FloatRect(5, 0, 123, 30);
-	m_examineString = "It's a puddle of water";
+	m_examineString = "It's a puddle of rainwater.";
 	m_useString = "There's nothing I can do with that";
 }
 

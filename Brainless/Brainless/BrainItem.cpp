@@ -6,7 +6,7 @@ BrainItem::BrainItem(int id)
 Item("Brain","BrainItem", "BrainItem", id)
 {
 	m_lootable = true;
-	m_examineString = "It's a brain, most likely belonging to one of the zombies";
+	m_examineString = "Someones brain, that's kind of nasty.";
 	m_useString = "I don't think I should do that";
 }
 

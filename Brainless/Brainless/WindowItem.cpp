@@ -9,7 +9,7 @@ m_levelIndex(levelIndex),
 m_smashed(smashed)
 {
 	m_usable = false;
-	m_useString = "I can't open it, it's sealed shut";
+	m_useString = "An unboarded window, too dirty to see through though.";
 	m_renderingMode = RenderingModes::Behind;
 	updateTexture();
 }
