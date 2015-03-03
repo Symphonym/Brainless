@@ -10,27 +10,43 @@ EditorItemMode::EditorItemMode()
 m_currentIndex(1),
 m_currentSyncID(-1)
 {
+	m_currentNameText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_currentIndexText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_currentSyncIDText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_currentIDText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+
+	m_currentNameText.setCharacterSize(17);
+	m_currentIndexText.setCharacterSize(17);
+	m_currentSyncIDText.setCharacterSize(17);
+	m_currentIDText.setCharacterSize(17);
 
 	m_currentIndexText.setString("Item index: " + std::to_string(m_currentIndex));
 	m_currentSyncIDText.setString("Sync ID: " + std::to_string(m_currentSyncID));
 
 	// Initialize itemID text
-	m_currentIDText.setPosition(10, 50);
+	m_currentNameText.setPosition(10, 50);
+	m_currentIDText.setPosition(10, 75);
 	m_currentIndexText.setPosition(10, 100);
-	m_currentSyncIDText.setPosition(10, 150);
+	m_currentSyncIDText.setPosition(10, 125);
 
 	// Initialize current item and the starting text of currentID with that item
 	m_currentItem = std::move(ItemDatabase::instance().extractItemByCount(m_currentIndex));
 	m_currentIDText.setString("Item ID: " + std::to_string(m_currentItem->getID()));
+	m_currentNameText.setString("Item name: " + m_currentItem->getName());
+
+
+	sf::Image bgImg;
+	bgImg.create(300, 170, sf::Color(0, 0, 0, 200));
+	m_infoBackground.loadFromImage(bgImg);
+	m_bgSprite.setTexture(m_infoBackground);
 }
 
 
 void EditorItemMode::reloadDebugText(Level &level)
 {
 	m_itemInfo.clear();
+	m_itemInteractBounds.clear();
+	m_itemCollisionBounds.clear();
 
 	// Load debug strings for any items already loaded
 	for (std::size_t i = 0; i < level.getItems().size(); i++)
@@ -46,7 +62,23 @@ void EditorItemMode::reloadDebugText(Level &level)
 			curItem.getSprite().getPosition().y - curItem.getSprite().getGlobalBounds().height / 2.f);
 		text.setPosition(textPos);
 		m_itemInfo.push_back(text);
+
+		sf::RectangleShape interactShape = sf::RectangleShape(sf::Vector2f(curItem.getInteractBounds().width, curItem.getInteractBounds().height));
+		interactShape.setFillColor(sf::Color::Color(0, 255, 0, 30));
+		interactShape.setOutlineThickness(1);
+		interactShape.setOutlineColor(sf::Color::Green);
+		interactShape.setPosition(curItem.getInteractBounds().left, curItem.getInteractBounds().top);
+		m_itemInteractBounds.push_back(interactShape);
+
+		sf::RectangleShape collisionShape = sf::RectangleShape(sf::Vector2f(curItem.getCollisionBounds().width, curItem.getCollisionBounds().height));
+		collisionShape.setFillColor(sf::Color::Color(255, 0, 0, 30));
+		collisionShape.setOutlineThickness(1);
+		collisionShape.setOutlineColor(sf::Color::Red);
+		collisionShape.setPosition(curItem.getCollisionBounds().left, curItem.getCollisionBounds().top);
+		m_itemCollisionBounds.push_back(collisionShape);
 	}
+
+
 }
 
 bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &editorWindow, Level &level)
@@ -60,6 +92,7 @@ bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &edit
 		// Update preview item
 		m_currentItem = std::move(ItemDatabase::instance().extractItemByCount(m_currentIndex));
 
+		m_currentNameText.setString("Item name: " + m_currentItem->getName());
 		m_currentIDText.setString("Item ID: " + std::to_string(m_currentItem->getID()));
 		m_currentIndexText.setString("Item index: " + std::to_string(m_currentIndex));
 	}
@@ -82,6 +115,27 @@ bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &edit
 			text.setPosition(textPos);
 			m_itemInfo.push_back(text);
 
+			sf::RectangleShape interactShape = sf::RectangleShape(sf::Vector2f(newItem->getInteractBounds().width, newItem->getInteractBounds().height));
+			interactShape.setFillColor(sf::Color::Color(0, 255, 0, 30));
+			interactShape.setOutlineThickness(1);
+			interactShape.setOutlineColor(sf::Color::Green);
+			interactShape.setPosition(newItem->getInteractBounds().left, newItem->getInteractBounds().top);
+			m_itemInteractBounds.push_back(interactShape);
+
+			sf::RectangleShape collisionShape = sf::RectangleShape(sf::Vector2f(newItem->getCollisionBounds().width, newItem->getCollisionBounds().height));
+			collisionShape.setFillColor(sf::Color::Color(255, 0, 0, 30));
+			collisionShape.setOutlineThickness(1);
+			collisionShape.setOutlineColor(sf::Color::Red);
+			collisionShape.setPosition(newItem->getCollisionBounds().left, newItem->getCollisionBounds().top);
+			m_itemCollisionBounds.push_back(collisionShape);
+
+			//sf::VertexArray boundVec = sf::VertexArray(sf::PrimitiveType::LinesStrip, 4);
+			//boundVec[0] = sf::Vertex(sf::Vector2f(newItem->getInteractBounds().left, newItem->getInteractBounds().top), sf::Color::Red);
+			//boundVec[1] = sf::Vertex(sf::Vector2f(newItem->getInteractBounds().left + newItem->getInteractBounds().width, newItem->getInteractBounds().top), sf::Color::Red);
+			//boundVec[2] = sf::Vertex(sf::Vector2f(newItem->getInteractBounds().left + newItem->getInteractBounds().width, newItem->getInteractBounds().top + newItem->getInteractBounds().height), sf::Color::Red);
+			//boundVec[3] = sf::Vertex(sf::Vector2f(newItem->getInteractBounds().left, newItem->getInteractBounds().top + newItem->getInteractBounds().height), sf::Color::Red);
+			//m_itemBounds.push_back(boundVec);
+
 			// Add new item to level
 			level.addItem(std::move(newItem));
 
@@ -98,6 +152,8 @@ bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &edit
 				{
 					level.removeItem(i);
 					m_itemInfo.erase(m_itemInfo.begin() + i);
+					m_itemInteractBounds.erase(m_itemInteractBounds.begin() + i);
+					m_itemCollisionBounds.erase(m_itemCollisionBounds.begin() + i);
 					return true;
 				}
 			}
@@ -136,10 +192,16 @@ bool EditorItemMode::update(float deltaTime, const sf::RenderWindow &editorWindo
 void EditorItemMode::draw()
 {
 	m_currentItem->draw();
+	Renderer::instance().drawHUD(m_bgSprite);
+	Renderer::instance().drawHUD(m_currentNameText);
 	Renderer::instance().drawHUD(m_currentIDText);
 	Renderer::instance().drawHUD(m_currentIndexText);
 	Renderer::instance().drawHUD(m_currentSyncIDText);
 
 	for (std::size_t i = 0; i < m_itemInfo.size(); i++)
 		Renderer::instance().drawForeground(m_itemInfo[i]);
+	for (std::size_t i = 0; i < m_itemInteractBounds.size(); i++)
+		Renderer::instance().drawAbove(m_itemInteractBounds[i]);
+	for (std::size_t i = 0; i < m_itemCollisionBounds.size(); i++)
+		Renderer::instance().drawAbove(m_itemCollisionBounds[i]);
 }

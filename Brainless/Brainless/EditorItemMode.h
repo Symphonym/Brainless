@@ -25,7 +25,14 @@ private:
 
 	// Extra text that is shown only in the editor (per item) when placing items
 	std::vector<sf::Text> m_itemInfo;
+	//std::vector<sf::VertexArray> m_itemBounds;
+	std::vector<sf::RectangleShape> m_itemInteractBounds;
+	std::vector<sf::RectangleShape> m_itemCollisionBounds;
 
+	sf::Texture m_infoBackground;
+	sf::Sprite m_bgSprite;
+
+	sf::Text m_currentNameText;
 	sf::Text m_currentIDText; // Just so you know the ID of the current item
 	sf::Text m_currentIndexText, m_currentSyncIDText;
 	int m_currentIndex, m_currentSyncID;

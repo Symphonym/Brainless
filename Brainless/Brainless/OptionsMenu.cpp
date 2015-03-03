@@ -24,6 +24,8 @@ m_Animation_grass4(SPRITESIZE, SPRITESIZE),
 m_Animation_grass5(SPRITESIZE, SPRITESIZE),
 m_Animation_scarf(SPRITESIZE, SPRITESIZE)
 {
+	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_OptionsMenu.txt", false);
+
 	m_keybindInfoText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_keybindInfoText.setString("Up:\nDown:\nLeft:\nRight:");
 	m_keybindInfoText.setPosition(100, 100);
@@ -95,6 +97,12 @@ m_Animation_scarf(SPRITESIZE, SPRITESIZE)
 	m_Animation_grass5.loop(0, 5, 5, 4.5f);
 	m_Animation_scarf.loop(0, 5, 6, 4.5f);
 
+}
+
+void OptionsMenu::onPlay()
+{
+	//Play music
+	SoundPlayer::instance().playMusic("MenuMusic", true, 20);
 }
 
 void OptionsMenu::events(const sf::Event &event)
