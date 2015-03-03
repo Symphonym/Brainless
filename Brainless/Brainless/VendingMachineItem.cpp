@@ -11,6 +11,7 @@ m_itemsWithin(itemsWithin)
 	m_renderingMode = RenderingModes::Behind;
 	m_examineString = "It's a vending machine";
 	m_pickupString = "It's way too heavy for me to carry";
+	m_interactBounds = sf::FloatRect(69, 21, 124, 220);
 }
 
 

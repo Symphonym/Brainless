@@ -15,6 +15,7 @@ m_itemsWithin(itemsWithin)
 	m_collidable = true;
 
 	m_collisionBounds = sf::FloatRect(46,62,190,286);
+	m_interactBounds = m_collisionBounds;
 }
 
 void ElectricalCabinetItem::onExamine()
