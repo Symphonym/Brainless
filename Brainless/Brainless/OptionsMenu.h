@@ -16,6 +16,8 @@ public:
 
 	OptionsMenu(StateMachine &machine);
 
+	void onPlay();
+
 	virtual void events(const sf::Event &event);
 	virtual void update(float deltaTime);
 	virtual void draw();
