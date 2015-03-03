@@ -6,13 +6,17 @@
 class ElectricalCabinetItem : public Item
 {
 public:
-	ElectricalCabinetItem(int id);
+	ElectricalCabinetItem(std::vector<int> itemsWithin, int id);
 
 	virtual void onExamine();
 
+	bool onCollisionWithUnit(Unit &unit, Game &game);
+	
 	virtual void draw();
 
 	virtual Item* clone();
+private:
+	std::vector<int> m_itemsWithin;
 };
 
 #endif
