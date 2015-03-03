@@ -10,6 +10,7 @@ EditorItemMode::EditorItemMode()
 m_currentIndex(1),
 m_currentSyncID(-1)
 {
+	m_currentNameText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_currentIndexText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_currentSyncIDText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_currentIDText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
@@ -18,13 +19,15 @@ m_currentSyncID(-1)
 	m_currentSyncIDText.setString("Sync ID: " + std::to_string(m_currentSyncID));
 
 	// Initialize itemID text
-	m_currentIDText.setPosition(10, 50);
-	m_currentIndexText.setPosition(10, 100);
-	m_currentSyncIDText.setPosition(10, 150);
+	m_currentNameText.setPosition(10, 50);
+	m_currentIDText.setPosition(10, 100);
+	m_currentIndexText.setPosition(10, 150);
+	m_currentSyncIDText.setPosition(10, 200);
 
 	// Initialize current item and the starting text of currentID with that item
 	m_currentItem = std::move(ItemDatabase::instance().extractItemByCount(m_currentIndex));
 	m_currentIDText.setString("Item ID: " + std::to_string(m_currentItem->getID()));
+	m_currentNameText.setString("Item name: " + m_currentItem->getName());
 }
 
 
@@ -60,6 +63,7 @@ bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &edit
 		// Update preview item
 		m_currentItem = std::move(ItemDatabase::instance().extractItemByCount(m_currentIndex));
 
+		m_currentNameText.setString("Item name: " + m_currentItem->getName());
 		m_currentIDText.setString("Item ID: " + std::to_string(m_currentItem->getID()));
 		m_currentIndexText.setString("Item index: " + std::to_string(m_currentIndex));
 	}
