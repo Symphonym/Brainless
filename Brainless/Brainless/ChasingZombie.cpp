@@ -51,7 +51,7 @@ void ChasingZombie::deserialize(std::ifstream &reader)
 
 	int animType = 0;
 	reader >> animType;
-	m_animState = static_cast<AnimationState>(animType);
+	m_animState = static_cast<AnimationState>(animType); //kan bli texture 0 vid idle -> idle, ingen animation byts fixa lite senare
 
 	reader >> m_maxWalkLenght;
 	reader >> m_currentLength;
