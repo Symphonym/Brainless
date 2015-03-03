@@ -15,13 +15,16 @@ class Unit
 public:
 	enum UnitType
 	{
+		//normals
 		ID_Player,
 		ID_IdleZombie,
 		ID_WalkingZombie,
 		ID_ChasingZombie,
 		ID_NONE,
-		ID_ScriptZombie
+		ID_ScriptZombie,
 	
+		//scripted
+		ID_CabinetZombie
 	};
 
 	Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID);

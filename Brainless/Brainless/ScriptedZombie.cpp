@@ -7,6 +7,8 @@
 #include "resourceLoader.h"
 #include "Item.h"
 
+#include "RemoveCabinetZombie.h"
+
 ScriptedZombie::ScriptedZombie(Zombie* baseZombie, int scriptID)
 :
 m_baseZombie(baseZombie),
@@ -48,9 +50,16 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 		{
 			//switcheroo
 			std::cout << "switcheroo till RemoveCabinet" << std::endl;
+			Zombie* del = m_baseZombie;
+			
+			m_baseZombie = new RemoveCabinetZombie(del->getPosition(), del->getTextureID(),
+				del->getPosition() + sf::Vector2f(1000, 0));
+			m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+			delete(del);
+			return false;
 		}
 	}
-	else
+
 	return m_baseZombie->onInteractedWith(otherItem, game);
 }
 void ScriptedZombie::onCollideWith(Unit *unit){ m_baseZombie->onCollideWith(unit); }
@@ -96,6 +105,11 @@ void ScriptedZombie::deserialize(std::ifstream &reader) //INTE KLART,
 		break;
 	case Unit::ID_ChasingZombie:
 		m_baseZombie = new ChasingZombie(sf::Vector2f(0, 0), 0, 0);
+		m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+		m_baseZombie->updateAnimation(0);
+		break;
+	case Unit::ID_CabinetZombie:
+		m_baseZombie = new RemoveCabinetZombie(sf::Vector2f(0, 0), 0, sf::Vector2f(0, 0));
 		m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 		m_baseZombie->updateAnimation(0);
 		break;
