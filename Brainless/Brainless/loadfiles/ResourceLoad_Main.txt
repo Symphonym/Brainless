@@ -1,5 +1,6 @@
 # Resource Load Background
 +Texture,images/backgrounds/LoadingScreen_Brainless.png,LoadingScreen_BG
++Texture,images/backgrounds/LoadingScreen_start.png,LoadingScreen_BG_start
 +Texture,images/backgrounds/Spritesheet_maeve_RunForever_V1.png,LoadingScreen_Run
 +Texture,images/backgrounds/Spritesheet_Loading_Dot_V1.png,LoadingScreen_Dot
 
@@ -18,6 +19,7 @@
 +Texture,images/tiles/cube.png,GroundCube
 +Texture,images/tiles/cubeRed.png,RedCube
 +Texture,images/tiles/cubeBlue.png,BlueCube
++Texture,images/TestImage.png,TestImage
 +Texture,images/tiles/cubeNada.png,AirCube
 +Texture,images/tiles/cubeStandard.png,StandardCube
 +Texture,images/tiles/cubeSmooth.png,SmoothCube
@@ -279,6 +281,13 @@
 +Texture,images/items/puddle.png,PuddleItem
 +Texture,images/items/puddleCable.png,PuddleCableItem
 +Texture,images/items/electricalCabinet/electricalCabinet.png,electricalCabinet
++Texture,images/items/ladders/Ladder-7tiles-Rope.png,RopeLadder7
++Texture,images/items/ladders/Rope-Ladder-Compact.png,RopeLadderCompact
++Texture,images/items/spikesNormal.png,SpikesNormal
++Texture,images/items/spikesDampened.png,SpikesDampened
++Texture,images/items/Stuffed Bag.png,StuffedBagItem
++Texture,images/items/Newspapper.png,NewspaperItem
++Texture,images/items/Plastic Bag.png,EmptyBagItem
 
 # Arcade disc items
 +Texture,images/items/discs/Big-Disk-Blue.png,ArcadeDiscItemBlueBig

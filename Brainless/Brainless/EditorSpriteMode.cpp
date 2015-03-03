@@ -103,4 +103,5 @@ void EditorSpriteMode::initializeSprites()
 	addTexture("GroundCube");
 	addTexture("RedCube");
 	addTexture("BlueCube");
+	addTexture("TestImage");
 }
