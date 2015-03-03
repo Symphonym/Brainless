@@ -19,7 +19,8 @@ public:
 		ID_IdleZombie,
 		ID_WalkingZombie,
 		ID_ChasingZombie,
-		ID_NONE
+		ID_NONE,
+		ID_ScriptZombie
 	
 	};
 
@@ -41,6 +42,7 @@ public:
 
 	virtual void serialize(std::ofstream &writer) const;
 	virtual void deserialize(std::ifstream &reader);
+	virtual int getScriptID(){ return -1; }
 
 	// Set player status
 	virtual void setInAir(bool inAir);

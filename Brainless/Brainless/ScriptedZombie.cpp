@@ -30,11 +30,17 @@ void ScriptedZombie::takesDamage(sf::Vector2f collisionPos, int damage){ m_baseZ
 
 void ScriptedZombie::serialize(std::ofstream &writer) const //INTE KLART,
 { 
+
 	m_baseZombie->serialize(writer); 
 }
 void ScriptedZombie::deserialize(std::ifstream &reader) //INTE KLART,
 { 
 	m_baseZombie->deserialize(reader); 
+}
+
+int ScriptedZombie::getScriptID()
+{
+	return m_scriptID;
 }
 
 // Set player status

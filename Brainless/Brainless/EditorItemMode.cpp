@@ -55,11 +55,12 @@ void EditorItemMode::reloadDebugText(Level &level)
 
 		sf::Text text;
 		text.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
-		text.setString("ID: " + std::to_string(curItem.getID()) + " SyncID: " + std::to_string(curItem.getSyncID()));
+		text.setString("Name: " + curItem.getName() + "\nID: " + std::to_string(curItem.getID()) + "\nSyncID: " + std::to_string(curItem.getSyncID()));
+		text.setCharacterSize(12);
 
 		sf::Vector2f textPos(
-			curItem.getSprite().getPosition().x + curItem.getSprite().getGlobalBounds().width / 2.f - text.getGlobalBounds().width / 2.f,
-			curItem.getSprite().getPosition().y - curItem.getSprite().getGlobalBounds().height / 2.f);
+			curItem.getInteractBounds().left,
+			curItem.getInteractBounds().top + curItem.getInteractBounds().height);
 		text.setPosition(textPos);
 		m_itemInfo.push_back(text);
 
@@ -107,11 +108,12 @@ bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &edit
 
 			sf::Text text;
 			text.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
-			text.setString("ID: " + std::to_string(newItem->getID()) + " SyncID: " + std::to_string(newItem->getSyncID()));
+			text.setString("Name: " + newItem->getName() + "\nID: " + std::to_string(newItem->getID()) + "\nSyncID: " + std::to_string(newItem->getSyncID()));
+			text.setCharacterSize(12);
 
 			sf::Vector2f textPos(
-				newItem->getSprite().getPosition().x + newItem->getSprite().getGlobalBounds().width / 2.f - text.getGlobalBounds().width / 2.f,
-				newItem->getSprite().getPosition().y - newItem->getSprite().getGlobalBounds().height / 2.f);
+				newItem->getInteractBounds().left,
+				newItem->getInteractBounds().top + newItem->getInteractBounds().height);
 			text.setPosition(textPos);
 			m_itemInfo.push_back(text);
 
