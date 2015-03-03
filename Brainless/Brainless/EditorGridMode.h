@@ -42,10 +42,8 @@ private:
 	std::vector<Tile::TileTypes> m_tileTypes;
 	Tile m_currentTile; // Selected tile for grid placement
 
-	// Texture is saved here since it is created as a blank texture from memory
-	// ,not loaded as a file
-	sf::Sprite m_highlightSprite;
-	sf::Texture m_highlightTexture;
+	// Tile selection highlight
+	sf::RectangleShape m_highlightShape;
 
 	// Text for showing the grid index of the mouse pointer
 	sf::Text m_indexText;
