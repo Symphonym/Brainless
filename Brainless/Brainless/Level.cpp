@@ -646,8 +646,8 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 
 			m_items.erase(std::remove_if(m_items.begin(), m_items.end(), [&](const ItemPtr &item) -> bool
 			{
-				// Trigger collision events for items TODO THIS SHIT SHOULD BE COLLISIONBOUNDS NOT INTERACTBOUNDS
-				if (item->getInteractBounds().intersects(currentUnit->getCollisionRect()))
+				// Trigger collision events for items
+				if (item->getCollisionBounds().intersects(currentUnit->getCollisionRect()))
 				{
 					currentUnit->onCollideWithItem(*item.get());
 					return item->onCollisionWithUnit(*currentUnit, game);
