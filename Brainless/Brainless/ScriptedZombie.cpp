@@ -64,7 +64,7 @@ void ScriptedZombie::serialize(std::ofstream &writer) const //INTE KLART,
 
 	writer << m_scriptID << std::endl;
 	writer << "KOMSIKOMSI" << std::endl;
-	writer << static_cast<int>(m_baseZombie->getUnitType()) << std::endl;
+	//writer << static_cast<int>(m_baseZombie->getUnitType()) << std::endl; //kanske något med den, spelar dota nu
 
 	m_baseZombie->serialize(writer); 
 }

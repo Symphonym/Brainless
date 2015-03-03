@@ -413,11 +413,11 @@ bool FileSave::loadLevelProgress(Level &level, int levelNumber)
 				break;
 			case Unit::ID_ScriptZombie:
 				unit = Level::UnitPtr(new ScriptedZombie()); //MEMORY0 skicka med itemList
+				break;
 			}
-			if (unit)
+			if (unit) //not player I guess?
 			{
 				unit->deserialize(reader);
-
 				level.addUnit(std::move(unit));
 			}
 		}
