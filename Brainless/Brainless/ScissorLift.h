@@ -33,14 +33,14 @@ private:
 	bool m_isActive;
 	sf::Vector2f m_speed;
 	sf::Vector2f m_distanceMoved;
-	float m_maxDistanceMoved;
+	const float m_maxDistanceMoved;
 	float m_distanceFromPlatform;
 	MovingPlatformItem m_platform;
 	sf::Sprite m_xTexture;
 	sf::Sprite m_topTexture;
-	float m_maxDistance;
+	const float m_maxDistance;
 	sf::IntRect m_xRectangle;
-	int m_xSize = 200;
+	const int m_xSize = 200;
 };
 
 #endif

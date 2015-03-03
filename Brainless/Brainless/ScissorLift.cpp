@@ -24,12 +24,36 @@ m_platform(speed,maxDistance,id)
 
 void ScissorLiftItem::serialize(std::ofstream &writer) const
 {
+	Item::serialize(writer);
+	
+	writer << m_isActive << std::endl;
+	writer << m_speed.x << std::endl;
+	writer << m_speed.y << std::endl;
+	writer << m_distanceMoved.x << std::endl;
+	writer << m_distanceMoved.y << std::endl;
+	writer << m_distanceFromPlatform << std::endl;
+	writer << m_xRectangle.left << std::endl;
+	writer << m_xRectangle.top << std::endl;
+	writer << m_xRectangle.width << std::endl;
+	writer << m_xRectangle.height << std::endl;
+
 	m_platform.serialize(writer);
 }
 
 void ScissorLiftItem::deserialize(std::ifstream &reader)
 {
+	Item::deserialize(reader);
+
+	reader >> m_isActive;
+	reader >> m_speed.x >> m_speed.y;
+	reader >> m_distanceMoved.x >> m_distanceMoved.y;
+	reader >> m_distanceFromPlatform;
+	reader >> m_xRectangle.left >> m_xRectangle.top >> m_xRectangle.width >> m_xRectangle.height;
+
+	int platformID = 0;
+	reader >> platformID; // Items don't parse ID's since this is usually taken care in the level loading
 	m_platform.deserialize(reader);
+
 }
 
 bool ScissorLiftItem::onSyncedWith(Item &otherItem)
