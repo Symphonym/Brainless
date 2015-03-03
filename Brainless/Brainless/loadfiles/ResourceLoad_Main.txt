@@ -19,6 +19,7 @@
 +Texture,images/tiles/cube.png,GroundCube
 +Texture,images/tiles/cubeRed.png,RedCube
 +Texture,images/tiles/cubeBlue.png,BlueCube
++Texture,images/TestImage.png,TestImage
 +Texture,images/tiles/cubeNada.png,AirCube
 +Texture,images/tiles/cubeStandard.png,StandardCube
 +Texture,images/tiles/cubeSmooth.png,SmoothCube
