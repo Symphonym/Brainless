@@ -10,7 +10,7 @@ m_spikesDampened(false)
 	m_lootable = false;
 	m_usable = false;
 	m_interactDistance = sf::Vector2f(250, 500);
-	m_collisionBounds = sf::FloatRect(0, 77, 128, 51);
+	m_collisionBounds = sf::FloatRect(5, 77, 123, 51);
 }
 
 void SpikeItem::serialize(std::ofstream &writer) const
