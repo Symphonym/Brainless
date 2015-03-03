@@ -140,6 +140,7 @@ bool EditorItemMode::update(float deltaTime, const sf::RenderWindow &editorWindo
 void EditorItemMode::draw()
 {
 	m_currentItem->draw();
+	Renderer::instance().drawHUD(m_currentNameText);
 	Renderer::instance().drawHUD(m_currentIDText);
 	Renderer::instance().drawHUD(m_currentIndexText);
 	Renderer::instance().drawHUD(m_currentSyncIDText);
