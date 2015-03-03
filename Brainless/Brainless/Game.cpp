@@ -113,11 +113,11 @@ Game::~Game()
 
 void Game::onPlay()
 {
-	// TODO sound stuff
+	SoundPlayer::instance().playMusic(m_level.getLevelMusicName());
 }
 void Game::onStop()
 {
-	// TODO sound stuff
+	SoundPlayer::instance().stopMusic(m_level.getLevelMusicName());
 }
 
 void Game::addSavedZombie(int count)
@@ -152,17 +152,22 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 	if (m_player != nullptr) // If this is a level change from a menu, the player won't already exist
 		saveGame();
 
+	// Stop previous level music if there is any
+	SoundPlayer::instance().stopMusic(m_level.getLevelMusicName());
+
 	// Reset level
 	m_level.reset();
 	m_levelIndex = levelIndex;
 	
-	//Load levle resources 
+	//Load level resources 
 	m_level.loadLevelResources("loadfiles/ResourceLoad_Level" + std::to_string(m_levelIndex) + ".txt");
 
 	// Reload level
 	FileSave::loadMapText(m_level, m_levelIndex); // All tiles are cleared in here
 	FileSave::loadLevelProgress(m_level, m_levelIndex); // All units are cleared from level here
 	FileSave::loadInventory(*m_inventory);
+
+	SoundPlayer::instance().playMusic(m_level.getLevelMusicName());
 	
 
 	//Set player to start position

@@ -11,7 +11,8 @@
 
 Level::Level()
 :
-m_enableDarkness(false)
+m_enableDarkness(false),
+m_musicName("")
 {
 	// Load game resources
 
@@ -30,6 +31,16 @@ void Level::setSpawnPosition(const sf::Vector2f &spawnPos)
 {
 	m_spawnPos = spawnPos;
 }
+void Level::setLevelMusic(const std::string &levelMusicName)
+{
+	m_musicName = levelMusicName;
+}
+void Level::addBackground(const std::string &backgroundTextureName)
+{
+	m_backgrounds.push_back(std::make_pair(
+		sf::Sprite(ResourceLoader::instance().retrieveTexture(backgroundTextureName)),
+		backgroundTextureName));
+}
 void Level::setDarkness(bool enabled)
 {
 	m_enableDarkness = enabled;
@@ -38,58 +49,7 @@ void Level::setDarkness(bool enabled)
 bool Level::loadLevelResources(const std::string &fileName)
 {
 	ResourceLoader::instance().loadResourceFile(fileName);
-	m_backgrounds.clear();
-	if (m_musicName != "none")
-	{
-		SoundPlayer::instance().stopMusic(m_musicName);
-		m_musicName = "none";
-	}
-	// Load backgrounds
-	std::ifstream reader(fileName);
-
-	bool hasLoaded = false;
-	if (reader.is_open())
-	{
-		std::string line;
-		while (std::getline(reader, line))
-		{
-			// Skip empty lines
-			if (line.empty())
-				continue;
-			else if (line[0] == '#')
-				continue;
-
-			std::vector<std::string> stringData = Utility::splitString(line, ',');
-			std::string resourceType = stringData[0].substr(1, stringData[0].size());
-
-			// Add a new resource
-			if (stringData[0][0] == '+')
-			{
-
-				if (resourceType == "Texture")
-				{
-					if (stringData[2].find("background") != std::string::npos)
-						m_backgrounds.push_back(sf::Sprite(ResourceLoader::instance().retrieveTexture(stringData[2])));
-				}
-				else if (resourceType == "Music")
-				{
-					if (m_musicName!="none")
-						SoundPlayer::instance().stopMusic(m_musicName);
-					m_musicName = stringData[2];
-					SoundPlayer::instance().playMusic(m_musicName, true, 50.f);
-					//TODO keep track of loaded music so it can be stopped
-				}
-				else
-					continue;
-			}
-		}
-		hasLoaded = true;
-	}
-	reader.close();
-
-	
-	return hasLoaded;
-	
+	return true;
 }
 
 Unit* Level::addUnit(UnitPtr unit)
@@ -176,6 +136,8 @@ void Level::reset()
 	m_units.clear();
 	m_items.clear();
 	m_sprites.clear();
+	m_backgrounds.clear();
+	m_musicName = "";
 }
 
 void Level::update(float deltaTime, Game &game)
@@ -208,9 +170,11 @@ void Level::draw(const sf::View &cameraView, bool editorMode)
 		screen_y = (cameraView.getCenter().y - (cameraView.getSize().y* 0.5)) / (1440 - cameraView.getSize().y);
 	for (std::size_t i = 0; i < m_backgrounds.size(); i++)
 	{
+		sf::Sprite &background = m_backgrounds[i].first;
+
 		//Move backgrounds accordingly
-		m_backgrounds[i].setPosition(sf::Vector2f((3840 - m_backgrounds[i].getTexture()->getSize().x)*screen_x, (1440 - m_backgrounds[i].getTexture()->getSize().y)*screen_y));
-		Renderer::instance().drawBackground(m_backgrounds[i]);
+		background.setPosition(sf::Vector2f((3840 - background.getTexture()->getSize().x)*screen_x, (1440 - background.getTexture()->getSize().y)*screen_y));
+		Renderer::instance().drawBackground(background);
 	}
 	for (std::size_t i = 0; i < m_sprites.size(); i++)
 	{
@@ -261,6 +225,18 @@ const sf::Vector2f& Level::getSpawnPos() const
 bool Level::isDark() const
 {
 	return m_enableDarkness;
+}
+std::vector<std::string> Level::getBackgroundNames() const
+{
+	std::vector<std::string> result;
+	for (std::size_t i = 0; i < m_backgrounds.size(); i++)
+		result.push_back(m_backgrounds[i].second);
+
+	return result;
+}
+std::string Level::getLevelMusicName() const
+{
+	return m_musicName;
 }
 
 void Level::updateUnitCollision(float deltaTime, Game &game)

@@ -99,6 +99,9 @@ void StateMachine::popState()
 	m_removeRequests.push_back(std::move(m_states.back()));
 	m_removeRequests.back()->onStop();
 	m_states.pop_back();
+
+	if (!m_states.empty())
+		m_states.back()->onPlay();
 }
 
 void StateMachine::run()

@@ -20,6 +20,8 @@ public:
 
 	void setSpawnPosition(const sf::Vector2f &spawnPos);
 	void setDarkness(bool enabled);
+	void setLevelMusic(const std::string &levelMusicName);
+	void addBackground(const std::string &backgroundTextureName);
 	bool loadLevelResources(const std::string &fileName);
 
 	// Adds a unit to the level and returns a pointer to it
@@ -59,6 +61,8 @@ public:
 
 	const sf::Vector2f& getSpawnPos() const;
 	bool isDark() const;
+	std::vector<std::string> getBackgroundNames() const;
+	std::string getLevelMusicName() const;
 
 private:
 
@@ -71,9 +75,9 @@ private:
 	std::vector<ItemPtr> m_items; // Items in the level
 	std::vector<ItemPtr> m_itemsBuffer; // Items in the level
 	std::vector<LevelSprite> m_sprites; // Decoration sprites in the level
-	std::vector<sf::Sprite> m_backgrounds; //Backgrounds in the level
+	std::vector<std::pair<sf::Sprite, std::string> > m_backgrounds; //Backgrounds in the level
 	std::vector<UnitPtr> m_units; // Units in the level
-	std::string m_musicName = "none";
+	std::string m_musicName; // Name of music to use in the level
 
 	// List of units
 	// List of items
