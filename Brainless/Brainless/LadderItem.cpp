@@ -15,7 +15,7 @@ m_lerpValue(0)
 	m_usable = true;
 	m_interactDistance = sf::Vector2f(30, 300);
 	m_renderingMode = RenderingModes::Above;
-	m_examineString = "It's a ladder, maybe I can climb it";
+	m_examineString = "To climb or not to climb?";
 	m_pickupString = "It's too heavy for me to carry";
 }
 

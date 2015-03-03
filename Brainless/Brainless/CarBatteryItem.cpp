@@ -6,7 +6,7 @@ CarBatteryItem::CarBatteryItem(int id)
 Item("Car Battery","CarBatteryInv", "CarBatteryItem", id)
 {
 	m_lootable = true;
-	m_examineString = "It's a working car battery";
+	m_examineString = "A battery. Let's see if I can power something with this!";
 	m_useString = "There's nothing here to use with a car battery";
 }
 

@@ -10,7 +10,7 @@ m_ladder(ladderTexture, id)
 {
 	m_lootable = false;
 	m_usable = true;
-	m_examineString = "It reminds Maive of her favorite tv-show. Teenage Mutant Ninja Åke!";
+	m_examineString = "A manhole. Seems as if I should be able to get it open.";
 
 	m_interactDistance = sf::Vector2f(100, 200);
 
