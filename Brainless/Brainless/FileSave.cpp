@@ -34,6 +34,15 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 	// Then write whether or not it's a dark map
 	writer << level.isDark() << std::endl;
 
+	// Write music used for the level
+	writer << level.getLevelMusicName() << std::endl;
+
+	// Write name of backgrounds used for the level
+	std::vector<std::string> backgroundNames = level.getBackgroundNames();
+	writer << backgroundNames.size() << std::endl;
+	for (std::size_t i = 0; i < backgroundNames.size(); i++)
+		writer << backgroundNames[i] << std::endl;
+
 	// Write the number of rows the map has
 	// This is how many lines the loader should read before moving onto items
 	writer << Constants::MapHeight << std::endl;
@@ -105,9 +114,25 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 		reader >> spawnX >> spawnY;
 		level.setSpawnPosition(sf::Vector2f(spawnX, spawnY));
 
+		// Read darkness value
 		bool darkness = false;
 		reader >> darkness;
 		level.setDarkness(darkness);
+
+		// Reader level music name
+		std::string musicName = "";
+		reader >> musicName;
+		level.setLevelMusic(musicName);
+
+		// Read background names
+		int backgroundCount = 0;
+		reader >> backgroundCount;
+		for (int i = 0; i < backgroundCount; i++)
+		{
+			std::string backgroundName = "";
+			reader >> backgroundName;
+			level.addBackground(backgroundName);
+		}
 
 		// Read row count
 		int rowCount = 0;

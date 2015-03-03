@@ -22,6 +22,9 @@ public:
 	{
 		m_loadingText.clear();
 		m_window.setView(m_window.getDefaultView());
+
+		if (!m_states.empty())
+			m_states.back()->onStop();
 		m_states.push_back(std::move(StatePtr(new TType(*this))));
 		m_states.back()->onPlay();
 		return m_states.back().get();
