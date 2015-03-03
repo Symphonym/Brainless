@@ -8,7 +8,7 @@ public:
 	WalkingZombie(sf::Vector2f startPosition, int maxLengthX, int Texture);
 
 	void updateTask(float deltaTime);
-	int getWalkLenght();
+	int getWalkLength();
 
 	
 

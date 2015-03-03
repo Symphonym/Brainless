@@ -117,7 +117,7 @@ void Zombie::incrementTexture()
 	m_animation.loop(0, 7, m_textureId * 2, 3);
 };
 
-int Zombie::getTexture()
+int Zombie::getTextureID()
 {
 	return m_textureId;
 };

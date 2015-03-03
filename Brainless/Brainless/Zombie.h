@@ -27,7 +27,7 @@ public:
 
 	void flash(sf::Vector2f cameraPos);
 	void incrementTexture();
-	int getTexture();
+	int getTextureID();
 
 	bool collide(Unit *unit);
 protected:

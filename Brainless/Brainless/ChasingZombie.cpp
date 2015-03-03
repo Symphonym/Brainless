@@ -31,6 +31,8 @@ void ChasingZombie::serialize(std::ofstream &writer) const
 {
 	Unit::serialize(writer);
 
+	writer << m_textureId << std::endl;
+
 	writer << m_homePosition.x << std::endl;
 	writer << m_homePosition.y << std::endl;
 	writer << static_cast<int>(m_animState) << std::endl;
@@ -42,6 +44,8 @@ void ChasingZombie::serialize(std::ofstream &writer) const
 void ChasingZombie::deserialize(std::ifstream &reader)
 {
 	Unit::deserialize(reader);
+
+	reader >> m_textureId;
 
 	reader >> m_homePosition.x >> m_homePosition.y;
 
@@ -221,7 +225,7 @@ void ChasingZombie::updateTask(float deltaTime)
 
 }
 
-int ChasingZombie::getWalkLenght()
+int ChasingZombie::getWalkLength()
 {
 	return m_maxWalkLenght;
 }

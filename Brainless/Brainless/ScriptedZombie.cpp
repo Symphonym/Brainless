@@ -1,19 +1,34 @@
 
-
+#include <iostream>
 #include "ScriptedZombie.h"
 #include "IdleZombie.h"
 #include "WalkingZombie.h"
 #include "ChasingZombie.h"
 #include "resourceLoader.h"
+#include "Item.h"
 
 ScriptedZombie::ScriptedZombie(Zombie* baseZombie, int scriptID)
 :
 m_baseZombie(baseZombie),
 m_scriptID(scriptID)
 {
-
+	m_UnitID = Unit::ID_ScriptZombie;
+	std::cout << "createdZombie" << std::endl;
 }
 
+//ScriptedZombie::ScriptedZombie(Zombie* baseZombie, int scriptID, std::vector<Level::ItemPtr> itemList)
+//:
+//m_baseZombie(baseZombie),
+//m_scriptID(scriptID),
+//m_itemList(itemList)
+//{
+//
+//} //MEMORY0
+ScriptedZombie::~ScriptedZombie()
+{
+	std::cout << "removedZombie" << std::endl;
+	delete(m_baseZombie);
+}
 /*
 Updates the collisionbox's position, speed, acceleration
 */
@@ -25,7 +40,19 @@ void ScriptedZombie::updateTask(float deltaTime){ m_baseZombie->updateTask(delta
 void ScriptedZombie::wallLeft(){ m_baseZombie->wallLeft(); }
 void ScriptedZombie::wallRight(){ m_baseZombie-> wallRight(); }
 
-bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){ return m_baseZombie->onInteractedWith(otherItem, game); }
+bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){ 
+	
+	if (m_scriptID == 0)
+	{
+		if (otherItem.getName() == "Brain")
+		{
+			//switcheroo
+			std::cout << "switcheroo till RemoveCabinet" << std::endl;
+		}
+	}
+	else
+	return m_baseZombie->onInteractedWith(otherItem, game);
+}
 void ScriptedZombie::onCollideWith(Unit *unit){ m_baseZombie->onCollideWith(unit); }
 void ScriptedZombie::onCollideWithItem(Item &item){ m_baseZombie->onCollideWithItem(item); }
 
@@ -33,15 +60,22 @@ void ScriptedZombie::takesDamage(sf::Vector2f collisionPos, int damage){ m_baseZ
 
 void ScriptedZombie::serialize(std::ofstream &writer) const //INTE KLART,
 { 
+	writer << static_cast<int>(m_UnitID) << std::endl;
+
 	writer << m_scriptID << std::endl;
+	writer << "KOMSIKOMSI" << std::endl;
 	writer << static_cast<int>(m_baseZombie->getUnitType()) << std::endl;
 
 	m_baseZombie->serialize(writer); 
 }
 void ScriptedZombie::deserialize(std::ifstream &reader) //INTE KLART,
 { 
-	reader >> m_scriptID;
 	
+	reader >> m_scriptID;
+
+	std::string a;
+	reader >> a;
+
 	int type;
 	UnitType unitType;
 	reader >> type;
@@ -107,6 +141,8 @@ bool ScriptedZombie::getInAir() const{ return m_baseZombie->getInAir(); }
 bool ScriptedZombie::getInTilt() const{ return m_baseZombie->getInTilt(); }
 sf::FloatRect ScriptedZombie::getCollisionRect(){ return m_baseZombie->getCollisionRect(); }
 Unit::UnitType ScriptedZombie::getUnitType(){ return m_baseZombie->getUnitType(); }
+Unit::UnitType ScriptedZombie::getRealUnitType(){ return m_UnitID; }
+
 Unit::Direction ScriptedZombie::getDirection(){ return m_baseZombie->getDirection(); }
 
 
@@ -115,3 +151,28 @@ void ScriptedZombie::collisionRight(float posX, float speedX, float accX){ m_bas
 void ScriptedZombie::collisionUp(float posY, float speedY, float accY){ m_baseZombie->collisionUp(posY, speedY, accY); }
 void ScriptedZombie::collisionDown(float posY, float speedY, float accY){ m_baseZombie->collisionDown(posY, speedY, accY); }
 bool ScriptedZombie::updateCollision(){ return m_baseZombie->updateCollision(); }
+
+int ScriptedZombie::getWalkLength()
+{
+	/*if (m_baseZombie->getUnitType() == Unit::ID_WalkingZombie)
+	{
+		return (dynamic_cast<WalkingZombie*>(m_baseZombie)->getWalkLength());
+	}
+	else if (m_baseZombie->getUnitType() == Unit::ID_ChasingZombie)
+	{
+		return (dynamic_cast<ChasingZombie*>(m_baseZombie)->getWalkLength());
+	}
+	else return 0;*/
+
+	return m_baseZombie->getWalkLength();
+}
+
+int ScriptedZombie::getTextureID()
+{
+	return m_baseZombie->getTextureID();
+}
+
+void ScriptedZombie::incrementTexture()
+{
+	m_baseZombie->incrementTexture();
+}

@@ -3,16 +3,21 @@
 
 #include "Unit.h"
 #include "Zombie.h"
+#include "Level.h"
 
 class ScriptedZombie : public Unit
 {
 public:
-	
+
+
 	ScriptedZombie(Zombie* baseZombie, int scriptID);
+//	ScriptedZombie(Zombie* baseZombie, int scriptID, std::vector<Level::ItemPtr> itemList); //MEMORY0
 	ScriptedZombie(){};
 	/*
 	Updates the collisionbox's position, speed, acceleration
 	*/
+	virtual ~ScriptedZombie();
+
 	void updateMovement(float gravity, float deltaTime);
 	void updateTask(float deltaTime);
 	void wallLeft() override;
@@ -59,6 +64,7 @@ public:
 	bool getInTilt() const;
 	sf::FloatRect getCollisionRect();
 	UnitType getUnitType();
+	UnitType getRealUnitType();
 	Direction getDirection();
 
 
@@ -68,9 +74,14 @@ public:
 	void collisionDown(float posY, float speedY, float accY);
 	bool updateCollision();
 
+	int getWalkLength();
+	int getTextureID();
+	void incrementTexture();
 private:
 	int m_scriptID;
 	Zombie* m_baseZombie;
+	//std::vector<Level::ItemPtr> m_itemList; //MEMORY0
+
 };
 
 

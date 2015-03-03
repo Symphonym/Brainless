@@ -26,6 +26,7 @@ public:
 
 	Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID);
 	Unit(){}; //för scriptZombien
+	virtual ~Unit(){};
 	/*
 	Updates the collisionbox's position, speed, acceleration
 	*/
@@ -86,6 +87,7 @@ public:
 	virtual	bool getInTilt() const;
 	virtual	sf::FloatRect getCollisionRect();
 	virtual	UnitType getUnitType();
+	virtual UnitType getRealUnitType();
 	virtual	Direction getDirection();
 
 
@@ -95,6 +97,10 @@ public:
 	virtual	void collisionDown(float posY, float speedY, float accY);
 	virtual	bool updateCollision();
 
+	//egentligen zombie, men var lättare att bara lägga dem i unit
+	virtual int getWalkLength(){ return 0; }
+	virtual int getTextureID(){ return 0; }
+	virtual void incrementTexture(){};
 protected:
 	RenderingModes m_renderingMode;
 	bool m_isMovementEnabled;
@@ -126,9 +132,10 @@ protected:
 	sf::Vector2f m_collisionNewAcc;
 
 	static Unit* s_playerPointer;
-private:
 
 	UnitType m_UnitID;
+private:
+
 };
 
 

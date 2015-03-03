@@ -26,11 +26,14 @@ void IdleZombie::serialize(std::ofstream &writer) const
 {
 	Unit::serialize(writer);
 
+	writer << m_textureId << std::endl;
 	writer << static_cast<int>(m_animState) << std::endl;
 }
 void IdleZombie::deserialize(std::ifstream &reader)
 {
 	Unit::deserialize(reader);
+
+	reader >> m_textureId;
 
 	int animType = 0;
 	reader >> animType;

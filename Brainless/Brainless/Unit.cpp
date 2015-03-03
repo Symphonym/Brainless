@@ -260,7 +260,10 @@ Unit::UnitType Unit::getUnitType()
 {
 	return m_UnitID;
 }
-
+Unit::UnitType Unit::getRealUnitType()
+{
+	return m_UnitID;
+}
 Unit::Direction Unit::getDirection()
 {
 	return m_spriteDirection;
