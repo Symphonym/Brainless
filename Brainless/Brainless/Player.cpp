@@ -1,13 +1,14 @@
 #include "Player.h"
 #include "Constants.h"
 #include "OptionsMenu.h"
+#include "ParticleSystem.h"
 #include <iostream>
 
 /*
-	spring hopp 4 rutor /ej klar/
-	gå hopp 3 rutor
-	höjd högt hopp 2 rutor
-	höjd kort hopp 1 ruta
+spring hopp 4 rutor /ej klar/
+gå hopp 3 rutor
+höjd högt hopp 2 rutor
+höjd kort hopp 1 ruta
 */
 #define MAX_SPEED_X (float) 300
 #define MAX_WALK_SPEED_X (float) 200
@@ -53,7 +54,7 @@ void Player::setHealth(int health)
 }
 
 /*
-	Updates/executes all input and calculates new states
+Updates/executes all input and calculates new states
 */
 void Player::updateTask(float deltaTime)
 {
@@ -63,9 +64,9 @@ void Player::updateTask(float deltaTime)
 
 	if (m_damageState == dmg_normal)
 	{
-	
+
 		/*
-			Walk/Run states
+		Walk/Run states
 		*/
 		float speedTurnAround = 8;
 		float speedStartAcc = 500;
@@ -109,7 +110,7 @@ void Player::updateTask(float deltaTime)
 					m_wallState = wall_normal;
 					m_acceleration.x = -speedNormalAcc;
 				}
-					
+
 			}
 
 		}
@@ -130,7 +131,7 @@ void Player::updateTask(float deltaTime)
 			}
 			else
 			{
-				
+
 				if (abs(m_speed.x) < startAccBreakpoint)
 					m_acceleration.x = speedStartAcc;
 				else
@@ -156,9 +157,9 @@ void Player::updateTask(float deltaTime)
 			//slow
 			else m_acceleration.x = -m_speed.x * speedSlowDown;
 		}
-		
-		/* 
-			Jump states and conditions 
+
+		/*
+		Jump states and conditions
 		*/
 		//in Air
 		if (m_inAir)
@@ -243,8 +244,8 @@ void Player::updateTask(float deltaTime)
 	}
 	else
 	{
-		if (getPosition().y-m_fallPos > Constants::TileSize*4)
-			takesDamage(sf::Vector2f(0,10));
+		if (getPosition().y - m_fallPos > Constants::TileSize * 4)
+			takesDamage(sf::Vector2f(0, 10));
 		m_fallPos = getPosition().y;
 	}
 }
@@ -316,8 +317,8 @@ sf::Vector2f Player::getCameraPosition()
 	return m_cameraPos;
 }
 
-/* 
-	Determines which animations should be called
+/*
+Determines which animations should be called
 */
 void Player::updateAnimation(float deltaTime)
 {
@@ -348,13 +349,15 @@ void Player::updateAnimation(float deltaTime)
 	m_specialSpriteDirection = false;
 
 	/*
-		Special State Conditions
+	Special State Conditions
 	*/
 	//Start to Land 
 	if (!m_inAir && m_jumpState == jump_inAir)
 	{
 		m_jumpState = jump_land;
 		SoundPlayer::instance().playSound("player_landing", getPosition());
+		ParticleSystem::instance().addParticles(15, m_position + sf::Vector2f(20, 190), sf::Color(128, 128, 128), sf::Vector2f(0.4f, 0.4f), sf::Vector2f(0, 360), sf::Vector2f(0, 0), sf::Vector2f(-10, 0), sf::Vector2f(-10, 0), sf::Vector2f(-1, 0.5f));
+		ParticleSystem::instance().addParticles(15, m_position + sf::Vector2f(60, 190), sf::Color(128, 128, 128), sf::Vector2f(0.4f, 0.4f), sf::Vector2f(0, 360), sf::Vector2f(0, 0), sf::Vector2f(-10, 0), sf::Vector2f(-10, 0), sf::Vector2f(1, 0.5f));
 	}
 
 	//Ladder Climbing
@@ -365,7 +368,7 @@ void Player::updateAnimation(float deltaTime)
 		if (m_speed.y == -1)
 			animation_climbingUp();
 
-		else if (m_speed.y == 1) 
+		else if (m_speed.y == 1)
 			animation_climbingDown();
 	}
 	//Dead
@@ -375,7 +378,7 @@ void Player::updateAnimation(float deltaTime)
 	//TakingDamage
 	else if (m_damageState == dmg_damaged)
 		animation_damaged();
-	
+
 	//startJump
 	else if (m_jumpState == jump_buttonPressed)
 	{
@@ -391,13 +394,13 @@ void Player::updateAnimation(float deltaTime)
 	else if (m_jumpState == jump_land)
 	{
 		if (m_animState == anim_landIdle || m_animState == anim_landRun);
-		
+
 		else if (abs(m_speed.x) <= runBreakpoint) //runJumpBreakpoint
 			animation_landIdle();
-		
+
 		else
 			animation_landRun();
-		
+
 	}
 	else if (m_inAir && !m_inTilt)
 	{
@@ -461,7 +464,7 @@ void Player::updateAnimation(float deltaTime)
 	else if (10 < abs(m_speed.x))
 		animation_walk();
 
-	else 
+	else
 	{
 		std::cout << "FIXA Får ingen animation" << std::endl; //bör inte uppstå
 		std::cout << m_animState << std::endl;
@@ -500,10 +503,10 @@ float Player::calcAcceleration(float minAcceleration, float maxAcceleration, flo
 }
 
 /*
-	All animation calls
-	"PlayerSheet" == 0
-	"PlayerSheetJump" == 1
-	"PlayerSheetRun" == 2 //Kommer senare försvinna, just nu bara jumpRun
+All animation calls
+"PlayerSheet" == 0
+"PlayerSheetJump" == 1
+"PlayerSheetRun" == 2 //Kommer senare försvinna, just nu bara jumpRun
 */
 void Player::animation_idle()
 {
@@ -556,10 +559,16 @@ void Player::animation_turnRun()
 		m_animation.playOnce(0, 1, 6, 8);
 		m_animState = anim_turnRun;
 		SoundPlayer::instance().playSound("player_turn", getPosition());
+
+		if (getSpeed().x < 0)
+		ParticleSystem::instance().addParticles(15, m_position + sf::Vector2f(-30, 190), sf::Color(128, 128, 128), sf::Vector2f(0.4f, 0.4f), sf::Vector2f(0, 360), sf::Vector2f(0, 0), sf::Vector2f(-50, 0), sf::Vector2f(-50, 0), sf::Vector2f(-3, 0.5f));
+		else
+			ParticleSystem::instance().addParticles(15, m_position + sf::Vector2f(130, 190), sf::Color(128, 128, 128), sf::Vector2f(0.4f, 0.4f), sf::Vector2f(0, 360), sf::Vector2f(0, 0), sf::Vector2f(-50, 0), sf::Vector2f(-50, 0), sf::Vector2f(3, 0.5f));
+
 	}
 }
 
-void Player::animation_startJumpIdle() 
+void Player::animation_startJumpIdle()
 {
 	if (m_animState != anim_startJumpIdle)
 	{
@@ -600,7 +609,7 @@ void Player::animation_inAirFall()
 	if (m_animState != anim_inAirFall)
 	{
 		m_sprite = &m_spriteSheets[1];
-		m_animation.loop(1, 3, 2, 8); 
+		m_animation.loop(1, 3, 2, 8);
 		m_animState = anim_inAirFall;
 	}
 }
@@ -624,7 +633,7 @@ void Player::animation_inAirUpRun()
 }
 void Player::animation_inAirFallRun()
 {
-	
+
 	if (m_animState != anim_inAirFallRun)
 	{
 		m_sprite = &m_spriteSheets[2];
