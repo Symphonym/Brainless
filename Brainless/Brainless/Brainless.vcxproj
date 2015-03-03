@@ -160,6 +160,7 @@
     <ClCompile Include="RpgGame.cpp" />
     <ClCompile Include="RubberGlovesItem.cpp" />
     <ClCompile Include="ScissorLift.cpp" />
+    <ClCompile Include="ScriptedZombie.cpp" />
     <ClCompile Include="SettingsMenu.cpp" />
     <ClCompile Include="SpikeItem.cpp" />
     <ClCompile Include="StuffedPaperBagItem.cpp" />
@@ -229,9 +230,9 @@
     <ClInclude Include="EmptyBagItem.h" />
     <ClInclude Include="NewspaperItem.h" />
     <ClInclude Include="RopeLadderItem.h" />
+    <ClInclude Include="ScriptedZombie.h" />
     <ClInclude Include="SpikeItem.h" />
     <ClInclude Include="StuffedPaperBagItem.h" />
-    <ClInclude Include="ZombieScript.h" />
     <ClInclude Include="DialogTree.h" />
     <ClInclude Include="DoorItem.h" />
     <ClInclude Include="DuctTapeItem.h" />

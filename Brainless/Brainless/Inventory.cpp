@@ -145,13 +145,13 @@ void Inventory::events(const sf::Event &event, Game &game)
 						bool deleteOtherItem = false;
 						bool deleteMouseItem = false;
 
-						// Invoke interaction on world item
-						if (item.onInteractedWith(*m_mouseItem.get(), game))
-							deleteOtherItem = true;
-
 						// Invoke interaction handling on mouse item
 						if (m_mouseItem->onInteract(item, game))
 							deleteMouseItem = true;
+
+						// Invoke interaction on world item
+						if (item.onInteractedWith(*m_mouseItem.get(), game))
+							deleteOtherItem = true;
 
 						if (deleteOtherItem)
 							game.getLevel().removeItem(i);

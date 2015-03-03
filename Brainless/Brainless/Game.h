@@ -25,6 +25,9 @@ public:
 	Game(StateMachine &machine);
 	~Game();
 	
+	virtual void onPlay();
+	virtual void onStop();
+
 	virtual void events(const sf::Event &event);
 	virtual void update(float deltaTime);
 	virtual void draw();
