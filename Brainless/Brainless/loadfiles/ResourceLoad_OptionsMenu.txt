@@ -9,7 +9,7 @@
 
 # BACKGROUND
 +Texture,images/backgrounds/menu_bakgrund_complete_nosheet.png,Menu_Background
-+Texture,images/backgrounds/Spritesheet_Maeve_StarScreen_V1.png,Menu_Background_Elements
++Texture,images/backgrounds/Spritesheet_Maeve_StartScreen.png,Menu_Background_Elements
 
 # MUSIC
 +Music,music/MenuMusic.wav,MenuMusic
