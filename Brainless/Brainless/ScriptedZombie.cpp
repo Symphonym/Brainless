@@ -1,5 +1,4 @@
 
-#include <iostream>
 #include "ScriptedZombie.h"
 #include "IdleZombie.h"
 #include "WalkingZombie.h"
@@ -47,7 +46,6 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 		if (otherItem.getName() == "Brain")
 		{
 			//switcheroo
-			std::cout << "switcheroo till RemoveCabinet" << std::endl;
 			Zombie* del = m_baseZombie;
 			
 			m_baseZombie = new RemoveCabinetZombie(del->getPosition(), del->getTextureID(),
@@ -70,7 +68,6 @@ void ScriptedZombie::serialize(std::ofstream &writer) const
 	writer << static_cast<int>(m_UnitID) << std::endl;
 
 	writer << m_scriptID << std::endl;
-	writer << "KOMSIKOMSI" << std::endl;
 
 	m_baseZombie->serialize(writer); 
 }
@@ -188,16 +185,11 @@ void ScriptedZombie::incrementTexture()
 	m_baseZombie->incrementTexture();
 }
 
-void ScriptedZombie::electricPuddle()
+void ScriptedZombie::electricPuddle(Game &game)
 {
 	if (m_baseZombie->getRealUnitType() == Unit::UnitType::ID_CabinetZombie)
 	{
-		std::cout << "dangerousPuddle" << std::endl;
-		((RemoveCabinetZombie *)m_baseZombie)->electricPuddle();
-	}
-	else
-	{
-		std::cout << "dangerousPuddle NOTCABINET" << std::endl;
+		((RemoveCabinetZombie *)m_baseZombie)->electricPuddle(game);
 	}
 
 }
@@ -205,11 +197,6 @@ void ScriptedZombie::safePuddle()
 {
 	if (m_baseZombie->getRealUnitType() == Unit::UnitType::ID_CabinetZombie)
 	{
-		std::cout << "safePuddle" << std::endl;
 		((RemoveCabinetZombie *)m_baseZombie)->safePuddle();
-	}
-	else
-	{
-		std::cout << "safePuddle NOTCABINET" << std::endl;
 	}
 }
