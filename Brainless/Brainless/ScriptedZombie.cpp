@@ -7,6 +7,7 @@
 #include "Item.h"
 #include "Level.h"
 #include "RemoveCabinetZombie.h"
+#include "DropItemZombie.h"
 
 ScriptedZombie::ScriptedZombie(Zombie* baseZombie, int scriptID)
 :
@@ -67,6 +68,26 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 		}
 	}
 
+	else if (m_scriptID == 1)
+	{
+		if (otherItem.getName() == "Brain")
+		{
+			flash(game.getPlayer().getCameraPosition());
+			game.addSavedZombie(1);
+			//switcheroo
+			Zombie* del = m_baseZombie;
+
+			DropItemZombie* ptr;
+			ptr = new DropItemZombie(del->getPosition(), del->getTextureID(), del->getDirection());
+			ptr->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+			ptr->updateAnimation(0);
+			m_baseZombie = ptr;
+
+			delete(del);
+			return ptr->releaseItems(m_levelPtr, game);
+		}
+	}
+	else 
 	return m_baseZombie->onInteractedWith(otherItem, game);
 }
 void ScriptedZombie::onCollideWith(Unit *unit){ m_baseZombie->onCollideWith(unit); }
@@ -79,13 +100,16 @@ void ScriptedZombie::serialize(std::ofstream &writer) const
 	writer << static_cast<int>(m_UnitID) << std::endl;
 
 	writer << m_scriptID << std::endl;
-
+	writer << "komsikomsi" << std::endl;
 	m_baseZombie->serialize(writer); 
 }
 void ScriptedZombie::deserialize(std::ifstream &reader)
 { 
 	
 	reader >> m_scriptID;
+	
+	std::string a;
+	reader >> a;
 
 	int type;
 	UnitType unitType;
@@ -112,6 +136,11 @@ void ScriptedZombie::deserialize(std::ifstream &reader)
 		break;
 	case Unit::ID_CabinetZombie:
 		m_baseZombie = new RemoveCabinetZombie(sf::Vector2f(0, 0), 0, sf::Vector2f(0, 0));
+		m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+		m_baseZombie->updateAnimation(0);
+		break;
+	case Unit::ID_ItemZombie:
+		m_baseZombie = new DropItemZombie(sf::Vector2f(0, 0), 0, Unit::dir_left);
 		m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 		m_baseZombie->updateAnimation(0);
 		break;

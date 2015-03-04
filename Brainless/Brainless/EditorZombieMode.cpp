@@ -200,6 +200,9 @@ bool EditorZombieMode::update(float deltaTime, const sf::RenderWindow &editorWin
 	case 0:
 		m_infoText.setString(m_infoText.getString() + "\nScript id: Remove E-Cabinet");
 		break;
+	case 1:
+		m_infoText.setString(m_infoText.getString() + "\nScript id: LotsaItems");
+		break;
 	default:
 		m_infoText.setString(m_infoText.getString() + "\nScript id: none");
 		break;

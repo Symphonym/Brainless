@@ -26,7 +26,7 @@ private:
 	EditorZombie m_createdZombie;
 	
 	int m_script_id = -1;
-	const int c_script_count = 1;
+	const int c_script_count = 2;
 
 	std::vector<EditorZombie> m_zombieMasks;
 };

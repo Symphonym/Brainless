@@ -24,7 +24,8 @@ public:
 		ID_ScriptZombie,
 	
 		//scripted
-		ID_CabinetZombie
+		ID_CabinetZombie,
+		ID_ItemZombie
 	};
 
 	Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID);

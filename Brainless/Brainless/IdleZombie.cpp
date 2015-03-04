@@ -36,7 +36,7 @@ void IdleZombie::deserialize(std::ifstream &reader)
 	reader >> m_textureId;
 	m_animState = anim_noAnimation;
 	animation_idle();
-
+	
 	int animType = 0;
 	reader >> animType;
 	m_animState = static_cast<AnimationState>(animType);
