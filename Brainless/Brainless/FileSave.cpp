@@ -20,6 +20,7 @@
 #include "ChasingZombie.h"
 #include "WalkingZombie.h"
 #include "IdleZombie.h"
+#include "ScriptedZombie.h"
 #include "Game.h"
 #include "Utility.h"
 
@@ -85,19 +86,24 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 	for (std::size_t i = 0; i < level.getUnits().size(); i++)
 	{
 		Unit& curUnit = *level.getUnits()[i].get();
-		writer << (int)curUnit.getUnitType() << "," << curUnit.getPosition().x << "," << curUnit.getPosition().y << "," << ((Zombie&)(curUnit)).getTexture() << ",";
-		switch (curUnit.getUnitType())
+		writer << (int)curUnit.getRealUnitType() << "," << curUnit.getPosition().x << "," << curUnit.getPosition().y << "," << /*((Zombie&)(*/curUnit/*))*/.getTextureID() << ","; //obs real
+		switch (curUnit.getUnitType()) //obs decorator
 		{
 		case Unit::ID_IdleZombie:
-			writer << (int)curUnit.getDirection() << std::endl;
+			writer << (int)curUnit.getDirection();
 			break;
 		case Unit::ID_WalkingZombie:
-			writer << (((WalkingZombie&)curUnit)).getWalkLenght() << std::endl;
+			writer << /*(((WalkingZombie&)*/curUnit/*))*/.getWalkLength();
 			break;
 		case Unit::ID_ChasingZombie:
-			writer << (((ChasingZombie&)curUnit)).getWalkLenght() << std::endl;
+			writer <</* (((ChasingZombie&)*/curUnit/*))*/.getWalkLength();
 			break;
 		}
+		if (curUnit.getRealUnitType() == Unit::ID_ScriptZombie)
+		{
+			writer << "," << /*5*/(((ScriptedZombie&)curUnit)).getScriptID() << "," <</*6*/ (int)(((ScriptedZombie&)curUnit)).getUnitType();
+		}
+		writer << std::endl;
 	}
 
 	writer.close();
@@ -226,6 +232,7 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 			Unit* temp;
 			switch (unitID)
 			{
+				//unitData[4] "special zombie data" unitData[3] " texture"
 			case Unit::ID_IdleZombie:
 				temp = new IdleZombie(sf::Vector2f(posX, posY), (Unit::Direction)Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
 				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
@@ -244,9 +251,40 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 				temp->updateAnimation(0);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
 				break;
-			}
+			case Unit::ID_ScriptZombie:
+				Zombie* scriptedZombie;
+				switch (Utility::stringToNumber<int>(unitData[6]))
+				{
+				case Unit::ID_IdleZombie:
 
+					scriptedZombie = new IdleZombie(sf::Vector2f(posX, posY), (Unit::Direction)Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
+					scriptedZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+					scriptedZombie->updateAnimation(0);
+					break;
+				case Unit::ID_WalkingZombie:
+					scriptedZombie = new WalkingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
+					scriptedZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+					scriptedZombie->updateAnimation(0);
+					break;
+				case Unit::ID_ChasingZombie:
+					scriptedZombie = new ChasingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
+					scriptedZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+					scriptedZombie->updateAnimation(0);
+					break;
+				default:
+					scriptedZombie = nullptr; //do krasch, make compiler happy
+					break;
+				}
+				/*temp = new ScriptedZombie(scriptedZombie, Utility::stringToNumber<int>(unitData[5]), level.getItems());*/ //MEMORY0
+				temp = new ScriptedZombie(scriptedZombie, Utility::stringToNumber<int>(unitData[5]));
+				level.addUnit(std::move(Level::UnitPtr(temp)));
+				break;
+			default:
+				break;
+			}
 		}
+
+	
 
 		reader.close();
 		return true;
@@ -373,8 +411,11 @@ bool FileSave::loadLevelProgress(Level &level, int levelNumber)
 				unit->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				unit->updateAnimation(0);
 				break;
+			case Unit::ID_ScriptZombie:
+				unit = Level::UnitPtr(new ScriptedZombie(nullptr, 0)); //MEMORY0 skicka med itemList
+				break;
 			}
-			if (unit)
+			if (unit) //not player I guess?
 			{
 				unit->deserialize(reader);
 				level.addUnit(std::move(unit));

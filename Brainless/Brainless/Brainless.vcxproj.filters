@@ -405,14 +405,14 @@
     <ClCompile Include="EmptyBagItem.cpp">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClCompile>
-    <ClCompile Include="ElectricalCabinetItem.cpp">
-      <Filter>Source Files\Game\Items\Unsorted</Filter>
-    </ClCompile>
     <ClCompile Include="ScriptedZombie.cpp">
       <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
     </ClCompile>
     <ClCompile Include="RemoveCabinetZombie.cpp">
       <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
+    </ClCompile>
+    <ClCompile Include="ElectricalCabinetItem.cpp">
+      <Filter>Source Files\Game\Items\ZombieInteractive</Filter>
     </ClCompile>
     <ClCompile Include="NewGameIntro.cpp">
       <Filter>Source Files\State Machine\States</Filter>
@@ -719,14 +719,14 @@
     <ClInclude Include="EmptyBagItem.h">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClInclude>
-    <ClInclude Include="ElectricalCabinetItem.h">
-      <Filter>Source Files\Game\Items\Unsorted</Filter>
-    </ClInclude>
     <ClInclude Include="ScriptedZombie.h">
       <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
     </ClInclude>
     <ClInclude Include="RemoveCabinetZombie.h">
       <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
+    </ClInclude>
+    <ClInclude Include="ElectricalCabinetItem.h">
+      <Filter>Source Files\Game\Items\ZombieInteractive</Filter>
     </ClInclude>
     <ClInclude Include="NewGameIntro.h">
       <Filter>Source Files\State Machine\States</Filter>
