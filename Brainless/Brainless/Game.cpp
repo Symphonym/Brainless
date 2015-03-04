@@ -123,6 +123,7 @@ void Game::onStop()
 void Game::addSavedZombie(int count)
 {
 	m_savedZombies += count;
+	saveGame();
 }
 void Game::clearSavedZombies()
 {
