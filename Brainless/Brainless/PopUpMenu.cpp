@@ -26,9 +26,9 @@ void PopUpMenu::setPosition(const sf::Vector2f &pos)
 {
 	m_position = pos;
 	// Update position of the popup buttons as well
-	m_background.setPosition(pos);
+	m_background.setPosition(pos + sf::Vector2f(0,-60));
 	for (std::size_t i = 0; i < m_buttons.size(); i++)
-		m_buttons[i].setPosition(m_position.x, m_position.y + m_buttons[i].getGlobalBounds().height*i);
+		m_buttons[i].setPosition(m_position.x, m_position.y + (m_buttons[i].getGlobalBounds().height+10)*i);
 }
 void PopUpMenu::setItemCallback(PopUpMenu::ItemCallback callback)
 {
