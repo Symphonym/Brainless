@@ -5,13 +5,22 @@
 #include "ChasingZombie.h"
 #include "resourceLoader.h"
 #include "Item.h"
-
+#include "Level.h"
 #include "RemoveCabinetZombie.h"
 
 ScriptedZombie::ScriptedZombie(Zombie* baseZombie, int scriptID)
 :
 m_baseZombie(baseZombie),
 m_scriptID(scriptID)
+{
+	m_UnitID = Unit::ID_ScriptZombie;
+}
+
+ScriptedZombie::ScriptedZombie(Zombie* baseZombie, int scriptID, Level* levelPtr)
+:
+m_baseZombie(baseZombie),
+m_scriptID(scriptID),
+m_levelPtr(levelPtr)
 {
 	m_UnitID = Unit::ID_ScriptZombie;
 }
@@ -45,6 +54,8 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 	{
 		if (otherItem.getName() == "Brain")
 		{
+			flash(game.getPlayer().getCameraPosition());
+			game.addSavedZombie(1);
 			//switcheroo
 			Zombie* del = m_baseZombie;
 			
@@ -75,9 +86,6 @@ void ScriptedZombie::deserialize(std::ifstream &reader)
 { 
 	
 	reader >> m_scriptID;
-
-	std::string a;
-	reader >> a;
 
 	int type;
 	UnitType unitType;
@@ -199,4 +207,9 @@ void ScriptedZombie::safePuddle()
 	{
 		((RemoveCabinetZombie *)m_baseZombie)->safePuddle();
 	}
+}
+
+void ScriptedZombie::flash(sf::Vector2f cameraPos)
+{
+	m_baseZombie->flash(cameraPos);
 }

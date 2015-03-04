@@ -16,6 +16,7 @@ m_autotilingRange("")
 
 	m_tileSprite.setPosition(bounds.left, bounds.top);
 	m_tileSprite.move(spriteOffset);
+	m_tileSprite.setTextureRect(sf::IntRect(0,0,128,128));
 }
 
 void Tile::setType(TileTypes type)
