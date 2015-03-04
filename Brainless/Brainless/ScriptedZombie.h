@@ -12,7 +12,7 @@ public:
 
 	ScriptedZombie(Zombie* baseZombie, int scriptID);
 //	ScriptedZombie(Zombie* baseZombie, int scriptID, std::vector<Level::ItemPtr> itemList); //MEMORY0
-	ScriptedZombie(){};
+
 	/*
 	Updates the collisionbox's position, speed, acceleration
 	*/

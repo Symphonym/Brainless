@@ -412,7 +412,7 @@ bool FileSave::loadLevelProgress(Level &level, int levelNumber)
 				unit->updateAnimation(0);
 				break;
 			case Unit::ID_ScriptZombie:
-				unit = Level::UnitPtr(new ScriptedZombie()); //MEMORY0 skicka med itemList
+				unit = Level::UnitPtr(new ScriptedZombie(nullptr, 0)); //MEMORY0 skicka med itemList
 				break;
 			}
 			if (unit) //not player I guess?

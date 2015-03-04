@@ -75,6 +75,8 @@ void Unit::serialize(std::ofstream &writer) const
 	// This is so the reader can quickly know what unit it is
 	writer << static_cast<int>(m_UnitID) << std::endl;
 
+	writer << "unitunt" << std::endl;
+
 	writer << m_position.x << std::endl;
 	writer << m_position.y << std::endl;
 	writer << m_speed.x << std::endl;
@@ -93,6 +95,9 @@ void Unit::deserialize(std::ifstream &reader)
 {
 	// ID is read initially outside this function to initially create the unit
 	
+	std::string a;
+	reader >> a;
+
 	reader >> m_position.x >> m_position.y;
 	reader >> m_speed.x >> m_speed.y;
 	reader >> m_acceleration.x >> m_acceleration.y;
