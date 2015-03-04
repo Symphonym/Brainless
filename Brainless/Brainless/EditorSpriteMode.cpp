@@ -24,7 +24,7 @@ bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &ed
 		m_currentSpriteIndex += event.mouseWheel.delta;
 		m_currentSpriteIndex = Utility::clampValue<int>(m_currentSpriteIndex, 0, m_availableDecorations.size() - 1);
 
-		
+
 		m_highlightSprite.sprite.setTexture(ResourceLoader::instance().retrieveTexture(m_availableDecorations[m_currentSpriteIndex]));
 		m_highlightSprite.textureName = m_availableDecorations[m_currentSpriteIndex];
 	}
@@ -46,7 +46,7 @@ bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &ed
 			sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));
 
 			// Loop through existing sprites and see if the cursor collides with them
-			for (int i = level.getDecorations().size()-1; i >= 0; i--)
+			for (int i = level.getDecorations().size() - 1; i >= 0; i--)
 			{
 				if (level.getDecorations()[i].sprite.getGlobalBounds().contains(mousePos))
 				{
@@ -56,7 +56,7 @@ bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &ed
 			}
 		}
 	}
-	
+
 	return false;
 }
 
@@ -110,4 +110,14 @@ void EditorSpriteMode::initializeSprites()
 	addTexture("RightTopPipe");
 	addTexture("TopPipe");
 	addTexture("VerticallyPipe");
+	addTexture("Green1");
+	addTexture("Green2");
+	addTexture("Green3");
+	addTexture("Green4");
+	addTexture("Green5");
+	addTexture("Green6");
+	addTexture("Green7");
+	addTexture("PileoBooks1");
+	addTexture("PileoBooks2");
+	addTexture("PileoBooks3");
 }

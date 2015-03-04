@@ -36,6 +36,16 @@
 +Texture,images/sprites/Pipes/RightTop-Pipe.png,RightTopPipe
 +Texture,images/sprites/Pipes/Top-Pipe.png,TopPipe
 +Texture,images/sprites/Pipes/vertically-Pipe.png,VerticallyPipe
++Texture,images/sprites/Green/Green1.png,Green1
++Texture,images/sprites/Green/Green2.png,Green2
++Texture,images/sprites/Green/Green3.png,Green3
++Texture,images/sprites/Green/Green4.png,Green4
++Texture,images/sprites/Green/Green5.png,Green5
++Texture,images/sprites/Green/Green6.png,Green6
++Texture,images/sprites/Green/Green7.png,Green7
++Texture,images/sprites/Books/PileoBooks1.png,PileoBooks1
++Texture,images/sprites/Books/PileoBooks2.png,PileoBooks2
++Texture,images/sprites/Books/PileoBooks3.png,PileoBooks3
 
 # Solid invisible tile
 +Texture,images/tiles/solidInvisible.png,SolidInvisibleCube
