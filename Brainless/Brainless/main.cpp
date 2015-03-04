@@ -2,6 +2,7 @@
 #include "MainMenu.h"
 #include "ResourceLoader.h"
 #include "StateMachine.h"
+#include "StartProgramIntro.h"
 #include "OptionsMenu.h"
 
 int main(int argc, const char *args[])
@@ -25,7 +26,7 @@ int main(int argc, const char *args[])
 		OptionsMenu::initializeKeybinds();
 
 		StateMachine machine;
-		machine.pushState<OptionsMenu>();
+		machine.pushState<StartProgramIntro>();
 		machine.run();
 	}
 
