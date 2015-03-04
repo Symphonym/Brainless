@@ -6,6 +6,7 @@
 +Texture,images/UI/heart.png,heart
 +Texture,images/UI/heartEmpty.png,heartEmpty
 +Texture,images/UI/ghostavatar.png,GhostAvatar
++Texture,images/UI/scaredzombie.png,ScaredZombie
 +Texture,images/UI/playeravatar.png,PlayerAvatar
 
 # CRAFTING UI

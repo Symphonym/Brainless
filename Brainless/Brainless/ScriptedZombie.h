@@ -79,7 +79,7 @@ public:
 	void incrementTexture();
 
 	//script functioner
-	void electricPuddle();
+	void electricPuddle(Game &game);
 	void safePuddle();
 private:
 	int m_scriptID;

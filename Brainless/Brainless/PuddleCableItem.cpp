@@ -41,7 +41,7 @@ bool PuddleCableItem::onCollisionWithUnit(Unit &unit, Game &game)
 		if (unit.getUnitType() == Unit::UnitType::ID_CabinetZombie)
 		{
 
-			((ScriptedZombie&) unit).electricPuddle();
+			((ScriptedZombie&) unit).electricPuddle(game);
 		}
 		else
 		{
