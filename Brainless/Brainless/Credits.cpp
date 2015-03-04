@@ -64,6 +64,8 @@ State(machine)
 	pushCreditsParagraph("Gustaf Yngström");
 
 	resetCreditsPosition();
+
+	m_creditsBG.setTexture(ResourceLoader::instance().retrieveTexture("CreditsBG"));
 }
 
 void Credits::events(const sf::Event &event)
@@ -104,6 +106,8 @@ void Credits::draw()
 	Renderer::instance().drawHUD(m_backgroundElement_grass4);
 	Renderer::instance().drawHUD(m_backgroundElement_grass5);
 	Renderer::instance().drawHUD(m_backgroundElement_scarf);
+
+	Renderer::instance().drawHUD(m_creditsBG);
 
 	for (std::size_t i = 0; i < m_creditText.size(); i++)
 		Renderer::instance().drawHUD(m_creditText[i]);

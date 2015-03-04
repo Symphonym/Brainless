@@ -744,7 +744,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Credits.h">
-      <Filter>Source Files\State Machine</Filter>
+      <Filter>Source Files\State Machine\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
