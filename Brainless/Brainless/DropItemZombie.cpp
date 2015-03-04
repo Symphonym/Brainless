@@ -96,7 +96,6 @@ bool DropItemZombie::releaseItems(Level* levelPtr, Game &game)
 			game.getLevel().addItemToBuffer(std::move(item));
 		}
 		m_itemsWithin.clear();
-		//release items
 	}
 	return false;
 }
