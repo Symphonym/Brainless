@@ -167,7 +167,8 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 	FileSave::loadLevelProgress(m_level, m_levelIndex); // All units are cleared from level here
 	FileSave::loadInventory(*m_inventory);
 
-	SoundPlayer::instance().playMusic(m_level.getLevelMusicName());
+	if (m_level.getLevelMusicName() != Constants::NoMusicProvidedString)
+		SoundPlayer::instance().playMusic(m_level.getLevelMusicName());
 	
 
 	//Set player to start position

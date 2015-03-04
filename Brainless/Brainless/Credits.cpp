@@ -36,9 +36,12 @@ State(machine)
 	m_Animation_grass5.loop(0, 5, 5, 4.5f);
 	m_Animation_scarf.loop(0, 5, 6, 4.5f);
 
+	pushCreditsParagraph("Ake Studios", 250);
+	pushCreditsParagraph("Brainless", 150);
+
 	pushCreditsParagraph("Programming", 100);
 	pushCreditsParagraph("Jakob Larsson");
-	pushCreditsParagraph("Kevin Lövgren");
+	pushCreditsParagraph("Kevin Lovgren");
 	pushCreditsParagraph("Tobias Melker");
 	pushCreditsParagraph("Svante Almbring");
 
@@ -48,7 +51,7 @@ State(machine)
 	pushCreditsParagraph("Olof Andersson");
 	pushCreditsParagraph("Linda Inghammar");
 	pushCreditsParagraph("Fredrik Olsson");
-	pushCreditsParagraph("Emelie Tordelöv");
+	pushCreditsParagraph("Emelie Tordelov");
 	pushCreditsParagraph("Pernilla Larsson");
 
 	pushCreditsParagraph("Game writing", 100);
@@ -56,15 +59,15 @@ State(machine)
 	pushCreditsParagraph("Robin Norén");
 
 	pushCreditsParagraph("Design", 100);
-	pushCreditsParagraph("Fredrik Söderberg");
+	pushCreditsParagraph("Fredrik Soderberg");
 
 	pushCreditsParagraph("Sound", 100);
-	pushCreditsParagraph("Simon Enström");
+	pushCreditsParagraph("Simon Enstrom");
 	pushCreditsParagraph("Fredrik Larsson");
 
 	pushCreditsParagraph("Music", 100);
 	pushCreditsParagraph("Rasmus Andersparr");
-	pushCreditsParagraph("Gustaf Yngström");
+	pushCreditsParagraph("Gustaf Yngstrom");
 
 	resetCreditsPosition();
 
@@ -95,7 +98,7 @@ void Credits::update(float deltaTime)
 
 		text.setPosition(
 			m_window.getSize().x / 2.f - text.getGlobalBounds().width / 2.f,
-			text.getPosition().y - 200.f * deltaTime);
+			text.getPosition().y - 100.f * deltaTime);
 
 		if (i == m_creditText.size() - 1 && text.getPosition().y < -40)
 			resetCreditsPosition();

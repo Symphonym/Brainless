@@ -361,6 +361,7 @@
 +Texture,images/items/longStickItem.png,LongStickItem
 +Texture,images/items/Small-Cables.png,CableItem
 +Texture,images/items/brainItem.png,BrainItem
++Texture,images/items/brainItemInv.png,BrainItemInv
 +Texture,images/items/Small-AA Battery.png,AABatteryItem
 +Texture,images/items/Small-Car battery.png,CarBatteryItem
 +Texture,images/items/ductTapedBattery.png,DuctTapeBatteryItem

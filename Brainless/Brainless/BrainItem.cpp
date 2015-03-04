@@ -3,7 +3,7 @@
 
 BrainItem::BrainItem(int id)
 :
-Item("Brain","BrainItem", "BrainItem", id)
+Item("Brain","BrainItemInv", "BrainItem", id)
 {
 	m_lootable = true;
 	m_examineString = "Someones brain, that's kind of nasty.";
