@@ -65,17 +65,16 @@ void ScriptedZombie::onCollideWithItem(Item &item){ m_baseZombie->onCollideWithI
 
 void ScriptedZombie::takesDamage(sf::Vector2f collisionPos, int damage){ m_baseZombie->takesDamage(collisionPos, damage); }
 
-void ScriptedZombie::serialize(std::ofstream &writer) const //INTE KLART,
+void ScriptedZombie::serialize(std::ofstream &writer) const 
 { 
 	writer << static_cast<int>(m_UnitID) << std::endl;
 
 	writer << m_scriptID << std::endl;
 	writer << "KOMSIKOMSI" << std::endl;
-	//writer << static_cast<int>(m_baseZombie->getUnitType()) << std::endl; //kanske något med den, spelar dota nu
 
 	m_baseZombie->serialize(writer); 
 }
-void ScriptedZombie::deserialize(std::ifstream &reader) //INTE KLART,
+void ScriptedZombie::deserialize(std::ifstream &reader)
 { 
 	
 	reader >> m_scriptID;

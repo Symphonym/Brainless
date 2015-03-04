@@ -4,6 +4,7 @@
 #include "ItemDatabase.h"
 #include "Game.h"
 #include "ParticleSystem.h"
+//#include "RemoveCabinetZombie.h"
 
 PuddleCableItem::PuddleCableItem(bool cableInPuddle, int id)
 :
@@ -37,11 +38,26 @@ bool PuddleCableItem::onCollisionWithUnit(Unit &unit, Game &game)
 {
 	if (m_cableInPuddle)
 	{
-		unit.takesDamage(sf::Vector2f(
-			getPosition().x + getSprite().getGlobalBounds().width / 2.f,
-			getPosition().y + getSprite().getGlobalBounds().height / 2.f));
+	/*	if (unit.getUnitType() == Unit::UnitType::ID_CabinetZombie)
+		{
+			RemoveCabinetZombie* ptr = (RemoveCabinetZombie*) &unit;
+			ptr->electricPuddle();
+		}
+		else
+		{*/
+			unit.takesDamage(sf::Vector2f(
+				getPosition().x + getSprite().getGlobalBounds().width / 2.f,
+				getPosition().y + getSprite().getGlobalBounds().height / 2.f));
+	/*	}*/
 	}
-
+	/*else
+	{
+		if (unit.getUnitType() == Unit::UnitType::ID_CabinetZombie)
+		{
+			RemoveCabinetZombie* ptr = (RemoveCabinetZombie*)&unit;
+			ptr->safePuddle();
+		}
+	}*/
 	return false;
 }
 bool PuddleCableItem::onInteractedWith(Item &otherItem, Game &game)

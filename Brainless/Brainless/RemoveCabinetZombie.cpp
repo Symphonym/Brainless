@@ -1,5 +1,6 @@
 #include "RemoveCabinetZombie.h"
 #include "ItemDatabase.h"
+//#include <iostream>
 
 #define MAX_SPEED_X (float) 200
 #define MAX_SPEED_Y (float) 200
@@ -135,3 +136,23 @@ void RemoveCabinetZombie::onCollideWithItem(Item &item)
 		m_direction = dir_noDirection;
 	}
 }
+
+//void RemoveCabinetZombie::electricPuddle()
+//{
+//	std::cout << "dangerousPuddle" << std::endl;
+//	m_direction = dir_noDirection;
+//	animation_idle();
+//	//play dialog
+//}
+//void RemoveCabinetZombie::safePuddle()
+//{
+//	std::cout << "safePuddle" << std::endl;
+//	if (m_position.x < m_target.x)
+//	{
+//		m_direction = dir_right;
+//	}
+//	else
+//	{
+//		m_direction = dir_left;
+//	}
+//}
