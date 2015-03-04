@@ -61,7 +61,7 @@ void RemoveCabinetZombie::updateTask(float deltaTime)
 		float speedTurnAround = 10;
 		float speedStartAcc = 300;
 		float speedNormalAcc = 100;
-		float speedSlowDown = 6;
+		float speedSlowDown = 10;
 
 		float startAccBreakpoint = 150;
 		float minSpeedBeforeStop = 10;
@@ -152,7 +152,6 @@ void RemoveCabinetZombie::electricPuddle(Game &game)
 		ConversationBox::instance().setDialog(m_dialog);
 		ConversationBox::instance().setShown(true);
 	}
-
 }
 void RemoveCabinetZombie::safePuddle()
 {
