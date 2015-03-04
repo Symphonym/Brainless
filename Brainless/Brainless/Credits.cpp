@@ -1,6 +1,9 @@
 #include "Credits.h"
 #include "Renderer.h"
 #include "ResourceLoader.h"
+#include "MainMenu.h"
+#include "StateMachine.h"
+#include "SoundPlayer.h"
 
 Credits::Credits(StateMachine &machine)
 :
@@ -33,9 +36,12 @@ State(machine)
 	m_Animation_grass5.loop(0, 5, 5, 4.5f);
 	m_Animation_scarf.loop(0, 5, 6, 4.5f);
 
+	pushCreditsParagraph("Ake Studios", 250);
+	pushCreditsParagraph("Brainless", 150);
+
 	pushCreditsParagraph("Programming", 100);
 	pushCreditsParagraph("Jakob Larsson");
-	pushCreditsParagraph("Kevin Lövgren", 15);
+	pushCreditsParagraph("Kevin Lovgren");
 	pushCreditsParagraph("Tobias Melker");
 	pushCreditsParagraph("Svante Almbring");
 
@@ -45,7 +51,7 @@ State(machine)
 	pushCreditsParagraph("Olof Andersson");
 	pushCreditsParagraph("Linda Inghammar");
 	pushCreditsParagraph("Fredrik Olsson");
-	pushCreditsParagraph("Emelie Tordelöv");
+	pushCreditsParagraph("Emelie Tordelov");
 	pushCreditsParagraph("Pernilla Larsson");
 
 	pushCreditsParagraph("Game writing", 100);
@@ -53,22 +59,28 @@ State(machine)
 	pushCreditsParagraph("Robin Norén");
 
 	pushCreditsParagraph("Design", 100);
-	pushCreditsParagraph("Fredrik Söderberg");
+	pushCreditsParagraph("Fredrik Soderberg");
 
-	pushCreditsParagraph("Ljud", 100);
-	pushCreditsParagraph("Simon Enström");
+	pushCreditsParagraph("Sound", 100);
+	pushCreditsParagraph("Simon Enstrom");
 	pushCreditsParagraph("Fredrik Larsson");
 
-	pushCreditsParagraph("Musik", 100);
+	pushCreditsParagraph("Music", 100);
 	pushCreditsParagraph("Rasmus Andersparr");
-	pushCreditsParagraph("Gustaf Yngström");
+	pushCreditsParagraph("Gustaf Yngstrom");
 
 	resetCreditsPosition();
+
+	m_creditsBG.setTexture(ResourceLoader::instance().retrieveTexture("CreditsBG"));
 }
 
 void Credits::events(const sf::Event &event)
 {
-
+	if (event.type == sf::Event::MouseButtonPressed)
+	{
+		m_machine.popState();
+		m_machine.pushState<MainMenu>();
+	}
 }
 void Credits::update(float deltaTime)
 {
@@ -86,9 +98,9 @@ void Credits::update(float deltaTime)
 
 		text.setPosition(
 			m_window.getSize().x / 2.f - text.getGlobalBounds().width / 2.f,
-			text.getPosition().y - 200.f * deltaTime);
+			text.getPosition().y - 100.f * deltaTime);
 
-		if (i == m_creditText.size() - 1 && text.getPosition().y < 0)
+		if (i == m_creditText.size() - 1 && text.getPosition().y < -40)
 			resetCreditsPosition();
 	}
 
@@ -105,17 +117,21 @@ void Credits::draw()
 	Renderer::instance().drawHUD(m_backgroundElement_grass5);
 	Renderer::instance().drawHUD(m_backgroundElement_scarf);
 
+	Renderer::instance().drawHUD(m_creditsBG);
+
 	for (std::size_t i = 0; i < m_creditText.size(); i++)
 		Renderer::instance().drawHUD(m_creditText[i]);
 }
 
 void Credits::onStop()
 {
-
+	//Play music
+	SoundPlayer::instance().stopMusic("MenuMusic");
 }
 void Credits::onPlay()
 {
-
+	//Play music
+	SoundPlayer::instance().playMusic("MenuMusic", true, 20);
 }
 
 void Credits::resetCreditsPosition()

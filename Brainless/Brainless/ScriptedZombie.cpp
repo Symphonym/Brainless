@@ -1,5 +1,4 @@
 
-#include <iostream>
 #include "ScriptedZombie.h"
 #include "IdleZombie.h"
 #include "WalkingZombie.h"
@@ -17,7 +16,7 @@ m_scriptID(scriptID)
 	m_UnitID = Unit::ID_ScriptZombie;
 }
 
-//ScriptedZombie::ScriptedZombie(Zombie* baseZombie, int scriptID, std::vector<Level::ItemPtr> itemList)
+//ScriptedZombie::ScriptedZombie(Zombie* baseZombie, int scriptID, std::vector<Level::ItemPtr>& itemList)
 //:
 //m_baseZombie(baseZombie),
 //m_scriptID(scriptID),
@@ -47,7 +46,6 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 		if (otherItem.getName() == "Brain")
 		{
 			//switcheroo
-			std::cout << "switcheroo till RemoveCabinet" << std::endl;
 			Zombie* del = m_baseZombie;
 			
 			m_baseZombie = new RemoveCabinetZombie(del->getPosition(), del->getTextureID(),
@@ -70,7 +68,6 @@ void ScriptedZombie::serialize(std::ofstream &writer) const
 	writer << static_cast<int>(m_UnitID) << std::endl;
 
 	writer << m_scriptID << std::endl;
-	writer << "KOMSIKOMSI" << std::endl;
 
 	m_baseZombie->serialize(writer); 
 }
@@ -186,4 +183,20 @@ int ScriptedZombie::getTextureID()
 void ScriptedZombie::incrementTexture()
 {
 	m_baseZombie->incrementTexture();
+}
+
+void ScriptedZombie::electricPuddle(Game &game)
+{
+	if (m_baseZombie->getRealUnitType() == Unit::UnitType::ID_CabinetZombie)
+	{
+		((RemoveCabinetZombie *)m_baseZombie)->electricPuddle(game);
+	}
+
+}
+void ScriptedZombie::safePuddle()
+{
+	if (m_baseZombie->getRealUnitType() == Unit::UnitType::ID_CabinetZombie)
+	{
+		((RemoveCabinetZombie *)m_baseZombie)->safePuddle();
+	}
 }

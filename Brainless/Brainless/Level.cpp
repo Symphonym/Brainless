@@ -12,7 +12,7 @@
 Level::Level()
 :
 m_enableDarkness(false),
-m_musicName("NO_MUSIC_PROVIDED")
+m_musicName(Constants::NoMusicProvidedString)
 {
 	// Load game resources
 
@@ -137,7 +137,7 @@ void Level::reset()
 	m_items.clear();
 	m_sprites.clear();
 	m_backgrounds.clear();
-	m_musicName = "";
+	m_musicName = Constants::NoMusicProvidedString;
 }
 
 void Level::update(float deltaTime, Game &game)

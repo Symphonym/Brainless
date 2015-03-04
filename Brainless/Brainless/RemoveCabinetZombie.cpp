@@ -1,6 +1,6 @@
 #include "RemoveCabinetZombie.h"
 #include "ItemDatabase.h"
-//#include <iostream>
+#include "ConversationBox.h"
 
 #define MAX_SPEED_X (float) 200
 #define MAX_SPEED_Y (float) 200
@@ -22,6 +22,7 @@ m_direction(dir_right),
 m_target(target)
 {
 	m_isDamaging = false;
+	m_dialog.loadDialogFile("dialogues/zombie_scared.txt");
 }
 
 void RemoveCabinetZombie::serialize(std::ofstream &writer) const
@@ -137,22 +138,30 @@ void RemoveCabinetZombie::onCollideWithItem(Item &item)
 	}
 }
 
-//void RemoveCabinetZombie::electricPuddle()
-//{
-//	std::cout << "dangerousPuddle" << std::endl;
-//	m_direction = dir_noDirection;
-//	animation_idle();
-//	//play dialog
-//}
-//void RemoveCabinetZombie::safePuddle()
-//{
-//	std::cout << "safePuddle" << std::endl;
-//	if (m_position.x < m_target.x)
-//	{
-//		m_direction = dir_right;
-//	}
-//	else
-//	{
-//		m_direction = dir_left;
-//	}
-//}
+void RemoveCabinetZombie::electricPuddle(Game &game)
+{
+	m_direction = dir_noDirection;
+
+	if (m_dialogShown == false)
+	{
+		m_dialogShown = true;
+		sf::Vector2i onScreenPos = game.getWindow().mapCoordsToPixel(getPosition());
+
+		m_dialog.resetDialog();
+		ConversationBox::instance().setPosition(sf::Vector2f(onScreenPos.x, onScreenPos.y));
+		ConversationBox::instance().setDialog(m_dialog);
+		ConversationBox::instance().setShown(true);
+	}
+
+}
+void RemoveCabinetZombie::safePuddle()
+{
+	if (m_position.x < m_target.x)
+	{
+		m_direction = dir_right;
+	}
+	else
+	{
+		m_direction = dir_left;
+	}
+}
