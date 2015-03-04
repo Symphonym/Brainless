@@ -405,14 +405,14 @@
     <ClCompile Include="EmptyBagItem.cpp">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClCompile>
+    <ClCompile Include="ElectricalCabinetItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
     <ClCompile Include="ScriptedZombie.cpp">
       <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
     </ClCompile>
     <ClCompile Include="RemoveCabinetZombie.cpp">
       <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
-    </ClCompile>
-    <ClCompile Include="ElectricalCabinetItem.cpp">
-      <Filter>Source Files\Game\Items\ZombieInteractive</Filter>
     </ClCompile>
     <ClCompile Include="NewGameIntro.cpp">
       <Filter>Source Files\State Machine\States</Filter>
@@ -421,10 +421,13 @@
       <Filter>Source Files\State Machine\States</Filter>
     </ClCompile>
     <ClCompile Include="BookShelfItem.cpp">
-      <Filter>Source Files\Game\Items\Unsorted</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CrateItem.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Credits.cpp">
+      <Filter>Source Files\State Machine\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -719,14 +722,14 @@
     <ClInclude Include="EmptyBagItem.h">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClInclude>
+    <ClInclude Include="ElectricalCabinetItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
     <ClInclude Include="ScriptedZombie.h">
       <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
     </ClInclude>
     <ClInclude Include="RemoveCabinetZombie.h">
       <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
-    </ClInclude>
-    <ClInclude Include="ElectricalCabinetItem.h">
-      <Filter>Source Files\Game\Items\ZombieInteractive</Filter>
     </ClInclude>
     <ClInclude Include="NewGameIntro.h">
       <Filter>Source Files\State Machine\States</Filter>
@@ -735,10 +738,13 @@
       <Filter>Source Files\State Machine\States</Filter>
     </ClInclude>
     <ClInclude Include="BookShelfItem.h">
-      <Filter>Source Files\Game\Items\Unsorted</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CrateItem.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Credits.h">
+      <Filter>Source Files\State Machine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
