@@ -44,7 +44,7 @@ m_Animation_scarf(SPRITESIZE, SPRITESIZE)
 	m_volumeTexture.loadFromImage(volImg);
 	m_volumeSprite.setTexture(m_volumeTexture);
 
-	m_volumeSprite.setPosition(200, m_window.getSize().y - m_volumeSprite.getGlobalBounds().height*2.f - 120);
+	m_volumeSprite.setPosition(300, m_window.getSize().y - m_volumeSprite.getGlobalBounds().height*2.f - 140);
 	m_volumeSprite.setColor(sf::Color::Green);
 	m_curVolume = SoundPlayer::instance().getVolume();
 	m_volumeSprite.setScale(m_curVolume * 4, 1);
@@ -60,17 +60,17 @@ m_Animation_scarf(SPRITESIZE, SPRITESIZE)
 	m_volumeUpButton = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("PlusButton"),
 		ResourceLoader::instance().retrieveTexture("PlusButton_Pressed"),
-		sf::Vector2f(610, m_window.getSize().y - 250)));
+		sf::Vector2f(710, m_window.getSize().y - 260)));
 	m_volumeDownButton = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("MinusButton"),
 		ResourceLoader::instance().retrieveTexture("MinusButton_Pressed"),
-		sf::Vector2f(110, m_window.getSize().y - 250)));
+		sf::Vector2f(210, m_window.getSize().y - 260)));
 
 	m_volumeText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_volumeText.setCharacterSize(50);
 	m_volumeText.setColor(sf::Color::Green);
 	m_volumeText.setString("Volume: " + std::to_string(m_curVolume) + "%");
-	m_volumeText.setPosition(200, m_window.getSize().y - 260);
+	m_volumeText.setPosition(300, m_window.getSize().y - 260);
 
 	m_background.setTexture(ResourceLoader::instance().retrieveTexture("Menu_Background"));
 	m_backgroundElement_hair.setTexture(ResourceLoader::instance().retrieveTexture("Menu_Background_Elements"));

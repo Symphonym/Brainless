@@ -67,7 +67,7 @@ m_isMenu(false)
 	// Initialize save text
 	m_saveText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_saveText.setPosition(0, 0);
-	m_saveText.setCharacterSize(16);
+	m_saveText.setCharacterSize(20);
 	m_saveText.setString("File is saved!");
 	m_saveText.setColor(sf::Color::Green);
 
