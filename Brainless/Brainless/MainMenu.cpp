@@ -8,6 +8,7 @@
 #include "Renderer.h"
 #include "FileSave.h"
 #include "OptionsMenu.h"
+#include "Credits.h"
 
 #define SPRITESIZE 256 
 
@@ -101,6 +102,14 @@ void MainMenu::onPlay()
 	SoundPlayer::instance().playMusic("MenuMusic", true, 20);
 }
 
+void MainMenu::events(const sf::Event &event)
+{
+	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::L)
+	{
+		m_machine.popState();
+		m_machine.pushState<Credits>();
+	}
+}
 void MainMenu::update(float deltaTime)
 {
 	m_backgroundElement_hair.setTextureRect(m_Animation_hair.getRectangle(deltaTime));
