@@ -11,13 +11,33 @@ State(machine)
 {
 	m_buttons[0] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("Resume_Normal"),
-		ResourceLoader::instance().retrieveTexture("Resume_Pressed"),
-		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2)));
+		ResourceLoader::instance().retrieveTexture("Resume_Normal"),
+		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 230.f)));
 
 	m_buttons[1] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("MainMenuBack_Normal"),
-		ResourceLoader::instance().retrieveTexture("MainMenuBack_Pressed"),
-		sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 2 + 100.f)));
+		ResourceLoader::instance().retrieveTexture("MainMenuBack_Normal"),
+		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 160.f)));
+
+	m_buttons[2] = GuiPtr(new Button(
+		ResourceLoader::instance().retrieveTexture("saveGamePM_Normal"),
+		ResourceLoader::instance().retrieveTexture("saveGamePM_Normal"),
+		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 90.f)));
+
+	m_buttons[3] = GuiPtr(new Button(
+		ResourceLoader::instance().retrieveTexture("loadGamePM_Normal"),
+		ResourceLoader::instance().retrieveTexture("loadGamePM_Normal"),
+		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 20.f)));
+
+	m_buttons[4] = GuiPtr(new Button(
+		ResourceLoader::instance().retrieveTexture("optionsPM_Normal"),
+		ResourceLoader::instance().retrieveTexture("optionsPM_Normal"),
+		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 + 50.f)));
+
+	m_buttons[5] = GuiPtr(new Button(
+		ResourceLoader::instance().retrieveTexture("quitPM_Normal"),
+		ResourceLoader::instance().retrieveTexture("quitPM_Normal"),
+		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 + 120.f)));
 
 	m_background.setTexture(ResourceLoader::instance().retrieveTexture("PauseBackground"));
 }
