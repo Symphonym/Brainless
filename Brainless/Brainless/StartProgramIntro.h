@@ -33,6 +33,17 @@ private:
 
 	typedef std::unique_ptr<GUIElement> GuiPtr;
 	GuiPtr m_mouseInputButton;
+	sf::Sprite m_mouseInputBG;
+
+	struct KeyboardInput
+	{
+		sf::Text text;
+		sf::Keyboard::Key inputKey;
+		bool validated;
+	};
+	std::vector<KeyboardInput> m_keyboardInputs;
+	sf::Sprite m_keyInputBG;
+	void createKeyboardInput(const std::string &displayText, sf::Keyboard::Key inputKey);
 
 };
 
