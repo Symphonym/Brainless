@@ -25,8 +25,8 @@ public:
 	static const int InteractDistance = 150;
 	static const int StickInteractAddition = 100;
 
-	static const int SpiritFeatherWorth = 20;
-	static const int SpiritGhostCost = 50;
+	static const int SpiritFeatherWorth = 13;
+	static const int SpiritGhostCost = 26;
 
 	// Must never be zero, and must equal the amount of brains placed in the levels
 	static const int TotalBrainCount = 1;

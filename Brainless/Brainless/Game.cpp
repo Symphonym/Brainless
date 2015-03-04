@@ -83,7 +83,7 @@ m_player(nullptr)
 		}
 	});
 	m_spiritBar = new SpiritBar();
-	m_spiritBar->setMaxValue(160);
+	m_spiritBar->setMaxValue(156);
 	m_spiritBar->setPosition(sf::Vector2f(
 		5,
 		m_window.getSize().y - m_spiritBar->getSize().y - 5.f));

@@ -12,7 +12,7 @@
 Level::Level()
 :
 m_enableDarkness(false),
-m_musicName("")
+m_musicName("NO_MUSIC_PROVIDED")
 {
 	// Load game resources
 
