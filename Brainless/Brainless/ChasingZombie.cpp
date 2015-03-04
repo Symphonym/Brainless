@@ -23,7 +23,7 @@ m_target(s_playerPointer),
 m_chaseState(chase_idle),
 m_homePosition(startPosition)
 {
-	animation_idleSlow();
+	//animation_idleSlow();
 }
 
 
@@ -31,9 +31,11 @@ void ChasingZombie::serialize(std::ofstream &writer) const
 {
 	Unit::serialize(writer);
 
+	writer << m_textureId << std::endl;
+
 	writer << m_homePosition.x << std::endl;
 	writer << m_homePosition.y << std::endl;
-	writer << static_cast<int>(m_animState) << std::endl;
+	//writer << static_cast<int>(m_animState) << std::endl;
 	writer << m_maxWalkLenght << std::endl;
 	writer << m_currentLength << std::endl;
 	writer << static_cast<int>(m_direction) << std::endl;
@@ -43,11 +45,13 @@ void ChasingZombie::deserialize(std::ifstream &reader)
 {
 	Unit::deserialize(reader);
 
+	reader >> m_textureId;
+
 	reader >> m_homePosition.x >> m_homePosition.y;
 
-	int animType = 0;
-	reader >> animType;
-	m_animState = static_cast<AnimationState>(animType);
+	//int animType = 0;
+	//reader >> animType;
+	//m_animState = static_cast<AnimationState>(animType); //kan bli texture 0 vid idle -> idle, ingen animation byts fixa lite senare
 
 	reader >> m_maxWalkLenght;
 	reader >> m_currentLength;
@@ -136,16 +140,13 @@ void ChasingZombie::updateTask(float deltaTime)
 			//stare
 			else
 			{
-				std::cout << "test" << std::endl;
 				m_specialSpriteDirection = true;
 				if (m_target->getPosition().x < m_position.x)
 				{
-					std::cout << "left" << std::endl;
 					m_spriteDirection = dir_left;
 				}
 				else
 				{
-					std::cout << "right" << std::endl;
 					m_spriteDirection = dir_right;
 				}
 				animation_idleSlow();
@@ -221,7 +222,7 @@ void ChasingZombie::updateTask(float deltaTime)
 
 }
 
-int ChasingZombie::getWalkLenght()
+int ChasingZombie::getWalkLength()
 {
 	return m_maxWalkLenght;
 }

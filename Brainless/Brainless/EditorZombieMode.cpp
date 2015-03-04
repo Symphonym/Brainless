@@ -9,6 +9,7 @@
 #include "WalkingZombie.h"
 #include "ChasingZombie.h"
 #include "ScriptedZombie.h"
+#include <iostream>
 
 EditorZombieMode::EditorZombieMode()
 {
@@ -34,19 +35,39 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 		{
 		case Unit::ID_WalkingZombie:
 			temp1.sprite = level.getUnit(i).getSprite();
-			temp1.sprite.setPosition(temp1.sprite.getPosition() + sf::Vector2f((dynamic_cast<WalkingZombie*>(&level.getUnit(i)))->getWalkLenght(), 0));
+			temp1.sprite.setPosition(temp1.sprite.getPosition() + sf::Vector2f(/*(dynamic_cast<WalkingZombie*>(&*/level.getUnit(i)/*))->*/.getWalkLength(), 0));
 			temp1.sprite.setColor(sf::Color(255, 255, 255, 128));
 			m_zombieMasks.push_back(temp1);
 			break;
 		case Unit::ID_ChasingZombie:
 			temp1.sprite = level.getUnit(i).getSprite(); temp2.sprite = level.getUnit(i).getSprite();
-			temp1.sprite.setPosition(temp1.sprite.getPosition() + sf::Vector2f((dynamic_cast<ChasingZombie*>(&level.getUnit(i)))->getWalkLenght(), 0));
-			temp2.sprite.setPosition(temp2.sprite.getPosition() - sf::Vector2f((dynamic_cast<ChasingZombie*>(&level.getUnit(i)))->getWalkLenght(), 0));
+			temp1.sprite.setPosition(temp1.sprite.getPosition() + sf::Vector2f(/*(dynamic_cast<ChasingZombie*>(&*/level.getUnit(i)/*))->*/.getWalkLength(), 0));
+			temp2.sprite.setPosition(temp2.sprite.getPosition() - sf::Vector2f(/*(dynamic_cast<ChasingZombie*>(&*/level.getUnit(i)/*))->*/.getWalkLength(), 0));
 			temp1.sprite.setColor(sf::Color(255, 255, 255, 128));
 			temp2.sprite.setColor(sf::Color(255, 255, 255, 128));
 			m_zombieMasks.push_back(temp1);
 			m_zombieMasks.push_back(temp2);
 			break;
+		//case Unit::ID_ScriptZombie: //prevent faulty typecasting
+		//	switch (level.getUnit(i).getUnitType())
+		//	{
+		//	case Unit::ID_WalkingZombie:
+		//		temp1.sprite = level.getUnit(i).getSprite();
+		//		temp1.sprite.setPosition(temp1.sprite.getPosition() + sf::Vector2f((dynamic_cast<ScriptedZombie*>(&level.getUnit(i)))->getWalkLength(), 0));
+		//		temp1.sprite.setColor(sf::Color(255, 255, 255, 128));
+		//		m_zombieMasks.push_back(temp1);
+		//		break;
+		//	case Unit::ID_ChasingZombie:
+		//		temp1.sprite = level.getUnit(i).getSprite(); temp2.sprite = level.getUnit(i).getSprite();
+		//		temp1.sprite.setPosition(temp1.sprite.getPosition() + sf::Vector2f((dynamic_cast<ScriptedZombie*>(&level.getUnit(i)))->getWalkLength(), 0));
+		//		temp2.sprite.setPosition(temp2.sprite.getPosition() - sf::Vector2f((dynamic_cast<ScriptedZombie*>(&level.getUnit(i)))->getWalkLength(), 0));
+		//		temp1.sprite.setColor(sf::Color(255, 255, 255, 128));
+		//		temp2.sprite.setColor(sf::Color(255, 255, 255, 128));
+		//		m_zombieMasks.push_back(temp1);
+		//		m_zombieMasks.push_back(temp2);
+		//		break;
+		//	}
+		//	break;
 		}
 	}
 	if (event.type == sf::Event::MouseWheelMoved)
@@ -109,8 +130,12 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 				}
 				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				temp->updateAnimation(0);
-				if (m_script_id>=0) //Add scripted zombie
-					level.addUnit(std::move(Level::UnitPtr(new ScriptedZombie(dynamic_cast<Zombie*>(temp),m_script_id))));
+				if (m_script_id >= 0) //Add scripted zombie
+				{
+					level.addUnit(std::move(Level::UnitPtr(new ScriptedZombie(dynamic_cast<Zombie*>(temp), m_script_id))));
+					
+					std::cout << "hej" << std::endl;
+				}
 				else
 					level.addUnit(std::move(Level::UnitPtr(temp)));
 				return true;

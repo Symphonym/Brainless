@@ -420,6 +420,15 @@
     <ClCompile Include="StartProgramIntro.cpp">
       <Filter>Source Files\State Machine\States</Filter>
     </ClCompile>
+    <ClCompile Include="BookShelfItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CrateItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Credits.cpp">
+      <Filter>Source Files\State Machine\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -727,6 +736,15 @@
     </ClInclude>
     <ClInclude Include="StartProgramIntro.h">
       <Filter>Source Files\State Machine\States</Filter>
+    </ClInclude>
+    <ClInclude Include="BookShelfItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrateItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Credits.h">
+      <Filter>Source Files\State Machine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

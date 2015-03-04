@@ -27,7 +27,7 @@ public:
 
 	void flash(sf::Vector2f cameraPos);
 	void incrementTexture();
-	int getTexture();
+	int getTextureID();
 
 	bool collide(Unit *unit);
 protected:
@@ -37,11 +37,9 @@ protected:
 	void animation_walking();
 	void animation_idleSlow();
 	void animation_walkingSlow();
+	bool m_isDamaging;
 private:
 
-	bool m_isDoingScript;
-	
-	bool m_isDamaging;
 	//ZombieScript m_script;
 	float m_flashAlpha;
 };
