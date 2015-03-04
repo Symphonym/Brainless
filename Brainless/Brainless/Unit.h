@@ -104,6 +104,7 @@ public:
 	virtual int getWalkLength(){ return 0; }
 	virtual int getTextureID(){ return 0; }
 	virtual void incrementTexture(){};
+	void flash(sf::Vector2f cameraPos);
 protected:
 	RenderingModes m_renderingMode;
 	bool m_isMovementEnabled;
@@ -138,7 +139,7 @@ protected:
 
 	UnitType m_UnitID;
 private:
-
+	float m_flashAlpha;
 };
 
 

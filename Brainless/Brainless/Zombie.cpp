@@ -1,7 +1,6 @@
 #include "Zombie.h"
 #include "Item.h"
 #include "Game.h"
-#include "ParticleSystem.h"
 
 Zombie::Zombie(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID, int Texture)
 :
@@ -13,76 +12,6 @@ m_animState(anim_noAnimation)
 
 }
 
-void Zombie::flash(sf::Vector2f cameraPos)
-{
-	m_flashAlpha = 255;
-
-	ParticleSystem::instance().addParticles(
-		150,
-		sf::Vector2f(cameraPos.x, cameraPos.y - 400),
-		sf::Color::Blue,
-		sf::Vector2f(0.5f, 1),
-		sf::Vector2f(0, 360),
-		sf::Vector2f(0, 100),
-		sf::Vector2f(-800, 800),
-		sf::Vector2f(-300, 300),
-		sf::Vector2f(0, 5));
-
-	ParticleSystem::instance().addParticles(
-		150,
-		sf::Vector2f(cameraPos.x, cameraPos.y - 400),
-		sf::Color::Yellow,
-		sf::Vector2f(0.5f, 1),
-		sf::Vector2f(0, 360),
-		sf::Vector2f(0, 100),
-		sf::Vector2f(-700, 700),
-		sf::Vector2f(-300, 300),
-		sf::Vector2f(0, 5));
-
-	ParticleSystem::instance().addParticles(
-		150,
-		sf::Vector2f(cameraPos.x + 640, cameraPos.y),
-		sf::Color::Blue,
-		sf::Vector2f(0.5f, 1),
-		sf::Vector2f(0, 360),
-		sf::Vector2f(0, 100),
-		sf::Vector2f(-800, 0),
-		sf::Vector2f(-500, 300),
-		sf::Vector2f(0, 5));
-
-	ParticleSystem::instance().addParticles(
-		150,
-		sf::Vector2f(cameraPos.x - 640, cameraPos.y),
-		sf::Color::Blue,
-		sf::Vector2f(0.5f, 1),
-		sf::Vector2f(0, 360),
-		sf::Vector2f(0, 100),
-		sf::Vector2f(0, 800),
-		sf::Vector2f(-500, 300),
-		sf::Vector2f(0, 5));
-
-	ParticleSystem::instance().addParticles(
-		150,
-		sf::Vector2f(cameraPos.x + 640, cameraPos.y),
-		sf::Color::Yellow,
-		sf::Vector2f(0.5f, 1),
-		sf::Vector2f(0, 360),
-		sf::Vector2f(0, 100),
-		sf::Vector2f(-800, 0),
-		sf::Vector2f(-500, 300),
-		sf::Vector2f(0, 5));
-
-	ParticleSystem::instance().addParticles(
-		150,
-		sf::Vector2f(cameraPos.x - 640, cameraPos.y),
-		sf::Color::Yellow,
-		sf::Vector2f(0.5f, 1),
-		sf::Vector2f(0, 360),
-		sf::Vector2f(0, 100),
-		sf::Vector2f(0, 800),
-		sf::Vector2f(-500, 300),
-		sf::Vector2f(0, 5));
-}
 
 void Zombie::setDamaging(bool damaging)
 {

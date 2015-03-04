@@ -276,7 +276,8 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 					break;
 				}
 				/*temp = new ScriptedZombie(scriptedZombie, Utility::stringToNumber<int>(unitData[5]), level.getItems());*/ //MEMORY0
-				temp = new ScriptedZombie(scriptedZombie, Utility::stringToNumber<int>(unitData[5]));
+				//temp = new ScriptedZombie(scriptedZombie, Utility::stringToNumber<int>(unitData[5]));
+				temp = new ScriptedZombie(scriptedZombie, Utility::stringToNumber<int>(unitData[5]), &level);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
 				break;
 			default:
@@ -412,7 +413,8 @@ bool FileSave::loadLevelProgress(Level &level, int levelNumber)
 				unit->updateAnimation(0);
 				break;
 			case Unit::ID_ScriptZombie:
-				unit = Level::UnitPtr(new ScriptedZombie(nullptr, 0)); //MEMORY0 skicka med itemList
+				unit = Level::UnitPtr(new ScriptedZombie(nullptr, 0, &level));
+				//unit = Level::UnitPtr(new ScriptedZombie(nullptr, 0)); //MEMORY0 skicka med itemList
 				break;
 			}
 			if (unit) //not player I guess?

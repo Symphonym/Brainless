@@ -132,6 +132,7 @@
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DialogTree.cpp" />
     <ClCompile Include="DoorItem.cpp" />
+    <ClCompile Include="DropItemZombie.cpp" />
     <ClCompile Include="DuctTapeItem.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorGridMode.cpp" />
@@ -236,6 +237,7 @@
     <ClInclude Include="CrateItem.h" />
     <ClInclude Include="Credits.h" />
     <ClInclude Include="Cursor.h" />
+    <ClInclude Include="DropItemZombie.h" />
     <ClInclude Include="EmptyBagItem.h" />
     <ClInclude Include="NewGameIntro.h" />
     <ClInclude Include="NewspaperItem.h" />

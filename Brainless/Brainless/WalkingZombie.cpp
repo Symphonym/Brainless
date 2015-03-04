@@ -34,7 +34,6 @@ void WalkingZombie::serialize(std::ofstream &writer) const
 {
 	Unit::serialize(writer);
 
-	writer << "WALKIWALKI" << std::endl;
 
 	writer << m_textureId << std::endl;
 	writer << static_cast<int>(m_animState) << std::endl;
@@ -48,9 +47,6 @@ void WalkingZombie::serialize(std::ofstream &writer) const
 void WalkingZombie::deserialize(std::ifstream &reader)
 {
 	Unit::deserialize(reader);
-
-	std::string a;
-	reader >> a;
 
 	reader >> m_textureId;
 	m_animState = anim_noAnimation;
