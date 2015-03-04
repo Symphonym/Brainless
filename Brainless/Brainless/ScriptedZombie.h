@@ -77,6 +77,10 @@ public:
 	int getWalkLength();
 	int getTextureID();
 	void incrementTexture();
+
+	//script functioner
+	void electricPuddle();
+	void safePuddle();
 private:
 	int m_scriptID;
 	Zombie* m_baseZombie;

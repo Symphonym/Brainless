@@ -10,8 +10,8 @@ public:
 	void updateTask(float deltaTime);
 
 	virtual void onCollideWithItem(Item &item);
-	//void electricPuddle();
-	//void safePuddle();
+	void electricPuddle();
+	void safePuddle();
 
 	virtual void serialize(std::ofstream &writer) const;
 	virtual void deserialize(std::ifstream &reader);
