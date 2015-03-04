@@ -22,7 +22,7 @@ m_musicName("NO_MUSIC_PROVIDED")
 	{
 		layout.push_back(std::vector<Tile::TileTypes>());
 		for (int y = 0; y < Constants::MapHeight; y++)
-			layout[x].push_back(Tile::Ground);
+			layout[x].push_back(Tile::Nothing);
 	}
 	m_tileMap = MapPtr(new TileMap(layout, Constants::TileSize));
 }
@@ -130,7 +130,7 @@ void Level::reset()
 	for (int x = 0; x < Constants::MapWidth; x++)
 	{
 		for (int y = 0; y < Constants::MapHeight; y++)
-			m_tileMap->getTile(x, y).setType(Tile::Ground);
+			m_tileMap->getTile(x, y).setType(Tile::Nothing);
 	}
 
 	m_units.clear();
