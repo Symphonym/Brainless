@@ -23,7 +23,7 @@ m_loadingAnimDot(256, 256)
 		sf::Text newText;
 		newText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 		newText.setString(info);
-		newText.setCharacterSize(12);
+		newText.setCharacterSize(20);
 		newText.setColor(sf::Color::Color(0,255,0,150));
 		m_loadingText.push_back(newText);
 

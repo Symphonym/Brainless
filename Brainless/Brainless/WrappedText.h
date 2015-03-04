@@ -20,7 +20,7 @@ public:
 	const sf::Vector2f& getBoxSize() const;
 
 	//Put in a string that will be written
-	void Type(std::string text, float speed = 1, sf::Color color = sf::Color::Black, int textSize = 16);
+	void Type(std::string text, float speed = 1, sf::Color color = sf::Color::Black, int textSize = 18);
 
 	void Update(float deltaTime);
 
