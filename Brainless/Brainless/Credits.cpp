@@ -1,6 +1,9 @@
 #include "Credits.h"
 #include "Renderer.h"
 #include "ResourceLoader.h"
+#include "MainMenu.h"
+#include "StateMachine.h"
+#include "SoundPlayer.h"
 
 Credits::Credits(StateMachine &machine)
 :
@@ -35,7 +38,7 @@ State(machine)
 
 	pushCreditsParagraph("Programming", 100);
 	pushCreditsParagraph("Jakob Larsson");
-	pushCreditsParagraph("Kevin Lövgren", 15);
+	pushCreditsParagraph("Kevin Lövgren");
 	pushCreditsParagraph("Tobias Melker");
 	pushCreditsParagraph("Svante Almbring");
 
@@ -55,11 +58,11 @@ State(machine)
 	pushCreditsParagraph("Design", 100);
 	pushCreditsParagraph("Fredrik Söderberg");
 
-	pushCreditsParagraph("Ljud", 100);
+	pushCreditsParagraph("Sound", 100);
 	pushCreditsParagraph("Simon Enström");
 	pushCreditsParagraph("Fredrik Larsson");
 
-	pushCreditsParagraph("Musik", 100);
+	pushCreditsParagraph("Music", 100);
 	pushCreditsParagraph("Rasmus Andersparr");
 	pushCreditsParagraph("Gustaf Yngström");
 
@@ -70,7 +73,11 @@ State(machine)
 
 void Credits::events(const sf::Event &event)
 {
-
+	if (event.type == sf::Event::MouseButtonPressed)
+	{
+		m_machine.popState();
+		m_machine.pushState<MainMenu>();
+	}
 }
 void Credits::update(float deltaTime)
 {
@@ -90,7 +97,7 @@ void Credits::update(float deltaTime)
 			m_window.getSize().x / 2.f - text.getGlobalBounds().width / 2.f,
 			text.getPosition().y - 200.f * deltaTime);
 
-		if (i == m_creditText.size() - 1 && text.getPosition().y < 0)
+		if (i == m_creditText.size() - 1 && text.getPosition().y < -40)
 			resetCreditsPosition();
 	}
 
@@ -115,11 +122,13 @@ void Credits::draw()
 
 void Credits::onStop()
 {
-
+	//Play music
+	SoundPlayer::instance().stopMusic("MenuMusic");
 }
 void Credits::onPlay()
 {
-
+	//Play music
+	SoundPlayer::instance().playMusic("MenuMusic", true, 20);
 }
 
 void Credits::resetCreditsPosition()
