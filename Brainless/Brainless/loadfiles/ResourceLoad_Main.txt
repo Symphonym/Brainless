@@ -12,7 +12,8 @@
 
 # FONT LOADING
 
-+Font,fonts/VCR_OSD_MONO.ttf,DefaultFont
++Font,fonts/16bfZX.ttf,DefaultFont
+
 
 # TILE TEXTURE LOADING
 +Texture,images/TestImage.png,TestImage
