@@ -11,7 +11,7 @@ m_isLocked(locked),
 m_isOpen(false)
 {
 	m_usable = true;
-	m_renderingMode = RenderingModes::Depth;
+	m_renderingMode = RenderingModes::Behind;
 	m_pickupString = "It's too heavy for me to carry";
 	m_examineString = "It's a trashcan. I don't really have anything I want to get rid of at the moment.";
 }

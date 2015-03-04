@@ -68,7 +68,7 @@ bool EditorSpriteMode::update(float deltaTime, const sf::RenderWindow &editorWin
 
 
 	// Change between foreground/background
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::V))
 	{
 		m_highlightSprite.drawToForeground = true;
 		m_layerText.setString("Drawing to: FOREGROUND");
@@ -100,8 +100,14 @@ void EditorSpriteMode::addTexture(const std::string &textureName)
 
 void EditorSpriteMode::initializeSprites()
 {
-	addTexture("GroundCube");
-	addTexture("RedCube");
-	addTexture("BlueCube");
-	addTexture("TestImage");
+	addTexture("HorizontalPipe");
+	addTexture("LeftDownPipe");
+	addTexture("LeftPipe");
+	addTexture("LeftTopPipe");
+	addTexture("MiddlePipe");
+	addTexture("RightDownPipe");
+	addTexture("RightPipe");
+	addTexture("RightTopPipe");
+	addTexture("TopPipe");
+	addTexture("VerticallyPipe");
 }

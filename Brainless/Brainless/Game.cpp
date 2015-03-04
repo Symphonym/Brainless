@@ -260,8 +260,8 @@ void Game::events(const sf::Event &event)
 	// Disable game input when conversation is ongoing
 	if (!ConversationBox::instance().isShown())
 	{
-		m_inventory->events(event, *this);
 		m_popup->events(event, *this);
+		m_inventory->events(event, *this);
 	}
 	else
 		ConversationBox::instance().events(event, *this);

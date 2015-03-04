@@ -16,16 +16,26 @@
 
 
 # TILE TEXTURE LOADING
-
-+Texture,images/tiles/cube.png,GroundCube
-+Texture,images/tiles/cubeRed.png,RedCube
-+Texture,images/tiles/cubeBlue.png,BlueCube
 +Texture,images/TestImage.png,TestImage
 +Texture,images/tiles/cubeNada.png,AirCube
 +Texture,images/tiles/cubeStandard.png,StandardCube
 +Texture,images/tiles/cubeSmooth.png,SmoothCube
++Texture,images/tiles/cubeBlue.png,BlueCube
 +Texture,images/tiles/cubeTilted.png,TiltCube
 +Texture,images/tiles/cubePlatform.png,PlatformCube
+
+# SPRITE TEXTURE LOADING
++Texture,images/sprites/Pipes/Down-Pipe.png,DownPipe
++Texture,images/sprites/Pipes/horizontal-Pipe.png,HorizontalPipe
++Texture,images/sprites/Pipes/LeftDown-Pipe.png,LeftDownPipe
++Texture,images/sprites/Pipes/Left-Pipe.png,LeftPipe
++Texture,images/sprites/Pipes/LeftTop-Pipe.png,LeftTopPipe
++Texture,images/sprites/Pipes/Middle-Pipe.png,MiddlePipe
++Texture,images/sprites/Pipes/RightDown-Pipe.png,RightDownPipe
++Texture,images/sprites/Pipes/Right-Pipe.png,RightPipe
++Texture,images/sprites/Pipes/RightTop-Pipe.png,RightTopPipe
++Texture,images/sprites/Pipes/Top-Pipe.png,TopPipe
++Texture,images/sprites/Pipes/vertically-Pipe.png,VerticallyPipe
 
 # Solid invisible tile
 +Texture,images/tiles/solidInvisible.png,SolidInvisibleCube

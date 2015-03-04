@@ -1,7 +1,10 @@
 
 
 #include "ScriptedZombie.h"
-
+#include "IdleZombie.h"
+#include "WalkingZombie.h"
+#include "ChasingZombie.h"
+#include "resourceLoader.h"
 
 ScriptedZombie::ScriptedZombie(Zombie* baseZombie, int scriptID)
 :
@@ -30,11 +33,47 @@ void ScriptedZombie::takesDamage(sf::Vector2f collisionPos, int damage){ m_baseZ
 
 void ScriptedZombie::serialize(std::ofstream &writer) const //INTE KLART,
 { 
+	writer << m_scriptID << std::endl;
+	writer << static_cast<int>(m_baseZombie->getUnitType()) << std::endl;
+
 	m_baseZombie->serialize(writer); 
 }
 void ScriptedZombie::deserialize(std::ifstream &reader) //INTE KLART,
 { 
+	reader >> m_scriptID;
+	
+	int type;
+	UnitType unitType;
+	reader >> type;
+	unitType = static_cast<UnitType>(type);
+
+
+	switch (unitType)
+	{
+	case Unit::ID_IdleZombie:
+		m_baseZombie = new IdleZombie(sf::Vector2f(0, 0), Unit::dir_left, 0);
+		m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+		m_baseZombie->updateAnimation(0);
+		break;
+	case Unit::ID_WalkingZombie:
+		m_baseZombie = new WalkingZombie(sf::Vector2f(0, 0), 0, 0);
+		m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+		m_baseZombie->updateAnimation(0);
+		break;
+	case Unit::ID_ChasingZombie:
+		m_baseZombie = new ChasingZombie(sf::Vector2f(0, 0), 0, 0);
+		m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+		m_baseZombie->updateAnimation(0);
+		break;
+	}
+
+
 	m_baseZombie->deserialize(reader); 
+}
+
+int ScriptedZombie::getScriptID()
+{
+	return m_scriptID;
 }
 
 // Set player status

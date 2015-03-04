@@ -149,12 +149,14 @@
     <ClCompile Include="LongStickItem.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="ManholeItem.cpp" />
+    <ClCompile Include="NewGameIntro.cpp" />
     <ClCompile Include="NewspaperItem.cpp" />
     <ClCompile Include="NoteGame.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="PuddleCableItem.cpp" />
+    <ClCompile Include="RemoveCabinetZombie.cpp" />
     <ClCompile Include="RobotAkeAttack.cpp" />
     <ClCompile Include="RopeLadderItem.cpp" />
     <ClCompile Include="RpgGame.cpp" />
@@ -163,6 +165,7 @@
     <ClCompile Include="ScriptedZombie.cpp" />
     <ClCompile Include="SettingsMenu.cpp" />
     <ClCompile Include="SpikeItem.cpp" />
+    <ClCompile Include="StartProgramIntro.cpp" />
     <ClCompile Include="StuffedPaperBagItem.cpp" />
     <ClCompile Include="Turtle.cpp" />
     <ClCompile Include="SpiritBar.cpp" />
@@ -228,10 +231,13 @@
     <ClInclude Include="CraftingDatabase.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="EmptyBagItem.h" />
+    <ClInclude Include="NewGameIntro.h" />
     <ClInclude Include="NewspaperItem.h" />
+    <ClInclude Include="RemoveCabinetZombie.h" />
     <ClInclude Include="RopeLadderItem.h" />
     <ClInclude Include="ScriptedZombie.h" />
     <ClInclude Include="SpikeItem.h" />
+    <ClInclude Include="StartProgramIntro.h" />
     <ClInclude Include="StuffedPaperBagItem.h" />
     <ClInclude Include="DialogTree.h" />
     <ClInclude Include="DoorItem.h" />

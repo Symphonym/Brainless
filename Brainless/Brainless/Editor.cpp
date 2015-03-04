@@ -73,9 +73,9 @@ m_isMenu(false)
 
 	// Initialize level file text
 	m_levelFileText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
-	m_levelFileText.setPosition(200, 0);
+	m_levelFileText.setPosition(10, m_editor.getSize().y - 80);
+	m_levelFileText.setCharacterSize(15);
 	m_levelFileText.setColor(sf::Color::Green);
-	m_levelFileText.setString("Editing level: level" + std::to_string(m_currentLevelFileIndex) + ".txt");
 }
 Editor::~Editor()
 {
@@ -144,7 +144,9 @@ void Editor::loop()
 				// Save file
 				else if (event.key.code == sf::Keyboard::S && event.key.control)
 					saveFile();
-				else if (event.key.code == sf::Keyboard::F)
+
+				// Set spawn point
+				else if (event.key.code == sf::Keyboard::G)
 				{
 					m_spawnSprite.setPosition(m_editor.mapPixelToCoords(sf::Mouse::getPosition(m_editor)));
 					m_level.setSpawnPosition(m_spawnSprite.getPosition());
@@ -284,6 +286,13 @@ void Editor::loop()
 			m_camera.setCenter(curCenter);
 
 		}
+
+		// Update level info
+		m_levelFileText.setString("Editing level: level" + std::to_string(m_currentLevelFileIndex) + ".txt\n" +
+			"Items: " + std::to_string(m_level.getItems().size()) + "\n" + 
+			"Units: " + std::to_string(m_level.getUnits().size()) + "\n" + 
+			"Decorations: " + std::to_string(m_level.getDecorations().size()));
+
 
 		// Update editor camera
 		m_editor.setView(m_camera);

@@ -9,6 +9,7 @@ class ScriptedZombie : public Unit
 public:
 	
 	ScriptedZombie(Zombie* baseZombie, int scriptID);
+	ScriptedZombie(){};
 	/*
 	Updates the collisionbox's position, speed, acceleration
 	*/
@@ -25,6 +26,7 @@ public:
 
 	void serialize(std::ofstream &writer) const;
 	void deserialize(std::ifstream &reader);
+	int getScriptID();
 
 	// Set player status
 	void setInAir(bool inAir);

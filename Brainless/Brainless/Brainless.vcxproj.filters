@@ -411,6 +411,15 @@
     <ClCompile Include="ScriptedZombie.cpp">
       <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
     </ClCompile>
+    <ClCompile Include="RemoveCabinetZombie.cpp">
+      <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
+    </ClCompile>
+    <ClCompile Include="NewGameIntro.cpp">
+      <Filter>Source Files\State Machine\States</Filter>
+    </ClCompile>
+    <ClCompile Include="StartProgramIntro.cpp">
+      <Filter>Source Files\State Machine\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -709,6 +718,15 @@
     </ClInclude>
     <ClInclude Include="ScriptedZombie.h">
       <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoveCabinetZombie.h">
+      <Filter>Source Files\Unit\Zombies\ScriptZombies</Filter>
+    </ClInclude>
+    <ClInclude Include="NewGameIntro.h">
+      <Filter>Source Files\State Machine\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StartProgramIntro.h">
+      <Filter>Source Files\State Machine\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
