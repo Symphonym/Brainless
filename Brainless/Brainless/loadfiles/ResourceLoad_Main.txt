@@ -271,6 +271,78 @@
 +Texture,images/tiles/Grass/Corner/Grass_Corner_Not_DownRight.png,Grass_Corner_Not_DownRight
 +Texture,images/tiles/Grass/Corner/Grass_Corner_Full.png,Grass_Corner_Full
 
+#---Swamp---
+# /TopRight
++Texture,images/tiles/Sewer/TopRight/Sewer_Top_Right.png,Sewer_Top_Right
++Texture,images/tiles/Sewer/TopRight/Sewer_Top_Right_Corner.png,Sewer_Top_Right_Corner
+# /TopLeft
++Texture,images/tiles/Sewer/TopLeft/Sewer_Top_Left.png,Sewer_Top_Left
++Texture,images/tiles/Sewer/TopLeft/Sewer_Top_Left_Corner.png,Sewer_Top_Left_Corner
+
+# /Top
++Texture,images/tiles/Sewer/Top/Sewer_Top.png,Sewer_Top
++Texture,images/tiles/Sewer/Top/Sewer_Top_Alone.png,Sewer_Top_Alone
++Texture,images/tiles/Sewer/Top/Sewer_Top_Short.png,Sewer_Top_Short
++Texture,images/tiles/Sewer/Top/Sewer_Top_Corner_Left.png,Sewer_Top_Corner_Left
++Texture,images/tiles/Sewer/Top/Sewer_Top_Corner_Right.png,Sewer_Top_Corner_Right
++Texture,images/tiles/Sewer/Top/Sewer_Top_Corner_Full.png,Sewer_Top_Corner_Full
+
+# /Right
++Texture,images/tiles/Sewer/Right/Sewer_Right.png,Sewer_Right
++Texture,images/tiles/Sewer/Right/Sewer_Right_Alone.png,Sewer_Right_Alone
++Texture,images/tiles/Sewer/Right/Sewer_Right_Corner_Down.png,Sewer_Right_Corner_Down
++Texture,images/tiles/Sewer/Right/Sewer_Right_Corner_Top.png,Sewer_Right_Corner_Top
++Texture,images/tiles/Sewer/Right/Sewer_Right_Corner_Full.png,Sewer_Right_Corner_Full
+
+# /Middle
++Texture,images/tiles/Sewer/Middle/Sewer_Middle_Alone.png,Sewer_Middle_Alone
++Texture,images/tiles/Sewer/Middle/Sewer_Middle_Alone_Horizontal.png,Sewer_Middle_Alone_Horizontal
++Texture,images/tiles/Sewer/Middle/Sewer_Middle_Alone_Vertical.png,Sewer_Middle_Alone_Vertical
++Texture,images/tiles/Sewer/Middle/Sewer_Middle.png,Sewer_Middle
+
+# /Left
++Texture,images/tiles/Sewer/Left/Sewer_Left.png,Sewer_Left
++Texture,images/tiles/Sewer/Left/Sewer_Left_Alone.png,Sewer_Left_Alone
++Texture,images/tiles/Sewer/Left/Sewer_Left_Short.png,Sewer_Left_Short
++Texture,images/tiles/Sewer/Left/Sewer_Left_Corner_Down.png,Sewer_Left_Corner_Down
++Texture,images/tiles/Sewer/Left/Sewer_Left_Corner_Top.png,Sewer_Left_Corner_Top
++Texture,images/tiles/Sewer/Left/Sewer_Left_Corner_Full.png,Sewer_Left_Corner_Full
+
+# /DownRight
++Texture,images/tiles/Sewer/DownRight/Sewer_Down_Right.png,Sewer_Down_Right
++Texture,images/tiles/Sewer/DownRight/Sewer_Down_Right_Corner.png,Sewer_Down_Right_Corner
+
+# /DownLeft
++Texture,images/tiles/Sewer/DownLeft/Sewer_Down_Left.png,Sewer_Down_Left
++Texture,images/tiles/Sewer/DownLeft/Sewer_Down_Left_Corner.png,Sewer_Down_Left_Corner
+
+# /Down
++Texture,images/tiles/Sewer/Down/Sewer_Down.png,Sewer_Down
++Texture,images/tiles/Sewer/Down/Sewer_Down_Alone.png,Sewer_Down_Alone
++Texture,images/tiles/Sewer/Down/Sewer_Down_Corner_Left.png,Sewer_Down_Corner_Left
++Texture,images/tiles/Sewer/Down/Sewer_Down_Corner_Right.png,Sewer_Down_Corner_Right
++Texture,images/tiles/Sewer/Down/Sewer_Down_Corner_Full.png,Sewer_Down_Corner_Full
+
+# /Special
++Texture,images/tiles/Sewer/Special/Sewer_Tilt.png,Sewer_Tilt
++Texture,images/tiles/Sewer/Special/Sewer_Tilt_Corner.png,Sewer_Tilt_Corner
+
+# /Corner
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_TopLeft.png,Sewer_Corner_TopLeft
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_TopRight.png,Sewer_Corner_TopRight
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_TopLeft_TopRight.png,Sewer_Corner_TopLeft_TopRight
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_DownLeft.png,Sewer_Corner_DownLeft
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_DownRight.png,Sewer_Corner_DownRight
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_DownLeft_DownRight.png,Sewer_Corner_DownLeft_DownRight
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_TopLeft_DownLeft.png,Sewer_Corner_TopLeft_DownLeft
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_TopRight_DownRight.png,Sewer_Corner_TopRight_DownRight
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_TopLeft_DownRight.png,Sewer_Corner_TopLeft_DownRight
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_TopRight_DownLeft.png,Sewer_Corner_TopRight_DownLeft
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_Not_TopLeft.png,Sewer_Corner_Not_TopLeft
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_Not_TopRight.png,Sewer_Corner_Not_TopRight
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_Not_DownLeft.png,Sewer_Corner_Not_DownLeft
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_Not_DownRight.png,Sewer_Corner_Not_DownRight
++Texture,images/tiles/Sewer/Corner/Sewer_Corner_Full.png,Sewer_Corner_Full
 
 ### ITEM TEXTURE LOADING
 +Texture,images/items/Small-Duct tape.png,DuctTapeItem

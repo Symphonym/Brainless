@@ -621,6 +621,181 @@ void Tile::updateType()
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Grass_Corner_Full"));  m_autotilingRange = "GrassAutotiling";
 		break;
 
+		/*
+
+		Sewer
+
+		*/
+	case Sewer_Top_Right:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Top_Right")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Top_Right_Corner:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Top_Right_Corner")); m_autotilingRange = "SewerAutotiling";
+		break;
+
+	case Sewer_Top_Left:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Top_Left")); m_autotilingRange = "SewerAutotiling";
+		break;
+		/*case Sewer_Top_Left_Short:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Top_Left_Short")); m_autotilingRange = "SewerAutotiling";
+		break;*/
+	case Sewer_Top_Left_Corner:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Top_Left_Corner")); m_autotilingRange = "SewerAutotiling";
+		break;
+
+	case Sewer_Top:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Top")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Top_Alone:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Top_Alone")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Top_Short:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Top_Short")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Top_Corner_Left:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Top_Corner_Left")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Top_Corner_Right:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Top_Corner_Right")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Top_Corner_Full:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Top_Corner_Full")); m_autotilingRange = "SewerAutotiling";
+		break;
+
+
+	case Sewer_Right:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Right")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Right_Alone:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Right_Alone")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Right_Corner_Down:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Right_Corner_Down")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Right_Corner_Top:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Right_Corner_Top")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Right_Corner_Full:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Right_Corner_Full")); m_autotilingRange = "SewerAutotiling";
+		break;
+
+	case Sewer_Middle:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Middle")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Middle_Alone:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Middle_Alone")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Middle_Alone_Horizontal:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Middle_Alone_Horizontal")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Middle_Alone_Vertical:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Middle_Alone_Vertical")); m_autotilingRange = "SewerAutotiling";
+		break;
+
+
+	case Sewer_Left:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Left")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Left_Short:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Left_Short")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Left_Alone:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Left_Alone")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Left_Corner_Down:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Left_Corner_Down")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Left_Corner_Top:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Left_Corner_Top")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Left_Corner_Full:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Left_Corner_Full")); m_autotilingRange = "SewerAutotiling";
+		break;
+
+	case Sewer_Down_Right:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Down_Right")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Down_Right_Corner:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Down_Right_Corner")); m_autotilingRange = "SewerAutotiling";
+		break;
+
+	case Sewer_Down_Left:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Down_Left")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Down_Left_Corner:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Down_Left_Corner")); m_autotilingRange = "SewerAutotiling";
+		break;
+
+	case Sewer_Down:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Down")); m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Down_Alone:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Down_Alone"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Down_Corner_Left:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Down_Corner_Left"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Down_Corner_Right:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Down_Corner_Right"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Down_Corner_Full:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Down_Corner_Full"));  m_autotilingRange = "SewerAutotiling";
+		break;
+
+	case Sewer_Tilt:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Tilt"));
+		m_tilt = true;
+		break;
+	case Sewer_Tilt_Corner:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Tilt_Corner"));
+		break;
+
+	case Sewer_Corner_TopLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_TopLeft"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Corner_TopRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_TopRight"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Corner_TopLeft_TopRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_TopLeft_TopRight"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Corner_DownLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_DownLeft"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Corner_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_DownRight"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Corner_DownLeft_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_DownLeft_DownRight"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Corner_TopLeft_DownLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_TopLeft_DownLeft"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Corner_TopRight_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_TopRight_DownRight"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Corner_TopLeft_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_TopLeft_DownRight"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Corner_TopRight_DownLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_TopRight_DownLeft"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Corner_Not_TopLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_Not_TopLeft"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Corner_Not_TopRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_Not_TopRight"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Corner_Not_DownLeft:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_Not_DownLeft"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Corner_Not_DownRight:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_Not_DownRight"));  m_autotilingRange = "SewerAutotiling";
+		break;
+	case Sewer_Corner_Full:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("Sewer_Corner_Full"));  m_autotilingRange = "SewerAutotiling";
+		break;
+
 	case Solid_Invisible:
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("SolidInvisibleCube"));
 		m_editorVisibleOnly = true;
