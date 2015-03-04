@@ -414,6 +414,12 @@
     <ClCompile Include="ElectricalCabinetItem.cpp">
       <Filter>Source Files\Game\Items\ZombieInteractive</Filter>
     </ClCompile>
+    <ClCompile Include="NewGameIntro.cpp">
+      <Filter>Source Files\State Machine\States</Filter>
+    </ClCompile>
+    <ClCompile Include="StartProgramIntro.cpp">
+      <Filter>Source Files\State Machine\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -715,6 +721,12 @@
     </ClInclude>
     <ClInclude Include="ElectricalCabinetItem.h">
       <Filter>Source Files\Game\Items\ZombieInteractive</Filter>
+    </ClInclude>
+    <ClInclude Include="NewGameIntro.h">
+      <Filter>Source Files\State Machine\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StartProgramIntro.h">
+      <Filter>Source Files\State Machine\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

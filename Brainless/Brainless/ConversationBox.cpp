@@ -222,7 +222,7 @@ void ConversationBox::loadNextOptions()
 		sf::Text option;
 		option.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 		option.setString(parseString(m_dialog.getCurrentOptions()[i].first));
-		option.setCharacterSize(15);
+		option.setCharacterSize(18);
 	
 		// Set text position to match that of the dialog box
 		/*option.setPosition(

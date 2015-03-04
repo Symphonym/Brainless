@@ -56,7 +56,7 @@ void EditorItemMode::reloadDebugText(Level &level)
 		sf::Text text;
 		text.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 		text.setString("Name: " + curItem.getName() + "\nID: " + std::to_string(curItem.getID()) + "\nSyncID: " + std::to_string(curItem.getSyncID()));
-		text.setCharacterSize(12);
+		text.setCharacterSize(14);
 
 		sf::Vector2f textPos(
 			curItem.getInteractBounds().left,
@@ -109,7 +109,7 @@ bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &edit
 			sf::Text text;
 			text.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 			text.setString("Name: " + newItem->getName() + "\nID: " + std::to_string(newItem->getID()) + "\nSyncID: " + std::to_string(newItem->getSyncID()));
-			text.setCharacterSize(12);
+			text.setCharacterSize(14);
 
 			sf::Vector2f textPos(
 				newItem->getInteractBounds().left,

@@ -83,7 +83,7 @@ m_player(nullptr)
 		}
 	});
 	m_spiritBar = new SpiritBar();
-	m_spiritBar->setMaxValue(160);
+	m_spiritBar->setMaxValue(156);
 	m_spiritBar->setPosition(sf::Vector2f(
 		5,
 		m_window.getSize().y - m_spiritBar->getSize().y - 5.f));
@@ -178,7 +178,10 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 	// Add player to level
 	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(player_location))));
 	FileSave::loadGameData(*this); // Load core game data for player
-
+	if (m_player->getHealth() == -99) //If the player died reset their hp
+	{
+		m_player->setHealth(m_player->getMaxHealth());
+	}
 	// Auto save when loading a new level
 	saveGame();
 
@@ -260,8 +263,8 @@ void Game::events(const sf::Event &event)
 	// Disable game input when conversation is ongoing
 	if (!ConversationBox::instance().isShown())
 	{
-		m_inventory->events(event, *this);
 		m_popup->events(event, *this);
+		m_inventory->events(event, *this);
 	}
 	else
 		ConversationBox::instance().events(event, *this);
@@ -326,12 +329,18 @@ void Game::update(float deltaTime)
 			}
 		}
 	}
-	//Player outside room
+	//If player is dead 
+	if (m_player->getHealth() <= 0 && m_player->getSpeed().y==0 && !m_levelTransition->getActive())
+	{
+		changeLevelTransition(m_levelIndex, false);
+		m_player->setHealth(-99);
+	}
+	//if player is outside room
 	if (m_player->getPosition().x > (Constants::MapWidth - 1)*Constants::TileSize && !m_levelTransition->getActive())
 		changeLevelTransition(m_levelIndex + 1, false);
 	if (m_player->getPosition().x < Constants::TileSize*0.5 && !m_levelTransition->getActive())
 		changeLevelTransition(m_levelIndex - 1, false);
-	//Player bound whitin room sides
+	//Keep player bound whitin room sides
 	m_player->setPosition(sf::Vector2f(Utility::clampValue<float>(m_player->getPosition().x, Constants::TileSize*0.1, (Constants::MapWidth - 0.5)*Constants::TileSize), m_player->getPosition().y));
 
 }

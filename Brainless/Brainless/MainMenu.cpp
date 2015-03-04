@@ -1,6 +1,7 @@
 #include "MainMenu.h"
 #include "StateMachine.h"
 #include "Game.h"
+#include "NewGameIntro.h"
 #include "Button.h"
 #include "ResourceLoader.h"
 #include "SoundPlayer.h"
@@ -136,8 +137,10 @@ void MainMenu::update(float deltaTime)
 		if (m_newGameButtons[0]->getReleased(m_machine.getWindow()))
 		{
 			FileSave::wipeProgress();
+			//m_machine.popState();
+			//m_machine.pushState<Game>();
 			m_machine.popState();
-			m_machine.pushState<Game>();
+			m_machine.pushState<NewGameIntro>();
 		}
 
 		// No

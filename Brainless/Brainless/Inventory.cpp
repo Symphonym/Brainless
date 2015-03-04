@@ -281,13 +281,13 @@ void Inventory::update(float deltaTime, Game &game)
 			m_highlightText.setString(invPair->first->getName());
 			m_highlightText.setPosition(
 				invPair->first->getPosition().x + invPair->first->getSprite().getGlobalBounds().width/2.f - m_highlightText.getGlobalBounds().width/2.f,
-				invPair->first->getPosition().y + 10.f);
+				invPair->first->getPosition().y + 10);
 
 			if (m_highlightText.getPosition().x < 0)
 					m_highlightText.setPosition(0, m_highlightText.getPosition().y);
 
 			m_highlightBGSprite.setScale(m_highlightText.getGlobalBounds().width + 6.f, m_highlightText.getGlobalBounds().height + 6.f);
-			m_highlightBGSprite.setPosition(m_highlightText.getPosition().x - 3.f, m_highlightText.getPosition().y + 3.f);
+			m_highlightBGSprite.setPosition(m_highlightText.getPosition().x - 3.f, m_highlightText.getPosition().y + 10.f);
 		}
 		else
 			m_showHighlighText = false;
