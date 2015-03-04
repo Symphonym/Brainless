@@ -19,6 +19,8 @@ public:
 
 private:
 
+	sf::Sprite m_creditsBG;
+
 	std::vector<sf::Text> m_creditText;
 
 	sf::Sprite m_background;

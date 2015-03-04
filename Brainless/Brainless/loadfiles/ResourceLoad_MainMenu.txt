@@ -25,3 +25,6 @@
 
 # MUSIC
 +Music,music/MenuMusic.wav,MenuMusic
+
+#Credits texture
++Texture,images/UI/creditsShading.png,CreditsBG
