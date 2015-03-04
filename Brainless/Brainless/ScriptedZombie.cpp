@@ -70,22 +70,27 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 
 	else if (m_scriptID == 1)
 	{
-		if (otherItem.getName() == "Brain")
+		if (m_baseZombie->getUnitType() != Unit::UnitType::ID_ItemZombie)
 		{
-			flash(game.getPlayer().getCameraPosition());
-			game.addSavedZombie(1);
-			//switcheroo
-			Zombie* del = m_baseZombie;
+			if (otherItem.getName() == "Brain")
+			{
+				flash(game.getPlayer().getCameraPosition());
+				game.addSavedZombie(1);
+				//switcheroo
+				Zombie* del = m_baseZombie;
 
-			DropItemZombie* ptr;
-			ptr = new DropItemZombie(del->getPosition(), del->getTextureID(), del->getDirection());
-			ptr->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-			ptr->updateAnimation(0);
-			m_baseZombie = ptr;
+				DropItemZombie* ptr;
+				ptr = new DropItemZombie(del->getPosition(), del->getTextureID(), del->getDirection());
+				ptr->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+				ptr->updateAnimation(0);
+				m_baseZombie = ptr;
 
-			delete(del);
-			return ptr->releaseItems(m_levelPtr, game);
+				delete(del);
+				return ptr->releaseItems(m_levelPtr, game);
+			}
 		}
+		else
+			return false;
 	}
 	else 
 	return m_baseZombie->onInteractedWith(otherItem, game);
