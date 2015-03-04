@@ -260,7 +260,7 @@ int Player::getMaxHealth()
 	return m_maxHp;
 }
 
-void Player::takesDamage(sf::Vector2f collisionDifference, int damage)
+void Player::takesDamage(sf::Vector2f damageOrigin, int damage)
 {
 	if (!m_isMovementEnabled)
 		return;
@@ -269,8 +269,16 @@ void Player::takesDamage(sf::Vector2f collisionDifference, int damage)
 		m_hp -= damage;
 		SoundPlayer::instance().playSound("player_hurt", getPosition());
 		m_acceleration = sf::Vector2f(0, 0);
-		if (0 < collisionDifference.x) m_speed.x = -200;
-		else if (collisionDifference.x != 0) m_speed.x = 200;
+		if (0 < damageOrigin.x - m_position.x)
+		{
+			m_speed.x = -200;
+			m_spriteDirection = dir_right;
+		}
+		else if (damageOrigin.x - m_position.x != 0)
+		{
+			m_speed.x = 200;
+			m_spriteDirection = dir_left;
+		}
 		m_speed.y = -400;
 		m_inAir = true;
 		m_inTilt = false;
@@ -278,9 +286,7 @@ void Player::takesDamage(sf::Vector2f collisionDifference, int damage)
 		m_jumpPower = 0;
 		m_jumpState = jump_ready;
 		//specialSpriteDirection is set in animationUpdate
-		if (0 < collisionDifference.x) m_spriteDirection = dir_right;
-		else m_spriteDirection = dir_left;
-
+		
 		if (0 < m_hp)
 		{
 			m_damageState = dmg_damaged;

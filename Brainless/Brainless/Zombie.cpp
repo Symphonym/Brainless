@@ -54,7 +54,7 @@ int Zombie::getTextureID()
 void Zombie::onCollideWith(Unit *unit)
 {
 	if (m_isDamaging)
-		unit->takesDamage(m_position - unit->getPosition());
+		unit->takesDamage(m_position);
 }
 
 void Zombie::updateAnimation(float deltaTime)
