@@ -42,6 +42,8 @@
 #include "StuffedPaperBagItem.h"
 #include "NewspaperItem.h"
 #include "EmptyBagItem.h"
+#include "BookShelfItem.h"
+#include "CrateItem.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -112,7 +114,8 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new StuffedPaperBagItem(42)));
 	addItem(ItemPtr(new NewspaperItem(43)));
 	addItem(ItemPtr(new EmptyBagItem(44)));
-
+	addItem(ItemPtr(new BookShelfItem(45)));
+	addItem(ItemPtr(new CrateItem(46)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)

@@ -299,6 +299,8 @@
 +Texture,images/items/Stuffed Bag.png,StuffedBagItem
 +Texture,images/items/Newspapper.png,NewspaperItem
 +Texture,images/items/Plastic Bag.png,EmptyBagItem
++Texture,images/items/bookShelf.png,bookShelf
++Texture,images/items/Crate.png,Crate
 
 # Arcade disc items
 +Texture,images/items/discs/Big-Disk-Blue.png,ArcadeDiscItemBlueBig
