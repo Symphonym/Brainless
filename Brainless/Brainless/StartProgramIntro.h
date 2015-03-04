@@ -4,6 +4,8 @@
 #include "State.h"
 #include <vector>
 #include <functional>
+#include <memory>
+#include "GUIElement.h"
 
 class StartProgramIntro : public State
 {
@@ -19,6 +21,18 @@ public:
 	virtual void onPlay();
 
 private:
+
+	enum class IntroStates
+	{
+		MouseInput,
+		MouseOutro,
+		KeyboardInput,
+		KeyboardOutro
+	};
+	IntroStates m_currentState;
+
+	typedef std::unique_ptr<GUIElement> GuiPtr;
+	GuiPtr m_mouseInputButton;
 
 	// Pumps the next instruction into the system
 	void pumpInstruction();

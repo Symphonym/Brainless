@@ -1,0 +1,5 @@
+# TEST NOTIFICATION TEXTURE
++Texture,images/UI/dialoguebox.png,DialogBoxBackground
+
++Texture,images/UI/newgame_normal.png,NewGame_Normal
++Texture,images/UI/newgame_pressed.png,NewGame_Pressed
