@@ -11,6 +11,7 @@ public:
 
 
 	ScriptedZombie(Zombie* baseZombie, int scriptID);
+	ScriptedZombie(Zombie* baseZombie, int scriptID, Level* levelPtr);
 //	ScriptedZombie(Zombie* baseZombie, int scriptID, std::vector<Level::ItemPtr> itemList); //MEMORY0
 
 	/*
@@ -77,6 +78,7 @@ public:
 	int getWalkLength();
 	int getTextureID();
 	void incrementTexture();
+	void flash(sf::Vector2f cameraPos);
 
 	//script functioner
 	void electricPuddle(Game &game);
@@ -85,7 +87,7 @@ private:
 	int m_scriptID;
 	Zombie* m_baseZombie;
 	//std::vector<Level::ItemPtr> m_itemList; //MEMORY0
-
+	Level* m_levelPtr;
 };
 
 

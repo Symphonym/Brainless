@@ -25,7 +25,7 @@ public:
 	// If set to false, this zombie will not deal damage
 	void setDamaging(bool damaging);
 
-	void flash(sf::Vector2f cameraPos);
+	
 	void incrementTexture();
 	int getTextureID();
 
@@ -39,9 +39,6 @@ protected:
 	void animation_walkingSlow();
 	bool m_isDamaging;
 private:
-
-	//ZombieScript m_script;
-	float m_flashAlpha;
 };
 
 #endif
