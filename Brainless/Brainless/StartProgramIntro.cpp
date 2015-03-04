@@ -41,8 +41,9 @@ void StartProgramIntro::update(float deltaTime)
 		{
 			m_machine.popState();
 			m_machine.pushState<OptionsMenu>();
-		}
 			m_currentState = IntroStates::KeyboardInput;
+
+		}
 	}
 
 	/*if (!m_instructions.empty())
