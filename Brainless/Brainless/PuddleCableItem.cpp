@@ -46,8 +46,8 @@ bool PuddleCableItem::onCollisionWithUnit(Unit &unit, Game &game)
 		else
 		{
 			unit.takesDamage(sf::Vector2f(
-				getPosition().x + getSprite().getGlobalBounds().width / 2.f,
-				getPosition().y + getSprite().getGlobalBounds().height / 2.f));
+				getCollisionBounds().left + getCollisionBounds().width / 2.f,
+				getCollisionBounds().top + getCollisionBounds().height / 2.f));
 		}
 	}
 	else
