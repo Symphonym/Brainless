@@ -12,7 +12,10 @@ Item("Brain","BrainItemInv", "BrainItem", id)
 
 bool BrainItem::onInteractUnit(Unit &unit)
 {
-	return unit.getUnitType() != unit.ID_Player;
+
+	return unit.getUnitType() != unit.ID_Player
+		&& unit.getUnitType() != unit.ID_CabinetZombie 
+		&& unit.getUnitType() != unit.ID_ItemZombie;
 }
 
 Item* BrainItem::clone()

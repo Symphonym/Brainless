@@ -53,19 +53,23 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 	
 	if (m_scriptID == 0)
 	{
-		if (otherItem.getName() == "Brain")
+		if (m_baseZombie->getUnitType() != Unit::UnitType::ID_CabinetZombie)
 		{
-			flash(game.getPlayer().getCameraPosition());
-			game.addSavedZombie(1);
-			//switcheroo
-			Zombie* del = m_baseZombie;
-			
-			m_baseZombie = new RemoveCabinetZombie(del->getPosition(), del->getTextureID(),
-				del->getPosition() + sf::Vector2f(1000, 0));
-			m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
-			delete(del);
-			return false;
+			if (otherItem.getName() == "Brain")
+			{
+				flash(game.getPlayer().getCameraPosition());
+				game.addSavedZombie(1);
+				//switcheroo
+				Zombie* del = m_baseZombie;
+
+				m_baseZombie = new RemoveCabinetZombie(del->getPosition(), del->getTextureID(),
+					del->getPosition() + sf::Vector2f(1000, 0));
+				m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+				delete(del);
+				return false;
+			}
 		}
+		else return false;
 	}
 
 	else if (m_scriptID == 1)
