@@ -33,6 +33,8 @@ public:
 
 	static const std::string CantPickUpString;
 	static const std::string CantUseString;
+
+	static const std::string NoMusicProvidedString;
 };
 
 #endif

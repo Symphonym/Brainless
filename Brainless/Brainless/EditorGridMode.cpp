@@ -60,6 +60,8 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 		Tile::Wood_Tilt,
 		Tile::Wood_Tilt_Corner,
 
+		Tile::Road_Top_Alone,
+		Tile::Wood_Top_Alone,
 
 		Tile::Grass_Top_Alone,
 		Tile::Grass_Tilt,
