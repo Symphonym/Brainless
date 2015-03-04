@@ -34,38 +34,39 @@ Item* ElectricalCabinetItem::clone()
 }
 int ElectricalCabinetItem::getScriptUnitType()
 {
-	return Unit::UnitType::ID_WalkingZombie;
+	return Unit::UnitType::ID_CabinetZombie;
 }
 
 bool ElectricalCabinetItem::onCollisionWithUnit(Unit &unit, Game &game)
 {
 	//test
-	if (unit.getUnitType() == Unit::UnitType::ID_WalkingZombie)
+	if (unit.getUnitType() == Unit::UnitType::ID_CabinetZombie)
 	{
-		sf::Vector2f floorPosition(getPosition().x + getSprite().getGlobalBounds().width/2, getPosition().y + getSprite().getGlobalBounds().height/2);
+		//autoloot works
+		//sf::Vector2f floorPosition(getPosition().x + getSprite().getGlobalBounds().width/2, getPosition().y + getSprite().getGlobalBounds().height/2);
 
-		// Spawn items when chest is opened
-		for (std::size_t i = 0; i < m_itemsWithin.size(); i++)
-		{
+		//// Spawn items when chest is opened
+		//for (std::size_t i = 0; i < m_itemsWithin.size(); i++)
+		//{
 
 
-			ItemDatabase::ItemPtr item = std::move(ItemDatabase::instance().extractItem(m_itemsWithin[i]));
+		//	ItemDatabase::ItemPtr item = std::move(ItemDatabase::instance().extractItem(m_itemsWithin[i]));
 
-			// Make sure items in the chest are lootable
-			if (!item->isLootable())
-				continue;
+		//	// Make sure items in the chest are lootable
+		//	if (!item->isLootable())
+		//		continue;
 
-			item->setPosition(sf::Vector2f(floorPosition.x, floorPosition.y - item->getSprite().getGlobalBounds().height));
+		//	item->setPosition(sf::Vector2f(floorPosition.x, floorPosition.y - item->getSprite().getGlobalBounds().height));
 
-			int offset = std::rand() % 150;
-			if (std::rand() % 2 == 0)
-				offset *= -1;
+		//	int offset = std::rand() % 150;
+		//	if (std::rand() % 2 == 0)
+		//		offset *= -1;
 
-			item->setPosition(sf::Vector2f(item->getPosition().x + offset, item->getPosition().y));
+		//	item->setPosition(sf::Vector2f(item->getPosition().x + offset, item->getPosition().y));
 
-			game.getLevel().addItemToBuffer(std::move(item));
-		}
-		m_itemsWithin.clear();
+		//	game.getLevel().addItemToBuffer(std::move(item));
+		//}
+		//m_itemsWithin.clear();
 
 		flyOff();
 

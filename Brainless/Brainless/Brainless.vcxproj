@@ -112,6 +112,7 @@
     <ClCompile Include="ArcadeMachine.cpp" />
     <ClCompile Include="ArcadeMachineItem.cpp" />
     <ClCompile Include="BeachParty.cpp" />
+    <ClCompile Include="BookShelfItem.cpp" />
     <ClCompile Include="Boop.cpp" />
     <ClCompile Include="BrainItem.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -126,7 +127,7 @@
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="ConversationBox.cpp" />
     <ClCompile Include="CraftingDatabase.cpp" />
-    <ClCompile Include="Credits.cpp" />
+    <ClCompile Include="CrateItem.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DialogTree.cpp" />
     <ClCompile Include="DoorItem.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="ArcadeMachine.h" />
     <ClInclude Include="ArcadeMachineItem.h" />
     <ClInclude Include="BeachParty.h" />
+    <ClInclude Include="BookShelfItem.h" />
     <ClInclude Include="Boop.h" />
     <ClInclude Include="BrainItem.h" />
     <ClInclude Include="Button.h" />
@@ -230,7 +232,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ConversationBox.h" />
     <ClInclude Include="CraftingDatabase.h" />
-    <ClInclude Include="Credits.h" />
+    <ClInclude Include="CrateItem.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="EmptyBagItem.h" />
     <ClInclude Include="NewGameIntro.h" />
