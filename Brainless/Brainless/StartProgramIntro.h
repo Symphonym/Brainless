@@ -34,16 +34,6 @@ private:
 	typedef std::unique_ptr<GUIElement> GuiPtr;
 	GuiPtr m_mouseInputButton;
 
-	// Pumps the next instruction into the system
-	void pumpInstruction();
-
-	typedef std::function<bool()> InstructionFunc;
-
-	// Text to display for instruction, and and function containing info about what actions must be done
-	// to move onto the next action
-	typedef std::pair <std::string, InstructionFunc> Instruction;
-
-	std::vector<Instruction> m_instructions;
 };
 
 #endif

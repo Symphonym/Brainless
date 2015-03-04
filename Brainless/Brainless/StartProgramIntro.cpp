@@ -1,7 +1,7 @@
 #include "StartProgramIntro.h"
 #include "Notification.h"
 #include "StateMachine.h"
-#include "MainMenu.h"
+#include "OptionsMenu.h"
 #include "ResourceLoader.h"
 #include "Button.h"
 #include "Renderer.h"
@@ -12,18 +12,6 @@ State(machine),
 m_currentState(IntroStates::MouseInput)
 {
 	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_StartProgramIntro.txt");
-	m_instructions.push_back(std::make_pair(
-		"Press the left mouse button to advance", []() -> bool
-	{
-		return sf::Mouse::isButtonPressed(sf::Mouse::Left);
-	}));
-	m_instructions.push_back(std::make_pair(
-		"Press the B button to advance", []() -> bool
-	{
-		return sf::Keyboard::isKeyPressed(sf::Keyboard::B);
-	}));
-
-	Notification::instance().write(m_instructions.back().first);
 
 	m_mouseInputButton = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("NewGame_Normal"),
@@ -50,6 +38,10 @@ void StartProgramIntro::update(float deltaTime)
 	else if (m_currentState == IntroStates::MouseOutro)
 	{
 		if (!Notification::instance().isShown())
+		{
+			m_machine.popState();
+			m_machine.pushState<OptionsMenu>();
+		}
 			m_currentState = IntroStates::KeyboardInput;
 	}
 
@@ -95,12 +87,6 @@ void StartProgramIntro::onStop()
 
 }
 void StartProgramIntro::onPlay()
-{
-
-}
-
-
-void StartProgramIntro::pumpInstruction()
 {
 
 }
