@@ -17,7 +17,7 @@ m_scriptID(scriptID)
 	m_UnitID = Unit::ID_ScriptZombie;
 }
 
-//ScriptedZombie::ScriptedZombie(Zombie* baseZombie, int scriptID, std::vector<Level::ItemPtr> itemList)
+//ScriptedZombie::ScriptedZombie(Zombie* baseZombie, int scriptID, std::vector<Level::ItemPtr>& itemList)
 //:
 //m_baseZombie(baseZombie),
 //m_scriptID(scriptID),
@@ -186,4 +186,30 @@ int ScriptedZombie::getTextureID()
 void ScriptedZombie::incrementTexture()
 {
 	m_baseZombie->incrementTexture();
+}
+
+void ScriptedZombie::electricPuddle()
+{
+	if (m_baseZombie->getRealUnitType() == Unit::UnitType::ID_CabinetZombie)
+	{
+		std::cout << "dangerousPuddle" << std::endl;
+		((RemoveCabinetZombie *)m_baseZombie)->electricPuddle();
+	}
+	else
+	{
+		std::cout << "dangerousPuddle NOTCABINET" << std::endl;
+	}
+
+}
+void ScriptedZombie::safePuddle()
+{
+	if (m_baseZombie->getRealUnitType() == Unit::UnitType::ID_CabinetZombie)
+	{
+		std::cout << "safePuddle" << std::endl;
+		((RemoveCabinetZombie *)m_baseZombie)->safePuddle();
+	}
+	else
+	{
+		std::cout << "safePuddle NOTCABINET" << std::endl;
+	}
 }

@@ -207,6 +207,69 @@ public:
 		Grass_Corner_Not_DownRight = 239,
 		Grass_Corner_Full = 240,
 
+		//SEWER
+		Sewer_Top_Right = 306,
+		Sewer_Top_Right_Corner = 356,
+
+		Sewer_Top_Left = 307,
+		Sewer_Top_Left_Short = 308, //
+		Sewer_Top_Left_Corner = 355,
+
+		Sewer_Top = 310,
+		Sewer_Top_Alone = 311,
+		Sewer_Top_Short = 312, //
+		Sewer_Top_Corner_Left = 352,
+		Sewer_Top_Corner_Right = 353,
+		Sewer_Top_Corner_Full = 354,
+
+		Sewer_Right = 313,
+		Sewer_Right_Alone = 314,
+		Sewer_Right_Corner_Down = 349,
+		Sewer_Right_Corner_Top = 350,
+		Sewer_Right_Corner_Full = 351,
+
+		Sewer_Middle = 315,
+		Sewer_Middle_Alone = 316,
+		Sewer_Middle_Alone_Horizontal = 317,
+		Sewer_Middle_Alone_Vertical = 318,
+
+		Sewer_Left = 319,
+		Sewer_Left_Short = 320, //
+		Sewer_Left_Alone = 321,
+		Sewer_Left_Corner_Down = 346,
+		Sewer_Left_Corner_Top = 347,
+		Sewer_Left_Corner_Full = 348,
+
+		Sewer_Down_Right = 322,
+		Sewer_Down_Right_Corner = 345,
+		Sewer_Down_Left = 323,
+		Sewer_Down_Left_Corner = 344,
+
+		Sewer_Down = 324,
+		Sewer_Down_Alone = 328,
+		Sewer_Down_Corner_Left = 341,
+		Sewer_Down_Corner_Right = 342,
+		Sewer_Down_Corner_Full = 343,
+
+		Sewer_Tilt = 309,
+		Sewer_Tilt_Corner = 357,
+
+		Sewer_Corner_TopLeft = 325,
+		Sewer_Corner_TopRight = 326,
+		Sewer_Corner_TopLeft_TopRight = 327,
+		Sewer_Corner_DownLeft = 329,
+		Sewer_Corner_DownRight = 330,
+		Sewer_Corner_DownLeft_DownRight = 331,
+		Sewer_Corner_TopLeft_DownLeft = 332,
+		Sewer_Corner_TopRight_DownRight = 333,
+		Sewer_Corner_TopLeft_DownRight = 334,
+		Sewer_Corner_TopRight_DownLeft = 335,
+		Sewer_Corner_Not_TopLeft = 336,
+		Sewer_Corner_Not_TopRight = 337,
+		Sewer_Corner_Not_DownLeft = 338,
+		Sewer_Corner_Not_DownRight = 339,
+		Sewer_Corner_Full = 340,
+
 
 		Solid_Invisible = 500
 	};
