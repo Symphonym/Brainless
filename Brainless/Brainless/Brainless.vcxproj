@@ -242,6 +242,7 @@
     <ClInclude Include="NewGameIntro.h" />
     <ClInclude Include="NewspaperItem.h" />
     <ClInclude Include="RemoveCabinetZombie.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="RopeLadderItem.h" />
     <ClInclude Include="ScriptedZombie.h" />
     <ClInclude Include="SpikeItem.h" />
@@ -318,6 +319,12 @@
     <ClInclude Include="WorldButton.h" />
     <ClInclude Include="WrappedText.h" />
     <ClInclude Include="Zombie.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Brainless.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
