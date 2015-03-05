@@ -2,7 +2,7 @@
 
 NewspaperItem::NewspaperItem(int id)
 :
-Item("Newspaper", "NewspaperItem", "NewspaperItem", id)
+Item("Newspaper", "NewspaperItem", "SmallNewspaperItem", id)
 {
 	m_lootable = true;
 	m_usable = false;

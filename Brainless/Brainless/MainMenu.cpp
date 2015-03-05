@@ -104,7 +104,7 @@ void MainMenu::onPlay()
 
 void MainMenu::events(const sf::Event &event)
 {
-	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::L)
+	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::L && false)
 	{
 		m_machine.popState();
 		m_machine.pushState<Credits>();
