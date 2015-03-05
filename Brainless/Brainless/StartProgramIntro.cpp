@@ -14,10 +14,10 @@ m_currentState(IntroStates::MouseInput)
 	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_StartProgramIntro.txt");
 
 	m_mouseInputButton = GuiPtr(new Button(
-		ResourceLoader::instance().retrieveTexture("NewGame_Normal"),
-		ResourceLoader::instance().retrieveTexture("NewGame_Pressed"),
+		ResourceLoader::instance().retrieveTexture("ok_Normal"),
+		ResourceLoader::instance().retrieveTexture("ok_Pressed"),
 		sf::Vector2f(
-			m_window.getSize().x / 2 - 130.f, m_window.getSize().y / 2 - 50.f)));
+			m_window.getSize().x / 2 - 30, m_window.getSize().y / 2.f)));
 
 	m_mouseInputBG.setTexture(ResourceLoader::instance().retrieveTexture("StartProgramIntroMouseBG"));
 	m_mouseInputBG.setPosition(
