@@ -1,4 +1,3 @@
 ScaredZombie
-The water looks dangerous.
-#Ok, I fix.
-	Good.
+This water looks dangerous.
+#I will try to fix it.

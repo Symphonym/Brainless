@@ -29,7 +29,7 @@ public:
 	static const int SpiritGhostCost = 26;
 
 	// Must never be zero, and must equal the amount of brains placed in the levels
-	static const int TotalBrainCount = 10;
+	static const int TotalBrainCount = 5;
 
 	static const std::string CantPickUpString;
 	static const std::string CantUseString;

@@ -1,3 +1,9 @@
 ScaredZombie
-Here have an item!
-#Ok, thx!
+Thanks for the help! I do not need this, so you can have it.
+#Thank you!
+#Whatever...
+#"..."
+	...Please. Take it.
+	#Okay.
+	#"..."
+		I'll just leave it here then...
