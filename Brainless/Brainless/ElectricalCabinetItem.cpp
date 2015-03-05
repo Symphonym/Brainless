@@ -20,7 +20,7 @@ m_itemsWithin(itemsWithin)
 
 void ElectricalCabinetItem::onExamine()
 {
-	m_examineString = "There's a cable loose, but it's still working.";
+	m_examineString = "A mystery from a time long gone, no one ever knew what these were good for.";
 }
 
 void ElectricalCabinetItem::draw()

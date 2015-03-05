@@ -10,7 +10,7 @@ Item("Magnifying Glass","MagnifyingGlassInv", "MagnifyingGlass", id)
 	m_lootable = true;
 	m_usable = false;
 	m_useString = "Don't think I can use that, just like that.";
-	m_examineString = "It's a magnifying glass.";
+	m_examineString = "Bottle music is, or rather was, my passion. Let's start a band!";
 
 	m_magnifyingView = sf::View(sf::FloatRect(0, 0, 0.25f, 0.25f));
 	m_background.setTexture(ResourceLoader::instance().retrieveTexture("MagnifyingGlassBG"));

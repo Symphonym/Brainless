@@ -5,7 +5,7 @@ StoneItem::StoneItem(int id)
 Item("Stone","StoneInv", "StoneItem", id)
 {
 	m_lootable = true;
-	m_examineString = "An ordinary stone, makes me want to smash stuff.";
+	m_examineString = "The possibilities. Like, smashing stuff. Or throwing it. Or throwing it at stuff to smash. Or I could keep her, Leslie, the pet rock. Let's rock!.";
 }
 
 Item* StoneItem::clone()

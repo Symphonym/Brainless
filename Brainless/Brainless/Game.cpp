@@ -141,13 +141,10 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 	// Remeber old player location
 	if (swapPosition && m_player != nullptr)
 	{
-		player_location = m_player->getPosition();
-		// TODO check if player want to keep current position or if they want a preset position instead of swapping map side
 		//Swap sides
+		player_location = m_player->getPosition();
 		player_location.x = Utility::clampValue<float>((Constants::MapWidth)*Constants::TileSize - (player_location.x), Constants::TileSize, (Constants::MapWidth - 1)*Constants::TileSize);
 	}
-
-	
 
 	// Auto save level before changing level
 	if (m_player != nullptr) // If this is a level change from a menu, the player won't already exist

@@ -9,7 +9,6 @@
 #include "WalkingZombie.h"
 #include "ChasingZombie.h"
 #include "ScriptedZombie.h"
-#include <iostream>
 
 EditorZombieMode::EditorZombieMode()
 {
@@ -133,8 +132,6 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 				if (m_script_id >= 0) //Add scripted zombie
 				{
 					level.addUnit(std::move(Level::UnitPtr(new ScriptedZombie(dynamic_cast<Zombie*>(temp), m_script_id))));
-					
-					std::cout << "hej" << std::endl;
 				}
 				else
 					level.addUnit(std::move(Level::UnitPtr(temp)));

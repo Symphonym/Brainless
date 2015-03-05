@@ -10,7 +10,7 @@ m_ladder(ladderTexture, id)
 {
 	m_lootable = false;
 	m_usable = true;
-	m_examineString = "A manhole. Seems as if I should be able to get it open.";
+	m_examineString = "Manhole, man-hole, a hole for men… Think I'm still allowed to climb through?";
 
 	m_interactDistance = sf::Vector2f(100, 200);
 

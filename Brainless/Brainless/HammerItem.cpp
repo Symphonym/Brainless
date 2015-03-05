@@ -5,7 +5,7 @@ HammerItem::HammerItem(int id)
 Item("Hammer","HammerInv", "HammerItem", id)
 {
 	m_lootable = true;
-	m_examineString = "It's a hammer, the best tool of them all";
+	m_examineString = "Let's get hammered!";
 	m_useString = "There's nothing to use a hammer on";
 }
 

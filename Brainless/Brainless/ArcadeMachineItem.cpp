@@ -9,7 +9,7 @@ ArcadeMachineItem::ArcadeMachineItem(int id)
 :
 Item("Arcade Machine","ArcadeMachineItem", "ArcadeMachineItem", id)
 {
-	m_examineString = "It's an arcade machine, it appears to be in working condition";
+	m_examineString = "A wonder from a distant time, looks like it's still works!";
 	m_pickupString = "It's too heavy for me to carry";
 	m_usable = true;
 	m_renderingMode = RenderingModes::Behind;

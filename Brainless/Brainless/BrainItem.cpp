@@ -6,7 +6,7 @@ BrainItem::BrainItem(int id)
 Item("Brain","BrainItemInv", "BrainItem", id)
 {
 	m_lootable = true;
-	m_examineString = "Someones brain, that's kind of nasty.";
+	m_examineString = "I wonder what sound it would make if I slammed it back into someones head.";
 	m_useString = "I don't think I should do that";
 }
 

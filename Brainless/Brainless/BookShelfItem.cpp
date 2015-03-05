@@ -19,7 +19,7 @@ Item("Bookshelf", "bookShelf", "bookShelf", id)
 
 void BookShelfItem::onExamine()
 {
-	m_examineString = "It looks like a shelf, it appears to be filled with books. \nBooks are collections of paper which contain information in the form of text.";
+	m_examineString = "A chance to stock up on books! …Oh, oh god, it's that one about sparkly vampires. Run, for gods sake, run!";
 }
 
 void BookShelfItem::draw()

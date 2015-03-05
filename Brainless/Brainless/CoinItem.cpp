@@ -4,6 +4,7 @@ CoinItem::CoinItem(int id)
 :
 Item("Coin","CoinsInv", "CoinItem", id)
 {
+	m_examineString = "Coins lying around, what is this, Mario?";
 	m_lootable = true;
 }
 

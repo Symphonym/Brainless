@@ -5,7 +5,7 @@ StickItem::StickItem(int id)
 Item("Stick","StickInv", "StickItem", id)
 {
 	m_lootable = true;
-	m_examineString = "It's a pretty short stick";
+	m_examineString = "Well it's a… stick. Good if I ever got into a sticky situation.";
 	m_useString = "That's not going to work";
 }
 

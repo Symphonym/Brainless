@@ -10,6 +10,7 @@ m_isActive(true)
 {
 	m_collidable = true;
 	m_solid = false;
+	m_examineString = "MAGIC? What is this… it's moving?! What is this S*per M*ario? ";
 
 	m_collisionBounds = sf::FloatRect(0, 0, 250, 50);
 }

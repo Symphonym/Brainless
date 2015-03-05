@@ -5,7 +5,7 @@ TwineItem::TwineItem(int id)
 Item("Twine","TwineInv", "TwineItem", id)
 {
 	m_lootable = true;
-	m_examineString = "An ordinary piece of twine.";
+	m_examineString = "This might just be the most useful thing ever! Or twine.";
 }
 
 Item* TwineItem::clone()
