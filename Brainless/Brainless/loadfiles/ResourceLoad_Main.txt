@@ -456,7 +456,7 @@
 +Texture,images/items/chestClosed.png,ChestClosed
 
 # LADDER TEST ITEM
-+Texture,images/items/ladderTest.png,LadderTest
++Texture,images/items/ladders/Ladder-4tile-Rope.png,LadderTest
 
 # MAGNIFYING GLASS TEST ITEM
 +Texture,images/items/Small-Magnifying glass.png,MagnifyingGlass
