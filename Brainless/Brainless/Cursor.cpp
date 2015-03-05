@@ -11,7 +11,7 @@ Cursor::Cursor()
 void Cursor::changeCursor(const std::string &cursorTextureName)
 {
 	m_cursorSprite.setTexture(ResourceLoader::instance().retrieveTexture(cursorTextureName));
-	m_cursorSprite.setOrigin(0, m_cursorSprite.getGlobalBounds().height);
+	m_cursorSprite.setOrigin(0, 0);
 }
 void Cursor::update(const sf::RenderWindow &window)
 {
