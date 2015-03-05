@@ -11,7 +11,8 @@ m_ladderIsDown(false)
 	m_lootable = false;
 	refreshStatus();
 	m_useString = "I can't reach that from here";
-	m_interactDistance = sf::Vector2f(100, 1000);
+	m_interactDistance = sf::Vector2f(700, 1000);
+	//m_interactDistance = sf::Vector2f(100, 1000);
 }
 
 void RopeLadderItem::serialize(std::ofstream &writer) const
@@ -85,6 +86,7 @@ void RopeLadderItem::refreshStatus()
 {
 	if (m_ladderIsDown)
 	{
+		m_interactDistance = sf::Vector2f(100, 1000);
 		m_examineString = "It's a rope ladder hanging down, I could try climbing it";
 		m_usable = true;
 		//getSprite().setTexture(ResourceLoader::instance().retrieveTexture("ManholeOpen"));
@@ -94,6 +96,7 @@ void RopeLadderItem::refreshStatus()
 	}
 	else
 	{
+		m_interactDistance = sf::Vector2f(700, 1000);
 		m_examineString = "It's a rope ladder all curled up, I should find a way to get it to fall down";
 		m_usable = false;
 		m_interactBounds = sf::FloatRect(0, 0,
