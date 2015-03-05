@@ -3,7 +3,7 @@
 
 EmptyBagItem::EmptyBagItem(int id)
 :
-Item("Empty Bag", "EmptyBagItem", "EmptyBagItem", id)
+Item("Empty Bag", "EmptyBagItem", "SmallEmptyBagItem", id)
 {
 	m_usable = false;
 	m_lootable = true;

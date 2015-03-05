@@ -386,8 +386,8 @@
 +Texture,images/items/spikesNormal.png,SpikesNormal
 +Texture,images/items/spikesDampened.png,SpikesDampened
 +Texture,images/items/Stuffed Bag.png,StuffedBagItem
-+Texture,images/items/Newspapper.png,NewspaperItem
-+Texture,images/items/Plastic Bag.png,EmptyBagItem
++Texture,images/items/Small-Newspapper.png,SmallNewspaperItem
++Texture,images/items/Small-Plastic Bag.png,SmallEmptyBagItem
 +Texture,images/items/bookShelf.png,bookShelf
 +Texture,images/items/Crate.png,Crate
 
@@ -443,6 +443,8 @@
 +Texture,images/items/Stuffed Bag.png,StuffedBagInv
 +Texture,images/items/Thor's-Hammer.png,MjolnirInv
 +Texture,images/animations/Spritesheet_Ghost.png,GhostItem
++Texture,images/items/Newspapper.png,NewspaperItem
++Texture,images/items/Plastic Bag.png,EmptyBagItem
 
 # DOOR TEST ITEM
 +Texture,images/items/doors/wood-doorOpen.png,DoorOpen

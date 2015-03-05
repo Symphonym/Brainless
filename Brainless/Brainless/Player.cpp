@@ -231,7 +231,7 @@ void Player::updateTask(float deltaTime)
 	}
 
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) && false)
 	{
 		m_damageState = dmg_normal;
 		m_hp = 3;
