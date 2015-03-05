@@ -78,8 +78,7 @@ sf::Vector2i SpiritBar::getSize() const
 
 void SpiritBar::draw()
 {
-	m_barSprite.setScale(m_value, 1);
-
+	m_barBg.setScale((m_value)*1.35, 0.5);
 	// m_background.x * A = B
 	Renderer::instance().drawHUD(m_barBg);
 	//Renderer::instance().drawHUD(m_barSprite);
