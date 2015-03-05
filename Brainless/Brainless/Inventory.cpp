@@ -333,6 +333,7 @@ void Inventory::draw()
 	// Draw inventory
 	if (m_isOpen)
 	{
+		//Renderer::instance().drawHUD(m_background);
 		for (std::size_t x = 0; x < m_slots.size(); x++)
 		{
 			for (std::size_t y = 0; y < m_slots[x].size(); y++)
