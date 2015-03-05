@@ -55,6 +55,7 @@ private:
 	sf::Text m_highlightText;
 	sf::Texture m_highlightBackground;
 	sf::Sprite m_highlightBGSprite;
+	sf::Sprite m_background;
 	bool m_showHighlighText;
 
 	void recolorSlots(const sf::Color &color);
