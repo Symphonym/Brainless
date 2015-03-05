@@ -22,7 +22,7 @@ void ConversationBox::setPosition(const sf::Vector2f &position)
 	m_basePosition = position;
 	m_background.setPosition(m_basePosition);
 	m_dialogBox.setPosition(sf::Vector2f(
-		m_background.getGlobalBounds().left + m_background.getGlobalBounds().width - m_dialogBox.getBoxSize().x - 10.f,
+		m_background.getGlobalBounds().left + m_background.getGlobalBounds().width - m_dialogBox.getBoxSize().x - 20.f,
 		m_background.getPosition().y + 10.f));
 	m_portraitSprite.setPosition(
 		m_background.getPosition().x + 10.f,

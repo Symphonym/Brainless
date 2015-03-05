@@ -31,7 +31,7 @@ void Notification::setFinishDelay(float delay)
 void Notification::setPosition(const sf::Vector2f &position)
 {
 	m_background.setPosition(position);
-	m_textBox.setPosition(sf::Vector2f(m_background.getPosition().x + 10.f, m_background.getPosition().y + 10.f));
+	m_textBox.setPosition(sf::Vector2f(m_background.getPosition().x + 20.f, m_background.getPosition().y + 10.f));
 }
 
 void Notification::update(float deltaTime, const sf::RenderWindow &gameWindow)
