@@ -51,7 +51,10 @@
 +Texture,images/sprites/Trees/Branch3.png,Branch3
 +Texture,images/sprites/Trees/Tree.png,Tree
 +Texture,images/sprites/Mist.png,Mist
-+Texture,images/sprites/Car.png,Car
++Texture,images/sprites/Cars/Car1.png,Car1
++Texture,images/sprites/Cars/Car2.png,Car2
++Texture,images/sprites/Cars/Car3.png,Car3
++Texture,images/sprites/Cars/Car4.png,Car4
 
 # Solid invisible tile
 +Texture,images/tiles/solidInvisible.png,SolidInvisibleCube

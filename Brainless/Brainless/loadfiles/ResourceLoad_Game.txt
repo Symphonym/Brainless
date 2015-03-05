@@ -20,8 +20,8 @@
 # SPRITE SHEET TEXTURES
 
 +Texture,images/animations/Spritesheet_Maeve.png,PlayerSheet
-+Texture,images/animations/spritesheet_Maeve_jump.png,PlayerSheetJump
-+Texture,images/animations/spritesheet_skeleton_run_v2.png,PlayerSheetRun
++Texture,images/animations/spritesheet_Maeve_Jump.png,PlayerSheetJump
++Texture,images/animations/spritesheet_Maeve_Jump_Run.png,PlayerSheetJumpRun
 +Texture,images/animations/spritesheet_zombie_merged_v0.5.png,Zombie
 
 # PICKUP MENU TEXTURES

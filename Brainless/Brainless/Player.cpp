@@ -552,7 +552,7 @@ void Player::animation_turn()
 	if (m_animState != anim_turn)
 	{
 		m_sprite = &m_spriteSheets[0];
-		m_animation.playOnce(2, 3, 5, 8);
+		m_animation.playOnce(0, 1, 5, 8);
 		m_animState = anim_turn;
 	}
 }
@@ -701,8 +701,8 @@ void Player::animation_climbingUp()
 {
 	if (m_animState != anim_climbingUp)
 	{
-		m_sprite = &m_spriteSheets[0];
-		m_animation.loop(0, 3, 7, 6);
+		m_sprite = &m_spriteSheets[2];
+		m_animation.loop(0, 1, 7, 8, 6);
 		m_animState = anim_climbingUp;
 	}
 }
@@ -710,8 +710,8 @@ void Player::animation_climbingDown()
 {
 	if (m_animState != anim_climbingDown)
 	{
-		m_sprite = &m_spriteSheets[0];
-		m_animation.loop(0, 3, 7, 6);
+		m_sprite = &m_spriteSheets[2];
+		m_animation.loop(0, 1, 7, 8, 6);
 		m_animState = anim_climbingDown;
 		m_animation.setReverse(true);
 	}
