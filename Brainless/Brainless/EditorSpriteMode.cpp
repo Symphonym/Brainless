@@ -125,4 +125,5 @@ void EditorSpriteMode::initializeSprites()
 	addTexture("Branch3");
 	addTexture("Tree");
 	addTexture("Mist");
+	addTexture("Car");
 }
