@@ -63,7 +63,7 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 				Zombie* del = m_baseZombie;
 
 				m_baseZombie = new RemoveCabinetZombie(del->getPosition(), del->getTextureID(),
-					del->getPosition() + sf::Vector2f(1000, 0));
+					del->getPosition() + sf::Vector2f(3840, 0));
 				m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				delete(del);
 				return false;

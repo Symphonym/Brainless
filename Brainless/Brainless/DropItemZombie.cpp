@@ -19,7 +19,7 @@ DropItemZombie::DropItemZombie(sf::Vector2f startPosition, int Texture, Directio
 :
 Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_ItemZombie, Texture)
 {
-	m_itemsWithin = { 44, 11, 43 };
+	m_itemsWithin = { 7 };
 	m_specialSpriteDirection = true;
 	m_spriteDirection = startDirection;
 	m_specialSpriteDirection = true;
