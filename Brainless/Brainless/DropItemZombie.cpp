@@ -28,7 +28,7 @@ Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vecto
 	m_dialog.loadDialogFile("dialogues/zombie_items.txt");
 }
 
-void DropItemZombie::serialize(std::ofstream &writer) const //NÅGONSTANS FEL, ZOMBIE KAN FÖRSVINNA VID SAVE PROGRESS OCH ITEMS KAN GES 2 GÅNGER
+void DropItemZombie::serialize(std::ofstream &writer) const
 {
 	Unit::serialize(writer);
 

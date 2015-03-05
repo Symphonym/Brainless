@@ -13,8 +13,8 @@ m_cableInPuddle(cableInPuddle)
 {
 	refreshTexture();
 	m_lootable = false;
-	m_collisionBounds = sf::FloatRect(5, 0, 123, 30);
-	m_interactBounds = sf::FloatRect(5, 0, 123, 30);
+	m_collisionBounds = sf::FloatRect(15, 0, 105, 35);
+	m_interactBounds = sf::FloatRect(15, 0, 105, 35);
 	m_examineString = "It's a puddle of rainwater.";
 	m_useString = "There's nothing I can do with that";
 }
