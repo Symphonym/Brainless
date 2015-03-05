@@ -17,16 +17,16 @@ m_maxValue(0)
 	m_barBg.setTexture(m_barTexture);
 	m_barBg.setColor(sf::Color::Color(255, 255, 255, 70));
 
-	m_background.setTexture(ResourceLoader::instance().retrieveTexture("SpiritBarBG"));
+	m_forground.setTexture(ResourceLoader::instance().retrieveTexture("SpiritBarFG"));
 
 	setPosition(sf::Vector2f(0, 0));
 }
 
 void SpiritBar::setPosition(const sf::Vector2f &position)
 {
-	m_background.setPosition(position);
-	m_barSprite.setPosition(position.x + 35.f, position.y + 5.f);
-	m_barBg.setPosition(position.x + 35.f, position.y + 5.f);
+	m_forground.setPosition(position);
+	//m_barSprite.setPosition(position.x + 35.f, position.y + 5.f);
+	m_barBg.setPosition(position.x + 41.f, position.y + 41.f);
 }
 void SpiritBar::setValue(int value)
 {
@@ -38,7 +38,7 @@ void SpiritBar::setMaxValue(int maxValue)
 {
 	m_maxValue = maxValue;
 	m_value = maxValue;
-	m_barBg.setScale(maxValue, 1);
+	m_barBg.setScale(maxValue*1.35,0.5);
 	//m_background.scale(
 	//	static_cast<float>(m_maxValue + 10.f) / m_background.getGlobalBounds().width,
 	//	static_cast<float>(m_maxValue + 10.f) / m_background.getGlobalBounds().height);
@@ -73,7 +73,7 @@ bool SpiritBar::isEmpty() const
 
 sf::Vector2i SpiritBar::getSize() const
 {
-	return sf::Vector2i(m_background.getGlobalBounds().width, m_background.getGlobalBounds().height);
+	return sf::Vector2i(m_forground.getGlobalBounds().width, m_forground.getGlobalBounds().height);
 }
 
 void SpiritBar::draw()
@@ -81,7 +81,7 @@ void SpiritBar::draw()
 	m_barSprite.setScale(m_value, 1);
 
 	// m_background.x * A = B
-	Renderer::instance().drawHUD(m_background);
 	Renderer::instance().drawHUD(m_barBg);
-	Renderer::instance().drawHUD(m_barSprite);
+	//Renderer::instance().drawHUD(m_barSprite);
+	Renderer::instance().drawHUD(m_forground);
 }

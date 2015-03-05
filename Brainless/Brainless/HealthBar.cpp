@@ -22,7 +22,7 @@ m_width(65)
 
 void HealthBar::setPosition(const sf::Vector2f &position)
 {
-	m_position = position;
+	m_position = position + sf::Vector2f(60,65);
 }
 void HealthBar::update(Player &player)
 {

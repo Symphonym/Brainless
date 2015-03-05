@@ -29,7 +29,7 @@ public:
 
 private:
 
-	sf::Sprite m_background;
+	sf::Sprite m_forground;
 	sf::Sprite m_barSprite;
 	sf::Sprite m_barBg;
 

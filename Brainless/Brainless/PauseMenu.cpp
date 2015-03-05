@@ -19,7 +19,7 @@ State(machine)
 		ResourceLoader::instance().retrieveTexture("MainMenuBack_Normal"),
 		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 160.f)));
 
-	m_buttons[2] = GuiPtr(new Button(
+	/*m_buttons[2] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("saveGamePM_Normal"),
 		ResourceLoader::instance().retrieveTexture("saveGamePM_Normal"),
 		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 90.f)));
@@ -37,7 +37,7 @@ State(machine)
 	m_buttons[5] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("quitPM_Normal"),
 		ResourceLoader::instance().retrieveTexture("quitPM_Normal"),
-		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 + 120.f)));
+		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 + 120.f)));*/
 
 	m_background.setTexture(ResourceLoader::instance().retrieveTexture("PauseBackground"));
 }
