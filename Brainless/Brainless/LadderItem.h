@@ -7,7 +7,7 @@ class LadderItem : public Item
 {
 public:
 
-	LadderItem(const std::string &ladderTexture, int id);
+	LadderItem(const std::string &ladderTexture, int id, bool isFront = true);
 
 	virtual void onUse(Game &game);
 	virtual void update(float deltaTime, Game &game);

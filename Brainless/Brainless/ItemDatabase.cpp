@@ -116,6 +116,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new EmptyBagItem(44)));
 	addItem(ItemPtr(new BookShelfItem(45)));
 	addItem(ItemPtr(new CrateItem(46)));
+	addItem(ItemPtr(new LadderItem("PlankLadder", 47, false)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)
