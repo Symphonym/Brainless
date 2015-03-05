@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "Player.h"
 
-LadderItem::LadderItem(const std::string &ladderTexture, int id)
+LadderItem::LadderItem(const std::string &ladderTexture, int id, bool isFront)
 :
 Item("Ladder",ladderTexture, ladderTexture, id),
 m_inUse(false),
@@ -12,9 +12,14 @@ m_startPos(0, 0),
 m_endPos(0, 0),
 m_lerpValue(0)
 {
+	if (isFront)
+		m_renderingMode = RenderingModes::Above;
+	else
+		m_renderingMode = RenderingModes::Behind;
+
 	m_usable = true;
 	m_interactDistance = sf::Vector2f(30, 300);
-	m_renderingMode = RenderingModes::Above;
+	
 	m_examineString = "To climb or not to climb?";
 	m_pickupString = "It's too heavy for me to carry";
 }

@@ -7,7 +7,7 @@ LighterItem::LighterItem(int id)
 Item("Lighter","LighterInv", "LighterItem", id)
 {
 	m_lootable = true;
-	m_examineString = "This lighter still works.";
+	m_examineString = "Let's light up the future! That sounded better in my head….";
 	m_useString = "I should probably just pick it up instead.";
 }
 

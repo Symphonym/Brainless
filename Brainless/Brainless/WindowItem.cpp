@@ -9,6 +9,7 @@ m_levelIndex(levelIndex),
 m_smashed(smashed)
 {
 	m_usable = false;
+	m_examineString = "An unboarded window, too dirty to see through though. This blows.";
 	m_useString = "An unboarded window, too dirty to see through though.";
 	m_renderingMode = RenderingModes::Behind;
 	updateTexture();
@@ -26,6 +27,8 @@ void WindowItem::deserialize(std::ifstream &reader)
 
 	reader >> m_smashed;
 	updateTexture();
+	if (m_smashed)
+		m_examineString = "Oops! Leslie fled from my hand at incredible speed, come back Leslie!";
 }
 
 void WindowItem::onUse(Game &game)
@@ -39,6 +42,7 @@ bool WindowItem::onInteractedWith(Item &otherItem, Game &game)
 	{
 		m_usable = true;
 		m_smashed = true;
+		m_examineString = "Oops! Leslie fled from my hand at incredible speed, come back Leslie!";
 		updateTexture();
 		// TODO PLAY SOUND
 	}

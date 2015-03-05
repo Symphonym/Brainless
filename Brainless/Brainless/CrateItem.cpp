@@ -19,7 +19,7 @@ Item("Crate", "Crate", "Crate", id)
 
 void CrateItem::onExamine()
 {
-	m_examineString = "It's huge.";
+	m_examineString = "I should jump on this..";
 }
 
 void CrateItem::draw()

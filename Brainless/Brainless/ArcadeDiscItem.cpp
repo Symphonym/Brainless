@@ -6,7 +6,7 @@ Item("Arcade Game","ArcadeDiscItem" + colorName + "Big", "ArcadeDiscItem" + colo
 m_gameCreatorFunc(gameCreator)
 {
 	m_lootable = true;
-	m_examineString = "It's an arcade game, it might work with an arcade machine";
+	m_examineString = "Retro! I miss the arcade. And games. And witty commentary.";
 	m_useString = "I'm need an arcade machine to do anything with it";
 }
 

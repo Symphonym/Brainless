@@ -7,7 +7,7 @@ Item("Duct Tape","DuctTapeInv", "DuctTapeItem", id)
 {
 	m_lootable = true;
 
-	m_examineString = "It's a roll of duct tape, usefull for everything.";
+	m_examineString = "Duct tape can solve any problem in the universe! Except maths.";
 	m_useString = "Not sure I can use it that way.";
 }
 

@@ -9,6 +9,7 @@ m_spikesDampened(false)
 {
 	m_lootable = false;
 	m_usable = false;
+	m_examineString = "I really don't want to touch those, I don't want any piercings at the moment.";
 	m_interactDistance = sf::Vector2f(250, 500);
 	m_collisionBounds = sf::FloatRect(5, 77, 123, 51);
 }
@@ -23,7 +24,8 @@ void SpikeItem::deserialize(std::ifstream &reader)
 {
 	Item::deserialize(reader);
 	reader >> m_spikesDampened;
-
+	if (m_spikesDampened)
+		m_examineString = "The spikes should be safe now.";
 	refreshTexture();
 }
 
@@ -32,6 +34,7 @@ bool SpikeItem::onInteractedWith(Item &otherItem, Game &game)
 	if (otherItem.getName() == "Stuffed Bag" && !m_spikesDampened)
 	{
 		m_spikesDampened = true;
+		m_examineString = "The spikes should be safe now.";
 		refreshTexture();
 	}
 
