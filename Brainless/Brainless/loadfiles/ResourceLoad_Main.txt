@@ -46,6 +46,11 @@
 +Texture,images/sprites/Books/PileoBooks1.png,PileoBooks1
 +Texture,images/sprites/Books/PileoBooks2.png,PileoBooks2
 +Texture,images/sprites/Books/PileoBooks3.png,PileoBooks3
++Texture,images/sprites/Trees/Branch1.png,Branch1
++Texture,images/sprites/Trees/Branch2.png,Branch2
++Texture,images/sprites/Trees/Branch3.png,Branch3
++Texture,images/sprites/Trees/Tree.png,Tree
++Texture,images/sprites/Mist.png,Mist
 
 # Solid invisible tile
 +Texture,images/tiles/solidInvisible.png,SolidInvisibleCube
@@ -376,6 +381,7 @@
 +Texture,images/items/puddleCable.png,PuddleCableItem
 +Texture,images/items/electricalCabinet/electricalCabinet.png,electricalCabinet
 +Texture,images/items/ladders/Ladder-7tiles-Rope.png,RopeLadder7
++Texture,images/items/ladders/PlankLadder.png,PlankLadder
 +Texture,images/items/ladders/Rope-Ladder-Compact.png,RopeLadderCompact
 +Texture,images/items/spikesNormal.png,SpikesNormal
 +Texture,images/items/spikesDampened.png,SpikesDampened

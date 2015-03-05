@@ -25,7 +25,7 @@ bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &ed
 		m_currentSpriteIndex = Utility::clampValue<int>(m_currentSpriteIndex, 0, m_availableDecorations.size() - 1);
 
 
-		m_highlightSprite.sprite.setTexture(ResourceLoader::instance().retrieveTexture(m_availableDecorations[m_currentSpriteIndex]));
+		m_highlightSprite.sprite.setTexture(ResourceLoader::instance().retrieveTexture(m_availableDecorations[m_currentSpriteIndex]), true);
 		m_highlightSprite.textureName = m_availableDecorations[m_currentSpriteIndex];
 	}
 	else if (event.type == sf::Event::MouseButtonReleased)
@@ -120,4 +120,9 @@ void EditorSpriteMode::initializeSprites()
 	addTexture("PileoBooks1");
 	addTexture("PileoBooks2");
 	addTexture("PileoBooks3");
+	addTexture("Branch1");
+	addTexture("Branch2");
+	addTexture("Branch3");
+	addTexture("Tree");
+	addTexture("Mist");
 }
