@@ -19,7 +19,7 @@ private:
 
 	typedef std::unique_ptr<GUIElement> GuiPtr;
 
-	std::array<GuiPtr, 6> m_buttons;
+	std::array<GuiPtr, 2> m_buttons;
 
 	// Complete dark texture covering screen, generated in code and thus not loaded
 	sf::Texture m_backgroundTexture;
