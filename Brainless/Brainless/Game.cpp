@@ -248,7 +248,7 @@ void Game::events(const sf::Event &event)
 {
 	if (event.type == sf::Event::KeyReleased)
 	{
-		if (event.key.code == sf::Keyboard::N)
+		if (event.key.code == sf::Keyboard::N && false)
 		{
 			Notification::instance().write("Game saved successfully!");
 			saveGame();
