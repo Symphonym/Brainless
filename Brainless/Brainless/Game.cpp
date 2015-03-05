@@ -187,7 +187,7 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 	//temp, texture borde laddas in på annat sätt.
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
 	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
-	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetRun"));
+	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJumpRun"));
 
 	
 }
