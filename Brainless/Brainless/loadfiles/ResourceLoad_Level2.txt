@@ -1,0 +1,6 @@
+# BACKGROUND TEXTURES
++Texture,images/backgrounds/park.png,background_park
++Texture,images/backgrounds/Room.png,Room
+
+# BACKGROUND MUSIC
++Music,music/moll_3.wav,Level1Music
