@@ -6,6 +6,7 @@
 #include <memory>
 #include <array>
 
+class Game;
 class PauseMenu : public State
 {
 public:
@@ -15,11 +16,14 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
+	void giveGame(Game &game);
+
 private:
 
 	typedef std::unique_ptr<GUIElement> GuiPtr;
 
-	std::array<GuiPtr, 2> m_buttons;
+	Game *m_game;
+	std::array<GuiPtr, 3> m_buttons;
 
 	// Complete dark texture covering screen, generated in code and thus not loaded
 	sf::Texture m_backgroundTexture;

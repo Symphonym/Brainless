@@ -23,6 +23,7 @@
 #include "PauseMenu.h"
 #include "Constants.h"
 #include "ParticleSystem.h"
+#include "Credits.h"
 
 Game::Game(StateMachine &machine)
 :
@@ -137,6 +138,14 @@ void Game::lootItem(Inventory::ItemPtr item)
 
 void Game::changeLevel(int levelIndex, bool swapPosition)
 {
+	// TODO REMOVE THIS PLACEHOLDER CODE THAT ENDS GAME WHEN LOADING LEVEL 3
+	if (levelIndex >= 2)
+	{
+		m_machine.popState();
+		m_machine.pushState<Credits>();
+		return;
+	}
+
 	sf::Vector2f player_location(-60, -60);
 	// Remeber old player location
 	if (swapPosition && m_player != nullptr)
@@ -254,7 +263,13 @@ void Game::events(const sf::Event &event)
 			saveGame();
 		}
 		else if (event.key.code == sf::Keyboard::Escape)
-			m_machine.pushState<PauseMenu>();
+		{
+			State* pauseState = m_machine.pushState<PauseMenu>();
+			if (PauseMenu *pauseMenu = dynamic_cast<PauseMenu*>(pauseState))
+			{
+				pauseMenu->giveGame(*this);
+			}
+		}
 
 	}
 
