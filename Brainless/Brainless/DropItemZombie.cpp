@@ -70,11 +70,7 @@ bool DropItemZombie::releaseItems(Level* levelPtr, Game &game)
 		ConversationBox::instance().setDialog(m_dialog);
 		ConversationBox::instance().setShown(true);
 
-
-		//autoloot works
-		sf::Vector2f floorPosition(getPosition().x + getSprite().getGlobalBounds().width / 2, getPosition().y + getSprite().getGlobalBounds().height / 2);
-
-		// Spawn items when chest is opened
+		// Spawn items
 		for (std::size_t i = 0; i < m_itemsWithin.size(); i++)
 		{
 
@@ -84,16 +80,7 @@ bool DropItemZombie::releaseItems(Level* levelPtr, Game &game)
 			// Make sure items in the chest are lootable
 			if (!item->isLootable())
 				continue;
-
-			item->setPosition(sf::Vector2f(floorPosition.x, floorPosition.y - item->getSprite().getGlobalBounds().height));
-
-			int offset = std::rand() % 150;
-			if (std::rand() % 2 == 0)
-				offset *= -1;
-
-			item->setPosition(sf::Vector2f(item->getPosition().x + offset, item->getPosition().y));
-
-			game.getLevel().addItemToBuffer(std::move(item));
+			game.lootItem(std::move(item));
 		}
 		m_itemsWithin.clear();
 	}
