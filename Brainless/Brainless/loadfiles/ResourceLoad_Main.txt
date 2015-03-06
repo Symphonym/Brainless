@@ -59,6 +59,7 @@
 +Texture,images/sprites/Cars/Car2.png,Car2
 +Texture,images/sprites/Cars/Car3.png,Car3
 +Texture,images/sprites/Cars/Car4.png,Car4
++Texture,images/sprites/Crate.png,Crate
 
 #---Road---
 # /TopRight
@@ -394,7 +395,6 @@
 +Texture,images/items/Small-Newspapper.png,SmallNewspaperItem
 +Texture,images/items/Small-Plastic Bag.png,SmallEmptyBagItem
 +Texture,images/items/bookShelf.png,bookShelf
-+Texture,images/items/Crate.png,Crate
 
 # Arcade disc items
 +Texture,images/items/discs/Big-Disk-Blue.png,ArcadeDiscItemBlueBig
