@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "ParticleSystem.h"
 
 Level::Level()
 :
@@ -62,6 +63,10 @@ Unit* Level::addUnit(UnitPtr unit)
 
 void Level::addItem(ItemPtr item)
 {
+	//run particles
+	sf::Vector2f itemPos = sf::Vector2f(item->getInteractBounds().left + item->getInteractBounds().width / 2, item->getInteractBounds().top + item->getInteractBounds().height / 2);
+	ParticleSystem::instance().addParticles(5, itemPos, sf::Color(255, 255, 0, 0));
+
 	m_items.push_back(std::move(item));
 }
 void Level::addItemToBuffer(ItemPtr item)
@@ -73,7 +78,10 @@ void Level::addItemBufferToItem()
 {
 	for (std::size_t i = 0; i < m_itemsBuffer.size(); i++)
 	{
+
 		//addItem(m_itemsBuffer[i]);
+		sf::Vector2f itemPos = sf::Vector2f(m_itemsBuffer[i]->getInteractBounds().left + m_itemsBuffer[i]->getInteractBounds().width / 2, m_itemsBuffer[i]->getInteractBounds().top + m_itemsBuffer[i]->getInteractBounds().height / 2);
+		ParticleSystem::instance().addParticles(5, itemPos, sf::Color(255, 255, 0, 0));
 		m_items.push_back(std::move(m_itemsBuffer[i]));
 	}
 	m_itemsBuffer.clear();

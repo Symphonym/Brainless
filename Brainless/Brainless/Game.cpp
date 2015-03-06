@@ -114,7 +114,7 @@ Game::~Game()
 
 void Game::onPlay()
 {
-	SoundPlayer::instance().playMusic(m_level.getLevelMusicName());
+	SoundPlayer::instance().playMusic(m_level.getLevelMusicName(), true, 20);
 }
 void Game::onStop()
 {
@@ -178,7 +178,7 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 	FileSave::loadInventory(*m_inventory);
 
 	if (m_level.getLevelMusicName() != Constants::NoMusicProvidedString)
-		SoundPlayer::instance().playMusic(m_level.getLevelMusicName());
+		SoundPlayer::instance().playMusic(m_level.getLevelMusicName(), true, 20);
 	
 
 	//Set player to start position
