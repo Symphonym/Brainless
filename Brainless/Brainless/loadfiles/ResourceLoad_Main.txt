@@ -24,6 +24,10 @@
 +Texture,images/tiles/cubeTilted.png,TiltCube
 +Texture,images/tiles/cubePlatform.png,PlatformCube
 
+# Solid invisible tile
++Texture,images/tiles/solidInvisible.png,SolidInvisibleCube
++Texture,images/tiles/solidInvisiblePlatform.png,SolidInvisiblePlatformCube
+
 # SPRITE TEXTURE LOADING
 +Texture,images/sprites/Pipes/Down-Pipe.png,DownPipe
 +Texture,images/sprites/Pipes/horizontal-Pipe.png,HorizontalPipe
@@ -55,9 +59,6 @@
 +Texture,images/sprites/Cars/Car2.png,Car2
 +Texture,images/sprites/Cars/Car3.png,Car3
 +Texture,images/sprites/Cars/Car4.png,Car4
-
-# Solid invisible tile
-+Texture,images/tiles/solidInvisible.png,SolidInvisibleCube
 
 #---Road---
 # /TopRight

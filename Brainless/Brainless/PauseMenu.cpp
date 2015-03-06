@@ -4,10 +4,12 @@
 #include "MainMenu.h"
 #include "StateMachine.h"
 #include "Renderer.h"
+#include "Game.h"
 
 PauseMenu::PauseMenu(StateMachine &machine)
 :
-State(machine)
+State(machine),
+m_game(nullptr)
 {
 	m_buttons[0] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("Resume_Normal"),
@@ -15,9 +17,15 @@ State(machine)
 		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 230.f)));
 
 	m_buttons[1] = GuiPtr(new Button(
-		ResourceLoader::instance().retrieveTexture("MainMenuBack_Normal"),
-		ResourceLoader::instance().retrieveTexture("MainMenuBack_Normal"),
+		ResourceLoader::instance().retrieveTexture("saveGamePM_Normal"),
+		ResourceLoader::instance().retrieveTexture("saveGamePM_Normal"),
 		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 160.f)));
+
+	m_buttons[2] = GuiPtr(new Button(
+		ResourceLoader::instance().retrieveTexture("MainMenuBack_Normal"),
+		ResourceLoader::instance().retrieveTexture("MainMenuBack_Normal"),
+		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 90.f)));
+
 
 	/*m_buttons[2] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("saveGamePM_Normal"),
@@ -42,14 +50,26 @@ State(machine)
 	m_background.setTexture(ResourceLoader::instance().retrieveTexture("PauseBackground"));
 }
 
+void PauseMenu::giveGame(Game &game)
+{
+	m_game = &game;
+}
+
 void PauseMenu::update(float deltaTime)
 {
 	// Resume
 	if (m_buttons[0]->getReleased(m_machine.getWindow()))
 		m_machine.popState();
 
-	// Back to mainmenu
+	// Save game
 	else if (m_buttons[1]->getReleased(m_machine.getWindow()))
+	{
+		if (m_game)
+			m_game->saveGame();
+	}
+
+	// Back to mainmenu
+	else if (m_buttons[2]->getReleased(m_machine.getWindow()))
 	{
 		m_machine.popState(); // Pop pause
 		m_machine.popState(); // Pop game
