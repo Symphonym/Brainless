@@ -273,7 +273,7 @@ void Game::update(float deltaTime)
 	sf::Shader *currentShader = Renderer::instance().getCurrentShader();
 	if (currentShader)
 	{
-		currentShader->setParameter("intensityValue", 1.f - static_cast<float>(m_savedZombies) / static_cast<float>(Constants::TotalBrainCount));
+		currentShader->setParameter("intensityValue", Utility::clampValue<float>(1.f - (static_cast<float>(m_savedZombies) / static_cast<float>(Constants::TotalBrainCount))*0.9,0.f,0.9f));
 		currentShader->setParameter("enableDarkness", static_cast<int>(m_level.isDark()));
 		currentShader->setParameter("enableLightSource", 0); // False until something else sets it
 	}
