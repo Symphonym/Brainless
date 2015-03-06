@@ -60,7 +60,7 @@
 +Texture,images/sprites/Cars/Car3.png,Car3
 +Texture,images/sprites/Cars/Car4.png,Car4
 +Texture,images/sprites/Crate.png,Crate
-
++Texture,images/sprites/Trees/Bottom_Tree.png,Bottom_Tree
 #---Road---
 # /TopRight
 +Texture,images/tiles/Road/TopRight/Road_Top_Right.png,Road_Top_Right

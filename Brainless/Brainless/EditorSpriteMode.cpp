@@ -130,4 +130,5 @@ void EditorSpriteMode::initializeSprites()
 	addTexture("Car3");
 	addTexture("Car4");
 	addTexture("Crate");
+	addTexture("Bottom_Tree");
 }
