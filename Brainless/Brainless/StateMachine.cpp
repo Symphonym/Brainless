@@ -50,11 +50,11 @@ m_loadingAnimDot(256, 256)
 		if (m_loadingText.size() > 10)
 			m_loadingText.erase(m_loadingText.begin());
 
-		for (std::size_t i = 0; i < m_loadingText.size(); i++)
+		/*for (std::size_t i = 0; i < m_loadingText.size(); i++)
 		{
 			m_loadingText[i].setPosition(0, (15.f)*i);
 			Renderer::instance().drawHUD(m_loadingText[i]);
-		}
+		}*/
 
 		m_loadingAnimSprite.setTextureRect(m_loadingAnim.getRectangle(deltaTime));
 		m_loadingAnimSpriteDot.setTextureRect(m_loadingAnimDot.getRectangle(deltaTime));
