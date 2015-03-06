@@ -5,6 +5,8 @@
 #include "StartProgramIntro.h"
 #include "OptionsMenu.h"
 
+// https://docs.google.com/document/d/1nog2e27vsrZsYKw-mIb_lyVyjMO-0aa4DxjMhRYTRGw/edit?pli=1#
+
 int main(int argc, const char *args[])
 {
 	// Seed random generator
