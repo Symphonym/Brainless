@@ -101,7 +101,7 @@ m_player(nullptr)
 	}
 
 	// TEST CODE FOR LOADING DEFAULT LEVEL
-	changeLevel(0, false);
+	changeLevel(FileSave::findHighestSavedLevelIndex(), false);
 }
 Game::~Game()
 {
@@ -138,6 +138,9 @@ void Game::lootItem(Inventory::ItemPtr item)
 
 void Game::changeLevel(int levelIndex, bool swapPosition)
 {
+	if (levelIndex < 0)
+		return;
+
 	// TODO REMOVE THIS PLACEHOLDER CODE THAT ENDS GAME WHEN LOADING LEVEL 3
 	if (levelIndex >= 2)
 	{
@@ -202,6 +205,9 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 }
 void Game::changeLevelTransition(int levelIndex, bool swapPosition)
 {
+	if (levelIndex < 0)
+		return;
+
 	m_levelTransition->startTransition(levelIndex, swapPosition);
 }
 
