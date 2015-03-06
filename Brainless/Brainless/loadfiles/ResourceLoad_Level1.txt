@@ -1,7 +1,7 @@
 # BACKGROUND TEXTURES
-+Texture,images/backgrounds/background_A.png,background_A
-+Texture,images/backgrounds/background_B.png,background_B
-+Texture,images/backgrounds/background_C.png,background_C
++Texture,images/backgrounds/level1_A.png,level1_A
++Texture,images/backgrounds/level1_B.png,level1_B
++Texture,images/backgrounds/level1_C.png,level1_C
 
 +Texture,images/backgrounds/park.png,background_park
 +Texture,images/backgrounds/Room.png,Room
