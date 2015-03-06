@@ -1,8 +1,12 @@
 -ResourceFile,ResourceLoad_MainMenu.txt
 +ResourceFile,ResourceLoad_PauseMenu.txt
 
-#Death soumd
+#Death sound
 +Sound,sounds/deathsound.wav,DeathSound
+
+#Bag icon
++Texture,images/UI/button_bag.png,ButtonBag_Normal
++Texture,images/UI/button_bag_click.png,ButtonBag_Pressed
 
 # UI TEXTURES
 +Texture,images/UI/spiritBarBG.png,SpiritBarBG

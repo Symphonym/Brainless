@@ -21,15 +21,14 @@ public:
 	// Adds an item to the inventory
 	void addItem(ItemPtr item);
 
-	// Set which level the inventory will interact with
-	void setCurrentLevel(Level* level);
-
 	void events(const sf::Event &event, Game &game);
 	void update(float deltaTime, Game &game);
 
 	void draw();
 
 	bool holdingItem() const;
+
+	void toggleVisible();
 
 	// Empties the inventory
 	void emptyInventory();
