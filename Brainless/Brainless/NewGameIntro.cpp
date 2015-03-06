@@ -10,7 +10,7 @@ NewGameIntro::NewGameIntro(StateMachine &machine)
 State(machine),
 m_currentIndex(0),
 m_curFade(0),
-m_maxFade(6)
+m_maxFade(6) // Half of this time is used for fade in, half for fade out
 {
 	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_NewGameIntro.txt");
 	//Notification::instance().write("The game has zombies and shit, pretty crazy");
