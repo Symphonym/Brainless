@@ -562,7 +562,7 @@ void Player::animation_turnRun()
 	if (m_animState != anim_turnRun)
 	{
 		m_sprite = &m_spriteSheets[2];
-		m_animation.playOnce(0, 1, 6, 8);
+		m_animation.playOnce(0, 1, 5, 8);
 		m_animState = anim_turnRun;
 		SoundPlayer::instance().playSound("player_turn", getPosition());
 
