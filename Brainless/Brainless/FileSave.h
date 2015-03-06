@@ -20,6 +20,11 @@ public:
 	static void saveGameData(Game &game);
 	static void loadGameData(Game &game);
 
+	// Searches for save files and returns the highest index of these files
+	// Basically it's just to see how many levels you have played so you can
+	// load progress from the level you're currently at and not level 0 by default.
+	static int findHighestSavedLevelIndex();
+
 	static void wipeProgress();
 
 	//Saving & loading player progress and misc info

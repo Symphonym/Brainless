@@ -466,6 +466,25 @@ void FileSave::loadGameData(Game &game)
 	reader.close();
 }
 
+int FileSave::findHighestSavedLevelIndex()
+{
+	int highestIndex = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		std::ifstream reader("save/game_level" + std::to_string(i) + ".txt");
+
+		if (reader.is_open())
+			highestIndex = i;
+		else
+			break;
+
+		reader.close();
+	}
+
+	return highestIndex;
+}
+
+
 void FileSave::wipeProgress()
 {
 	// Rename the file first so that the game won't misstakenly interact with a non-existing file
