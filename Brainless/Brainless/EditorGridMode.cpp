@@ -53,6 +53,7 @@ m_currentTile(sf::FloatRect(100, 100, 0, 0), Tile::Ground, sf::Vector2f(Constant
 		Tile::Tilt,
 		Tile::Platform,
 		Tile::Solid_Invisible,
+		Tile::Solid_Invisible_Platform,
 
 		Tile::Road_Middle,
 

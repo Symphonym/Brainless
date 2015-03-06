@@ -801,6 +801,11 @@ void Tile::updateType()
 		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("SolidInvisibleCube"));
 		m_editorVisibleOnly = true;
 		break;
+	case Solid_Invisible_Platform:
+		m_tileSprite.setTexture(ResourceLoader::instance().retrieveTexture("SolidInvisiblePlatformCube"));
+		m_editorVisibleOnly = true;
+		m_platform = true;
+		break;
 		
 	default:
 		break;
