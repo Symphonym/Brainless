@@ -271,7 +271,8 @@ public:
 		Sewer_Corner_Full = 340,
 
 
-		Solid_Invisible = 500
+		Solid_Invisible = 500,
+		Solid_Invisible_Platform = 501
 	};
 
 	// Position/size of collision, tile type and offset for sprite
