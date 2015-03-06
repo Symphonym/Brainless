@@ -117,6 +117,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new BookShelfItem(45)));
 	addItem(ItemPtr(new CrateItem(46)));
 	addItem(ItemPtr(new LadderItem("PlankLadder", 47, false)));
+	addItem(ItemPtr(new GhostItem("dialogues/zombie_mechanical.txt", 48)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)
