@@ -147,8 +147,8 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 	if (levelIndex < 0)
 		return;
 
-	// TODO REMOVE THIS PLACEHOLDER CODE THAT ENDS GAME WHEN LOADING LEVEL 3
-	if (levelIndex >= 2)
+	// TODO REMOVE THIS PLACEHOLDER CODE THAT ENDS GAME WHEN LOADING LEVEL 4
+	if (levelIndex >= 3)
 	{
 		m_machine.popState();
 		m_machine.pushState<Credits>();
@@ -214,7 +214,7 @@ void Game::changeLevelTransition(int levelIndex, bool swapPosition)
 	if (levelIndex < 0)
 		return;
 
-	m_levelTransition->startTransition(levelIndex, swapPosition);
+	m_levelTransition->startTransition(levelIndex, swapPosition, 2.f);
 }
 
 void Game::addCamera(const sf::View &camera)

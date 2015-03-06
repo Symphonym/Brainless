@@ -44,6 +44,7 @@
 #include "EmptyBagItem.h"
 #include "BookShelfItem.h"
 #include "CrateItem.h"
+#include "Lamp.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -115,9 +116,10 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new NewspaperItem(43)));
 	addItem(ItemPtr(new EmptyBagItem(44)));
 	addItem(ItemPtr(new BookShelfItem(45)));
-	//addItem(ItemPtr(new CrateItem(46))); decoration nu
+	addItem(ItemPtr(new CrateItem(46)));
 	addItem(ItemPtr(new LadderItem("PlankLadder", 47, false)));
 	addItem(ItemPtr(new GhostItem("dialogues/LEVEL2.txt", 48)));
+	addItem(ItemPtr(new Lamp(49)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)

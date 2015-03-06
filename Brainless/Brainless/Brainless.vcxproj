@@ -148,6 +148,7 @@
     <ClCompile Include="HammerItem.cpp" />
     <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="KeyTwineItem.cpp" />
+    <ClCompile Include="Lamp.cpp" />
     <ClCompile Include="LevelTransition.cpp" />
     <ClCompile Include="LighterItem.cpp" />
     <ClCompile Include="LongStickItem.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="DropItemZombie.h" />
     <ClInclude Include="EmptyBagItem.h" />
+    <ClInclude Include="Lamp.h" />
     <ClInclude Include="NewGameIntro.h" />
     <ClInclude Include="NewspaperItem.h" />
     <ClInclude Include="RemoveCabinetZombie.h" />

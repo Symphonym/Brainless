@@ -432,6 +432,9 @@
     <ClCompile Include="CrateItem.cpp">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClCompile>
+    <ClCompile Include="Lamp.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -754,6 +757,9 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lamp.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

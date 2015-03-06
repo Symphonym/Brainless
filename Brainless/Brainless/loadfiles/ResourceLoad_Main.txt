@@ -396,6 +396,7 @@
 +Texture,images/items/Small-Newspapper.png,SmallNewspaperItem
 +Texture,images/items/Small-Plastic Bag.png,SmallEmptyBagItem
 +Texture,images/items/bookShelf.png,bookShelf
++Texture,images/items/Lamp.png,Lamp
 
 # Arcade disc items
 +Texture,images/items/discs/Big-Disk-Blue.png,ArcadeDiscItemBlueBig

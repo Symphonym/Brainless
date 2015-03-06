@@ -39,12 +39,21 @@ State(machine)
 	pushCreditsParagraph("Ake Studios", 250);
 	pushCreditsParagraph("Brainless", 150);
 
+	pushCreditsParagraph("Project Manager", 100);
+	pushCreditsParagraph("Robin Norén");
+
+	pushCreditsParagraph("Lead Programmer", 100);
+	pushCreditsParagraph("Kevin Lovgren");
 	pushCreditsParagraph("Programming", 100);
 	pushCreditsParagraph("Jakob Larsson");
 	pushCreditsParagraph("Kevin Lovgren");
 	pushCreditsParagraph("Tobias Melker");
 	pushCreditsParagraph("Svante Almbring");
 
+	pushCreditsParagraph("Lead Graphical Artist", 100);
+	pushCreditsParagraph("Linda Inghammar");
+	pushCreditsParagraph("Art Director", 100);
+	pushCreditsParagraph("Pernilla Larsson");
 
 	pushCreditsParagraph("Graphics", 100);
 	pushCreditsParagraph("Johan Wibrink");
@@ -58,8 +67,11 @@ State(machine)
 	pushCreditsParagraph("Linnea Thimrén");
 	pushCreditsParagraph("Robin Norén");
 
-	pushCreditsParagraph("Design", 100);
+	pushCreditsParagraph("Lead Designer", 100);
 	pushCreditsParagraph("Fredrik Soderberg");
+
+	pushCreditsParagraph("Music/Sound Lead", 100);
+	pushCreditsParagraph("Rasmus Andersparr");
 
 	pushCreditsParagraph("Sound", 100);
 	pushCreditsParagraph("Simon Enstrom");
