@@ -16,6 +16,15 @@ public:
 	virtual void onStop();
 	virtual void onPlay();
 
+private:
+
+	int m_currentIndex;
+	//bool m_fadingIn;
+	float m_curFade, m_maxFade;
+	std::vector<sf::Text> m_introTexts;
+
+	void pushIntroText(const std::string &text);
+
 };
 
 #endif

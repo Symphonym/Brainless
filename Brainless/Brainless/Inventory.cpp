@@ -389,6 +389,11 @@ void Inventory::emptyInventory()
 	}
 }
 
+void Inventory::toggleVisible()
+{
+	m_isOpen = !m_isOpen;
+}
+
 bool Inventory::holdingItem() const
 {
 	if (m_mouseItem)

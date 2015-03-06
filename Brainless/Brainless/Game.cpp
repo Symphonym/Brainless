@@ -24,6 +24,7 @@
 #include "Constants.h"
 #include "ParticleSystem.h"
 #include "Credits.h"
+#include "Button.h"
 
 Game::Game(StateMachine &machine)
 :
@@ -39,6 +40,11 @@ m_player(nullptr)
 
 	// Set game shader
 	Renderer::instance().plugShader(ResourceLoader::instance().retrieveShader("DarknessShader"));
+
+	m_inventoryButton = std::unique_ptr<GUIElement>(new Button(
+		ResourceLoader::instance().retrieveTexture("ButtonBag_Normal"),
+		ResourceLoader::instance().retrieveTexture("ButtonBag_Pressed"),
+		sf::Vector2f(0, m_window.getSize().y - 200.f)));
 
 
 	m_levelTransition = std::unique_ptr<LevelTransition>(new LevelTransition(*this));
@@ -299,6 +305,11 @@ void Game::update(float deltaTime)
 		currentShader->setParameter("enableLightSource", 0); // False until something else sets it
 	}
 
+	if (m_inventoryButton->getReleased(m_window))
+	{
+		m_inventory->toggleVisible();
+	}
+
 
 	// Update game logic and input, if not paused
 	// Disable game input when conversation is ongoing
@@ -376,6 +387,7 @@ void Game::draw()
 	// Draw with normal camera
 	m_window.setView(m_camera);
 	m_level.draw(m_camera);
+	m_inventoryButton->draw();
 	m_inventory->draw();
 	m_popup->draw();
 	m_spiritBar->draw();

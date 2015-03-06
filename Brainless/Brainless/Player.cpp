@@ -220,6 +220,8 @@ void Player::updateTask(float deltaTime)
 			m_damageState = dmg_normal;
 			m_speed.x = 0;
 		}
+		//Reset fall position to keep player from taking repeated damage from falling
+		m_fallPos = getPosition().y;
 	}
 	else //dying
 	{

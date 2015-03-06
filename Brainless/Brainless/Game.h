@@ -13,7 +13,7 @@
 #include "HealthBar.h"
 #include "State.h"
 
-
+class GUIElement;
 class Level;
 class Unit;
 class Player;
@@ -66,6 +66,7 @@ private:
 	std::vector<sf::View> m_extraCameras;
 
 	std::unique_ptr<LevelTransition> m_levelTransition;
+	std::unique_ptr<GUIElement> m_inventoryButton;
 
 	// How many zombies has been given a brain
 	int m_savedZombies;
