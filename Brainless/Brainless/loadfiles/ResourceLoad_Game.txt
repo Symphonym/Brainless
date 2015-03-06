@@ -1,6 +1,9 @@
 -ResourceFile,ResourceLoad_MainMenu.txt
 +ResourceFile,ResourceLoad_PauseMenu.txt
 
+#Death soumd
++Sound,sounds/deathsound.wav,DeathSound
+
 # UI TEXTURES
 +Texture,images/UI/spiritBarBG.png,SpiritBarBG
 +Texture,images/UI/heart.png,heart

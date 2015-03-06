@@ -352,6 +352,7 @@ void Game::update(float deltaTime)
 	//If player is dead 
 	if (m_player->getHealth() <= 0 && m_player->getSpeed().y==0 && !m_levelTransition->getActive())
 	{
+		SoundPlayer::instance().playSound("DeathSound", m_player->getPosition());
 		changeLevelTransition(m_levelIndex, false);
 		m_player->setHealth(-99);
 	}
@@ -362,6 +363,7 @@ void Game::update(float deltaTime)
 		changeLevelTransition(m_levelIndex - 1, false);
 	if (m_player->getPosition().y >(Constants::MapHeight - 1)*Constants::TileSize && !m_levelTransition->getActive())
 	{
+		SoundPlayer::instance().playSound("DeathSound", m_player->getPosition());
 		changeLevelTransition(m_levelIndex, false);
 		m_player->setHealth(-99);
 	}
