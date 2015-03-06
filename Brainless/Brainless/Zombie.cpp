@@ -41,7 +41,7 @@ bool Zombie::collide(Unit *unit)
 void Zombie::incrementTexture()
 {
 	m_textureId++;
-	if (m_textureId >= Constants::ZombieTypeCount)
+	if (m_textureId >= Constants::ZombieTextureCount)
 		m_textureId = 0;
 	m_animation.loop(0, 7, m_textureId * 2, 3);
 };

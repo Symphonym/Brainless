@@ -17,7 +17,8 @@ public:
 	static const int MapHeight = 15;
 
 	static const int BlockTypeCount = 258;
-	static const int ZombieTypeCount = 4;
+	static const int ZombieTypeCount = 3;
+	static const int ZombieTextureCount = 4;
 
 	static const int InventoryWidth = 5;
 	static const int InventoryHeight = 4;
