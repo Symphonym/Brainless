@@ -12,7 +12,7 @@ public:
 
 	typedef std::unique_ptr<sf::Sound> SoundPtr;
 
-	void playSound(const std::string &soundName, const sf::Vector2f &position, float volume = 100);
+	void playSound(const std::string &soundName, const sf::Vector2f &position, float volume = 80); //fulfix, ska vara 100 egentligen
 	void playMusic(const std::string &musicName, bool looping = true, float volume = 100);
 	void pauseMusic(const std::string &musicName);
 	void stopMusic(const std::string &musicName);
