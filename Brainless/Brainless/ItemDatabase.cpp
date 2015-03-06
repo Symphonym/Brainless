@@ -109,7 +109,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new ManholeItem(true, "SteelLadder5", 36)));
 	addItem(ItemPtr(new PuddleCableItem(true, 38)));
 	addItem(ItemPtr(new ElectricalCabinetItem({ 44, 11, 43 }, 39))); //items within för scriptTest, kan ta bort itemvectorn nu!
-	addItem(ItemPtr(new RopeLadderItem("RopeLadder7", 40)));
+	addItem(ItemPtr(new RopeLadderItem("RopeLadder6", 40)));
 	addItem(ItemPtr(new SpikeItem(41)));
 	addItem(ItemPtr(new StuffedPaperBagItem(42)));
 	addItem(ItemPtr(new NewspaperItem(43)));
