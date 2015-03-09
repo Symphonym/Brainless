@@ -21,7 +21,7 @@ public:
 
 private:
 
-	void refreshTexture();
+	void refreshStatus();
 	bool m_cableInPuddle;
 };
 

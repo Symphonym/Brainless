@@ -24,15 +24,10 @@ bool Zombie::onInteractedWith(Item &otherItem, Game &game)
 	{
 		flash(game.getPlayer().getCameraPosition());
 		game.addSavedZombie(1);
-		// TODO add brain giving logic
 		return true;
 	}
 	return false;
-}/*
-void Zombie::onCollisionWithItem(Item &item)
-{
-	m_script.onCollisionWithItem(item, *this);
-}*/
+}
 
 bool Zombie::collide(Unit *unit)
 {

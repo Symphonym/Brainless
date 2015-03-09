@@ -11,11 +11,11 @@ PuddleCableItem::PuddleCableItem(bool cableInPuddle, int id)
 Item("Eletrical Puddle", "PuddleCableItem", "PuddleCableItem", id),
 m_cableInPuddle(cableInPuddle)
 {
-	refreshTexture();
+	refreshStatus();
 	m_lootable = false;
 	m_collisionBounds = sf::FloatRect(15, 0, 105, 35);
 	m_interactBounds = sf::FloatRect(15, 0, 105, 35);
-	m_examineString = "It's a puddle of rainwater.";
+	m_examineString = "I wish I could splash around without a care in the world and without being electrocuted.";
 	m_useString = "There's nothing I can do with that";
 }
 
@@ -31,7 +31,7 @@ void PuddleCableItem::deserialize(std::ifstream &reader)
 	Item::deserialize(reader);
 
 	reader >> m_cableInPuddle;
-	refreshTexture();
+	refreshStatus();
 }
 
 bool PuddleCableItem::onCollisionWithUnit(Unit &unit, Game &game)
@@ -67,7 +67,7 @@ bool PuddleCableItem::onInteractedWith(Item &otherItem, Game &game)
 		game.lootItem(ItemDatabase::instance().extractItem(20));
 
 		m_cableInPuddle = false;
-		refreshTexture();
+		refreshStatus();
 	}
 
 	return false;
@@ -86,10 +86,16 @@ Item* PuddleCableItem::clone()
 }
 
 
-void PuddleCableItem::refreshTexture()
+void PuddleCableItem::refreshStatus()
 {
 	if (m_cableInPuddle)
+	{
+		m_examineString = "I wish I could splash around without a care in the world and without being electrocuted.";
 		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("PuddleCableItem"));
+	}
 	else
+	{
+		m_examineString = "Such an interesting, natural, phenomenon. Good thing I looked at it...";
 		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("PuddleItem"));
+	}
 }
