@@ -22,7 +22,7 @@ m_hungerDelay(0)
 		{
 			Tile &tile = m_tiles[x][y];
 			tile.sprite.setTexture(ResourceLoader::instance().retrieveTexture("ArcadeGrassTile"));
-			tile.sprite.setScale(1.88, 1.88);
+			tile.sprite.setScale(1.88f, 1.88f);
 			tile.sprite.setPosition(
 				m_machine.getScreenPos().x + 5.f + x*tile.sprite.getGlobalBounds().width,
 				m_machine.getScreenPos().y + 5.f + y*tile.sprite.getGlobalBounds().height);

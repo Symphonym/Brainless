@@ -208,7 +208,7 @@ void PopUpMenu::draw()
 	if (m_isShowing)
 	{
 		Renderer::instance().drawAbove(m_background);
-		for (int i = 0; i < m_buttons.size(); i++)
+		for (std::size_t i = 0; i < m_buttons.size(); i++)
 			Renderer::instance().drawAbove(m_buttons[i]);
 	}
 }

@@ -55,7 +55,7 @@ void WrappedText::Update(float deltaTime)
 {
 	m_text.setPosition(m_position);
 
-	if (currentLetter < m_string.length())
+	if (currentLetter < (int) m_string.length())
 	{
 		timer -= deltaTime * m_speed;
 
@@ -82,7 +82,7 @@ void WrappedText::Update(float deltaTime)
 			{
 				std::string croppedText = m_text.getString();
 
-				for (int i = 0; i <= croppedText.length(); i++)
+				for (int i = 0; i <= (int) croppedText.length(); i++)
 				{
 					croppedText.erase(croppedText.begin());
 					if (croppedText[0] == '\n')
@@ -104,7 +104,7 @@ void WrappedText::Update(float deltaTime)
 				{
 					if (m_linesOfText[currentRow - 1][i - 1] == ' ')
 					{
-						for (int j = i; j < m_linesOfText[currentRow - 1].length(); j++)
+						for (int j = i; j < (int) m_linesOfText[currentRow - 1].length(); j++)
 						{
 							m_linesOfText[currentRow] += m_linesOfText[currentRow - 1][j];
 						}
@@ -131,5 +131,5 @@ void WrappedText::Draw(bool drawAsHud)
 
 bool WrappedText::isFinished() const
 {
-	return currentLetter >= m_string.length();
+	return currentLetter >= (int) m_string.length();
 }

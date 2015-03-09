@@ -17,7 +17,7 @@ m_animation(100,100)
 	m_examineString = "For tickling, or for… collecting? I feel a sudden urge to stuff these in my backpack.";
 	m_useString = "You try to eat the feather. It's not tasty. You spit it out and put it back into its hovering position.";
 	m_animation.loop(0, 7, 0, 10);
-	getSprite().setScale(0.7,0.7);
+	getSprite().setScale(0.7f,0.7f);
 	getSprite().setTextureRect(m_animation.getRectangle(0));
 }
 

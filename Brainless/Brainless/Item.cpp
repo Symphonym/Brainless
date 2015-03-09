@@ -21,7 +21,7 @@ m_markedForDestruction(false),
 m_itemName(itemName),
 m_id(id),
 m_syncID(-1),
-m_speed(sf::Vector2f(0,0))
+m_speed(sf::Vector2f(0.f,0.f))
 {
 	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
 	m_inventorySprite.setTexture(ResourceLoader::instance().retrieveTexture(inventoryTextureName));

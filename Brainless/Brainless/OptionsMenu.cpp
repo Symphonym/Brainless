@@ -46,7 +46,7 @@ m_Animation_scarf(SPRITESIZE, SPRITESIZE)
 
 	m_volumeSprite.setPosition(300, m_window.getSize().y - m_volumeSprite.getGlobalBounds().height*2.f - 140);
 	m_volumeSprite.setColor(sf::Color::Green);
-	m_curVolume = SoundPlayer::instance().getVolume();
+	m_curVolume = (int) SoundPlayer::instance().getVolume();
 	m_volumeSprite.setScale(m_curVolume * 4, 1);
 
 

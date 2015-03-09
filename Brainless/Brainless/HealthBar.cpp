@@ -14,7 +14,7 @@ m_width(65)
 	m_heartTexture = ResourceLoader::instance().retrieveTexture("heart");
 	m_emptyTexture = ResourceLoader::instance().retrieveTexture("heartEmpty");
 
-	for (int i = 0; i < m_sprites.size(); i++)
+	for (std::size_t i = 0; i < m_sprites.size(); i++)
 	{
 		m_sprites[i].setPosition(m_position.x + m_width*i, m_position.y);
 	}
@@ -41,7 +41,7 @@ void HealthBar::update(Player &player)
 
 void HealthBar::draw()
 {
-	for (int i = 0; i < m_sprites.size(); i++)
+	for (std::size_t i = 0; i < m_sprites.size(); i++)
 	{
 	    Renderer::instance().drawHUD(m_sprites[i]);
 	}

@@ -37,8 +37,8 @@ private:
 	sf::Text m_thisTextRow;
 	sf::Font m_font;
 	int typedLength = 0;
-	int delay = 1000;
-	int timer = delay;
+	float delay = 1000;
+	float timer = delay;
 	int currentLetter = 0;
 	int currentRow = 0;
 	float m_speed;

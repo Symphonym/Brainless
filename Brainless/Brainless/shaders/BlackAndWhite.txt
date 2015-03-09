@@ -13,9 +13,9 @@ void main() {
 	
 	// SEPIA CODE
 	vec3 tmpSepia = vec3(0,0,0);
-	tmpSepia.r = dot(texel, vec3(.393, .769, .189));
-	tmpSepia.g = dot(texel, vec3(.349, .686, .168));
-	tmpSepia.b = dot(texel, vec3(.272, .534, .131));  
+	tmpSepia.r = dot(texel.xyz, vec3(.393, .769, .189));
+	tmpSepia.g = dot(texel.xyz, vec3(.349, .686, .168));
+	tmpSepia.b = dot(texel.xyz, vec3(.272, .534, .131));  
 
 	tmpSepia.rgb = tmpSepia.rgb / 3.f;
 

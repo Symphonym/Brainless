@@ -233,8 +233,8 @@ void Turtle::update(float deltaTime)
 					int rndPosY;
 					while (!movedFrie) //fulaste trial and error search
 					{
-						rndPosX = Utility::randomValueBetween(0, 9);
-						rndPosY = Utility::randomValueBetween(0, 9);
+						rndPosX = (int) Utility::randomValueBetween(0, 9);
+						rndPosY = (int) Utility::randomValueBetween(0, 9);
 						if (map[rndPosX][rndPosY] == nullptr) movedFrie = true;
 					}
 					map[rndPosX][rndPosY] = map[newPosX][newPosY];
