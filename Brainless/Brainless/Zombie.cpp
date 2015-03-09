@@ -27,6 +27,7 @@ bool Zombie::onInteractedWith(Item &otherItem, Game &game)
 		// TODO add brain giving logic
 		return true;
 	}
+	return false;
 }/*
 void Zombie::onCollisionWithItem(Item &item)
 {
