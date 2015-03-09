@@ -13,7 +13,6 @@ m_ladderIsDown(false)
 	m_examineString = "Rickety thing... Must. Climb.";
 	m_useString = "I can't reach that from here";
 	m_interactDistance = sf::Vector2f(700, 1000);
-	//m_interactDistance = sf::Vector2f(100, 1000);
 }
 
 void RopeLadderItem::serialize(std::ofstream &writer) const
@@ -90,7 +89,6 @@ void RopeLadderItem::refreshStatus()
 		m_interactDistance = sf::Vector2f(100, 1000);
 		m_examineString = "Rickety thing... Must. Climb.";
 		m_usable = true;
-		//getSprite().setTexture(ResourceLoader::instance().retrieveTexture("ManholeOpen"));
 		m_interactBounds = sf::FloatRect(0, 0,
 			getSprite().getGlobalBounds().width,
 			getSprite().getGlobalBounds().height + m_ladder.getSprite().getGlobalBounds().height);
@@ -103,6 +101,5 @@ void RopeLadderItem::refreshStatus()
 		m_interactBounds = sf::FloatRect(0, 0,
 			getSprite().getGlobalBounds().width,
 			getSprite().getGlobalBounds().height);
-		//getSprite().setTexture(ResourceLoader::instance().retrieveTexture("ManholeClosed"));
 	}
 }
