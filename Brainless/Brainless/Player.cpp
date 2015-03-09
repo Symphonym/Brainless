@@ -247,7 +247,7 @@ void Player::updateTask(float deltaTime)
 	else
 	{
 		if (getPosition().y - m_fallPos > Constants::TileSize * 4)
-			takesDamage(sf::Vector2f(0, 10));
+			takesDamage(m_position);
 		m_fallPos = getPosition().y;
 	}
 }
@@ -276,7 +276,7 @@ void Player::takesDamage(sf::Vector2f damageOrigin, int damage)
 			m_speed.x = -200;
 			m_spriteDirection = dir_right;
 		}
-		else if (damageOrigin.x - m_position.x != 0)
+		else if (damageOrigin.x - m_position.x < 0)
 		{
 			m_speed.x = 200;
 			m_spriteDirection = dir_left;

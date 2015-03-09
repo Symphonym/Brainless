@@ -102,6 +102,15 @@ void Renderer::executeDraws()
 			m_renderTarget->draw(*m_renderTasks[i].first);
 	}
 
+	// Draw foreground stuff
+	for (std::size_t i = 0; i < m_foregroundRenderTasks.size(); i++)
+	{
+		if (m_shader != nullptr)
+			m_renderTarget->draw(*m_foregroundRenderTasks[i], m_shader);
+		else
+			m_renderTarget->draw(*m_foregroundRenderTasks[i]);
+	}
+
 	// Draw "above" stuff
 	for (std::size_t i = 0; i < m_aboveRenderTasks.size(); i++)
 	{
@@ -111,14 +120,7 @@ void Renderer::executeDraws()
 			m_renderTarget->draw(*m_aboveRenderTasks[i]);
 	}
 
-	// Draw foreground stuff
-	for (std::size_t i = 0; i < m_foregroundRenderTasks.size(); i++)
-	{
-		if (m_shader != nullptr)
-			m_renderTarget->draw(*m_foregroundRenderTasks[i], m_shader);
-		else
-			m_renderTarget->draw(*m_foregroundRenderTasks[i]);
-	}
+
 
 	// Store a temp variable of the current camera so we can revert back to it
 	sf::View tempView = m_renderTarget->getView();
