@@ -382,6 +382,8 @@ void Inventory::draw()
 
 void Inventory::emptyInventory()
 {
+	delete m_mouseItem.release();
+	m_mouseItem = nullptr;
 	for (auto &rows : m_slots)
 	{
 		for (auto &slot : rows)
