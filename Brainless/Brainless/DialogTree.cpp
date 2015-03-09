@@ -49,7 +49,8 @@ std::string DialogTree::getPortraitTextureName() const
 void DialogTree::loadDialogFile(const std::string &fileName)
 {
 	std::ifstream reader(fileName);
-
+	m_rootBranch.branches.clear();
+	m_rootBranch.description = "";
 	if (reader.is_open())
 	{
 		std::getline(reader, m_portraitTextureName);

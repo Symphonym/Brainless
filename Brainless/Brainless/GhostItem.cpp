@@ -2,18 +2,21 @@
 #include "ConversationBox.h"
 #include "Renderer.h"
 #include <math.h>
+#include <string>
 #include "Game.h"
 #include "Notification.h"
 
+#include <iostream>
+
 #define SPRITESIZE 256
 
-GhostItem::GhostItem(const std::string &dialogFile, int id)
+GhostItem::GhostItem(int id)
 :
 m_animation(SPRITESIZE, SPRITESIZE),
 Item("Ghost","GhostItem", "GhostItem", id)
 {
-	m_dialog.loadDialogFile(dialogFile);
 	m_interactBounds = sf::FloatRect(65, 75, 150, 150);
+	m_collisionBounds = sf::FloatRect(65, 75, 150, 150);
 	m_lootable = false;
 	m_usable = true;
 	m_pickupString = "It would be unwise to try to pick up a ghost";
@@ -32,12 +35,13 @@ void GhostItem::update(float deltaTime, Game &game)
 }
 void GhostItem::draw()
 {
-
 	Renderer::instance().drawDepth(getSprite());
 }
 
 void GhostItem::onUse(Game &game)
 {
+	std::cout << getSyncID() << std::endl;
+	m_dialog.loadDialogFile("dialogues/Ghost" + std::to_string(getSyncID()) + ".txt");
 	// You can't talk to the ghost if you don't have spirit power
 	if (game.getSpiritBar().getValue() < Constants::SpiritGhostCost)
 	{
@@ -53,6 +57,29 @@ void GhostItem::onUse(Game &game)
 	ConversationBox::instance().setPosition(sf::Vector2f(onScreenPos.x, onScreenPos.y));
 	ConversationBox::instance().setDialog(m_dialog);
 	ConversationBox::instance().setShown(true);
+}
+
+bool GhostItem::onCollisionWithUnit(Unit &unit, Game &game)
+{
+	if (unit.getUnitType() == Unit::ID_Player)
+	{
+		setSyncID(-1);
+	}
+	return false;
+}
+
+void GhostItem::serialize(std::ofstream &writer) const
+{
+	Item::serialize(writer);
+	writer << getSyncID() << std::endl;
+}
+
+void GhostItem::deserialize(std::ifstream &reader)
+{
+	Item::deserialize(reader);
+	int temp;
+	reader >> temp;
+	setSyncID(temp);
 }
 
 Item* GhostItem::clone()

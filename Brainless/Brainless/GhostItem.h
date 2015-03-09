@@ -11,12 +11,16 @@ class GhostItem : public Item
 {
 public:
 
-	explicit GhostItem(const std::string &dialogFile, int id);
+	explicit GhostItem(int id);
 
 	virtual void update(float deltaTime, Game &game);
 	virtual void draw();
 
 	virtual void onUse(Game &game);
+	virtual bool onCollisionWithUnit(Unit &unit, Game &game);
+
+	virtual void serialize(std::ofstream &writer) const;
+	virtual void deserialize(std::ifstream &reader);
 
 	virtual Item* clone();
 

@@ -53,7 +53,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new VendingMachineItem("VendingMachineItem1", { 0 }, 2)));
 	addItem(ItemPtr(new CoinItem(3)));
 	addItem(ItemPtr(new TwineItem(4)));
-	addItem(ItemPtr(new GhostItem("dialogues/LEVEL1.txt", 5)));
+	addItem(ItemPtr(new GhostItem(5)));
 	addItem(ItemPtr(new DoorItem(true, 6))); // Locked door
 	addItem(ItemPtr(new KeyItem(7))); // Key to said door
 	addItem(ItemPtr(new ChestItem(false, { 0, 1 }, 8)));
@@ -118,7 +118,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new BookShelfItem(45)));
 	addItem(ItemPtr(new CrateItem(46)));
 	addItem(ItemPtr(new LadderItem("PlankLadder", 47, false)));
-	addItem(ItemPtr(new GhostItem("dialogues/LEVEL2.txt", 48)));
+	//addItem(ItemPtr(new GhostItem("dialogues/LEVEL2.txt", 48)));
 	addItem(ItemPtr(new Lamp(49)));
 }
 
