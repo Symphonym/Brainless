@@ -152,7 +152,7 @@ void NoteGame::update(float deltaTime)
 			m_machine.getScreenPos().x + 60.f,
 			m_machine.getScreenPos().y + m_machine.getScreenSize().y / 2.f + 20 * textCount);
 		sf::Color col = hitText.second.getColor();
-		col.a = (hitText.first / HitTextDuration) * 255;
+		col.a = (sf::Uint8) (hitText.first / HitTextDuration) * 255;
 		hitText.second.setColor(col);
 		++textCount;
 

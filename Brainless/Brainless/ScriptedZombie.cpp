@@ -69,7 +69,7 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 				return false;
 			}
 		}
-		else return false;
+		return false;
 	}
 
 	else if (m_scriptID == 1)
@@ -93,8 +93,7 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 				return ptr->releaseItems(m_levelPtr, game);
 			}
 		}
-		else
-			return false;
+		return false;
 	}
 	else 
 	return m_baseZombie->onInteractedWith(otherItem, game);

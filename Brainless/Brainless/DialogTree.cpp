@@ -64,7 +64,7 @@ void DialogTree::printBranch(DialogBranch &branch, std::size_t indent)
 {
 	std::string indentStr;
 
-	for (int i = 0; i < indent; i++)
+	for (std::size_t i = 0; i < indent; i++)
 		indentStr += '\t';
 
 	if (!branch.description.empty())

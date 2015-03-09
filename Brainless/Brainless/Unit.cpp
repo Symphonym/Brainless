@@ -151,7 +151,7 @@ void Unit::setTexture(int index, sf::Texture& texture)
 	m_sprite->setTexture(texture);
 	//error sheet.size() < 1
 	//error index < 0
-	if (index < m_spriteSheets.size())
+	if ((std::size_t) index < m_spriteSheets.size())
 	{
 		m_spriteSheets[index].setTexture(texture);
 	}

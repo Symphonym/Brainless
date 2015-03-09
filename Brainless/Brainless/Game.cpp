@@ -379,7 +379,7 @@ void Game::update(float deltaTime)
 		m_player->setHealth(-99);
 	}
 	//Keep player bound whitin room sides
-	m_player->setPosition(sf::Vector2f(Utility::clampValue<float>(m_player->getPosition().x, Constants::TileSize*0.1, (Constants::MapWidth - 0.5)*Constants::TileSize), m_player->getPosition().y));
+	m_player->setPosition(sf::Vector2f(Utility::clampValue<float>(m_player->getPosition().x, Constants::TileSize*0.1f, (Constants::MapWidth - 0.5f)*Constants::TileSize), m_player->getPosition().y));
 
 }
 void Game::draw()

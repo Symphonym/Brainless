@@ -27,46 +27,26 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 	{
 		m_zombieMasks.pop_back();
 	}
-	for (int i = 0; i < level.getUnits().size(); i++)
+	for (std::size_t i = 0; i < level.getUnits().size(); i++)
 	{
 		EditorZombie temp1,temp2;
 		switch (level.getUnit(i).getUnitType())
 		{
 		case Unit::ID_WalkingZombie:
 			temp1.sprite = level.getUnit(i).getSprite();
-			temp1.sprite.setPosition(temp1.sprite.getPosition() + sf::Vector2f(/*(dynamic_cast<WalkingZombie*>(&*/level.getUnit(i)/*))->*/.getWalkLength(), 0));
+			temp1.sprite.setPosition(temp1.sprite.getPosition() + sf::Vector2f(level.getUnit(i).getWalkLength(), 0.f));
 			temp1.sprite.setColor(sf::Color(255, 255, 255, 128));
 			m_zombieMasks.push_back(temp1);
 			break;
 		case Unit::ID_ChasingZombie:
 			temp1.sprite = level.getUnit(i).getSprite(); temp2.sprite = level.getUnit(i).getSprite();
-			temp1.sprite.setPosition(temp1.sprite.getPosition() + sf::Vector2f(/*(dynamic_cast<ChasingZombie*>(&*/level.getUnit(i)/*))->*/.getWalkLength(), 0));
-			temp2.sprite.setPosition(temp2.sprite.getPosition() - sf::Vector2f(/*(dynamic_cast<ChasingZombie*>(&*/level.getUnit(i)/*))->*/.getWalkLength(), 0));
+			temp1.sprite.setPosition(temp1.sprite.getPosition() + sf::Vector2f(level.getUnit(i).getWalkLength(), 0.f));
+			temp2.sprite.setPosition(temp2.sprite.getPosition() - sf::Vector2f(level.getUnit(i).getWalkLength(), 0.f));
 			temp1.sprite.setColor(sf::Color(255, 255, 255, 128));
 			temp2.sprite.setColor(sf::Color(255, 255, 255, 128));
 			m_zombieMasks.push_back(temp1);
 			m_zombieMasks.push_back(temp2);
 			break;
-		//case Unit::ID_ScriptZombie: //prevent faulty typecasting
-		//	switch (level.getUnit(i).getUnitType())
-		//	{
-		//	case Unit::ID_WalkingZombie:
-		//		temp1.sprite = level.getUnit(i).getSprite();
-		//		temp1.sprite.setPosition(temp1.sprite.getPosition() + sf::Vector2f((dynamic_cast<ScriptedZombie*>(&level.getUnit(i)))->getWalkLength(), 0));
-		//		temp1.sprite.setColor(sf::Color(255, 255, 255, 128));
-		//		m_zombieMasks.push_back(temp1);
-		//		break;
-		//	case Unit::ID_ChasingZombie:
-		//		temp1.sprite = level.getUnit(i).getSprite(); temp2.sprite = level.getUnit(i).getSprite();
-		//		temp1.sprite.setPosition(temp1.sprite.getPosition() + sf::Vector2f((dynamic_cast<ScriptedZombie*>(&level.getUnit(i)))->getWalkLength(), 0));
-		//		temp2.sprite.setPosition(temp2.sprite.getPosition() - sf::Vector2f((dynamic_cast<ScriptedZombie*>(&level.getUnit(i)))->getWalkLength(), 0));
-		//		temp1.sprite.setColor(sf::Color(255, 255, 255, 128));
-		//		temp2.sprite.setColor(sf::Color(255, 255, 255, 128));
-		//		m_zombieMasks.push_back(temp1);
-		//		m_zombieMasks.push_back(temp2);
-		//		break;
-		//	}
-		//	break;
 		}
 	}
 	if (event.type == sf::Event::MouseWheelMoved)
@@ -119,11 +99,11 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 					temp = new IdleZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), temp_direction, 0);
 					break;
 				case Unit::ID_WalkingZombie: //Walking zombie
-					m_createdZombie.walk_distance = mousePos.x - m_createdZombie.sprite.getPosition().x;
+					m_createdZombie.walk_distance = (int) (mousePos.x - m_createdZombie.sprite.getPosition().x);
 					temp = new WalkingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, 0);
 					break;
 				default://case Unit::ID_ChasingZombie: //Chasing Zombie
-					m_createdZombie.walk_distance = mousePos.x - m_createdZombie.sprite.getPosition().x;
+					m_createdZombie.walk_distance = (int) (mousePos.x - m_createdZombie.sprite.getPosition().x);
 					temp = new ChasingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, 0);
 					break;
 				}
@@ -214,7 +194,7 @@ void EditorZombieMode::draw()
 	{
 		Renderer::instance().drawForeground(m_createdZombie.sprite);
 	}
-	for (int i = 0; i < m_zombieMasks.size(); i++)
+	for (std::size_t i = 0; i < m_zombieMasks.size(); i++)
 	{
 		Renderer::instance().drawForeground(m_zombieMasks[i].sprite);
 	}

@@ -259,7 +259,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 
 
 
-		currentUnit->updateMovement(Constants::Gravity, deltaTime);
+		currentUnit->updateMovement((float) Constants::Gravity, deltaTime);
 
 		sf::FloatRect unitBounds = currentUnit->getCollisionRect();
 
@@ -309,7 +309,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 
 #pragma region tiltCollision
 
-			for (int i = 0; i < tiltRects.size(); i++)
+			for (std::size_t i = 0; i < tiltRects.size(); i++)
 				//for (int i = tiltRects.size(); i-- > 0; )
 			{
 				sf::FloatRect originalBounds = unitBounds;
@@ -388,7 +388,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 			{
 #pragma region solidCollision
 				//std::cout << "solid collision" << std::endl;
-				for (int i = 0; i < solidRects.size(); i++)
+				for (std::size_t i = 0; i < solidRects.size(); i++)
 				{
 					sf::FloatRect tileBounds = solidRects[i];
 					sf::FloatRect tileTopBounds = sf::FloatRect(tileBounds.left, tileBounds.top, tileBounds.width, 1);
@@ -502,7 +502,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 			}
 
 #pragma region platformCollision
-			for (int i = 0; i < platformRects.size(); i++)
+			for (std::size_t i = 0; i < platformRects.size(); i++)
 			{
 				float platformCollisionHeight = 20;
 
@@ -530,7 +530,7 @@ void Level::updateUnitCollision(float deltaTime, Game &game)
 
 #pragma region itemCollision
 
-			for (int i = 0; i < m_items.size(); i++)
+			for (std::size_t i = 0; i < m_items.size(); i++)
 			{
 				if (m_items[i]->getScriptUnitType() != currentUnit->getUnitType())
 				{

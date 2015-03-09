@@ -153,7 +153,7 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 
 			// Loop through the row
 			std::vector<std::string> columns = Utility::splitString(line, ',');
-			for (int x = 0; x < columns.size(); x++)
+			for (std::size_t x = 0; x < columns.size(); x++)
 			{
 				int tileType = Utility::stringToNumber<int>(columns[x]);
 				level.getTileMap().getTile(x, y).setType(static_cast<Tile::TileTypes>(tileType));
@@ -164,7 +164,7 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 		int itemCount = 0;
 		reader >> itemCount;
 
-		for (std::size_t i = 0; i < itemCount; i++)
+		for (int i = 0; i < itemCount; i++)
 		{
 			std::string line;
 			reader >> line;
@@ -186,7 +186,7 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 		}
 
 		// Read sprite count
-		int spriteCount = 0;
+		std::size_t spriteCount = 0;
 		reader >> spriteCount;
 
 		for (std::size_t i = 0; i < spriteCount; i++)
@@ -213,7 +213,7 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 		}
 
 		// Read Unit count
-		int unitCount = 0;
+		std::size_t unitCount = 0;
 		reader >> unitCount;
 
 		for (std::size_t i = 0; i < unitCount; i++)

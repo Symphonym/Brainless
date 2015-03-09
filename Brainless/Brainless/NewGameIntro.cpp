@@ -66,7 +66,7 @@ void NewGameIntro::update(float deltaTime)
 				++m_currentIndex;
 				m_curFade = 0;
 
-				if (m_currentIndex >= m_introTexts.size())
+				if ((std::size_t) m_currentIndex >= m_introTexts.size())
 				{
 					m_machine.popState();
 					m_machine.pushState<Game>();

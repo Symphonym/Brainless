@@ -73,8 +73,8 @@ sf::IntRect WorldButton::getHitbox()
 void WorldButton::setPosition(sf::Vector2f pos)
 {
 	m_position = pos;
-	m_hitBoxRect.top = pos.y;
-	m_hitBoxRect.left = pos.x;
+	m_hitBoxRect.top = (int) pos.y;
+	m_hitBoxRect.left = (int) pos.x;
 }
 
 std::string WorldButton::getType()

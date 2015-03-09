@@ -14,12 +14,12 @@ m_tileSize(tileSize)
 		{
 			// Tile size has to be the dimension of the front side of the cube
 			Tile tile(sf::FloatRect(
-				x*tileSize, y*tileSize, tileSize, tileSize),
+				(float) x*tileSize, (float) y*tileSize, (float) tileSize, (float) tileSize), /* borde tile ha en intrect? */
 				layout[x][y],
 				// In the vector below
 				// X needs to be negative half the width of the left side of the cube
 				// Y needs to be negative half the width of the top side of the cube
-				sf::Vector2f(Constants::LeftTileOffset, Constants::TopTileOffset));
+				sf::Vector2f((float) Constants::LeftTileOffset,(float) Constants::TopTileOffset));
 			m_tileMap[x].push_back(tile);
 		}
 			
@@ -74,7 +74,7 @@ void TileMap::draw(const sf::View &view, bool editorMode)
 // Converts a position to an index in the grid
 sf::Vector2i TileMap::positionToIndex(const sf::Vector2f &position) const
 {
-	return sf::Vector2i(position.x / m_tileSize, position.y / m_tileSize);
+	return sf::Vector2i((int) (position.x / m_tileSize), (int) (position.y / m_tileSize));
 }
 
 Tile &TileMap::getTile(int x, int y)
