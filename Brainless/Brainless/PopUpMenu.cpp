@@ -102,6 +102,7 @@ void PopUpMenu::events(const sf::Event &event, Game &game)
 				// Right clicked on an item
 				if (itemBounds.contains(mousePos))
 				{
+					game.getLevel().getItems()[i]->onExamine();
 					Notification::instance().write(game.getLevel().getItems()[i]->getExamineString());
 					break;
 				}
