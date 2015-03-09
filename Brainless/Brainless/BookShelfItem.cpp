@@ -19,7 +19,7 @@ Item("Bookshelf", "bookShelf", "bookShelf", id)
 
 void BookShelfItem::onExamine()
 {
-	m_examineString = "A chance to stock up on books! …Oh, oh god, it's that one about sparkly vampires. Run, for gods sake, run!";
+	m_examineString = "A chance to stock up on books! ...Oh, oh god, it's that one about sparkly vampires. Run, for gods sake, run!";
 }
 
 void BookShelfItem::draw()

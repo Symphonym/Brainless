@@ -10,7 +10,7 @@ m_ladderIsDown(false)
 {
 	m_lootable = false;
 	refreshStatus();
-	m_examineString = "Rickety thing… Must. Climb.";
+	m_examineString = "Rickety thing... Must. Climb.";
 	m_useString = "I can't reach that from here";
 	m_interactDistance = sf::Vector2f(700, 1000);
 	//m_interactDistance = sf::Vector2f(100, 1000);
