@@ -27,6 +27,9 @@ public:
 
 	virtual Item* clone();
 
+	int getGhostID() const;
+	void setGhostID(int ghostID);
+
 private:
 	float m_currentFrame = 0;
 	int m_frameCount = 13;

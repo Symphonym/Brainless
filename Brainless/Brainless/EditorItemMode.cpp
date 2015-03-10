@@ -87,7 +87,6 @@ bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &edit
 	if (event.type == sf::Event::MouseWheelMoved)
 	{
 		sf::Vector2f mousePos = editorWindow.mapPixelToCoords(sf::Mouse::getPosition(editorWindow));
-		bool toggled = false;
 		// Loop through all items and see if you scrolled on any of them
 		for (int i = level.getItems().size() - 1; i >= 0; i--)
 		{
@@ -95,25 +94,21 @@ bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &edit
 			{
 				if (level.getItems()[i]->onToggle(event.mouseWheel.delta))
 				{
-					toggled = true;
 					m_itemInfo[i].setString("Name: " + level.getItems()[i]->getName() + "\nID: " + std::to_string(level.getItems()[i]->getID()) + "\nSyncID: " + std::to_string(level.getItems()[i]->getSyncID()) + "\n" + level.getItems()[i]->getToggleString());
-					break;
+					return true;
 				}
 			}
 		}
-		if (!toggled)
-		{
-			// Scroll between items
-			m_currentIndex += event.mouseWheel.delta;
-			m_currentIndex = Utility::clampValue<int>(m_currentIndex, 1, ItemDatabase::instance().getItemCount());
+		// Scroll between items
+		m_currentIndex += event.mouseWheel.delta;
+		m_currentIndex = Utility::clampValue<int>(m_currentIndex, 1, ItemDatabase::instance().getItemCount());
 
-			// Update preview item
-			m_currentItem = std::move(ItemDatabase::instance().extractItemByCount(m_currentIndex));
+		// Update preview item
+		m_currentItem = std::move(ItemDatabase::instance().extractItemByCount(m_currentIndex));
 
-			m_currentNameText.setString("Item name: " + m_currentItem->getName());
-			m_currentIDText.setString("Item ID: " + std::to_string(m_currentItem->getID()));
-			m_currentIndexText.setString("Item index: " + std::to_string(m_currentIndex));
-		}
+		m_currentNameText.setString("Item name: " + m_currentItem->getName());
+		m_currentIDText.setString("Item ID: " + std::to_string(m_currentItem->getID()));
+		m_currentIndexText.setString("Item index: " + std::to_string(m_currentIndex));
 	}
 	else if (event.type == sf::Event::MouseButtonReleased)
 	{
