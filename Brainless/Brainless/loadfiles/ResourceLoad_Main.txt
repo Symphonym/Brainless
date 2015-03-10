@@ -479,3 +479,6 @@
 
 # FEATHER ITEM
 +Texture,images/items/feather.png,SpiritFeather
+
+# DIALOUGE ITEM
++Texture,images/items/startDialougeItem.png,DialougeItem
