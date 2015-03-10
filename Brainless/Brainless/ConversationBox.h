@@ -49,6 +49,7 @@ private:
 
 	sf::Vector2f m_basePosition;
 
+	sf::Text m_headerText;
 
 	// List of answers to choose from
 	std::vector<sf::Text> m_answers;

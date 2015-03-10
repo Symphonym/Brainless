@@ -11,7 +11,7 @@ StartProgramIntro::StartProgramIntro(StateMachine &machine)
 State(machine),
 m_currentState(IntroStates::MouseInput)
 {
-	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_StartProgramIntro.txt");
+	ResourceLoader::instance().loadResourceFile("loadfiles/ResourceLoad_StartProgramIntro.txt", false);
 
 	m_mouseInputButton = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("ok_Normal"),
