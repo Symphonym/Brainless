@@ -72,7 +72,7 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 				// Clicking outside the conversation box will close it
 				if (!m_background.getGlobalBounds().contains(sf::Vector2f(mousePos.x, mousePos.y)))
 				{
-					setShown(false);
+					m_dialogBox.finishTextNow();
 					return;
 				}
 
