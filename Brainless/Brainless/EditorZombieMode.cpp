@@ -107,7 +107,6 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 					temp = new ChasingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, 0);
 					break;
 				}
-				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				temp->updateAnimation(0);
 				if (m_script_id >= 0) //Add scripted zombie
 				{

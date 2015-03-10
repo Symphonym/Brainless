@@ -56,8 +56,24 @@ m_player(nullptr)
 		if (ConversationBox::instance().isShown())
 			return;
 
+		sf::Vector2f playerCenter = sf::Vector2f(m_player->getPosition().x + m_player->getSize().x / 2.f, m_player->getPosition().y + m_player->getSize().y / 2.f);
+		sf::Vector2f itemCenter = sf::Vector2f(
+			itm->getInteractBounds().left + itm->getInteractBounds().width / 2.f,
+			itm->getInteractBounds().top + itm->getInteractBounds().height / 2.f);
+
+		sf::Vector2f distVec = itemCenter - playerCenter;
+		distVec.x = std::abs(distVec.x);
+		distVec.y = std::abs(distVec.y);
+
 		if (type == PopUpMenu::InteractTypes::Pickup)
 		{
+			// Item too far away
+			if (distVec.x > itm->getInteractDistance().x || distVec.y > itm->getInteractDistance().y)
+			{
+				Notification::instance().write("It's too far away");
+				return;
+			}
+
 			if (itm->isLootable())
 			{
 				itm->onPickUp();
@@ -69,6 +85,13 @@ m_player(nullptr)
 		}
 		else if (type == PopUpMenu::InteractTypes::Use)
 		{
+			// Item too far away
+			if (distVec.x > itm->getInteractDistance().x || distVec.y > itm->getInteractDistance().y)
+			{
+				Notification::instance().write("It's too far away");
+				return;
+			}
+
 			if (itm->isUsable())
 			{
 				itm->onUse(*this);
