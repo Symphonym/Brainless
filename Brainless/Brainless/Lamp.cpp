@@ -13,7 +13,7 @@ Item("Lamp", "Lamp", "Lamp", id)
 	m_usable = true;
 	m_collidable = true;
 
-	m_collisionBounds = sf::FloatRect(33, 33, 75, 33);
+	m_collisionBounds = sf::FloatRect(86,190,226, 33);
 	m_interactBounds = m_collisionBounds;
 }
 

@@ -50,7 +50,6 @@ private:
 
 	std::array<sf::Sprite, 3> m_buttons;
 	sf::Sprite m_background;
-	std::bitset<3> m_buttonsEnabled;
 };
 
 #endif

@@ -32,6 +32,11 @@ const sf::Vector2f& WrappedText::getBoxSize() const
 	return m_messageBoxSize;
 }
 
+void WrappedText::finishTextNow()
+{
+	m_turbo = true;
+}
+
 void WrappedText::Type(std::string text, float speed, sf::Color color, int textSize)
 {
 	typedLength = 0;
@@ -53,6 +58,18 @@ void WrappedText::Type(std::string text, float speed, sf::Color color, int textS
 
 void WrappedText::Update(float deltaTime)
 {
+	if (isFinished())
+	{
+		m_turbo = false;
+	}
+	else
+	{
+		if (m_turbo)
+			delay = 1;
+		else
+			delay = 200;
+	}
+
 	m_text.setPosition(m_position);
 
 	if (currentLetter < (int) m_string.length())
@@ -129,7 +146,7 @@ void WrappedText::Draw(bool drawAsHud)
 }
 
 
-bool WrappedText::isFinished() const
+bool WrappedText::isFinished()
 {
 	return currentLetter >= (int) m_string.length();
 }

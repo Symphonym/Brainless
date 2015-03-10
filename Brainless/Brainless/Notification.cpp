@@ -33,7 +33,7 @@ void Notification::setPosition(const sf::Vector2f &position)
 	m_background.setPosition(position);
 	m_textBox.setPosition(sf::Vector2f(m_background.getPosition().x + 20.f, m_background.getPosition().y + 10.f));
 }
-
+#include <iostream>
 void Notification::update(float deltaTime, const sf::RenderWindow &gameWindow)
 {
 	if (m_isShown)
@@ -48,6 +48,17 @@ void Notification::update(float deltaTime, const sf::RenderWindow &gameWindow)
 		{
 			m_curDelay += deltaTime;
 			float diff = m_curDelay / m_maxDelay;
+
+
+			if (diff < 0.8f)
+				diff = 0;
+			else
+				diff = (diff - 0.8f) / 0.2f;
+
+			if (diff >= 1.f)
+				diff = 1.f;
+			if (diff < 0)
+				diff = 0;
 
 			sf::Color fadedColor(255, 255, 255, 255 - 255 * diff);
 			m_background.setColor(fadedColor);

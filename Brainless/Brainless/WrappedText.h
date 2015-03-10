@@ -19,6 +19,8 @@ public:
 	const sf::Vector2f& getPosition() const;
 	const sf::Vector2f& getBoxSize() const;
 
+	void finishTextNow();
+
 	//Put in a string that will be written
 	void Type(std::string text, float speed = 1, sf::Color color = sf::Color::Black, int textSize = 18);
 
@@ -26,7 +28,7 @@ public:
 
 	void Draw(bool drawAsHud = true);
 
-	bool isFinished() const;
+	bool isFinished();
 
 private:
 	//The size of the box which the text will be displayed in
@@ -43,6 +45,7 @@ private:
 	int currentRow = 0;
 	float m_speed;
 	std::string m_string;
+	bool m_turbo;
 };
 
 #endif

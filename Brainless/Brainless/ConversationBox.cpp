@@ -15,6 +15,10 @@ m_dialogBox(sf::Vector2f(0, 0), sf::Vector2f(100, 100), ResourceLoader::instance
 	m_background.setTexture(ResourceLoader::instance().retrieveTexture("DialogBoxBackground"));
 	m_dialogBox.setSize(sf::Vector2f(m_background.getGlobalBounds().width / 1.6, m_background.getGlobalBounds().height / 1.3f));
 	m_portraitSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_playerPortraitTextureName));
+
+	m_headerText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
+	m_headerText.setString("Select your answer:");
+	m_headerText.setCharacterSize(30);
 }
 
 void ConversationBox::setPosition(const sf::Vector2f &position)
@@ -28,13 +32,17 @@ void ConversationBox::setPosition(const sf::Vector2f &position)
 		m_background.getPosition().x + 10.f,
 		m_background.getPosition().y + 10.f);
 
+	m_headerText.setPosition(
+		m_portraitSprite.getPosition().x + m_portraitSprite.getGlobalBounds().width + 10.f,
+		m_background.getPosition().y);
+
 	for (std::size_t i = 0; i < m_answers.size(); i++)
 	{
 		sf::Text &text = m_answers[i];
 		
 		text.setPosition(
 			m_portraitSprite.getPosition().x + m_portraitSprite.getGlobalBounds().width + 10.f,//m_background.getGlobalBounds().left + m_background.getGlobalBounds().width - text.getGlobalBounds().width - 10.f,
-			m_background.getPosition().y + 10.f + i*(text.getGlobalBounds().height + 5.f)
+			m_background.getPosition().y + 25.f + i*(text.getGlobalBounds().height + 5.f)
 			);
 	}
 }
@@ -64,7 +72,7 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 				// Clicking outside the conversation box will close it
 				if (!m_background.getGlobalBounds().contains(sf::Vector2f(mousePos.x, mousePos.y)))
 				{
-					setShown(false);
+					m_dialogBox.finishTextNow();
 					return;
 				}
 
@@ -76,10 +84,12 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 					{
 
 						sf::FloatRect textBounds = m_answers[i].getGlobalBounds();
+						sf::FloatRect mouseBounds = sf::FloatRect(
+							0, mousePos.y, game.getWindow().getSize().x, 1);
 						sf::Text &text = m_answers[i];
 
 						// An answer was clicked
-						if (textBounds.contains(sf::Vector2f(mousePos.x, mousePos.y)))
+						if (textBounds.intersects(mouseBounds) || (m_answers.size() == 1 && m_background.getGlobalBounds().contains(sf::Vector2f(mousePos.x, mousePos.y))))
 						{
 							m_conversationState = ConversationStates::NPC;
 							m_portraitSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_dialog.getPortraitTextureName()), true);
@@ -127,6 +137,8 @@ void ConversationBox::update(float deltaTime, Game &game)
 		if (m_conversationState == ConversationStates::Player)
 		{
 			sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
+			sf::FloatRect mouseBounds = sf::FloatRect(
+				0, mousePos.y, game.getWindow().getSize().x, 1);
 
 			for (std::size_t i = 0; i < m_answers.size(); i++)
 			{
@@ -134,7 +146,7 @@ void ConversationBox::update(float deltaTime, Game &game)
 				sf::Text &text = m_answers[i];
 
 				// Toggle colors on answers depending on click, hover, etc
-				if (textBounds.contains(sf::Vector2f(mousePos.x, mousePos.y)))
+				if (textBounds.intersects(mouseBounds))//contains(sf::Vector2f(mousePos.x, mousePos.y)))
 				{
 					if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 						text.setColor(sf::Color::Green);
@@ -157,12 +169,15 @@ void ConversationBox::draw()
 {
 	if (m_isShown)
 	{
+
 		Renderer::instance().drawHUD(m_background);
 		Renderer::instance().drawHUD(m_portraitSprite);
 
 		 //Draw answers only if it's the player's turn to speak
 		if (m_conversationState == ConversationStates::Player)
 		{
+			Renderer::instance().drawHUD(m_headerText);
+
 			for (std::size_t i = 0; i < m_answers.size(); i++)
 				Renderer::instance().drawHUD(m_answers[i]);
 		}
