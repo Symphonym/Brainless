@@ -13,9 +13,9 @@
 
 //v0.02
 
-ChasingZombie::ChasingZombie(sf::Vector2f startPosition, int maxLengthX, int Texture)
+ChasingZombie::ChasingZombie(sf::Vector2f startPosition, int maxLengthX, int Texture, int syncID)
 :
-Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_ChasingZombie,Texture),
+Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_ChasingZombie,Texture, syncID),
 m_maxWalkLenght(abs(maxLengthX)),
 m_direction(dir_noDirection),
 m_currentLength(0),

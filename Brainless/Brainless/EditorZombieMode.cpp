@@ -96,15 +96,15 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 				case Unit::ID_IdleZombie: //Idle zombie
 					if (mousePos.x - m_createdZombie.sprite.getPosition().x < 0)
 						temp_direction = Unit::dir_left;
-					temp = new IdleZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), temp_direction, 0);
+					temp = new IdleZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), temp_direction, 0, m_sync_id);
 					break;
 				case Unit::ID_WalkingZombie: //Walking zombie
 					m_createdZombie.walk_distance = (int) (mousePos.x - m_createdZombie.sprite.getPosition().x);
-					temp = new WalkingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, 0);
+					temp = new WalkingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, 0, m_sync_id);
 					break;
 				default://case Unit::ID_ChasingZombie: //Chasing Zombie
 					m_createdZombie.walk_distance = (int) (mousePos.x - m_createdZombie.sprite.getPosition().x);
-					temp = new ChasingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, 0);
+					temp = new ChasingZombie(m_createdZombie.sprite.getPosition() + sf::Vector2f(85, 50), m_createdZombie.walk_distance, 0, m_sync_id);
 					break;
 				}
 				temp->updateAnimation(0);
@@ -134,16 +134,28 @@ bool EditorZombieMode::events(const sf::Event &event, const sf::RenderWindow &ed
 	}
 	else if (event.type == sf::Event::KeyReleased)
 	{
-		if (event.key.code == sf::Keyboard::Z)
+		if (event.key.code == sf::Keyboard::C)
 		{
 			m_script_id--;
 			m_script_id = Utility::clampValue<int>(m_script_id, -1,c_script_count-1);
 		}
-		else if (event.key.code == sf::Keyboard::X)
+		else if (event.key.code == sf::Keyboard::V)
 		{
 			m_script_id++;
 			m_script_id = Utility::clampValue<int>(m_script_id, -1,c_script_count-1);
 		}
+		else if (event.key.code == sf::Keyboard::Z)
+		{
+			m_sync_id--;
+			m_sync_id = Utility::clampValue<int>(m_sync_id, -1, 10000 - 1);
+		}
+		else if (event.key.code == sf::Keyboard::X)
+		{
+			m_sync_id++;
+			m_sync_id = Utility::clampValue<int>(m_sync_id, -1, 10000 - 1);
+		}
+
+
 	}
 
 	return false;
@@ -183,6 +195,7 @@ bool EditorZombieMode::update(float deltaTime, const sf::RenderWindow &editorWin
 		m_infoText.setString(m_infoText.getString() + "\nScript id: none");
 		break;
 	}
+	m_infoText.setString(m_infoText.getString() + "\nSync id: " + std::to_string(m_sync_id));
 	return false;
 }
 void EditorZombieMode::draw()
