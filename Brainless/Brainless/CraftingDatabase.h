@@ -18,6 +18,9 @@ public:
 	// crafting combination was found for those id's
 	ItemPtr craftItem(const IdVector &idVector);
 
+	// Returns true if the specified item is part of any crafting recipe
+	bool existsInRecipe(int id);
+
 	static CraftingDatabase &instance();
 
 private:

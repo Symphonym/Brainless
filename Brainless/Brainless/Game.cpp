@@ -65,6 +65,12 @@ m_player(nullptr)
 		distVec.x = std::abs(distVec.x);
 		distVec.y = std::abs(distVec.y);
 
+		std::cout << "DistX: " << distVec.x << std::endl;
+		std::cout << "DistY: " << distVec.y << std::endl;
+
+		std::cout << "InteractX: " << itm->getInteractDistance().x << std::endl;
+		std::cout << "InteractY: " << itm->getInteractDistance().y << std::endl;
+
 		if (type == PopUpMenu::InteractTypes::Pickup)
 		{
 			// Item too far away

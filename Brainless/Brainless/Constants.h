@@ -23,7 +23,7 @@ public:
 	static const int InventoryWidth = 5;
 	static const int InventoryHeight = 4;
 
-	static const int InteractDistance = 150;
+	static const int InteractDistance = 220;
 	static const int StickInteractAddition = 100;
 
 	static const int SpiritFeatherWorth = 13;

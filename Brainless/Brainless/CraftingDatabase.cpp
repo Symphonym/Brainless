@@ -29,6 +29,19 @@ CraftingDatabase::ItemPtr CraftingDatabase::craftItem(const std::vector<int> &id
 
 	return ItemPtr();
 }
+bool CraftingDatabase::existsInRecipe(int id)
+{
+	for (auto itr = m_craftingRecipes.begin(); itr != m_craftingRecipes.end(); itr++)
+	{
+		for (std::size_t i = 0; i < itr->second.size(); i++)
+		{
+			if (id == itr->second[i])
+				return true;
+		}
+	}
+
+	return false;
+}
 
 void CraftingDatabase::addRecipe(int productID, const std::vector<int> &ingredients)
 {
