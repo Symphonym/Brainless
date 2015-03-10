@@ -80,6 +80,17 @@ void GhostItem::deserialize(std::ifstream &reader)
 	reader >> m_ghostID;
 }
 
+void GhostItem::onToggle()
+{
+	m_ghostID++;
+}
+
+
+std::string GhostItem::getToggleString() const
+{
+	return "Dialogue id: " + std::to_string(m_ghostID);
+}
+
 Item* GhostItem::clone()
 {
 	return new GhostItem(*this);

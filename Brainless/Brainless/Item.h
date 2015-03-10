@@ -86,7 +86,7 @@ public:
 	std::string getUseString() const;
 	std::string getPickupString() const;
 	std::string getExamineString() const;
-	std::string getToggleString() const;
+	virtual std::string getToggleString() const;
 	/*virtual*/ sf::FloatRect getCollisionBounds() const; // Will be zero if collidable is false
 	sf::FloatRect getInteractBounds() const;
 	sf::Vector2f getInteractDistance() const;

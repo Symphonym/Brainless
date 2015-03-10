@@ -200,7 +200,7 @@ std::string Item::getExamineString() const
 }
 std::string Item::getToggleString() const
 {
-	return "Unchangeable";
+	return "";
 }
 sf::FloatRect Item::getCollisionBounds() const
 {

@@ -55,7 +55,7 @@ void EditorItemMode::reloadDebugText(Level &level)
 
 		sf::Text text;
 		text.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
-		text.setString("Name: " + curItem.getName() + "\nID: " + std::to_string(curItem.getID()) + "\nSyncID: " + std::to_string(curItem.getSyncID()));
+		text.setString("Name: " + curItem.getName() + "\nID: " + std::to_string(curItem.getID()) + "\nSyncID: " + std::to_string(curItem.getSyncID()) + "\n" + curItem.getToggleString());
 		text.setCharacterSize(14);
 
 		sf::Vector2f textPos(
@@ -108,7 +108,7 @@ bool EditorItemMode::events(const sf::Event &event, const sf::RenderWindow &edit
 
 			sf::Text text;
 			text.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
-			text.setString("Name: " + newItem->getName() + "\nID: " + std::to_string(newItem->getID()) + "\nSyncID: " + std::to_string(newItem->getSyncID()));
+			text.setString("Name: " + newItem->getName() + "\nID: " + std::to_string(newItem->getID()) + "\nSyncID: " + std::to_string(newItem->getSyncID()) + "\n" + newItem->getToggleString());
 			text.setCharacterSize(14);
 
 			sf::Vector2f textPos(
