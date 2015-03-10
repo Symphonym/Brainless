@@ -97,3 +97,13 @@ Item* GhostItem::clone()
 {
 	return new GhostItem(*this);
 }
+
+int GhostItem::getGhostID() const
+{
+	return m_ghostID;
+}
+
+void GhostItem::setGhostID(int ghostID)
+{
+	m_ghostID = ghostID;
+}
