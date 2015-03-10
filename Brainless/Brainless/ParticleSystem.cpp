@@ -65,7 +65,7 @@ void ParticleSystem::update(float deltaTime)
 		{
 			float ratio = particle.lifeTime / particle.maxLifeTime;
 
-			particle.velocity += particle.gravity;
+			particle.velocity += particle.gravity * deltaTime;
 			particle.sprite.move(particle.velocity * deltaTime);
 			particle.sprite.rotate(particle.rotationSpeed * deltaTime);
 
