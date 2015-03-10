@@ -1,6 +1,7 @@
 #include "Zombie.h"
 #include "Item.h"
 #include "Game.h"
+#include "ResourceLoader.h"
 
 Zombie::Zombie(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID, int Texture)
 :
@@ -9,7 +10,8 @@ Unit(startPosition, size, maxSpeed, spriteOffset, ID),
 m_isDamaging(true),
 m_animState(anim_noAnimation)
 {
-
+	addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
+	addTexture(ResourceLoader::instance().retrieveTexture("Zombie2"));
 }
 
 
@@ -39,7 +41,9 @@ void Zombie::incrementTexture()
 	m_textureId++;
 	if (m_textureId >= Constants::ZombieTextureCount)
 		m_textureId = 0;
-	m_animation.loop(0, 7, m_textureId * 2, 3);
+
+	m_sprite = &m_spriteSheets[std::trunc(m_textureId / 4)];
+	m_animation.loop(0, 7, m_textureId % 4 * 2 + 1, 5);
 };
 
 int Zombie::getTextureID()
@@ -55,7 +59,7 @@ void Zombie::onCollideWith(Unit *unit)
 
 void Zombie::updateAnimation(float deltaTime)
 {
-	m_sprite = &m_spriteSheets[0];
+	m_sprite = &m_spriteSheets[std::trunc(m_textureId/4)];
 
 	updateSpriteDirection();
 
@@ -66,7 +70,7 @@ void Zombie::animation_idle()
 {
 	if (m_animState != anim_idle)
 	{
-		m_animation.loop(0, 7, m_textureId * 2 + 1, 5);
+		m_animation.loop(0, 7, m_textureId%4 * 2 + 1, 5);
 		m_animState = anim_idle;
 	}
 }
@@ -76,7 +80,7 @@ void Zombie::animation_walking()
 
 	if (m_animState != anim_walking)
 	{
-		m_animation.loop(0, 7, m_textureId * 2, 10);
+		m_animation.loop(0, 7, m_textureId % 4 * 2, 10);
 		m_animState = anim_walking;
 	}
 
@@ -86,7 +90,7 @@ void Zombie::animation_idleSlow()
 {
 	if (m_animState != anim_idleSlow)
 	{
-		m_animation.loop(0, 7, m_textureId * 2 + 1, 3);
+		m_animation.loop(0, 7, m_textureId % 4 * 2 + 1, 3);
 		m_animState = anim_idleSlow;
 	}
 
@@ -96,7 +100,7 @@ void Zombie::animation_walkingSlow()
 {
 	if (m_animState != anim_walkingSlow)
 	{
-		m_animation.loop(0, 7, m_textureId * 2, 3);
+		m_animation.loop(0, 7, m_textureId % 4 * 2, 3);
 		m_animState = anim_walkingSlow;
 	}
 }

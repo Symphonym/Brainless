@@ -64,7 +64,6 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 
 				m_baseZombie = new RemoveCabinetZombie(del->getPosition(), del->getTextureID(),
 					del->getPosition() + sf::Vector2f(3840, 0));
-				m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				delete(del);
 				return false;
 			}
@@ -85,7 +84,6 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 
 				DropItemZombie* ptr;
 				ptr = new DropItemZombie(del->getPosition(), del->getTextureID(), del->getDirection());
-				ptr->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				ptr->updateAnimation(0);
 				m_baseZombie = ptr;
 
@@ -129,27 +127,22 @@ void ScriptedZombie::deserialize(std::ifstream &reader)
 	{
 	case Unit::ID_IdleZombie:
 		m_baseZombie = new IdleZombie(sf::Vector2f(0, 0), Unit::dir_left, 0);
-		m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 		m_baseZombie->updateAnimation(0);
 		break;
 	case Unit::ID_WalkingZombie:
 		m_baseZombie = new WalkingZombie(sf::Vector2f(0, 0), 0, 0);
-		m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 		m_baseZombie->updateAnimation(0);
 		break;
 	case Unit::ID_ChasingZombie:
 		m_baseZombie = new ChasingZombie(sf::Vector2f(0, 0), 0, 0);
-		m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 		m_baseZombie->updateAnimation(0);
 		break;
 	case Unit::ID_CabinetZombie:
 		m_baseZombie = new RemoveCabinetZombie(sf::Vector2f(0, 0), 0, sf::Vector2f(0, 0));
-		m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 		m_baseZombie->updateAnimation(0);
 		break;
 	case Unit::ID_ItemZombie:
 		m_baseZombie = new DropItemZombie(sf::Vector2f(0, 0), 0, Unit::dir_left);
-		m_baseZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 		m_baseZombie->updateAnimation(0);
 		break;
 	}
