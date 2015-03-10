@@ -435,6 +435,9 @@
     <ClCompile Include="Lamp.cpp">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClCompile>
+    <ClCompile Include="StartDialougeItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -759,6 +762,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Lamp.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="StartDialougeItem.h">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClInclude>
   </ItemGroup>

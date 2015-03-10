@@ -13,6 +13,7 @@
 #include "TileMap.h"
 #include "Tile.h"
 #include "Item.h"
+#include "GhostItem.h"
 #include "ItemDatabase.h"
 #include "Inventory.h"
 #include "Unit.h"
@@ -68,7 +69,14 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 	for (std::size_t i = 0; i < level.getItems().size(); i++)
 	{
 		Item& curItem = *level.getItems()[i].get();
-		writer << curItem.getID() << "," << curItem.getSyncID() << "," << curItem.getPosition().x << "," << curItem.getPosition().y << std::endl;
+		writer << curItem.getID() << "," << curItem.getSyncID() << "," << curItem.getPosition().x << "," << curItem.getPosition().y;
+		switch (curItem.getID())
+		{
+		case 5:
+			writer << "," << ((GhostItem&)curItem).getGhostID();
+			break;
+		}
+		writer << std::endl;
 	}
 
 	// Write the number of sprites to read
@@ -86,17 +94,17 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 	for (std::size_t i = 0; i < level.getUnits().size(); i++)
 	{
 		Unit& curUnit = *level.getUnits()[i].get();
-		writer << (int)curUnit.getRealUnitType() << "," << curUnit.getPosition().x << "," << curUnit.getPosition().y << "," << /*((Zombie&)(*/curUnit/*))*/.getTextureID() << ","; //obs real
+		writer << (int)curUnit.getRealUnitType() << "," << curUnit.getPosition().x << "," << curUnit.getPosition().y << "," << curUnit.getTextureID() << ","; //obs real
 		switch (curUnit.getUnitType()) //obs decorator
 		{
 		case Unit::ID_IdleZombie:
 			writer << (int)curUnit.getDirection();
 			break;
 		case Unit::ID_WalkingZombie:
-			writer << /*(((WalkingZombie&)*/curUnit/*))*/.getWalkLength();
+			writer << curUnit.getWalkLength();
 			break;
 		case Unit::ID_ChasingZombie:
-			writer <</* (((ChasingZombie&)*/curUnit/*))*/.getWalkLength();
+			writer << curUnit.getWalkLength();
 			break;
 		}
 		if (curUnit.getRealUnitType() == Unit::ID_ScriptZombie)
@@ -177,10 +185,20 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 			float posX = Utility::stringToNumber<float>(itemData[2]);
 			float posY = Utility::stringToNumber<float>(itemData[3]);
 
+			
+
 			// Create item from data
 			ItemDatabase::ItemPtr item = std::move(ItemDatabase::instance().extractItem(itemID));
 			item->setSyncID(syncID);
 			item->setPosition(sf::Vector2f(posX, posY));
+
+			// Add speciall variables
+			switch (itemID)
+			{
+			case 5:
+				(dynamic_cast<GhostItem*>(item.get()))->setGhostID(Utility::stringToNumber<float>(itemData[4]));
+				break;
+			}
 
 			level.addItem(std::move(item));
 		}
