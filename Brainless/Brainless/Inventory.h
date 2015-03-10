@@ -59,6 +59,7 @@ private:
 
 	void recolorSlots(const sf::Color &color);
 	void highlightSelected();
+	void highlightCraftables();
 
 	void craft();
 	void setCraftingMode(bool enabled);

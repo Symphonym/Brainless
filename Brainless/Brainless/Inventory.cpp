@@ -420,6 +420,21 @@ void Inventory::highlightSelected()
 	for (auto &index : m_selectedSlots)
 		m_slots[index.x][index.y].second.setColor(sf::Color::Yellow);
 }
+void Inventory::highlightCraftables()
+{
+	for (std::size_t x = 0; x < m_slots.size(); x++)
+	{
+		for (std::size_t y = 0; y < m_slots[x].size(); y++)
+		{
+			InventoryPair& invPair = m_slots[x][y];
+
+			if (invPair.first && CraftingDatabase::instance().existsInRecipe(invPair.first->getID()))
+				invPair.second.setColor(sf::Color::Green);
+			else
+				invPair.second.setColor(sf::Color::Red);
+		}
+	}
+}
 
 void Inventory::setCraftingMode(bool enabled)
 {
@@ -428,7 +443,8 @@ void Inventory::setCraftingMode(bool enabled)
 	if (m_craftingModeEnabled)
 	{
 		m_selectedSlots.clear();
-		recolorSlots(sf::Color::Green);
+		highlightCraftables();
+		//recolorSlots(sf::Color::Green);
 	}
 
 	else
@@ -467,7 +483,8 @@ void Inventory::craft()
 
 
 	m_selectedSlots.clear();
-	recolorSlots(sf::Color::Green);
+	highlightCraftables();
+	//recolorSlots(sf::Color::Green);
 }
 
 std::vector<const Item*> Inventory::getInventoryItems() const
