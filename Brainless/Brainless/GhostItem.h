@@ -11,7 +11,7 @@ class GhostItem : public Item
 {
 public:
 
-	explicit GhostItem(int id);
+	explicit GhostItem(int id,int ghost_id);
 
 	virtual void update(float deltaTime, Game &game);
 	virtual void draw();
@@ -30,6 +30,7 @@ private:
 	Animation m_animation;
 
 	// Dialog of the ghost
+	int m_ghostID;
 	DialogTree m_dialog;
 };
 
