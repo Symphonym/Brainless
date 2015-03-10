@@ -8,7 +8,7 @@
 Unit* Unit::s_playerPointer = nullptr;
 
 //V0.02
-Unit::Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID)
+Unit::Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID, int syncID)
 :
 m_renderingMode(RenderingModes::Depth),
 m_isMovementEnabled(true),
@@ -23,7 +23,8 @@ m_animation(SPRITESIZE, SPRITESIZE),
 m_spriteOffset(spriteOffset),
 m_spriteDirection(dir_right),
 m_specialSpriteDirection(false),
-m_UnitID(ID)
+m_UnitID(ID),
+m_syncID(syncID)
 {
 
 }
@@ -87,6 +88,8 @@ void Unit::serialize(std::ofstream &writer) const
 	writer << m_specialSpriteDirection << std::endl;
 	writer << m_inAir << std::endl;
 	writer << m_inTilt << std::endl;
+	writer << m_syncID << std::endl;
+
 	writer << static_cast<int>(m_spriteDirection) << std::endl;
 	writer << static_cast<int>(m_renderingMode) << std::endl;
 }
@@ -101,6 +104,7 @@ void Unit::deserialize(std::ifstream &reader)
 	reader >> m_specialSpriteDirection;
 	reader >> m_inAir;
 	reader >> m_inTilt;
+	reader >> m_syncID;
 
 	int directionType = 0;
 	reader >> directionType;

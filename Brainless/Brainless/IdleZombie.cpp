@@ -12,9 +12,9 @@
 
 //v0.02
 
-IdleZombie::IdleZombie(sf::Vector2f startPosition, Direction startDirection, int Texture)
+IdleZombie::IdleZombie(sf::Vector2f startPosition, Direction startDirection, int Texture, int syncID)
 :
-Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_IdleZombie, Texture)
+Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_IdleZombie, Texture, syncID)
 {
 	m_spriteDirection = startDirection;
 	m_specialSpriteDirection = true;

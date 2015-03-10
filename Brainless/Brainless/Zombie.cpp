@@ -3,10 +3,10 @@
 #include "Game.h"
 #include "ResourceLoader.h"
 
-Zombie::Zombie(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID, int Texture)
+Zombie::Zombie(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID, int Texture, int syncID)
 :
 m_textureId(Texture),
-Unit(startPosition, size, maxSpeed, spriteOffset, ID),
+Unit(startPosition, size, maxSpeed, spriteOffset, ID, syncID),
 m_isDamaging(true),
 m_animState(anim_noAnimation)
 {
@@ -51,6 +51,10 @@ int Zombie::getTextureID()
 	return m_textureId;
 };
 
+int Zombie::getSyncID()
+{
+	return m_syncID;
+}
 void Zombie::onCollideWith(Unit *unit)
 {
 	if (m_isDamaging)

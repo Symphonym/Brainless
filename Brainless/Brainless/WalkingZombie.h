@@ -5,7 +5,7 @@
 class WalkingZombie : public Zombie
 {
 public:
-	WalkingZombie(sf::Vector2f startPosition, int maxLengthX, int Texture);
+	WalkingZombie(sf::Vector2f startPosition, int maxLengthX, int Texture, int syncID = -1);
 
 	void updateTask(float deltaTime);
 	int getWalkLength();
