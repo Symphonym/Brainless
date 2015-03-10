@@ -20,7 +20,7 @@ public:
 	virtual Item* clone();
 
 private:
-
+	float m_particleTime = 0;
 	void refreshStatus();
 	bool m_cableInPuddle;
 };
