@@ -6,11 +6,9 @@
 #include "Game.h"
 #include "Notification.h"
 
-#include <iostream>
-
 #define SPRITESIZE 256
 
-GhostItem::GhostItem(int id)
+GhostItem::GhostItem(int id, int ghostID)
 :
 m_animation(SPRITESIZE, SPRITESIZE),
 Item("Ghost","GhostItem", "GhostItem", id)
@@ -40,8 +38,7 @@ void GhostItem::draw()
 
 void GhostItem::onUse(Game &game)
 {
-	std::cout << getSyncID() << std::endl;
-	m_dialog.loadDialogFile("dialogues/Ghost" + std::to_string(getSyncID()) + ".txt");
+	m_dialog.loadDialogFile("dialogues/Ghost" + std::to_string(m_ghostID) + ".txt");
 	// You can't talk to the ghost if you don't have spirit power
 	if (game.getSpiritBar().getValue() < Constants::SpiritGhostCost)
 	{
@@ -63,7 +60,10 @@ bool GhostItem::onCollisionWithUnit(Unit &unit, Game &game)
 {
 	if (unit.getUnitType() == Unit::ID_Player)
 	{
-		setSyncID(-1);
+		if (m_ghostID == 0)
+		{
+			m_ghostID = -1;
+		}
 	}
 	return false;
 }
@@ -71,15 +71,24 @@ bool GhostItem::onCollisionWithUnit(Unit &unit, Game &game)
 void GhostItem::serialize(std::ofstream &writer) const
 {
 	Item::serialize(writer);
-	writer << getSyncID() << std::endl;
+	writer << m_ghostID << std::endl;
 }
 
 void GhostItem::deserialize(std::ifstream &reader)
 {
 	Item::deserialize(reader);
-	int temp;
-	reader >> temp;
-	setSyncID(temp);
+	reader >> m_ghostID;
+}
+
+void GhostItem::onToggle()
+{
+	m_ghostID++;
+}
+
+
+std::string GhostItem::getToggleString() const
+{
+	return "Dialogue id: " + std::to_string(m_ghostID);
 }
 
 Item* GhostItem::clone()

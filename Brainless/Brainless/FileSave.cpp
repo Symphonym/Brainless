@@ -235,19 +235,16 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 				//unitData[4] "special zombie data" unitData[3] " texture"
 			case Unit::ID_IdleZombie:
 				temp = new IdleZombie(sf::Vector2f(posX, posY), (Unit::Direction)Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
-				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				temp->updateAnimation(0);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
 				break;
 			case Unit::ID_WalkingZombie:
 				temp = new WalkingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
-				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				temp->updateAnimation(0);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
 				break;
 			case Unit::ID_ChasingZombie:
 				temp = new ChasingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
-				temp->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				temp->updateAnimation(0);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
 				break;
@@ -258,25 +255,20 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 				case Unit::ID_IdleZombie:
 
 					scriptedZombie = new IdleZombie(sf::Vector2f(posX, posY), (Unit::Direction)Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
-					scriptedZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 					scriptedZombie->updateAnimation(0);
 					break;
 				case Unit::ID_WalkingZombie:
 					scriptedZombie = new WalkingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
-					scriptedZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 					scriptedZombie->updateAnimation(0);
 					break;
 				case Unit::ID_ChasingZombie:
 					scriptedZombie = new ChasingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
-					scriptedZombie->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 					scriptedZombie->updateAnimation(0);
 					break;
 				default:
 					scriptedZombie = nullptr; //do krasch, make compiler happy
 					break;
 				}
-				/*temp = new ScriptedZombie(scriptedZombie, Utility::stringToNumber<int>(unitData[5]), level.getItems());*/ //MEMORY0
-				//temp = new ScriptedZombie(scriptedZombie, Utility::stringToNumber<int>(unitData[5]));
 				temp = new ScriptedZombie(scriptedZombie, Utility::stringToNumber<int>(unitData[5]), &level);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
 				break;
@@ -399,22 +391,18 @@ bool FileSave::loadLevelProgress(Level &level, int levelNumber)
 			{
 			case Unit::ID_IdleZombie:
 				unit = Level::UnitPtr(new IdleZombie(sf::Vector2f(0, 0), Unit::dir_left, 0));
-				unit->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				unit->updateAnimation(0);
 				break;
 			case Unit::ID_WalkingZombie:
 				unit = Level::UnitPtr(new WalkingZombie(sf::Vector2f(0, 0), 0, 0));
-				unit->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				unit->updateAnimation(0);
 				break;
 			case Unit::ID_ChasingZombie:
 				unit = Level::UnitPtr(new ChasingZombie(sf::Vector2f(0, 0), 0, 0));
-				unit->addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 				unit->updateAnimation(0);
 				break;
 			case Unit::ID_ScriptZombie:
 				unit = Level::UnitPtr(new ScriptedZombie(nullptr, 0, &level));
-				//unit = Level::UnitPtr(new ScriptedZombie(nullptr, 0)); //MEMORY0 skicka med itemList
 				break;
 			}
 			if (unit) //not player I guess?

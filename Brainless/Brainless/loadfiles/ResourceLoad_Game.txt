@@ -30,6 +30,7 @@
 +Texture,images/animations/spritesheet_Maeve_Jump.png,PlayerSheetJump
 +Texture,images/animations/spritesheet_Maeve_Jump_Run.png,PlayerSheetJumpRun
 +Texture,images/animations/spritesheet_zombie_merged_v0.5.png,Zombie
++Texture,images/animations/long_dramatic_zombieV2.png,Zombie2
 
 # PICKUP MENU TEXTURES
 +Texture,images/UI/notepad.png,background_Notepad

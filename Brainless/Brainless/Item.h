@@ -74,6 +74,8 @@ public:
 	void setSyncID(int id);
 	int getSyncID() const;
 
+	virtual void onToggle() {};
+
 	bool isMarkedForDestruction() const;
 	bool isLootable() const;
 	bool isUsable() const;
@@ -84,6 +86,7 @@ public:
 	std::string getUseString() const;
 	std::string getPickupString() const;
 	std::string getExamineString() const;
+	virtual std::string getToggleString() const;
 	/*virtual*/ sf::FloatRect getCollisionBounds() const; // Will be zero if collidable is false
 	sf::FloatRect getInteractBounds() const;
 	sf::Vector2f getInteractDistance() const;
