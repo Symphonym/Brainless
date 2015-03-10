@@ -22,7 +22,7 @@ public:
 	virtual void serialize(std::ofstream &writer) const;
 	virtual void deserialize(std::ifstream &reader);
 
-	virtual void onToggle();
+	virtual bool onToggle(int direction);
 	virtual std::string getToggleString() const;
 
 	virtual Item* clone();
@@ -33,7 +33,7 @@ private:
 	Animation m_animation;
 
 	// Dialog of the ghost
-	int m_ghostID = 0;
+	int m_ghostID;
 	DialogTree m_dialog;
 };
 

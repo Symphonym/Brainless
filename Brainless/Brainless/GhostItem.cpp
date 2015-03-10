@@ -10,6 +10,7 @@
 
 GhostItem::GhostItem(int id, int ghostID)
 :
+m_ghostID(ghostID),
 m_animation(SPRITESIZE, SPRITESIZE),
 Item("Ghost","GhostItem", "GhostItem", id)
 {
@@ -80,9 +81,10 @@ void GhostItem::deserialize(std::ifstream &reader)
 	reader >> m_ghostID;
 }
 
-void GhostItem::onToggle()
+bool GhostItem::onToggle(int direction)
 {
-	m_ghostID++;
+	m_ghostID+=direction;
+	return true;
 }
 
 

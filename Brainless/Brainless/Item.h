@@ -74,7 +74,7 @@ public:
 	void setSyncID(int id);
 	int getSyncID() const;
 
-	virtual void onToggle() {};
+	virtual bool onToggle(int direction) { return false; };
 
 	bool isMarkedForDestruction() const;
 	bool isLootable() const;
