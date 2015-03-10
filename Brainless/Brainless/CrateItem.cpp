@@ -10,7 +10,7 @@ CrateItem::CrateItem(int id)
 :
 Item("Crate", "Crate", "Crate", id)
 {
-	m_usable = true;
+	m_usable = false;
 	m_collidable = true;
 
 	m_collisionBounds = sf::FloatRect(24, 24, 82, 88);

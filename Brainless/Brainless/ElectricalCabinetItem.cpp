@@ -11,7 +11,7 @@ ElectricalCabinetItem::ElectricalCabinetItem(std::vector<int> itemsWithin, int i
 Item("Cabinet", "electricalCabinet", "electricalCabinet", id),
 m_itemsWithin(itemsWithin)
 {
-	m_usable = true;
+	m_usable = false;
 	m_collidable = true;
 
 	m_collisionBounds = sf::FloatRect(46,62,190,286);
