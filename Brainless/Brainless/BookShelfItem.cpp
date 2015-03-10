@@ -10,7 +10,7 @@ BookShelfItem::BookShelfItem(int id)
 :
 Item("Bookshelf", "bookShelf", "bookShelf", id)
 {
-	m_usable = true;
+	m_usable = false;
 	m_collidable = true;
 
 	m_collisionBounds = sf::FloatRect(61, 12, 136, 229);
