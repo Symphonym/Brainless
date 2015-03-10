@@ -10,7 +10,7 @@ Lamp::Lamp(int id)
 :
 Item("Lamp", "Lamp", "Lamp", id)
 {
-	m_usable = true;
+	m_usable = false;
 	m_collidable = true;
 
 	m_collisionBounds = sf::FloatRect(20,20,226, 33);

@@ -77,7 +77,7 @@ void Inventory::events(const sf::Event &event, Game &game)
 		}
 	}
 
-	else if (event.type == sf::Event::MouseButtonReleased)
+	else if (event.type == sf::Event::MouseButtonPressed)
 	{
 		// Items can not be moved around in crafting mode
 		if (event.mouseButton.button == sf::Mouse::Left && !m_craftingModeEnabled)
