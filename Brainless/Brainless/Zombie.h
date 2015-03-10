@@ -6,7 +6,7 @@
 class Zombie : public Unit
 {
 public:
-	Zombie(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID, int Texture);
+	Zombie(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID, int Texture, int syncID = -1);
 
 	virtual bool onInteractedWith(Item &otherItem, Game &game);
 	virtual void onCollideWith(Unit *unit);
@@ -28,6 +28,7 @@ public:
 	
 	void incrementTexture();
 	int getTextureID();
+	int getSyncID();
 
 	bool collide(Unit *unit);
 protected:

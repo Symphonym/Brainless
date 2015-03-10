@@ -12,9 +12,9 @@
 
 //v0.02
 
-WalkingZombie::WalkingZombie(sf::Vector2f startPosition, int maxDisparityX, int Texture)
+WalkingZombie::WalkingZombie(sf::Vector2f startPosition, int maxDisparityX, int Texture, int syncID)
 :
-Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_WalkingZombie,Texture),
+Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_WalkingZombie,Texture, syncID),
 m_maxPositionX(maxDisparityX + startPosition.x),
 m_walkLenght(maxDisparityX),
 m_direction(dir_right),

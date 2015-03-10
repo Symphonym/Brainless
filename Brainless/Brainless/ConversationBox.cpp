@@ -78,24 +78,45 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 
 				if (m_conversationState == ConversationStates::Player)
 				{
-
-					// Go through answers and check if an answer was clicked
-					for (std::size_t i = 0; i < m_answers.size(); i++)
+					if (m_answers.size() > 1)
 					{
+						// Go through answers and check if an answer was clicked
+						for (std::size_t i = 0; i < m_answers.size(); i++)
+						{
 
-						sf::FloatRect textBounds = m_answers[i].getGlobalBounds();
-						sf::FloatRect mouseBounds = sf::FloatRect(
-							0, mousePos.y, game.getWindow().getSize().x, 1);
-						sf::Text &text = m_answers[i];
+							sf::FloatRect textBounds = m_answers[i].getGlobalBounds();
+							sf::FloatRect mouseBounds = sf::FloatRect(
+								0, mousePos.y, game.getWindow().getSize().x, 1);
+							sf::Text &text = m_answers[i];
 
-						// An answer was clicked
-						if (textBounds.intersects(mouseBounds) || (m_answers.size() == 1 && m_background.getGlobalBounds().contains(sf::Vector2f(mousePos.x, mousePos.y))))
+							// An answer was clicked
+							if (textBounds.intersects(mouseBounds))
+							{
+								m_conversationState = ConversationStates::NPC;
+								m_portraitSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_dialog.getPortraitTextureName()), true);
+
+								// If the next branch has a description then we change into that branch, otherwise exit conversation
+								const DialogBranch &nextBranch = m_dialog.getCurrentOptions()[i].second;
+								if (nextBranch.description.empty())
+									setShown(false);
+								else
+									m_dialog.changeBranch(nextBranch);
+
+								// Reset the dialog next and load the next answers
+								resetCurrentDialog();
+								loadNextOptions();
+							}
+						}
+					}
+					else if (m_answers.size() == 1)
+					{
+						if (m_dialogBox.isFinished())
 						{
 							m_conversationState = ConversationStates::NPC;
 							m_portraitSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_dialog.getPortraitTextureName()), true);
 
 							// If the next branch has a description then we change into that branch, otherwise exit conversation
-							const DialogBranch &nextBranch = m_dialog.getCurrentOptions()[i].second;
+							const DialogBranch &nextBranch = m_dialog.getCurrentOptions()[0].second;
 							if (nextBranch.description.empty())
 								setShown(false);
 							else
@@ -106,6 +127,8 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 							loadNextOptions();
 						}
 					}
+
+					
 				}
 				else if (m_conversationState == ConversationStates::NPC)
 				{
@@ -114,6 +137,10 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 					{
 						m_conversationState = ConversationStates::Player;
 						m_portraitSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_playerPortraitTextureName), true);
+
+						// If the player only has one answer it will make use of the dialog box
+						if (m_answers.size() == 1)
+							m_dialogBox.Type(m_answers[0].getString(), 5000.f, sf::Color::White);
 
 						// If there's no more dialog options, close the dialog
 						if (m_dialog.getCurrentOptions().size() == 0)
@@ -136,27 +163,32 @@ void ConversationBox::update(float deltaTime, Game &game)
 		// Just highlight answers if you hover above them
 		if (m_conversationState == ConversationStates::Player)
 		{
-			sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
-			sf::FloatRect mouseBounds = sf::FloatRect(
-				0, mousePos.y, game.getWindow().getSize().x, 1);
-
-			for (std::size_t i = 0; i < m_answers.size(); i++)
+			if (m_answers.size() > 1)
 			{
-				sf::FloatRect textBounds = m_answers[i].getGlobalBounds();
-				sf::Text &text = m_answers[i];
+				sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
+				sf::FloatRect mouseBounds = sf::FloatRect(
+					0, mousePos.y, game.getWindow().getSize().x, 1);
 
-				// Toggle colors on answers depending on click, hover, etc
-				if (textBounds.intersects(mouseBounds))//contains(sf::Vector2f(mousePos.x, mousePos.y)))
+				for (std::size_t i = 0; i < m_answers.size(); i++)
 				{
-					if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-						text.setColor(sf::Color::Green);
-					else
-						text.setColor(sf::Color::Yellow);
-				}
-				else
-					text.setColor(sf::Color::White);
+					sf::FloatRect textBounds = m_answers[i].getGlobalBounds();
+					sf::Text &text = m_answers[i];
 
+					// Toggle colors on answers depending on click, hover, etc
+					if (textBounds.intersects(mouseBounds))//contains(sf::Vector2f(mousePos.x, mousePos.y)))
+					{
+						if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+							text.setColor(sf::Color::Green);
+						else
+							text.setColor(sf::Color::Yellow);
+					}
+					else
+						text.setColor(sf::Color::White);
+
+				}
 			}
+			else if (m_answers.size() == 1)
+				m_dialogBox.Update(deltaTime);
 		}
 
 		// Update dialog box drawing
@@ -176,10 +208,17 @@ void ConversationBox::draw()
 		 //Draw answers only if it's the player's turn to speak
 		if (m_conversationState == ConversationStates::Player)
 		{
-			Renderer::instance().drawHUD(m_headerText);
+			if (m_answers.size() > 1)
+			{
+				Renderer::instance().drawHUD(m_headerText);
 
-			for (std::size_t i = 0; i < m_answers.size(); i++)
-				Renderer::instance().drawHUD(m_answers[i]);
+				for (std::size_t i = 0; i < m_answers.size(); i++)
+					Renderer::instance().drawHUD(m_answers[i]);
+			}
+
+			// If the player only has one answers, it will make use of the dialog box
+			else if (m_answers.size() == 1)
+				m_dialogBox.Draw();
 		}
 		 //Draw the dialog only if it's the NPC speaking
 		else if (m_conversationState == ConversationStates::NPC)

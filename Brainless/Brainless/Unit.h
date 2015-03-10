@@ -28,7 +28,7 @@ public:
 		ID_ItemZombie
 	};
 
-	Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID);
+	Unit(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSpeed, sf::Vector2f spriteOffset, UnitType ID, int syncID = -1);
 	Unit(){}; //för scriptZombien
 	virtual ~Unit(){};
 	/*
@@ -106,6 +106,7 @@ public:
 	virtual int getTextureID(){ return 0; }
 	virtual void incrementTexture(){};
 	void flash(sf::Vector2f cameraPos);
+	virtual int getSyncID(){ return -1; }
 protected:
 	RenderingModes m_renderingMode;
 	bool m_isMovementEnabled;
@@ -139,6 +140,7 @@ protected:
 	static Unit* s_playerPointer;
 
 	UnitType m_UnitID;
+	int m_syncID;
 private:
 	float m_flashAlpha;
 };
