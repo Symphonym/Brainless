@@ -105,6 +105,17 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 								// Reset the dialog next and load the next answers
 								resetCurrentDialog();
 								loadNextOptions();
+
+
+								// TODO Show special dialog box if spiritbar < 60
+								// TODO Show special dialog box if spiritbar < 60
+								// TODO Show special dialog box if spiritbar < 60
+								// TODO Show special dialog box if spiritbar < 60
+								// TODO Show special dialog box if spiritbar < 60
+								// TODO Show special dialog box if spiritbar < 60
+								// TODO Show special dialog box if spiritbar < 60
+								// TODO Show special dialog box if spiritbar < 60
+
 							}
 						}
 					}
