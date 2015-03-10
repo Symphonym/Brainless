@@ -53,7 +53,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new VendingMachineItem("VendingMachineItem1", { 0 }, 2)));
 	addItem(ItemPtr(new CoinItem(3)));
 	addItem(ItemPtr(new TwineItem(4)));
-	addItem(ItemPtr(new GhostItem(5)));
+	addItem(ItemPtr(new GhostItem(5,0)));
 	addItem(ItemPtr(new DoorItem(true, 6))); // Locked door
 	addItem(ItemPtr(new KeyItem(7))); // Key to said door
 	addItem(ItemPtr(new ChestItem(false, { 0, 1 }, 8)));

@@ -11,7 +11,7 @@ class GhostItem : public Item
 {
 public:
 
-	explicit GhostItem(int id);
+	explicit GhostItem(int id,int ghost_id);
 
 	virtual void update(float deltaTime, Game &game);
 	virtual void draw();
@@ -22,6 +22,9 @@ public:
 	virtual void serialize(std::ofstream &writer) const;
 	virtual void deserialize(std::ifstream &reader);
 
+	virtual void onToggle();
+	virtual std::string getToggleString() const;
+
 	virtual Item* clone();
 
 private:
@@ -30,6 +33,7 @@ private:
 	Animation m_animation;
 
 	// Dialog of the ghost
+	int m_ghostID = 0;
 	DialogTree m_dialog;
 };
 

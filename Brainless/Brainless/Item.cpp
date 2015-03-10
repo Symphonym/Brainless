@@ -198,6 +198,10 @@ std::string Item::getExamineString() const
 {
 	return m_examineString;
 }
+std::string Item::getToggleString() const
+{
+	return "";
+}
 sf::FloatRect Item::getCollisionBounds() const
 {
 	return sf::FloatRect(getPosition().x + m_collisionBounds.left, getPosition().y + m_collisionBounds.top, m_collisionBounds.width, m_collisionBounds.height);
