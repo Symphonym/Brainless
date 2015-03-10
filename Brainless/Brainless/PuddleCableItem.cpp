@@ -76,7 +76,7 @@ bool PuddleCableItem::onInteractedWith(Item &otherItem, Game &game)
 void PuddleCableItem::update(float deltaTime, Game &game)
 {
 	if (m_cableInPuddle)
-	ParticleSystem::instance().addParticles(1, getPosition() + sf::Vector2f(85,20), sf::Color().Yellow, sf::Vector2f(0.5f,0.5f), 
+	ParticleSystem::instance().addParticles(deltaTime * 600, getPosition() + sf::Vector2f(85,20), sf::Color().Yellow, sf::Vector2f(0.5f,0.5f), 
 	sf::Vector2f(0,360),sf::Vector2f(0,10), sf::Vector2f(-100,100),sf::Vector2f(-100,100),sf::Vector2f(0,3));
 }
 

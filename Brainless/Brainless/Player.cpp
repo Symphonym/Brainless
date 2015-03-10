@@ -246,7 +246,7 @@ void Player::updateTask(float deltaTime)
 	}
 	else
 	{
-		if (getPosition().y - m_fallPos > Constants::TileSize * 4)
+		if (getPosition().y - m_fallPos > Constants::TileSize * 7)
 			takesDamage(m_position);
 		m_fallPos = getPosition().y;
 	}
