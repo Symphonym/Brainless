@@ -10,7 +10,7 @@ public:
 	StartDialougeItem(int id);
 
 	virtual bool onCollisionWithUnit(Unit &unit, Game &game);
-
+	virtual void draw() {};
 	virtual Item* clone();
 };
 

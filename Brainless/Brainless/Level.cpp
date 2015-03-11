@@ -188,10 +188,12 @@ void Level::draw(const sf::View &cameraView, bool editorMode)
 	}
 	for (std::size_t i = 0; i < m_sprites.size(); i++)
 	{
-		if (m_sprites[i].drawToForeground)
+		if (m_sprites[i].layer == LevelSpriteLayers::Foreground)
 			Renderer::instance().drawForeground(m_sprites[i].sprite);
-		else
+		else if (m_sprites[i].layer  == LevelSpriteLayers::Background)
 			Renderer::instance().drawBackground(m_sprites[i].sprite);
+		else if (m_sprites[i].layer == LevelSpriteLayers::Depth)
+			Renderer::instance().drawDepth(m_sprites[i].sprite);
 	}
 
 

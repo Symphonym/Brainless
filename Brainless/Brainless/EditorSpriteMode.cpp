@@ -13,7 +13,7 @@ EditorSpriteMode::EditorSpriteMode()
 	m_layerText.setFont(ResourceLoader::instance().retrieveFont("DefaultFont"));
 	m_layerText.setPosition(30, 100);
 	m_layerText.setString("Drawing to: FOREGROUND");
-	m_highlightSprite.drawToForeground = true;
+	m_highlightSprite.layer = LevelSpriteLayers::Foreground;
 }
 
 bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &editorWindow, Level &level)
@@ -35,7 +35,7 @@ bool EditorSpriteMode::events(const sf::Event &event, const sf::RenderWindow &ed
 		{
 			LevelSprite levelSprite;
 			levelSprite.sprite = m_highlightSprite.sprite;
-			levelSprite.drawToForeground = m_highlightSprite.drawToForeground;
+			levelSprite.layer = m_highlightSprite.layer;
 			levelSprite.textureName = m_highlightSprite.textureName;
 
 			level.addDecoration(levelSprite);
@@ -68,25 +68,32 @@ bool EditorSpriteMode::update(float deltaTime, const sf::RenderWindow &editorWin
 
 
 	// Change between foreground/background
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::V))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::C))
 	{
-		m_highlightSprite.drawToForeground = true;
+		m_highlightSprite.layer = LevelSpriteLayers::Foreground;
 		m_layerText.setString("Drawing to: FOREGROUND");
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::B))
 	{
-		m_highlightSprite.drawToForeground = false;
+		m_highlightSprite.layer = LevelSpriteLayers::Background;
 		m_layerText.setString("Drawing to: BACKGROUND");
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::V))
+	{
+		m_highlightSprite.layer = LevelSpriteLayers::Depth;
+		m_layerText.setString("Drawing to: DEPTH");
 	}
 
 	return false;
 }
 void EditorSpriteMode::draw()
 {
-	if (m_highlightSprite.drawToForeground)
+	if (m_highlightSprite.layer == LevelSpriteLayers::Foreground)
 		Renderer::instance().drawForeground(m_highlightSprite.sprite);
-	else
+	else if (m_highlightSprite.layer == LevelSpriteLayers::Background)
 		Renderer::instance().drawBackground(m_highlightSprite.sprite);
+	else if (m_highlightSprite.layer == LevelSpriteLayers::Depth)
+		Renderer::instance().drawDepth(m_highlightSprite.sprite);
 
 	Renderer::instance().drawHUD(m_layerText);
 }

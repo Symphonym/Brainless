@@ -20,6 +20,8 @@ private:
 	// Display current task
 	sf::Text m_infoText; 
 
+	std::vector<sf::Text> m_itemInfo;
+
 	// Used as a preview to how it would look like if the Zombie was placed
 	EditorZombie m_highlightSprite;
 	bool zombie_created = false;

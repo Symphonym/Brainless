@@ -82,6 +82,7 @@ public:
 	//script functioner
 	void electricPuddle(Game &game);
 	void safePuddle();
+	int getSyncID();
 private:
 	int m_scriptID;
 	Zombie* m_baseZombie;

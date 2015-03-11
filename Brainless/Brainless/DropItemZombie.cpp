@@ -15,9 +15,9 @@
 
 //v0.02
 
-DropItemZombie::DropItemZombie(sf::Vector2f startPosition, int Texture, Direction startDirection)
+DropItemZombie::DropItemZombie(sf::Vector2f startPosition, int Texture, Direction startDirection, int syncID)
 :
-Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_ItemZombie, Texture)
+Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_ItemZombie, Texture, syncID)
 {
 	m_itemsWithin = { 7 };
 	m_specialSpriteDirection = true;
