@@ -18,6 +18,7 @@ m_mouseItemSlot(nullptr),
 m_showHighlighText(false),
 m_craftingModeEnabled(false)
 {
+	m_background.setTexture(ResourceLoader::instance().retrieveTexture("InventoryBackground"));
 	for (std::size_t x = 0; x < m_slots.size(); x++)
 	{
 		for (std::size_t y = 0; y < m_slots[x].size(); y++)
@@ -40,7 +41,7 @@ m_craftingModeEnabled(false)
 	m_craftButton = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("Crafting_Normal"),
 		ResourceLoader::instance().retrieveTexture("Crafting_Pressed"),
-		sf::Vector2f(10, m_slots[0][0].second.getGlobalBounds().height * Constants::InventoryHeight + 10.f)));
+		sf::Vector2f(60, m_slots[0][0].second.getGlobalBounds().height * Constants::InventoryHeight + 50.f)));
 }
 
 void Inventory::addItem(ItemPtr item)
@@ -333,7 +334,7 @@ void Inventory::draw()
 	// Draw inventory
 	if (m_isOpen)
 	{
-		//Renderer::instance().drawHUD(m_background);
+		Renderer::instance().drawHUD(m_background);
 		for (std::size_t x = 0; x < m_slots.size(); x++)
 		{
 			for (std::size_t y = 0; y < m_slots[x].size(); y++)
