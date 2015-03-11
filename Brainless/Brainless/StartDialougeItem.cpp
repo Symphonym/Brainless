@@ -22,12 +22,15 @@ Item("StartDialougeItem", "DialougeItem", "DialougeItem", id)
 bool StartDialougeItem::onCollisionWithUnit(Unit &unit, Game &game)
 {
 	// TODO FIX THIS, IT DOES NOT WANT TO FIND/OPEN THE FILE, DA FUQ, FIX PLZ
-	//DialogTree tree;
-	//tree.loadDialogFile("dialouges/Ghost0.txt");
-	//tree.resetDialog();
+	DialogTree tree;
+	tree.loadDialogFile("dialouges/Ghost1.txt");
+	tree.resetDialog();
 
-	//ConversationBox::instance().setDialog(tree);
-	//ConversationBox::instance().setShown(true);
+	//sf::Vector2i onScreenPos = game.getWindow().mapCoordsToPixel(getPosition());
+
+	//ConversationBox::instance().setPosition(sf::Vector2f(onScreenPos.x, onScreenPos.y));
+	ConversationBox::instance().setDialog(tree);
+	ConversationBox::instance().setShown(true);
 
 	return true;
 }
