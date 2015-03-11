@@ -25,7 +25,7 @@ m_craftingModeEnabled(false)
 		{
 			sf::Sprite& slotSprite = m_slots[x][y].second;
 			slotSprite.setTexture(ResourceLoader::instance().retrieveTexture("InventorySlot"));
-			slotSprite.setPosition(x*slotSprite.getGlobalBounds().width,50 + y*slotSprite.getGlobalBounds().height);
+			slotSprite.setPosition(20 + x*slotSprite.getGlobalBounds().width,50 + y*slotSprite.getGlobalBounds().height);
 		}
 	}
 

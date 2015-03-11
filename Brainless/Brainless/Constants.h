@@ -20,7 +20,7 @@ public:
 	static const int ZombieTypeCount = 3;
 	static const int ZombieTextureCount = 6;
 
-	static const int InventoryWidth = 5;
+	static const int InventoryWidth = 4;
 	static const int InventoryHeight = 4;
 
 	static const int InteractDistance = 220;
