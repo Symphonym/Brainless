@@ -45,6 +45,7 @@
 
 # INVENTORY TEXTURES
 +Texture,images/UI/invSlot.png,InventorySlot
++Texture,images/UI/inventory_background.png,InventoryBackground
 
 # CONVERSATION TEXTURES
 +Texture,images/UI/convBox.png,BackgroundTest
