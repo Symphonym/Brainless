@@ -59,6 +59,8 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new KeyItem(7))); // Key to said door
 	addItem(ItemPtr(new ChestItem(false, { 0, 1 }, 8)));
 	addItem(ItemPtr(new LadderItem("WoodLadder1", 9)));
+	addItem(ItemPtr(new LadderItem("SteelLadder1", 51)));
+	addItem(ItemPtr(new LadderItem("RopeLadder1", 52)));
 	addItem(ItemPtr(new MagnifyingGlassItem(10)));
 	addItem(ItemPtr(new CoinTwineItem(11)));
 	addItem(ItemPtr(new MovingPlatformItem(sf::Vector2f(0, 800), 800, 12)));
