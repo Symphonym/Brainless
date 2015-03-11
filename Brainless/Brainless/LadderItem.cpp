@@ -1,3 +1,6 @@
+#include "ResourceLoader.h"
+#include "Utility.h"
+#include <string>
 #include "LadderItem.h"
 #include "Game.h"
 #include "Player.h"
@@ -10,7 +13,8 @@ m_reachedStartPos(false),
 m_startStartPos(0, 0),
 m_startPos(0, 0),
 m_endPos(0, 0),
-m_lerpValue(0)
+m_lerpValue(0),
+m_ladderTexture(ladderTexture)
 {
 	if (isFront)
 		m_renderingMode = RenderingModes::Above;
@@ -22,6 +26,14 @@ m_lerpValue(0)
 	
 	m_examineString = "To climb or not to climb?";
 	m_pickupString = "It's too heavy for me to carry";
+
+	//Change ladder
+	m_ladderLenght = -1;
+	if ((m_ladderTexture == "WoodLadder1") || (m_ladderTexture == "RopeLadder1") || (m_ladderTexture == "SteelLadder1"))
+	{
+		m_ladderLenght = 1;
+		m_ladderTexture = m_ladderTexture.substr(0, m_ladderTexture.size() - 1);
+	}
 }
 
 
@@ -124,6 +136,54 @@ void LadderItem::update(float deltaTime, Game &game)
 	}
 }
 
+void LadderItem::serialize(std::ofstream &writer) const
+{
+	Item::serialize(writer);
+	writer << m_ladderLenght << m_ladderTexture << std::endl;
+}
+
+void LadderItem::deserialize(std::ifstream &reader)
+{
+	Item::deserialize(reader);
+	reader >> m_ladderLenght;
+	reader >> m_ladderTexture;
+	setLadderTexture(m_ladderLenght, m_ladderTexture);
+}
+
+bool LadderItem::onToggle(int direction)
+{
+	if (m_ladderLenght>0)
+	{
+		m_ladderLenght = Utility::clampValue<int>(m_ladderLenght + direction,1,10);
+		setLadderTexture(m_ladderLenght, m_ladderTexture);
+		return true;
+	}
+	return false;
+}
+
+std::string LadderItem::getToggleString() const
+{
+	return "Ladder size: " + std::to_string(m_ladderLenght);
+}
+
+int LadderItem::getLadderLenght()
+{
+	return m_ladderLenght;
+}
+
+std::string LadderItem::getLadderTextureString()
+{
+	return m_ladderTexture;
+}
+
+void LadderItem::setLadderTexture(int ladderLenght,const std::string &ladderTexture)
+{
+	m_ladderLenght = ladderLenght;
+	m_ladderTexture = ladderTexture;
+	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(m_ladderTexture + std::to_string(m_ladderLenght)));
+	m_sprite.setTextureRect(sf::IntRect(0, 0, m_sprite.getTexture()->getSize().x, m_sprite.getTexture()->getSize().y));
+	m_interactBounds = sf::FloatRect(20,0,100, 128 * m_ladderLenght);
+}
 
 Item* LadderItem::clone()
 {

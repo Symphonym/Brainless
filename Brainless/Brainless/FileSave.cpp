@@ -14,6 +14,7 @@
 #include "Tile.h"
 #include "Item.h"
 #include "GhostItem.h"
+#include "LadderItem.h"
 #include "ItemDatabase.h"
 #include "Inventory.h"
 #include "Unit.h"
@@ -70,11 +71,13 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 	{
 		Item& curItem = *level.getItems()[i].get();
 		writer << curItem.getID() << "," << curItem.getSyncID() << "," << curItem.getPosition().x << "," << curItem.getPosition().y;
-		switch (curItem.getID())
+		if (curItem.getName() == "Ghost")
 		{
-		case 5:
 			writer << "," << ((GhostItem&)curItem).getGhostID();
-			break;
+		}
+		else if (curItem.getName() == "Ladder")
+		{
+			writer << "," << ((LadderItem&)curItem).getLadderLenght() << "," << ((LadderItem&)curItem).getLadderTextureString();
 		}
 		writer << std::endl;
 	}
@@ -193,13 +196,14 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 			item->setPosition(sf::Vector2f(posX, posY));
 
 			// Add speciall variables
-			switch (itemID)
+			if (item->getName() == "Ghost")
 			{
-			case 5:
 				(dynamic_cast<GhostItem*>(item.get()))->setGhostID(Utility::stringToNumber<float>(itemData[4]));
-				break;
 			}
-
+			else if (item->getName() == "Ladder")
+			{
+				(dynamic_cast<LadderItem*>(item.get()))->setLadderTexture(Utility::stringToNumber<float>(itemData[4]),itemData[5]);
+			}
 			level.addItem(std::move(item));
 		}
 

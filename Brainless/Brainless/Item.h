@@ -98,6 +98,10 @@ protected:
 	bool m_usable; // Saved to file
 	bool m_collidable; // Saved to file
 	bool m_solid;
+
+	sf::Sprite m_sprite;
+	sf::Sprite m_inventorySprite;
+
 	RenderingModes m_renderingMode; // Saved to file
 	sf::Vector2f m_interactDistance; // Allowed X and Y distance from player to interact with this item
 	sf::FloatRect m_interactBounds;
@@ -115,8 +119,7 @@ private:
 
 	sf::Vector2f m_speed;
 	std::string m_itemName;
-	sf::Sprite m_sprite;
-	sf::Sprite m_inventorySprite;
+	
 	int m_id; // Unique identifier for the item
 	int m_syncID; // ID to connect the item to other items
 	std::string m_description;

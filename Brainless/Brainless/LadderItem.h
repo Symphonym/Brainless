@@ -12,6 +12,16 @@ public:
 	virtual void onUse(Game &game);
 	virtual void update(float deltaTime, Game &game);
 
+	virtual void serialize(std::ofstream &writer) const;
+	virtual void deserialize(std::ifstream &reader);
+
+	virtual bool onToggle(int direction);
+	virtual std::string getToggleString() const;
+
+	int getLadderLenght();
+	std::string getLadderTextureString();
+	void setLadderTexture(int ladderLenght,const std::string &ladderTexture);
+
 	virtual Item* clone();
 
 private:
@@ -21,7 +31,10 @@ private:
 	bool m_reachedStartPos;
 
 	float m_lerpValue;
-
+	//Texture information
+	int m_ladderLenght;
+	std::string m_ladderTexture;
+	
 	// Start position when end is the original start pos
 	sf::Vector2f m_startStartPos;
 

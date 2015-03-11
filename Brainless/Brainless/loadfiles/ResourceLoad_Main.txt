@@ -382,12 +382,43 @@
 +Texture,images/items/arcadeDisc.png,ArcadeDiscItem
 +Texture,images/items/manholeclosed.png,ManholeClosed
 +Texture,images/items/manholeopen.png,ManholeOpen
-+Texture,images/items/steelladder5.png,SteelLadder5
 +Texture,images/items/puddle.png,PuddleItem
 +Texture,images/items/puddleCable.png,PuddleCableItem
 +Texture,images/items/electricalCabinet/electricalCabinet.png,electricalCabinet
-+Texture,images/items/ladders/Ladder-7tiles-Rope.png,RopeLadder7
-+Texture,images/items/ladders/Ladder-6tile-Rope.png,RopeLadder6
+
++Texture,images/items/ladders/LadderRope1.png,RopeLadder1
++Texture,images/items/ladders/LadderRope2.png,RopeLadder2
++Texture,images/items/ladders/LadderRope3.png,RopeLadder3
++Texture,images/items/ladders/LadderRope4.png,RopeLadder4
++Texture,images/items/ladders/LadderRope5.png,RopeLadder5
++Texture,images/items/ladders/LadderRope6.png,RopeLadder6
++Texture,images/items/ladders/LadderRope7.png,RopeLadder7
++Texture,images/items/ladders/LadderRope8.png,RopeLadder8
++Texture,images/items/ladders/LadderRope9.png,RopeLadder9
++Texture,images/items/ladders/LadderRope10.png,RopeLadder10
+
++Texture,images/items/ladders/LadderSteel1.png,SteelLadder1
++Texture,images/items/ladders/LadderSteel2.png,SteelLadder2
++Texture,images/items/ladders/LadderSteel3.png,SteelLadder3
++Texture,images/items/ladders/LadderSteel4.png,SteelLadder4
++Texture,images/items/ladders/LadderSteel5.png,SteelLadder5
++Texture,images/items/ladders/LadderSteel6.png,SteelLadder6
++Texture,images/items/ladders/LadderSteel7.png,SteelLadder7
++Texture,images/items/ladders/LadderSteel8.png,SteelLadder8
++Texture,images/items/ladders/LadderSteel9.png,SteelLadder9
++Texture,images/items/ladders/LadderSteel10.png,SteelLadder10
+
++Texture,images/items/ladders/LadderWood1.png,WoodLadder1
++Texture,images/items/ladders/LadderWood2.png,WoodLadder2
++Texture,images/items/ladders/LadderWood3.png,WoodLadder3
++Texture,images/items/ladders/LadderWood4.png,WoodLadder4
++Texture,images/items/ladders/LadderWood5.png,WoodLadder5
++Texture,images/items/ladders/LadderWood6.png,WoodLadder6
++Texture,images/items/ladders/LadderWood7.png,WoodLadder7
++Texture,images/items/ladders/LadderWood8.png,WoodLadder8
++Texture,images/items/ladders/LadderWood9.png,WoodLadder9
++Texture,images/items/ladders/LadderWood10.png,WoodLadder10
+
 +Texture,images/items/ladders/PlankLadder.png,PlankLadder
 +Texture,images/items/ladders/Rope-Ladder-Compact.png,RopeLadderCompact
 +Texture,images/items/spikesNormal.png,SpikesNormal
@@ -461,9 +492,6 @@
 # CHEST TEST ITEM
 +Texture,images/items/chestOpen.png,ChestOpen
 +Texture,images/items/chestClosed.png,ChestClosed
-
-# LADDER TEST ITEM
-+Texture,images/items/ladders/Ladder-4tile-Rope.png,LadderTest
 
 # MAGNIFYING GLASS TEST ITEM
 +Texture,images/items/Small-Magnifying glass.png,MagnifyingGlass
