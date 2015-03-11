@@ -46,6 +46,7 @@
 #include "CrateItem.h"
 #include "Lamp.h"
 #include "StartDialougeItem.h"
+#include "SpiritFeatherSpawnItem.h"
 #include "LeverItem.h"
 #include "LeverSideItem.h"
 
@@ -59,8 +60,12 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new GhostItem(5,0)));
 	addItem(ItemPtr(new DoorItem(true, 6))); // Locked door
 	addItem(ItemPtr(new KeyItem(7))); // Key to said door
+	addItem(ItemPtr(new LeverItem(true, 54)));
+	addItem(ItemPtr(new LeverSideItem(true, 55)));
 	addItem(ItemPtr(new ChestItem(false, { 0, 1 }, 8)));
 	addItem(ItemPtr(new LadderItem("WoodLadder1", 9)));
+	addItem(ItemPtr(new LadderItem("SteelLadder1", 51)));
+	addItem(ItemPtr(new LadderItem("RopeLadder1", 52)));
 	addItem(ItemPtr(new MagnifyingGlassItem(10)));
 	addItem(ItemPtr(new CoinTwineItem(11)));
 	addItem(ItemPtr(new MovingPlatformItem(sf::Vector2f(0, 800), 800, 12)));
@@ -124,8 +129,7 @@ ItemDatabase::ItemDatabase()
 	//addItem(ItemPtr(new GhostItem("dialogues/LEVEL2.txt", 48)));
 	addItem(ItemPtr(new Lamp(49)));
 	addItem(ItemPtr(new StartDialougeItem(50)));
-	addItem(ItemPtr(new LeverItem(true, 51)));
-	addItem(ItemPtr(new LeverSideItem(true, 52)));
+	addItem(ItemPtr(new SpiritFeatherSpawnItem(53)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)

@@ -182,7 +182,7 @@ void LadderItem::setLadderTexture(int ladderLenght,const std::string &ladderText
 	m_ladderTexture = ladderTexture;
 	m_sprite.setTexture(ResourceLoader::instance().retrieveTexture(m_ladderTexture + std::to_string(m_ladderLenght)));
 	m_sprite.setTextureRect(sf::IntRect(0, 0, m_sprite.getTexture()->getSize().x, m_sprite.getTexture()->getSize().y));
-	m_interactBounds = sf::FloatRect(20,0,100, 128 * m_ladderLenght);
+	m_interactBounds = sf::FloatRect(10,-20,120, 128 * m_ladderLenght + 40);
 }
 
 Item* LadderItem::clone()

@@ -438,6 +438,9 @@
     <ClCompile Include="StartDialougeItem.cpp">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClCompile>
+    <ClCompile Include="SpiritFeatherSpawnItem.cpp">
+      <Filter>Source Files\Game\Items\Feathers</Filter>
+    </ClCompile>
     <ClCompile Include="LeverItem.cpp">
       <Filter>Source Files\Game\Items\Lockable</Filter>
     </ClCompile>
@@ -772,6 +775,9 @@
     </ClInclude>
     <ClInclude Include="StartDialougeItem.h">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="SpiritFeatherSpawnItem.h">
+      <Filter>Source Files\Game\Items\Feathers</Filter>
     </ClInclude>
     <ClInclude Include="LeverItem.h">
       <Filter>Source Files\Game\Items\Lockable</Filter>

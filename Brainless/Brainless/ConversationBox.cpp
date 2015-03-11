@@ -4,6 +4,8 @@
 #include "Game.h"
 #include "OptionsMenu.h"
 
+bool ConversationBox::HelpDialogShown = false;
+
 ConversationBox::ConversationBox()
 :
 m_playerPortraitTextureName("PlayerAvatar"),
@@ -98,24 +100,16 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 								// If the next branch has a description then we change into that branch, otherwise exit conversation
 								const DialogBranch &nextBranch = m_dialog.getCurrentOptions()[i].second;
 								if (nextBranch.description.empty())
+								{
 									setShown(false);
+									checkForHelpTrigger(game);
+								}
 								else
 									m_dialog.changeBranch(nextBranch);
 
 								// Reset the dialog next and load the next answers
 								resetCurrentDialog();
 								loadNextOptions();
-
-
-								// TODO Show special dialog box if spiritbar < 60
-								// TODO Show special dialog box if spiritbar < 60
-								// TODO Show special dialog box if spiritbar < 60
-								// TODO Show special dialog box if spiritbar < 60
-								// TODO Show special dialog box if spiritbar < 60
-								// TODO Show special dialog box if spiritbar < 60
-								// TODO Show special dialog box if spiritbar < 60
-								// TODO Show special dialog box if spiritbar < 60
-
 							}
 						}
 					}
@@ -129,7 +123,10 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 							// If the next branch has a description then we change into that branch, otherwise exit conversation
 							const DialogBranch &nextBranch = m_dialog.getCurrentOptions()[0].second;
 							if (nextBranch.description.empty())
+							{
 								setShown(false);
+								checkForHelpTrigger(game);
+							}
 							else
 								m_dialog.changeBranch(nextBranch);
 
@@ -155,7 +152,10 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 
 						// If there's no more dialog options, close the dialog
 						if (m_dialog.getCurrentOptions().size() == 0)
+						{
 							setShown(false);
+							checkForHelpTrigger(game);
+						}
 					}
 				}
 			}
@@ -299,6 +299,20 @@ void ConversationBox::loadNextOptions()
 	}
 }
 
+void ConversationBox::checkForHelpTrigger(Game &game)
+{
+	// Trigger help dialog
+	if (game.getSpiritBar().getValue() <= Constants::SpiritHelpTriggerAmount && !HelpDialogShown)
+	{
+		HelpDialogShown = true;
+		DialogTree tree;
+		tree.loadDialogFile("dialogues/Ghost0.txt");
+		tree.resetDialog();
+
+		ConversationBox::instance().setDialog(tree);
+		ConversationBox::instance().setShown(true);
+	}
+}
 
 ConversationBox& ConversationBox::instance()
 {

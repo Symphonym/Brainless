@@ -20,7 +20,7 @@ public:
 	static const int ZombieTypeCount = 3;
 	static const int ZombieTextureCount = 6;
 
-	static const int InventoryWidth = 5;
+	static const int InventoryWidth = 4;
 	static const int InventoryHeight = 4;
 
 	static const int InteractDistance = 220;
@@ -36,6 +36,9 @@ public:
 	static const std::string CantUseString;
 
 	static const std::string NoMusicProvidedString;
+
+	// If spirit is less than this, a tutorial/help dialog will show the first time it happens
+	static const int SpiritHelpTriggerAmount = SpiritGhostCost;
 };
 
 #endif
