@@ -8,6 +8,7 @@
 #include "Level.h"
 #include "RemoveCabinetZombie.h"
 #include "DropItemZombie.h"
+#include <iostream>
 
 ScriptedZombie::ScriptedZombie(Zombie* baseZombie, int scriptID)
 :
@@ -57,13 +58,21 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 		{
 			if (otherItem.getName() == "Brain")
 			{
+				for (size_t i = 0; i < game.getLevel().getItems().size(); i++)
+				{
+					if (game.getLevel().getItems()[i]->getSyncID() == m_baseZombie->getSyncID() && game.getLevel().getItems()[i]->getName() == "Ghost")
+					{
+						game.getLevel().getItems()[i]->flyOff();
+					}
+				}
+
 				flash(game.getPlayer().getCameraPosition());
 				game.addSavedZombie(1);
 				//switcheroo
 				Zombie* del = m_baseZombie;
 
 				m_baseZombie = new RemoveCabinetZombie(del->getPosition(), del->getTextureID(),
-					del->getPosition() + sf::Vector2f(3840, 0));
+					del->getPosition() + sf::Vector2f(3840, 0), m_baseZombie->getSyncID());
 				delete(del);
 				return false;
 			}
@@ -77,13 +86,21 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 		{
 			if (otherItem.getName() == "Brain")
 			{
+				for (size_t i = 0; i < game.getLevel().getItems().size(); i++)
+				{
+					if (game.getLevel().getItems()[i]->getSyncID() == m_baseZombie->getSyncID() && game.getLevel().getItems()[i]->getName() == "Ghost")
+					{
+						game.getLevel().getItems()[i]->flyOff();
+					}
+				}
+
 				flash(game.getPlayer().getCameraPosition());
 				game.addSavedZombie(1);
 				//switcheroo
 				Zombie* del = m_baseZombie;
 
 				DropItemZombie* ptr;
-				ptr = new DropItemZombie(del->getPosition(), del->getTextureID(), del->getDirection());
+				ptr = new DropItemZombie(del->getPosition(), del->getTextureID(), del->getDirection(), m_baseZombie->getSyncID());
 				ptr->updateAnimation(0);
 				m_baseZombie = ptr;
 
@@ -156,6 +173,10 @@ int ScriptedZombie::getScriptID()
 	return m_scriptID;
 }
 
+int ScriptedZombie::getSyncID()
+{
+	return m_baseZombie->getSyncID();
+}
 // Set player status
 void ScriptedZombie::setInAir(bool inAir){ m_baseZombie->setInAir(inAir); }
 void ScriptedZombie::setTilt(bool inTilt){ m_baseZombie->setTilt(inTilt); }

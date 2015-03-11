@@ -7,7 +7,7 @@
 class RemoveCabinetZombie : public Zombie
 {
 public:
-	RemoveCabinetZombie(sf::Vector2f startPosition, int Texture, sf::Vector2f target);
+	RemoveCabinetZombie(sf::Vector2f startPosition, int Texture, sf::Vector2f target, int syncID = -1);
 
 	void updateTask(float deltaTime);
 

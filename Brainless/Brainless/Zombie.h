@@ -28,7 +28,7 @@ public:
 	
 	void incrementTexture();
 	int getTextureID();
-	int getSyncID();
+	int getSyncID() override;
 
 	bool collide(Unit *unit);
 protected:

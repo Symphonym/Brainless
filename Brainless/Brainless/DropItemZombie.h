@@ -8,7 +8,7 @@
 class DropItemZombie : public Zombie
 {
 public:
-	DropItemZombie(sf::Vector2f startPosition, int Texture, Direction Direction);
+	DropItemZombie(sf::Vector2f startPosition, int Texture, Direction Direction, int syncID = -1);
 
 	void updateTask(float deltaTime);
 

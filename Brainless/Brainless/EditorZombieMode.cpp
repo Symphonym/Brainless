@@ -209,6 +209,7 @@ void EditorZombieMode::draw()
 	for (std::size_t i = 0; i < m_zombieMasks.size(); i++)
 	{
 		Renderer::instance().drawForeground(m_zombieMasks[i].sprite);
+
 	}
 	Renderer::instance().drawHUD(m_infoText);
 }

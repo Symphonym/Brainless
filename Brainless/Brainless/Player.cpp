@@ -472,11 +472,11 @@ void Player::updateAnimation(float deltaTime)
 	else if (10 < abs(m_speed.x))
 		animation_walk();
 
-	else
-	{
-		std::cout << "FIXA Får ingen animation" << std::endl; //bör inte uppstå
-		std::cout << m_animState << std::endl;
-	}
+	//else
+	//{
+	//	std::cout << "FIXA Får ingen animation" << std::endl; //bör inte uppstå
+	//	std::cout << m_animState << std::endl;
+	//}
 
 	updateSpriteDirection();
 	m_sprite->setTextureRect(m_animation.getRectangle(deltaTime));
@@ -530,7 +530,6 @@ void Player::animation_walk()
 {
 	if (m_animState != anim_walk)
 	{
-		//std::cout << "hej" << std::endl;
 		m_sprite = &m_spriteSheets[0];
 		m_animation.loop(0, 7, 0, 5);
 		m_animState = anim_walk;

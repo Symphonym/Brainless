@@ -24,6 +24,14 @@ bool Zombie::onInteractedWith(Item &otherItem, Game &game)
 {
 	if (otherItem.getName() == "Brain")
 	{
+		for (size_t i = 0; i < game.getLevel().getItems().size(); i++)
+		{
+			if (game.getLevel().getItems()[i]->getSyncID() == m_syncID && game.getLevel().getItems()[i]->getName() == "Ghost")
+			{
+				game.getLevel().getItems()[i]->flyOff();
+			}
+		}
+
 		flash(game.getPlayer().getCameraPosition());
 		game.addSavedZombie(1);
 		return true;
