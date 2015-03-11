@@ -251,6 +251,7 @@ void ConversationBox::setDialog(const DialogTree &dialog)
 {
 	// Copy over the dialog and set the sprite to that of the NPC
 	m_dialog = dialog;
+	sf::Texture texture;
 	m_portraitSprite.setTexture(ResourceLoader::instance().retrieveTexture(m_dialog.getPortraitTextureName()), true);
 	resetCurrentDialog(); // Reset any existing dialog
 	loadNextOptions(); // Load answers
