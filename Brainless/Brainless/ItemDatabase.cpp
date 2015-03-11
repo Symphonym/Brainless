@@ -46,6 +46,7 @@
 #include "CrateItem.h"
 #include "Lamp.h"
 #include "StartDialougeItem.h"
+#include "SpiritFeatherSpawnItem.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -124,6 +125,8 @@ ItemDatabase::ItemDatabase()
 	//addItem(ItemPtr(new GhostItem("dialogues/LEVEL2.txt", 48)));
 	addItem(ItemPtr(new Lamp(49)));
 	addItem(ItemPtr(new StartDialougeItem(50)));
+	addItem(ItemPtr(new SpiritFeatherSpawnItem(51)));
+
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)
