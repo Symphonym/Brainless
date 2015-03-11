@@ -107,9 +107,10 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 			writer << curUnit.getWalkLength();
 			break;
 		}
+		writer << ',' << curUnit.getSyncID();
 		if (curUnit.getRealUnitType() == Unit::ID_ScriptZombie)
 		{
-			writer << "," << /*5*/(((ScriptedZombie&)curUnit)).getScriptID() << "," <</*6*/ (int)(((ScriptedZombie&)curUnit)).getUnitType();
+			writer << "," << /*6*/(((ScriptedZombie&)curUnit)).getScriptID() << "," <</*7*/ (int)(((ScriptedZombie&)curUnit)).getUnitType();
 		}
 		writer << std::endl;
 	}
@@ -252,42 +253,42 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 			{
 				//unitData[4] "special zombie data" unitData[3] " texture"
 			case Unit::ID_IdleZombie:
-				temp = new IdleZombie(sf::Vector2f(posX, posY), (Unit::Direction)Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
+				temp = new IdleZombie(sf::Vector2f(posX, posY), (Unit::Direction)Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]), Utility::stringToNumber<int>(unitData[5]));
 				temp->updateAnimation(0);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
 				break;
 			case Unit::ID_WalkingZombie:
-				temp = new WalkingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
+				temp = new WalkingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]), Utility::stringToNumber<int>(unitData[5]));
 				temp->updateAnimation(0);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
 				break;
 			case Unit::ID_ChasingZombie:
-				temp = new ChasingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
+				temp = new ChasingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]), Utility::stringToNumber<int>(unitData[5]));
 				temp->updateAnimation(0);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
 				break;
 			case Unit::ID_ScriptZombie:
 				Zombie* scriptedZombie;
-				switch (Utility::stringToNumber<int>(unitData[6]))
+				switch (Utility::stringToNumber<int>(unitData[7]))
 				{
 				case Unit::ID_IdleZombie:
 
-					scriptedZombie = new IdleZombie(sf::Vector2f(posX, posY), (Unit::Direction)Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
+					scriptedZombie = new IdleZombie(sf::Vector2f(posX, posY), (Unit::Direction)Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]), Utility::stringToNumber<int>(unitData[5]));
 					scriptedZombie->updateAnimation(0);
 					break;
 				case Unit::ID_WalkingZombie:
-					scriptedZombie = new WalkingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
+					scriptedZombie = new WalkingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]), Utility::stringToNumber<int>(unitData[5]));
 					scriptedZombie->updateAnimation(0);
 					break;
 				case Unit::ID_ChasingZombie:
-					scriptedZombie = new ChasingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]));
+					scriptedZombie = new ChasingZombie(sf::Vector2f(posX, posY), Utility::stringToNumber<int>(unitData[4]), Utility::stringToNumber<int>(unitData[3]), Utility::stringToNumber<int>(unitData[5]));
 					scriptedZombie->updateAnimation(0);
 					break;
 				default:
 					scriptedZombie = nullptr; //do krasch, make compiler happy
 					break;
 				}
-				temp = new ScriptedZombie(scriptedZombie, Utility::stringToNumber<int>(unitData[5]), &level);
+				temp = new ScriptedZombie(scriptedZombie, Utility::stringToNumber<int>(unitData[6]), &level);
 				level.addUnit(std::move(Level::UnitPtr(temp)));
 				break;
 			default:

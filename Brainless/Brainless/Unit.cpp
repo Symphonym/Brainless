@@ -2,7 +2,7 @@
 #include "Renderer.h"
 #include "ConversationBox.h"
 #include "ParticleSystem.h"
-#include <iostream>
+
 #define SPRITESIZE 256 //storleken på varje bild i texturesheet
 
 Unit* Unit::s_playerPointer = nullptr;
@@ -30,6 +30,9 @@ m_syncID(syncID)
 }
 void Unit::updateMovement(float gravity, float deltaTime)
 {
+	/*if (m_UnitID != Unit::ID_Player)
+	std::cout << "sync id"<< getSyncID() << std::endl;*/
+
 	if (!m_isMovementEnabled)
 		return;
 
@@ -315,10 +318,10 @@ bool Unit::updateCollision()
 		m_collisionRight == 0 &&
 		m_collisionUp == 0) return false;
 	//debug typ
-	if (m_collisionLeft > 0 && m_collisionRight > 0)
+	/*if (m_collisionLeft > 0 && m_collisionRight > 0)
 		std::cout << "OM DU INTE ÄR INUTI I VÄGGEN NÄR DETTA KOMMER UPP, UTÖKA FÖR VÄNSTER/HÖGER KROCK SAMTIDIGT" << std::endl;
 	if (m_collisionUp > 0 && m_collisionDown > 0)
-		std::cout << "OM DU INTE ÄR INUTI I VÄGGEN NÄR DETTA KOMMER UPP, UTÖKA FÖR UP/NERE KROCK SAMTIDIGT" << std::endl;
+		std::cout << "OM DU INTE ÄR INUTI I VÄGGEN NÄR DETTA KOMMER UPP, UTÖKA FÖR UP/NERE KROCK SAMTIDIGT" << std::endl;*/
 
 	/*
 	med följande värden och nuvarande tile kollision i level 2015-02-24

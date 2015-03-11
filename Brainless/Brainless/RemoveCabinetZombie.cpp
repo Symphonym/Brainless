@@ -15,9 +15,9 @@
 
 //v0.02
 
-RemoveCabinetZombie::RemoveCabinetZombie(sf::Vector2f startPosition, int Texture, sf::Vector2f target)
+RemoveCabinetZombie::RemoveCabinetZombie(sf::Vector2f startPosition, int Texture, sf::Vector2f target, int syncID)
 :
-Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_CabinetZombie, Texture),
+Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vector2f(MAX_SPEED_X, MAX_SPEED_Y), sf::Vector2f(SPRITE_OFFSET_X, SPRITE_OFFSET_Y), ID_CabinetZombie, Texture, syncID),
 m_direction(dir_right),
 m_target(target)
 {
