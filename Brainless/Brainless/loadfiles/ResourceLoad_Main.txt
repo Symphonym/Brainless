@@ -488,6 +488,10 @@
 +Texture,images/items/doors/wood-doorOpen.png,DoorOpen
 +Texture,images/items/doors/wood-doorClosed.png,DoorClosed
 +Texture,images/items/Small-Key.png,KeyTest
++Texture,images/items/locks/LeverDown.png,LeverDown
++Texture,images/items/locks/LeverUp.png,LeverUp
++Texture,images/items/locks/LeverLeft.png,LeverLeft
++Texture,images/items/locks/LeverRight.png,LeverRight
 
 # CHEST TEST ITEM
 +Texture,images/items/chestOpen.png,ChestOpen
