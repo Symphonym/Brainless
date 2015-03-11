@@ -306,7 +306,7 @@ void ConversationBox::checkForHelpTrigger(Game &game)
 	{
 		HelpDialogShown = true;
 		DialogTree tree;
-		tree.loadDialogFile("dialogues/Ghost0.txt");
+		tree.loadDialogFile("dialogues/GhostFeather.txt");
 		tree.resetDialog();
 
 		ConversationBox::instance().setDialog(tree);
