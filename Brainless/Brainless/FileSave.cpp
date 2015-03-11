@@ -85,7 +85,7 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 	for (std::size_t i = 0; i < level.getDecorations().size(); i++)
 	{
 		const LevelSprite& curSprite = level.getDecorations()[i];
-		writer << curSprite.drawToForeground << "," << curSprite.textureName << "," << curSprite.sprite.getPosition().x << "," << curSprite.sprite.getPosition().y << std::endl;
+		writer << static_cast<int>(curSprite.layer) << "," << curSprite.textureName << "," << curSprite.sprite.getPosition().x << "," << curSprite.sprite.getPosition().y << std::endl;
 	}
 
 	// Write numbers of units
@@ -216,14 +216,14 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 			std::vector<std::string> spriteData = Utility::splitString(line, ',');
 
 			// Read sprite data
-			bool drawToForeground = Utility::stringToNumber<bool>(spriteData[0]);
+			LevelSpriteLayers layer = static_cast<LevelSpriteLayers>(Utility::stringToNumber<int>(spriteData[0]));
 			std::string textureName = spriteData[1];
 			float posX = Utility::stringToNumber<float>(spriteData[2]);
 			float posY = Utility::stringToNumber<float>(spriteData[3]);
 
 			// Create sprite from data
 			LevelSprite levelSprite;
-			levelSprite.drawToForeground = drawToForeground;
+			levelSprite.layer = layer;
 			levelSprite.textureName = textureName;
 			levelSprite.sprite.setPosition(posX, posY);
 			levelSprite.sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));
