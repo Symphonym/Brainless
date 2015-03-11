@@ -36,6 +36,9 @@ public:
 	static const std::string CantUseString;
 
 	static const std::string NoMusicProvidedString;
+
+	// If spirit is less than this, a tutorial/help dialog will show the first time it happens
+	static const int SpiritHelpTriggerAmount = SpiritGhostCost;
 };
 
 #endif

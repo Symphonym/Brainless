@@ -31,6 +31,9 @@ public:
 
 private:
 
+	static bool HelpDialogShown;
+	void checkForHelpTrigger(Game &game);
+
 	ConversationBox();
 
 	std::string parseString(const std::string &str);
