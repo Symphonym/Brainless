@@ -203,7 +203,8 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 			}
 			else if (item->getName() == "Ladder")
 			{
-				(dynamic_cast<LadderItem*>(item.get()))->setLadderTexture(Utility::stringToNumber<float>(itemData[4]),itemData[5]);
+				if (Utility::stringToNumber<float>(itemData[4])>0)
+					(dynamic_cast<LadderItem*>(item.get()))->setLadderTexture(Utility::stringToNumber<float>(itemData[4]),itemData[5]);
 			}
 			level.addItem(std::move(item));
 		}
