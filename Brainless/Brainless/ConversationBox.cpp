@@ -71,12 +71,12 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 			{
 				sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
 
-				// Clicking outside the conversation box will close it
-				if (!m_background.getGlobalBounds().contains(sf::Vector2f(mousePos.x, mousePos.y)))
-				{
-					m_dialogBox.finishTextNow();
-					return;
-				}
+				// Clicking outside the conversation box will quicken the dialogue
+				//if (!m_background.getGlobalBounds().contains(sf::Vector2f(mousePos.x, mousePos.y)))
+				//{
+				//	m_dialogBox.finishTextNow();
+				//	return;
+				//}
 
 				if (m_conversationState == ConversationStates::Player)
 				{
@@ -156,6 +156,10 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 							setShown(false);
 							checkForHelpTrigger(game);
 						}
+					}
+					else
+					{
+						m_dialogBox.finishTextNow();
 					}
 				}
 			}
