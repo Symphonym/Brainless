@@ -12,7 +12,6 @@ m_ladderIsDown(false)
 	refreshStatus();
 	m_examineString = "Rickety thing... Must. Climb.";
 	m_useString = "I can't reach that from here";
-	m_interactDistance = sf::Vector2f(700, 1000);
 }
 
 void RopeLadderItem::serialize(std::ofstream &writer) const
@@ -86,7 +85,7 @@ void RopeLadderItem::refreshStatus()
 {
 	if (m_ladderIsDown)
 	{
-		m_interactDistance = sf::Vector2f(100, 1000);
+		m_interactDistance = sf::Vector2f(100, m_ladder.getSprite().getGlobalBounds().height / 2 + 280.f);
 		m_examineString = "Rickety thing... Must. Climb.";
 		m_usable = true;
 		m_interactBounds = sf::FloatRect(0, 0,
