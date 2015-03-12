@@ -14,7 +14,12 @@
 +Texture,images/UI/heartEmpty.png,heartEmpty
 +Texture,images/UI/Spirit_empty.png,SpiritBarFG
 +Texture,images/UI/ghostavatar.png,GhostAvatar
-+Texture,images/UI/scaredzombie.png,ScaredZombie
++Texture,images/UI/zombie0.png,zombie0
++Texture,images/UI/zombie1.png,zombie1
++Texture,images/UI/zombie2.png,zombie2
++Texture,images/UI/zombie3.png,zombie3
++Texture,images/UI/zombie4.png,zombie4
++Texture,images/UI/zombie5.png,zombie5
 +Texture,images/UI/playeravatar.png,PlayerAvatar
 
 # CRAFTING UI
