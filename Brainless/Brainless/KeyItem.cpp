@@ -12,7 +12,7 @@ Item("Key","KeyInv", "KeyTest", id)
 bool KeyItem::onInteract(Item &otherItem, Game &game)
 {
 	// A key is consumed if it can be used
-	if (otherItem.getSyncID() == getSyncID())
+	if (getSyncID() != -1 && otherItem.getSyncID() == getSyncID())
 		return true;
 	else
 		return false;

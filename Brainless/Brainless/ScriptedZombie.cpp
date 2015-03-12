@@ -58,9 +58,15 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 		{
 			if (otherItem.getName() == "Brain")
 			{
+				sf::Vector2f cabinetPos;
 				for (size_t i = 0; i < game.getLevel().getItems().size(); i++)
 				{
-					if (game.getLevel().getItems()[i]->getSyncID() == m_baseZombie->getSyncID() && game.getLevel().getItems()[i]->getName() == "Ghost")
+					if (game.getLevel().getItems()[i]->getName() == "Cabinet")
+					{
+						cabinetPos.x = game.getLevel().getItems()[i]->getCollisionBounds().left + game.getLevel().getItems()[i]->getCollisionBounds().width / 2;
+						cabinetPos.y = game.getLevel().getItems()[i]->getCollisionBounds().top + game.getLevel().getItems()[i]->getCollisionBounds().height / 2;
+					}
+					else if (game.getLevel().getItems()[i]->getSyncID() == m_baseZombie->getSyncID() && game.getLevel().getItems()[i]->getName() == "Ghost")
 					{
 						game.getLevel().getItems()[i]->flyOff();
 					}
@@ -72,7 +78,7 @@ bool ScriptedZombie::onInteractedWith(Item &otherItem, Game &game){
 				Zombie* del = m_baseZombie;
 
 				m_baseZombie = new RemoveCabinetZombie(del->getPosition(), del->getTextureID(),
-					del->getPosition() + sf::Vector2f(3840, 0), m_baseZombie->getSyncID());
+					cabinetPos, m_baseZombie->getSyncID());
 				delete(del);
 				return false;
 			}

@@ -76,7 +76,7 @@ bool DropItemZombie::releaseItems(Level* levelPtr, Game &game)
 
 
 			ItemDatabase::ItemPtr item = std::move(ItemDatabase::instance().extractItem(m_itemsWithin[i]));
-
+			item->setSyncID(m_syncID);
 			// Make sure items in the chest are lootable
 			if (!item->isLootable())
 				continue;
