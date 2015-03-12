@@ -231,7 +231,10 @@ void Inventory::events(const sf::Event &event, Game &game)
 
 				// First time click on world will just close the inventory
 				if (m_isOpen)
+				{
+					SoundPlayer::instance().playSound("inventory_open", game.getWindow().getView().getCenter());
 					m_isOpen = false;
+				}
 
 				// Second time click on world, without the item being destroyed from interaction, will put it back into the inventory
 				else if (m_mouseItem && !m_isOpen)
