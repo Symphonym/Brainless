@@ -23,7 +23,7 @@ bool StartDialougeItem::onCollisionWithUnit(Unit &unit, Game &game)
 {
 	// TODO FIX THIS, IT DOES NOT WANT TO FIND/OPEN THE FILE, DA FUQ, FIX PLZ
 	DialogTree tree;
-	tree.loadDialogFile("dialogues/Ghost0.txt");
+	tree.loadDialogFile("dialogues/intro.txt");
 	tree.resetDialog();
 
 	sf::Vector2i onScreenPos = game.getWindow().mapCoordsToPixel(getPosition());

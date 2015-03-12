@@ -14,6 +14,7 @@
 #include "Tile.h"
 #include "Item.h"
 #include "GhostItem.h"
+#include "LadderItem.h"
 #include "ItemDatabase.h"
 #include "Inventory.h"
 #include "Unit.h"
@@ -70,11 +71,13 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 	{
 		Item& curItem = *level.getItems()[i].get();
 		writer << curItem.getID() << "," << curItem.getSyncID() << "," << curItem.getPosition().x << "," << curItem.getPosition().y;
-		switch (curItem.getID())
+		if (curItem.getName() == "Ghost")
 		{
-		case 5:
 			writer << "," << ((GhostItem&)curItem).getGhostID();
-			break;
+		}
+		else if (curItem.getName() == "Ladder")
+		{
+			writer << "," << ((LadderItem&)curItem).getLadderLenght() << "," << ((LadderItem&)curItem).getLadderTextureString();
 		}
 		writer << std::endl;
 	}
@@ -85,7 +88,7 @@ void FileSave::saveMapText(Level &level, int levelNumber)
 	for (std::size_t i = 0; i < level.getDecorations().size(); i++)
 	{
 		const LevelSprite& curSprite = level.getDecorations()[i];
-		writer << curSprite.drawToForeground << "," << curSprite.textureName << "," << curSprite.sprite.getPosition().x << "," << curSprite.sprite.getPosition().y << std::endl;
+		writer << static_cast<int>(curSprite.layer) << "," << curSprite.textureName << "," << curSprite.sprite.getPosition().x << "," << curSprite.sprite.getPosition().y << std::endl;
 	}
 
 	// Write numbers of units
@@ -194,13 +197,15 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 			item->setPosition(sf::Vector2f(posX, posY));
 
 			// Add speciall variables
-			switch (itemID)
+			if (item->getName() == "Ghost")
 			{
-			case 5:
 				(dynamic_cast<GhostItem*>(item.get()))->setGhostID(Utility::stringToNumber<float>(itemData[4]));
-				break;
 			}
-
+			else if (item->getName() == "Ladder")
+			{
+				if (Utility::stringToNumber<float>(itemData[4])>0)
+					(dynamic_cast<LadderItem*>(item.get()))->setLadderTexture(Utility::stringToNumber<float>(itemData[4]),itemData[5]);
+			}
 			level.addItem(std::move(item));
 		}
 
@@ -216,14 +221,14 @@ bool FileSave::loadMapText(Level &level, int levelNumber)
 			std::vector<std::string> spriteData = Utility::splitString(line, ',');
 
 			// Read sprite data
-			bool drawToForeground = Utility::stringToNumber<bool>(spriteData[0]);
+			LevelSpriteLayers layer = static_cast<LevelSpriteLayers>(Utility::stringToNumber<int>(spriteData[0]));
 			std::string textureName = spriteData[1];
 			float posX = Utility::stringToNumber<float>(spriteData[2]);
 			float posY = Utility::stringToNumber<float>(spriteData[3]);
 
 			// Create sprite from data
 			LevelSprite levelSprite;
-			levelSprite.drawToForeground = drawToForeground;
+			levelSprite.layer = layer;
 			levelSprite.textureName = textureName;
 			levelSprite.sprite.setPosition(posX, posY);
 			levelSprite.sprite.setTexture(ResourceLoader::instance().retrieveTexture(textureName));

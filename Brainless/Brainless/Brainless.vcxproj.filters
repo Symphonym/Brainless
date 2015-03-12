@@ -438,6 +438,15 @@
     <ClCompile Include="StartDialougeItem.cpp">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClCompile>
+    <ClCompile Include="SpiritFeatherSpawnItem.cpp">
+      <Filter>Source Files\Game\Items\Feathers</Filter>
+    </ClCompile>
+    <ClCompile Include="LeverItem.cpp">
+      <Filter>Source Files\Game\Items\Lockable</Filter>
+    </ClCompile>
+    <ClCompile Include="LeverSideItem.cpp">
+      <Filter>Source Files\Game\Items\Lockable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -766,6 +775,15 @@
     </ClInclude>
     <ClInclude Include="StartDialougeItem.h">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="SpiritFeatherSpawnItem.h">
+      <Filter>Source Files\Game\Items\Feathers</Filter>
+    </ClInclude>
+    <ClInclude Include="LeverItem.h">
+      <Filter>Source Files\Game\Items\Lockable</Filter>
+    </ClInclude>
+    <ClInclude Include="LeverSideItem.h">
+      <Filter>Source Files\Game\Items\Lockable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

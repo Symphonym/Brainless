@@ -15,6 +15,7 @@ public:
 	// To handle opening of door, if it is unlocked
 	virtual void onUse(Game &game);
 	virtual void onExamine();
+	virtual bool onSyncedWith(Item &otherItem);
 
 	virtual void serialize(std::ofstream &writer) const;
 	virtual void deserialize(std::ifstream &reader);

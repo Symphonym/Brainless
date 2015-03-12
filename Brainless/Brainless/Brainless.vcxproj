@@ -152,6 +152,8 @@
     <ClCompile Include="KeyTwineItem.cpp" />
     <ClCompile Include="Lamp.cpp" />
     <ClCompile Include="LevelTransition.cpp" />
+    <ClCompile Include="LeverItem.cpp" />
+    <ClCompile Include="LeverSideItem.cpp" />
     <ClCompile Include="LighterItem.cpp" />
     <ClCompile Include="LongStickItem.cpp" />
     <ClCompile Include="MainMenu.cpp" />
@@ -172,6 +174,7 @@
     <ClCompile Include="ScriptedZombie.cpp" />
     <ClCompile Include="SettingsMenu.cpp" />
     <ClCompile Include="SpikeItem.cpp" />
+    <ClCompile Include="SpiritFeatherSpawnItem.cpp" />
     <ClCompile Include="StartDialougeItem.cpp" />
     <ClCompile Include="StartProgramIntro.cpp" />
     <ClCompile Include="StuffedPaperBagItem.cpp" />
@@ -244,6 +247,8 @@
     <ClInclude Include="DropItemZombie.h" />
     <ClInclude Include="EmptyBagItem.h" />
     <ClInclude Include="Lamp.h" />
+    <ClInclude Include="LeverItem.h" />
+    <ClInclude Include="LeverSideItem.h" />
     <ClInclude Include="NewGameIntro.h" />
     <ClInclude Include="NewspaperItem.h" />
     <ClInclude Include="RemoveCabinetZombie.h" />
@@ -251,6 +256,7 @@
     <ClInclude Include="RopeLadderItem.h" />
     <ClInclude Include="ScriptedZombie.h" />
     <ClInclude Include="SpikeItem.h" />
+    <ClInclude Include="SpiritFeatherSpawnItem.h" />
     <ClInclude Include="StartDialougeItem.h" />
     <ClInclude Include="StartProgramIntro.h" />
     <ClInclude Include="StuffedPaperBagItem.h" />

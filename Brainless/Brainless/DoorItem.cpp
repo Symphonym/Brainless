@@ -21,10 +21,30 @@ bool DoorItem::onInteractedWith(Item &otherItem, Game &game)
 		m_isLocked = false;
 		SoundPlayer::instance().playSound("item_door",getPosition());
 	}
-
 	// The door will not get destroyed
 	return false;
 }
+
+bool DoorItem::onSyncedWith(Item &otherItem)
+{
+	if (otherItem.getName() == "Lever")
+	{
+		m_isOpen = !m_isOpen;
+		m_collidable = !m_collidable;
+		if (m_isOpen)
+		{
+			m_collisionBounds = sf::FloatRect(m_collisionBounds.left, m_collisionBounds.top, 90, 192);
+			getSprite().setTexture(ResourceLoader::instance().retrieveTexture("DoorOpen"));
+		}
+		else
+		{
+			m_collisionBounds = sf::FloatRect(m_collisionBounds.left, m_collisionBounds.top, 25, 192);
+			getSprite().setTexture(ResourceLoader::instance().retrieveTexture("DoorClosed"));
+		}
+		return false;
+	}
+}
+
 
 void DoorItem::onUse(Game &game)
 {
