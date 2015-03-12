@@ -16,7 +16,7 @@ m_isLocked(locked)
 
 bool DoorItem::onInteractedWith(Item &otherItem, Game &game)
 {
-	if (m_isLocked && otherItem.getSyncID() == getSyncID() && otherItem.getName() == "Key")
+	if (getSyncID() != -1 && m_isLocked && otherItem.getSyncID() == getSyncID() && otherItem.getName() == "Key")
 	{
 		m_isLocked = false;
 		SoundPlayer::instance().playSound("item_door",getPosition());
@@ -41,8 +41,8 @@ bool DoorItem::onSyncedWith(Item &otherItem)
 			m_collisionBounds = sf::FloatRect(m_collisionBounds.left, m_collisionBounds.top, 25, 192);
 			getSprite().setTexture(ResourceLoader::instance().retrieveTexture("DoorClosed"));
 		}
-		return false;
 	}
+	return false;
 }
 
 
