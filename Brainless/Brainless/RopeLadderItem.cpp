@@ -30,7 +30,7 @@ void RopeLadderItem::deserialize(std::ifstream &reader)
 
 bool RopeLadderItem::onInteractedWith(Item &otherItem, Game &game)
 {
-	if (otherItem.getName() == "Key & String" && !m_ladderIsDown)
+	if (otherItem.getName() == "Long Stick" && !m_ladderIsDown)
 	{
 		m_ladderIsDown = true;
 		refreshStatus();
