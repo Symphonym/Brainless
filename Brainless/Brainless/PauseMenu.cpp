@@ -14,17 +14,17 @@ m_game(nullptr)
 	m_buttons[0] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("Resume_Normal"),
 		ResourceLoader::instance().retrieveTexture("Resume_Normal"),
-		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 230.f)));
+		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 200.f)));
 
 	m_buttons[1] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("saveGamePM_Normal"),
 		ResourceLoader::instance().retrieveTexture("saveGamePM_Normal"),
-		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 160.f)));
+		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 100.f))); //160
 
 	m_buttons[2] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("MainMenuBack_Normal"),
 		ResourceLoader::instance().retrieveTexture("MainMenuBack_Normal"),
-		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 90.f)));
+		sf::Vector2f(m_window.getSize().x / 2 + 40.f, m_window.getSize().y / 2 - 0.f))); //90
 
 
 	/*m_buttons[2] = GuiPtr(new Button(
