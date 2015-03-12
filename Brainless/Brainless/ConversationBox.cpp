@@ -134,6 +134,10 @@ void ConversationBox::events(const sf::Event &event, Game &game)
 							resetCurrentDialog();
 							loadNextOptions();
 						}
+						else
+						{
+							m_dialogBox.finishTextNow();
+						}
 					}
 
 					
