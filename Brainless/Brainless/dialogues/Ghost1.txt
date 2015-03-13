@@ -47,13 +47,13 @@ Oh awful fate, to be reduced to a floating... thing. What did I ever do to deser
 					Because my life is all but over, at least for now. I have nothing to keep existing for, no one to really appreciate me.
 					Will you help me get out of this dark abyss, back into the light and my body?
 					#Sure.
-					Terrific, then give me back my brain and I'll give you a gift that'll help you. My lost body is stumbling around over there by the grass, please set me free as soon as possible.
-				#You're on your own.
-					Then I bid you, and your terrible self, goodbye. May you fall to this curse like the rest of humanity.
+						Terrific, then give me back my brain and I'll give you a gift that'll help you. My lost body is stumbling around over there by the grass, please set me free as soon as possible.
+					#You're on your own.
+						Then I bid you, and your terrible self, goodbye. May you fall to this curse like the rest of humanity.
 				#...Okay, anyway, can you help me?
 					Why would I do that? If I do, will you try and save me from this horrible fate?
 					#Sure.
-					Terrific, then give me back my brain and I'll give you a gift that'll help you. My lost body is stumbling around over there by the grass, please set me free as soon as possible.
-				#You're on your own.
-					Then I bid you, and your terrible self, goodbye. May you fall to this curse like the rest of humanity.
+						Terrific, then give me back my brain and I'll give you a gift that'll help you. My lost body is stumbling around over there by the grass, please set me free as soon as possible.
+					#You're on your own.
+						Then I bid you, and your terrible self, goodbye. May you fall to this curse like the rest of humanity.
 
