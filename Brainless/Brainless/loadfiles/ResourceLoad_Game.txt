@@ -67,6 +67,7 @@
 +Sound,sounds/player_landing.wav,player_landing
 +Sound,sounds/player_turn.wav,player_turn
 +Sound,sounds/Collect_v2.wav,feather_sound
++Sound,sounds/cabinetFlyOff.wav,cabinetFlyOff
 
 # TEST SOUND
 +Sound,sounds/COINV3.wav,CoinTestSound

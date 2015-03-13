@@ -22,7 +22,7 @@ void Zombie::setDamaging(bool damaging)
 
 bool Zombie::onInteractedWith(Item &otherItem, Game &game)
 {
-	if (otherItem.getName() == "Brain" && m_isDamaging)
+	if (otherItem.getName() == "Brain" && m_isDamaging && otherItem.getSyncID() == getSyncID())
 	{
 		for (size_t i = 0; i < game.getLevel().getItems().size(); i++)
 		{

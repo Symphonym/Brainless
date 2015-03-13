@@ -5,6 +5,7 @@
 #include "Unit.h"
 #include "Game.h"
 #include <iostream>
+#include "SoundPlayer.h"
 
 ElectricalCabinetItem::ElectricalCabinetItem(std::vector<int> itemsWithin, int id)
 :
@@ -39,37 +40,13 @@ int ElectricalCabinetItem::getScriptUnitType()
 
 bool ElectricalCabinetItem::onCollisionWithUnit(Unit &unit, Game &game)
 {
-	//test
+
 	if (unit.getUnitType() == Unit::UnitType::ID_CabinetZombie)
 	{
-		//autoloot works
-		//sf::Vector2f floorPosition(getPosition().x + getSprite().getGlobalBounds().width/2, getPosition().y + getSprite().getGlobalBounds().height/2);
 
-		//// Spawn items when chest is opened
-		//for (std::size_t i = 0; i < m_itemsWithin.size(); i++)
-		//{
-
-
-		//	ItemDatabase::ItemPtr item = std::move(ItemDatabase::instance().extractItem(m_itemsWithin[i]));
-
-		//	// Make sure items in the chest are lootable
-		//	if (!item->isLootable())
-		//		continue;
-
-		//	item->setPosition(sf::Vector2f(floorPosition.x, floorPosition.y - item->getSprite().getGlobalBounds().height));
-
-		//	int offset = std::rand() % 150;
-		//	if (std::rand() % 2 == 0)
-		//		offset *= -1;
-
-		//	item->setPosition(sf::Vector2f(item->getPosition().x + offset, item->getPosition().y));
-
-		//	game.getLevel().addItemToBuffer(std::move(item));
-		//}
-		//m_itemsWithin.clear();
+		SoundPlayer::instance().playSound("cabinetFlyOff", game.getWindow().getView().getCenter());
 
 		flyOff();
-
 	}
 
 	return false;

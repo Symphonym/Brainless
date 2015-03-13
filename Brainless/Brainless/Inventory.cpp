@@ -203,7 +203,7 @@ void Inventory::events(const sf::Event &event, Game &game)
 							bool deleteUnit = false;
 
 							// Invoke interaction handling on item
-							if (m_mouseItem->onInteractUnit(unit))
+							if (m_mouseItem->onInteractUnit(unit, game))
 								deleteMouseItem = true;
 
 							// Invoke interaction on unit

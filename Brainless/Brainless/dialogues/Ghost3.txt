@@ -1,3 +1,20 @@
 GhostAvatar
-Fuck off!
-#...
+What are you looking at, never seen something supernatural before?
+#Of course I have.
+	Congratulations, then stop glowering at my spirit and bugger off, I have more important things to do than entertain you.
+	#What, like hovering around?
+		Damn right. You are just as anoying as everyone was before this whole thing started. Now get lost.
+		#Wait just a second, I need your help!
+			Too stupid to figure things out by yourself? Here's a hint for ya, the right brain to the right person.
+		#You're not exactly mrs. sunshine either.
+			That's more like it. Now leave me alone.
+	#Even though you are floating around up there you really are a downer.
+		Good one! Maybe you're not that bad after all. But that does not change the fact that you should fuck off.
+	#Can you please just giv me a hint or something?help me with this problem?
+		Too stupid to figure things out by yourself? Here's a hint for ya, the right brain to the right person.
+#What's your problem?
+	For the moment; you. You expecting some help or something?
+	#Yes, that would be nice.
+		What a joke, you spoiled brat. Stop glowering and piss off.
+	#Not from you, asshole.
+		That's more like it. Now leave me alone.

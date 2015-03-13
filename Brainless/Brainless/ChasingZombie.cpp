@@ -68,6 +68,7 @@ void ChasingZombie::deserialize(std::ifstream &reader)
 
 void ChasingZombie::updateTask(float deltaTime)
 {
+
 	float speedTurnAround = 10;
 	float speedStartAcc = 300;
 	float speedNormalAcc = 100;
@@ -116,19 +117,22 @@ void ChasingZombie::updateTask(float deltaTime)
 		}
 		do movement
 		*/
-	m_target = s_playerPointer;
-	if (m_target != nullptr)
+
+	if (m_isDamaging)
 	{
-		sf::Vector2f length = m_target->getPosition() - m_position;
-		float distance = sqrt(pow(length.x, 2) + pow(length.y, 2));
+		m_target = s_playerPointer;
+		if (m_target != nullptr)
+		{
+			sf::Vector2f length = m_target->getPosition() - m_position;
+			float distance = sqrt(pow(length.x, 2) + pow(length.y, 2));
 
-		m_specialSpriteDirection = false;
-		m_direction = dir_noDirection;
-		//chasing zombie Ai
+			m_specialSpriteDirection = false;
+			m_direction = dir_noDirection;
+			//chasing zombie Ai
 
-		//target in sight
-		if (distance < lookDistance)
-			//target looks tasty && not far from home
+			//target in sight
+			if (distance < lookDistance)
+				//target looks tasty && not far from home
 			if (distance < chaseDistance && abs(m_position.x - m_homePosition.x) < m_maxWalkLenght)
 			{
 				if (m_target->getPosition().x < m_position.x)
@@ -151,74 +155,76 @@ void ChasingZombie::updateTask(float deltaTime)
 				}
 				animation_idleSlow();
 			}
-		//return home
-		else
-		{
-			if (m_position.x + 5 < m_homePosition.x)
-			{
-				m_direction = dir_right;
-				animation_walkingSlow();
-			}
-			else if (m_position.x - 5 > m_homePosition.x)
-			{
-				m_direction = dir_left;
-				animation_walkingSlow();
-			}
-			//isHome
+			//return home
 			else
 			{
-				m_position.x = m_homePosition.x;
-				m_direction = dir_noDirection;
-				animation_idleSlow();
+				if (m_position.x + 5 < m_homePosition.x)
+				{
+					m_direction = dir_right;
+					animation_walkingSlow();
+				}
+				else if (m_position.x - 5 > m_homePosition.x)
+				{
+					m_direction = dir_left;
+					animation_walkingSlow();
+				}
+				//isHome
+				else
+				{
+					m_position.x = m_homePosition.x;
+					m_direction = dir_noDirection;
+					animation_idleSlow();
+				}
 			}
 		}
-	}
 
-	//movement
-	//Note for simplicity: This is practically physics code and could be used for all unit classes instead of copied.
-	//Left
-	if (m_direction == dir_left)
-	{
-		if (20 < m_speed.x) //wrong direcion - slow character
+		//movement
+		//Note for simplicity: This is practically physics code and could be used for all unit classes instead of copied.
+		//Left
+		if (m_direction == dir_left)
 		{
-			m_acceleration.x = -m_speed.x * speedTurnAround;
-		}
-		else
-		{
-			if (abs(m_speed.x) < startAccBreakpoint)
-				m_acceleration.x = -speedStartAcc;
+			if (20 < m_speed.x) //wrong direcion - slow character
+			{
+				m_acceleration.x = -m_speed.x * speedTurnAround;
+			}
 			else
-				m_acceleration.x = -speedNormalAcc;
+			{
+				if (abs(m_speed.x) < startAccBreakpoint)
+					m_acceleration.x = -speedStartAcc;
+				else
+					m_acceleration.x = -speedNormalAcc;
+			}
+			slowDown = false;
 		}
-		slowDown = false;
-	}
-	//Right
-	if (m_direction == dir_right)
-	{
-		if (m_speed.x < -20) //wrong direcion - slow character
+		//Right
+		if (m_direction == dir_right)
 		{
-			m_acceleration.x = -m_speed.x * speedTurnAround;
-		}
-		else
-		{
-			if (abs(m_speed.x) < startAccBreakpoint)
-				m_acceleration.x = speedStartAcc;
+			if (m_speed.x < -20) //wrong direcion - slow character
+			{
+				m_acceleration.x = -m_speed.x * speedTurnAround;
+			}
 			else
-				m_acceleration.x = speedNormalAcc;
+			{
+				if (abs(m_speed.x) < startAccBreakpoint)
+					m_acceleration.x = speedStartAcc;
+				else
+					m_acceleration.x = speedNormalAcc;
+			}
+			slowDown = false;
 		}
-		slowDown = false;
+	
 	}
-	if (slowDown)
-	{
-		//small values = stop totally
-		if (m_speed.x < minSpeedBeforeStop && m_speed.x > -minSpeedBeforeStop)
+		if (slowDown)
 		{
-			m_speed.x = 0;
-			m_acceleration.x = 0;
+			//small values = stop totally
+			if (m_speed.x < minSpeedBeforeStop && m_speed.x > -minSpeedBeforeStop)
+			{
+				m_speed.x = 0;
+				m_acceleration.x = 0;
+			}
+			//slow
+			else m_acceleration.x = -m_speed.x * speedSlowDown;
 		}
-		//slow
-		else m_acceleration.x = -m_speed.x * speedSlowDown;
-	}
 
 }
 

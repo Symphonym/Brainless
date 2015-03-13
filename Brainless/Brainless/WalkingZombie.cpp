@@ -72,64 +72,68 @@ void WalkingZombie::deserialize(std::ifstream &reader)
 void WalkingZombie::updateTask(float deltaTime)
 {
 
-	float speedTurnAround = 10;
-	float speedStartAcc = 300;
-	float speedNormalAcc = 100;
-	float speedSlowDown = 6;
+		float speedTurnAround = 10;
+		float speedStartAcc = 300;
+		float speedNormalAcc = 100;
+		float speedSlowDown = 6;
 
-	float startAccBreakpoint = 150;
-	float minSpeedBeforeStop = 10;
+		float startAccBreakpoint = 150;
+		float minSpeedBeforeStop = 10;
 
-	bool slowDown = true;
-	//Walking Zombie's AI
-	if (m_position.x < m_minPositionX)
-		m_direction = dir_right;
-	else if (m_maxPositionX < m_minPositionX + (m_position.x - m_minPositionX))
-		m_direction = dir_left;
-	//Note for simplicity: This is practically physics code and could be used for all unit classes instead of copied.
-	//Left
-	if (m_direction == dir_left)
-	{
-		if (20 < m_speed.x) //wrong direcion - slow character
+		bool slowDown = true;
+
+		if (m_isDamaging)
 		{
-			m_acceleration.x = -m_speed.x * speedTurnAround;
+			//Walking Zombie's AI
+			if (m_position.x < m_minPositionX)
+				m_direction = dir_right;
+			else if (m_maxPositionX < m_minPositionX + (m_position.x - m_minPositionX))
+				m_direction = dir_left;
+			//Note for simplicity: This is practically physics code and could be used for all unit classes instead of copied.
+			//Left
+			if (m_direction == dir_left)
+			{
+				if (20 < m_speed.x) //wrong direcion - slow character
+				{
+					m_acceleration.x = -m_speed.x * speedTurnAround;
+				}
+				else
+				{
+					if (abs(m_speed.x) < startAccBreakpoint)
+						m_acceleration.x = -speedStartAcc;
+					else
+						m_acceleration.x = -speedNormalAcc;
+				}
+				slowDown = false;
+			}
+			//Right
+			if (m_direction == dir_right)
+			{
+				if (m_speed.x < -20) //wrong direcion - slow character
+				{
+					m_acceleration.x = -m_speed.x * speedTurnAround;
+				}
+				else
+				{
+					if (abs(m_speed.x) < startAccBreakpoint)
+						m_acceleration.x = speedStartAcc;
+					else
+						m_acceleration.x = speedNormalAcc;
+				}
+				slowDown = false;
+			}
 		}
-		else
+		if (slowDown)
 		{
-			if (abs(m_speed.x) < startAccBreakpoint)
-				m_acceleration.x = -speedStartAcc;
-			else
-				m_acceleration.x = -speedNormalAcc;
+			//small values = stop totally
+			if (m_speed.x < minSpeedBeforeStop && m_speed.x > -minSpeedBeforeStop)
+			{
+				m_speed.x = 0;
+				m_acceleration.x = 0;
+			}
+			//slow
+			else m_acceleration.x = -m_speed.x * speedSlowDown;
 		}
-		slowDown = false;
-	}
-	//Right
-	if (m_direction == dir_right)
-	{
-		if (m_speed.x < -20) //wrong direcion - slow character
-		{
-			m_acceleration.x = -m_speed.x * speedTurnAround;
-		}
-		else
-		{
-			if (abs(m_speed.x) < startAccBreakpoint)
-				m_acceleration.x = speedStartAcc;
-			else
-				m_acceleration.x = speedNormalAcc;
-		}
-		slowDown = false;
-	}
-	if (slowDown)
-	{
-		//small values = stop totally
-		if (m_speed.x < minSpeedBeforeStop && m_speed.x > -minSpeedBeforeStop)
-		{
-			m_speed.x = 0;
-			m_acceleration.x = 0;
-		}
-		//slow
-		else m_acceleration.x = -m_speed.x * speedSlowDown;
-	}
 }
 
 void WalkingZombie::wallLeft()
