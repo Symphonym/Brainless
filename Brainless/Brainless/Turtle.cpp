@@ -105,7 +105,7 @@ void Turtle::onGameStart()
 		}
 	}
 
-	if (direction->next != nullptr)
+	while (direction->next != nullptr)
 	{
 		Directions* del;
 		del = direction;
@@ -170,6 +170,14 @@ void Turtle::update(float deltaTime)
 
 		if (time > 0.1f)
 		{
+			if (direction->next != nullptr)
+			{
+				Directions* del;
+				del = direction;
+				direction = direction->next;
+				delete(del);
+			}
+
 			time -= 0.1f;
 			int x = 0;
 			int y = 0;
@@ -270,14 +278,6 @@ void Turtle::update(float deltaTime)
 			else if (direction->dirr == right)
 			{
 				head->sprite.setRotation(90);
-			}
-
-			if (direction->next != nullptr)
-			{
-				Directions* del;
-				del = direction;
-				direction = direction->next;
-				delete(del);
 			}
 			
 		}
