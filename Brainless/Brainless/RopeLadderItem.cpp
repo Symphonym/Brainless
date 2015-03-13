@@ -85,7 +85,7 @@ void RopeLadderItem::refreshStatus()
 {
 	if (m_ladderIsDown)
 	{
-		m_interactDistance = sf::Vector2f(100, m_ladder.getSprite().getGlobalBounds().height / 2 + 280.f);
+		m_interactDistance = sf::Vector2f(70, m_ladder.getSprite().getGlobalBounds().height / 2 + 280.f);
 		m_examineString = "Rickety thing... Must. Climb.";
 		m_usable = true;
 		m_interactBounds = sf::FloatRect(0, 0,

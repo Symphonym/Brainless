@@ -12,7 +12,7 @@ m_ladder(ladderTexture, id)
 	m_usable = true;
 	m_examineString = "Manhole, man-hole, a hole for men... Think I'm still allowed to climb through?";
 
-	m_interactDistance = sf::Vector2f(100, 200);
+	m_interactDistance = sf::Vector2f(70, 200);
 
 	// Refresh ladder position
 	setPosition(getPosition());
@@ -80,14 +80,14 @@ void ManholeItem::refreshTexture()
 	if (m_open)
 	{
 		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("ManholeOpen"));
-		m_interactDistance = sf::Vector2f(100, m_ladder.getSprite().getGlobalBounds().height / 2 + 180.f);
+		m_interactDistance = sf::Vector2f(70, m_ladder.getSprite().getGlobalBounds().height / 2 + 180.f);
 		m_interactBounds = sf::FloatRect(0, 0,
 			getSprite().getGlobalBounds().width,
 			getSprite().getGlobalBounds().height + m_ladder.getSprite().getGlobalBounds().height);
 	}
 	else
 	{
-		m_interactDistance = sf::Vector2f(100, 200);
+		m_interactDistance = sf::Vector2f(70, 200);
 		m_interactBounds = sf::FloatRect(0, 0,
 			getSprite().getGlobalBounds().width,
 			getSprite().getGlobalBounds().height);

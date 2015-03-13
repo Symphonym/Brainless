@@ -15,7 +15,8 @@ bool BrainItem::onInteractUnit(Unit &unit)
 
 	return unit.getUnitType() != unit.ID_Player
 		&& unit.getUnitType() != unit.ID_CabinetZombie 
-		&& unit.getUnitType() != unit.ID_ItemZombie;
+		&& unit.getUnitType() != unit.ID_ItemZombie
+		&& unit.getUnitType() != unit.ID_NONE;
 }
 
 Item* BrainItem::clone()

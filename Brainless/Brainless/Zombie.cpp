@@ -22,7 +22,7 @@ void Zombie::setDamaging(bool damaging)
 
 bool Zombie::onInteractedWith(Item &otherItem, Game &game)
 {
-	if (otherItem.getName() == "Brain")
+	if (otherItem.getName() == "Brain" && m_isDamaging)
 	{
 		for (size_t i = 0; i < game.getLevel().getItems().size(); i++)
 		{
@@ -34,7 +34,9 @@ bool Zombie::onInteractedWith(Item &otherItem, Game &game)
 
 		flash(game.getPlayer().getCameraPosition());
 		game.addSavedZombie(1);
-		return true;
+		m_isDamaging = false;
+		m_UnitID = ID_NONE; //kan bli fel vid save, en bara testa nu så inte hjärnan försvinner.
+		return false;
 	}
 	return false;
 }

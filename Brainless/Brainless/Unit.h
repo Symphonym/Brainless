@@ -22,7 +22,7 @@ public:
 		ID_ChasingZombie,
 		ID_NONE,
 		ID_ScriptZombie,
-	
+		
 		//scripted
 		ID_CabinetZombie,
 		ID_ItemZombie
