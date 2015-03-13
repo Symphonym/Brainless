@@ -50,7 +50,9 @@ void WalkingZombie::deserialize(std::ifstream &reader)
 
 	reader >> m_textureId;
 	m_animState = anim_noAnimation;
-	animation_walking();
+	if (m_isDamaging)
+		animation_walking();
+	else animation_idle();
 
 	int animType = 0;
 	reader >> animType;

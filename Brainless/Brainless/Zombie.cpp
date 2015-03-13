@@ -7,9 +7,9 @@ Zombie::Zombie(sf::Vector2f startPosition, sf::Vector2f size, sf::Vector2f maxSp
 :
 m_textureId(Texture),
 Unit(startPosition, size, maxSpeed, spriteOffset, ID, syncID),
-m_isDamaging(true),
 m_animState(anim_noAnimation)
 {
+	m_isDamaging = true;
 	addTexture(ResourceLoader::instance().retrieveTexture("Zombie"));
 	addTexture(ResourceLoader::instance().retrieveTexture("Zombie2"));
 }
@@ -35,7 +35,7 @@ bool Zombie::onInteractedWith(Item &otherItem, Game &game)
 		flash(game.getPlayer().getCameraPosition());
 		game.addSavedZombie(1);
 		m_isDamaging = false;
-		m_UnitID = ID_NONE; //kan bli fel vid save, en bara testa nu så inte hjärnan försvinner.
+		animation_idle();
 		return false;
 	}
 	return false;

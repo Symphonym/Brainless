@@ -141,6 +141,9 @@ protected:
 
 	UnitType m_UnitID;
 	int m_syncID;
+
+	//egentligen zombie osv...
+	bool m_isDamaging = false;
 private:
 	float m_flashAlpha;
 };

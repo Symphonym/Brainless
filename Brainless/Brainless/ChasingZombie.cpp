@@ -23,7 +23,7 @@ m_target(s_playerPointer),
 m_chaseState(chase_idle),
 m_homePosition(startPosition)
 {
-	//animation_idleSlow();
+	animation_idle();
 }
 
 

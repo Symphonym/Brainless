@@ -129,16 +129,12 @@ void ScriptedZombie::serialize(std::ofstream &writer) const
 	writer << static_cast<int>(m_UnitID) << std::endl;
 
 	writer << m_scriptID << std::endl;
-	writer << "komsikomsi" << std::endl;
 	m_baseZombie->serialize(writer); 
 }
 void ScriptedZombie::deserialize(std::ifstream &reader)
 { 
 	
 	reader >> m_scriptID;
-	
-	std::string a;
-	reader >> a;
 
 	int type;
 	UnitType unitType;

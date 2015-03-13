@@ -92,6 +92,7 @@ void Unit::serialize(std::ofstream &writer) const
 	writer << m_inAir << std::endl;
 	writer << m_inTilt << std::endl;
 	writer << m_syncID << std::endl;
+	writer << m_isDamaging << std::endl;
 
 	writer << static_cast<int>(m_spriteDirection) << std::endl;
 	writer << static_cast<int>(m_renderingMode) << std::endl;
@@ -108,6 +109,7 @@ void Unit::deserialize(std::ifstream &reader)
 	reader >> m_inAir;
 	reader >> m_inTilt;
 	reader >> m_syncID;
+	reader >> m_isDamaging;
 
 	int directionType = 0;
 	reader >> directionType;

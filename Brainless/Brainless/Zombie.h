@@ -38,7 +38,6 @@ protected:
 	void animation_walking();
 	void animation_idleSlow();
 	void animation_walkingSlow();
-	bool m_isDamaging;
 private:
 };
 
