@@ -5,6 +5,7 @@
 #include "Utility.h"
 #include "SoundPlayer.h"
 #include "OptionsMenu.h"
+#include <iostream>
 //plz no hate on uggly code, much lazy, very kappa
 
 Object::Object(stuffType _type, int _x, int _y)
@@ -117,6 +118,7 @@ void Turtle::onGameStart()
 	head = new Object(turtle, 5, 9);
 	head->before = nullptr;
 	head->next = nullptr;
+	tail = head;
 	map[5][9] = head;
 	map[5][2] = new Object(frie, 5, 2);
 
@@ -130,6 +132,173 @@ void Turtle::update(float deltaTime)
 
 	if (!isDead)
 	{
+		/* super ai for debug */
+		/*if (head->x == 9 && head->y == 0)
+		{
+			if (direction_tail->dirr != up && direction_tail->dirr != down)
+			{
+				direction_tail->next = new Directions(down, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 9 && head->y == 2)
+		{
+			if (direction_tail->dirr != up && direction_tail->dirr != down)
+			{
+				direction_tail->next = new Directions(down, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 9 && head->y == 4)
+		{
+			if (direction_tail->dirr != up && direction_tail->dirr != down)
+			{
+				direction_tail->next = new Directions(down, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 9 && head->y == 6)
+		{
+			if (direction_tail->dirr != up && direction_tail->dirr != down)
+			{
+				direction_tail->next = new Directions(down, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 9 && head->y == 8)
+		{
+			if (direction_tail->dirr != up && direction_tail->dirr != down)
+			{
+				direction_tail->next = new Directions(down, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+
+		if (head->x == 1 && head->y == 1)
+		{
+			if (direction_tail->dirr != up && direction_tail->dirr != down)
+			{
+				direction_tail->next = new Directions(down, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 1 && head->y == 3)
+		{
+			if (direction_tail->dirr != up && direction_tail->dirr != down)
+			{
+				direction_tail->next = new Directions(down, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 1 && head->y == 5)
+		{
+			if (direction_tail->dirr != up && direction_tail->dirr != down)
+			{
+				direction_tail->next = new Directions(down, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 1 && head->y == 7)
+		{
+			if (direction_tail->dirr != up && direction_tail->dirr != down)
+			{
+				direction_tail->next = new Directions(down, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+
+		else if (head->x == 0 && head->y == 9)
+		{
+			if (direction_tail->dirr != up && direction_tail->dirr != down)
+			{
+				direction_tail->next = new Directions(up, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+
+
+		else if (head->x == 9 && head->y == 1)
+		{
+			if (direction_tail->dirr != right  && direction_tail->dirr != left)
+			{
+				direction_tail->next = new Directions(left, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 9 && head->y == 3)
+		{
+			if (direction_tail->dirr != right  && direction_tail->dirr != left)
+			{
+				direction_tail->next = new Directions(left, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 9 && head->y == 5)
+		{
+			if (direction_tail->dirr != right  && direction_tail->dirr != left)
+			{
+				direction_tail->next = new Directions(left, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 9 && head->y == 7)
+		{
+			if (direction_tail->dirr != right  && direction_tail->dirr != left)
+			{
+				direction_tail->next = new Directions(left, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 9 && head->y == 9)
+		{
+			if (direction_tail->dirr != right  && direction_tail->dirr != left)
+			{
+				direction_tail->next = new Directions(left, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+
+		else if (head->x == 0 && head->y == 0)
+		{
+			if (direction_tail->dirr != right  && direction_tail->dirr != left)
+			{
+				direction_tail->next = new Directions(right, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 1 && head->y == 2)
+		{
+			if (direction_tail->dirr != right  && direction_tail->dirr != left)
+			{
+				direction_tail->next = new Directions(right, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 1 && head->y == 4)
+		{
+			if (direction_tail->dirr != right  && direction_tail->dirr != left)
+			{
+				direction_tail->next = new Directions(right, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 1 && head->y == 6)
+		{
+			if (direction_tail->dirr != right  && direction_tail->dirr != left)
+			{
+				direction_tail->next = new Directions(right, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}
+		else if (head->x == 1 && head->y == 8)
+		{
+			if (direction_tail->dirr != right  && direction_tail->dirr != left)
+			{
+				direction_tail->next = new Directions(right, nullptr);
+				direction_tail = direction_tail->next;
+			}
+		}*/
+
 		if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Up")))
 		{
 			if (direction_tail->dirr != down  && direction_tail->dirr != up)
@@ -145,7 +314,6 @@ void Turtle::update(float deltaTime)
 				direction_tail->next = new Directions(down, nullptr);
 				direction_tail = direction_tail->next;
 			}
-
 		}
 
 		else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Left")))
@@ -155,7 +323,6 @@ void Turtle::update(float deltaTime)
 				direction_tail->next = new Directions(left, nullptr);
 				direction_tail = direction_tail->next;
 			}
-
 		}
 
 		else if (sf::Keyboard::isKeyPressed(OptionsMenu::getKeybind("Right")))
@@ -165,7 +332,6 @@ void Turtle::update(float deltaTime)
 				direction_tail->next = new Directions(right, nullptr);
 				direction_tail = direction_tail->next;
 			}
-
 		}
 
 		if (time > 0.1f)
@@ -210,11 +376,7 @@ void Turtle::update(float deltaTime)
 			}
 			else if (map[newPosX][newPosY] == nullptr)
 			{
-				Object* ptr = head;
-				while (ptr->next != nullptr)
-				{
-					ptr = ptr->next;
-				}
+				Object* ptr = tail;
 				if (ptr->before != nullptr)ptr->before->next = nullptr;
 				map[ptr->x][ptr->y] = nullptr;
 				ptr->x = newPosX;
@@ -222,6 +384,7 @@ void Turtle::update(float deltaTime)
 				map[newPosX][newPosY] = ptr;
 				if (ptr != head)
 				{
+					tail = ptr->before;
 					ptr->before = nullptr;
 					ptr->next = head;
 					head->before = ptr;
@@ -280,11 +443,19 @@ void Turtle::update(float deltaTime)
 				head->sprite.setRotation(90);
 			}
 			
+			
+			for (int i = 0; i < 10; i++)
+			{
+				for (int j = 0; j < 10; j++)
+				{
+					if (map[i][j] == nullptr);
+					else
+						map[i][j]->sprite.setTextureRect(map[i][j]->animation.getRectangle(deltaTime));
+				}
+			}
+			scoreText.setString("Score: " + std::to_string(score));
 		}
-		
-		scoreText.setString("Score: " + std::to_string(score));
 	}
-	
 	else
 	{
 		scoreText.setPosition(screenPos.x + 180, screenPos.y + 320);
@@ -292,15 +463,6 @@ void Turtle::update(float deltaTime)
 		infoShowing = false;
 	}
 	
-	for (int i = 0; i < 10; i++)
-	{
-		for (int j = 0; j < 10; j++)
-		{
-			if (map[i][j] == nullptr);
-			else
-				map[i][j]->sprite.setTextureRect(map[i][j]->animation.getRectangle(deltaTime));
-		}
-	}
 }
 
 void Turtle::draw()

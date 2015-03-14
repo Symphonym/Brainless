@@ -58,6 +58,7 @@ private:
 	Directions* direction;
 	Directions* direction_tail;
 	Object* head;
+	Object* tail;
 	//stuffPtr head;
 
 	sf::Sprite background;
