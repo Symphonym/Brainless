@@ -447,6 +447,9 @@
     <ClCompile Include="LeverSideItem.cpp">
       <Filter>Source Files\Game\Items\Lockable</Filter>
     </ClCompile>
+    <ClCompile Include="WindowOverlayItem.cpp">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -784,6 +787,9 @@
     </ClInclude>
     <ClInclude Include="LeverSideItem.h">
       <Filter>Source Files\Game\Items\Lockable</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowOverlayItem.h">
+      <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -214,6 +214,7 @@
     <ClCompile Include="VendingMachineItem.cpp" />
     <ClCompile Include="WalkingZombie.cpp" />
     <ClCompile Include="WindowItem.cpp" />
+    <ClCompile Include="WindowOverlayItem.cpp" />
     <ClCompile Include="WorldButton.cpp" />
     <ClCompile Include="WrappedText.cpp" />
     <ClCompile Include="Zombie.cpp" />
@@ -328,6 +329,7 @@
     <ClInclude Include="VendingMachineItem.h" />
     <ClInclude Include="WalkingZombie.h" />
     <ClInclude Include="WindowItem.h" />
+    <ClInclude Include="WindowOverlayItem.h" />
     <ClInclude Include="WorldButton.h" />
     <ClInclude Include="WrappedText.h" />
     <ClInclude Include="Zombie.h" />

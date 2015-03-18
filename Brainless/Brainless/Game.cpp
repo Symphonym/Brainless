@@ -177,7 +177,7 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 		return;
 
 	// TODO REMOVE THIS PLACEHOLDER CODE THAT ENDS GAME WHEN LOADING LEVEL 4
-	if (levelIndex >= 3)
+	if (levelIndex >= 4)
 	{
 		m_machine.popState();
 		m_machine.pushState<Credits>();
