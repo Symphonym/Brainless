@@ -9,6 +9,8 @@ public:
 
 	RubberGlovesItem(int id);
 
+	//virtual bool onInteract(Item &otherItem, Game &game);
+
 	virtual Item* clone();
 };
 

@@ -14,3 +14,15 @@ Item* RubberGlovesItem::clone()
 {
 	return new RubberGlovesItem(*this);
 }
+
+//bool RubberGlovesItem::onInteract(Item &otherItem, Game &game)
+//{
+//	// A key is consumed if it can be used
+//	if (otherItem.getName() == "Eletrical Puddle")
+//	{
+//		if (otherItem. cancollide)
+//		return true;
+//	}
+//	else
+//		return false;
+//}
