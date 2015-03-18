@@ -14,6 +14,7 @@
 #include "CoinTwineItem.h"
 #include "KeyTwineItem.h"
 #include "WindowItem.h"
+#include "WindowOverlayItem.h"
 #include "StoneItem.h"
 #include "LighterItem.h"
 #include "ScissorLift.h"
@@ -130,6 +131,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new Lamp(49)));
 	addItem(ItemPtr(new StartDialougeItem(50)));
 	addItem(ItemPtr(new SpiritFeatherSpawnItem(53)));
+	addItem(ItemPtr(new WindowOverlayItem(56)));
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)
