@@ -1,6 +1,7 @@
 #include "DoorItem.h"
 #include "ResourceLoader.h"
 #include "Renderer.h"
+#include "Notification.h"
 
 DoorItem::DoorItem(bool locked, int id)
 :
@@ -20,6 +21,10 @@ bool DoorItem::onInteractedWith(Item &otherItem, Game &game)
 	{
 		m_isLocked = false;
 		SoundPlayer::instance().playSound("item_door",getPosition());
+	}
+	else if (m_isLocked && otherItem.getName() == "Key")
+	{
+		Notification::instance().write("The key doesn't seem to fit.");
 	}
 	// The door will not get destroyed
 	return false;

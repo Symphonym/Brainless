@@ -1,6 +1,7 @@
 #include "RemoveCabinetZombie.h"
 #include "ItemDatabase.h"
 #include "ConversationBox.h"
+#include "Game.h"
 
 #define MAX_SPEED_X (float) 200
 #define MAX_SPEED_Y (float) 200

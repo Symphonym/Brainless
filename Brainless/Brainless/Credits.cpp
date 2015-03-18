@@ -81,6 +81,8 @@ State(machine)
 	pushCreditsParagraph("Rasmus Andersparr");
 	pushCreditsParagraph("Gustaf Yngstrom");
 
+	pushCreditsParagraph("GDD Writer", 100);
+	pushCreditsParagraph("Linnea Thimrén");
 	resetCreditsPosition();
 
 	m_creditsBG.setTexture(ResourceLoader::instance().retrieveTexture("CreditsBG"));

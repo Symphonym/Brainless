@@ -1,6 +1,5 @@
 #ifndef INCLUDED_DOOR_ITEM_H
 #define INCLUDED_DOOR_ITEM_H
-
 #include "Item.h"
 
 class DoorItem : public Item
@@ -25,7 +24,6 @@ public:
 	virtual Item* clone();
 
 private:
-
 	bool m_isOpen;
 	bool m_isLocked;
 

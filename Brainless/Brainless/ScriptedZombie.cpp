@@ -8,7 +8,7 @@
 #include "Level.h"
 #include "RemoveCabinetZombie.h"
 #include "DropItemZombie.h"
-#include <iostream>
+#include "game.h"
 
 ScriptedZombie::ScriptedZombie(Zombie* baseZombie, int scriptID)
 :

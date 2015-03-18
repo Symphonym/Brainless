@@ -2,7 +2,6 @@
 #define _DROPITEM_ZOMBIE
 #include "Zombie.h"
 #include "DialogTree.h"
-#include "Game.h"
 #include "Level.h"
 
 class DropItemZombie : public Zombie

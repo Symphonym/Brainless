@@ -2,7 +2,6 @@
 #define _REMOVECABINET_ZOMBIE
 #include "Zombie.h"
 #include "DialogTree.h"
-#include "Game.h"
 
 class RemoveCabinetZombie : public Zombie
 {
