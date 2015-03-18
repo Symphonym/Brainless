@@ -46,12 +46,10 @@ void ChasingZombie::deserialize(std::ifstream &reader)
 	Unit::deserialize(reader);
 
 	reader >> m_textureId;
+	m_animState = anim_noAnimation;
+	animation_idle();
 
 	reader >> m_homePosition.x >> m_homePosition.y;
-
-	//int animType = 0;
-	//reader >> animType;
-	//m_animState = static_cast<AnimationState>(animType); //kan bli texture 0 vid idle -> idle, ingen animation byts fixa lite senare
 
 	reader >> m_maxWalkLenght;
 	reader >> m_currentLength;
