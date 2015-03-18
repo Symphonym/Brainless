@@ -176,7 +176,7 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 	if (levelIndex < 0)
 		return;
 
-	// TODO REMOVE THIS PLACEHOLDER CODE THAT ENDS GAME WHEN LOADING LEVEL 4
+	// TODO REMOVE THIS PLACEHOLDER CODE THAT ENDS GAME WHEN LOADING LEVEL 5
 	if (levelIndex >= 4)
 	{
 		m_machine.popState();
@@ -220,6 +220,15 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 	if (player_location == sf::Vector2f(-60, -60))
 	{
 		player_location = m_level.getSpawnPos();
+	}
+	else
+	{
+		int temp_y = Constants::MapHeight - 1;
+		while (m_level.getTileMap().getTile(floor(player_location.x / Constants::TileSize), temp_y).getType() != Tile::Nothing)
+		{
+			temp_y--;
+		}
+		player_location.y = (temp_y-1)*Constants::TileSize;
 	}
 	// Add player to level
 	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(player_location))));
@@ -399,9 +408,9 @@ void Game::update(float deltaTime)
 	}
 	//if player is outside room
 	if (m_player->getPosition().x > (Constants::MapWidth - 1)*Constants::TileSize && !m_levelTransition->getActive())
-		changeLevelTransition(m_levelIndex + 1, false);
+		changeLevelTransition(m_levelIndex + 1, true);
 	if (m_player->getPosition().x < Constants::TileSize*0.5 && !m_levelTransition->getActive())
-		changeLevelTransition(m_levelIndex - 1, false);
+		changeLevelTransition(m_levelIndex - 1, true);
 	if (m_player->getPosition().y >(Constants::MapHeight - 1)*Constants::TileSize && !m_levelTransition->getActive())
 	{
 		SoundPlayer::instance().playSound("DeathSound", m_player->getPosition());
