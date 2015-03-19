@@ -19,11 +19,11 @@ public:
 private:
 
 	int m_currentIndex;
-	//bool m_fadingIn;
-	float m_curFade, m_maxFade;
-	std::vector<sf::Text> m_introTexts;
+	float m_curFade;
+	std::vector<std::pair<sf::Text, float> > m_introTexts;
 
-	void pushIntroText(const std::string &text);
+	// Half of the time is used for fade in, half for fade out
+	void pushIntroText(const std::string &text, float duration);
 
 };
 

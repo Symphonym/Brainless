@@ -3,12 +3,14 @@
 #include "State.h"
 #include "Cursor.h"
 #include "ResourceLoader.h"
+#include "SoundPlayer.h"
 
 StateMachine::StateMachine()
 :
-m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close),
+m_savedVolume(100.f),
 m_loadingAnim(256, 256),
-m_loadingAnimDot(256, 256)
+m_loadingAnimDot(256, 256),
+m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 {
 	Renderer::instance().setTarget(m_window);
 
@@ -145,28 +147,28 @@ void StateMachine::loop()
 		{
 			if (event.type == sf::Event::Closed)
 				m_window.close();
+			else if (event.type == sf::Event::GainedFocus)
+				SoundPlayer::instance().setVolume(m_savedVolume);
+			else if (event.type == sf::Event::LostFocus)
+			{
+				m_savedVolume = SoundPlayer::instance().getVolume();
+				SoundPlayer::instance().setVolume(0);
+			}
 
-			// Only top state gets events
-			if (!m_states.empty())
+			// Only top state gets events, if window has focus
+			if (m_window.hasFocus() && !m_states.empty())
 				thisState->events(event);
 		}
 
-		// Only top state gets updates
-		if (!m_states.empty())
+		// Only top state gets updates, if window has focus
+		if (m_window.hasFocus() && !m_states.empty())
 			thisState->update(deltaTime);
 
 		// Update cursor regardless of state
 		Cursor::instance().update(m_window);
-
-		if (m_window.hasFocus())
-		{
-			m_window.setActive(true);
-			m_window.clear();
-			draw();
-			m_window.display();
-		}
-		else
-			m_window.setActive(false);
+		m_window.clear();
+		draw();
+		m_window.display();
 	}
 }
 

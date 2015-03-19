@@ -55,6 +55,12 @@ void PauseMenu::giveGame(Game &game)
 	m_game = &game;
 }
 
+void PauseMenu::events(const sf::Event &event)
+{
+	// Resume by pressing escape
+	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Escape)
+		m_machine.popState();
+}
 void PauseMenu::update(float deltaTime)
 {
 	// Resume

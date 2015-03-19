@@ -136,7 +136,7 @@ void ArcadeMachine::events(const sf::Event &event)
 		else
 		{
 			// Exit machine
-			if (event.key.code == OptionsMenu::getKeybind("Left"))
+			if (event.key.code == OptionsMenu::getKeybind("Left") || event.key.code == sf::Keyboard::Escape)
 			{
 				SoundPlayer::instance().killAllSounds();
 				ResourceLoader::instance().unloadResourceFile("loadfiles/ResourceLoad_ArcadeMachine.txt", false);

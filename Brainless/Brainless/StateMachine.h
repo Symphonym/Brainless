@@ -37,6 +37,8 @@ public:
 
 private:
 
+	float m_savedVolume;
+
 	Animation m_loadingAnim;
 	Animation m_loadingAnimDot;
 

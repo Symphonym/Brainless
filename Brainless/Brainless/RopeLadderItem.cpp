@@ -10,7 +10,6 @@ m_ladderIsDown(false)
 {
 	m_lootable = false;
 	refreshStatus();
-	m_examineString = "Rickety thing... Must. Climb.";
 	m_useString = "I can't reach that from here";
 }
 

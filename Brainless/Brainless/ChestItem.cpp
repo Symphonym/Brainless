@@ -26,7 +26,7 @@ void ChestItem::onUse(Game &game)
 		{
 			getSprite().setTexture(ResourceLoader::instance().retrieveTexture("ChestOpen"));
 
-			sf::Vector2f floorPosition(getPosition().x + getSprite().getGlobalBounds().width/2, getPosition().y + getSprite().getGlobalBounds().height);
+			sf::Vector2f floorPosition(getPosition().x + getInteractBounds().width / 2, getPosition().y + getInteractBounds().height);
 
 			// Spawn items when chest is opened
 			for (std::size_t i = 0; i < m_itemsWithin.size(); i++)
@@ -39,7 +39,7 @@ void ChestItem::onUse(Game &game)
 				if (!item->isLootable())
 					continue;
 
-				item->setPosition(sf::Vector2f(floorPosition.x, floorPosition.y - item->getSprite().getGlobalBounds().height));
+				item->setPosition(sf::Vector2f(floorPosition.x, floorPosition.y - item->getInteractBounds().height - Constants::TopTileOffset));
 
 				int offset = i * 60;
 

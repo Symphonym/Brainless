@@ -13,6 +13,7 @@ public:
 
 	PauseMenu(StateMachine &machine);
 
+	virtual void events(const sf::Event &event);
 	virtual void update(float deltaTime);
 	virtual void draw();
 
