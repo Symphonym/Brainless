@@ -6,7 +6,7 @@ class FlatDoorItem : public Item
 {
 public:
 
-	FlatDoorItem(bool locked, int id);
+	FlatDoorItem(bool locked, int levelIndex, int id);
 
 	// To handle unlocking of the door, if it is locked
 	virtual bool onInteractedWith(Item &otherItem, Game &game);
@@ -23,7 +23,7 @@ public:
 	virtual Item* clone();
 
 private:
-	bool m_isOpen;
+	int m_levelIndex;
 	bool m_isLocked;
 
 };
