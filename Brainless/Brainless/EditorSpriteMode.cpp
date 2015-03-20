@@ -140,4 +140,7 @@ void EditorSpriteMode::initializeSprites()
 	addTexture("Bottom_Tree");
 	addTexture("WoodRoom");
 	addTexture("WindowBack");
+	addTexture("FenceSprite");
+	addTexture("House0");
+	addTexture("House1");
 }

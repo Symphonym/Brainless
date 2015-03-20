@@ -63,6 +63,11 @@
 +Texture,images/sprites/Crate.png,Crate
 +Texture,images/sprites/WoodRoom.png,WoodRoom
 +Texture,images/sprites/WindowBack.png,WindowBack
++Texture,images/sprites/WindowBack.png,WindowBack
++Texture,images/sprites/Fence.png,FenceSprite
++Texture,images/sprites/Houses/House0.png,House0
++Texture,images/sprites/Houses/House1.png,House1
+
 #---Road---
 # /TopRight
 +Texture,images/tiles/Road/TopRight/Road_Top_Right.png,Road_Top_Right
