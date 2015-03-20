@@ -63,6 +63,11 @@
 +Texture,images/sprites/Crate.png,Crate
 +Texture,images/sprites/WoodRoom.png,WoodRoom
 +Texture,images/sprites/WindowBack.png,WindowBack
++Texture,images/sprites/WindowBack.png,WindowBack
++Texture,images/sprites/Fence.png,FenceSprite
++Texture,images/sprites/Houses/House0.png,House0
++Texture,images/sprites/Houses/House1.png,House1
+
 #---Road---
 # /TopRight
 +Texture,images/tiles/Road/TopRight/Road_Top_Right.png,Road_Top_Right
@@ -492,6 +497,9 @@
 +Texture,images/items/doors/wood-doorClosed.png,DoorClosed
 +Texture,images/items/doors/Steel-doorOpen.png,SteelDoorOpen
 +Texture,images/items/doors/Steel-doorClosed.png,SteelDoorClosed
++Texture,images/items/doors/wood-FlatOpen.png,FlatOpen
++Texture,images/items/doors/wood-FlatClosed.png,FlatClosed
+
 +Texture,images/items/Small-Key.png,KeyTest
 +Texture,images/items/locks/LeverDown.png,LeverDown
 +Texture,images/items/locks/LeverUp.png,LeverUp

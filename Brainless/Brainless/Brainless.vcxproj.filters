@@ -453,6 +453,9 @@
     <ClCompile Include="SteelDoor.cpp">
       <Filter>Source Files\Game\Items\Lockable</Filter>
     </ClCompile>
+    <ClCompile Include="FlatDoorItem.cpp">
+      <Filter>Source Files\Game\Items\Lockable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -795,6 +798,9 @@
       <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClInclude>
     <ClInclude Include="SteelDoor.h">
+      <Filter>Source Files\Game\Items\Lockable</Filter>
+    </ClInclude>
+    <ClInclude Include="FlatDoorItem.h">
       <Filter>Source Files\Game\Items\Lockable</Filter>
     </ClInclude>
   </ItemGroup>
