@@ -177,6 +177,7 @@
     <ClCompile Include="SpiritFeatherSpawnItem.cpp" />
     <ClCompile Include="StartDialougeItem.cpp" />
     <ClCompile Include="StartProgramIntro.cpp" />
+    <ClCompile Include="SteelDoor.cpp" />
     <ClCompile Include="StuffedPaperBagItem.cpp" />
     <ClCompile Include="Turtle.cpp" />
     <ClCompile Include="SpiritBar.cpp" />
@@ -260,6 +261,7 @@
     <ClInclude Include="SpiritFeatherSpawnItem.h" />
     <ClInclude Include="StartDialougeItem.h" />
     <ClInclude Include="StartProgramIntro.h" />
+    <ClInclude Include="SteelDoor.h" />
     <ClInclude Include="StuffedPaperBagItem.h" />
     <ClInclude Include="DialogTree.h" />
     <ClInclude Include="DoorItem.h" />

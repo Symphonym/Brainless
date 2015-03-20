@@ -136,7 +136,7 @@ m_player(nullptr)
 	}
 
 	// TEST CODE FOR LOADING DEFAULT LEVEL
-	changeLevel(FileSave::findHighestSavedLevelIndex(), false);
+	changeLevel(-1, false);
 }
 Game::~Game()
 {
@@ -173,78 +173,93 @@ void Game::lootItem(Inventory::ItemPtr item)
 
 void Game::changeLevel(int levelIndex, bool swapPosition)
 {
-	if (levelIndex < 0)
-		return;
-
-	// TODO REMOVE THIS PLACEHOLDER CODE THAT ENDS GAME WHEN LOADING LEVEL 5
-	if (levelIndex >= 4)
+	if (levelIndex == -1)
 	{
-		m_machine.popState();
-		m_machine.pushState<Credits>();
-		return;
+		std::ifstream reader("save/game.txt"); 
+		if (reader.is_open())
+		{
+			reader >> levelIndex;
+		}
+		else
+		{
+			levelIndex = 0;
+		}
+		reader.close();
 	}
+		if (levelIndex < 0)
+			return;
 
-	sf::Vector2f player_location(-60, -60);
-	// Remeber old player location
-	if (swapPosition && m_player != nullptr)
-	{
-		//Swap sides
-		player_location = m_player->getPosition();
-		player_location.x = Utility::clampValue<float>((Constants::MapWidth)*Constants::TileSize - (player_location.x), Constants::TileSize, (Constants::MapWidth - 1)*Constants::TileSize);
-	}
+		// TODO REMOVE THIS PLACEHOLDER CODE THAT ENDS GAME WHEN LOADING LEVEL 5
+		if (levelIndex >= 4)
+		{
+			m_machine.popState();
+			m_machine.pushState<Credits>();
+			return;
+		}
 
-	// Auto save level before changing level
-	if (m_player != nullptr) // If this is a level change from a menu, the player won't already exist
+
+
+		sf::Vector2f player_location(-60, -60);
+		// Remeber old player location
+		if (swapPosition && m_player != nullptr)
+		{
+			//Swap sides
+			player_location = m_player->getPosition();
+			player_location.x = Utility::clampValue<float>((Constants::MapWidth)*Constants::TileSize - (player_location.x), Constants::TileSize, (Constants::MapWidth - 1)*Constants::TileSize);
+		}
+
+		// Auto save level before changing level
+		if (m_player != nullptr) // If this is a level change from a menu, the player won't already exist
+			saveGame();
+
+		// Stop previous level music if there is any
+		SoundPlayer::instance().stopMusic(m_level.getLevelMusicName());
+
+		// Reset level
+		m_level.reset();
+		m_levelIndex = levelIndex;
+
+		//Load level resources 
+		m_level.loadLevelResources("loadfiles/ResourceLoad_Level" + std::to_string(m_levelIndex) + ".txt");
+
+		// Reload level
+		FileSave::loadMapText(m_level, m_levelIndex); // All tiles are cleared in here
+		FileSave::loadLevelProgress(m_level, m_levelIndex); // All units are cleared from level here
+		FileSave::loadInventory(*m_inventory);
+
+		if (m_level.getLevelMusicName() != Constants::NoMusicProvidedString)
+			SoundPlayer::instance().playMusic(m_level.getLevelMusicName(), true, 20);
+
+
+		//Set player to start position
+		if (player_location == sf::Vector2f(-60, -60))
+		{
+			player_location = m_level.getSpawnPos();
+		}
+		else
+		{
+			int temp_y = Constants::MapHeight - 1;
+			while (m_level.getTileMap().getTile(floor(player_location.x / Constants::TileSize), temp_y).getType() != Tile::Nothing)
+			{
+				temp_y--;
+			}
+			player_location.y = (temp_y - 1)*Constants::TileSize;
+		}
+		// Add player to level
+		m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(player_location))));
+		FileSave::loadGameData(*this); // Load core game data for player
+		
+		if (m_player->getHealth() == -99) //If the player died reset their hp
+		{
+			m_player->setHealth(m_player->getMaxHealth());
+		}
+		// Auto save when loading a new level
 		saveGame();
 
-	// Stop previous level music if there is any
-	SoundPlayer::instance().stopMusic(m_level.getLevelMusicName());
-
-	// Reset level
-	m_level.reset();
-	m_levelIndex = levelIndex;
-	
-	//Load level resources 
-	m_level.loadLevelResources("loadfiles/ResourceLoad_Level" + std::to_string(m_levelIndex) + ".txt");
-
-	// Reload level
-	FileSave::loadMapText(m_level, m_levelIndex); // All tiles are cleared in here
-	FileSave::loadLevelProgress(m_level, m_levelIndex); // All units are cleared from level here
-	FileSave::loadInventory(*m_inventory);
-
-	if (m_level.getLevelMusicName() != Constants::NoMusicProvidedString)
-		SoundPlayer::instance().playMusic(m_level.getLevelMusicName(), true, 20);
-	
-
-	//Set player to start position
-	if (player_location == sf::Vector2f(-60, -60))
-	{
-		player_location = m_level.getSpawnPos();
-	}
-	else
-	{
-		int temp_y = Constants::MapHeight - 1;
-		while (m_level.getTileMap().getTile(floor(player_location.x / Constants::TileSize), temp_y).getType() != Tile::Nothing)
-		{
-			temp_y--;
-		}
-		player_location.y = (temp_y-1)*Constants::TileSize;
-	}
-	// Add player to level
-	m_player = static_cast<Player*>(m_level.addUnit(Level::UnitPtr(new Player(player_location))));
-	FileSave::loadGameData(*this); // Load core game data for player
-	if (m_player->getHealth() == -99) //If the player died reset their hp
-	{
-		m_player->setHealth(m_player->getMaxHealth());
-	}
-	// Auto save when loading a new level
-	saveGame();
-
-	//temp, texture borde laddas in på annat sätt.
-	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
-	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
-	m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJumpRun"));
-
+		//temp, texture borde laddas in på annat sätt.
+		m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheet"));
+		m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJump"));
+		m_player->addTexture(ResourceLoader::instance().retrieveTexture("PlayerSheetJumpRun"));
 	
 }
 void Game::changeLevelTransition(int levelIndex, bool swapPosition)
@@ -274,6 +289,10 @@ Player& Game::getPlayer()
 Level& Game::getLevel()
 {
 	return m_level;
+}
+int Game::getLevelIndex()
+{
+	return m_levelIndex;
 }
 SpiritBar& Game::getSpiritBar()
 {

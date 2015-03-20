@@ -445,6 +445,7 @@ void FileSave::saveGameData(Game &game)
 {
 	std::ofstream writer("save/game.txt");
 
+	writer << game.getLevelIndex() << std::endl;
 	writer << game.getSavedZombieCount() << std::endl;
 	writer << game.getSpiritBar().getValue() << std::endl;
 	writer << game.getSpiritBar().getMaxValue() << std::endl;
@@ -454,10 +455,16 @@ void FileSave::saveGameData(Game &game)
 }
 void FileSave::loadGameData(Game &game)
 {
+	//OBS denna är nu hårdkodat så att game.changeLevel() har laddat första raden redan.
+
 	std::ifstream reader("save/game.txt");
 
 	if (reader.is_open())
 	{
+		//read current level
+		int a;
+		reader >> a;
+
 		game.clearSavedZombies();
 
 		int savedZombieCount = 0;

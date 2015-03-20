@@ -51,6 +51,7 @@ public:
 
 	Player& getPlayer();
 	Level& getLevel();
+	int getLevelIndex();
 	SpiritBar& getSpiritBar();
 	int getSavedZombieCount() const;
 

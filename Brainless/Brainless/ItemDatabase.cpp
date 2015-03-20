@@ -50,6 +50,7 @@
 #include "SpiritFeatherSpawnItem.h"
 #include "LeverItem.h"
 #include "LeverSideItem.h"
+#include "SteelDoor.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -60,6 +61,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new TwineItem(4)));
 	addItem(ItemPtr(new GhostItem(5,0)));
 	addItem(ItemPtr(new DoorItem(true, 6))); // Locked door
+	addItem(ItemPtr(new SteelDoor(true, 57))); // Locked door
 	addItem(ItemPtr(new KeyItem(7))); // Key to said door
 	addItem(ItemPtr(new LeverItem(true, 54)));
 	addItem(ItemPtr(new LeverSideItem(true, 55)));
