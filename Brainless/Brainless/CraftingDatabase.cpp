@@ -6,10 +6,12 @@ CraftingDatabase::CraftingDatabase()
 {
 	// TODO add crafting recipes
 	addRecipe(13, { 4, 7 }); // Key + Twine = KeyTwine
+	addRecipe(60, { 4, 59 }); // Magnet + Twine = MagnetTwine
 	addRecipe(11, { 4, 3 }); // Key + Coin = CoinTwine
 	addRecipe(19, { 17, 17, 0}); // Stick + Stick + DuctTape = LongStick
 	addRecipe(26, { 22, 25, 0 }); // AABattery + Hammer + DuctTape = Thors Hammer
 	addRecipe(42, { 43, 44 }); // Newspaper + Empty Bag = Stuffed Bag
+
 }
 
 CraftingDatabase::ItemPtr CraftingDatabase::craftItem(const std::vector<int> &idVector)

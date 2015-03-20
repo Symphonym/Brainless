@@ -52,6 +52,9 @@
 #include "LeverSideItem.h"
 #include "SteelDoor.h"
 #include "FlatDoorItem.h"
+#include "Magnet.h"
+#include "MagnetTwine.h"
+#include "StreetWell.h"
 
 ItemDatabase::ItemDatabase()
 {
@@ -62,8 +65,8 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new TwineItem(4)));
 	addItem(ItemPtr(new GhostItem(5,0)));
 	addItem(ItemPtr(new DoorItem(true, 6))); // Locked door
-	addItem(ItemPtr(new SteelDoor(true, 57))); // Locked door
 	addItem(ItemPtr(new FlatDoorItem(true, 3, 58))); // Flat door
+	addItem(ItemPtr(new SteelDoor(true, 57))); // Locked door
 	addItem(ItemPtr(new KeyItem(7))); // Key to said door
 	addItem(ItemPtr(new LeverItem(true, 54)));
 	addItem(ItemPtr(new LeverSideItem(true, 55)));
@@ -136,6 +139,10 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new StartDialougeItem(50)));
 	addItem(ItemPtr(new SpiritFeatherSpawnItem(53)));
 	addItem(ItemPtr(new WindowOverlayItem(56)));
+	addItem(ItemPtr(new Magnet(59)));
+	addItem(ItemPtr(new MagnetTwine(60)));
+	addItem(ItemPtr(new StreetWell(61)));
+
 }
 
 void ItemDatabase::addItem(ItemPtr itemPtr)

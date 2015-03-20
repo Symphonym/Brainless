@@ -8,7 +8,7 @@ class RubberGlovesItem : public Item
 public:
 
 	RubberGlovesItem(int id);
-
+	bool onInteract(Item &otherItem, Game &game);
 	//virtual bool onInteract(Item &otherItem, Game &game);
 
 	virtual Item* clone();

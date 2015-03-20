@@ -10,6 +10,7 @@ public:
 	KeyItem(int id);
 
 	virtual bool onInteract(Item &otherItem, Game &game);
+	virtual bool onSyncedWith(Item &otherItem);
 
 	virtual Item* clone();
 };

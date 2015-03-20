@@ -14,7 +14,7 @@ public:
 
 	virtual bool onCollisionWithUnit(Unit &unit, Game &game);
 	virtual bool onInteractedWith(Item &otherItem, Game &game);
-
+	bool isActive();
 	virtual void update(float deltaTime, Game &game);
 
 	virtual Item* clone();

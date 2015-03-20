@@ -8,6 +8,7 @@ class LongStickItem : public Item
 public:
 
 	LongStickItem(int id);
+	bool onInteract(Item &otherItem, Game &game);
 
 	virtual Item* clone();
 };

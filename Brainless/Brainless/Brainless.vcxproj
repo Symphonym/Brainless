@@ -157,6 +157,8 @@
     <ClCompile Include="LeverSideItem.cpp" />
     <ClCompile Include="LighterItem.cpp" />
     <ClCompile Include="LongStickItem.cpp" />
+    <ClCompile Include="Magnet.cpp" />
+    <ClCompile Include="MagnetTwine.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="ManholeItem.cpp" />
     <ClCompile Include="NewGameIntro.cpp" />
@@ -179,6 +181,7 @@
     <ClCompile Include="StartDialougeItem.cpp" />
     <ClCompile Include="StartProgramIntro.cpp" />
     <ClCompile Include="SteelDoor.cpp" />
+    <ClCompile Include="StreetWell.cpp" />
     <ClCompile Include="StuffedPaperBagItem.cpp" />
     <ClCompile Include="Turtle.cpp" />
     <ClCompile Include="SpiritBar.cpp" />
@@ -253,6 +256,8 @@
     <ClInclude Include="Lamp.h" />
     <ClInclude Include="LeverItem.h" />
     <ClInclude Include="LeverSideItem.h" />
+    <ClInclude Include="Magnet.h" />
+    <ClInclude Include="MagnetTwine.h" />
     <ClInclude Include="NewGameIntro.h" />
     <ClInclude Include="NewspaperItem.h" />
     <ClInclude Include="RemoveCabinetZombie.h" />
@@ -264,6 +269,7 @@
     <ClInclude Include="StartDialougeItem.h" />
     <ClInclude Include="StartProgramIntro.h" />
     <ClInclude Include="SteelDoor.h" />
+    <ClInclude Include="StreetWell.h" />
     <ClInclude Include="StuffedPaperBagItem.h" />
     <ClInclude Include="DialogTree.h" />
     <ClInclude Include="DoorItem.h" />

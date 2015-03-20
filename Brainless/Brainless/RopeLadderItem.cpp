@@ -101,3 +101,12 @@ void RopeLadderItem::refreshStatus()
 			getSprite().getGlobalBounds().height);
 	}
 }
+
+bool RopeLadderItem::isActive()
+{
+	if (m_ladderIsDown)
+	{
+		return false;
+	}
+	else return true;
+}

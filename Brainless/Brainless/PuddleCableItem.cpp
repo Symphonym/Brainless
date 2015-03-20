@@ -72,6 +72,13 @@ bool PuddleCableItem::onInteractedWith(Item &otherItem, Game &game)
 
 	return false;
 }
+bool PuddleCableItem::isActive()
+{
+	if (m_cableInPuddle)
+		return true;
+	else
+		return false;
+}
 
 void PuddleCableItem::update(float deltaTime, Game &game)
 {

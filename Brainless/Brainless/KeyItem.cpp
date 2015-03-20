@@ -1,5 +1,5 @@
 #include "KeyItem.h"
-
+#include "Notification.h"
 
 KeyItem::KeyItem(int id)
 :
@@ -21,4 +21,16 @@ bool KeyItem::onInteract(Item &otherItem, Game &game)
 Item* KeyItem::clone()
 {
 	return new KeyItem(*this);
+}
+
+bool KeyItem::onSyncedWith(Item &otherItem)
+{
+	if (otherItem.getName() == "StreetWell")
+	{
+		if (otherItem.isActive())
+		{
+			markForDestruction();
+		}
+	}
+	return false;
 }

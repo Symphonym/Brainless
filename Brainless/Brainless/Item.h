@@ -37,6 +37,7 @@ public:
 	virtual bool onInteract(Item &otherItem, Game &game) { return false;  }; // Called when this item iteracts with another item, returning TRUE will destroy THIS item
 	virtual bool onInteractedWith(Item &otherItem, Game &game) { return false; }; // Called when another item interactors with THIS item, returning TRUE will destroy THIS item
 	virtual bool onSyncedWith(Item &otherItem) { return false; } // Called when another item with the same syncID is triggered, returning TRUE will destroy this item
+	//^ varför bool, items tas inte bort när de syncats med.
 	virtual bool onInteractUnit(Unit &unit, Game &game) { return false; } // Called when this item interacts with a unit, returning TRUE will destroy this item
 
 	virtual void onUse(Game &game) {};
@@ -76,6 +77,7 @@ public:
 
 	virtual bool onToggle(int direction) { return false; };
 
+	virtual bool isActive(){ return true; } //used for special sync interactions
 	bool isMarkedForDestruction() const;
 	bool isLootable() const;
 	bool isUsable() const;

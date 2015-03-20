@@ -485,6 +485,10 @@
 +Texture,images/items/Twine.png,TwineInv
 +Texture,images/items/Coint-hook.png,CoinTwineInv
 +Texture,images/items/Hook.png,HookInv
++Texture,images/items/Magnet.png,MagnetInv
++Texture,images/items/Hook_Magnet.png,MagnetTwineInv
++Texture,images/items/Small-Magnet.png,MagnetItem
++Texture,images/items/streetWell.png,StreetWellItem
 +Texture,images/items/Long-Stick.png,LongStickInv
 +Texture,images/items/Stuffed Bag.png,StuffedBagInv
 +Texture,images/items/Thor's-Hammer.png,MjolnirInv

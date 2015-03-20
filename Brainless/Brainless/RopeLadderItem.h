@@ -17,6 +17,8 @@ public:
 	virtual void update(float deltaTime, Game &game);
 	virtual void draw();
 
+	bool isActive();
+
 	virtual void onPositionChanged();
 	virtual bool onInteractedWith(Item &otherItem, Game &game);
 

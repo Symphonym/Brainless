@@ -115,6 +115,9 @@
     <Filter Include="Source Files\Unit\Zombies\ScriptZombies">
       <UniqueIdentifier>{bf910876-68b5-4aa9-95bd-271aab7d3216}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Items\Magnets">
+      <UniqueIdentifier>{663136fc-f1ed-428d-9b5c-1616511c66f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -455,6 +458,15 @@
     </ClCompile>
     <ClCompile Include="FlatDoorItem.cpp">
       <Filter>Source Files\Game\Items\Lockable</Filter>
+    </ClCompile>
+    <ClCompile Include="MagnetTwine.cpp">
+      <Filter>Source Files\Game\Items\Magnets</Filter>
+    </ClCompile>
+    <ClCompile Include="Magnet.cpp">
+      <Filter>Source Files\Game\Items\Magnets</Filter>
+    </ClCompile>
+    <ClCompile Include="StreetWell.cpp">
+      <Filter>Source Files\Game\Items\Magnets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -802,6 +814,15 @@
     </ClInclude>
     <ClInclude Include="FlatDoorItem.h">
       <Filter>Source Files\Game\Items\Lockable</Filter>
+    </ClInclude>
+    <ClInclude Include="MagnetTwine.h">
+      <Filter>Source Files\Game\Items\Magnets</Filter>
+    </ClInclude>
+    <ClInclude Include="Magnet.h">
+      <Filter>Source Files\Game\Items\Magnets</Filter>
+    </ClInclude>
+    <ClInclude Include="StreetWell.h">
+      <Filter>Source Files\Game\Items\Magnets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

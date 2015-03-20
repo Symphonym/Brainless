@@ -161,6 +161,13 @@ void Inventory::events(const sf::Event &event, Game &game)
 							if (item.onInteractedWith(*m_mouseItem.get(), game))
 								deleteOtherItem = true;
 
+							// Sync use functionality for sync
+							for (std::size_t j = 0; j < game.getLevel().getItems().size(); j++)
+							{
+								if (game.getLevel().getItems()[j]->getSyncID() >= 0 && game.getLevel().getItems()[i]->getSyncID() == item.getSyncID())
+									game.getLevel().getItems()[j]->onSyncedWith(item);
+							}
+
 							if (deleteOtherItem)
 								game.getLevel().removeItem(i);
 
@@ -471,9 +478,15 @@ void Inventory::craft()
 	// An item was crafted
 	if (item)
 	{
+		//need to keep syncID
+		int syncID = -1;
 		// Remove all ingredients from inventory
 		for (auto &index : m_selectedSlots)
+		{
+			syncID = m_slots[index.x][index.y].first.get()->getSyncID();
 			delete m_slots[index.x][index.y].first.release();
+		}
+		item->setSyncID(syncID);
 
 		Notification::instance().write("\"" + item->getName() + "\" was crafted successfully!");
 
