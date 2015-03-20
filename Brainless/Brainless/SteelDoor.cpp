@@ -12,7 +12,7 @@ m_isLocked(locked)
 	m_usable = true;
 	m_collidable = true;
 
-	m_collisionBounds = sf::FloatRect(20, 0, 25, 192);
+	m_collisionBounds = sf::FloatRect(48, 25, 25, 192);
 }
 
 bool SteelDoor::onInteractedWith(Item &otherItem, Game &game)
@@ -70,7 +70,10 @@ void SteelDoor::onUse(Game &game)
 			getSprite().setTexture(ResourceLoader::instance().retrieveTexture("SteelDoorClosed"));
 		}
 	}
-
+	else
+	{
+		Notification::instance().write("It's locked!");
+	}
 
 }
 void SteelDoor::onExamine()

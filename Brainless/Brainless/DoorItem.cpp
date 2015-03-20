@@ -12,7 +12,7 @@ m_isLocked(locked)
 	m_usable = true;
 	m_collidable = true;
 
-	m_collisionBounds = sf::FloatRect(20, 0, 25, 192);
+	m_collisionBounds = sf::FloatRect(20, 5, 25, 192);
 }
 
 bool DoorItem::onInteractedWith(Item &otherItem, Game &game)
@@ -68,7 +68,11 @@ void DoorItem::onUse(Game &game)
 		{
 			m_collisionBounds = sf::FloatRect(m_collisionBounds.left, m_collisionBounds.top, 25, 192);
 			getSprite().setTexture(ResourceLoader::instance().retrieveTexture("DoorClosed"));
+		}
 	}
+	else
+	{
+		Notification::instance().write("It's locked!");
 	}
 
 
