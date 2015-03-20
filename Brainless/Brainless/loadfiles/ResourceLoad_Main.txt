@@ -492,9 +492,12 @@
 +Texture,images/items/Newspapper.png,NewspaperItem
 +Texture,images/items/Plastic Bag.png,EmptyBagItem
 
-# DOOR TEST ITEM
+# DOOR
 +Texture,images/items/doors/wood-doorOpen.png,DoorOpen
 +Texture,images/items/doors/wood-doorClosed.png,DoorClosed
++Texture,images/items/doors/wood-FlatOpen.png,FlatOpen
++Texture,images/items/doors/wood-FlatClosed.png,FlatClosed
+
 +Texture,images/items/Small-Key.png,KeyTest
 +Texture,images/items/locks/LeverDown.png,LeverDown
 +Texture,images/items/locks/LeverUp.png,LeverUp

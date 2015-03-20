@@ -450,6 +450,9 @@
     <ClCompile Include="WindowOverlayItem.cpp">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
     </ClCompile>
+    <ClCompile Include="FlatDoorItem.cpp">
+      <Filter>Source Files\Game\Items\Lockable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -790,6 +793,9 @@
     </ClInclude>
     <ClInclude Include="WindowOverlayItem.h">
       <Filter>Source Files\Game\Items\Unsorted</Filter>
+    </ClInclude>
+    <ClInclude Include="FlatDoorItem.h">
+      <Filter>Source Files\Game\Items\Lockable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

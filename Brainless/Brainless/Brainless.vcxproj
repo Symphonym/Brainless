@@ -146,6 +146,7 @@
     <ClCompile Include="EmptyBagItem.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="FileSave.cpp" />
+    <ClCompile Include="FlatDoorItem.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HammerItem.cpp" />
     <ClCompile Include="HealthBar.cpp" />
@@ -247,6 +248,7 @@
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="DropItemZombie.h" />
     <ClInclude Include="EmptyBagItem.h" />
+    <ClInclude Include="FlatDoorItem.h" />
     <ClInclude Include="Lamp.h" />
     <ClInclude Include="LeverItem.h" />
     <ClInclude Include="LeverSideItem.h" />
