@@ -1,16 +1,17 @@
 #include "FlatDoorItem.h"
 #include "ResourceLoader.h"
 #include "Renderer.h"
+#include "Game.h"
 #include "Notification.h"
 
-FlatDoorItem::FlatDoorItem(bool locked, int id)
+FlatDoorItem::FlatDoorItem(bool locked, int levelIndex, int id)
 :
 Item("Door", "FlatClosed", "FlatClosed", id),
-m_isOpen(false),
-m_isLocked(locked)
+m_isLocked(locked),
+m_levelIndex(levelIndex)
 {
 	m_usable = true;
-	m_collisionBounds = sf::FloatRect(20, 0, 25, 192);
+	m_interactBounds = sf::FloatRect(15,35,100, 200);
 }
 
 bool FlatDoorItem::onInteractedWith(Item &otherItem, Game &game)
@@ -19,6 +20,7 @@ bool FlatDoorItem::onInteractedWith(Item &otherItem, Game &game)
 	{
 		m_isLocked = false;
 		SoundPlayer::instance().playSound("item_door", getPosition());
+		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("FlatOpen"));
 	}
 	else if (m_isLocked && otherItem.getName() == "Key")
 	{
@@ -32,22 +34,8 @@ void FlatDoorItem::onUse(Game &game)
 	// Toggle collision and open state
 	if (!m_isLocked)
 	{
-		m_isOpen = !m_isOpen;
-		m_collidable = !m_collidable;
-
-		if (m_isOpen)
-		{
-			m_collisionBounds = sf::FloatRect(m_collisionBounds.left, m_collisionBounds.top, 90, 192);
-			getSprite().setTexture(ResourceLoader::instance().retrieveTexture("FlatOpen"));
-		}
-		else
-		{
-			m_collisionBounds = sf::FloatRect(m_collisionBounds.left, m_collisionBounds.top, 25, 192);
-			getSprite().setTexture(ResourceLoader::instance().retrieveTexture("FlatClosed"));
-		}
+		game.changeLevelTransition(m_levelIndex, false);
 	}
-
-
 }
 void FlatDoorItem::onExamine()
 {
@@ -55,7 +43,7 @@ void FlatDoorItem::onExamine()
 		m_examineString = "It appears to be locked";
 	else
 	{
-		if (m_isOpen)
+		if (m_isLocked)
 			m_examineString = "It's an open door, not much about it.";
 		else
 			m_examineString = "It's a closed door, maybe I should open it.";
@@ -66,14 +54,13 @@ void FlatDoorItem::serialize(std::ofstream &writer) const
 {
 	Item::serialize(writer);
 	writer << m_isLocked << std::endl;
-	writer << m_isOpen << std::endl;
 }
 void FlatDoorItem::deserialize(std::ifstream &reader)
 {
 	Item::deserialize(reader);
-	reader >> m_isLocked >> m_isOpen;
+	reader >> m_isLocked;
 
-	if (m_isOpen)
+	if (!m_isLocked)
 		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("FlatOpen"));
 	else
 		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("FlatClosed"));
@@ -81,10 +68,7 @@ void FlatDoorItem::deserialize(std::ifstream &reader)
 
 void FlatDoorItem::draw()
 {
-	if (m_isOpen)
-		Renderer::instance().drawAbove(getSprite());
-	else
-		Renderer::instance().drawDepth(getSprite());
+	Renderer::instance().drawBehind(getSprite());
 }
 
 Item* FlatDoorItem::clone()
