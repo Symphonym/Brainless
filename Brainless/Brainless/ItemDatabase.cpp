@@ -76,7 +76,7 @@ ItemDatabase::ItemDatabase()
 	addItem(ItemPtr(new LadderItem("RopeLadder1", 52)));
 	addItem(ItemPtr(new MagnifyingGlassItem(10)));
 	addItem(ItemPtr(new CoinTwineItem(11)));
-	addItem(ItemPtr(new MovingPlatformItem(sf::Vector2f(0, 800), 800, 12)));
+	addItem(ItemPtr(new MovingPlatformItem(sf::Vector2f(0, 400), 800, 12)));
 	addItem(ItemPtr(new KeyTwineItem(13)));
 	addItem(ItemPtr(new WindowItem(false, 1, 14)));
 	addItem(ItemPtr(new StoneItem(15)));

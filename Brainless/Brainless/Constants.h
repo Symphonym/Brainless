@@ -6,7 +6,6 @@
 class Constants
 {
 public:
-
 	static const int Gravity = 800;
 
 	static const int TileSize = 96;
@@ -30,7 +29,7 @@ public:
 	static const int SpiritGhostCost = 26;
 
 	// Must never be zero, and must equal the amount of brains placed in the levels
-	static const int TotalBrainCount = 4;
+	static const int TotalBrainCount = 7;
 
 	static const std::string CantPickUpString;
 	static const std::string CantUseString;

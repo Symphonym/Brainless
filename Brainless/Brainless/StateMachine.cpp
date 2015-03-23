@@ -78,7 +78,7 @@ m_window(sf::VideoMode(1280, 720), "Brainless", sf::Style::Close)
 		m_window.getSize().x / 2 + 155.f,
 		m_window.getSize().y - 170.f);
 
-	m_loadingAnim.loop(0, 7, 0, 5.f);
+	m_loadingAnim.loop(0, 7, 2, 5.f);
 	m_loadingAnimDot.loop(0, 2, 0, 2.f);
 
 	sf::Image loadingBar;
