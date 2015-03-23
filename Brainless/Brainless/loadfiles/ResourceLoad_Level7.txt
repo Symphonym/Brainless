@@ -1,0 +1,10 @@
+# BACKGROUND TEXTURES
++Texture,images/backgrounds/level1_A.png,level1_A
++Texture,images/backgrounds/level1_B.png,level1_B
++Texture,images/backgrounds/level1_C.png,level1_C
+
++Texture,images/backgrounds/park.png,background_park
++Texture,images/backgrounds/Room.png,Room
+
+# BACKGROUND MUSIC
++Music,music/moll_5.wav,Level2Music
