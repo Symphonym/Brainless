@@ -18,7 +18,7 @@ public:
 
 	static const int BlockTypeCount = 258;
 	static const int ZombieTypeCount = 3;
-	static const int ZombieTextureCount = 6;
+	static const int ZombieTextureCount = 7;
 
 	static const int InventoryWidth = 4;
 	static const int InventoryHeight = 4;
