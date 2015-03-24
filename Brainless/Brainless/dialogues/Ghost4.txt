@@ -1,3 +1,16 @@
-zombie0
-Fuck off!
-#...
+GhostAvatar
+What do you want? Leave me alone to float into eternity.
+#Are you alright?
+	Of course I am! I am more than alright, I am finally free from that degrading meat-prison that people call a body. My soul is free to float through the air, and even if I at this time have to keep close to my body surely that will change in time! Just image the possibilities, the freedom, the raw though and nothing else to disturb you!
+	#Think about the future!
+		Yes, that is what I am doing! Imagining a future without that body to slow me down, to be able to think this freely forever, that is truly something amazing.
+		#So you want to be stuck as a spirit?
+			Yes, yes I do! This is the best thing to ever happen to me. All my life I was irritated- no, hateful, of my body and its limitations. I've always relied more on my mind than anything else, and the body is a harsh keeper of such an active thing. Now, if you would please leave me alone I would be very grateful, I can't wait to start eternity alone!
+		#You sure you're alright?
+			I've never been more clearheaded in my life. Don't look at me like that, I do not want your pity since nothing is wrong.
+			#I will fix this, let me help.
+				No, please do not, I do not want or need your help. Listen to me, do not do anything!
+			#You don't know what you're saying.
+				Of course I do, now please stop bothering me and leave me alone!
+	#You think this is a good thing?
+		Yes, yes I do! This is the best thing to ever happen to me. All my life I was irritated- no, hateful, of my body and its limitations. I've always relied more on my mind than anything else, and the body is a harsh keeper of such an active thing. Now, if you would please leave me alone I would be very grateful, I can't wait to start eternity alone!

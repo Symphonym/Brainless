@@ -1,3 +1,20 @@
-zombie3
-Fuck off!
-#...
+GhostAvatar
+Hey, you over there! Have you seen my brother? He's probably crawling around down here, talking to rats or some shit.
+#Yeah, just a moment ago.
+	Awesome! I've been looking for him for days! I lost him you see, an easy thing to do since it's quite dark down here. Quite dark indeed. Sweet darkness.
+	#I can see crazy goes in the family.
+		Yes, thank you. We've been down here from even before this whole 'losing-your-brain' thing started you know. Always been comfortable down here. Always at home among the small tunnels.
+		#I think I'll go now.
+			I warn you, don't go up to the surface! Beware the sunlight! Just one more thing before you go, have you seen my brother?
+	#Right...
+		I'll never be forced to see the sun again! Never smell fresh air! Never feel the wind on my face! What a glorious existence.
+		#I think I'll go now.
+			I warn you, don't go up to the surface! Beware the sunlight! Just one more thing before you go, have you seen my brother?
+#That nut job was your brother?
+	He's not a-! ... Alright yes, the nut job is my brother. He kinda lost it down here in the dark. Can't imagine why, the darkness is so comforting.
+	#No it's really not.
+		It's everything! Darkness in the air, and darkness in the soul. Damp and crawling, walls sweating, small rodent scuttering... Oh hello, have you seen my brother?
+	#I can see crazy goes in the family.
+		Yes, thank you. We've been down here from even before this whole 'losing-your-brain' thing started you know. Always been comfortable down here. Always at home among the small tunnels.
+		#I think I'll go now.
+			I warn you, don't go up to the surface! Beware the sunlight! Just one more thing before you go, have you seen my brother?

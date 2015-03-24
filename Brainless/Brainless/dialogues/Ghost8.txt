@@ -1,3 +1,32 @@
-zombie4
-Fuck off!
-#...
+GhostAvatar
+Hey, hey you! Yes you, want to help me out?
+#Nah, not really.
+	What seriously? That's just mean. No need to kick the ones who are already dead, right? I've already lost all my students, even though I tried to save them...
+	#Save them from what?
+		This... brainless state of living of course! I realized what was happening, but I realized it too late. But I've heard rumors that it might be reversible, will you help me?
+		#Yes, sure!
+			Awesome! That's the spirit! By the way, I guess you know who I am?
+			#What? No of course not.
+				Pffth, you should! I used to be a trainer, and one of the best as well, at least that's what my students said. But then they all stopped coming, one after the other, and I got really worried you know? But when I finally mustered up what was left of my waning willpower to really look into what'd happened it was already too late.
+				#I'm sorry for your loss.
+					Yeah, me too... But thanks for listening! If you give me my brain back, I'll be sure to give you something for your trouble!
+				#Did I ask for a life story?
+					That's unnecessarily mean. Please leave me alone now.
+			#Yeah, sure, if that makes you happy
+				Yes I am kind of famous! I was one of the best trainers around after all, at least according to my students. But then they all stopped coming, one after the other, and I got really worried you know? But when I finally mustered up my waning willpower to really look into what'd happened it was already too late, they were too far gone...
+				#That's really sad.
+					Enough of sad recollections though, would you like some help? If you give my body it's brain back I'll be sure to give you something for your trouble. Believe in yourself, you can do it!
+		#No way.
+			That's unnecessarily mean. Please leave me alone now.
+#Yes, sure!
+	Awesome! That's the spirit! By the way, I guess you know who I am?
+	#What? No of course not.
+		Pffth, you should! I used to be a trainer, and one of the best as well, at least that's what my students said. But then they all stopped coming, one after the other, and I got really worried you know? But when I finally mustered up what was left of my waning willpower to really look into what'd happened it was already too late.
+		#I'm sorry for your loss.
+			Yeah, me too... But thanks for listening! If you give me my brain back, I'll be sure to give you something for your trouble!
+		#Did I ask for a life story?
+			That's unnecessarily mean. Please leave me alone now.
+	#Yeah, sure, if that makes you happy.
+			Yes I am kind of famous! I was one of the best trainers around after all, at least according to my students. But then they all stopped coming, one after the other, and I got really worried you know? But when I finally mustered up my waning willpower to really look into what'd happened it was already too late, they were too far gone...
+			#That's really sad.
+				Enough of sad recollections though, would you like some help? If you give my body it's brain back I'll be sure to give you something for your trouble. Believe in yourself, you can do it!

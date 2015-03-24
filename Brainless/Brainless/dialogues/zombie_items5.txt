@@ -1,9 +1,5 @@
 zombie5
-Thanks for the help! I do not need this, so you can have it.
-#Thank you!
-#Whatever...
-#"..."
-	...Please. Take it.
-	#Okay.
-	#"..."
-		I'll just leave it here then...
+I thank you for your help! I do not need this, so you can have it.
+#Thanks!
+#What is it?
+	A gift, please accept it.
