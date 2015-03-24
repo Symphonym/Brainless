@@ -565,7 +565,7 @@ void Player::animation_turnRun()
 		m_sprite = &m_spriteSheets[2];
 		m_animation.playOnce(0, 1, 5, 8);
 		m_animState = anim_turnRun;
-		SoundPlayer::instance().playSound("player_turn", getPosition());
+		SoundPlayer::instance().playSound("player_turn", getPosition(), 70.0f);
 
 		if (getSpeed().x < 0)
 		ParticleSystem::instance().addParticles(15, m_position + sf::Vector2f(-30, 190), sf::Color(128, 128, 128), sf::Vector2f(0.4f, 0.4f), sf::Vector2f(0, 360), sf::Vector2f(0, 0), sf::Vector2f(-50, 0), sf::Vector2f(-50, 0), sf::Vector2f(-3, 0.5f));

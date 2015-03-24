@@ -23,11 +23,16 @@ public:
 
 	// Draw a drawable on top of all depth sorted drawables
 	void drawAbove(const sf::Drawable &drawable);
+
+	//like drawabove but without shader
+	void drawPopUp(const sf::Drawable &drawable);
+
 	// Draw a drawable behind all depth sorted drawables
 	void drawBehind(const sf::Drawable &drawable);
 
 	// Draws the drawable in a separate layer using the default camera view, and ontop of everything else
 	void drawHUD(const sf::Drawable &drawable);
+
 
 	// Draw something a separate layer super far back or super far in front, mostly for environment stuff
 	void drawBackground(const sf::Drawable &drawable);
@@ -56,6 +61,7 @@ private:
 	// buffer since don't require the same 2.5D layering in those layers
 	std::vector<const sf::Drawable*> m_foregroundRenderTasks;
 	std::vector<const sf::Drawable*> m_backgroundRenderTasks;
+	std::vector<const sf::Drawable*> m_popUpRenderTasks;
 
 	std::vector<std::pair<const sf::Drawable*, std::vector<sf::IntRect> > > m_testTasks;
 

@@ -125,7 +125,7 @@ sf::Vector2f Item::getPosition() const
 void Item::inventoryDraw(bool drawInWorldSpace)
 {
 	if (drawInWorldSpace)
-		Renderer::instance().drawAbove(m_inventorySprite);
+		Renderer::instance().drawPopUp(m_inventorySprite);
 	else
 		Renderer::instance().drawHUD(m_inventorySprite);
 }

@@ -1,6 +1,8 @@
 #include "SpikeItem.h"
 #include "Unit.h"
 #include "ResourceLoader.h"
+#include "SoundPlayer.h"
+#include "Game.h"
 
 SpikeItem::SpikeItem(int id)
 :

@@ -76,7 +76,8 @@ void Inventory::events(const sf::Event &event, Game &game)
 		if (event.key.code == OptionsMenu::getKeybind("Inventory"))
 		{
 			m_isOpen = !m_isOpen;
-			SoundPlayer::instance().playSound("inventory_open",game.getWindow().getView().getCenter());
+			//SoundPlayer::instance().playSound("inventory_open",game.getWindow().getView().getCenter());
+			SoundPlayer::instance().playSound("inventory_open", game.getPlayer().getPosition(), 50.0f);
 
 			if (!m_isOpen)
 				setCraftingMode(false);
@@ -112,6 +113,8 @@ void Inventory::events(const sf::Event &event, Game &game)
 				{
 					m_mouseItemSlot = invPair;
 					m_mouseItem = std::move(invPair->first);
+					if(m_mouseItem && m_mouseItem->getName() == "Lighter") 
+						SoundPlayer::instance().playSound("lighter_sound", game.getWindow().getView().getCenter());
 				}
 			}
 
@@ -244,7 +247,8 @@ void Inventory::events(const sf::Event &event, Game &game)
 				// First time click on world will just close the inventory
 				if (m_isOpen)
 				{
-					SoundPlayer::instance().playSound("inventory_open", game.getWindow().getView().getCenter());
+					//SoundPlayer::instance().playSound("inventory_open", game.getWindow().getView().getCenter());
+					SoundPlayer::instance().playSound("inventory_open", game.getPlayer().getPosition(), 50.0f);
 					m_isOpen = false;
 				}
 

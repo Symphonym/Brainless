@@ -65,6 +65,10 @@ void Renderer::drawForeground(const sf::Drawable &drawable)
 {
 	m_foregroundRenderTasks.push_back(&drawable);
 }
+void Renderer::drawPopUp(const sf::Drawable &drawable)
+{
+	m_popUpRenderTasks.push_back(&drawable);
+}
 
 void Renderer::executeDraws()
 {
@@ -120,6 +124,12 @@ void Renderer::executeDraws()
 			m_renderTarget->draw(*m_aboveRenderTasks[i]);
 	}
 
+	// Draw "popup" stuff without shader
+	for (std::size_t i = 0; i < m_popUpRenderTasks.size(); i++)
+	{
+			m_renderTarget->draw(*m_popUpRenderTasks[i]);
+	}
+	
 
 
 	// Store a temp variable of the current camera so we can revert back to it
@@ -134,6 +144,7 @@ void Renderer::executeDraws()
 
 	m_renderTarget->setView(tempView);
 
+	m_popUpRenderTasks.clear();
 	m_aboveRenderTasks.clear();
 	m_behindRenderTasks.clear();
 	m_foregroundRenderTasks.clear();

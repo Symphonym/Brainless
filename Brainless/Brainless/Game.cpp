@@ -364,7 +364,8 @@ void Game::update(float deltaTime)
 
 	if (m_inventoryButton->getReleased(m_window))
 	{
-		SoundPlayer::instance().playSound("inventory_open", getWindow().getView().getCenter());
+		//SoundPlayer::instance().playSound("inventory_open", getWindow().getView().getCenter());
+		SoundPlayer::instance().playSound("inventory_open", getPlayer().getPosition(), 50.0f);
 		m_inventory->toggleVisible();
 	}
 
