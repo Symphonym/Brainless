@@ -27,14 +27,6 @@ m_levelPtr(levelPtr)
 	m_UnitID = Unit::ID_ScriptZombie;
 }
 
-//ScriptedZombie::ScriptedZombie(Zombie* baseZombie, int scriptID, std::vector<Level::ItemPtr>& itemList)
-//:
-//m_baseZombie(baseZombie),
-//m_scriptID(scriptID),
-//m_itemList(itemList)
-//{
-//
-//} //MEMORY0
 ScriptedZombie::~ScriptedZombie()
 {
 	delete(m_baseZombie);

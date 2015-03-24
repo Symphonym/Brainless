@@ -144,4 +144,5 @@ void EditorSpriteMode::initializeSprites()
 	addTexture("FenceSprite");
 	addTexture("House0");
 	addTexture("House1");
+	addTexture("WoodRoom_small");
 }

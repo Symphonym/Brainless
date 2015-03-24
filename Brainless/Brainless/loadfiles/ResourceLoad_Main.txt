@@ -62,6 +62,7 @@
 +Texture,images/sprites/Cars/Car4.png,Car4
 +Texture,images/sprites/Crate.png,Crate
 +Texture,images/sprites/WoodRoom.png,WoodRoom
++Texture,images/sprites/WoodRoom_small.png,WoodRoom_small
 +Texture,images/sprites/SewerRoom.png,SewerRoom
 +Texture,images/sprites/WindowBack.png,WindowBack
 +Texture,images/sprites/WindowBack.png,WindowBack

@@ -164,7 +164,7 @@ void Inventory::events(const sf::Event &event, Game &game)
 							// Sync use functionality for sync
 							for (std::size_t j = 0; j < game.getLevel().getItems().size(); j++)
 							{
-								if (game.getLevel().getItems()[j]->getSyncID() >= 0 && game.getLevel().getItems()[i]->getSyncID() == item.getSyncID())
+								if (game.getLevel().getItems()[j]->getSyncID() >= 0 && game.getLevel().getItems()[j]->getSyncID() == item.getSyncID())
 									game.getLevel().getItems()[j]->onSyncedWith(item);
 							}
 

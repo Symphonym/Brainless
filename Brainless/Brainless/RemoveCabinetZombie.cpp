@@ -41,7 +41,7 @@ void RemoveCabinetZombie::serialize(std::ofstream &writer) const
 void RemoveCabinetZombie::deserialize(std::ifstream &reader)
 {
 	Unit::deserialize(reader);
-	//HEJ
+
 	reader >> m_textureId;
 
 	reader >> m_target.x >> m_target.y;

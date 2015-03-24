@@ -17,8 +17,11 @@ bool StreetWell::onInteractedWith(Item &otherItem, Game &game)
 {
 	if (getSyncID() != -1 && m_isKey && otherItem.getSyncID() == getSyncID() && otherItem.getName() == "Magnet & Twine")
 	{
+
+		ItemDatabase::ItemPtr item = std::move(ItemDatabase::instance().extractItem(7));
+		item->setSyncID(getSyncID());
 		//addkey
-		game.lootItem(std::move(ItemDatabase::instance().extractItem(7)));
+		game.lootItem(std::move(item));
 		m_isKey = false;
 		
 	}
