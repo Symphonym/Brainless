@@ -1,6 +1,7 @@
 #include "LeverItem.h"
 #include "ResourceLoader.h"
 #include "Renderer.h"
+#include "Notification.h"
 
 LeverItem::LeverItem(bool down, int id)
 :
@@ -17,10 +18,12 @@ void LeverItem::onUse(Game &game)
 		
 	if (m_isDown)
 	{
+		Notification::instance().write("I heard something move.");
 		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("LeverDown"));
 	}
 	else
 	{
+		Notification::instance().write("I heard something move.");
 		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("LeverUp"));
 	}
 }
@@ -32,6 +35,22 @@ void LeverItem::onExamine()
 	{
 		m_examineString = "It's a lever, up up and away!";
 	}
+}
+bool LeverItem::onInteractedWith(Item &otherItem, Game &game)
+{
+	m_isDown = !m_isDown;
+
+	if (m_isDown)
+	{
+		Notification::instance().write("I heard something move.");
+		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("LeverDown"));
+	}
+	else
+	{
+		Notification::instance().write("I heard something move.");
+		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("LeverUp"));
+	}
+	return false;
 }
 
 void LeverItem::serialize(std::ofstream &writer) const

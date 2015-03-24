@@ -23,7 +23,7 @@ bool StreetWell::onInteractedWith(Item &otherItem, Game &game)
 		//addkey
 		game.lootItem(std::move(item));
 		m_isKey = false;
-		
+		Notification::instance().write("I got it!");
 	}
 	else if (m_isKey && otherItem.getName() == "Magnet & Twine")
 	{
