@@ -69,6 +69,8 @@ private:
 
 	std::array<std::array<InventoryPair, Constants::InventoryHeight>, Constants::InventoryWidth> m_slots;
 
+	bool m_lighterInventory;
+
 };
 
 #endif

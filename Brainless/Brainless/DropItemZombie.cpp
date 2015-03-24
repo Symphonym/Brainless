@@ -26,7 +26,9 @@ Zombie(startPosition, sf::Vector2f(COLLISION_WIDTH, COLLISION_HEIGHT), sf::Vecto
 	m_specialSpriteDirection = true;
 	animation_idle();
 	m_isDamaging = false;
-	m_dialog.loadDialogFile("dialogues/zombie_items.txt");
+	if (Texture == 1) m_dialog.loadDialogFile("dialogues/zombie_items1.txt");
+	else if (Texture == 5) m_dialog.loadDialogFile("dialogues/zombie_items5.txt");
+	else m_dialog.loadDialogFile("dialogues/zombie_items.txt");
 }
 
 void DropItemZombie::serialize(std::ofstream &writer) const

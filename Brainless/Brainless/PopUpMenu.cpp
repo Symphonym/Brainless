@@ -42,10 +42,10 @@ void PopUpMenu::events(const sf::Event &event, Game &game)
 
 	if (event.type == sf::Event::MouseButtonReleased)
 	{
-
 		// Show menu if left clicking on item/unit, and the player isn't holding an item (to interact with stuff)
 		if (event.mouseButton.button == sf::Mouse::Left && !m_isShowing && !game.holdingItem())
 		{
+
 			// Do backwards to take the topmost item first
 			for (int i = game.getLevel().getItems().size()-1; i >= 0; i--)
 			{

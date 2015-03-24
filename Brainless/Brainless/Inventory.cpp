@@ -16,7 +16,8 @@ Inventory::Inventory()
 m_isOpen(false),
 m_mouseItemSlot(nullptr),
 m_showHighlighText(false),
-m_craftingModeEnabled(false)
+m_craftingModeEnabled(false),
+m_lighterInventory(false)
 {
 	m_background.setTexture(ResourceLoader::instance().retrieveTexture("InventoryBackground"));
 	for (std::size_t x = 0; x < m_slots.size(); x++)
@@ -46,6 +47,10 @@ m_craftingModeEnabled(false)
 
 void Inventory::addItem(ItemPtr item)
 {
+	if (item->getName() == "Lighter")
+	{
+		m_lighterInventory = true;
+	}
 	for (std::size_t x = 0; x < m_slots.size(); x++)
 	{
 		for (std::size_t y = 0; y < m_slots[x].size(); y++)
@@ -53,8 +58,8 @@ void Inventory::addItem(ItemPtr item)
 			if (!m_slots[x][y].first)
 			{
 				m_slots[x][y].first = std::move(item);
-				if (m_slots[x][y].first)
-					int b = 3;
+				/*if (m_slots[x][y].first)
+					int b = 3; */
 				return;
 			}
 		}
@@ -78,7 +83,7 @@ void Inventory::events(const sf::Event &event, Game &game)
 		}
 	}
 
-	else if (event.type == sf::Event::MouseButtonPressed)
+	else if (event.type == sf::Event::MouseButtonReleased) //pressed
 	{
 		// Items can not be moved around in crafting mode
 		if (event.mouseButton.button == sf::Mouse::Left && !m_craftingModeEnabled)
@@ -278,8 +283,11 @@ void Inventory::update(float deltaTime, Game &game)
 {
 	sf::Vector2i mousePos = sf::Mouse::getPosition(game.getWindow());
 
+
 	if (m_mouseItem)
 	{
+	
+
 		// Don't show item name when you're moving items around
 		m_showHighlighText = false;
 
@@ -287,7 +295,6 @@ void Inventory::update(float deltaTime, Game &game)
 		if (m_isOpen)
 		{
 			// Held item gets special update calls in HUD space
-			m_mouseItem->heldUpdate(deltaTime, game);
 
 			m_mouseItem->setPosition(
 				sf::Vector2f(mousePos.x - m_mouseItem->getSprite().getGlobalBounds().width / 2.f, mousePos.y - m_mouseItem->getSprite().getGlobalBounds().height / 2.f));
@@ -303,6 +310,19 @@ void Inventory::update(float deltaTime, Game &game)
 
 			m_mouseItem->setPosition(worldPos);
 		}
+		m_mouseItem->heldUpdate(deltaTime, game);
+
+		//if (m_lighterInventory == true && m_mouseItem->getName() != "Lighter")
+		//{
+		//	sf::Shader *shader = Renderer::instance().getCurrentShader();
+
+		//	if (shader)
+		//	{
+		//		shader->setParameter("enableLightSource", 1);
+		//		shader->setParameter("lightPos", game.getPlayer().getPosition().x/* - game.getWindow().getPosition().x*/, game.getPlayer().getPosition().y/* - game.getWindow().getPosition().y*/);
+		//		shader->setParameter("lightReachDistance", 300);
+		//	}
+		//}
 	}
 	else
 	{
@@ -336,7 +356,19 @@ void Inventory::update(float deltaTime, Game &game)
 			setCraftingMode(!m_craftingModeEnabled);
 
 		}
+		//if (m_lighterInventory == true)
+		//{
+		//	sf::Shader *shader = Renderer::instance().getCurrentShader();
+
+		//	if (shader)
+		//	{
+		//		shader->setParameter("enableLightSource", 1);
+		//		shader->setParameter("lightPos", game.getPlayer().getPosition().x/* - game.getWindow().getPosition().x*/, game.getPlayer().getPosition().y/* - game.getWindow().getPosition().y*/);
+		//		shader->setParameter("lightReachDistance", 300);
+		//	}
+		//}
 	}
+
 }
 
 void Inventory::draw()
