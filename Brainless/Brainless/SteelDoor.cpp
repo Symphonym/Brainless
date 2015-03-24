@@ -11,7 +11,7 @@ m_isLocked(locked)
 {
 	m_usable = true;
 	m_collidable = true;
-
+	if (id == -1) m_isLocked = false;
 	m_collisionBounds = sf::FloatRect(48, 25, 25, 192);
 }
 

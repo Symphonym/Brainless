@@ -11,6 +11,7 @@ m_isLocked(locked),
 m_levelIndex(levelIndex)
 {
 	m_usable = true;
+	if (id == -1) m_isLocked = false;
 	m_interactBounds = sf::FloatRect(15,35,100, 200);
 }
 
