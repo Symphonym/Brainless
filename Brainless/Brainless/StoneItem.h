@@ -8,6 +8,7 @@ class StoneItem : public Item
 public:
 
 	StoneItem(int id);
+	bool onInteract(Item &otherItem, Game &game);
 
 	virtual Item* clone();
 };

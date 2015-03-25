@@ -19,7 +19,7 @@ Item("Lamp", "Lamp", "Lamp", id)
 
 void Lamp::onExamine()
 {
-	m_examineString = "TEMP";
+	m_examineString = "It's a street lamp.";
 }
 
 void Lamp::draw()

@@ -12,3 +12,12 @@ Item* StoneItem::clone()
 {
 	return new StoneItem(*this);
 }
+
+bool StoneItem::onInteract(Item &otherItem, Game &game)
+{
+	if (otherItem.getName() == "Window")
+	{
+		return true;
+	}
+	return false;
+}
