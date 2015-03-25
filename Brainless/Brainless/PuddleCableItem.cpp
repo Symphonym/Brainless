@@ -5,12 +5,19 @@
 #include "Game.h"
 #include "ParticleSystem.h"
 #include "ScriptedZombie.h"
+#include "Renderer.h"
 
 PuddleCableItem::PuddleCableItem(bool cableInPuddle, int id)
 :
 Item("Eletrical Puddle", "PuddleCableItem", "PuddleCableItem", id),
-m_cableInPuddle(cableInPuddle)
+m_cableInPuddle(cableInPuddle),
+m_animation()
 {
+
+	m_electricitySprite.setTexture(ResourceLoader::instance().retrieveTexture("Puddle_Electricity"));
+	m_animation.loop(0, 3, 0, 5);
+	m_electricitySprite.setTextureRect(m_animation.getRectangle(0));
+
 	refreshStatus();
 	m_lootable = false;
 	m_collisionBounds = sf::FloatRect(15, 0, 105, 35);
@@ -41,7 +48,7 @@ bool PuddleCableItem::onCollisionWithUnit(Unit &unit, Game &game)
 		if (unit.getUnitType() == Unit::UnitType::ID_CabinetZombie)
 		{
 
-			((ScriptedZombie&) unit).electricPuddle(game);
+			((ScriptedZombie&)unit).electricPuddle(game);
 		}
 		else
 		{
@@ -82,16 +89,23 @@ bool PuddleCableItem::isActive()
 
 void PuddleCableItem::update(float deltaTime, Game &game)
 {
+	m_electricitySprite.setPosition(m_sprite.getPosition() + sf::Vector2f(-75, -80));
+
 	if (m_cableInPuddle)
 	{
+		m_electricitySprite.setTextureRect(m_animation.getRectangle(deltaTime));
+
+		/*	rip partiklar, men kan använda dem till tors hammare istället :D
 		m_particleTime += deltaTime;
 		while (m_particleTime > 0.01)
 		{
-			m_particleTime-= 0.01;
-			ParticleSystem::instance().addParticles(1, getPosition() + sf::Vector2f(85, 20), sf::Color().Yellow, sf::Vector2f(0.3f, 0.3f),
-				sf::Vector2f(0, 360), sf::Vector2f(0, 10), sf::Vector2f(-100, 100), sf::Vector2f(-100, 100), sf::Vector2f(0, 300));
-		}
+		m_particleTime-= 0.01;
+		ParticleSystem::instance().addParticles(1, getPosition() + sf::Vector2f(85, 20), sf::Color().Yellow, sf::Vector2f(0.3f, 0.3f),
+		sf::Vector2f(0, 360), sf::Vector2f(0, 10), sf::Vector2f(-100, 100), sf::Vector2f(-100, 100), sf::Vector2f(0, 300));
+		}*/
 	}
+	else
+		m_electricitySprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
 }
 
 Item* PuddleCableItem::clone()
@@ -112,4 +126,11 @@ void PuddleCableItem::refreshStatus()
 		m_examineString = "Such an interesting, natural, phenomenon. Good thing I looked at it...";
 		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("PuddleItem"));
 	}
+}
+
+void PuddleCableItem::draw()
+{
+	Renderer::instance().drawDepth(m_sprite);
+
+	Renderer::instance().drawAbove(m_electricitySprite);
 }

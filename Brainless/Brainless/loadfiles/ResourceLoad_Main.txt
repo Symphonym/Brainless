@@ -77,7 +77,6 @@
 +Texture,images/sprites/Wanted/Wanted-EasterEGG6.png,wanted6
 +Texture,images/sprites/Wanted/Wanted-EasterEGG7.png,wanted7
 +Texture,images/sprites/Wanted/Wanted-EasterEGG8.png,wanted8
-+Texture,images/sprites/Wanted/Wanted-EasterEGG9.png,wanted9
 
 #---Road---
 # /TopRight
@@ -403,6 +402,7 @@
 +Texture,images/items/manholeopen.png,ManholeOpen
 +Texture,images/items/puddle.png,PuddleItem
 +Texture,images/items/puddleCable.png,PuddleCableItem
++Texture,images/animations/Electricity-Sprite.png,Puddle_Electricity
 +Texture,images/items/electricalCabinet/electricalCabinet.png,electricalCabinet
 
 +Texture,images/items/ladders/LadderRope1.png,RopeLadder1
