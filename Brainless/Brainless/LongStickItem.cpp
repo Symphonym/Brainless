@@ -20,6 +20,5 @@ bool LongStickItem::onInteract(Item &otherItem, Game &game)
 		if (otherItem.isActive())
 			return true;
 	}
-	else
-		return false;
+	return false;
 }
