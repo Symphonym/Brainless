@@ -16,12 +16,14 @@ public:
 	virtual void serialize(std::ofstream &writer) const;
 	virtual void deserialize(std::ifstream &reader);
 
-	virtual bool onSyncedWith(Item &otherItem);
+	virtual bool onInteractedWith(Item &otherItem, Game &game);
 
 	virtual void update(float deltaTime, Game &game);
 	virtual void draw();
 
 	virtual void onPositionChanged();
+
+	bool isActive();
 
 	virtual Item* clone();
 

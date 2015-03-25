@@ -35,11 +35,6 @@ void MovingPlatformItem::deserialize(std::ifstream &reader)
 	reader >> m_isActive;
 }
 
-bool MovingPlatformItem::onSyncedWith(Item &otherItem)
-{
-	m_isActive = !m_isActive;
-	return false;
-}
 
 void MovingPlatformItem::update(float deltaTime, Game &game)
 {

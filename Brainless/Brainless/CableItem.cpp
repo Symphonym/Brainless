@@ -11,6 +11,11 @@ Item("Cable","CablesInv", "CableItem", id)
 
 bool CableItem::onInteract(Item &otherItem, Game &game)
 {
+	if (otherItem.getName() == "ScissorLift" && otherItem.getSyncID() != -1)
+	{
+		if (otherItem.isActive())
+			return true;
+	}
 	// TODO add eletrical items for which it can be put in
 	return false;
 }

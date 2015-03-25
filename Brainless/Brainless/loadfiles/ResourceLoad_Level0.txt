@@ -3,4 +3,4 @@
 +Texture,images/backgrounds/Room.png,Room
 
 # BACKGROUND MUSIC
-+Music,music/level0Music.wav,Level0Music
++Music,music/level0Music.wav,level0Music

@@ -14,7 +14,7 @@ public:
 
 	virtual void onUse(Game &game);
 	virtual bool onInteractedWith(Item &otherItem, Game &game);
-
+	bool isActive();
 	virtual Item* clone();
 
 private:

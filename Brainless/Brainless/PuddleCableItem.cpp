@@ -59,7 +59,7 @@ bool PuddleCableItem::onCollisionWithUnit(Unit &unit, Game &game)
 	}
 	return false;
 }
-bool PuddleCableItem::onInteractedWith(Item &otherItem, Game &game)
+bool PuddleCableItem::onInteractedWith(Item &otherItem, Game &game) //ska ha id samma som pölen sen
 {
 	if (otherItem.getName() == "Rubber Gloves" && m_cableInPuddle)
 	{

@@ -40,6 +40,7 @@ bool WindowItem::onInteractedWith(Item &otherItem, Game &game)
 {
 	if (otherItem.getName() == "Stone" && !m_smashed)
 	{
+		SoundPlayer::instance().playSound("breakGlass_sound", getPosition());
 		m_usable = true;
 		m_smashed = true;
 		m_examineString = "Oops! Leslie fled from my hand at incredible speed, come back Leslie!";
@@ -61,4 +62,13 @@ void WindowItem::updateTexture()
 		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("WindowSmashedItem"));
 	else
 		getSprite().setTexture(ResourceLoader::instance().retrieveTexture("WindowWholeItem"));
+}
+
+bool WindowItem::isActive()
+{
+	if (m_smashed)
+	{
+		return false;
+	}
+	else return true;
 }

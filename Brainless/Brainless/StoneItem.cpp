@@ -17,6 +17,11 @@ bool StoneItem::onInteract(Item &otherItem, Game &game)
 {
 	if (otherItem.getName() == "Window")
 	{
+		if (otherItem.isActive())
+			return true;
+	}
+	else if (otherItem.getName() == "WindowOverlay")
+	{
 		return true;
 	}
 	return false;

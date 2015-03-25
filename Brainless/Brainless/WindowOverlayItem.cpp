@@ -25,6 +25,7 @@ bool WindowOverlayItem::onInteractedWith(Item &otherItem, Game &game)
 {
 	if (otherItem.getName() == "Stone")
 	{
+		SoundPlayer::instance().playSound("breakGlass_sound", getPosition());
 		return true;
 	}
 	return false;

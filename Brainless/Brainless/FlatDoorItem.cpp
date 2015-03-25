@@ -11,12 +11,15 @@ m_isLocked(locked),
 m_levelIndex(levelIndex)
 {
 	m_usable = true;
-	if (id == -1) m_isLocked = false;
 	m_interactBounds = sf::FloatRect(15,35,100, 200);
 }
 
 bool FlatDoorItem::onInteractedWith(Item &otherItem, Game &game)
 {
+	if (getSyncID() == -1)
+	{
+		m_isLocked = false;
+	}
 	if (getSyncID() != -1 && m_isLocked && otherItem.getSyncID() == getSyncID() && otherItem.getName() == "Key")
 	{
 		m_isLocked = false;
@@ -32,6 +35,10 @@ bool FlatDoorItem::onInteractedWith(Item &otherItem, Game &game)
 
 void FlatDoorItem::onUse(Game &game)
 {
+	if (getSyncID() == -1)
+	{
+		m_isLocked = false;
+	}
 	// Toggle collision and open state
 	if (!m_isLocked)
 	{

@@ -44,7 +44,7 @@ bool ElectricalCabinetItem::onCollisionWithUnit(Unit &unit, Game &game)
 	if (unit.getUnitType() == Unit::UnitType::ID_CabinetZombie)
 	{
 
-		SoundPlayer::instance().playSound("cabinetFlyOff", game.getWindow().getView().getCenter());
+		SoundPlayer::instance().playSound("cabinetFlyOff", game.getPlayer().getPosition());
 
 		flyOff();
 	}

@@ -1,7 +1,7 @@
 86.8726
 199.57
 1
-NO_MUSIC_PROVIDED
+level6Music
 1
 level5_A
 15
@@ -44,7 +44,7 @@ level5_A
 28,11,1240.7,1262.82
 5,14,2671.04,119.268,7
 28,-1,207.03,1061.46
-216
+219
 0,HorizontalPipe,3453.57,1191.4
 0,HorizontalPipe,3399.04,1191.4
 0,HorizontalPipe,3331.89,1191.4
@@ -261,5 +261,8 @@ level5_A
 0,VerticallyPipe,2820.04,179.609
 0,VerticallyPipe,2820.04,114.859
 0,VerticallyPipe,2820.04,43.7145
+1,Green2,2256.95,368.916
+1,Green5,1099.96,368.916
+1,Green3,353.331,949.074
 1
 1,313.364,1142.17,4,2,14

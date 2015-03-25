@@ -55,12 +55,12 @@ m_Animation_scarf(SPRITESIZE, SPRITESIZE)
 	m_newGameButtons[0] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("Yes_Normal"),
 		ResourceLoader::instance().retrieveTexture("Yes_Pressed"),
-		sf::Vector2f(m_confirmBackground.getPosition().x + 20.f, m_confirmBackground.getPosition().y + 120.f)));
+		sf::Vector2f(m_confirmBackground.getPosition().x + 100.f, m_confirmBackground.getPosition().y + 120.f)));
 
 	m_newGameButtons[1] = GuiPtr(new Button(
 		ResourceLoader::instance().retrieveTexture("No_Normal"),
 		ResourceLoader::instance().retrieveTexture("No_Pressed"),
-		sf::Vector2f(m_confirmBackground.getPosition().x + 210.f, m_confirmBackground.getPosition().y + 120.f)));
+		sf::Vector2f(m_confirmBackground.getPosition().x + 250.f, m_confirmBackground.getPosition().y + 120.f)));
 
 	//Background
 	//m_background.setTexture(ResourceLoader::instance().retrieveTexture("Menu_Background"));

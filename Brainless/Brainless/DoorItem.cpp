@@ -11,12 +11,15 @@ m_isLocked(locked)
 {
 	m_usable = true;
 	m_collidable = true;
-	if (id == -1) m_isLocked = false;
 	m_collisionBounds = sf::FloatRect(20, 5, 25, 192);
 }
 
 bool DoorItem::onInteractedWith(Item &otherItem, Game &game)
 {
+	if (getSyncID() == -1)
+	{
+		m_isLocked = false;
+	}
 	if (getSyncID() != -1 && m_isLocked && otherItem.getSyncID() == getSyncID() && otherItem.getName() == "Key")
 	{
 		m_isLocked = false;
@@ -53,6 +56,10 @@ bool DoorItem::onSyncedWith(Item &otherItem)
 
 void DoorItem::onUse(Game &game)
 {
+	if (getSyncID() == -1)
+	{
+		m_isLocked = false;
+	}
 	// Toggle collision and open state
 	if (!m_isLocked)
 	{

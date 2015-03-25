@@ -77,7 +77,7 @@ public:
 
 	virtual bool onToggle(int direction) { return false; };
 
-	virtual bool isActive(){ return true; } //used for special sync interactions
+	virtual bool isActive(){ return true; } //used for special sync interactions, example, preventing multiple cables being used on a fixed machine
 	bool isMarkedForDestruction() const;
 	bool isLootable() const;
 	bool isUsable() const;

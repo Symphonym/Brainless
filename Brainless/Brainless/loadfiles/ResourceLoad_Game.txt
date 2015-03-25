@@ -59,9 +59,6 @@
 +Sound,sounds/inventory_open.wav,inventory_open
 +Sound,sounds/item_coin.wav,item_coin
 +Sound,sounds/item_door.wav,item_door
-#+Sound,sounds/item_glassBottle.wav,item_glassBottle
-#+Sound,sounds/item_gumPaper.wav,item_gumPaper
-#+Sound,sounds/item_tape.wav,item_tape
 +Sound,sounds/player_hurt.wav,player_hurt
 +Sound,sounds/player_jump.wav,player_jump
 +Sound,sounds/player_landing.wav,player_landing
@@ -69,6 +66,9 @@
 +Sound,sounds/Feather.wav,feather_sound
 +Sound,sounds/cabinetFlyOff.wav,cabinetFlyOff
 +Sound,sounds/lighter.wav,lighter_sound
++Sound,sounds/scissorlift.wav,lift_sound
++Sound,sounds/manhole.wav,manhole_sound
++Sound,sounds/breakGlass_sound.wav,breakGlass_sound
 
 # TEST SOUND
 +Sound,sounds/COINV3.wav,CoinTestSound

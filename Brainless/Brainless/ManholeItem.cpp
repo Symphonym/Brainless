@@ -37,6 +37,7 @@ void ManholeItem::onUse(Game &game)
 {
 	if (!m_open)
 	{
+		SoundPlayer::instance().playSound("manhole_sound", getPosition(), 30.0f);
 		m_open = true;
 		refreshTexture();
 	}

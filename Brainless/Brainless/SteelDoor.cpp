@@ -17,6 +17,10 @@ m_isLocked(locked)
 
 bool SteelDoor::onInteractedWith(Item &otherItem, Game &game)
 {
+	if (getSyncID() == -1)
+	{
+		m_isLocked = false;
+	}
 	if (getSyncID() != -1 && m_isLocked && otherItem.getSyncID() == getSyncID() && otherItem.getName() == "Key")
 	{
 		m_isLocked = false;
@@ -53,6 +57,10 @@ bool SteelDoor::onSyncedWith(Item &otherItem)
 
 void SteelDoor::onUse(Game &game)
 {
+	if (getSyncID() == -1)
+	{
+		m_isLocked = false;
+	}
 	// Toggle collision and open state
 	if (!m_isLocked)
 	{

@@ -1,19 +1,20 @@
 #include "ScissorLift.h"
 #include "Renderer.h"
 #include "ResourceLoader.h"
-
+#include <iostream>
 ScissorLiftItem::ScissorLiftItem(sf::Vector2f speed, float maxDistance, int id)
 :
 Item("ScissorLift","liftBottom", "liftBottom", id),
 m_speed(speed),
 m_maxDistanceMoved(maxDistance),
-m_isActive(true),
+m_isActive(false),
 m_maxDistance(maxDistance),
 m_platform(speed,maxDistance,id)
 {
 	m_collidable = true;
 	m_solid = false;
 	m_lootable = false;
+	
 
 	m_collisionBounds = sf::FloatRect(0, 0, 0, 0);
 	m_xTexture = sf::Sprite(ResourceLoader::instance().retrieveTexture("liftX"),
@@ -56,13 +57,28 @@ void ScissorLiftItem::deserialize(std::ifstream &reader)
 
 }
 
-bool ScissorLiftItem::onSyncedWith(Item &otherItem)
+bool ScissorLiftItem::onInteractedWith(Item &otherItem, Game &game)
 {
-	return m_platform.onSyncedWith(otherItem);
+	if (getSyncID() == -1)
+	{
+		m_isActive = true;
+	}
+	else if (!m_isActive && otherItem.getName() == "Cable") //efter puddblekable har korrekt syncid, fixa samma syncId här
+	{
+		m_isActive = true;
+		SoundPlayer::instance().playSound("lift_sound", getPosition());
+	}
+
+	// The lift will not get destroyed
+	return false;
 }
 
 void ScissorLiftItem::update(float deltaTime, Game &game)
 {
+	if (getSyncID() == -1)
+	{
+		m_isActive = true;
+	}
 	sf::Vector2f offset = m_platform.getPosition() - getPosition();
 	m_collisionBounds = sf::FloatRect(
 		offset.x,
@@ -70,7 +86,12 @@ void ScissorLiftItem::update(float deltaTime, Game &game)
 		m_platform.getCollisionBounds().width,
 		m_platform.getCollisionBounds().height);
 	m_distanceFromPlatform = 200;
-	m_platform.update(deltaTime, game);
+	
+	if (m_isActive)
+	{
+		m_platform.update(deltaTime, game);
+	}
+	
 	m_xTexture.setPosition(getPosition().x, m_platform.getPosition().y + m_platform.getSprite().getGlobalBounds().height);
 	m_xTexture.setTextureRect(sf::IntRect(0, 0, m_xSize, m_xSize));
 	m_topTexture.setPosition(m_platform.getPosition().x, m_platform.getPosition().y - m_platform.getSprite().getGlobalBounds().height);
@@ -86,7 +107,12 @@ void ScissorLiftItem::onPositionChanged()
 
 void ScissorLiftItem::onExamine()
 {
-	m_examineString = "This scissor lift is named Lisa.";
+	if (m_isActive)
+		m_examineString = "This scissor lift is named Lisa.";
+	else
+	{
+		m_examineString = "The scissorlift is missing some cables.";
+	}
 }
 
 void ScissorLiftItem::draw()
@@ -110,4 +136,13 @@ sf::Vector2f ScissorLiftItem::getSpeed() const
 sf::FloatRect ScissorLiftItem::getCollisionBounds() const
 {
 	return m_platform.getCollisionBounds();
+}
+
+bool ScissorLiftItem::isActive()
+{
+	if (m_isActive)
+	{
+		return false;
+	}
+	else return true;
 }
