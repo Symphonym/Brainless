@@ -77,6 +77,7 @@
 +Texture,images/sprites/Wanted/Wanted-EasterEGG6.png,wanted6
 +Texture,images/sprites/Wanted/Wanted-EasterEGG7.png,wanted7
 +Texture,images/sprites/Wanted/Wanted-EasterEGG8.png,wanted8
++Texture,images/sprites/Wanted/Wanted-EasterEGG9.png,wanted9
 
 #---Road---
 # /TopRight
