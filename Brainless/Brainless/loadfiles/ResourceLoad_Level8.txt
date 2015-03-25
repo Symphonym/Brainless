@@ -1,5 +1,5 @@
 # BACKGROUND TEXTURES
-+Texture,images/backgrounds/Factory.png,Factory
++Texture,images/backgrounds/factory.png,factory
 
 # BACKGROUND MUSIC
 +Music,music/level8Music.wav,level8Music
