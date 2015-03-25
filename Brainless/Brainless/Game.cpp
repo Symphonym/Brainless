@@ -205,7 +205,11 @@ void Game::changeLevel(int levelIndex, bool swapPosition)
 		{
 			//Swap sides
 			player_location = m_player->getPosition();
-			player_location.x = Utility::clampValue<float>((Constants::MapWidth)*Constants::TileSize - (player_location.x), Constants::TileSize, (Constants::MapWidth - 1)*Constants::TileSize);
+			if (player_location.x < (Constants::MapWidth*0.5)*Constants::TileSize)
+				player_location.x = (Constants::MapWidth - 1)*Constants::TileSize;
+			else
+				player_location.x = (1)*Constants::TileSize;
+			//player_location.x = Utility::clampValue<float>((Constants::MapWidth)*Constants::TileSize - (player_location.x), Constants::TileSize, (Constants::MapWidth - 1)*Constants::TileSize);
 		}
 
 		// Auto save level before changing level
