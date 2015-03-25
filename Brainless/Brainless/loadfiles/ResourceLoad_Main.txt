@@ -69,6 +69,15 @@
 +Texture,images/sprites/Fence.png,FenceSprite
 +Texture,images/sprites/Houses/House0.png,House0
 +Texture,images/sprites/Houses/House1.png,House1
++Texture,images/sprites/Wanted/Wanted-EasterEGG1.png,wanted1
++Texture,images/sprites/Wanted/Wanted-EasterEGG2.png,wanted2
++Texture,images/sprites/Wanted/Wanted-EasterEGG3.png,wanted3
++Texture,images/sprites/Wanted/Wanted-EasterEGG4.png,wanted4
++Texture,images/sprites/Wanted/Wanted-EasterEGG5.png,wanted5
++Texture,images/sprites/Wanted/Wanted-EasterEGG6.png,wanted6
++Texture,images/sprites/Wanted/Wanted-EasterEGG7.png,wanted7
++Texture,images/sprites/Wanted/Wanted-EasterEGG8.png,wanted8
++Texture,images/sprites/Wanted/Wanted-EasterEGG9.png,wanted9
 
 #---Road---
 # /TopRight
