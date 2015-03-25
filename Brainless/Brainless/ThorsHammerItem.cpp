@@ -3,7 +3,7 @@
 
 ThorsHammerItem::ThorsHammerItem(int id)
 :
-Item("Mjölner","MjolnirInv", "ThorsHammerItem", id)
+Item("Mjolnir","MjolnirInv", "ThorsHammerItem", id)
 {
 	m_lootable = true;
 	m_examineString = "The hammer of the god Thor, and now it's in my hands. The world better prepare.";
@@ -12,7 +12,7 @@ Item("Mjölner","MjolnirInv", "ThorsHammerItem", id)
 
 bool ThorsHammerItem::onInteract(Item &otherItem, Game &game)
 {
-	Notification::instance().write("The might of Mjölner is not be used on lowlife items such as " + otherItem.getName());
+	Notification::instance().write("The might of Mjolnir is not be used on lowlife items such as " + otherItem.getName());
 	return false;
 }
 
