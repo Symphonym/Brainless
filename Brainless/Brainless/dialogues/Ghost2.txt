@@ -2,10 +2,22 @@ GhostAvatar
 Oh, you can see me can you?
 #Yes.
 	That's great! Haven't had anyone to talk to in a while. So... What's happening? Apart from, you know, all of this.
-	#Nothing much. Can I help you with your brain?
-		That'd be very much appreciated miss. Only I have no idea where it'd be at, you see. I lost it somewhere along the line, not quite sure when. You know the restaurant located at the front of this building? That used to be mine, before all this. Love of my life, that place was. Yeah... Don't know what happened, really. Less customers came in and no matter what I made them they were unimpressed, indifferent, really. It started to affect me as well, didn't know how to handle it. Never been all that good with rejection, so, eventually, I stopped caring. Let the place go to ruins, I did. No real reason for it, despite my complaints and excuses. Ah, but listen to me working your ears to shred, forgive a woman for wasting your time with her problems. You know, I feel a bit better, talking about it. If I could do it all over again, with the restaurant, I'd do it differently this time for sure.
-	#Fighting for survival. You have any supplies?
-		Afraid not, haven't had any need you see. Being... This. Whatever this is. You know the restaurant located at the front of this building? That used to be mine, before all this. Love of my life, that place was. Yeah... Don't know what happened, really. Less customers came in and no matter what I made them they were unimpressed, indifferent, really. It started to affect me as well, didn't know how to handle it. Never been all that good with rejection, so, eventually, I stopped caring. Let the place go to ruins, I did. No real reason for it, despite my complaints and excuses. Ah, but listen to me working your ears to shred, forgive a woman for wasting your time with her problems. You know, I feel a bit better, talking about it. If I could do it all over again, with the restaurant, I'd do it differently this time for sure.
+	#Nothing much. Can I help with your brain?
+		That'd be very much appreciated miss. Only I have no idea where it'd be at, you see. I lost it somewhere along the line, not quite sure when. 
+		#That sounds like a pain.
+			Sure was. You know the restaurant located at the front of this building? That used to be mine, before all this. Love of my life, that place was. Yeah... Don't know what happened, really. Less customers came in and no matter what I made them they were unimpressed, indifferent, really. 
+			#Bummer.
+				Bummer indeed. It started to affect me as well, didn't know how to handle it. Never been all that good with rejection, so, eventually, I stopped caring. Let the place go to ruins, I did. No real reason for it, despite my complaints and excuses. 
+				#Hm.
+					Ah, but listen to me working your ears to shred, forgive a woman for wasting your time with her problems. You know, I feel a bit better, talking about it. If I could do it all over again, with the restaurant, I'd do it differently this time for sure.
+	#Fighting for survival. Have any supplies?
+		Afraid not, haven't had any need you see. Being... This. Whatever this is. You know the restaurant located at the front of this building? That used to be mine, before all this. Love of my life, that place was.
+		#Nice.
+			Yeah... Don't know what happened, really. Less customers came in and no matter what I made them they were unimpressed, indifferent, really. 
+			#Tough.
+				It started to affect me as well, didn't know how to handle it. Never been all that good with rejection, so, eventually, I stopped caring. Let the place go to ruins, I did. No real reason for it, despite my complaints and excuses. 
+				#Hm.
+					Ah, but listen to me working your ears to shred, forgive a woman for wasting your time with her problems. You know, I feel a bit better, talking about it. If I could do it all over again, with the restaurant, I'd do it differently this time for sure.
 #No I can't, leave me alone.
 	Oh, I see that's a real shame. ... Wait a second, you can see me! You little liar!
 	#Damn, you found me out.
@@ -13,8 +25,20 @@ Oh, you can see me can you?
 	#I was just kidding.
 		Oh, really? That so? Heh, so long since I had someone to talk to, humour kind of goes over my head, you see. Heh, or through it. That's some spirit humour for you, right there.
 		#Funny.
-			Really, your think so? I used to chum it up with the customers all the time, you know, before. Did you notice the restaurant located at the front of this building? That used to be mine, before all this. Love of my life, that place was. Yeah... Don't know what happened, really. Less customers came in and no matter what I made them they were unimpressed, indifferent, really. It started to affect me as well, didn't know how to handle it. Never been all that good with rejection, so, eventually, I stopped caring. Let the place go to ruins, I did. No real reason for it, despite my complaints and excuses. Ah, but listen to me working your ears to shred, forgive a woman for wasting your time with her problems. You know, I feel a bit better, talking about it. If I could do it all over again, with the restaurant, I'd do it differently this time for sure.
-		#That's great and all. You know where I can get supplies?
-			There might be something left somewhere around here... Yes, maybe. You know the restaurant located at the front of this building? That used to be mine, before all this. Love of my life, that place was. Yeah... Don't know what happened, really. Less customers came in and no matter what I made them they were unimpressed, indifferent, really. It started to affect me as well, didn't know how to handle it. Never been all that good with rejection, so, eventually, I stopped caring. Let the place go to ruins, I did. No real reason for it, despite my complaints and excuses. Ah, but listen to me working your ears to shred, forgive a woman for wasting your time with his problems. You know, I feel a bit better, talking about it. If I could do it all over again, with the restaurant, I'd do it differently this time for sure. 
+			Really, your think so? I used to chum it up with the customers all the time, you know, before. Did you notice the restaurant located at the front of this building? 
+			#Sure?
+				That used to be mine, before all this. Love of my life, that place was. Yeah... Don't know what happened, really. Less customers came in and no matter what I made them they were unimpressed, indifferent, really. 
+				#Sounds harsh.
+					It was! And it started to affect me as well, didn't know how to handle it. Never been all that good with rejection, so, eventually, I stopped caring. Let the place go to ruins, I did. No real reason for it, despite my complaints and excuses. 
+					#Hm.
+						Ah, but listen to me working your ears to shred, forgive a woman for wasting your time with her problems. You know, I feel a bit better, talking about it. If I could do it all over again, with the restaurant, I'd do it differently this time for sure.
+		#That's great. Where can I get supplies?
+			There might be something left somewhere around here... Yes, maybe. You know the restaurant located at the front of this building? 
+			#Sure.
+				That used to be mine, before all this. Love of my life, that place was. Yeah... Don't know what happened, really. Less customers came in and no matter what I made them they were unimpressed, indifferent, really. 
+				#Sounds harsh.
+					It was! And it started to affect me as well, didn't know how to handle it. Never been all that good with rejection, so, eventually, I stopped caring. Let the place go to ruins, I did. No real reason for it, despite my complaints and excuses. 
+					#Hm.
+						Ah, but listen to me working your ears to shred, forgive a woman for wasting your time with his problems. You know, I feel a bit better, talking about it. If I could do it all over again, with the restaurant, I'd do it differently this time for sure. 
 	#No, I really can't see you. Trust me. 
 			Fine, if you are going to be that way I'd rather be alone anyway.

@@ -19,7 +19,7 @@ Item("Ghost","GhostItem", "GhostItem", id)
 	m_lootable = false;
 	m_usable = true;
 	m_pickupString = "It would be unwise to try to pick up a ghost";
-	m_examineString = "It's a spirit! Maybe I should try to talk to it?";
+	m_examineString = "It's a spirit! Maybe I should try talking to it";
 	m_interactDistance = sf::Vector2f(500, 500);
 	getSprite().setTextureRect(sf::IntRect(0,0,256,256));
 

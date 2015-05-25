@@ -9,7 +9,7 @@ m_itemsWithin(itemsWithin)
 {
 	m_usable = true;
 	m_renderingMode = RenderingModes::Behind;
-	m_examineString = "A modern treasure-chest, the sustainer of human life, the pinnacle of human invention, the- ...Oh they are out of Jupiter, I'll try another one then.";
+	m_examineString = "A modern treasure chest, the sustainer of human life, the pinnacle of human invention, the- ...Oh they are out of Jupiter, I'll try another one then.";
 	m_pickupString = "It's way too heavy for me to carry";
 	m_interactBounds = sf::FloatRect(69, 21, 124, 220);
 }

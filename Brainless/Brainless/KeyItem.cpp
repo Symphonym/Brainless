@@ -5,7 +5,7 @@ KeyItem::KeyItem(int id)
 :
 Item("Key","KeyInv", "KeyTest", id)
 {
-	m_examineString = "This key has unimaginable possible areas of use!Such as... unlocking things!And... and... unlocking things!";
+	m_examineString = "This key has unimaginable possible areas of use! Such as... unlocking things! And... and... unlocking things!";
 	m_lootable = true;
 }
 

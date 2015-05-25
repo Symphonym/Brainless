@@ -1,8 +1,20 @@
 GhostAvatar
 That was a nice jump! I almost feel some pride.
 #Are you being sarcastic?
-	Well, maybe a little, but I mean nothing by it. Let's just say that my people skills are rather rusty. Do you want a repeat of the amazing hint I gave you?
-	#Yes, please repeat it.
+	Well, maybe a little, but I mean nothing by it. Let's just say that my people skills are rather rusty. Do you want a really useful hint?
+	#Yes, sure.
 		Right, here I go! The hint is to look everywhere for useful stuff; underground, trashcans, the ground... And you can use most of it, in combinations or separated! Until you return my brain to me I'll be floating around here, so feel free to come and chat again. It gets rather lonely after a while. And the cables are waiting!
 	#No, I can handle myself.
-		Well, that's all well and good. Until you return my brain to me I'll be floating around here, so feel free to come and chat again. It gets rather lonely in this half dead, half alive state after a while. And the cables are waiting!
+		Well, that's all well and good. Until you return my brain to me I'll be floating around here, so feel free to come and chat again. It gets rather lonely in this half dead, half alive state after a while. And I have som cables waiting!
+#What even are you?
+	A ghost, a spirit, a soul... I don't even know. But I know that there's a possibility for you to help me!
+	#Help?
+		Yeah! I've heard some rumors that my condition, or whatever you want to call it, does not have to be permanent! Seems like a thing worthy of some investigation, right? And if you agree to help me, I'll give you a useful hint! And some cables!
+		#If you say so...
+			Don't sound too enthusiastic about it. The hint is to look everywhere for useful stuff. Trashcans, the ground... And you can use it, combined or separated! And now that I've held up my part of the agreement, jump like yo-... my life depends on it. But be careful around my body, it can be rather... bite-happy.
+		#No, not really...
+			Well aren't you a cold bastard. I was thinking of giving you some really sweet cables or something, but I guess that's a no.
+			#No wait, wait! I'm sorry Mr. Spirit!
+				Yeah, that's the spirit! The promised hint, it's a real good one, is to look everywhere for useful stuff. Underground, trashcans, the ground... And you can use most of it, combinated or separated! And now that I've held up my part of the agreement, jump over that gap and come over here and give me my brain back! But be careful around my body, it can be rather... bite-happy.
+			#Who would want cables anyway?
+				Not you apparently. Everyone loves cables though, there must be something seriously wrong with you. Now, if you're not going to help me, please leave me alone.
